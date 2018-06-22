@@ -1,125 +1,45 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="fuenteForm">
 
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Formulario de Resumen Fuente</h3>
-    </div>
-    <form>
-      <div class="form-group">
-
-        <!------------------------------------------------------- -->
-        <div class="row">
+      <!------------------------CODFUENTE------------------------------ -->
+      <div class="row">
+        <div class="md-form col-sm-4">
+          <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto" formControlName="codfuente"
+            required>
+          <label for="form1" class="font-weight-light">CODFUENTE</label>
+        </div>
+      </div>
+<!------------------------CITA------------------------------ -->
+<div class="row">
          
-            <div class="md-form col-sm-4">
-              <input mdbInputDirective type="text" name="codfuente" [(ngModel)]="codfuente" id="form1" class="form-control">
-              <label for="form1" class="">CODFUENTE</label>
-              <p>Look at me! {{codfuente}}</p>
-            </div>
-            
-        
-          
-          
-      `
+    <div class="md-form  col-xs-6 col-sm-7">
+      <i class="fa fa-pencil prefix"></i>
+      <textarea mdbInputDirective type="text" 
+       id="form2" class="md-textarea form-control" rows="3"
+        data-error="incorrecto, minimo de 5 caracteres" data-success="correcta" formControlName="cita" required></textarea>
+      <label for="form2">CITA</label>
+      </div>        
+  </div>
+  <!--------------------------ARCHIVADO---------------------------- -->
+  <div class="row">
+      <div class="col-xs-6 col-sm-1">
+          <label for="">ARCHIVADO:</label>
+      </div> 
+      <div class="col-xs-6 col-sm-3">  
+          <select class="form-control" formControlName="archivado" editable required>
+            <option *ngFor="let archivo of archivado" [value]="archivo">{{archivo}}</option>
+          </select>
         </div>
-        <br>
-        <!------------------------------------------------------ -->
-        <div class="row">
-          <div class="col-xs-6 col-sm-1">
-              <label for="">CITA:</label>
-          </div>
-          <div class="col-xs-6 col-sm-3">
-            <input type="text" class="form-control" id="cita1">
-            <input type="text" class="form-control" id="cita3">
-          </div>
-          <div class="col-xs-6 col-sm-3">
-            <input type="text" class="form-control" id="cita2">
-            <input type="text" class="form-control" id="cita4">
-
-          </div>
-        </div>
-        <br>
-        <!------------------------------------------------------ -->
-        <div class="row">
-            <div class="col-xs-6 col-sm-1">
-                <label for="">ARCHIVADO:</label>
-            </div>
-            <div class="col-xs-6 col-sm-3">  
-                <select class="form-control" id="power" required>
-                  <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                </select>
-              </div>
-          </div>
-          <br>
-        <!------------------------------------------------------ -->
-        <div class="row">
-            <div class="col-xs-6 col-sm-1">
-                <label for="codgeo">CODGEO:</label>
-            </div>
-            <div class="col-xs-6 col-sm-1">  
-                <select class="form-control" id="power" required>
-                  <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                </select>
-              </div>
-              <div class="col-xs-6 col-sm-1">  
-                  <select class="form-control" id="power" required>
-                    <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                  </select>
-                </div>
-                <div class="col-xs-6 col-sm-1">  
-                    <select class="form-control" id="power" required>
-                      <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                    </select>
-                  </div>
-          </div>
-          <br>
-         <!------------------------------------------------------ -->
-         <div class="row">
-            <div class="col-xs-6 col-sm-1">
-                <label for="">S:</label>
-            </div>
-            <div class="col-xs-6 col-sm-1">
-                <input type="text" class="form-control" id="coordS">
-              </div>
-              <div class="col-xs-6 col-sm-1">
-                  <label for="">N:</label>
-                </div>
-                <div class="col-xs-6 col-sm-1">
-                    <input type="text" class="form-control" id="coordS">
-                  </div>
-                  <div class="col-xs-6 col-sm-1">
-                      <label for="">E:</label>
-                    </div>
-                    <div class="col-xs-6 col-sm-1">
-                        <input type="text" class="form-control" id="coordS">
-                      </div>
-                      <div class="col-xs-6 col-sm-1">
-                          <label for="">O:</label>
-                        </div>
-                        <div class="col-xs-6 col-sm-1">
-                            <input type="text" class="form-control" id="coordS">
-                          </div>
-          </div>
-         <br>
-         <!------------------------------------------------------ -->
-         <div class="row">
-            <div class="col-xs-6 col-sm-1">
-                <label for="comment">RESUMEN:</label>
-            </div>
-            <div class="col-xs-6 col-sm-7">  
-                <textarea class="form-control" rows="5" id="comment"></textarea>
-              </div>
-          </div>
-          <br>
-           <!------------------------------------------------------ -->
-      </div> <!--fin form-group-->
+    </div>  
+    <br>
 
 
-
-
-
-
-      <button type="submit" class="btn btn-success">Submit</button>
-
+      <div class="text-center py-4 mt-3">
+        <button class="btn btn-cyan waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button>
+        <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+      </div>
     </form>
   </div>
 </div>
+<p>Form value: {{ fuenteForm.value | json }}</p>
