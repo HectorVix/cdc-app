@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-6 mx-auto my-5">
+        <section class="form-elegant">
+            <div class="card">
+                <div class="card-body mx-4">
+                    <!--Header-->
+                    <div class="text-center">
+                        <h3 class="dark-grey-text mb-5">
+                            <strong>Login:</strong>
+                        </h3>
+                    </div>
+                    <form [formGroup]="loginForm">
+                        <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                            <input type="text" id="loginFormEmailEx" class="form-control" formControlName="loginFormEmailEx" mdbInputDirective>
+                            <label for="loginFormEmailEx">Correo electrónico</label>
+                        </div>
+                        <div class="md-form pb-3">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="loginFormPasswordEx" formControlName="loginFormPasswordEx" class="form-control" mdbInputDirective>
+                                <label for="loginFormPasswordEx">Your password</label>
+                                <p class="font-small blue-text d-flex justify-content-end">¿Olvidaste tu
+                                  <a href="#" class="blue-text ml-1"> contraseña?</a>
+                                </p>
+                              </div>
+                        <div class="text-center">
+                                <input type="submit" class="btn btn-primary waves-light" mdbWavesEffect value="Iniciar sesión">
+                        </div>
+                    </form>
+ <!--Footer-->
+ <div class="modal-footer mx-5 pt-3 mb-1">
+        <p class="font-small grey-text d-flex justify-content-end">¿No tiene cuenta?
+          <a href="#" class="blue-text ml-1"> Registrate</a>
+        </p>
+      </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
