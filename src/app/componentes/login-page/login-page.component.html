@@ -9,30 +9,30 @@
                             <strong>Login:</strong>
                         </h3>
                     </div>
-                    <form [formGroup]="loginForm">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="md-form">
-                                <i class="fa fa-envelope prefix grey-text"></i>
-                            <input type="text" id="loginFormEmailEx" class="form-control" formControlName="loginFormEmailEx" mdbInputDirective>
+                            <i class="fa fa-envelope prefix grey-text"></i>
+                            <input type="text" id="loginFormEmailEx" class="form-control" formControlName="loginFormEmailEx"  required mdbInputDirective>
                             <label for="loginFormEmailEx">Correo electrónico</label>
                         </div>
                         <div class="md-form pb-3">
-                                <i class="fa fa-lock prefix grey-text"></i>
-                                <input type="password" id="loginFormPasswordEx" formControlName="loginFormPasswordEx" class="form-control" mdbInputDirective>
-                                <label for="loginFormPasswordEx">Your password</label>
-                                <p class="font-small blue-text d-flex justify-content-end">¿Olvidaste tu
-                                  <a href="#" class="blue-text ml-1"> contraseña?</a>
-                                </p>
-                              </div>
+                            <i class="fa fa-lock prefix grey-text"></i>
+                            <input type="password" id="loginFormPasswordEx" formControlName="loginFormPasswordEx" class="form-control"  required mdbInputDirective>
+                            <label for="loginFormPasswordEx">Your password</label>
+                            <p class="font-small blue-text d-flex justify-content-end">¿Olvidaste tu
+                                <a href="#" class="blue-text ml-1"> contraseña?</a>
+                            </p>
+                        </div>
                         <div class="text-center">
-                                <input type="submit" class="btn btn-primary waves-light" mdbWavesEffect value="Iniciar sesión">
+                            <input type="submit" class="btn btn-primary waves-light" [disabled]="!loginForm.valid" mdbWavesEffect value="Iniciar sesión">
                         </div>
                     </form>
- <!--Footer-->
- <div class="modal-footer mx-5 pt-3 mb-1">
-        <p class="font-small grey-text d-flex justify-content-end">¿No tiene cuenta?
-          <a href="#" class="blue-text ml-1"> Registrate</a>
-        </p>
-      </div>
+                    <!--Footer-->
+                    <div class="modal-footer mx-5 pt-3 mb-1">
+                        <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
+                            <a href="#" class="blue-text ml-1"> Regístrate</a>
+                        </p>
+                    </div>
 
                 </div>
             </div>

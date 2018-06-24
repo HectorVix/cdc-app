@@ -5,7 +5,6 @@
       <!------------------------CODFUENTE------------------------------ -->
       <div class="row">
         <div class="md-form col-sm-4">
-          <i class="fa fa-key prefix"></i>
           <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
             formControlName="codfuente" required>
           <label for="form1" class="font-weight-light">CODFUENTE</label>
@@ -38,7 +37,7 @@
 
           <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
             formControlName="cobgeo" required>
-          <label for="formCOBGEO" class="font-weight-light">COBGEO</label>
+          <label for="formCOBGEO">COBGEO</label>
         </div>
       </div>
 
@@ -49,7 +48,7 @@
           <i class="fa fa-pencil prefix"></i>
           <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 10 caracteres"
             data-success="correcta" formControlName="resumen" required></textarea>
-          <label for="formResumen">CITA</label>
+          <label for="formResumen">RESUMEN</label>
         </div>
       </div>
       <!------------------------TEMA------------------------------ -->
@@ -138,7 +137,10 @@
             <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
         </div>
 
+        
       </div>
+
+    
 
 
       <div class="text-center py-4 mt-3">
@@ -149,3 +151,4 @@
   </div>
 </div>
 <p>Form value: {{ fuenteForm.value | json }}</p>
+
