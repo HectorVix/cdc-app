@@ -10,7 +10,7 @@ import { FormularioResumenFuenteComponent } from
 
 
 const routes: Routes = [
-{path: '',component: HomePageComponent},
+{path: 'home',component: HomePageComponent},
 
 {path: 'formResumenFuente', component: FormularioResumenFuenteComponent},
 {path: 'login', component: LoginPageComponent},
