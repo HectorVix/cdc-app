@@ -12,16 +12,17 @@ import {UsuarioModelo} from '../../modelo/usuario-modelo';
 export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
-  usuario : UsuarioModelo;
-  correo : string;
-  password : string ;
+  usDatos: FormGroup;
+  usuario1 : UsuarioModelo;
+  //correo : string;
+  //password : string ;
   usuarioDatos: any;
   data: any;
   us: UsuarioModelo[];
   constructor(public fb: FormBuilder, private usuarioService: UsuarioService , private router : Router) {
     this.loginForm = fb.group({
-      loginFormEmailEx: ['', [Validators.required, Validators.email]],
-       loginFormPasswordEx: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+       password: ['', Validators.required],
     });
   }
   ngOnInit() {
@@ -30,8 +31,8 @@ export class LoginPageComponent implements OnInit {
     
     
 
-   this.correo=this.loginForm.get('loginFormEmailEx').value;
-   this.password=this.loginForm.get('loginFormPasswordEx').value
+   //this.correo=this.loginForm.get('loginFormEmailEx').value;
+   //this.password=this.loginForm.get('loginFormPasswordEx').value
     
    this.usuarioService.getUsuarioDatos ()
    .subscribe(data => {
@@ -49,17 +50,16 @@ export class LoginPageComponent implements OnInit {
     });*/
     
     
-   
+   console.log(this.loginForm.value);
   
     //this.router.navigate(['/home']);
-    this.add ("benita");
+    this.add (this.loginForm.value);
    
   }
 
-  add(correo : string ): void {
-    correo = correo.trim();
-   if (!correo) { return; }
-    this.usuarioService.addUsuario({correo} as UsuarioModelo)
+  add(usDatos : UsuarioModelo ): void {
+   
+    this.usuarioService.addUsuario(usDatos)
     .subscribe(us => {
 
       console.log ('bbb:'+us.correo);

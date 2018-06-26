@@ -1,4 +1,4 @@
 export class UsuarioModelo {
-    correo='';
-    password='';
+    correo: string;
+    password: string;
 }
