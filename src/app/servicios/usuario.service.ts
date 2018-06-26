@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable , of } from 'rxjs';
+import {UsuarioModelo} from '../modelo/usuario-modelo';
+
+import { catchError, map, tap } from 'rxjs/operators';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +18,25 @@ import { map } from 'rxjs/operators';
 export class UsuarioService {
   readonly rootUrl = 'http://localhost:8080/web/rs';
   data : any;
+
   constructor(private http: HttpClient) { }
 
+  
+
   userAuthentication(userName, password) {
+    
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
-    return this.http.post(this.rootUrl + '/us/token', data, { headers: reqHeader });
+   
+    const req  =this.http.post(this.rootUrl + '/us/token', { headers: reqHeader })
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
   }
 
   getUsuarioDatos(){
@@ -28,5 +49,20 @@ export class UsuarioService {
     });*/
   
    }
+   addUsuario (us: UsuarioModelo): Observable<UsuarioModelo> {
+    return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions).pipe(
+      tap((us: UsuarioModelo) => console.log(`added us w/ correo=${us.correo}`)),
+      catchError(this.handleError<UsuarioModelo>('addUsuario'))
+    );
+  }
+ 
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+     console.error(error); 
+
+      return of(result as T);
+    };
+  }
+
    }
 

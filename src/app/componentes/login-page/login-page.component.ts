@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UsuarioModelo } from '../login-page/usuario-modelo';
+//import { UsuarioModelo } from '../login-page/usuario-modelo';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
-
+import {UsuarioModelo} from '../../modelo/usuario-modelo';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -16,7 +16,8 @@ export class LoginPageComponent implements OnInit {
   correo : string;
   password : string ;
   usuarioDatos: any;
-
+  data: any;
+  us: UsuarioModelo[];
   constructor(public fb: FormBuilder, private usuarioService: UsuarioService , private router : Router) {
     this.loginForm = fb.group({
       loginFormEmailEx: ['', [Validators.required, Validators.email]],
@@ -32,14 +33,37 @@ export class LoginPageComponent implements OnInit {
    this.correo=this.loginForm.get('loginFormEmailEx').value;
    this.password=this.loginForm.get('loginFormPasswordEx').value
     
-    console.log(this.correo,this.password);
+   this.usuarioService.getUsuarioDatos ()
+   .subscribe(data => {
+      this.data = data;
+      console.log(this.data);
+  
+    });
        
-    /*this.usuarioService.userAuthentication(this.correo,this.password).subscribe((data : any)=>{
-      localStorage.setItem('userToken',data.access_token);
-      this.router.navigate(['/home']);
+
+  
+ /*.subscribe(data => {
+      this.data = data;
+      console.log(this.data);
+  
     });*/
-    this.router.navigate(['/home']);
+    
+    
    
+  
+    //this.router.navigate(['/home']);
+    this.add ("benita");
+   
+  }
+
+  add(correo : string ): void {
+    correo = correo.trim();
+   if (!correo) { return; }
+    this.usuarioService.addUsuario({correo} as UsuarioModelo)
+    .subscribe(us => {
+
+      console.log ('bbb:'+us.correo);
+    });
   }
   
 
