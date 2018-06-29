@@ -51,7 +51,7 @@ export class UsuarioService {
    }
    addUsuario (us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions).pipe(
-      tap((us: UsuarioModelo) => console.log(`added us w/ correo=${us.correo}`)),
+      tap((us: UsuarioModelo) => console.log(`added us w/ correo=${us.email}`)),
       catchError(this.handleError<UsuarioModelo>('addUsuario'))
     );
   }

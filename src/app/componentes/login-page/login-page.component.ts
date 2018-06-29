@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder ,FormControl} from '@angular/forms';
 //import { UsuarioModelo } from '../login-page/usuario-modelo';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
 import {UsuarioModelo} from '../../modelo/usuario-modelo';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+const now = new Date();
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -12,43 +15,29 @@ import {UsuarioModelo} from '../../modelo/usuario-modelo';
 export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
+  registroForm: FormGroup;
   usDatos: FormGroup;
   usuario1 : UsuarioModelo;
-  //correo : string;
-  //password : string ;
   usuarioDatos: any;
   data: any;
   us: UsuarioModelo[];
-  constructor(public fb: FormBuilder, private usuarioService: UsuarioService , private router : Router) {
+  model: NgbDateStruct;
+  date: {year: number, month: number};
+  constructor(public fb: FormBuilder, private usuarioService: UsuarioService ,
+    private router : Router,
+    public fb2: FormBuilder
+  ) {
     this.loginForm = fb.group({
-      correo: ['', [Validators.required, Validators.email]],
-       password: ['', Validators.required],
+      LFemail: ['', [Validators.required, Validators.email]],
+      LFcontrasena: ['', Validators.required],
+      db: new FormControl()
     });
+   
+    this.crearRegistroForm();
   }
   ngOnInit() {
   }
   onSubmit() {
-    
-    
-
-   //this.correo=this.loginForm.get('loginFormEmailEx').value;
-   //this.password=this.loginForm.get('loginFormPasswordEx').value
-    
-   this.usuarioService.getUsuarioDatos ()
-   .subscribe(data => {
-      this.data = data;
-      console.log(this.data);
-  
-    });
-       
-
-  
- /*.subscribe(data => {
-      this.data = data;
-      console.log(this.data);
-  
-    });*/
-    
     
    console.log(this.loginForm.value);
   
@@ -62,7 +51,7 @@ export class LoginPageComponent implements OnInit {
     this.usuarioService.addUsuario(usDatos)
     .subscribe(us => {
 
-      console.log ('bbb:'+us.correo);
+      console.log ('bbb:'+us.email);
     });
   }
   
@@ -73,5 +62,20 @@ export class LoginPageComponent implements OnInit {
     });
     
   }
- 
+
+  crearRegistroForm()
+  {
+
+    this.registroForm = this.fb2.group({
+      nombre: ['', Validators.required],
+      apellido: ['',  Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
+      contrasena: ['', Validators.required],
+      
+    });
+  }
+  selectToday() {
+    this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+  }
 }

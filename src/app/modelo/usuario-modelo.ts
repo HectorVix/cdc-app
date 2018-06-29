@@ -1,4 +1,10 @@
 export class UsuarioModelo {
-correo: string;
-password: string;
+rol:number;    
+nombre: string;
+apellido: string;
+usuario: string;
+sexo: string;
+fechaNacimiento:Date;    
+email: string;
+contrasena: string;
 }
