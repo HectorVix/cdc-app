@@ -21,7 +21,7 @@
                         <input mdbInputDirective type="text" id="LFcontrasena" formControlName="LFcontrasena" class="form-control">
                         <label for="LFcontrasena">Contraseña</label>
                         <p class="font-small blue-text d-flex justify-content-end">¿Olvidaste tu
-                            <a href="#" class="blue-text ml-1"> contraseña?</a>
+                            <a (click)="formRecuperarContrasena.show()" class="blue-text ml-1"> contraseña?</a>
                         </p>
                     </div>
 
@@ -36,7 +36,7 @@
                 <!--Footer-->
                 <div class="modal-footer mx-5 pt-3 mb-1">
                     <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
-                        <a (click)="form.show()" class="blue-text ml-1"> Regístrate</a>
+                        <a (click)="formRegistro.show()" class="blue-text ml-1"> Regístrate</a>
                     </p>
                 </div>
 
@@ -53,7 +53,7 @@
 
 
 <!--Modal: Registro form-->
-<div mdbModal #form="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div mdbModal #formRegistro="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
         <!--Content-->
@@ -63,7 +63,7 @@
             <div class="modal-header light-blue darken-3 white-text">
                 <h4 class="title">
                     <i class="fa fa-pencil"></i> Registro</h4>
-                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="form.hide()">
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRegistro.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -85,12 +85,9 @@
                        
                     </div>
                    
-                    <!--Fecha de nacimiento-->
-                   
-                    <div class="md-form form-sm input-group-append mt-0">
-                            
-                        <i class="fa fa-calendar prefix "></i>
-                      
+                    <!--Fecha de nacimiento-->                 
+                    <div class="md-form form-sm input-group-append mt-0">                           
+                        <i class="fa fa-calendar prefix "></i>                    
                          <input mdbInputDirective type="text" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control" ngbDatepicker
                                 #d="ngbDatepicker" >
                             <label for="fechaNacimiento">Tu fecha de nacimiento</label>
@@ -103,19 +100,27 @@
                     </div>
               
                     <div class="md-form form-sm">
-                            <i class="fa fa-lock prefix"></i>
+                            <i class="fa fa-envelope prefix"></i>
                             <input mdbInputDirective type="email" id="email" formControlName="email" class="form-control">
-                            <label for="email">Your email</label>
+                            <label for="email">Tu correo</label>
                         </div>
 
-                
+                        <div class="md-form form-sm">
+                            <i class="fa fa-exclamation-triangle prefix "></i>
+                            <input mdbInputDirective type="email" id="emailConfirmar" formControlName="emailConfirmar" class="form-control">
+                            <label for="emailConfirmar">Confirmar tu correo</label>
+                        </div>
 
-
+                        <div class="md-form form-sm">
+                            <i class="fa fa-lock prefix "></i>
+                            <input mdbInputDirective type="password" id="contrasena" formControlName="contrasena" class="form-control">
+                            <label for="contrasena">Tu contraseña</label>
+                        </div>
 
 
 
                     <div class="text-center mt-1-half">
-                        <button class="btn btn-info mb-2 waves-light" mdbWavesEffect>Send
+                        <button class="btn btn-info mb-2 waves-light" [disabled]="!registroForm.valid" mdbWavesEffect>Registrar
 
                         </button>
                     </div>
@@ -127,3 +132,56 @@
     </div>
 </div>
 <!--Modal: Registro form-->
+
+
+<!--Modal: Recuperar Contraseña form-->
+<div mdbModal #formRecuperarContrasena="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title">
+                    <i class="fa fa-pencil"></i> Recuperar Contraseña</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRecuperarContrasena.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+                <form [formGroup]="recuperarContrasenaForm">
+                    <!--Nombre-->
+                    
+                   
+                    
+              
+                    <div class="md-form form-sm">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input mdbInputDirective type="email" id="emailRecuperarContrasena" formControlName="emailRecuperarContrasena" class="form-control">
+                            <label for="emailRecuperarContrasena">Tu correo</label>
+                        </div>
+
+                        
+
+                        
+
+
+
+                    <div class="text-center mt-1-half">
+                        <button class="btn btn-info mb-2 waves-light" [disabled]="!recuperarContrasenaForm.valid" mdbWavesEffect>Enviar
+
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Registro form-->
+
+
+

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder ,FormControl} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 //import { UsuarioModelo } from '../login-page/usuario-modelo';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
-import {UsuarioModelo} from '../../modelo/usuario-modelo';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { UsuarioModelo } from '../../modelo/usuario-modelo';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const now = new Date();
 @Component({
@@ -16,66 +16,78 @@ export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
   registroForm: FormGroup;
+  recuperarContrasenaForm: FormGroup;
   usDatos: FormGroup;
-  usuario1 : UsuarioModelo;
+  usuario1: UsuarioModelo;
   usuarioDatos: any;
   data: any;
   us: UsuarioModelo[];
   model: NgbDateStruct;
-  date: {year: number, month: number};
-  constructor(public fb: FormBuilder, private usuarioService: UsuarioService ,
-    private router : Router,
-    public fb2: FormBuilder
-  ) {
+  date: { year: number, month: number };
+
+  constructor(public fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private router: Router,
+    public fb2: FormBuilder,
+    public fb3: FormBuilder)
+     {
     this.loginForm = fb.group({
       LFemail: ['', [Validators.required, Validators.email]],
       LFcontrasena: ['', Validators.required],
       db: new FormControl()
     });
-   
+
     this.crearRegistroForm();
+    this.restablecerContrasenaForm();
   }
   ngOnInit() {
   }
   onSubmit() {
-    
-   console.log(this.loginForm.value);
-  
+
+    console.log(this.loginForm.value);
+
     //this.router.navigate(['/home']);
-    this.add (this.loginForm.value);
-   
+    this.add(this.loginForm.value);
+
   }
 
-  add(usDatos : UsuarioModelo ): void {
-   
+  add(usDatos: UsuarioModelo): void {
+
     this.usuarioService.addUsuario(usDatos)
-    .subscribe(us => {
+      .subscribe(us => {
 
-      console.log ('bbb:'+us.email);
-    });
+        console.log('bbb:' + us.email);
+      });
   }
-  
+
 
   rebuildForm() {
     this.loginForm.reset({
-     
+
     });
-    
+
   }
 
-  crearRegistroForm()
-  {
+  crearRegistroForm() {
 
     this.registroForm = this.fb2.group({
       nombre: ['', Validators.required],
-      apellido: ['',  Validators.required],
+      apellido: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
+      emailConfirmar: ['', [Validators.email, Validators.required]],
       contrasena: ['', Validators.required],
-      
+
+    });
+  }
+  restablecerContrasenaForm() {
+    this.recuperarContrasenaForm = this.fb3.group({
+      emailRecuperarContrasena:  ['', [Validators.email, Validators.required]]
+
+
     });
   }
   selectToday() {
-    this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+    this.model = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
 }
