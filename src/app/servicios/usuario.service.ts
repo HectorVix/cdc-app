@@ -16,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsuarioService {
-  readonly rootUrl = 'http://localhost:8080/web/rs';
+  readonly rootUrl = 'http://localhost:8080/cdc/rs';
   data : any;
 
   constructor(private http: HttpClient) { }
@@ -41,7 +41,7 @@ export class UsuarioService {
 
   getUsuarioDatos(){
     console.log('getUs');
-    return this.http.get('http://192.168.1.2:8080/web/rs/us/') ;
+    return this.http.get('http://192.168.1.2:8080/cdc/rs/us/') ;
     /*.subscribe(data => {
       this.data = data;
       console.log(this.data);
@@ -51,7 +51,7 @@ export class UsuarioService {
    }
    addUsuario (us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions).pipe(
-      tap((us: UsuarioModelo) => console.log(`added us w/ correo=${us.email}`)),
+      tap((us: UsuarioModelo) => console.log(`added us w/ nombre=${us.nombre}`)),
       catchError(this.handleError<UsuarioModelo>('addUsuario'))
     );
   }

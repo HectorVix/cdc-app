@@ -5,6 +5,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
 import { UsuarioModelo } from '../../modelo/usuario-modelo';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common'
 
 const now = new Date();
 @Component({
@@ -18,23 +19,26 @@ export class LoginPageComponent implements OnInit {
   registroForm: FormGroup;
   recuperarContrasenaForm: FormGroup;
   usDatos: FormGroup;
-  usuario1: UsuarioModelo;
   usuarioDatos: any;
-  data: any;
   us: UsuarioModelo[];
   model: NgbDateStruct;
   date: { year: number, month: number };
 
+  //pruebas
+  data: any;
+  fecha: Date ;
+  modelo2: NgbDateStruct;
   constructor(public fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
     public fb2: FormBuilder,
-    public fb3: FormBuilder)
+    public fb3: FormBuilder,
+    public datepipe: DatePipe)
      {
     this.loginForm = fb.group({
       LFemail: ['', [Validators.required, Validators.email]],
       LFcontrasena: ['', Validators.required],
-      db: new FormControl()
+      //db: new FormControl()
     });
 
     this.crearRegistroForm();
@@ -47,17 +51,43 @@ export class LoginPageComponent implements OnInit {
     console.log(this.loginForm.value);
 
     //this.router.navigate(['/home']);
-    this.add(this.loginForm.value);
+   // this.addUsuario(this.loginForm.value);
+   this.usuarioService.getUsuarioDatos()
+     .subscribe(data => {
+      this.data = data;
+      console.log(this.data);
+  
+    });
 
   }
+  //Guardar Registro
+  onSubmitRegistro(){
 
-  add(usDatos: UsuarioModelo): void {
 
-    this.usuarioService.addUsuario(usDatos)
+    console.log(this.registroForm.value);
+    this.modelo2=this.registroForm.get('fechaNacimiento').value;
+  // this.fecha=new Date();
+   // let latest_date =this.datepipe.transform(this.fecha, 'yyyy-MM-dd');
+     this.fecha=this.toModel(this.modelo2);
+     
+     console.log(this.registroForm.value);
+     this.addUsuario(this.registroForm.value);
+  //  this.addUsuario(this.registroForm.value);
+  }
+
+  addUsuario(usDatos: UsuarioModelo): void {
+     console.log(usDatos.fechaNacimiento);
+     ;
+     usDatos.fechaNacimiento=  this.fecha;
+     console.log(usDatos.fechaNacimiento);
+      
+
+   this.usuarioService.addUsuario(usDatos)
       .subscribe(us => {
 
-        console.log('bbb:' + us.email);
+        console.log('bbb:' + us.nombre);
       });
+      
   }
 
 
@@ -89,5 +119,8 @@ export class LoginPageComponent implements OnInit {
   }
   selectToday() {
     this.model = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+  }
+  toModel(date: NgbDateStruct): Date {
+    return date ? new Date(''+date.year+'-'+date.month+'-'+date.day) : null;
   }
 }

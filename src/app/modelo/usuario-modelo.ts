@@ -1,10 +1,11 @@
 export class UsuarioModelo {
-rol:number;    
+//rol:number;    
 nombre: string;
 apellido: string;
-usuario: string;
-sexo: string;
+//usuario: string;
+//sexo: string;
 fechaNacimiento:Date;    
 email: string;
+emailConfirmar:string;
 contrasena: string;
 }
