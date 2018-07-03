@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 //import { UsuarioModelo } from '../login-page/usuario-modelo';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
-import { UsuarioModelo } from '../../modelo/usuario-modelo';
+import { UsuarioModelo,Rol } from '../../modelo/usuario-modelo';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 
@@ -23,11 +23,12 @@ export class LoginPageComponent implements OnInit {
   us: UsuarioModelo[];
   model: NgbDateStruct;
   date: { year: number, month: number };
-
+   emailConfirmar:string;
   //pruebas
   data: any;
   fecha: Date ;
   modelo2: NgbDateStruct;
+   rol : Rol;
   constructor(public fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router,
@@ -79,6 +80,11 @@ export class LoginPageComponent implements OnInit {
      console.log(usDatos.fechaNacimiento);
      ;
      usDatos.fechaNacimiento=  this.fecha;
+     usDatos.usuarioId=1000000000;
+
+     this.rol=new Rol();
+     this.rol.rolId=123;
+    // usDatos.rolrolid=this.rol;
      console.log(usDatos.fechaNacimiento);
       
 
@@ -105,7 +111,7 @@ export class LoginPageComponent implements OnInit {
       apellido: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      emailConfirmar: ['', [Validators.email, Validators.required]],
+   //   emailConfirmar: ['', [Validators.email, Validators.required]],
       contrasena: ['', Validators.required],
 
     });
