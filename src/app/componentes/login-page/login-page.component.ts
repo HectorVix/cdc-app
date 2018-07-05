@@ -88,7 +88,8 @@ export class LoginPageComponent implements OnInit {
     this.usuarioService.addUsuario(usDatos)
       .subscribe(
         us => {
-          this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');
+          this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');  
+          this.rebuildFormRegisrtro();        
         }, err => {
           this.changeSuccessMessage('No se pudo registrar, servidor no disponible.', 'warning ');
         });
@@ -96,12 +97,17 @@ export class LoginPageComponent implements OnInit {
   }
 
 
-  rebuildForm() {
+  rebuildFormLogin() {
     this.loginForm.reset({
     });
 
   }
 
+  rebuildFormRegisrtro() {
+    this.registroForm.reset({
+    });
+
+  }
   crearRegistroForm() {
     this.registroForm = this.fb2.group({
       nombre: ['', Validators.required],
