@@ -1,23 +1,32 @@
 <div class="container">
-  <div class="row">
-    <div class="card">
-      <ngb-tabset >
-        <ngb-tab id="details">
-          <ng-template ngbTabTitle>
-            <a routerLink='/formulariojerarquizacion'>Formulario</a>
-          </ng-template>
+    <div class="row">
+      <div class="col s8 offset-s2">
+        <div class="card grey lighten-2">
+          <div class="card-tabs">
+             <ngb-tabset  #t="ngbTabset"  >
+        <ngb-tab id="tab-selectbyid1" title="Formulario Jerarquizacion">
+            <ng-template ngbTabContent>
+                <app-formulario-jerarquizacion></app-formulario-jerarquizacion>
+             
+              </ng-template>
+          
         </ngb-tab>
-        <ngb-tab id="details">
-          <ng-template ngbTabTitle>
-            <a routerLink='/editarjerarquizacion'>Editar</a>
+        <ngb-tab  id="tab-selectbyid2" title="Editar">
+            <ng-template ngbTabContent>
+                <app-editar-jerarquizacion></app-editar-jerarquizacion>
           </ng-template>
         </ngb-tab>
       </ngb-tabset>
+          </div>
+          <div class="card-content white">
+            <div class="row">
+              
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="card-content white">
-    <div class="row">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+        
+      
+   

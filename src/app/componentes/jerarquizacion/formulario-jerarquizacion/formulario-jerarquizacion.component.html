@@ -1,3 +1,40 @@
-<p>
-  formulario-jerarquizacion works!
-</p>
+<div class="card-content white">
+  <div class="card-body">
+    <ngb-tabset #fJ="ngbTabset">
+      <ngb-tab id="tab-selectbyid1">
+        <ng-template ngbTabTitle>
+          <b>1</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+
+          <form>
+            <div class="row">
+              <div class="col-xs-6 col-sm-1">
+                <label for="">CODIGOE:</label>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="md-form col-sm-4 mt-0">
+                <input mdbInputDirective type="text" id="form1" required>
+
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-selectbyid2">
+        <ng-template ngbTabTitle>
+          <b>2</b>
+        </ng-template>
+        <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+    <p>
+      <button class="btn btn-outline-primary" (click)="fJ.select('tab-selectbyid2')">Siguiente</button>
+    </p>
+  </div>
+
+</div>
