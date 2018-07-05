@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <ngb-tabset >
+        <ngb-tab id="details">
+          <ng-template ngbTabTitle>
+            <a routerLink='/formulariojerarquizacion'>Formulario</a>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="details">
+          <ng-template ngbTabTitle>
+            <a routerLink='/editarjerarquizacion'>Editar</a>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+  <div class="card-content white">
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

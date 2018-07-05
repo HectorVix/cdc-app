@@ -15,7 +15,10 @@ import { PrivadoPageComponent } from './componentes/privado-page/privado-page.co
 import { NotFoundPageComponent } from './componentes/not-found-page/not-found-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormularioResumenFuenteComponent } from './componentes/Fuentes/formulario-resumen-fuente/formulario-resumen-fuente.component';
-import { UsuarioService} from './servicios/usuario.service'
+import { UsuarioService} from './servicios/usuario.service';
+import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
+import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
+import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,10 @@ import { UsuarioService} from './servicios/usuario.service'
     LoginPageComponent,
     PrivadoPageComponent,
     NotFoundPageComponent,
-    FormularioResumenFuenteComponent
+    FormularioResumenFuenteComponent,
+    JerarquizacionComponent,
+    FormularioJerarquizacionComponent,
+    EditarJerarquizacionComponent
 
   ],
   imports: [
