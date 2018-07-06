@@ -8,17 +8,55 @@
         <ng-template ngbTabContent>
 
           <form>
+             <!-- Codigo del elemento -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                      <label for="">CODIGOE:</label>
+                    </div>
+                  <div class="md-form col-sm-4 mt-0">
+                    <input mdbInputDirective type="text" id="form1" class="form-control"
+                     data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                     required>                   
+                  </div>
+                </div>
+               <!--Nombre nacional  -->            
+               <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                      <label for="">NOMBREN:</label>
+                    </div>
+                  <div class="md-form col-sm-4 mt-0">
+                    <input mdbInputDirective type="text" id="form1" class="form-control"
+                     data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                     required>
+                    
+                  </div>
+                </div>
+            <!--codigo del pais -->
             <div class="row">
-              <div class="col-xs-6 col-sm-1">
-                <label for="">CODIGOE:</label>
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">NACION:</label>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                  <select class="form-control" required>
+                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="row ">
-              <div class="md-form col-sm-4 mt-0">
-                <input mdbInputDirective type="text" id="form1" required>
-
+          
+            <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                    <label>NLOCTIP:</label>
+                  </div>
+                <div class="md-form col-sm-4 mt-0">
+                  <input mdbInputDirective type="text" id="form1" class="form-control"
+                   data-error="" data-success=""
+                   required>
+                  
+                </div>
               </div>
-            </div>
+            <!--  -->
+            <!--  -->
           </form>
         </ng-template>
       </ngb-tab>
