@@ -18,6 +18,8 @@ export class FormularioJerarquizacionComponent implements OnInit {
     this.jerarquizacionForm = this.fb.group({
       'codigoe': ['', Validators.required],
       'cobgeo': '',
+      'nlestimcom': ''
+      
       
     });
   }

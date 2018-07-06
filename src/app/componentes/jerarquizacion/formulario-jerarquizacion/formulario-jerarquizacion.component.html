@@ -7,34 +7,79 @@
         </ng-template>
         <ng-template ngbTabContent>
 
-          <form>
-             <!-- Codigo del elemento -->
-              <div class="row">
-                  <div class="col-xs-6 col-sm-2">
-                      <label for="">CODIGOE:</label>
-                    </div>
-                  <div class="md-form col-sm-4 mt-0">
-                    <input mdbInputDirective type="text" id="form1" class="form-control"
-                     data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                     required>                   
-                  </div>
-                </div>
-               <!--Nombre nacional  -->            
-               <div class="row">
-                  <div class="col-xs-6 col-sm-2">
-                      <label for="">NOMBREN:</label>
-                    </div>
-                  <div class="md-form col-sm-4 mt-0">
-                    <input mdbInputDirective type="text" id="form1" class="form-control"
-                     data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                     required>
-                    
-                  </div>
-                </div>
+          <form [formGroup]="jerarquizacionForm" >
+            <!-- Codigo del elemento -->
+            <div class="row">
+              <div class="col-xs-6 col-sm-2">
+                <label for="">CODIGOE:</label>
+              </div>
+              <div class="md-form col-sm-4 mt-0">
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                  required>
+              </div>
+            </div>
+            <!--Nombre nacional  -->
+            <div class="row">
+              <div class="col-xs-6 col-sm-2">
+                <label for="">NOMBREN:</label>
+              </div>
+              <div class="md-form col-sm-4 mt-0">
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                  required>
+
+              </div>
+            </div>
             <!--codigo del pais -->
             <div class="row">
+              <div class="col-xs-6 col-sm-2">
+                <label for="">NACION:</label>
+              </div>
+              <div class="col-xs-6 col-sm-3">
+                <select class="form-control" required>
+                  <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!--  -->
+            <div class="row">
+              <div class="col-xs-6 col-sm-2">
+                <label>NLOCTIP:</label>
+              </div>
+              <div class="md-form col-sm-4 mt-0">
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="" data-success="" required>
+              </div>
+            </div>
+
+            <!--  -->
+            <div class="row">
+              <div class="col-xs-6 col-sm-2">
+                <label for="">NLESTIM:</label>
+              </div>
+              <div class="col-xs-6 col-sm-3">
+                <select class="form-control" required>
+                  <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                </select>
+              </div>
+            </div>
+            <!--  -->
+            <div class="row">
                 <div class="col-xs-6 col-sm-2">
-                  <label for="">NACION:</label>
+                  <label for="">NLESTIMCOM:</label>
+                </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                    <i class="fa fa-pencil prefix"></i>
+                    <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nlestimcom" required></textarea>
+                    <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                  </div>
+              </div>
+            <!--  -->
+              <!-- *** -->
+               <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">NABUND:</label>
                 </div>
                 <div class="col-xs-6 col-sm-3">
                   <select class="form-control" required>
@@ -42,22 +87,96 @@
                   </select>
                 </div>
               </div>
-          
-            <!--  -->
+              <!--  -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">NABUNDCOM:</label>
+                  </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta" formControlName="nlestimcom" required></textarea>
+                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                    </div>
+                </div>
+              <!--  --> <!--  -->
             <div class="row">
                 <div class="col-xs-6 col-sm-2">
-                    <label>NLOCTIP:</label>
-                  </div>
-                <div class="md-form col-sm-4 mt-0">
-                  <input mdbInputDirective type="text" id="form1" class="form-control"
-                   data-error="" data-success=""
-                   required>
-                  
+                  <label for="">NDIST:</label>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                  <select class="form-control" required>
+                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  </select>
                 </div>
               </div>
-            <!--  -->
-            <!--  -->
+              <!--  -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">NDISTCOM:</label>
+                  </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta" formControlName="nlestimcom" required></textarea>
+                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                    </div>
+                </div>
+              <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">NLEPROT:</label>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                  <select class="form-control" required>
+                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  </select>
+                </div>
+              </div>
+              <!--  -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">NLEPROTCOM:</label>
+                  </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta" formControlName="nlestimcom" required></textarea>
+                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                    </div>
+                </div>
+              <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">NAMENAZ:</label>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                  <select class="form-control" required>
+                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  </select>
+                </div>
+              </div>
+              <!--  -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">NAMENAZCOM:</label>
+                  </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta" formControlName="nlestimcom" required></textarea>
+                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                    </div>
+                </div>
+              <!--  -->
+              <!-- *** -->
           </form>
+          <p>
+            <button class="btn btn-outline-primary" (click)="fJ.select('tab-selectbyid2')">Siguiente</button>
+            <button class="btn btn-outline-primary" type="reset">Cancelar</button>
+         
+          </p>
+
         </ng-template>
       </ngb-tab>
       <ngb-tab id="tab-selectbyid2">
@@ -70,9 +189,7 @@
       </ngb-tab>
     </ngb-tabset>
 
-    <p>
-      <button class="btn btn-outline-primary" (click)="fJ.select('tab-selectbyid2')">Siguiente</button>
-    </p>
+
   </div>
 
 </div>
