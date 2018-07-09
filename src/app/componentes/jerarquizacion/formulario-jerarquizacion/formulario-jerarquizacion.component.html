@@ -14,7 +14,7 @@
                 <label for="">CODIGOE:</label>
               </div>
               <div class="md-form col-sm-4 mt-0">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
                   required>
               </div>
             </div>
@@ -24,7 +24,7 @@
                 <label for="">NOMBREN:</label>
               </div>
               <div class="md-form col-sm-4 mt-0">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
                   required>
 
               </div>
@@ -35,8 +35,8 @@
                 <label for="">NACION:</label>
               </div>
               <div class="col-xs-6 col-sm-3">
-                <select class="form-control" required>
-                  <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                <select class="form-control" formControlName="nacion" required>
+                  <option *ngFor="let sNacion of lnacion" [value]="sNacion">{{sNacion}}</option>
                 </select>
               </div>
             </div>
@@ -47,7 +47,7 @@
                 <label>NLOCTIP:</label>
               </div>
               <div class="md-form col-sm-4 mt-0">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="" data-success="" required>
+                <input mdbInputDirective type="text" id="form3" class="form-control" formControlName="nloctip" data-error="" data-success="" required>
               </div>
             </div>
 
@@ -57,8 +57,8 @@
                 <label for="">NLESTIM:</label>
               </div>
               <div class="col-xs-6 col-sm-3">
-                <select class="form-control" required>
-                  <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                <select class="form-control" formControlName="nlestim" required>
+                  <option *ngFor="let sNestim of lnestim" [value]="sNestim">{{sNestim}}</option>
                 </select>
               </div>
             </div>
@@ -82,8 +82,8 @@
                   <label for="">NABUND:</label>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                  <select class="form-control" required>
-                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  <select class="form-control" formControlName="nabund" required>
+                    <option *ngFor="let sNabund of lnabund" [value]="sNabund">{{sNabund}}</option>
                   </select>
                 </div>
               </div>
@@ -95,8 +95,8 @@
                   <div class="md-form  col-xs-6 col-sm-7">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                        data-success="correcta" formControlName="nlestimcom" required></textarea>
-                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                        data-success="correcta" formControlName="nabundcom" required></textarea>
+                      <label for="formCita"></label>
                     </div>
                 </div>
               <!--  --> <!--  -->
@@ -105,8 +105,8 @@
                   <label for="">NDIST:</label>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                  <select class="form-control" required>
-                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  <select class="form-control" formControlName="ndist" required>
+                    <option *ngFor="let sNdist of lndist" [value]="sNdist">{{sNdist}}</option>
                   </select>
                 </div>
               </div>
@@ -118,8 +118,8 @@
                   <div class="md-form  col-xs-6 col-sm-7">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                        data-success="correcta" formControlName="nlestimcom" required></textarea>
-                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                        data-success="correcta" formControlName="ndistcom" required></textarea>
+                      <label for="formCita"></label>
                     </div>
                 </div>
               <!--  --> <!--  -->
@@ -128,8 +128,8 @@
                   <label for="">NLEPROT:</label>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                  <select class="form-control" required>
-                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  <select class="form-control"  formControlName="nleprot" required>
+                    <option *ngFor="let sNleprot of lnleprot" [value]="sNleprot">{{sNleprot}}</option>
                   </select>
                 </div>
               </div>
@@ -141,8 +141,8 @@
                   <div class="md-form  col-xs-6 col-sm-7">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                        data-success="correcta" formControlName="nlestimcom" required></textarea>
-                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                        data-success="correcta" formControlName="nleprotcom" required></textarea>
+                      <label for="formCita"></label>
                     </div>
                 </div>
               <!--  --> <!--  -->
@@ -151,8 +151,8 @@
                   <label for="">NAMENAZ:</label>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                  <select class="form-control" required>
-                    <option *ngFor="let nacion of lnaciones" [value]="nacion">{{nacion}}</option>
+                  <select class="form-control" formControlName="namenaz" required>
+                    <option *ngFor="let sNamenaz of lnamenaz" [value]="sNamenaz">{{sNamenaz}}</option>
                   </select>
                 </div>
               </div>
@@ -164,8 +164,8 @@
                   <div class="md-form  col-xs-6 col-sm-7">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                        data-success="correcta" formControlName="nlestimcom" required></textarea>
-                      <label for="formCita">Anote el número exacto de localizaciones existentes conocidas.</label>
+                        data-success="correcta" formControlName="namenazcom" required></textarea>
+                      <label for="formCita"></label>
                     </div>
                 </div>
               <!--  -->
@@ -183,7 +183,162 @@
         <ng-template ngbTabTitle>
           <b>2</b>
         </ng-template>
-        <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+        <ng-template ngbTabContent>
+      <!-- Página 2 -->
+      <form [formGroup]="jerarquizacionForm" >
+       <!--  -->
+            <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                     <label for="">NOTROCONSI:</label>
+                   </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                       <i class="fa fa-pencil prefix"></i>
+                       <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta" formControlName="notroconsi" required></textarea>
+                       <label for="formCita"></label>
+                     </div>
+                 </div>
+               <!--  -->
+                <!--  --> 
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">RANGON:</label>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                  <select class="form-control" formControlName="rangon"  required>
+                    <option *ngFor="let sRangon of lrangon" [value]="sRangon">{{sRangon}}</option>
+                  </select>
+                </div>
+                
+                  <div class="md-form form-sm input-group-append mt-0">
+                      <i class="fa fa-calendar prefix "></i>
+                      <input mdbInputDirective type="text" id="formFecharn"  class="form-control" formControlName="fecharn"  ngbDatepicker
+                          #dFecharn="ngbDatepicker">
+                      <label for="formFecharn">FECHARN</label>
+                      <div class="input-group-append ">
+                          <button class="btn btn-info mb-2 waves-light" (click)="dFecharn.toggle()" mdbWavesEffect>Date
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <!-- **** -->
+               <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                   <label for="">NRANRZON:</label>
+                 </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                     <i class="fa fa-pencil prefix"></i>
+                     <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nranrzon" required></textarea>
+                     <label for="formCita"></label>
+                   </div>
+               </div>
+             <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                   <label for="">NNECPROTEC:</label>
+                 </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                     <i class="fa fa-pencil prefix"></i>
+                     <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nnecprotec" required></textarea>
+                     <label for="formCita"></label>
+                   </div>
+               </div>
+             <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                   <label for="">NNECINVENT:</label>
+                 </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                     <i class="fa fa-pencil prefix"></i>
+                     <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nnecinvent" required></textarea>
+                     <label for="formCita"></label>
+                   </div>
+               </div>
+             <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                   <label for="">NNECESTUDI:</label>
+                 </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                     <i class="fa fa-pencil prefix"></i>
+                     <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nnecestudi" required></textarea>
+                     <label for="formCita"></label>
+                   </div>
+               </div>
+             <!--  --> <!--  -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                   <label for="">NNECMAEJO:</label>
+                 </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                     <i class="fa fa-pencil prefix"></i>
+                     <textarea mdbInputDirective type="text" id="formNnecmaejo" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta" formControlName="nnecmaejo" required></textarea>
+                     <label for="formCita"></label>
+                   </div>
+               </div>
+             <!--  -->  
+             <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">RESRN:</label>
+                </div>
+                <div class="md-form col-sm-4 mt-0">
+                  <input mdbInputDirective type="text" id="formResrn" class="form-control" formControlName="resrn" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!--  -->
+              <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">EDAUTOR:</label>
+                  </div>
+                  <div class="md-form col-sm-4 mt-0">
+                    <input mdbInputDirective type="text" id="formEdautor" class="form-control" formControlName="edautor" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                      required>
+                  </div>
+                </div>
+                <!--  -->
+                <div class="row">
+                    <div class="col-xs-6 col-sm-2">
+                      <label for="">EDICION:</label>
+                    </div>
+                   
+                    
+                      <div class="md-form form-sm input-group-append mt-0">
+                          <i class="fa fa-calendar prefix "></i>
+                          <input mdbInputDirective type="text" id="formEdicion"  class="form-control" formControlName="edicion" ngbDatepicker
+                              #dEdicion="ngbDatepicker">
+                          <label for="formEdicion"></label>
+                          <div class="input-group-append ">
+                              <button class="btn btn-info mb-2 waves-light" (click)="dEdicion.toggle()" mdbWavesEffect>Date
+                              </button>
+                          </div>
+                      </div>
+                      <div class="md-form form-sm input-group-append mt-0">
+                          <i class="fa fa-calendar prefix "></i>
+                          <input mdbInputDirective type="text" id="formActualizar"  class="form-control" formControlName="actualizar" ngbDatepicker
+                              #dActualizar="ngbDatepicker">
+                          <label for="formActualizar">ACTUALIZAR</label>
+                          <div class="input-group-append ">
+                              <button class="btn btn-info mb-2 waves-light" (click)="dActualizar.toggle()" mdbWavesEffect>Date
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                 
+              
+
+        </form>
+        <p>
+            <button class="btn btn-outline-primary" >Guardar</button>
+            <button class="btn btn-outline-primary" type="reset">Cancelar</button>
+         
+          </p>
 
         </ng-template>
       </ngb-tab>
