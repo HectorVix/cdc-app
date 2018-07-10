@@ -1,0 +1,249 @@
+<div class="card-content white">
+  <div class="card-body">
+    <ngb-tabset #fJ="ngbTabset">
+      <ngb-tab id="tab-selectbyid1">
+        <ng-template ngbTabTitle>
+          <b>1</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+
+          <form>
+              <div class="modal-content ">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Identificadores</h5>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-6 col-sm-2">
+                        <label for="">CODIGOLE:</label>
+                      </div>
+                      <div class="md-form col-sm-3 mt-0 ">
+                        <input mdbInputDirective type="text" id="formCodigoe" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                          data-success="correcto" required>
+                      </div>
+                      <div class="col-xs-6 col-sm-1">
+                        <label for="">IDENT:</label>
+                      </div>
+                      <div class="col-xs-6 col-sm-2  mt-30 td ">
+                        <select class="form-control"  required>
+                          <option *ngFor="let sIdent of lident" [value]="sIdent">{{sIdent}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-2">
+                          <label for="">NOMBRES:</label>
+                        </div>
+                        <div class="md-form col-sm-5 mt-0 ">
+                          <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                            data-success="correcto" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-2">
+                            <label for="">NOMCOMUNS:</label>
+                          </div>
+                          <div class="md-form col-sm-5 mt-0 ">
+                            <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                              data-success="correcto" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-2">
+                              <label for="">RANGOS LE:</label>
+                            </div>
+                            <div class="md-form col-sm-2 mt-0 ">
+                              <input mdbInputDirective type="text" id="formRangoG" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                data-success="correcto" required>
+                                <label for="formRangoG">RANGOG:</label>
+                            </div>
+                            <div class="md-form col-sm-2 mt-0 ">
+                                <input mdbInputDirective type="text" id="formRangoN" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                  data-success="correcto" required>
+                                  <label for="formRangoN">RANGON:</label>
+                              </div>
+                              <div class="md-form col-sm-2 mt-0 ">
+                                  <input mdbInputDirective type="text" id="formRangos" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                    data-success="correcto" required>
+                                    <label for="formRangos">RANGOS:</label>
+                                </div>
+                          </div>          
+            </div> 
+            <!-- fin modal-content -->
+            <div class="modal-content ">
+                <div class="modal-header">
+                  <h5 class="modal-title">Localizadores</h5>
+                </div>
+                <div class="row">                    
+                    <div class="col-xs-6 col-sm-2">
+                        <label for="">SUBNACION:</label>
+                      </div>
+                      <div class="col-xs-6 col-sm-1 mt5 ">
+                        <select class="form-control"  required>
+                          <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-6 col-sm-1">
+                          <label for="">SUBDIVISION:</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-1 mt5 ">
+                          <select class="form-control"  required>
+                            <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                          </select>
+                        </div>
+                  </div>
+                  <div class="row">
+                    
+                      <div class="col-xs-6 col-sm-2">
+                          <label for="">CODSITIO:</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-1 mt5 ">
+                          <select class="form-control"  required>
+                            <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-2">
+                          <label for="">NOMSITIO:</label>
+                        </div>
+                        <div class="md-form col-sm-5 mt-0 ">
+                          <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                            data-success="correcto" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-2">
+                            <label for="">SITCEVA:</label>
+                          </div>
+                          <div class="md-form  col-xs-6 col-sm-7">
+                              <i class="fa fa-pencil prefix"></i>
+                              <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                data-success="correcta"  required></textarea>
+                              <label for="formCita">Anote .</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                    
+                            <div class="col-xs-6 col-sm-2">
+                                <label for="">PRECISION:</label>
+                              </div>
+                              <div class="col-xs-6 col-sm-1  ">
+                                <select class="form-control"  required>
+                                  <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                                </select>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-xs-6 col-sm-2">
+                                <label for="">NOMMAPA:</label>
+                              </div>
+                              <div class="md-form col-sm-2 mt-0 ">
+                                <input mdbInputDirective type="text" id="formnNommapa" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                  data-success="correcto" required>
+                                  <label for="formnNommapa">CODMAPA:</label>
+                              </div>
+                              <div class="md-form col-sm-2 mt-0 ">
+                                  <input mdbInputDirective type="text" id="formNummarg" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                    data-success="correcto" required>
+                                    <label for="formNummarg">NUMMARG:</label>
+                                </div>
+                                <div class="md-form col-sm-2 mt-0 ">
+                                    <input mdbInputDirective type="text" id="formNumpunto" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                      data-success="correcto" required>
+                                      <label for="formNumpunto">NUMPUNTO:</label>
+                                  </div>
+                                  <div class="md-form col-sm-2 mt-0 ">
+                                      <input mdbInputDirective type="text" id="formDiezdiez" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                        data-success="correcto" required>
+                                        <label for="formDiezdiez">DIEZDIEZ:</label>
+                                    </div>                                
+                            </div> 
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-2">
+                                  <label for="">COORDENADAS:</label>
+                                </div>
+                                <div class="md-form col-sm-2 mt-0 ">
+                                  <input mdbInputDirective type="text" id="formLatitud" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                    data-success="correcto" required>
+                                    <label for="formLatitud">LATITUD:</label>
+                                </div>
+                                <div class="md-form col-sm-2 mt-0 ">
+                                    <input mdbInputDirective type="text" id="formLongitud" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                      data-success="correcto" required>
+                                      <label for="formLongitud">LONGITUD:</label>
+                                  </div>
+                                  <div class="md-form col-sm-1 mt-0 ">
+                                      <input mdbInputDirective type="text" id="formCoordS" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                        data-success="correcto" required>
+                                        <label for="formCoordS">S:</label>
+                                    </div>
+                                    <div class="md-form col-sm-1 mt-0 ">
+                                        <input mdbInputDirective type="text" id="formCoordS" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                          data-success="correcto" required>
+                                          <label for="formCoordS">N:</label>
+                                      </div>
+                                      <div class="md-form col-sm-1 mt-0 ">
+                                          <input mdbInputDirective type="text" id="formCoordS" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                            data-success="correcto" required>
+                                            <label for="formCoordS">E:</label>
+                                        </div>
+                                        <div class="md-form col-sm-1 mt-0 ">
+                                            <input mdbInputDirective type="text" id="formCoordS" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                              data-success="correcto" required>
+                                              <label for="formCoordS">O:</label>
+                                          </div>
+                                                                     
+                              </div> 
+                              <div class="row">
+                                  <div class="col-xs-6 col-sm-2">
+                                    <label for="">DIRECCION:</label>
+                                  </div>
+                                  <div class="md-form  col-xs-6 col-sm-7">
+                                      <i class="fa fa-pencil prefix"></i>
+                                      <textarea mdbInputDirective type="text" id="formDireccion" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="correcta"  required></textarea>
+                                      <label for="formDireccion">Anote .</label>
+                                    </div>
+                                </div>
+                                <div class="row">                    
+                                    <div class="col-xs-6 col-sm-2">
+                                        <label for="">ECOREGION:</label>
+                                      </div>
+                                      <div class="col-xs-6 col-sm-1 mt5 ">
+                                        <select class="form-control"  required>
+                                          <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                                        </select>
+                                      </div>
+                                      <div class="col-xs-6 col-sm-1">
+                                          <label for="">CUENCA:</label>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-1 mt5 ">
+                                          <select class="form-control"  required>
+                                            <option *ngFor="let sClasetax of lident" [value]="sClasetax">{{sClasetax}}</option>
+                                          </select>
+                                        </div>
+                                  </div>
+          
+          </div> 
+          <!-- fin modal-content -->
+          </form>
+          <!-- fin form -->
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-selectbyid2">
+        <ng-template ngbTabTitle>
+          <b>2</b>
+        </ng-template>
+        <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+    <p>
+      <button class="btn btn-outline-primary" (click)="fJ.select('tab-selectbyid2')">Siguiente</button>
+    </p>
+  </div>
+
+</div>
+

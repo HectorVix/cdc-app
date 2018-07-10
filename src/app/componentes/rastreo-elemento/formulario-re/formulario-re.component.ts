@@ -4,7 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-
+const now = new Date();
 @Component({
   selector: 'app-formulario-re',
   templateUrl: './formulario-re.component.html',
@@ -12,6 +12,9 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class FormularioReComponent implements OnInit {
   reForm: FormGroup;
+  date: { year: number, month: number };
+  modelDate: NgbDateStruct;
+
  ltropicos= ['', '', ''];
  lnacion= ['', '', ''];
  lsubnacion= ['', '', ''];
@@ -26,7 +29,7 @@ export class FormularioReComponent implements OnInit {
  lnumsinn= ['', '', ''];
  //status global
  lrangog= ['', '', ''];
- lformularg= ['', '', ''];
+ lformularg= ['', 'C', ''];
  laepeu= ['', '', ''];
  lcites= ['', '', ''];
  luicn= ['', '', ''];
@@ -131,5 +134,8 @@ export class FormularioReComponent implements OnInit {
       'actualizan': '',
       'abc': ''
     });
+  }
+  selectToday() {
+    this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
 }

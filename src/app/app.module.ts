@@ -26,6 +26,8 @@ import { LocalizacionElementoComponent } from './componentes/localizacion-elemen
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
 import { LotesComponent } from './componentes/lotes/lotes.component';
+import { FormularioLeComponent } from './componentes/localizacion-elemento/formulario-le/formulario-le.component';
+import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le/editar-le.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { LotesComponent } from './componentes/lotes/lotes.component';
     LocalizacionElementoComponent,
     SitiosComponent,
     AreasManejadasComponent,
-    LotesComponent
+    LotesComponent,
+    FormularioLeComponent,
+    EditarLeComponent
   
 
   ],
