@@ -9,11 +9,15 @@ import { FormularioResumenFuenteComponent } from './componentes/Fuentes/formular
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
 import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component'
+import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
+import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
+import { SitiosComponent } from './componentes/sitios/sitios.component';
+import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
+import { LotesComponent } from './componentes/lotes/lotes.component';
 
 
 const routes: Routes = [
 {path: 'home',component: HomePageComponent},
-
 {path: 'formResumenFuente', component: FormularioResumenFuenteComponent},
 {path: 'login', component: LoginPageComponent},
 {path: 'register', component: RegisterPageComponent},
@@ -27,9 +31,17 @@ const routes: Routes = [
   path: 'editarjerarquizacion', component: JerarquizacionComponent,
   children: [{ path: '', component: EditarJerarquizacionComponent }]
 },
+{path: 'rastreoElemento', component: RastreoElementoComponent},
+{path: 'localizacionElemento', component: LocalizacionElementoComponent},
+{path: 'sitios', component: SitiosComponent},
+{path: 'areasManejadas', component: AreasManejadasComponent},
+{path: 'lotes', component: LotesComponent},
 
 {path: '**', component: NotFoundPageComponent},
+
+
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

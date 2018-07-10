@@ -18,7 +18,15 @@ import { FormularioResumenFuenteComponent } from './componentes/Fuentes/formular
 import { UsuarioService} from './servicios/usuario.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
-import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component'
+import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component';
+import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
+import { FormularioReComponent } from './componentes/rastreo-elemento/formulario-re/formulario-re.component';
+import { EditarReComponent } from './componentes/rastreo-elemento/editar-re/editar-re.component';
+import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
+import { SitiosComponent } from './componentes/sitios/sitios.component';
+import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
+import { LotesComponent } from './componentes/lotes/lotes.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +39,15 @@ import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/edit
     FormularioResumenFuenteComponent,
     JerarquizacionComponent,
     FormularioJerarquizacionComponent,
-    EditarJerarquizacionComponent
+    EditarJerarquizacionComponent,
+    RastreoElementoComponent,
+    FormularioReComponent,
+    EditarReComponent,
+    LocalizacionElementoComponent,
+    SitiosComponent,
+    AreasManejadasComponent,
+    LotesComponent
+  
 
   ],
   imports: [
