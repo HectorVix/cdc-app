@@ -1,3 +1,234 @@
-<p>
-  formulario-re works!
-</p>
+<div class="card-content white">
+  <div class="card-body">
+    <ngb-tabset #fR="ngbTabset">
+      <ngb-tab id="tab-pag1">
+        <ng-template ngbTabTitle>
+          <b>1</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+
+          <form [formGroup]="reForm">
+            <!-- Identificadores -->
+            <div class="modal-content ">
+              <div class="modal-header">
+                <h5 class="modal-title">Identificadores</h5>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-2">
+                  <label for="">CODIGOE:</label>
+                </div>
+                <div class="md-form col-sm-3 mt-0 ">
+                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+                <div class="col-xs-6 col-sm-1">
+                    <label for="">TROPICOS:</label>
+                  </div>
+                  <div class="col-xs-6 col-sm-2  mt-30 td ">
+                    <select class="form-control" formControlName="tropicos" required>
+                      <option *ngFor="let sTropicos of ltropicos" [value]="sTropicos">{{sTropicos}}</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="row">                 
+                  <div class="col-xs-6 col-sm-2 mt-20">
+                      <label for="">NACION:</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-1 mt-20">
+                      <select class="form-control" formControlName="nacion" required>
+                        <option *ngFor="let sNacion of lnacion" [value]="sNacion">{{sNacion}}</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-6 col-sm-1 mt-20 ">
+                        <label for="">SUBNACION:</label>
+                      </div>
+                      <div class="col-xs-6 col-sm-2  mt-50 td ">
+                        <select class="form-control" formControlName="subnacion" required>
+                          <option *ngFor="let sSubnacion of lsubnacion" [value]="sSubnacion">{{sSubnacion}}</option>
+                        </select>
+                      </div>
+                      
+                </div>   
+
+            </div>   <!-- fin modal-content -->
+           <!-- Taxonomia (Global) -->
+           <div class="modal-content ">
+              <div class="modal-header">
+                <h5 class="modal-title">Taxonomia (Global)</h5>
+              </div>
+              <div class="row">                 
+                  <div class="col-xs-6 col-sm-2 ">
+                      <label for="">CLASETAX:</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-2 mt5 ">
+                      <select class="form-control" formControlName="clasetax" required>
+                        <option *ngFor="let sClasetax of lclasetax" [value]="sClasetax">{{sClasetax}}</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-6 col-sm-1 mt-0 ">
+                        <label for="">ORDEN:</label>
+                      </div>
+                      <div class="col-xs-6 col-sm-2  mt5 ">
+                        <select class="form-control" formControlName="orden" required>
+                          <option *ngFor="let sOrden of lorden" [value]="sOrden">{{sOrden}}</option>
+                        </select>
+                      </div>
+                      
+                </div>  
+              <div class="row">                 
+                  <div class="col-xs-6 col-sm-2 ">
+                      <label for="">FAMILIA:</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-2 mt5 ">
+                      <select class="form-control" formControlName="familia" required>
+                        <option *ngFor="let sFamilia of lfamilia" [value]="sFamilia">{{sFamilia}}</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-6 col-sm-1 ">
+                        <label for="">GENERO:</label>
+                      </div>
+                      <div class="col-xs-6 col-sm-2 mt5 ">
+                        <select class="form-control" formControlName="genero" required>
+                          <option *ngFor="let sGenero of lgenero" [value]="sGenero">{{sGenero}}</option>
+                        </select>
+                      </div>                     
+                </div>   
+                <div class="row">
+                    <div class="col-xs-6 col-sm-2">
+                      <label for="">NOMBREG:</label>
+                    </div>                   
+                        <div class="md-form col-sm-5 mt-0 ">
+                            <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error="incorrecto, minimo 3 caracteres"
+                              data-success="correcto" required>
+                          </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-6 col-sm-2">
+                        <label for="">AUTOR:</label>
+                      </div>                   
+                          <div class="md-form col-sm-5 mt-0 ">
+                              <input mdbInputDirective type="text" id="formAutor" class="form-control" formControlName="autor" data-error="incorrecto, minimo 3 caracteres"
+                                data-success="correcto" required>
+                            </div>
+                    </div>
+                    <div class="row">                 
+                        <div class="col-xs-6 col-sm-2 ">
+                            <label for="">FUENTENOM:</label>
+                          </div>
+                          <div class="col-xs-6 col-sm-1  mt5 ">
+                            <select class="form-control" formControlName="fuentenom" required>
+                              <option *ngFor="let sFuentenom of lfuentenom" [value]="sFuentenom">{{sFuentenom}}</option>
+                            </select>
+                          </div>
+                          <div class="col-xs-6 col-sm-1 ">
+                              <label for="">REFNOMBER:</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 mt-35 td40">
+                              <select class="form-control" formControlName="refnomber" required>
+                                <option *ngFor="let sRefnomber of lrefnomber" [value]="sRefnomber">{{sRefnomber}}</option>
+                              </select>
+                            </div>   
+                            <div class="col-xs-6 col-sm-1 ">
+                                <label for="">DISTRAX:</label>
+                              </div>
+                              <div class="col-xs-6 col-sm-1 ">
+                                <select class="form-control" formControlName="distrax" required>
+                                  <option *ngFor="let sDistrax of ldistrax" [value]="sDistrax">{{sDistrax}}</option>
+                                </select>
+                              </div>
+                              <div class="col-xs-6 col-sm-1 ">
+                                  <label for="">DUDATAX:</label>
+                                </div>
+                                <div class="col-xs-6 col-sm-1 ">
+                                  <select class="form-control" formControlName="dudatax" required>
+                                    <option *ngFor="let sDudatax of ldudatax" [value]="sDudatax">{{sDudatax}}</option>
+                                  </select>
+                                </div>                     
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-2">
+                            <label for="">NOMCOMUNG:</label>
+                          </div>                   
+                              <div class="md-form col-sm-5 mt-0 ">
+                                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nomcomung" data-error="incorrecto, minimo 3 caracteres"
+                                    data-success="correcto" required>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-2">
+                              <label for="">COMTAXG:</label>
+                            </div>
+                            <div class="md-form  col-xs-6 col-sm-7">
+                                <i class="fa fa-pencil prefix"></i>
+                                <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                  data-success="correcta" formControlName="comtaxg" required></textarea>
+                                <label for="formComtaxg"></label>
+                              </div>
+                          </div>
+            </div>   <!-- fin modal-content -->
+             <!-- Taxonomia (Nacional) -->
+             <div class="modal-content ">
+                <div class="modal-header">
+                  <h5 class="modal-title">Taxonomia (Nacional)</h5>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-2">
+                    <label for="">NOMBREN:</label>
+                  </div>
+                  <div class="md-form col-sm-3 mt-0 ">
+                    <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="nombren" data-error="incorrecto, minimo 3 caracteres"
+                      data-success="correcto" required>
+                  </div>
+                  <div class="col-xs-6 col-sm-1">
+                      <label for="">NUMSINN:</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-2  mt-30 td ">
+                      <select class="form-control" formControlName="numsinn" required>
+                        <option *ngFor="let sNumsinn of lnumsinn" [value]="sNumsinn">{{sNumsinn}}</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-2">
+                      <label for="">NOMCOMUNN:</label>
+                    </div>                   
+                        <div class="md-form col-sm-5 mt-0 ">
+                            <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" formControlName="nomcomunn" data-error="incorrecto, minimo 3 caracteres"
+                              data-success="correcto" required>
+                          </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-6 col-sm-2">
+                        <label for="">COMTAXN:</label>
+                      </div>
+                      <div class="md-form  col-xs-6 col-sm-7">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                            data-success="correcta" formControlName="comtaxn" required></textarea>
+                          <label for="formComtaxn"></label>
+                        </div>
+                    </div>
+  
+              </div>   <!-- fin modal-content -->
+
+           
+          </form> <!-- fin form -->
+          
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-pag2">
+        <ng-template ngbTabTitle>
+          <b>2</b>
+        </ng-template>
+        <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+    <p>
+      <button class="btn btn-outline-primary" (click)="fR.select('tab-pag2')">Siguiente</button>
+    </p>
+  </div>
+
+</div>
