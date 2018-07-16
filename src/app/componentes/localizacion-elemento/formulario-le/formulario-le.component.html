@@ -226,6 +226,58 @@
           
           </div> 
           <!-- fin modal-content -->
+          <!-- Status -->
+          <div class="modal-content ">
+              <div class="modal-header">
+                  <h5 class="modal-title">Status</h5>
+                </div>
+               
+                                         
+                    <div class="row md-form form-sm  input-group-append mt-0">  
+                        <div class="col-xs-6 col-sm-2 ">
+                            <label for="">FECHAEVA:</label>
+                          </div>  
+                          <!--Grid column-->
+                        <div class="col-md-2">
+                            <i class="fa fa-calendar prefix "></i>
+                        <input mdbInputDirective type="text" id="formFechaeva" class="form-control" ngbDatepicker
+                          #dFechaeva="ngbDatepicker">
+                        <label for="formFechaeva"></label>
+                      </div>
+                        <div class="input-group-append ">
+                          <button class="btn btn-info mb-2 waves-light" (click)="dFechaeva.toggle()" mdbWavesEffect>Date
+                          </button>
+                        </div>
+                          <!--Grid column-->
+                  <div class="col-md-2">
+                      <i class="fa fa-calendar prefix "></i>
+                  <input mdbInputDirective type="text" id="formFechaeva" class="form-control"  ngbDatepicker
+                    #dFechaeva="ngbDatepicker">
+                  <label for="formFechaeva"></label>
+                </div>
+                  <div class="input-group-append ">
+                    <button class="btn btn-info mb-2 waves-light" (click)="dFechaeva.toggle()" mdbWavesEffect>Date
+                    </button>
+                  </div>
+                    <!--Grid column-->
+                    <div class="col-md-2">
+                        <i class="fa fa-calendar prefix "></i>
+                    <input mdbInputDirective type="text" id="formFechaeva" class="form-control"  ngbDatepicker
+                      #dFechaeva="ngbDatepicker">
+                    <label for="formFechaeva"></label>
+                  </div>
+                  <div class="input-group-append ">
+                      <button class="btn btn-info mb-2 waves-light" (click)="dFechaeva.toggle()" mdbWavesEffect>Date
+                      </button>
+                    </div>
+
+                </div>
+               
+
+           
+
+          </div><!-- fin modal-content -->
+          <!--  -->
           </form>
           <!-- fin form -->
         </ng-template>
