@@ -16,12 +16,12 @@ export class FormularioReComponent implements OnInit {
   modelDate: NgbDateStruct;
 
  ltropicos= ['', '', ''];
- lnacion= ['', '', ''];
+ lnacion= ['', 'GT', 'US',''];
  lsubnacion= ['', '', ''];
  lclasetax= ['', '', ''];
  lorden= ['', '', ''];
- lfamilia= ['', '', ''];
- lgenero= ['', '', ''];
+ lfamilia= ['', 'Malvaceae', ''];
+ lgenero= ['', 'Malva L.', ''];
  lfuentenom= ['', '', ''];
  lrefnomber= ['', '', ''];
  ldistrax= ['', '', ''];
