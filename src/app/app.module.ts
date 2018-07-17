@@ -28,6 +28,7 @@ import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-man
 import { LotesComponent } from './componentes/lotes/lotes.component';
 import { FormularioLeComponent } from './componentes/localizacion-elemento/formulario-le/formulario-le.component';
 import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le/editar-le.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,9 @@ import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    Ng2SmartTableModule
+
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [UsuarioService,DatePipe],
