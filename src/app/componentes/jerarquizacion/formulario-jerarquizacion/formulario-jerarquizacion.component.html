@@ -8,6 +8,7 @@
         <ng-template ngbTabContent>
 
           <form [formGroup]="jerarquizacionForm" >
+            <div class="modal-content">           
             <!-- Codigo del elemento -->
             <div class="row">
               <div class="col-xs-6 col-sm-2">
@@ -170,7 +171,10 @@
                 </div>
               <!--  -->
               <!-- *** -->
+            </div>
+            <!-- fin modal-content -->
           </form>
+          <!-- fin form -->
           <p>
             <button class="btn btn-outline-primary" (click)="fJ.select('tab-selectbyid2')">Siguiente</button>
             <button class="btn btn-outline-primary" type="reset">Cancelar</button>
@@ -186,6 +190,7 @@
         <ng-template ngbTabContent>
       <!-- Página 2 -->
       <form [formGroup]="jerarquizacionForm" >
+        <div class="modal-content">       
        <!--  -->
             <div class="row">
                   <div class="col-xs-6 col-sm-2">
@@ -329,11 +334,11 @@
                               </button>
                           </div>
                       </div>
-                  </div>
-                 
-              
-
+                  </div>    
+                </div>
+                <!-- fin modal-content -->                        
         </form>
+        <!-- fin form -->
         <p>
             <button class="btn btn-outline-primary" >Guardar</button>
             <button class="btn btn-outline-primary" type="reset">Cancelar</button>
