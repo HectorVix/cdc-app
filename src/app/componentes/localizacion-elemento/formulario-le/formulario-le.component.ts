@@ -4,7 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import {Proteccion} from '../../../modelo/tabla';
+import {Proteccion,CamposOpcionales} from '../../../modelo/tabla';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
@@ -16,6 +16,8 @@ export class FormularioLeComponent implements OnInit {
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
   characters: Proteccion[];
+  campos_Opcionales:CamposOpcionales[];
+
   settings = {
     columns: {
       id: {
@@ -29,6 +31,14 @@ export class FormularioLeComponent implements OnInit {
       }
     }
   };
+  settings_Campos_Opcionales= {
+    columns: {
+     
+      DATOS: {
+        title: 'DATOS'
+      }
+    }
+  }; 
   constructor() { }
 
   ngOnInit() {

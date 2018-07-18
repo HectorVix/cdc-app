@@ -383,20 +383,131 @@
               <div class="modal-header">
                 <h5 class="modal-title">Protección</h5>
               </div>
-              <div class="row mx-auto">
+              <div class="row  mx-auto ">
+
                 <ng2-smart-table [settings]="settings" [source]="characters">
                 </ng2-smart-table>
+
               </div>
 
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">MASTERRRENO:</label>
+                </div>
+
+                <div class="col-xs-6 col-sm-1">
+                  <select class="form-control" required>
+                    <option *ngFor="let sNacion of lident" [value]="sNacion">{{sNacion}}</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="">MASPROTEC:</label>
+                </div>
+                <div class="col-xs-6 col-sm-1">
+                  <select class="form-control" required>
+                    <option *ngFor="let sNacion of lident" [value]="sNacion">{{sNacion}}</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="">MASMANEJO:</label>
+                </div>
+                <div class="col-xs-6 col-sm-1">
+                  <select class="form-control" required>
+                    <option *ngFor="let sNacion of lident" [value]="sNacion">{{sNacion}}</option>
+                  </select>
+                </div>
+                <div class="col-md-1">
+                  <label for="">INVOL.TNC:</label>
+                </div>
+                <div class="col-xs-6 col-sm-1 td-35">
+                  <select class="form-control" required>
+                    <option *ngFor="let sNacion of lident" [value]="sNacion">{{sNacion}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="" >COMMANEJO:</label>
+                </div>
+                <div class="md-form  col-xs-6 col-sm-7">
+                    <i class="fa fa-pencil prefix"></i>
+                    <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                      data-success="correcta"  required></textarea>
+                    <label for="formCita">Anote .</label>
+                  </div>               
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                    <label for="" >COMPROT:</label>
+                  </div>
+                  <div class="md-form  col-xs-6 col-sm-7">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                        data-success="correcta"  required></textarea>
+                      <label for="formCita">Anote .</label>
+                    </div>               
+                </div>
             </div>
             <!-- fin modal-content -->
 
+            <!-- Propietario -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Propietario</h5>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">PROP:</label>
+                </div>
+                <div class="md-form col-sm-4 mt-0 ">
+                    <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                      data-success="correcto" required>
+                  </div>
+                  <div class="col-md-1">
+                      <label for="">INFPROP:</label>
+                    </div>
+                  <div class="col-xs-6 col-sm-1">
+                      <select class="form-control" required>
+                        <option *ngFor="let sNacion of lident" [value]="sNacion">{{sNacion}}</option>
+                      </select>
+                    </div>
+              </div>
+             <div class="row">
+               <div class="col-md-2">
+                 <label for="">COMPROP</label>
+               </div>
+               <div class="md-form  col-xs-6 col-sm-7">
+                  <i class="fa fa-pencil prefix"></i>
+                  <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                    data-success="correcta" formControlName="comtaxg" required></textarea>
+                  <label for="formCita">Anote s.</label>
+                </div>
+             </div>
+            </div>
+            <!-- fin modal -content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Campos Opcionales</h5>
+              </div>
+
+              <div class="row  mx-auto ">
+
+                  <ng2-smart-table [settings]="settings_Campos_Opcionales" [source]="campos_Opcionales">
+                  </ng2-smart-table>
+  
+                </div>
+            </div>
+            <!-- fin modal-content -->
 
           </form>
 
         </ng-template>
 
       </ngb-tab>
+      <!-- pagina 3 -->
+      <ngb-tab id="tab-selectbyid2">
+        
+       </ngb-tab> 
 
     </ngb-tabset>
 

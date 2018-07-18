@@ -3,3 +3,7 @@ export interface Proteccion {
     NOMBREAM: String;
     CONTENIDO: String;
 }
+
+export interface CamposOpcionales{
+    DATOS:String;
+}
