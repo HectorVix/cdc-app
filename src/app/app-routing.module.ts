@@ -5,7 +5,7 @@ import {LoginPageComponent} from './componentes/login-page/login-page.component'
 import {RegisterPageComponent} from  './componentes/register-page/register-page.component';
 import {PrivadoPageComponent} from './componentes/privado-page/privado-page.component';
 import {NotFoundPageComponent} from './componentes/not-found-page/not-found-page.component';
-import { FormularioResumenFuenteComponent } from './componentes/Fuentes/formulario-resumen-fuente/formulario-resumen-fuente.component';
+import { FuenteComponent } from './componentes/fuente/fuente.component';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
 import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component'
@@ -18,13 +18,13 @@ import { LotesComponent } from './componentes/lotes/lotes.component';
 
 const routes: Routes = [
 {path: 'home',component: HomePageComponent},
-{path: 'formResumenFuente', component: FormularioResumenFuenteComponent},
+{path: 'fuente', component: FuenteComponent},
 {path: 'login', component: LoginPageComponent},
 {path: 'register', component: RegisterPageComponent},
 {path: 'privado', component: PrivadoPageComponent},
 {path: 'jerarquizacion', component: JerarquizacionComponent},
 {
-  path: 'formulariojerarquizacion', component: JerarquizacionComponent,
+  path: 'jerarquizacion', component: JerarquizacionComponent,
   children: [{ path: '', component: FormularioJerarquizacionComponent }]
 },
 {

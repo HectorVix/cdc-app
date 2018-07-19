@@ -14,7 +14,7 @@ import { LoginPageComponent } from './componentes/login-page/login-page.componen
 import { PrivadoPageComponent } from './componentes/privado-page/privado-page.component';
 import { NotFoundPageComponent } from './componentes/not-found-page/not-found-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormularioResumenFuenteComponent } from './componentes/Fuentes/formulario-resumen-fuente/formulario-resumen-fuente.component';
+import { FormularioResumenFuenteComponent } from './componentes/fuente/formulario-resumen-fuente/formulario-resumen-fuente.component';
 import { UsuarioService} from './servicios/usuario.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
@@ -29,6 +29,9 @@ import { LotesComponent } from './componentes/lotes/lotes.component';
 import { FormularioLeComponent } from './componentes/localizacion-elemento/formulario-le/formulario-le.component';
 import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le/editar-le.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FuenteComponent } from './componentes/fuente/fuente.component';
+import { RegistroSitioComponent } from './componentes/sitios/registro-sitio/registro-sitio.component';
+import { FormularioAreasManejadasComponent } from './componentes/areas-manejadas/formulario-areas-manejadas/formulario-areas-manejadas.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     AreasManejadasComponent,
     LotesComponent,
     FormularioLeComponent,
-    EditarLeComponent
+    EditarLeComponent,
+    FuenteComponent,
+    RegistroSitioComponent,
+    FormularioAreasManejadasComponent
   
 
   ],
