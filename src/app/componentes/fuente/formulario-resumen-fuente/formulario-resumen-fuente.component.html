@@ -3,7 +3,7 @@
     <form [formGroup]="fuenteForm">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Formulario de resumen de fuente</h5>
+          <h5 class="modal-title">Formulario de resumen fuente</h5>
         </div>
         <!------------------------CODFUENTE------------------------------ -->
         <div class="row">
@@ -57,6 +57,35 @@
           </div>       
         </div>
         <!-- fin row -->
+        <!-- ----------------------------- Coordenadas ------------------------ -->
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">S:</label>
+          </div>
+                      
+              <div class="md-form  col-md-2 mt-5 ">
+                <input mdbInputDirective type="text" id="formRangoG" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                  required>
+                <label for="formRangoG"></label>
+              </div>
+              <div class="md-form col-md-2 mt-5 ">
+                <input mdbInputDirective type="text" id="formRangoN" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                  required>
+                <label for="formRangoN">N:</label>
+              </div>
+              <div class="md-form col-md-2 mt-5 ">
+                <input mdbInputDirective type="text" id="formRangos" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                  required>
+                <label for="formRangos">E:</label> 
+              </div>
+              <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formRangos" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                  <label for="formRangos">O:</label> 
+                </div>
+            
+        </div>
+        <!--fin row  -->
         <!------------------------RESUMEN------------------------------ -->
          <div class="row">
            <div class="col-md-2">
@@ -75,86 +104,143 @@
            <div class="col-md-2">
              <label for="">TEMA:</label>
            </div>
-           <div class="col-xs-6 col-sm-2 ">
-              <label>
-                <input type="checkbox" formControlName="comunat" value="">COMUNAT</label>
+           <div class="col-md-2 ">             
+              <label><input type="checkbox" formControlName="comunat" value="">COMUNAT</label>
+              <label><input type="checkbox" formControlName="comunat" value="">COMMUNTERR</label>
+              <label><input type="checkbox" formControlName="comunat" value="">BOSQUE</label>
+              <label><input type="checkbox" formControlName="comunat" value="">SABANA</label>
               <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="comunterr" value="">COMUNTERR</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="bosque" value="">BOSQUE</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="sabana" value="">SABANA</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="prado" value="">PRADO</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="chaparral" value="">CHAPARRAL</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="desierto" value="">DESIERTO</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="alpino" value="">ALPINO</label>
-              </div>
-    
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="otroterr" value="">OTROTERR</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="comunac" value="">COMUNAC</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="palustre" value="">PALUSTRE</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="lacustre" value="">LACUSTRE</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="pluvial" value="">PLUVIAL</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="estuarino" value="">ESTUARINO</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="maritimo" value="">MARITIMO</label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="subterp" value="">SUBTERP</label>
-              </div>
+                  <label><input type="checkbox" formControlName="comunat" value="">PRADO</label>
+              </div>             
+              <label><input type="checkbox" formControlName="comunat" value="">CHAPARRAL</label>
+              <label><input type="checkbox" formControlName="comunat" value="">DESIERTO</label>
+              <label><input type="checkbox" formControlName="comunat" value="">ALPINO</label>
+              <label><input type="checkbox" formControlName="comunat" value="">OTROTERR</label>
+              <label><input type="checkbox" formControlName="comunat" value="">COMUNAC</label>
+              <label><input type="checkbox" formControlName="comunat" value="">PALUSTRE</label>
+              <label><input type="checkbox" formControlName="comunat" value="">LACUSTRE</label>
+              <label><input type="checkbox" formControlName="comunat" value="">FLUVIAL</label>
+              <label><input type="checkbox" formControlName="comunat" value="">ESTUARINO</label>
+              <label><input type="checkbox" formControlName="comunat" value="">MARITIMO</label>
+              <label><input type="checkbox" formControlName="comunat" value="">SUBTERP</label>
+              
+              
             </div>
             <!--Flora-->
-        <div class="col-xs-6 col-sm-2 ">
-            <label>
-              <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
+        <div class="col-md-2 ">           
+             <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORA</label>
+             <div class="checkbox">
+                <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORAAC</label>
+             </div>            
+             <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORATERP</label>
+             <label><input type="checkbox" name="validate" formControlName="comunat" value="">PLNOVASC</label>
+             <label><input type="checkbox" name="validate" formControlName="comunat" value="">MICROORG</label>
+             <label><input type="checkbox" name="validate" formControlName="comunat" value="">INFOSITIO</label>
           </div>
           <!--Fauna-->
-          <div class="col-xs-6 col-sm-2 ">
-            <label>
-              <input type="checkbox" name="validate" formControlName="comunat" value="">CRUSTACEOS</label>
-          </div>
+          <div class="col-md-2 ">           
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNA</label>
+              <div class="checkbox">
+                  <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNAAC</label>
+              </div>             
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNATERR</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">MOLUSCOS</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">INSECTOS</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">CRUSTACEOS</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">OTROARTROP</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">OTROINVERT</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">PECES</label>
+              <div class="checkbox">
+                  <label><input type="checkbox" name="validate" formControlName="comunat" value="">ANFIBIOS</label>
+              </div>              
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">REPTILES</label>
+              <div class="checkbox">
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">AVES</label>
+              </div>
+              
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">MAMIFEROS</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">CIENFISIC</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">FISIOTOPO</label>          
+            </div>
           <!--Otros-->
-          <div class="col-xs-6 col-sm-2 ">
-            <label>
-              <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
+          <div class="col-md-2 ">           
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">HIDROL</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">GEOLOGIA</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">SUELOS</label>
+              <div class="checkbox">
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">CLIMA</label>
+              </div>
+              
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">BIOLOGIA</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">ECOLOGIA</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">FUNECOL</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">DIVERSNAT</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">INVENTARIO</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">TECINVEST</label>
+              <div class="checkbox">
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">AM</label>
+              </div>
+              
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">PLANMANEJO</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">TECMANEJO</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">ESTIMPAMB</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">ORGANPROT</label>
+              <label><input type="checkbox" name="validate" formControlName="comunat" value="">HERRPROT</label>
+
           </div>
+         </div>
+         <!-- fin row -->
+         <div class="row">
+           <div class="col-md-2">
+             <label for="">PUBLICACION.CDC:</label>
+           </div>
+           <div class="md-form col-md-4 mt-5 ">
+              <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                data-success="correcto" required>
+            </div>
+         </div>
+         <!-- fin row -->
+         <div class="row">
+          <div class="col-md-2">
+            <label for="">COMENTARIO:</label>
+          </div>
+          <div class="md-form  col-md-7">
+              <i class="fa fa-pencil prefix"></i>
+              <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                data-success="correcta"  required></textarea>
+              <label for="formCita">Anote .</label>
+            </div>
+         </div>
+         <!-- fin row -->
+         <div class="row">
+           <div class="col-md-2">
+              <label for="">NOTADIGEST:</label>
+           </div>
+           <div class="md-form col-md-4 mt-5 ">
+              <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                data-success="correcto" required>
+            </div>
+         </div>
+         <!-- fin row -->
+         <div class="row">
+          <div class="col-md-2">
+            <label for="">ACTUALIZAR:</label>
+          </div>
+          <div class="md-form form-sm  input-group-append mt-5">
+              <i class="fa fa-calendar prefix "></i>
+              <input mdbInputDirective type="text" id="formActualizaR" class="form-control"  ngbDatepicker
+                #dActualizar="ngbDatepicker">
+              <label for="formActualizan">Fecha para actualizar:</label>
+              <div class="input-group-append ">
+                <button class="btn btn-info mb-2 waves-light" (click)="dActualizar.toggle()" mdbWavesEffect>Date
+                </button>
+              </div>
+             </div>
+             <div class="md-form col-md-4  mt-5">
+                <input mdbInputDirective type="text" id="formIniciales" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                  data-success="correcto" required>
+                  <label for="formIniciales">&nbsp;&nbsp;&nbsp;Iniciales Actualizador:</label>
+              </div>
          </div>
          <!-- fin row -->
       </div>
