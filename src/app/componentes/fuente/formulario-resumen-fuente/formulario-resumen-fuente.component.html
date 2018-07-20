@@ -1,146 +1,167 @@
 <div class="card">
   <div class="card-body">
     <form [formGroup]="fuenteForm">
-
-      <!------------------------CODFUENTE------------------------------ -->
-      <div class="row">
-        <div class="md-form col-sm-4">
-          <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-            formControlName="codfuente" required>
-          <label for="form1" class="font-weight-light">CODFUENTE</label>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Formulario de resumen de fuente</h5>
         </div>
-      </div>
-      <!------------------------CITA------------------------------ -->
-      <div class="row">
-
-        <div class="md-form  col-xs-6 col-sm-7">
-          <i class="fa fa-pencil prefix"></i>
-          <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-            data-success="correcta" formControlName="cita" required></textarea>
-          <label for="formCita">CITA</label>
-        </div>
-      </div>
-      <!--------------------------ARCHIVADO---------------------------- -->
-      <div class="row">
-        <div class="col-xs-6 col-sm-1">
-          <label for="">ARCHIVADO:</label>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-          <select class="form-control" formControlName="archivado" required>
-            <option *ngFor="let archivo of archivado" [value]="archivo">{{archivo}}</option>
-          </select>
-        </div>
-      </div>
-      <!------------------------COBGEO------------------------------ -->
-      <div class="row">
-        <div class="md-form col-sm-4">
-
-          <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-            formControlName="cobgeo" required>
-          <label for="formCOBGEO">COBGEO</label>
-        </div>
-      </div>
-
-      <!------------------------RESUMEN------------------------------ -->
-      <div class="row">
-
-        <div class="md-form  col-xs-6 col-sm-7">
-          <i class="fa fa-pencil prefix"></i>
-          <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 10 caracteres"
-            data-success="correcta" formControlName="resumen" required></textarea>
-          <label for="formResumen">RESUMEN</label>
-        </div>
-      </div>
-      <!------------------------TEMA------------------------------ -->
-      <div class="row ">
-        <div class="col-xs-6 col-sm-1">
-          <label for="">TEMA:</label>
-        </div>
-        <div class="col-xs-6 col-sm-2 ">
-          <label>
-            <input type="checkbox" formControlName="comunat" value="">COMUNAT</label>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="comunterr" value="">COMUNTERR</label>
+        <!------------------------CODFUENTE------------------------------ -->
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">CODFUENTE:</label>
           </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="bosque" value="">BOSQUE</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="sabana" value="">SABANA</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="prado" value="">PRADO</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="chaparral" value="">CHAPARRAL</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="desierto" value="">DESIERTO</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="alpino" value="">ALPINO</label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="otroterr" value="">OTROTERR</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="comunac" value="">COMUNAC</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="palustre" value="">PALUSTRE</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="lacustre" value="">LACUSTRE</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="pluvial" value="">PLUVIAL</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="estuarino" value="">ESTUARINO</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="maritimo" value="">MARITIMO</label>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" formControlName="subterp" value="">SUBTERP</label>
+          <div class="md-form col-md-4 mt-5">
+            <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+              formControlName="codfuente" required>
+            <label for="form1" class="font-weight-light"></label>
           </div>
         </div>
-        <!--Flora-->
-        <div class="col-xs-6 col-sm-2 ">
-          <label>
-            <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
+        <!-- fin row -->
+        <!------------------------CITA------------------------------ -->
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">CITA:</label>
+          </div>
+          <div class="md-form  col-md-7 mt-5">
+            <i class="fa fa-pencil prefix"></i>
+            <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+              data-success="correcta" formControlName="cita" required></textarea>
+            <label for="formCita"></label>
+          </div>
         </div>
-        <!--Fauna-->
-        <div class="col-xs-6 col-sm-2 ">
-          <label>
-            <input type="checkbox" name="validate" formControlName="comunat" value="">CRUSTACEOS</label>
-        </div>
-        <!--Otros-->
-        <div class="col-xs-6 col-sm-2 ">
-          <label>
-            <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
-        </div>
-
+        <!-- fin row -->
         
-      </div>
-
+           <!--------------------------ARCHIVADO---------------------------- -->
+      <div class="row">
+          <div class=" col-md-2">
+            <label for="">ARCHIVADO:</label>
+          </div>
+          <div class=" col-md-3 mt-5">
+            <select class="form-control" formControlName="archivado" required>
+              <option *ngFor="let archivo of archivado" [value]="archivo">{{archivo}}</option>
+            </select>
+          </div>
+        </div>      
+        <!-- fin row -->
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">COBGEO:</label>
+          </div>
+          <!------------------------COBGEO------------------------------ -->
+      
+          <div class="md-form col-md-4 mt-5">
+  
+            <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+              formControlName="cobgeo" required>
+            <label for="formCOBGEO"></label>
+          </div>       
+        </div>
+        <!-- fin row -->
+        <!------------------------RESUMEN------------------------------ -->
+         <div class="row">
+           <div class="col-md-2">
+             <label for="">RESUMEN:</label>
+           </div>
+           <div class="md-form  col-md-7 mt-5">
+              <i class="fa fa-pencil prefix"></i>
+              <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 10 caracteres"
+                data-success="correcta" formControlName="resumen" required></textarea>
+              <label for="formResumen"></label>
+            </div>
+         </div>
+         <!-- fin row -->
+         <!------------------------TEMA------------------------------ -->
+         <div class="row">
+           <div class="col-md-2">
+             <label for="">TEMA:</label>
+           </div>
+           <div class="col-xs-6 col-sm-2 ">
+              <label>
+                <input type="checkbox" formControlName="comunat" value="">COMUNAT</label>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="comunterr" value="">COMUNTERR</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="bosque" value="">BOSQUE</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="sabana" value="">SABANA</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="prado" value="">PRADO</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="chaparral" value="">CHAPARRAL</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="desierto" value="">DESIERTO</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="alpino" value="">ALPINO</label>
+              </div>
     
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="otroterr" value="">OTROTERR</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="comunac" value="">COMUNAC</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="palustre" value="">PALUSTRE</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="lacustre" value="">LACUSTRE</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="pluvial" value="">PLUVIAL</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="estuarino" value="">ESTUARINO</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="maritimo" value="">MARITIMO</label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="subterp" value="">SUBTERP</label>
+              </div>
+            </div>
+            <!--Flora-->
+        <div class="col-xs-6 col-sm-2 ">
+            <label>
+              <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
+          </div>
+          <!--Fauna-->
+          <div class="col-xs-6 col-sm-2 ">
+            <label>
+              <input type="checkbox" name="validate" formControlName="comunat" value="">CRUSTACEOS</label>
+          </div>
+          <!--Otros-->
+          <div class="col-xs-6 col-sm-2 ">
+            <label>
+              <input type="checkbox" name="validate" formControlName="comunat" value="">COMUNAT</label>
+          </div>
+         </div>
+         <!-- fin row -->
+      </div>
+      <!-- fin modal-content -->
+
+
+
 
 
       <div class="text-center py-4 mt-3">
@@ -151,4 +172,3 @@
   </div>
 </div>
 <p>Form value: {{ fuenteForm.value | json }}</p>
-
