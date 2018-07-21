@@ -1,20 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import {Identificadores_Sitio} from '../../../modelo/tabla';
+import {Identificadores_Sitio,Localizadores_Sitio} from '../../../modelo/tabla';
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
   styleUrls: ['./registro-sitio.component.scss']
 })
 export class RegistroSitioComponent implements OnInit {
-  identificadores_Sitio:Identificadores_Sitio[];
+  source_identificadores_Sitio:Identificadores_Sitio[];
+  source_localizadores_Sitio:Localizadores_Sitio[];
+  lident = ['','S','N','?'];
+
   settings_Identificadores_Sitio = {
     columns: {
-      CODMACSITIO: {
+      codmacsitio: {
         title: 'CODMACSITIO'
       },
-      NOMMACSTIO: {
-        title: 'NOMMACSTIO'
+      nommacsitio: {
+        title: 'NOMMACSITIO'
       }
+    }
+  };
+  settings_Localizadores_Sitio = {
+    columns: {
+      codsubdiv: {
+        title: 'CODSUBDIV'
+      },
+      nomsubdiv: {
+        title: 'NOMSUBDIV'
+      },
+      nommapa: {
+        title: 'NOMMAPA'
+      },
+      codmapa: {
+        title: 'CODMAPA'
+      },
     }
   };
 

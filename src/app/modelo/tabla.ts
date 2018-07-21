@@ -1,14 +1,20 @@
 export interface Proteccion {
-    CODIGOAM: String;
-    NOMBREAM: String;
-    CONTENIDO: String;
+    codigoam: String;
+    nombream: String;
+    contenido: String;
 }
 
 export interface CamposOpcionales{
-    DATOS:String;
+    datos:String;
 }
 
 export interface Identificadores_Sitio{
-    CODMACSITIO:String;
-    NOMMACSTIO:String;
+    codmacsitio:String;
+    nommacsitio:String;
+}
+export interface Localizadores_Sitio{
+    codsubdiv:String;
+    nomsubdiv:String;
+    nommapa:String;
+    codmapa:String;
 }

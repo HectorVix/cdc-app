@@ -20,10 +20,10 @@ export class FormularioLeComponent implements OnInit {
 
   settings = {
     columns: {
-      CODIGOAM: {
+      codigoam: {
         title: 'CODIGOAM'
       },
-      NOMBREAM: {
+      nombream: {
         title: 'NOMBREAM'
       },
       CONTENIDO: {
@@ -34,7 +34,7 @@ export class FormularioLeComponent implements OnInit {
   settings_Campos_Opcionales= {
     columns: {
      
-      DATOS: {
+      datos: {
         title: 'DATOS'
       }
     }
