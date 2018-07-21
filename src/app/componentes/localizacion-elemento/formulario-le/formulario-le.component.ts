@@ -20,13 +20,13 @@ export class FormularioLeComponent implements OnInit {
 
   settings = {
     columns: {
-      id: {
+      CODIGOAM: {
         title: 'CODIGOAM'
       },
-      name: {
+      NOMBREAM: {
         title: 'NOMBREAM'
       },
-      age: {
+      CONTENIDO: {
         title: 'CONTENIDO'
       }
     }

@@ -1,3 +1,84 @@
-<p>
-  registro-sitio works!
-</p>
+<div class="card-content white">
+    <div class="card-body">
+        <ngb-tabset #fRegistro="ngbTabset">
+            <!-- página 1 -->
+            <ngb-tab id="tab-selectbyid1">
+                <ng-template ngbTabTitle>
+                    <b>1</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Identificadores</h5>
+                            </div>
+                            <div class="row">
+                               <div class="col-md-2">
+                                   <label for="">CODSITIO:</label>
+                               </div> 
+                               <div class="md-form col-md-4 mt-5 ">
+                                    <input mdbInputDirective type="text" id="formNomcomungs" class="form-control"  data-error=""
+                                      data-success="correcto" required>
+                                  </div>                           
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">SIN.SITIO:</label>
+                                </div>
+                                <div class="md-form  col-md-7">
+                                        <i class="fa fa-pencil prefix"></i>
+                                        <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                          data-success="correcto" ></textarea>
+                                        <label for="formCita">Anote.</label>
+                                      </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row  mx-auto ">
+
+                                <ng2-smart-table [settings]="settings_Identificadores_Sitio" [source]="Identificadores_Sitio">
+                                </ng2-smart-table>
+                
+                              </div>
+                              <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 2 -->
+            <ngb-tab id="tab-selectbyid2">
+                    <ng-template ngbTabTitle>
+                        <b>2</b>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <form action="">
+    
+                        </form>
+                        <!-- fin form -->
+                    </ng-template>
+                    <!-- fin ng-template -->
+                </ngb-tab>
+            <!-- fin ngb-tab -->
+            <ngb-tab id="tab-selectbyid3">
+                    <ng-template ngbTabTitle>
+                        <b>3</b>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <form action="">
+    
+                        </form>
+                        <!-- fin form -->
+                    </ng-template>
+                    <!-- fin ng-template -->
+                </ngb-tab>
+            <!-- fin ngb-tab -->
+        </ngb-tabset>
+        <!-- fin ngb-tabset -->
+    </div>
+    <!-- fin card-body -->
+</div>
+<!-- fin card-content -->

@@ -7,3 +7,8 @@ export interface Proteccion {
 export interface CamposOpcionales{
     DATOS:String;
 }
+
+export interface Identificadores_Sitio{
+    CODMACSITIO:String;
+    NOMMACSTIO:String;
+}
