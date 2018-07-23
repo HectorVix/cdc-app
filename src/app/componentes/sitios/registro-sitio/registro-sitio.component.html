@@ -84,43 +84,161 @@
                             <!-- fin row -->
                             <div class="row">
                                 <div class="col-md-2">
-                                  <label for="">S:</label>
+                                    <label for="">S:</label>
                                 </div>
-                                            
-                                    <div class="md-form  col-md-2 mt-0 ">
-                                      <input mdbInputDirective type="text" id="formS" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+
+                                <div class="md-form  col-md-2 mt-0 ">
+                                    <input mdbInputDirective type="text" id="formS" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
                                         required>
-                                      <label for="formS"></label>
-                                    </div>
-                                    <div class="md-form col-md-2 mt-0 ">
-                                      <input mdbInputDirective type="text" id="formN" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                                    <label for="formS"></label>
+                                </div>
+                                <div class="md-form col-md-2 mt-0 ">
+                                    <input mdbInputDirective type="text" id="formN" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
                                         required>
-                                      <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N:</label>
-                                    </div>
-                                    <div class="md-form col-md-2 mt-0 ">
-                                      <input mdbInputDirective type="text" id="formE" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                                    <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N:</label>
+                                </div>
+                                <div class="md-form col-md-2 mt-0 ">
+                                    <input mdbInputDirective type="text" id="formE" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
                                         required>
-                                      <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E:</label> 
-                                    </div>
-                                    <div class="md-form col-md-2 mt-5 ">
-                                        <input mdbInputDirective type="text" id="formO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                          required>
-                                        <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O:</label> 
-                                      </div>
-                                  
-                              </div>
-                              <!--fin row  -->
-                              <div class="row">
-                                  <div class="col-md-2">
-                                      <label for="">DIRECCION:</label>
-                                  </div>
-                                  <div class="md-form  col-md-7">
+                                    <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E:</label>
+                                </div>
+                                <div class="md-form col-md-2 mt-5 ">
+                                    <input mdbInputDirective type="text" id="formO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                                        required>
+                                    <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O:</label>
+                                </div>
+
+                            </div>
+                            <!--fin row  -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">DIRECCION:</label>
+                                </div>
+                                <div class="md-form  col-md-7">
                                     <i class="fa fa-pencil prefix"></i>
                                     <textarea mdbInputDirective type="text" id="formDireccion" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                      data-success="correcta"  required></textarea>
+                                        data-success="correcta" required></textarea>
                                     <label for="formDireccion">Anote .</label>
-                                  </div>
-                              </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Descriptores del Sitio/Diseño</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">DESCRITO:</label>
+                                </div>
+                                    <div class="md-form  col-md-7 mt-5">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formDescrito" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                              data-success="correcta"  required></textarea>
+                                            <label for="formDescrito">Anote.</label>
+                                          </div>
+                                
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">MAPASITIO:</label>
+                                </div>
+                                <div class="md-form col-md-4 mt-5">
+                                        <input mdbInputDirective type="text" id="formMapasitio" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                          data-success="correcto" required>
+                                      </div>
+                                      <div class="md-form form-sm  input-group-append mt-5">
+                                            <i class="fa fa-calendar prefix "></i>
+                                            <input mdbInputDirective type="text" id="formFechamapa" class="form-control" ngbDatepicker
+                                              #dFechamapa="ngbDatepicker">
+                                            <label for="formFechamapa">FECHAMAPA:</label>
+                                            <div class="input-group-append ">
+                                              <button class="btn btn-info mb-2 waves-light" (click)="dFechamapa.toggle()" mdbWavesEffect>Date
+                                              </button>
+                                            </div>
+                                           </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">DIBUJANTE:</label>
+                                </div>
+                                <div class="md-form col-md-4 mt-5 ">
+                                        <input mdbInputDirective type="text" id="formDibujantes" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                          data-success="correcto" required>
+                                      </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">JUSTLIMITE:</label>
+                                </div>
+                                <div class="md-form  col-md-7">
+                                        <i class="fa fa-pencil prefix"></i>
+                                        <textarea mdbInputDirective type="text" id="formJustlimite" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                          data-success="correcta"  required></textarea>
+                                        <label for="formJustlimite">Anote .</label>
+                                      </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">AREAPRISEC:</label>
+                                </div>
+                                <div class="md-form col-md-2 mt-15">
+                                        <input mdbInputDirective type="text" id="formAreaPrisecU" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                          data-success="correcto" required>                                         
+                                      </div>
+                                      <h5> <label for="">.</label></h5>
+                                        
+                                      <div class="md-form col-md-1 mt-15">
+                                      <input mdbInputDirective type="text" id="formAreaPrisecD" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                        data-success="correcto" required>                                         
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label for="">AREAPRI:</label>
+                                    </div>
+                                    <div class="md-form col-md-2 mt-15">
+                                            <input mdbInputDirective type="text" id="formAreaPricU" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                              data-success="correcto" required>                                         
+                                          </div>
+                                          <h5> <label for="">.</label></h5>
+                                            
+                                          <div class="md-form col-md-1 mt-15">
+                                          <input mdbInputDirective type="text" id="formAreaPrisD" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                            data-success="correcto" required>                                         
+                                        </div>
+
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">AREATOTAL:</label>
+                                </div>
+                                <div class="md-form col-md-2 mt-15 ">
+                                        <input mdbInputDirective type="text" id="formAreaTotalU" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                          data-success="correcto" required>
+                                      </div>
+                                      <h5> <label for="">.</label></h5>
+                                            
+                                          <div class="md-form col-md-1 mt-15">
+                                          <input mdbInputDirective type="text" id="formAreaTotalD" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                                            data-success="correcto" required>
+                                        </div>   
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMSITIO:</label>
+                                </div>
+                                <div class="md-form  col-md-7">
+                                        <i class="fa fa-pencil prefix"></i>
+                                        <textarea mdbInputDirective type="text" id="formComsitio" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
+                                          data-success="correcta"  required></textarea>
+                                        <label for="formCita">Anote.</label>
+                                      </div>
+                            </div>
                         </div>
                         <!-- fin modal-content -->
                     </form>
@@ -136,7 +254,142 @@
                 </ng-template>
                 <ng-template ngbTabContent>
                     <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Importancia del Sitio</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RANGOANT:</label>
+                                </div>
 
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMRANGO:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">IMPDIVBIOL:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMDIVBIOL:</label>
+                                </div>
+
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">IMPNODIVBIOL:</label>
+                                </div>
+
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMNODIVBIOL:</label>
+                                </div>
+
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">URGENCIA:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMURGENCIA:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bienes Raíces y Protección</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">INTENCCONS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">NUMLOTES:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">CODDESIG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMPROT:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Administracción</h5>
+                            </div>                       
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">COMUSOTIERRA:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">COMPELIGRNAT:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">COMEXOTICAS:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">USOTIERRAF</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">NECINFORM:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">NECMANEJO:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">COMAM:</label>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                    </div>
+                        <!-- final modal-content -->
                     </form>
                     <!-- fin form -->
                 </ng-template>
@@ -149,7 +402,17 @@
                 </ng-template>
                 <ng-template ngbTabContent>
                     <form action="">
-
+                        <div class="modal-content">
+                            <div class="modal-headear">
+                                <h5 class="modal-title">Campos Opcionales</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RESPDATOS:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal-content -->
                     </form>
                     <!-- fin form -->
                 </ng-template>
