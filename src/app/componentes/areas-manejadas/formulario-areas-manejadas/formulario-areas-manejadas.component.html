@@ -1,6 +1,6 @@
 <div class="card-content white">
     <div class="card-body">
-        <ngb-tabset #fRegistro="ngbTabset">
+        <ngb-tabset #fAreasManejadas="ngbTabset">
             <!-- página 1 -->
             <ngb-tab id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
@@ -12,30 +12,180 @@
                         <div class="modal-header">
                           <h5 class="modal-title">Identificadores</h5>
                         </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">CODIGOAM:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NOMBREAM:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">SINAM:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">AMMAYOR:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">CODSITIO:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NOMSTIOS:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">Localizadores</h5>
                         </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NACION:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NOMMAPA:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">LAT:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">S:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">Descriptores</h5>
                         </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">DESCRIPCION:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">AREATOT:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">MULTISUBNAC:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">CONTINUA:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">COMENTARIO:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">Status</h5>
                         </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">FECHAESTA:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">Manejo</h5>
                         </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">ADMINISTRADOR:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">INST.ADMIN:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">DIRAADMIN1:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">DIRAAMIN2:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">CIUDADADMIN:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">TELEFAADMINIST:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">ACCESOFUB:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">INSTCOOP:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">COMMANEJO:</label>
+                          </div>
+                        </div>
+                        <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
                     </form>
@@ -67,6 +217,12 @@
                             <div class="modal-header">
                               <h5 class="modal-title">Mantenimiento del Registro</h5>
                             </div>
+                            <div class="row">
+                              <div class="col-md-2">
+                                <label for="">RESPDATOS:</label>
+                              </div>
+                            </div>
+                            <!-- fin row -->
                           </div>
                           <!-- fin modal-content -->
                         </form>
