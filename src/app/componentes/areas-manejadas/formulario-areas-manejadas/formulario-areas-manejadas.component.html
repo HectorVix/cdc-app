@@ -1,3 +1,83 @@
-<p>
-  formulario-areas-manejadas works!
-</p>
+<div class="card-content white">
+    <div class="card-body">
+        <ngb-tabset #fRegistro="ngbTabset">
+            <!-- página 1 -->
+            <ngb-tab id="tab-selectbyid1">
+                <ng-template ngbTabTitle>
+                    <b>1</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Identificadores</h5>
+                        </div>
+                      </div>
+                      <!-- fin modal-content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Localizadores</h5>
+                        </div>
+                      </div>
+                      <!-- fin modal-content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Descriptores</h5>
+                        </div>
+                      </div>
+                      <!-- fin modal-content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Status</h5>
+                        </div>
+                      </div>
+                      <!-- fin modal-content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Manejo</h5>
+                        </div>
+                      </div>
+                      <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 2 -->
+            <ngb-tab id="tab-selectbyid2">
+                    <ng-template ngbTabTitle>
+                        <b>2</b>
+                    </ng-template>
+                    <ng-template ngbTabContent>
+                        <form action="">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Elementos</h5>
+                            </div>
+                          </div>
+                          <!-- fin modal-content -->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Campos Opcionales</h5>
+                            </div>
+                          </div>
+                          <!-- fin modal-content -->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Mantenimiento del Registro</h5>
+                            </div>
+                          </div>
+                          <!-- fin modal-content -->
+                        </form>
+                        <!-- fin form -->
+                    </ng-template>
+                    <!-- fin ng-template -->
+                </ngb-tab>
+            <!-- fin ngb-tab -->            
+        </ngb-tabset>
+        <!-- fin ngb-tabset -->
+    </div>
+    <!-- fin card-body -->
+</div>
+<!-- fin card-content -->
