@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Identificadores_Sitio,Localizadores_Sitio} from '../../../modelo/tabla';
+import {Identificadores_Sitio,Localizadores_Sitio,CamposOpcionales} from '../../../modelo/tabla';
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
@@ -8,9 +8,10 @@ import {Identificadores_Sitio,Localizadores_Sitio} from '../../../modelo/tabla';
 export class RegistroSitioComponent implements OnInit {
   source_identificadores_Sitio:Identificadores_Sitio[];
   source_localizadores_Sitio:Localizadores_Sitio[];
+  source_CamposOpcionales_Sitio:CamposOpcionales[];
   lident = ['','S','N','?'];
 
-  settings_Identificadores_Sitio = {
+  settings_Identificadores_Sitio = { 
     columns: {
       codmacsitio: {
         title: 'CODMACSITIO'
@@ -36,6 +37,15 @@ export class RegistroSitioComponent implements OnInit {
       },
     }
   };
+  settings_CamposOpcionales_Sitio= {
+    columns: {
+      datos: {
+        title: 'DATOS'
+      }
+      
+    }
+  };
+  
 
   constructor() { }
 

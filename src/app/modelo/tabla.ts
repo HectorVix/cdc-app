@@ -1,7 +1,7 @@
 export interface Proteccion {
     codigoam: String;
     nombream: String;
-    contenido: String;
+    contenido : String;
 }
 
 export interface CamposOpcionales{
