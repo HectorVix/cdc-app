@@ -18,3 +18,10 @@ export interface Localizadores_Sitio{
     nommapa:String;
     codmapa:String;
 }
+export interface Elementos_AreasManejadas{
+    codigoe:String;
+    nombres:String;
+    status:String;
+    codfuente:String;
+
+}
