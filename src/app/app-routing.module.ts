@@ -13,7 +13,7 @@ import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo
 import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
-import { LotesComponent } from './componentes/lotes/lotes.component';
+import { ContactosComponent } from './componentes/contactos/contactos.component';
 
 
 const routes: Routes = [
@@ -35,7 +35,7 @@ const routes: Routes = [
 {path: 'localizacionElemento', component: LocalizacionElementoComponent},
 {path: 'sitios', component: SitiosComponent},
 {path: 'areasManejadas', component: AreasManejadasComponent},
-{path: 'lotes', component: LotesComponent},
+{path: 'contactos', component: ContactosComponent},
 
 {path: '**', component: NotFoundPageComponent},
 

@@ -25,13 +25,14 @@ import { EditarReComponent } from './componentes/rastreo-elemento/editar-re/edit
 import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
-import { LotesComponent } from './componentes/lotes/lotes.component';
 import { FormularioLeComponent } from './componentes/localizacion-elemento/formulario-le/formulario-le.component';
 import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le/editar-le.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FuenteComponent } from './componentes/fuente/fuente.component';
 import { RegistroSitioComponent } from './componentes/sitios/registro-sitio/registro-sitio.component';
 import { FormularioAreasManejadasComponent } from './componentes/areas-manejadas/formulario-areas-manejadas/formulario-areas-manejadas.component';
+import { ContactosComponent } from './componentes/contactos/contactos.component';
+import { FormularioContactosComponent } from './componentes/contactos/formulario-contactos/formulario-contactos.component';
 
 @NgModule({
   declarations: [
@@ -52,12 +53,13 @@ import { FormularioAreasManejadasComponent } from './componentes/areas-manejadas
     LocalizacionElementoComponent,
     SitiosComponent,
     AreasManejadasComponent,
-    LotesComponent,
     FormularioLeComponent,
     EditarLeComponent,
     FuenteComponent,
     RegistroSitioComponent,
-    FormularioAreasManejadasComponent
+    FormularioAreasManejadasComponent,
+    ContactosComponent,
+    FormularioContactosComponent
   
 
   ],
