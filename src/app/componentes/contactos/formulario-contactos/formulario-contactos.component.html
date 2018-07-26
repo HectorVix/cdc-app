@@ -1,37 +1,227 @@
 <div class="card-content white">
-    <div class="card-body">
-        <ngb-tabset #fRegistro="ngbTabset">
-            <!-- página 1 -->
-            <ngb-tab id="tab-selectbyid1">
-                <ng-template ngbTabTitle>
-                    <b>1</b>
-                </ng-template>
-                <ng-template ngbTabContent>
-                    <form action="">
-
-                    </form>
-                    <!-- fin form -->
-                </ng-template>
-                <!-- fin ng-template -->
-            </ngb-tab>
-            <!-- fin ngb-tab -->
-            <!-- página 2 -->
-            <ngb-tab id="tab-selectbyid2">
-                    <ng-template ngbTabTitle>
-                        <b>2</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-                        <form action="">
-    
-                        </form>
-                        <!-- fin form -->
-                    </ng-template>
-                    <!-- fin ng-template -->
-                </ngb-tab>
-            <!-- fin ngb-tab -->            
-        </ngb-tabset>
-        <!-- fin ngb-tabset -->
-    </div>
-    <!-- fin card-body -->
+  <div class="card-body">
+    <ngb-tabset #fRegistro="ngbTabset">
+      <!-- página 1 -->
+      <ngb-tab id="tab-selectbyid1">
+        <ng-template ngbTabTitle>
+          <b>1</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form action="">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Identificadores:</h5>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">NUMIDENT:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">                 
+                    <i class="fa fa-id-card prefix"></i>
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                    <label for="formNumident"></label>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">NOMBREIDENT:</label>
+                </div>
+                <div class="md-form col-md-9 mt-5 ">               
+                    <i class="fa fa-id-badge prefix"></i>
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                    <label for="formNumident"></label>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">TITULO:</label>
+                </div>
+                <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">NOMBRE:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">
+                    <i class="fa fa-user prefix"></i>
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                    <label for="formNumident"></label>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">APELLIDO.1:</label>
+                </div>
+                <div class="md-form col-md-5 mt-5 ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">APELLIDO.2:</label>
+                </div>
+                <div class="md-form col-md-5 mt-5 ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">SUFIJO:</label>
+                </div>
+                <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">POSICION:</label>
+                </div>
+                <div class="md-form col-md-9 mt-5 ">
+                    <i class="fa fa-map-pin prefix"></i>
+                  <input mdbInputDirective type="text" id="formPosicion" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                    <label for="formPosicion"></label>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">INSTITUCION:</label>
+                </div>
+                <div class="md-form col-md-9 mt-5 ">
+                  <input mdbInputDirective type="text" id="formInstitucion" class="form-control" data-error="incorrecto, minimo 3 caracteres"
+                    data-success="correcto" required>
+                </div>
+              </div>
+              <!-- fin row -->
+            </div>
+            <!-- fin modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Localizadores:</h5>
+              </div>
+            </div>
+            <!-- fin modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tipos de Contactos:</h5>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">DIR1:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">
+                  <input mdbInputDirective type="text" id="formDir1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">DIR2:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">
+                  <input mdbInputDirective type="text" id="formDir2" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">DIR3:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">
+                  <input mdbInputDirective type="text" id="formDir3" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">PAIS:</label>
+                </div>
+                <div class="md-form col-md-4 mt-5 ">
+                  <input mdbInputDirective type="text" id="formPais" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">CIUDAD:</label>
+                </div>
+                <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formCiudad" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+                <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+                <div class="md-form col-md-2 mt-5 ">
+                  <input mdbInputDirective type="text" id="formCodpostal" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                    required>
+                </div>
+              </div>
+              <!-- fin row -->
+            </div>
+            <!-- fin modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Actividades con el Contacto:</h5>
+              </div>
+            </div>
+            <!-- fin modal-content -->
+          </form>
+          <!-- fin form -->
+        </ng-template>
+        <!-- fin ng-template -->
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+      <!-- página 2 -->
+      <ngb-tab id="tab-selectbyid2">
+        <ng-template ngbTabTitle>
+          <b>2</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form action="">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Descripción:</h5>
+              </div>
+            </div>
+            <!-- fin modal-content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Documentación y Mantenimiento:</h5>
+              </div>
+            </div>
+            <!-- fin modal-content -->
+          </form>
+          <!-- fin form -->
+        </ng-template>
+        <!-- fin ng-template -->
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+    </ngb-tabset>
+    <!-- fin ngb-tabset -->
+  </div>
+  <!-- fin card-body -->
 </div>
 <!-- fin card-content -->
