@@ -14,7 +14,7 @@ import { LocalizacionElementoComponent } from './componentes/localizacion-elemen
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
 import { ContactosComponent } from './componentes/contactos/contactos.component';
-
+import { ResumenComponent } from './componentes/resumen/resumen.component';
 
 const routes: Routes = [
 {path: 'home',component: HomePageComponent},
@@ -32,6 +32,7 @@ const routes: Routes = [
   children: [{ path: '', component: EditarJerarquizacionComponent }]
 },
 {path: 'rastreoElemento', component: RastreoElementoComponent},
+{path: 'resumen', component: ResumenComponent},
 {path: 'localizacionElemento', component: LocalizacionElementoComponent},
 {path: 'sitios', component: SitiosComponent},
 {path: 'areasManejadas', component: AreasManejadasComponent},

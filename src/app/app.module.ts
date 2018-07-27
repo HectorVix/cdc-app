@@ -33,6 +33,9 @@ import { RegistroSitioComponent } from './componentes/sitios/registro-sitio/regi
 import { FormularioAreasManejadasComponent } from './componentes/areas-manejadas/formulario-areas-manejadas/formulario-areas-manejadas.component';
 import { ContactosComponent } from './componentes/contactos/contactos.component';
 import { FormularioContactosComponent } from './componentes/contactos/formulario-contactos/formulario-contactos.component';
+import { ResumenComponent } from './componentes/resumen/resumen.component';
+import { CaracterizacinPlantasNacionalComponent } from './componentes/resumen/caracterizacin-plantas-nacional/caracterizacin-plantas-nacional.component';
+import { CaracterizacinVertebradosNacionalComponent } from './componentes/resumen/caracterizacin-vertebrados-nacional/caracterizacin-vertebrados-nacional.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,11 @@ import { FormularioContactosComponent } from './componentes/contactos/formulario
     RegistroSitioComponent,
     FormularioAreasManejadasComponent,
     ContactosComponent,
-    FormularioContactosComponent
+    FormularioContactosComponent,
+    ResumenComponent,
+    CaracterizacinPlantasNacionalComponent,
+    CaracterizacinVertebradosNacionalComponent
+   
   
 
   ],
