@@ -1,3 +1,31 @@
-<p>
-  resumen works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="card grey lighten-2">
+        <div class="card-tabs">
+          <ngb-tabset #t="ngbTabset">
+            <ngb-tab id="tab-selectbyid1" title="Caracteriacion Plantas Nacional">
+              <ng-template ngbTabContent>
+                <app-caracterizacion-plantas-nacional></app-caracterizacion-plantas-nacional>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid2" title="Caracterizacion Vertebrado Nacional">
+              <ng-template ngbTabContent>
+                <app-caracterizacion-vertebrados-nacional></app-caracterizacion-vertebrados-nacional>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid3" title="Editar">
+              <ng-template ngbTabContent>
+                
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+        <div class="card-content white">
+          <div class="row">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
