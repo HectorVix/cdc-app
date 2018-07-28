@@ -1,6 +1,6 @@
 <div class="card-content white">
   <div class="card-body">
-      <ngb-tabset #fCaracterizacionPlatasNacional="ngbTabset">
+      <ngb-tabset #fCaracterizacionVertebradosNacional="ngbTabset">
           <!-- página 1 -->
           <ngb-tab id="tab-selectbyid1">
               <ng-template ngbTabTitle>
@@ -8,12 +8,39 @@
               </ng-template>
               <ng-template ngbTabContent>
                   <form action="">
-
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Identificadores:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Taxonomía:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Status:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Distribución:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->                  
                   </form>
                   <!-- fin form -->
                   <div class="text-center ">
                       <p>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>                     
+                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>                     
                           <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                       </p>
                   </div>
@@ -28,13 +55,26 @@
                   </ng-template>
                   <ng-template ngbTabContent>
                       <form action="">
-  
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Migración:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Habitat:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                        </div>
+                        <!-- fin modal-content -->                      
                       </form>
                       <!-- fin form -->
                       <div class="text-center ">
                           <p>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>    
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>                 
+                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>    
+                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>                 
                               <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                           </p>
                       </div>
@@ -49,13 +89,19 @@
                   </ng-template>
                   <ng-template ngbTabContent>
                       <form action="">
-  
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Hábitos alimenticios:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                        </div>
+                        <!-- fin modal-content -->
                       </form>
                       <!-- fin form -->
                       <div class="text-center ">
                           <p>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>                                                                                                
+                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
+                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>                                                                                                
                               <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                           </p>
                       </div>
@@ -70,13 +116,33 @@
               </ng-template>
               <ng-template ngbTabContent>
                   <form action=""> 
-
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ecología:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Fenología/Estacionalidad:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Reproducción:</h5>
+                        </div>
+                        <!-- fin modal-header -->
+                    </div>
+                    <!-- fin modal-content -->
                   </form>
                   <!-- fin form -->
                   <div class="text-center ">
                       <p>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid5')" mdbWavesEffect>Siguiente</button>                                           
+                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
+                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid5')" mdbWavesEffect>Siguiente</button>                                           
                           <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                       </p>
                   </div>
@@ -91,12 +157,46 @@
           </ng-template>
           <ng-template ngbTabContent>
               <form action="">
-
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Manejo:</h5>
+                    </div>
+                    <!-- fin modal-header -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Atributos misceláneos:</h5>
+                    </div>
+                    <!-- fin modal-header -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Campos opcionales:</h5>
+                    </div>
+                    <!-- fin modal-header -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Referencias:</h5>
+                    </div>
+                    <!-- fin modal-header -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mantenimiento del registro:</h5>
+                    </div>
+                    <!-- fin modal-header -->
+                </div>
+                <!-- fin modal-content -->
               </form>
               <!-- fin form -->
               <div class="text-center ">
                   <p>
-                      <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid4')" mdbWavesEffect>Atras</button>
+                      <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Atras</button>
                       <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                                            
                       <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                   </p>
