@@ -1,0 +1,92 @@
+<div class="card-content white">
+  <div class="card-body">
+    <ngb-tabset #fJerarquizacionElemento="ngbTabset">
+      <!-- Formulario  -->
+      <ngb-tab id="tab-formulario">
+        <ng-template ngbTabTitle>
+          <b>Formulario</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <div class="card-content white">
+            <div class="card-body">
+              <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
+                <!-- página 1 -->
+                <ngb-tab id="tab-selectbyid1">
+                  <ng-template ngbTabTitle>
+                    <b>1</b>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <form action="">
+
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                      <p>
+                        <button class="btn btn-cyan waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                        <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                      </p>
+                    </div>
+                  </ng-template>
+                  <!-- fin ng-template -->
+                </ngb-tab>
+                <!-- fin ngb-tab -->
+                <!-- pagína 2 -->
+                <ngb-tab id="tab-selectbyid2">
+                  <ng-template ngbTabTitle>
+                    <b>2</b>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <form action="">
+
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                      <p>
+                        <button class="btn btn-cyan waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
+                        <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                        <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                      </p>
+                    </div>
+                  </ng-template>
+                  <!-- fin ng-template -->
+                </ngb-tab>
+                <!-- fin ngb-tab -->
+              </ngb-tabset>
+              <!-- fin ngb-tabset -->
+            </div>
+            <!-- fin card-body -->
+          </div>
+          <!-- fin card-content -->
+
+
+        </ng-template>
+        <!-- fin ng-template -->
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+      <!-- Editar -->
+      <ngb-tab id="tab-editar">
+        <ng-template ngbTabTitle>
+          <b>Editar</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form action="">
+
+          </form>
+          <!-- fin form -->
+          <div class="text-center ">
+            <p>
+
+              <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
+              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+            </p>
+          </div>
+        </ng-template>
+        <!-- fin ng-template -->
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+    </ngb-tabset>
+    <!-- fin ngb-tabset -->
+  </div>
+  <!-- fin card-body -->
+</div>
+<!-- fin card-content -->
