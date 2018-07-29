@@ -1,29 +1,160 @@
-
 <div class="card-content white">
     <div class="card-body">
-        <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">           
+        <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
             <!-- Formulario -->
             <ngb-tab id="Formulario">
-                    <ng-template ngbTabTitle>
-                        <b>Formulario</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-                        <form action="">
-    
-                        </form>
-                        <!-- fin form -->
-                        <div class="text-center ">
-                            <p>                              
-                                <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                                            
-                                <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                            </p>
+                <ng-template ngbTabTitle>
+                    <b>Formulario</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">JERARQUIZACIÓN DEL ELMENTO (SUBNACIONAL)</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">CODIGOE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">NOMBRES:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">LOCTIPS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">LESTIMS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMLESTIMS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">ABUNDS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMABUNDS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">DISTS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMSISTS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">LEPROTS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMLEPROTS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">AMENAZS:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="">COMAMENAZS:</label>
+                                    </div>
+                                </div>
+                                <!-- fin row -->
+                                <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">OTRACONSIDS:</label>
+                                        </div>
+                                    </div>
+                                    <!-- fin row -->
+                                    <div class="row">
+                                            <div class="col-md-2">
+                                                <label for="">RANGOS:</label>
+                                            </div>
+                                        </div>
+                                        <!-- fin row -->
+                                        <div class="row">
+                                                <div class="col-md-2">
+                                                    <label for="">RAZON.RS:</label>
+                                                </div>
+                                            </div>
+                                            <!-- fin row -->
+                                            <div class="row">
+                                                    <div class="col-md-2">
+                                                        <label for="">NEC.PROTECS:</label>
+                                                    </div>
+                                                </div>
+                                                <!-- fin row -->
+                                                <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="">NEC.INVENTS:</label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- fin row -->
+                                                    <div class="row">
+                                                            <div class="col-md-2">
+                                                                <label for="">NEC.MANEJOS:</label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- fin row -->
+                                                        <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label for="">AUTOR.ED:</label>
+                                                                </div>
+                                                            </div>
+                                                            <!-- fin row -->
+                                                            <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <label for="">EDICIÓN:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- fin row -->
+
                         </div>
-                    </ng-template>
-                    <!-- fin ng-template -->
-                </ngb-tab>
+                        <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
+                    </div>
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
             <!-- fin ngb-tab -->
-             <!-- Editar -->
-             <ngb-tab id="Editar">
+            <!-- Editar -->
+            <ngb-tab id="Editar">
                 <ng-template ngbTabTitle>
                     <b>Editar</b>
                 </ng-template>
@@ -33,15 +164,15 @@
                     </form>
                     <!-- fin form -->
                     <div class="text-center ">
-                        <p>                              
-                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                                            
+                        <p>
+                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
                             <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                         </p>
                     </div>
                 </ng-template>
                 <!-- fin ng-template -->
             </ngb-tab>
-        <!-- fin ngb-tab -->
+            <!-- fin ngb-tab -->
         </ngb-tabset>
         <!-- fin ngb-tabset -->
     </div>
