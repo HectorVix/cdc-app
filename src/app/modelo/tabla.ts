@@ -25,3 +25,15 @@ export interface Elementos_AreasManejadas{
     codfuente:String;
 
 }
+export interface Distribucion1_ResumenCaracterizacionPlantasNacional{
+   codsubnac:String;
+   nomsubnac:String;
+   statsubnac:String; 
+}
+
+export interface Distribucion2_ResumenCaracterizacionPlantasNacional{
+   codecoregn:String;
+   statecoregn:String;
+   codcuencan:String;
+   statcuencan:String; 
+}
