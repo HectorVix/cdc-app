@@ -1,65 +1,218 @@
 <div class="card-content white">
-  <div class="card-body">
-      <ngb-tabset #fCaracterizacionVertebradosNacional="ngbTabset">
-          <!-- página 1 -->
-          <ngb-tab id="tab-selectbyid1">
-              <ng-template ngbTabTitle>
-                  <b>1</b>
-              </ng-template>
-              <ng-template ngbTabContent>
-                  <form action="">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Identificadores:</h5>
+    <div class="card-body">
+        <ngb-tabset #fCaracterizacionVertebradosNacional="ngbTabset">
+            <!-- página 1 -->
+            <ngb-tab id="tab-selectbyid1">
+                <ng-template ngbTabTitle>
+                    <b>1</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Identificadores:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">CODIGOE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">NOMBREG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">AUTOR:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">NOMBREN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">NOMCOMUNN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+
                         </div>
-                        <!-- fin modal-header -->
-                    </div>
-                    <!-- fin modal-content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Taxonomía:</h5>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Taxonomía:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">CLASETAX:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">FAMILIA:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMTAXG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMSUBESPN:</label>
+                                </div>
+                            </div>
                         </div>
-                        <!-- fin modal-header -->
-                    </div>
-                    <!-- fin modal-content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Status:</h5>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Status:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RANGOG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">AEPEU:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">ENDEMISMO:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMSTATG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RANGON:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">ESPDEPORTN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">PESTEN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMSTATN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-header -->
-                    </div>
-                    <!-- fin modal-content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Distribución:</h5>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Distribución:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row  mx-auto ">
+                                <ng2-smart-table [settings]="settings_Distribucion1" [source]="characters_Distribucion1">
+                                </ng2-smart-table>
+                            </div>
+                            <div class="row  mx-auto ">
+                                <ng2-smart-table [settings]="settings_Distribucion2" [source]="characters_Distribucion2">
+                                </ng2-smart-table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">ELEVMIN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMDISTG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMDISTN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-header -->
+                        <!-- fin modal-content -->
+
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
                     </div>
-                    <!-- fin modal-content -->                  
-                  </form>
-                  <!-- fin form -->
-                  <div class="text-center ">
-                      <p>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>                     
-                          <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                      </p>
-                  </div>
-              </ng-template>
-              <!-- fin ng-template -->
-          </ngb-tab>
-          <!-- fin ngb-tab -->
-          <!-- página 2 -->
-          <ngb-tab id="tab-selectbyid2">
-                  <ng-template ngbTabTitle>
-                      <b>2</b>
-                  </ng-template>
-                  <ng-template ngbTabContent>
-                      <form action="">
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 2 -->
+            <ngb-tab id="tab-selectbyid2">
+                <ng-template ngbTabTitle>
+                    <b>2</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Migración:</h5>
                             </div>
                             <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RESIDENTE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">REPN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMMIGG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMMIGN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
                         <!-- fin modal-content -->
                         <div class="modal-content">
@@ -67,148 +220,321 @@
                                 <h5 class="modal-title">Habitat:</h5>
                             </div>
                             <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">MARINO:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">FLUVIAL:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">LACUSTRE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">PALUSTRE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">TERRESTRE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">SUBTERRAN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">FACTORESPE:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMHABG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMHABREP:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMHABN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-content -->                      
-                      </form>
-                      <!-- fin form -->
-                      <div class="text-center ">
-                          <p>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>    
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>                 
-                              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                          </p>
-                      </div>
-                  </ng-template>
-                  <!-- fin ng-template -->
-              </ngb-tab>
-          <!-- fin ngb-tab -->
-          <!-- página 3 -->
-          <ngb-tab id="tab-selectbyid3">
-                  <ng-template ngbTabTitle>
-                      <b>3</b>
-                  </ng-template>
-                  <ng-template ngbTabContent>
-                      <form action="">
+                        <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
+                    </div>
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 3 -->
+            <ngb-tab id="tab-selectbyid3">
+                <ng-template ngbTabTitle>
+                    <b>3</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Hábitos alimenticios:</h5>
                             </div>
                             <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">HABITOSALIM:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMALIMG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMALIMN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
                         <!-- fin modal-content -->
-                      </form>
-                      <!-- fin form -->
-                      <div class="text-center ">
-                          <p>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                              <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>                                                                                                
-                              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                          </p>
-                      </div>
-                  </ng-template>
-                  <!-- fin ng-template -->
-              </ngb-tab>
-          <!-- fin ngb-tab -->
-          <!-- página 4 -->
-          <ngb-tab id="tab-selectbyid4">
-              <ng-template ngbTabTitle>
-                  <b>4</b>
-              </ng-template>
-              <ng-template ngbTabContent>
-                  <form action=""> 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Ecología:</h5>
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
+                    </div>
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 4 -->
+            <ngb-tab id="tab-selectbyid4">
+                <ng-template ngbTabTitle>
+                    <b>4</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ecología:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMECOLG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMECOLN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-header -->
-                    </div>
-                    <!-- fin modal-content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Fenología/Estacionalidad:</h5>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Fenología/Estacionalidad:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">FENOLOGIA:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMFENOLG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMFENOLN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-header -->
-                    </div>
-                    <!-- fin modal-content -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Reproducción:</h5>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Reproducción:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COLREP:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMREPG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMREPN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
-                        <!-- fin modal-header -->
+                        <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid5')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
                     </div>
-                    <!-- fin modal-content -->
-                  </form>
-                  <!-- fin form -->
-                  <div class="text-center ">
-                      <p>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
-                          <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid5')" mdbWavesEffect>Siguiente</button>                                           
-                          <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                      </p>
-                  </div>
-              </ng-template>
-              <!-- fin ng-template -->
-          </ngb-tab>
-      <!-- fin ngb-tab -->
-      <!-- página 5 -->
-      <ngb-tab id="tab-selectbyid5">
-          <ng-template ngbTabTitle>
-              <b>5</b>
-          </ng-template>
-          <ng-template ngbTabContent>
-              <form action="">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Manejo:</h5>
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+            <!-- página 5 -->
+            <ngb-tab id="tab-selectbyid5">
+                <ng-template ngbTabTitle>
+                    <b>5</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Manejo:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMMANEJOG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">COMMANEJON:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Atributos misceláneos:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">USOECONOM:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">LONGITUD:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Campos opcionales:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+
+                            <div class="row  mx-auto ">
+                                <ng2-smart-table [settings]="settings_CamposOpcionales" 
+                                                 [source]="characters_CamposOpcionales">
+                                </ng2-smart-table>
+                            </div>
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Referencias:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">REFG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Mantenimiento del registro:</h5>
+                            </div>
+                            <!-- fin modal-header -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">EDICIONG:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">EDICIONN:</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!-- fin modal-content -->
+                    </form>
+                    <!-- fin form -->
+                    <div class="text-center ">
+                        <p>
+                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Atras</button>
+                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </p>
                     </div>
-                    <!-- fin modal-header -->
-                </div>
-                <!-- fin modal-content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Atributos misceláneos:</h5>
-                    </div>
-                    <!-- fin modal-header -->
-                </div>
-                <!-- fin modal-content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Campos opcionales:</h5>
-                    </div>
-                    <!-- fin modal-header -->
-                </div>
-                <!-- fin modal-content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Referencias:</h5>
-                    </div>
-                    <!-- fin modal-header -->
-                </div>
-                <!-- fin modal-content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Mantenimiento del registro:</h5>
-                    </div>
-                    <!-- fin modal-header -->
-                </div>
-                <!-- fin modal-content -->
-              </form>
-              <!-- fin form -->
-              <div class="text-center ">
-                  <p>
-                      <button class="btn btn-cyan waves-light" (click)="fCaracterizacionVertebradosNacional.select('tab-selectbyid4')" mdbWavesEffect>Atras</button>
-                      <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                                            
-                      <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                  </p>
-              </div>
-          </ng-template>
-          <!-- fin ng-template -->
-      </ngb-tab>
-  <!-- fin ngb-tab -->
-      </ngb-tabset>
-      <!-- fin ngb-tabset -->
-  </div>
-  <!-- fin card-body -->
+                </ng-template>
+                <!-- fin ng-template -->
+            </ngb-tab>
+            <!-- fin ngb-tab -->
+        </ngb-tabset>
+        <!-- fin ngb-tabset -->
+    </div>
+    <!-- fin card-body -->
 </div>
 <!-- fin card-content -->
-

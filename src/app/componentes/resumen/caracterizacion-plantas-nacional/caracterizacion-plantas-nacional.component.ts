@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Distribucion1_ResumenCaracterizacionPlantasNacional,Distribucion2_ResumenCaracterizacionPlantasNacional,
-        CamposOpcionales} from '../../../modelo/tabla';
+import {Distribucion1_Resumen,Distribucion2_Resumen,CamposOpcionales} from '../../../modelo/tabla';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -11,8 +10,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   lrangog = ['','A','B'];
   lrangon = ['','A','B'];
   laepeu = ['','A','B'];
-  source_Distribucion1:Distribucion1_ResumenCaracterizacionPlantasNacional[];
-  source_Distribucion2:Distribucion2_ResumenCaracterizacionPlantasNacional[];
+  source_Distribucion1:Distribucion1_Resumen[];
+  source_Distribucion2:Distribucion2_Resumen[];
   source_CamposOpcionales:CamposOpcionales[];
   
   settings_CamposOpcionales= { 
