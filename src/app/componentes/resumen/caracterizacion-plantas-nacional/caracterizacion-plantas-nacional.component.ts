@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Distribucion1_ResumenCaracterizacionPlantasNacional,Distribucion2_ResumenCaracterizacionPlantasNacional} from '../../../modelo/tabla';
+import {Distribucion1_ResumenCaracterizacionPlantasNacional,Distribucion2_ResumenCaracterizacionPlantasNacional,
+        CamposOpcionales} from '../../../modelo/tabla';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -12,7 +13,15 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   laepeu = ['','A','B'];
   source_Distribucion1:Distribucion1_ResumenCaracterizacionPlantasNacional[];
   source_Distribucion2:Distribucion2_ResumenCaracterizacionPlantasNacional[];
+  source_CamposOpcionales:CamposOpcionales[];
   
+  settings_CamposOpcionales= { 
+    columns: {
+      datos: {
+        title: 'RCPN.OPC'
+      }
+    }
+  };
   settings_distribucion1 = { 
     columns: {
       codsubnac: {
@@ -23,7 +32,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       },
       statsubnac: {
         title: 'STATSUBNAC'
-      },
+      }
     }
   };
   settings_distribucion2 = { 
