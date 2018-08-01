@@ -9,6 +9,8 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   source_Distribucion1:Distribucion1_Resumen[];
   source_Distribucion2:Distribucion2_Resumen[];
   source_CamposOpcionales:CamposOpcionales[];
+  lrangog = ['','A','B'];
+  lrangon = ['','A','B'];
   
   settings_CamposOpcionales= { 
     columns: {
