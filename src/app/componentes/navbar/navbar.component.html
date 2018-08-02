@@ -1,13 +1,58 @@
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="fondo">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="icon-bar">
+    <a class="active">
+      <img src="/iconos/logo32.ico">
+      CDC
+    </a>
+    <a [routerLink]="['/home']">
+      <img src="/iconos/home32.ico">
+       Home
+    </a>
+    <a [routerLink]="['/fuente']">
+      <img src="/iconos/fuente32.ico">
+       Fuentes
+    </a>
+    <a [routerLink]="['/jerarquizacion']">
+      <img src="/iconos/jerarquizacion32.ico">
+      Jerarquía
+    </a>
+    <a [routerLink]="['/rastreoElemento']">
+      <img src="/iconos/rastreo32.ico">
+      Rastreo
+    </a>
+    <a [routerLink]="['/resumen']">
+      <img src="/iconos/resumen32.ico">
+      Resumen
+    </a>
 
-<div class="icon-bar">
-  <a class="active" href="#">
-        <img src="/iconos/home.ico">              
-               
-  </a> 
-  <a href="#"><i class="fa fa-search"></i></a> 
-  <a href="#"><i class="fa fa-envelope"></i></a> 
-  <a href="#"><i class="fa fa-globe"></i></a>
-  <a href="#"><i class="fa fa-trash"></i></a> 
+    <a [routerLink]="['/localizacionElemento']">
+      <img src="/iconos/localizacion32.ico">
+      Localización
+    </a>
+    <a [routerLink]="['/']">
+      <img src="/iconos/estadisticas32.ico">
+      Estadística
+    </a>
+    <a [routerLink]="['/sitios']">
+      <img src="/iconos/sitios32.ico">
+      Sitios
+    </a>
+    <a [routerLink]="['/areasManejadas']">
+      <img src="/iconos/area32.ico">
+      Área
+    </a>
+    <a [routerLink]="['/contactos']">
+      <img src="/iconos/contacto32.ico">
+      Contactos
+    </a>
+    <a href="#">
+      <i class="fa fa-envelope"></i>
+      Perfil
+    </a>
+    <a href="#">
+        <i class="fa fa-envelope"></i>
+        Cerar sesión
+      </a>
+  </div>
 </div>

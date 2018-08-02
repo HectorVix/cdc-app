@@ -1,21 +1,24 @@
 .icon-bar {
-    width: 90px; /* Set a specific width */
-    background-color: #555; /* Dark-grey background */
+    width: 90px; 
+    background-color: #000; 
 }
 
 .icon-bar a {
-    display: block; /* Make the links appear below each other instead of side-by-side */
-    text-align: center; /* Center-align text */
-    padding: 16px; /* Add some padding */
-    transition: all 0.3s ease; /* Add transition for hover effects */
-    color: white; /* White text color */
-    font-size: 36px; /* Increased font-size */
+    display: block; 
+    text-align: center; 
+    padding: 16px; 
+    transition: all 0.3s ease; 
+    color: white; 
+    font-size: 12px; 
 }
 
 .icon-bar a:hover {
-    background-color: #000; /* Add a hover color */
+    background-color: #4CAF50; 
 }
 
 .active {
-    background-color: #4CAF50; /* Add an active/current color */
+    background-color: #4CAF50;
+}
+.fondo {
+    background-color: #555;
 }
