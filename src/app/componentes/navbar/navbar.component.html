@@ -1,52 +1,13 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Navbar brand -->
-  <logo><a class="navbar-brand">CDC</a></logo>
-
-  <!-- Collapsible content -->
-  <links>
-
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-              <a class="nav-link waves-light"  [routerLink]="['/home']" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-light"  [routerLink]="['/fuente']" mdbWavesEffect>Fuentes</a>
-        </li>
-          <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/jerarquizacion']" mdbWavesEffect>Jerarquización</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/rastreoElemento']" mdbWavesEffect>Rastreo</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/resumen']" mdbWavesEffect>Resumen</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/localizacionElemento']" mdbWavesEffect>Localizacion </a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/sitios']" mdbWavesEffect>Sitios</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/areasManejadas']" mdbWavesEffect>Areas</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link waves-light"  [routerLink]="['/contactos']" mdbWavesEffect>Contactos</a>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link waves-light"  [routerLink]="['/login']" mdbWavesEffect>Login</a>
-          </li>
-
-
-      </ul>
-    
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
-
- 
+<div class="icon-bar">
+  <a class="active" href="#">
+        <img src="/iconos/home.ico">              
+               
+  </a> 
+  <a href="#"><i class="fa fa-search"></i></a> 
+  <a href="#"><i class="fa fa-envelope"></i></a> 
+  <a href="#"><i class="fa fa-globe"></i></a>
+  <a href="#"><i class="fa fa-trash"></i></a> 
+</div>
