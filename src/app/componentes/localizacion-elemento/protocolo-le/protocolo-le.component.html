@@ -1,0 +1,49 @@
+<div class="card-content white">
+  <div class="card-body">
+      <ngb-tabset #fProtocolo="ngbTabset">
+          <!-- página 1 -->
+          <ngb-tab id="tab-selectbyid1">
+              <ng-template ngbTabTitle>
+                  <b>Protocolos</b>
+              </ng-template>
+              <ng-template ngbTabContent>
+                  <form action="">
+
+                  </form>
+                  <!-- fin form -->
+                  <div class="text-center ">
+                      <p>
+                          <button class="btn btn-cyan waves-light"  type="submit" mdbWavesEffect>Guardar</button>                     
+                          <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                      </p>
+                  </div>
+              </ng-template>
+              <!-- fin ng-template -->
+          </ngb-tab>
+          <!-- fin ngb-tab -->
+          <!-- página 2 -->
+          <ngb-tab id="tab-selectbyid2">
+                  <ng-template ngbTabTitle>
+                      <b>Editar</b>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                      <form action="">
+  
+                      </form>
+                      <!-- fin form -->
+                      <div class="text-center ">
+                          <p>
+                              <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                 
+                              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                          </p>
+                      </div>
+                  </ng-template>
+                  <!-- fin ng-template -->
+              </ngb-tab>
+          <!-- fin ngb-tab -->         
+      </ngb-tabset>
+      <!-- fin ngb-tabset -->
+  </div>
+  <!-- fin card-body -->
+</div>
+<!-- fin card-content -->

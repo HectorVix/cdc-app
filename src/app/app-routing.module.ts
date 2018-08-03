@@ -15,6 +15,9 @@ import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
 import { ContactosComponent } from './componentes/contactos/contactos.component';
 import { ResumenComponent } from './componentes/resumen/resumen.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
+import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 
 const routes: Routes = [
 {path: 'home',component: HomePageComponent},
@@ -37,9 +40,12 @@ const routes: Routes = [
 {path: 'sitios', component: SitiosComponent},
 {path: 'areasManejadas', component: AreasManejadasComponent},
 {path: 'contactos', component: ContactosComponent},
+{path: 'estadistica', component: EstadisticaComponent},
+{path: 'perfil', component: PerfilComponent},
+{path: 'ayuda', component: AyudaComponent},
 
-{path: '**', component: NotFoundPageComponent},
-
+// {path: '**', component: NotFoundPageComponent},
+{path: '**', component: LoginPageComponent},
 
 ];
 

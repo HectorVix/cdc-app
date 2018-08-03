@@ -38,6 +38,10 @@ import { CaracterizacionPlantasNacionalComponent } from './componentes/resumen/c
 import { CaracterizacionVertebradosNacionalComponent } from './componentes/resumen/caracterizacion-vertebrados-nacional/caracterizacion-vertebrados-nacional.component';
 import { FormularioJerarquizacionElementoGlobalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-global/formulario-jerarquizacion-elemento-global.component';
 import { FormularioJerarquizacionElementoSubnacionalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-subnacional/formulario-jerarquizacion-elemento-subnacional.component';
+import { ProtocoloLeComponent } from './componentes/localizacion-elemento/protocolo-le/protocolo-le.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
+import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import { FormularioJerarquizacionElementoSubnacionalComponent } from './componen
     CaracterizacionPlantasNacionalComponent,
     CaracterizacionVertebradosNacionalComponent,
     FormularioJerarquizacionElementoGlobalComponent,
-    FormularioJerarquizacionElementoSubnacionalComponent
+    FormularioJerarquizacionElementoSubnacionalComponent,
+    ProtocoloLeComponent,
+    PerfilComponent,
+    EstadisticaComponent,
+    AyudaComponent
    
   
 
