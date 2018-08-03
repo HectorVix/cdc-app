@@ -37,3 +37,10 @@ export interface Distribucion2_Resumen{
     codcuencan: String;
     statcuencan: String;
 }
+export interface Protocolo {
+    le:String;
+    nommapaNummarg:String;
+    prov:String;
+    direccion:String;
+    ultObs:String;
+}

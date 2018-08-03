@@ -1,9 +1,9 @@
-<div class="fondo">
+<div class="fondo-dark-gray">
     <div class="card-content white">
         <div class="card-body">
           <form [formGroup]="fuenteForm">
             <div class="modal-content">
-              <div class="modal-header modal-green">
+              <div class="modal-header color-green">
                 <h5 class="modal-title">Formulario de resumen fuente</h5>
               </div>
               <!------------------------CODFUENTE------------------------------ -->
@@ -38,7 +38,7 @@
                   <label for="">ARCHIVADO:</label>
                 </div>
                 <div class=" col-md-3 mt-5">
-                  <select class="form-control" formControlName="archivado" required>
+                  <select class="form-control color-green" formControlName="archivado" required>
                     <option *ngFor="let archivo of archivado" [value]="archivo">{{archivo}}</option>
                   </select>
                 </div>
