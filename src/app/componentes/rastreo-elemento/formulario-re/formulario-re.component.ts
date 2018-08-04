@@ -33,7 +33,7 @@ export class FormularioReComponent implements OnInit {
  lexsitu= ['', 'SÍ','NO'];
  lendemismo= ['', 'Endémico a jurisdicción CDC sub-nacional', 'Endémico nacional'];
 //status nacional
- lrangon= ['', '', ''];
+ lrangon= ['', 'N1', 'N2','N3','N4','N5','NA','NE','NH','NN','NR','NRF','NU','NX'];
  lformularn= ['', '', ''];
  lrastreolen= ['', '', ''];
  llestimn= ['', '', ''];
