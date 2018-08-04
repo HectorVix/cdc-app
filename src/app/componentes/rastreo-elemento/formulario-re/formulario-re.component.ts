@@ -15,17 +15,14 @@ export class FormularioReComponent implements OnInit {
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
 
- ltropicos= ['', '', ''];
- lnacion= ['', 'GT', 'US',''];
- lsubnacion= ['', '', ''];
- lclasetax= ['', '', ''];
- lorden= ['', '', ''];
- lfamilia= ['', 'Malvaceae', ''];
- lgenero= ['', 'Malva L.', ''];
- lfuentenom= ['', '', ''];
- lrefnomber= ['', '', ''];
- ldistrax= ['', '', ''];
- ldudatax= ['', '', ''];
+//taxonomia global
+ ldistrax= ['', 'Genero o familia monotípica', 
+                'Genero pequeño (2-5 especies)',
+                'Genero intermedio (6-20 especies)',
+                'Genero grande (21+ especies)'];
+ ldudatax= ['', 'Indudablemente una especie válida',
+                'Posiblemente no válida como especie pero si como subespecie',
+                'Probablemente no sea diferente a ningún nivel taxonómico'];
  lnumsinn= ['', '', ''];
  //status global
  lrangog= ['', '', ''];
@@ -72,8 +69,8 @@ export class FormularioReComponent implements OnInit {
       //pagina1
         //identificadores
       'codigoe': ['', Validators.required],
-      'tropicos': '',
-      'nacion': '',
+      'tropicos':['', Validators.required],
+      'nacion': ['', Validators.required],
       'subnacion': '',
         //taxonomia (global)
       'clasetax': '',
