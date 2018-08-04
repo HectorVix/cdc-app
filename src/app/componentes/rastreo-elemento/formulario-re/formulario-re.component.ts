@@ -23,17 +23,15 @@ export class FormularioReComponent implements OnInit {
  ldudatax= ['', 'Indudablemente una especie válida',
                 'Posiblemente no válida como especie pero si como subespecie',
                 'Probablemente no sea diferente a ningún nivel taxonómico'];
- lnumsinn= ['', '', ''];
  //status global
- lrangog= ['', '', ''];
- lformularg= ['', 'C', ''];
- laepeu= ['', '', ''];
- lcites= ['', '', ''];
- luicn= ['', '', ''];
- lplanscons= ['', '', ''];
- lresumenman= ['', '', ''];
- lexsitu= ['', '', ''];
- lendemismo= ['', '', ''];
+ lrangog= ['', 'G1', 'G2','G3','G4','G5','GU','GH','GX'];
+ lformularg= ['', 'Computarizado', 'Manual'];
+ lcites= ['', 'Apéndice I','Apéndice','Apéndice II', 'Apéndice III'];
+ luicn= ['', 'Extinta', 'En peligro','Vulnerable','Rara','Indeterminada','Insuficientemente conocida',
+              'Fuera de peligro','No está en peligro ( lista especies endémicas)',
+              'No tomada en cuenta por UICN'];
+ lexsitu= ['', 'SÍ','NO'];
+ lendemismo= ['', 'Endémico a jurisdicción CDC sub-nacional', 'Endémico nacional'];
 //status nacional
  lrangon= ['', '', ''];
  lformularn= ['', '', ''];
