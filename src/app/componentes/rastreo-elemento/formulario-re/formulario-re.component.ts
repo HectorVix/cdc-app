@@ -37,20 +37,6 @@ export class FormularioReComponent implements OnInit {
 //status nacional
  lrangon= ['', 'N1', 'N2','N3','N4','N5','NA','NE','NH','NN','NR','NRF','NU','NX'];
  
-
- lleprotn= ['', '', ''];
- labundn= ['', '', ''];
- lprotnacion= ['', '', ''];
- ltransparencian= ['', '', ''];
- //status subnacional
- lrangos= ['', '', ''];
- lformulars= ['', '', ''];//num
- lrastreoles= ['', '', '']; //num
- lestimn= ['', '', ''];
- leprotn= ['', '', '']; //num
- //labundn= ['', '', '']; repetido
- //lprotnacion= ['', '', '']; repetido
- ltranspatencias= ['', '', ''];
   constructor(
               private fb: FormBuilder
              )
@@ -127,8 +113,18 @@ export class FormularioReComponent implements OnInit {
       'protsubnac': '',
       'refnombres': '', 
       'transparencias': '',
+      //campos opcionales
+      're_opc1': '',
+      're_opc2': '',
+      're_opc3': '',
+      're_opc4': '',
+      're_opc5': '',
+      // manteniiento del registro
+      'codfuenten': '',
+      'codfuentes': '',
+      'actualizag': '',
       'actualizan': '',
-      'abc': ''
+      'actualizas': ''
     });
   }
   selectToday() {

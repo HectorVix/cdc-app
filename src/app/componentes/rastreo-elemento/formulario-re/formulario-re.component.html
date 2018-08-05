@@ -504,7 +504,6 @@
                 <div class="md-form col-md-4 mt-20">
                   <input mdbInputDirective type="text" id="formRefnombres" class="form-control" formControlName="refnombres" data-error=" "
                     data-success=" ">
-
                 </div>
                 <div class="col-md-2">
                   <label for="">TRANSPARENCIAS:</label>
@@ -518,37 +517,133 @@
               <!-- fin row -->
             </div>
             <!-- fin modal-content -->
-            <div class="row">
-              <div class="col-xs-6 col-sm-2 ">
-                <label for="">ACTUALIZAN:</label>
+            <div class="modal-content">
+              <div class="modal-header color-green">
+                <h5 class="modal-title">Campos Opcionales</h5>
               </div>
-              <div class="md-form form-sm  input-group-append mt-0">
-                <i class="fa fa-calendar prefix "></i>
-                <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" ngbDatepicker
-                  #dActualizan="ngbDatepicker">
-                <label for="formActualizan">Fecha para actualizar:</label>
-                <div class="input-group-append ">
-                  <button class="btn btn-info mb-2 waves-light" (click)="dActualizan.toggle()" mdbWavesEffect>Date
-                  </button>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">RE.OPC1</label>
+                </div>
+                <div class="md-form col-md-9 mt-5">
+                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="re_opc1" data-error=" "
+                    data-success=" ">
                 </div>
               </div>
-
-
-              <div class="md-form col-sm-4 mt-0 ">
-                <input mdbInputDirective type="text" id="formIniciales" class="form-control" formControlName="nomcomunn" data-error="incorrecto, minimo 3 caracteres"
-                  data-success="correcto" required>
-                <label for="formIniciales">Iniciales de la persona que actualiza:</label>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">RE.OPC2</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="re_opc2" data-error=" "
+                    data-success=" ">
+                </div>
               </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">RE.OPC3</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="re_opc3" data-error=" "
+                    data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">RE.OPC4</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="re_opc4" data-error=" "
+                    data-success=" ">
+                </div>
+              </div>             
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">RE.OPC5</label>
+                </div>
+                <div class="md-form  col-md-9 mt-20">
+                  <i class="fa fa-pencil prefix"></i>
+                  <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" "
+                    data-success=" " formControlName="re_opc5"></textarea>
+                  <label for="formReOpc5"></label>
+                </div>
+              </div>             
+              <!-- fin row -->
             </div>
-            <!--  -->
+            <!-- fin modal-content -->
+            <div class="modal-content">
+              <div class="modal-header color-green">
+                <h5 class="modal-title">Mantenimiento del Registro</h5>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">CODFUENTEN:</label>
+                </div>
+                <div class="md-form col-md-3 mt10">
+                  <input mdbInputDirective type="text" id="formCodfuenten" class="form-control" formControlName="codfuenten" data-error=" "
+                    data-success=" ">
+                </div>
+                <div class="md-form col-md-3 mt10">
+                  <input mdbInputDirective type="text" id="formCodfuentes" class="form-control" formControlName="codfuentes" data-error=" "
+                    data-success=" ">
+                    <label for="formCodfuentes">&nbsp;&nbsp;&nbsp;&nbsp;CODFUENTES</label>
+                </div>
+                <div class="md-form col-md-2 input-group-append   mt10 ">
+                    <input mdbInputDirective type="text" id="formActualizag" class="form-control" formControlName="actualizag" data-error=" "
+                      data-success=" " ngbDatepicker #dActualizag="ngbDatepicker">
+                    <label for="formActualizag">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
+                    <div (click)="dActualizag.toggle()">
+                      <i class="fa fa-calendar prefix"></i>
+                    </div>
+                  </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                  <div class="col-md-8">
+                    <label for=""> </label>
+                  </div>                              
+                <div class="md-form col-md-2 input-group-append   mt-20 ">
+                    <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" data-error=" "
+                      data-success=" " ngbDatepicker #dActualizan="ngbDatepicker">
+                    <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
+                    <div (click)="dActualizan.toggle()">
+                      <i class="fa fa-calendar prefix"></i>
+                    </div>
+                  </div>
+                
+              </div>
+            <!-- fin row -->       
+            <div class="row">
+                <div class="col-md-8">
+                  <label for=""> </label>
+                </div>                              
+              <div class="md-form col-md-2 input-group-append   mt-20 ">
+                  <input mdbInputDirective type="text" id="formActualizas" class="form-control" formControlName="actualizas" data-error=" "
+                    data-success=" " ngbDatepicker #dActualizas="ngbDatepicker">
+                  <label for="formActualizas">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAS</label>
+                  <div (click)="dActualizas.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
+                  </div>
+                </div>
+              
+            </div>
+          <!-- fin row -->     
+            </div>
+            <!-- fin modal-content -->                       
           </form>
           <!-- fin form -->
-          <p>
-            <button class="btn btn-outline-primary" (click)="fR.select('tab-pag1')">Atras</button>
-            <button class="btn btn-outline-primary" type="submit">Guardar</button>
-            <button class="btn btn-outline-primary" type="reset">Cancelar</button>
-
-          </p>
+          
+          <div class="text-center ">
+              <p>                      
+                <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
+                <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+              </p>
+            </div>
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
