@@ -4,6 +4,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { DISABLED } from '@angular/forms/src/model';
+import { disableDebugTools } from '@angular/platform-browser';
 const now = new Date();
 @Component({
   selector: 'app-formulario-re',
@@ -34,9 +36,8 @@ export class FormularioReComponent implements OnInit {
  lendemismo= ['', 'Endémico a jurisdicción CDC sub-nacional', 'Endémico nacional'];
 //status nacional
  lrangon= ['', 'N1', 'N2','N3','N4','N5','NA','NE','NH','NN','NR','NRF','NU','NX'];
- lformularn= ['', '', ''];
- lrastreolen= ['', '', ''];
- llestimn= ['', '', ''];
+ 
+
  lleprotn= ['', '', ''];
  labundn= ['', '', ''];
  lprotnacion= ['', '', ''];
@@ -78,7 +79,7 @@ export class FormularioReComponent implements OnInit {
       'nombreg': '',
       'autor': '',
       'fuentenom': '',
-      'refnomber': '',
+      'refnombreg': '',
       'distrax': '',
       'dudatax': '',
       'nomcomung': '',
@@ -109,22 +110,22 @@ export class FormularioReComponent implements OnInit {
       'fecha_revrn': '',
       'formularn': '',
       'rastreolen': '',
-      'lestimn': '',
+      'lestimn': [''],
       'leprotn': '',
       'abundn': '',
-      'protancion': '',
-      'refnombre': '',
+      'protnacion': '',
+      'refnombren': '',
       'transparencian': '',
         //status (subnacional)
       'rangos': '', 
       'fecha_revrs': '',
       'formulars': '',
       'rastreoles': '',
-      'lestims': '', //se cambio el nombre
-      'leprots': '', //se cambio el nombre
-      'abunds': '',  //se cambio el nombre
-      'protancios': '',
-      'refnombres': '', // se cambio el nombre
+      'lestims': '', 
+      'leprots': '', 
+      'abunds': '',  
+      'protsubnac': '',
+      'refnombres': '', 
       'transparencias': '',
       'actualizan': '',
       'abc': ''

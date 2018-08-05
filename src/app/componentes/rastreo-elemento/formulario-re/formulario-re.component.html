@@ -100,8 +100,9 @@
                   <input mdbInputDirective type="number" id="formAutor" class="form-control" formControlName="autor" data-error=" " data-success=" ">
                 </div>
                 <div class="md-form col-md-3 mt-20">
-                  <input mdbInputDirective type="text" id="formRefnombre" class="form-control" formControlName="refnombre" data-error=" " data-success=" ">
-                  <label for="formRefnombre">&nbsp;&nbsp;&nbsp;&nbsp;REFNOMBRE</label>
+                  <input mdbInputDirective type="text" id="formRefnombreg" class="form-control" formControlName="refnombreg" data-error=" "
+                    data-success=" ">
+                  <label for="formRefnombreg">&nbsp;&nbsp;&nbsp;&nbsp;REFNOMBRE</label>
                 </div>
               </div>
               <!-- fin row -->
@@ -230,7 +231,7 @@
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="text" id="formResprg" class="form-control" formControlName="resprg" data-error=" " data-success=" ">
-                  <label for="formResprg">RESPRG</label>
+                  <label for="formResprg">&nbsp;&nbsp;&nbsp;&nbsp;RESPRG</label>
                 </div>
                 <div class="md-form col-md-2 input-group-append mt10">
                   <input mdbInputDirective type="text" id="formFechaRevrg" class="form-control" formControlName="fecha_revrg" data-error=" "
@@ -358,186 +359,163 @@
                   </select>
                 </div>
                 <div class="col-md-1">
-                    <label for="">FORMLARN:</label>
-                  </div>
-                  <div class="col-md-2 mt10">
-                    <select class="form-control color-green" formControlName="formularn">
-                      <option *ngFor="let sFormularn of lformularg" [value]="sFormularn">{{sFormularn}}</option>
-                    </select>
-                  </div>
-                  <div class="md-form col-md-2 mt10">
-                      <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
-                        data-success=" ">
-                      <label for="formRastreolen">&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
-                    </div>
-                <div class="md-form col-md-2  input-group-append mt10">        
+                  <label for="">FORMLARN:</label>
+                </div>
+                <div class="col-md-2 mt10">
+                  <select class="form-control color-green" formControlName="formularn">
+                    <option *ngFor="let sFormularn of lformularg" [value]="sFormularn">{{sFormularn}}</option>
+                  </select>
+                </div>
+                <div class="md-form col-md-2 mt10">
+                  <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
+                    data-success=" ">
+                  <label for="formRastreolen">&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
+                </div>
+                <div class="md-form col-md-2  input-group-append mt10">
                   <input mdbInputDirective type="text" id="formFechaRevrn" class="form-control" formControlName="fecha_revrn" data-error=" "
                     data-success=" " ngbDatepicker #dFechaRvrn="ngbDatepicker">
-                  <label for="formFechaRevrn">FECHA.REVRN:</label>
-                  <div (click)="dFechaRvrn.toggle()" >
-                      <i class="fa fa-calendar prefix"></i>
+                  <label for="formFechaRevrn">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRN:</label>
+                  <div (click)="dFechaRvrn.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
                   </div>
                 </div>
-                
-                
+
+
               </div>
               <!--  2 linea -->
               <div class="row">
                 <div class="col-md-2">
                   <label for="">LESTIMN:</label>
                 </div>
-                <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="lestimn" required>
-                    <option *ngFor="let sFuentenom of llestimn" [value]="sFuentenom">{{sFuentenom}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formLestimn" class="form-control" formControlName="lestimn" data-error=" " data-success=" ">
+                  <label for="formLestimn">&nbsp;&nbsp;&nbsp;&nbsp;LESTIMN</label>
                 </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">LEPROTN:</label>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formLeprotn" class="form-control" formControlName="leprotn" data-error=" " data-success=" ">
+                  <label for="formLeprotn">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTN</label>
                 </div>
-                <div class="col-xs-6 col-sm-2 mt-35 td40">
-                  <select class="form-control" formControlName="refnomber" required>
-                    <option *ngFor="let sRefnomber of lrefnomber" [value]="sRefnomber">{{sRefnomber}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formAbundn" class="form-control" formControlName="abundn" data-error=" " data-success=" ">
+                  <label for="formAbundn">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDN</label>
                 </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">ABUNDN:</label>
-                </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <select class="form-control" formControlName="distrax" required>
-                    <option *ngFor="let sDistrax of ldistrax" [value]="sDistrax">{{sDistrax}}</option>
-                  </select>
-                </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">PROTNACION:</label>
-                </div>
-                <div class="col-xs-6 col-sm-2 td mt-35 ">
-                  <select class="form-control" formControlName="dudatax" required>
-                    <option *ngFor="let sDudatax of ldudatax" [value]="sDudatax">{{sDudatax}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formProtnacion" class="form-control" formControlName="protnacion" data-error=" "
+                    data-success=" ">
+                  <label for="formProtnacion">&nbsp;&nbsp;&nbsp;&nbsp;PROTNACION</label>
                 </div>
               </div>
+              <!-- fin row -->
               <!-- 3 linea -->
 
               <div class="row">
-                <div class="col-xs-6 col-sm-2 ">
+                <div class="col-md-2">
                   <label for="">REFNOMBRE:</label>
                 </div>
 
-                <div class="md-form col-sm-4 mt-0 ">
-                  <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="nomcomunn" data-error="incorrecto, minimo 3 caracteres"
-                    data-success="correcto" required>
+                <div class="md-form col-md-4 mt-20">
+                  <input mdbInputDirective type="text" id="formRefnombren" class="form-control" formControlName="refnombren" data-error=" "
+                    data-success=" ">
 
                 </div>
-                <div class="col-xs-6 col-sm-2">
+                <div class="col-md-2">
                   <label for="">TRANSPARENCIAN:</label>
                 </div>
-                <div class="col-xs-6 col-sm-2 td mt-35 ">
-                  <select class="form-control" formControlName="clasetax" required>
-                    <option *ngFor="let sClasetax of lclasetax" [value]="sClasetax">{{sClasetax}}</option>
+                <div class="col-md-2 mt-10">
+                  <select class="form-control color-green" formControlName="transparencian">
+                    <option *ngFor="let sTransparencian of lexsitu" [value]="sTransparencian">{{sTransparencian}}</option>
                   </select>
                 </div>
               </div>
-
+              <!-- fin row -->
             </div>
             <!-- fin modal-content -->
             <!-- Status (Subnacional) -->
             <div class="modal-content ">
-              <div class="modal-header">
+              <div class="modal-header color-green">
                 <h5 class="modal-title">Status (Subnacional)</h5>
               </div>
+
               <!-- 1 linea -->
               <div class="row">
-                <div class="col-xs-6 col-sm-2 ">
+                <div class="col-md-2">
                   <label for="">RANGOS:</label>
                 </div>
-                <div class="col-xs-6 col-sm-1 mt5 ">
-                  <select class="form-control" formControlName="clasetax" required>
-                    <option *ngFor="let sClasetax of lclasetax" [value]="sClasetax">{{sClasetax}}</option>
+                <div class="col-md-2 mt10">
+                  <select class="form-control color-green" formControlName="rangos">
+                    <option *ngFor="let sRangos of lrangon" [value]="sRangos">{{sRangos}}</option>
                   </select>
                 </div>
-                <div class="md-form form-sm  input-group-append mt-0">
-                  <i class="fa fa-calendar prefix "></i>
-                  <input mdbInputDirective type="text" id="formFecha_revrg" class="form-control" formControlName="rangos" ngbDatepicker #dFECHA_REVRG="ngbDatepicker">
-                  <label for="formFecha_revrg">FECHA.REVRS:</label>
-                  <div class="input-group-append ">
-                    <button class="btn btn-info mb-2 waves-light" (click)="dFECHA_REVRG.toggle()" mdbWavesEffect>Date
-                    </button>
-                  </div>
-                </div>
-                <div class="col-xs-6 col-sm-1 mt-0">
+                <div class="col-md-1">
                   <label for="">FORMLARS:</label>
                 </div>
-                <div class="col-xs-6 col-sm-1  ">
-                  <select class="form-control" formControlName="formularg" required>
-                    <option *ngFor="let sFormularg of lformularg" [value]="sFormularg">{{sFormularg}}</option>
+                <div class="col-md-2 mt10">
+                  <select class="form-control color-green" formControlName="formulars">
+                    <option *ngFor="let sFormulars of lformularg" [value]="sFormulars">{{sFormulars}}</option>
                   </select>
                 </div>
-                <div class="col-xs-6 col-sm-1 mt-0 ">
-                  <label for="">RASTREOLES:</label>
+                <div class="md-form col-md-2 mt10">
+                  <input mdbInputDirective type="text" id="formRastreoles" class="form-control" formControlName="rastreoles" data-error=" "
+                    data-success=" ">
+                  <label for="formRastreoles">&nbsp;&nbsp;&nbsp;RASTREOLES</label>
                 </div>
-                <div class="col-xs-6 col-sm-2 td mt-35">
-                  <select class="form-control" formControlName="formularg" required>
-                    <option *ngFor="let sFormularg of lformularg" [value]="sFormularg">{{sFormularg}}</option>
-                  </select>
+                <div class="md-form col-md-2  input-group-append mt10">
+                  <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecha_revrs" data-error=" "
+                    data-success=" " ngbDatepicker #dFechaRvrs="ngbDatepicker">
+                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS:</label> 
+                  <div (click)="dFechaRvrs.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
+                  </div>
                 </div>
+
+
               </div>
               <!--  2 linea -->
               <div class="row">
-                <div class="col-xs-6 col-sm-2 ">
-                  <label for="">LESTIMS:</label>
+                <div class="col-md-2">
+                  <label for="">LESTIMN:</label>
                 </div>
-                <div class="col-xs-6 col-sm-1  mt5 ">
-                  <select class="form-control" formControlName="fuentenom" required>
-                    <option *ngFor="let sFuentenom of lfuentenom" [value]="sFuentenom">{{sFuentenom}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formLestimn" class="form-control" formControlName="lestims" data-error=" " data-success=" ">
+                  <label for="formLestims">&nbsp;&nbsp;&nbsp;&nbsp;LESTIMS</label>
                 </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">LEPROTS:</label>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formLeprots" class="form-control" formControlName="leprots" data-error=" " data-success=" ">
+                  <label for="formLeprots">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTS</label>
                 </div>
-                <div class="col-xs-6 col-sm-2 mt-35 td40">
-                  <select class="form-control" formControlName="refnomber" required>
-                    <option *ngFor="let sRefnomber of lrefnomber" [value]="sRefnomber">{{sRefnomber}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formAbunds" class="form-control" formControlName="abunds" data-error=" " data-success=" ">
+                  <label for="formAbunds">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDS</label>
                 </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">ABUNDS:</label>
-                </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <select class="form-control" formControlName="distrax" required>
-                    <option *ngFor="let sDistrax of ldistrax" [value]="sDistrax">{{sDistrax}}</option>
-                  </select>
-                </div>
-                <div class="col-xs-6 col-sm-1 ">
-                  <label for="">PROTNACIOS:</label>
-                </div>
-                <div class="col-xs-6 col-sm-2 td mt-35 ">
-                  <select class="form-control" formControlName="dudatax" required>
-                    <option *ngFor="let sDudatax of ldudatax" [value]="sDudatax">{{sDudatax}}</option>
-                  </select>
+                <div class="md-form col-md-2 mt-20">
+                  <input mdbInputDirective type="text" id="formProtsubnac" class="form-control" formControlName="protsubnac" data-error=" "
+                    data-success=" ">
+                  <label for="formProtsubnac">&nbsp;&nbsp;&nbsp;&nbsp;PROTSUBNAC</label>
                 </div>
               </div>
+              <!-- fin row -->
               <!-- 3 linea -->
 
               <div class="row">
-                <div class="col-xs-6 col-sm-2 ">
+                <div class="col-md-2">
                   <label for="">REFNOMBRE:</label>
                 </div>
 
-                <div class="md-form col-sm-4 mt-0 ">
-                  <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="nomcomunn" data-error="incorrecto, minimo 3 caracteres"
-                    data-success="correcto" required>
-                </div>
+                <div class="md-form col-md-4 mt-20">
+                  <input mdbInputDirective type="text" id="formRefnombres" class="form-control" formControlName="refnombres" data-error=" "
+                    data-success=" ">
 
-                <div class="col-xs-6 col-sm-2">
+                </div>
+                <div class="col-md-2">
                   <label for="">TRANSPARENCIAS:</label>
                 </div>
-                <div class="col-xs-6 col-sm-2 td mt-35 ">
-                  <select class="form-control" formControlName="clasetax" required>
-                    <option *ngFor="let sClasetax of lclasetax" [value]="sClasetax">{{sClasetax}}</option>
+                <div class="col-md-2 mt-10">
+                  <select class="form-control color-green" formControlName="transparencias">
+                    <option *ngFor="let sTransparencian of lexsitu" [value]="sTransparencian">{{sTransparencian}}</option>
                   </select>
                 </div>
               </div>
-
+              <!-- fin row -->
             </div>
             <!-- fin modal-content -->
             <div class="row">
