@@ -4,6 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { criterio_Jerarquizacion } from '.././criterio-jerarquizacion';
 const now = new Date();
 @Component({
   selector: 'app-formulario-jerarquizacion',
@@ -12,46 +13,13 @@ const now = new Date();
 })
 export class FormularioJerarquizacionComponent implements OnInit {
 
-  lestim = ['',
-    '0 - 5 localizaciones conocidas',
-    '6 - 20 localizaciones conocidas',
-    '21 - 100 localizaciones conocidas',
-    '100 o más localizaciones conocidas'];
-  labund = ['',
-    '< 1000 individuos (PE Y AE), 1000 hectáreas (CN), 30 Km a lo largo de un río (CN) ',
-    '= 1000 - 3000 individuos, 1000-5000 hectáreas, 30-10 Km',
-    '= 3000 - 10,000 individuos, 5000-25,000 hectareás, 100-500 Km',
-    '> 10,000 individuos , 25,000 hectáreas, 500 kilómetros'];
-
-  lgdist = ['', 'Endémica de un país, departamento grande o región; una área < 260 km²',
-    'Edémica regional; una área de 260 - 26,000 km²',
-    'Moderadamente ampia pero dispersa; una área de 26,000 - 2,600,000 km²',
-    'Amplia; una área > 2,600,000 km²'];
-  lndist = ['',
-    'Muy limitada; porcentaje de territorio nacional < 3%',
-    'Limitada; porcentaje de territorio nacional 3 - 10%',
-    'Moderadamente amplia; porcentaje de territorio nacional 10 - 50%',
-    'Amplia; porcentaje de territorio nacional > 50%'];
-
-  lleprot = ['',
-    'Ninguna LE protegida (hasta dónde se conoce)',
-    'Por lo menos una LE protegida',
-    'Varias LE protegidas',
-    'Muchas LE protegidas',
-    'Se ignora'];
-  lamenaz = ['',
-    'Muy amenazado: El elemento es directamente explotado o amenazado por causas naturalez o por el hombre',
-    'Moderadamente amenazado: El habitat o comunidad se presta para usos alternos que amenazan al elemento',
-    'Ligeramente amenazado: El habitat o comunidad se protege ya que no se presta para usos que amenazan al elemento',
-    'Sin amenaza'];
-  lgfragil = ['',
-    'Muy frágil (murciélago en cueva de maternidad)',
-    'Frágil (Felis spp.)',
-    'Bastante resistente (perezoso de tres dedos)',
-    'Resistente (algunas ardillas)'];
-  lrango = ['', '', ''];
-  val: number;
-
+  criterio_Jeraquizacion = new criterio_Jerarquizacion();
+  criterio_nlestim = this.criterio_Jeraquizacion.lgn_lestim;
+  criterio_nabund = this.criterio_Jeraquizacion.lgn_abund;
+  criterio_ndist = this.criterio_Jeraquizacion.ln_dist;
+  criterio_nleprot = this.criterio_Jeraquizacion.lgn_leprot;
+  criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
+  criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacionForm: FormGroup;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
