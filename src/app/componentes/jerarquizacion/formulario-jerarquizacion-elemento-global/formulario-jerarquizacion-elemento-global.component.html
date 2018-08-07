@@ -9,6 +9,7 @@
         <ng-template ngbTabContent>
           <div class="card-content white">
             <div class="card-body">
+                <form [formGroup]="jerarquizacion_GlobalForm" >
               <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
                 <!-- página 1 -->
                 <ngb-tab id="tab-selectbyid1">
@@ -16,18 +17,18 @@
                     <b>1</b>
                   </ng-template>
                   <ng-template ngbTabContent>
-                    <form action="">
+                    
                       <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header color-green">
                           <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
                         </div>
                         <div class="row">
                           <div class="col-md-2">
                             <label for="">CODIGOE:</label>
                           </div>
-                          <div class="md-form col-md-2 mt-5">
-                            <input mdbInputDirective type="text" id="formCodigoe" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                              data-success="correcto" required>
+                          <div class="md-form col-md-4 mt-1">
+                            <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe"  data-error=" "
+                              data-success=" " required>
                               <label for="formCodigoe"></label>
                           </div>
                         </div>
@@ -37,8 +38,8 @@
                             <label for="">NOMBREG:</label>
                           </div>
                           <div class="md-form col-md-9 mt-20">
-                            <input mdbInputDirective type="text" id="formNombreg" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                              data-success="correcto" required>
+                            <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" "
+                              data-success=" " >
                               <label for="formNombreg"></label>
                           </div>
                         </div>
@@ -47,23 +48,22 @@
                           <div class="col-md-2">
                             <label for="">DESCRIELEM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
-                            <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formDescrielem" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formDescrielem"></label>
+                          <div class="md-form col-md-9 mt-20">
+                            <input mdbInputDirective type="text" id="formDescrielem" class="form-control" formControlName="descrielem"  data-error=" "
+                              data-success=" " >
+                              <label for="formDescrielem"></label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">ESPECIE:</label>
+                            <label for="">ESPECLE:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formEspecie" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formEspecie"></label>
+                            <textarea mdbInputDirective type="text" id="formEspecle" class="md-textarea form-control" formControlName="especle"  rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formEspecle">Especificaciones LE. Describa como aparece el elemento en su región.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -71,11 +71,11 @@
                           <div class="col-md-2">
                             <label for="">ESPECRANGA:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formEspecranga" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formEspecranga"></label>
+                            <textarea mdbInputDirective type="text" id="formEspecranga" class="md-textarea form-control" formControlName="especranga" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formEspecranga">Escríba una descripción de qué es un LE para este rango.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -83,11 +83,11 @@
                           <div class="col-md-2">
                             <label for="">ESPECRANGB:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formEspecrangb" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formEspecrangb"></label>
+                            <textarea mdbInputDirective type="text" id="formEspecrangb" class="md-textarea form-control" formControlName="especrangb"  rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formEspecrangb">Escríba una descripción de qué es un LE para este rango.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -95,11 +95,11 @@
                           <div class="col-md-2">
                             <label for="">ESPECRANGC:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formEspecrangc" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formEspecrangc"></label>
+                            <textarea mdbInputDirective type="text" id="formEspecrangc" class="md-textarea form-control" formControlName="especrangc"  rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formEspecrangc">Escríba una descripción de qué es un LE para este rango.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -107,11 +107,11 @@
                           <div class="col-md-2">
                             <label for="">ESPECRANGD:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formEspecrangd" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formEspecrangd"></label>
+                            <textarea mdbInputDirective type="text" id="formEspecrangd" class="md-textarea form-control" formControlName="especrangd" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formEspecrangd">Escríba una descripción de qué es un LE para este rango.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -119,11 +119,11 @@
                           <div class="col-md-2">
                             <label for="">HABITAT:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formHabitat" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formHabitat"></label>
+                            <textarea mdbInputDirective type="text" id="formHabitat" class="md-textarea form-control" formControlName="habitat" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formHabitat">Para especies , describa el habitat. Para comunidades , definir la comunidad</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -131,80 +131,115 @@
                           <div class="col-md-2">
                             <label for="">PERMANENCIA:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formPermanencia" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formPermanencia"></label>
+                            <textarea mdbInputDirective type="text" id="formPermanencia" class="md-textarea form-control" formControlName="permanencia"  rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formPermanencia">Anote información que indique el grado de permanencia o estabilidad de la LE.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">LOCTIPG:</label>
+                            <label for="">GLOCTIP:</label>
                           </div>
                           <div class="md-form col-md-9 mt-20">
-                            <input mdbInputDirective type="text" id="formLoctipg" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                              data-success="correcto" required>
-                              <label for="formLoctipg"></label>
+                            <input mdbInputDirective type="text" id="formLoctipg" class="form-control" formControlName="gloctip"  data-error=" "
+                              data-success=" ">
+                              <label for="formLoctipg">&nbsp;&nbsp;&nbsp;&nbsp;Indentificar el mejor sitio conocido en el país.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMTAXG:</label>
+                            <label for="">COMTAX:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formComtaxg"></label>
+                            <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtax"  rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formComtaxg">Indique la distinción taxonómica del elemento.</label>
                           </div>
                         </div>
                         <!-- fin row -->
+                         <div class="row">
+                           <div class="col-md-2">
+                             <label for="">GLESTIM:</label>
+                           </div>
+                           <div class="col-md-5 mt-15">
+                              <select class="form-control color-green" formControlName="glestim">
+                                <option *ngFor="let sGlestim of criterio_glestim; let i1=index;" [value]="getCriterio_Jerarquizacion(i1)">{{sGlestim}}</option>
+                              </select>
+                            </div> 
+                         </div>
+                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMLESTIMG:</label>
+                            <label for="">GLESTIMCOM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-5">
+                          <div class="md-form  col-md-9 mt-0">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComlestimg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formComlestimg"></label>
+                            <textarea mdbInputDirective type="text" id="formComlestimg" class="md-textarea form-control" formControlName="glestimcom" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formComlestimg">De ser posible anote el número exacto de localizaciones existentes conocidas.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">ABUNDG:</label>
+                            <label for="">GABUND:</label>
                           </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sAbundg of labundg" [value]="sAbundg">{{sAbundg}}</option>
+                          <div class="col-md-8 mt-15">
+                            <select class="form-control color-green" formControlName="gabund" >
+                              <option *ngFor="let sAbundg of criterio_gabund; let i2=index" [value]="getCriterio_Jerarquizacion(i2)">{{sAbundg}}</option>
                             </select>
                           </div>                   
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMABUNDG:</label>
+                            <label for="">GABUNDCOM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9  mt-0">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComabundg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formComabundg"></label>
+                            <textarea mdbInputDirective type="text" id="formGabundcom" class="md-textarea form-control" formControlName="gabundcom" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGabundcom">A menudo resulta complicado estimar la abundancia de un elemento. Comente sobre esto. </label>
                           </div>
                         </div>
                         <!-- fin row -->
+                        <div class="row">
+                            <div class="col-md-2">
+                              <label for="">GDIST:</label>
+                            </div>
+                            <div class="col-md-7 mt-15">
+                              <select class="form-control color-green" formControlName="gdist">
+                                <option *ngFor="let sDistg of criterio_gdist; let i3=index" [value]="getCriterio_Jerarquizacion(i3)">{{sDistg}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- fin row -->
+                          <div class="row">
+                            <div class="col-md-2">
+                              <label for="">GDISTCOM:</label>
+                            </div>
+                            <div class="md-form  col-md-9 mt-0">
+                              <i class="fa fa-pencil prefix"></i>
+                              <textarea mdbInputDirective type="text" id="formGdistcom" class="md-textarea form-control" formControlName="gdistcom" rows="1" data-error=" "
+                                data-success=" " ></textarea>
+                              <label for="formGdistcom">Se especifica los países o regiones ecológicas donde se encuentra el elemento actualmente.</label>
+                            </div>
+                          </div>
+                          <!-- fin row -->
+
                       </div>
                       <!-- fin modal-content -->
-                    </form>
+                    
                     <!-- fin form -->
                     <div class="text-center ">
                       <p>
-                        <button class="btn btn-cyan waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
-                        <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        <button class="btn color-green waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                        <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                       </p>
                     </div>
                   </ng-template>
@@ -217,135 +252,89 @@
                     <b>2</b>
                   </ng-template>
                   <ng-template ngbTabContent>
-                    <form action="">
+                  
                       <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header color-green">
                           <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
-                        </div>
+                        </div>                                     
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">DISTG:</label>
+                            <label for="">GLEPROT:</label>
                           </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sDistg of ldistg" [value]="sDistg">{{sDistg}}</option>
+                          <div class="col-md-5 mt10">
+                            <select class="form-control color-green" formControlName="gleprot">
+                              <option *ngFor="let sGleprot of criterio_gleprot; let i4=index;" [value]="getCriterio_Jerarquizacion(i4)">{{sGleprot}}</option>
                             </select>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMDISTG:</label>
+                            <label for="">GLEPROTCOM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComdistg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formComdistg"></label>
+                            <textarea mdbInputDirective type="text" id="formGleprotcom" class="md-textarea form-control"  formControlName="gleprotcom" rows="1" data-error=" "
+                              data-success=" " required></textarea>
+                            <label for="formGleprotcom">En qué país o países están protegidas y qué tipo de protección tienen.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">TENDENCIAG:</label>
+                            <label for="">GAMENAZ:</label>
                           </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sTendenciag of ltendenciag" [value]="sTendenciag">{{sTendenciag}}</option>
+                          <div class="col-md-9 mt-15">
+                            <select class="form-control color-green" formControlName="gamenaz">
+                              <option *ngFor="let sGamenaz of criterio_gamenaz; let i5=index;" [value]="getCriterio_Jerarquizacion(i5)">{{sGamenaz}}</option>
                             </select>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMTENDG:</label>
+                            <label for="">GAMENAZCOM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-0">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComtendg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formComtendg"></label>
+                            <textarea mdbInputDirective type="text" id="formGamenazcom" class="md-textarea form-control" formControlName="gamenazcom" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGamenazcom">Indique la amenaza, por ejemplo: "tierras primarias para cultivos"</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">LEPROTG:</label>
+                            <label for="">GFRAGIL:</label>
                           </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sLeprotg of lleprotg" [value]="sLeprotg">{{sLeprotg}}</option>
+                          <div class="col-md-5 mt-15">
+                            <select class="form-control color-green" formControlName="gfragil">
+                              <option *ngFor="let sGfragil of criterio_gfragil; let i6=index;" [value]="getCriterio_Jerarquizacion(i6)">{{sGfragil}}</option>
                             </select>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">COMLEPROTG:</label>
+                            <label for="">GFRAGILCOM:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-0">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComleprotg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formComleprotg"></label>
+                            <textarea mdbInputDirective type="text" id="formGfragilcom" class="md-textarea form-control" formControlName="gfragilcom" rows="1" data-error=" "
+                              data-success=" " required></textarea>
+                            <label for="formGfragilcom">Comente al respecto. Por ejemplo, por qué es frágil.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">AMENAZG:</label>
+                            <label for="">GOTROCONSI:</label>
                           </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sAmenazg of lamenazg" [value]="sAmenazg">{{sAmenazg}}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                          <div class="col-md-2">
-                            <label for="">COMAMENAZG:</label>
-                          </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-10">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComamenazg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formComamenazg"></label>
-                          </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                          <div class="col-md-2">
-                            <label for="">FRAGILG:</label>
-                          </div>
-                          <div class="col-md-2">
-                            <select class="form-control">
-                              <option *ngFor="let sFragilg of lfragilg" [value]="sFragilg">{{sFragilg}}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                          <div class="col-md-2">
-                            <label for="">COMFRAGILG:</label>
-                          </div>
-                          <div class="md-form  col-md-7 mt-3">
-                            <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formComfragilg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formComfragilg"></label>
-                          </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                          <div class="col-md-2">
-                            <label for="">OTRACONSIDG:</label>
-                          </div>
-                          <div class="md-form  col-md-7 mt-3">
-                            <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formOtraconsidg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formOtraconsidg"></label>
+                            <textarea mdbInputDirective type="text" id="formGotroconsi" class="md-textarea form-control" formControlName="gotroconsi" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGotroconsi">0tro criterios. Anote cualiesquiera otros factores que considere importantes.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -353,71 +342,78 @@
                           <div class="col-md-2">
                             <label for="">RANGOG:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="col-md-2 mt-15">
+                              <select class="form-control color-green" formControlName="rangog">
+                                <option *ngFor="let sRangog of criterio_rangog; let i7=index;" [value]="getCriterio_Jerarquizacion(i7)">{{sRangog}}</option>
+                              </select>
+                            </div>
+                            <div class="md-form col-md-2 input-group-append mt-10">
+                                <input mdbInputDirective type="text" id="formFecharg" class="form-control" formControlName="fecharg" data-error=" "
+                                  data-success=" " ngbDatepicker #dFecharg="ngbDatepicker">
+                                <label for="formFecharg">&nbsp;&nbsp;&nbsp;&nbsp;FECHARG</label>
+                                <div (click)="dFecharg.toggle()">
+                                  <i class="fa fa-calendar prefix"></i>
+                                </div>
+                              </div> 
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">GRANRAZON:</label>
+                          </div>
+                          <div class="md-form  col-md-9 mt-20">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formRangog" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta" required></textarea>
-                            <label for="formRangog"></label>
+                            <textarea mdbInputDirective type="text" id="formGranranzon" class="md-textarea form-control" formControlName="granrazon" rows="3" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGranranzon">Dar las razones para este rango, mencionando los mejores factores de jerarquización y otras consideraciones.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">RAZON.RG:</label>
+                            <label for="">GNECPROTEC:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-20">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formRazonRg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formRazonRg"></label>
+                            <textarea mdbInputDirective type="text" id="formGnecprotec" class="md-textarea form-control" formControlName="gnecprotec" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGnecprotec">Dar el número estimado de LE adecuados para sostener el elemento a través de su distribución.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">NEC.PROTECG:</label>
+                            <label for="">GNECINVENT:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-20">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formNecProtecg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formNecProtecg"></label>
+                            <textarea mdbInputDirective type="text" id="formGnecinvent" class="md-textarea form-control" formControlName="gnecinvent" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGnecinvent">Necesidades de inventario.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">NEC.INVENTG:</label>
+                            <label for="">GNECESTUDI:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-20">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formNecInventg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formNecInventg"></label>
+                            <textarea mdbInputDirective type="text" id="formGnecestudi" class="md-textarea form-control" formControlName="gnecestudi" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGnecestudi">Escriba las necesidades de investigacion de la biología del elemento.</label>
                           </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">NEC.ESTUDIG:</label>
+                            <label for="">GNECMANEJO:</label>
                           </div>
-                          <div class="md-form  col-md-7 mt-3">
+                          <div class="md-form  col-md-9 mt-20">
                             <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formNecEstudig" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formNecEstudig"></label>
-                          </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                          <div class="col-md-2">
-                            <label for="">NEC.MANEJOG:</label>
-                          </div>
-                          <div class="md-form  col-md-7 mt-3">
-                            <i class="fa fa-pencil prefix"></i>
-                            <textarea mdbInputDirective type="text" id="formNecManejog" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                              data-success="correcta"></textarea>
-                            <label for="formNecManejog"></label>
+                            <textarea mdbInputDirective type="text" id="formGnecmanejo" class="md-textarea form-control" formControlName="gnecmanejo" rows="1" data-error=" "
+                              data-success=" "></textarea>
+                            <label for="formGnecmanejo">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
                           </div>
                         </div>
                         <!-- fin row -->
@@ -425,54 +421,55 @@
                           <div class="col-md-2">
                             <label for="">RESRG:</label>
                           </div>
-                          <div class="md-form col-md-2 mt-5 ">
-                            <input mdbInputDirective type="text" id="formResrg" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                              data-success="correcto">
-                              <label for="formResrg"></label>
-                          </div>
-                          <div class="md-form col-md-4 mt-5 ">
-                            <input mdbInputDirective type="text" id="formAutorEd" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                              data-success="correcto">
-                              <label for="formAutorEd">&nbsp;&nbsp;&nbsp;&nbsp;AUTOR.ED</label>
-                          </div>
+                          <div class="md-form col-md-5 mt-20 ">
+                            <input mdbInputDirective type="text" id="formResrg" class="form-control" formControlName="resrg" data-error=" "
+                              data-success=" ">
+                              <label for="formResrg">&nbsp;&nbsp;&nbsp;&nbsp;Responsable de preparar y mantener el formulario.</label>
+                          </div>                         
                         </div>
                         <!-- fin row -->
                         <div class="row">
                           <div class="col-md-2">
-                            <label for="">EDICION:</label>
+                            <label for="">EDAUTOR:</label>
                           </div>
-                          <div class="md-form form-sm  input-group-append mt-0">
-                            <i class="fa fa-calendar prefix "></i>
-                            <input mdbInputDirective type="text" id="formEdicion" class="form-control"  ngbDatepicker
-                              #dEdicion="ngbDatepicker">
-                            <label for="formEdicion"></label>
-                            <div class="input-group-append ">
-                              <button class="btn btn-info mb-2 waves-light" (click)="dEdicion.toggle()" mdbWavesEffect>Date
-                              </button>
-                            </div>
-                           </div>
-                           <div class="md-form form-sm  input-group-append mt-0">
-                            <i class="fa fa-calendar prefix "></i>
-                            <input mdbInputDirective type="text" id="formActualizar" class="form-control"  ngbDatepicker
-                              #dActualizar="ngbDatepicker">
-                            <label for="formActualizar"></label>
-                            <div class="input-group-append ">
-                              <button class="btn btn-info mb-2 waves-light" (click)="dActualizar.toggle()" mdbWavesEffect>Date
-                              </button>
-                            </div>
-                           </div>
+                          <div class="md-form col-md-7 mt-20 ">
+                              <input mdbInputDirective type="text" id="formEdautor" class="form-control" formControlName="edautor" data-error=" "
+                                data-success=" ">
+                                <label for="formEdautor">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
+                            </div>  
                         </div>
                         <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-8">
+                          </div>
+                          <div class="md-form form-sm  input-group-append mt-10">                           
+                            <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion"  data-error=" "
+                               data-success=" "ngbDatepicker #dEdicion="ngbDatepicker">
+                            <label for="formEdicion">EDICION</label>
+                            <div (click)="dEdicion.toggle()">
+                                <i class="fa fa-calendar prefix"></i>
+                              </div>
+                           </div>                           
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-8"></div>
+                          <div class="md-form form-sm  input-group-append mt-10">   
+                              <input mdbInputDirective type="text" id="formActualizar" class="form-control"formControlName="edicion" data-error=" "
+                               data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                              <label for="formActualizar">ACTUALIZAR</label>
+                              <div (click)="dActualizar.toggle()">
+                                  <i class="fa fa-calendar prefix"></i>
+                                </div>
+                             </div>
+                        </div>
                       </div>
                       <!-- fin modal-content -->
-                    </form>
-                    <!-- fin form -->
-                    <div class="text-center ">
-                      <p>
-                        <button class="btn btn-cyan waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                        <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
-                        <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                      </p>
+                   
+                    <div class="text-center ">                    
+                        <button class="btn color-green waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
+                        <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                        <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                     
                     </div>
                   </ng-template>
                   <!-- fin ng-template -->
@@ -480,8 +477,11 @@
                 <!-- fin ngb-tab -->
               </ngb-tabset>
               <!-- fin ngb-tabset -->
+              </form>
+              <!-- fin form -->
             </div>
             <!-- fin card-body -->
+            
           </div>
           <!-- fin card-content -->
 

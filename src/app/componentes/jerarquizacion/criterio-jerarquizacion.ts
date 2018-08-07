@@ -36,7 +36,7 @@ export class criterio_Jerarquizacion {
         'Frágil (Felis spp.)',
         'Bastante resistente (perezoso de tres dedos)',
         'Resistente (algunas ardillas)'];
-    lg_rango = ['G1', 'G2', 'G3', 'G4','G5','GU','GH','GX'];
+    lg_rango = ['','G1', 'G2', 'G3', 'G4','G5','GU','GH','GX'];
     ln_rango  =['','N1','N2','N3','N4','N5','NA','NE','NH','NN','NR','NRF','NU','NX'];
 
 }
