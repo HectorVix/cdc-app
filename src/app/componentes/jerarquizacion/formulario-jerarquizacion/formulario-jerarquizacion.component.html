@@ -1,12 +1,12 @@
 <div class="card-content white">
-  <div class="card-body">
-    <form [formGroup]="jerarquizacionForm " (ngSubmit)="onSubmit()">
+  <div class="card-body">  
       <ngb-tabset #JerarquizacionElementoGlobal="ngbTabset">
         <ngb-tab id="tab-formulario">
           <ng-template ngbTabTitle>
             <b>Formulario</b>
           </ng-template>
           <ng-template ngbTabContent>
+              <form [formGroup]="jerarquizacionForm " (ngSubmit)="onSubmit()">
             <ngb-tabset #fJ="ngbTabset">
               <ngb-tab id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
@@ -360,6 +360,8 @@
               </ngb-tab>
             </ngb-tabset>
             <!-- fin ngb-tabset -->
+          </form>
+          <!-- fin form -->
           </ng-template>
         </ngb-tab>
         <!-- fin ngb-tab -->
@@ -371,8 +373,6 @@
         <!-- fin ngb-tab -->
       </ngb-tabset>
       <!-- fin ngb-tabset -->
-    </form>
-    <!-- fin form -->
   </div>
   <!-- fin-card-body -->
 </div>

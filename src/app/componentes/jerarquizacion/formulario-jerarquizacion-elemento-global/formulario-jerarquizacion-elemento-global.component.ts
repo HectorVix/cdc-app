@@ -17,16 +17,8 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_gamenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_gfragil = this.criterio_Jeraquizacion.lg_fragil;
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
-
   jerarquizacion_GlobalForm: FormGroup;
-
-  labundg = ['', 'A', 'B'];
-  ldistg = ['', 'A', 'B'];
-  ltendenciag = ['', 'A', 'B'];
-  lleprotg = ['', 'A', 'B'];
-  lamenazg = ['', 'A', 'B'];
-  lfragilg = ['', 'A', 'B'];
-  lrangog = ['', 'A', 'B'];
+  
   constructor(private fb: FormBuilder) {
     this.crear_Jerarquizacion_Global();
    }
