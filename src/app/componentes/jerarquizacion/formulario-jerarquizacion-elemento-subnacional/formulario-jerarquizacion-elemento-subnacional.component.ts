@@ -9,12 +9,6 @@ import { criterio_Jerarquizacion } from '.././criterio-jerarquizacion';
   styleUrls: ['./formulario-jerarquizacion-elemento-subnacional.component.scss']
 })
 export class FormularioJerarquizacionElementoSubnacionalComponent implements OnInit {
- llestims = ['','A','B'];
- labunds =  ['','A','B'];
- ldists =   ['','A','B'];
- lleprots = ['','A','B'];
- lamenazs =  ['','A','B'];
- lrangos =  ['','A','B'];
  criterio_Jeraquizacion = new criterio_Jerarquizacion();
   criterio_lestims = this.criterio_Jeraquizacion.lgn_lestim;
   criterio_abunds = this.criterio_Jeraquizacion.lgn_abund;

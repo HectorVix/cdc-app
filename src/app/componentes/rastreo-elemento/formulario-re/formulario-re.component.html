@@ -1,13 +1,14 @@
 <div class="card-content white">
   <div class="card-body">
-    <ngb-tabset #fR="ngbTabset">
-      <ngb-tab id="tab-pag1">
-        <ng-template ngbTabTitle>
-          <b>1</b>
-        </ng-template>
-        <ng-template ngbTabContent>
+    <form [formGroup]="reForm">
+      <ngb-tabset #fR="ngbTabset">
+        <ngb-tab id="tab-pag1">
+          <ng-template ngbTabTitle>
+            <b>1</b>
+          </ng-template>
+          <ng-template ngbTabContent>
 
-          <form [formGroup]="reForm">
+
             <!-- Identificadores -->
             <div class="modal-content ">
               <div class="modal-header color-green">
@@ -108,11 +109,11 @@
               <!-- fin row -->
               <div class="row">
                 <div class="col-md-2">
-                  <label for="">DISTRAX:</label>
+                  <label for="">DISTTAX:</label>
                 </div>
                 <div class="col-md-5 mt-10">
-                  <select class="form-control color-green" formControlName="distrax">
-                    <option *ngFor="let sDistrax of ldistrax" [value]="sDistrax">{{sDistrax}}</option>
+                  <select class="form-control color-green" formControlName="disttax">
+                    <option *ngFor="let sDisttax of criterio_disttax; let i1=index;" [value]="getCriterio_Tax(i1)">{{sDisttax}}</option>
                   </select>
                 </div>
               </div>
@@ -123,7 +124,7 @@
                 </div>
                 <div class="col-md-5">
                   <select class="form-control color-green" formControlName="dudatax">
-                    <option *ngFor="let sDudatax of ldudatax" [value]="sDudatax">{{sDudatax}}</option>
+                    <option *ngFor="let sDudatax of criterio_dudatax; let i2=index;" [value]="getCriterio_Tax(i2)">{{sDudatax}}</option>
                   </select>
                 </div>
               </div>
@@ -189,24 +190,20 @@
 
             </div>
             <!-- fin modal-content -->
-
-
-          </form>
-          <!-- fin form -->
-          <div class="text-center ">
-            <p>
-              <button class="btn color-green waves-light" (click)="fR.select('tab-pag2')" mdbWavesEffect>Siguiente</button>
-              <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-            </p>
-          </div>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab id="tab-pag2">
-        <ng-template ngbTabTitle>
-          <b>2</b>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <form [formGroup]="reForm">
+            <!-- fin form -->
+            <div class="text-center ">
+              <p>
+                <button class="btn color-green waves-light" (click)="fR.select('tab-pag2')" mdbWavesEffect>Siguiente</button>
+                <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+              </p>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-pag2">
+          <ng-template ngbTabTitle>
+            <b>2</b>
+          </ng-template>
+          <ng-template ngbTabContent>
             <!-- Status (Global) -->
             <div class="modal-content ">
               <div class="modal-header color-green">
@@ -218,7 +215,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="rangog">
-                    <option *ngFor="let sRangog of lrangog" [value]="sRangog">{{sRangog}}</option>
+                    <option *ngFor="let sRangog of criterio_rangog" [value]="sRangog">{{sRangog}}</option>
                   </select>
                 </div>
                 <div class="col-md-1">
@@ -226,7 +223,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="formularg">
-                    <option *ngFor="let sFormularg of lformularg" [value]="sFormularg">{{sFormularg}}</option>
+                    <option *ngFor="let sFormularg of criterio_compu_manual; let i3=index;" [value]="getCriterio_Compu_Manual(i3)">{{sFormularg}}</option>
                   </select>
                 </div>
                 <div class="md-form col-md-2 mt10">
@@ -268,15 +265,15 @@
                 </div>
                 <div class="col-md-2">
                   <select class="form-control color-green" formControlName="cites">
-                    <option *ngFor="let sCites of lcites" [value]="sCites">{{sCites}}</option>
+                    <option *ngFor="let sCites of criterio_cites; let i4=index;" [value]="getCriterio_Cites(i4)">{{sCites}}</option>
                   </select>
                 </div>
                 <div class="col-md-1">
-                  <label for="">UICN:</label>
+                  <label for="">IUCN:</label>
                 </div>
                 <div class="col-md-4">
-                  <select class="form-control color-green" formControlName="uicn">
-                    <option *ngFor="let sUicn of luicn" [value]="sUicn">{{sUicn}}</option>
+                  <select class="form-control color-green" formControlName="iucn">
+                    <option *ngFor="let sUicn of criterio_iucn; let i5=index;" [value]="getCriterio_Iucn(i5)">{{sUicn}}</option>
                   </select>
                 </div>
               </div>
@@ -288,7 +285,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="planscons">
-                    <option *ngFor="let sPlanscons of lformularg" [value]="sPlanscons">{{sPlanscons}}</option>
+                    <option *ngFor="let sPlanscons of criterio_compu_manual; let i6=index;" [value]="getCriterio_Compu_Manual(i6)">{{sPlanscons}}</option>
                   </select>
                 </div>
 
@@ -301,7 +298,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="resumenman">
-                    <option *ngFor="let sResumenman of lformularg" [value]="sResumenman">{{sResumenman}}</option>
+                    <option *ngFor="let sResumenman of criterio_compu_manual; let i7=index" [value]="getCriterio_Compu_Manual(i7)">{{sResumenman}}</option>
                   </select>
                 </div>
 
@@ -321,7 +318,7 @@
                 </div>
                 <div class="col-md-2 mt-10">
                   <select class="form-control color-green" formControlName="exsitu">
-                    <option *ngFor="let sExsitu of lexsitu" [value]="sExsitu">{{sExsitu}}</option>
+                    <option *ngFor="let sExsitu of criterio_si_no; let i8=index;" [value]="getCriterio_Si_No(i8)">{{sExsitu}}</option>
                   </select>
                 </div>
 
@@ -336,7 +333,7 @@
                 </div>
                 <div class="col-md-4 mt-10">
                   <select class="form-control color-green" formControlName="endemismo">
-                    <option *ngFor="let sEndemismo of lendemismo" [value]="sEndemismo">{{sEndemismo}}</option>
+                    <option *ngFor="let sEndemismo of criterio_endemismo; let i9=index;" [value]="getCriterio_Endemismo(i9)">{{sEndemismo}}</option>
                   </select>
                 </div>
               </div>
@@ -355,7 +352,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="rangon">
-                    <option *ngFor="let sRangon of lrangon" [value]="sRangon">{{sRangon}}</option>
+                    <option *ngFor="let sRangon of criterio_rangon" [value]="sRangon">{{sRangon}}</option>
                   </select>
                 </div>
                 <div class="col-md-1">
@@ -363,7 +360,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="formularn">
-                    <option *ngFor="let sFormularn of lformularg" [value]="sFormularn">{{sFormularn}}</option>
+                    <option *ngFor="let sFormularn of criterio_compu_manual; let i10=index;" [value]="getCriterio_Compu_Manual(i10)">{{sFormularn}}</option>
                   </select>
                 </div>
                 <div class="md-form col-md-2 mt10">
@@ -423,7 +420,7 @@
                 </div>
                 <div class="col-md-2 mt-10">
                   <select class="form-control color-green" formControlName="transparencian">
-                    <option *ngFor="let sTransparencian of lexsitu" [value]="sTransparencian">{{sTransparencian}}</option>
+                    <option *ngFor="let sTransparencian of criterio_si_no; let i11=index;" [value]="getCriterio_Si_No(i11)">{{sTransparencian}}</option>
                   </select>
                 </div>
               </div>
@@ -443,7 +440,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="rangos">
-                    <option *ngFor="let sRangos of lrangon" [value]="sRangos">{{sRangos}}</option>
+                    <option *ngFor="let sRangos of criterio_rangon" [value]="sRangos">{{sRangos}}</option>
                   </select>
                 </div>
                 <div class="col-md-1">
@@ -451,7 +448,7 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <select class="form-control color-green" formControlName="formulars">
-                    <option *ngFor="let sFormulars of lformularg" [value]="sFormulars">{{sFormulars}}</option>
+                    <option *ngFor="let sFormulars of criterio_compu_manual; let i12=index;" [value]="getCriterio_Compu_Manual(i12)">{{sFormulars}}</option>
                   </select>
                 </div>
                 <div class="md-form col-md-2 mt10">
@@ -462,7 +459,7 @@
                 <div class="md-form col-md-2  input-group-append mt10">
                   <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecha_revrs" data-error=" "
                     data-success=" " ngbDatepicker #dFechaRvrs="ngbDatepicker">
-                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS:</label> 
+                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS:</label>
                   <div (click)="dFechaRvrs.toggle()">
                     <i class="fa fa-calendar prefix"></i>
                   </div>
@@ -510,7 +507,7 @@
                 </div>
                 <div class="col-md-2 mt-10">
                   <select class="form-control color-green" formControlName="transparencias">
-                    <option *ngFor="let sTransparencian of lexsitu" [value]="sTransparencian">{{sTransparencian}}</option>
+                    <option *ngFor="let sTransparencian of criterio_si_no; let i13=index;" [value]="getCriterio_Si_No(i13)">{{sTransparencian}}</option>
                   </select>
                 </div>
               </div>
@@ -526,8 +523,7 @@
                   <label for="">RE.OPC1</label>
                 </div>
                 <div class="md-form col-md-9 mt-5">
-                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="re_opc1" data-error=" "
-                    data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="re_opc1" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -536,8 +532,7 @@
                   <label for="">RE.OPC2</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="re_opc2" data-error=" "
-                    data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="re_opc2" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -546,8 +541,7 @@
                   <label for="">RE.OPC3</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="re_opc3" data-error=" "
-                    data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="re_opc3" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -556,10 +550,9 @@
                   <label for="">RE.OPC4</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="re_opc4" data-error=" "
-                    data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="re_opc4" data-error=" " data-success=" ">
                 </div>
-              </div>             
+              </div>
               <!-- fin row -->
               <div class="row">
                 <div class="col-md-2">
@@ -567,11 +560,11 @@
                 </div>
                 <div class="md-form  col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" "
-                    data-success=" " formControlName="re_opc5"></textarea>
+                  <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                    formControlName="re_opc5"></textarea>
                   <label for="formReOpc5"></label>
                 </div>
-              </div>             
+              </div>
               <!-- fin row -->
             </div>
             <!-- fin modal-content -->
@@ -590,38 +583,38 @@
                 <div class="md-form col-md-3 mt10">
                   <input mdbInputDirective type="text" id="formCodfuentes" class="form-control" formControlName="codfuentes" data-error=" "
                     data-success=" ">
-                    <label for="formCodfuentes">&nbsp;&nbsp;&nbsp;&nbsp;CODFUENTES</label>
+                  <label for="formCodfuentes">&nbsp;&nbsp;&nbsp;&nbsp;CODFUENTES</label>
                 </div>
                 <div class="md-form col-md-2 input-group-append   mt10 ">
-                    <input mdbInputDirective type="text" id="formActualizag" class="form-control" formControlName="actualizag" data-error=" "
-                      data-success=" " ngbDatepicker #dActualizag="ngbDatepicker">
-                    <label for="formActualizag">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
-                    <div (click)="dActualizag.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
-                    </div>
+                  <input mdbInputDirective type="text" id="formActualizag" class="form-control" formControlName="actualizag" data-error=" "
+                    data-success=" " ngbDatepicker #dActualizag="ngbDatepicker">
+                  <label for="formActualizag">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
+                  <div (click)="dActualizag.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
                   </div>
+                </div>
               </div>
               <!-- fin row -->
               <div class="row">
-                  <div class="col-md-8">
-                    <label for=""> </label>
-                  </div>                              
-                <div class="md-form col-md-2 input-group-append   mt-20 ">
-                    <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" data-error=" "
-                      data-success=" " ngbDatepicker #dActualizan="ngbDatepicker">
-                    <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
-                    <div (click)="dActualizan.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
-                    </div>
-                  </div>
-                
-              </div>
-            <!-- fin row -->       
-            <div class="row">
                 <div class="col-md-8">
                   <label for=""> </label>
-                </div>                              
-              <div class="md-form col-md-2 input-group-append   mt-20 ">
+                </div>
+                <div class="md-form col-md-2 input-group-append   mt-20 ">
+                  <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" data-error=" "
+                    data-success=" " ngbDatepicker #dActualizan="ngbDatepicker">
+                  <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
+                  <div (click)="dActualizan.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
+                  </div>
+                </div>
+
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-8">
+                  <label for=""> </label>
+                </div>
+                <div class="md-form col-md-2 input-group-append   mt-20 ">
                   <input mdbInputDirective type="text" id="formActualizas" class="form-control" formControlName="actualizas" data-error=" "
                     data-success=" " ngbDatepicker #dActualizas="ngbDatepicker">
                   <label for="formActualizas">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAS</label>
@@ -629,24 +622,26 @@
                     <i class="fa fa-calendar prefix"></i>
                   </div>
                 </div>
-              
+
+              </div>
+              <!-- fin row -->
             </div>
-          <!-- fin row -->     
-            </div>
-            <!-- fin modal-content -->                       
-          </form>
-          <!-- fin form -->
-          
-          <div class="text-center ">
-              <p>                      
+            <!-- fin modal-content -->
+
+
+            <div class="text-center ">
+              <p>
                 <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
                 <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
                 <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
               </p>
             </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
+          </ng-template>
+        </ngb-tab>
 
+      </ngb-tabset>
+    </form>
+    <!-- fin form -->
+  </div>
+  <!-- fin car-body -->
 </div>

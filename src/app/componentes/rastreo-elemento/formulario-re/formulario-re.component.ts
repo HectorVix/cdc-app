@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
 import { disableDebugTools } from '@angular/platform-browser';
+import { criterio_re } from '.././criterio-re';
 const now = new Date();
 @Component({
   selector: 'app-formulario-re',
@@ -16,48 +17,36 @@ export class FormularioReComponent implements OnInit {
   reForm: FormGroup;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
-
-//taxonomia global
- ldistrax= ['', 'Genero o familia monotípica', 
-                'Genero pequeño (2-5 especies)',
-                'Genero intermedio (6-20 especies)',
-                'Genero grande (21+ especies)'];
- ldudatax= ['', 'Indudablemente una especie válida',
-                'Posiblemente no válida como especie pero si como subespecie',
-                'Probablemente no sea diferente a ningún nivel taxonómico'];
- //status global
- lrangog= ['', 'G1', 'G2','G3','G4','G5','GU','GH','GX'];
- lformularg= ['', 'Computarizado', 'Manual'];
- lcites= ['', 'Apéndice I','Apéndice','Apéndice II', 'Apéndice III'];
- luicn= ['', 'Extinta', 'En peligro','Vulnerable','Rara','Indeterminada','Insuficientemente conocida',
-              'Fuera de peligro','No está en peligro ( lista especies endémicas)',
-              'No tomada en cuenta por UICN'];
- lexsitu= ['', 'SÍ','NO'];
- lendemismo= ['', 'Endémico a jurisdicción CDC sub-nacional', 'Endémico nacional'];
-//status nacional
- lrangon= ['', 'N1', 'N2','N3','N4','N5','NA','NE','NH','NN','NR','NRF','NU','NX'];
- 
+  criterio_re = new criterio_re();
+  criterio_disttax = this.criterio_re.disttax;
+  criterio_dudatax = this.criterio_re.dudatax;
+  criterio_rangog = this.criterio_re.rangog;
+  criterio_compu_manual = this.criterio_re.compu_manual;//formularg, plancons, resplan, resumenman, formularn, formulars
+  criterio_endemismo = this.criterio_re.endemismo;
+  criterio_rangon = this.criterio_re.rangon;
+  criterio_cites = this.criterio_re.cites;
+  criterio_iucn = this.criterio_re.iucn;
+  criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
+  criterio_listacdc = this.criterio_re.listacdc;
   constructor(
-              private fb: FormBuilder
-             )
-            {
-               this.crearFormRastreoElemento();
-            }
+    private fb: FormBuilder
+  ) {
+    this.crearFormRastreoElemento();
+  }
 
   ngOnInit() {
   }
 
   //crear formulario Rastreo Elemento
-  crearFormRastreoElemento()
-  {
+  crearFormRastreoElemento() {
     this.reForm = this.fb.group({
       //pagina1
-        //identificadores
+      //identificadores
       'codigoe': ['', Validators.required],
-      'tropicos':['', Validators.required],
+      'tropicos': ['', Validators.required],
       'nacion': ['', Validators.required],
       'subnacion': '',
-        //taxonomia (global)
+      //taxonomia (global)
       'clasetax': '',
       'orden': '',
       'familia': '',
@@ -66,16 +55,16 @@ export class FormularioReComponent implements OnInit {
       'autor': '',
       'fuentenom': '',
       'refnombreg': '',
-      'distrax': '',
+      'disttax': '',
       'dudatax': '',
       'nomcomung': '',
       'comtaxg': '',
-        //taxonomia (nacional)
+      //taxonomia (nacional)
       'nombren': '',
       'numsinn': '',
       'nomcomunn': '',
       'comtaxn': '',
-        //status (global)
+      //status (global)
       'rangog': '',
       'fecha_revrg': '',
       'formularg': '',
@@ -83,7 +72,7 @@ export class FormularioReComponent implements OnInit {
       'aepeu': '',
       'fecha_aepeu': '',
       'cites': '',
-      'uicn': '',
+      'iucn': '',
       'planscons': '',
       'resplan': '',
       'resumenman': '',
@@ -91,7 +80,7 @@ export class FormularioReComponent implements OnInit {
       'exsitu': '',
       'inst_exsitu': '',
       'endemismo': '',
-        //status (nacional)
+      //status (nacional)
       'rangon': '',
       'fecha_revrn': '',
       'formularn': '',
@@ -102,16 +91,16 @@ export class FormularioReComponent implements OnInit {
       'protnacion': '',
       'refnombren': '',
       'transparencian': '',
-        //status (subnacional)
-      'rangos': '', 
+      //status (subnacional)
+      'rangos': '',
       'fecha_revrs': '',
       'formulars': '',
       'rastreoles': '',
-      'lestims': '', 
-      'leprots': '', 
-      'abunds': '',  
+      'lestims': '',
+      'leprots': '',
+      'abunds': '',
       'protsubnac': '',
-      'refnombres': '', 
+      'refnombres': '',
       'transparencias': '',
       //campos opcionales
       're_opc1': '',
@@ -127,6 +116,80 @@ export class FormularioReComponent implements OnInit {
       'actualizas': ''
     });
   }
+  /****
+   * Comun para 
+   * formularg, plancons, resplan, resumenman, formularn
+   */
+  getCriterio_Compu_Manual(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'C';
+      case 2: return 'M';
+    }
+
+  }
+  /****
+ * Comun para 
+ * disttax, dudatax
+ */
+  getCriterio_Tax(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'A';
+      case 2: return 'B';
+      case 3: return 'C';
+      case 4: return 'D';
+    }
+  }
+  getCriterio_Endemismo(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'S';
+      case 2: return 'N';
+      case 3: return 'M';
+    }
+  }
+  getCriterio_Cites(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return '1';
+      case 2: return '2';
+      case 3: return '3';
+    }
+  }
+  getCriterio_Iucn(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'EX';
+      case 2: return 'E';
+      case 3: return 'V';
+      case 4: return 'R';
+      case 5: return 'I';
+      case 6: return 'K';
+      case 7: return 'O';
+      case 8: return 'NT';
+    }
+  }
+  /*
+  * Comun para 
+  * exsitu, transparen
+  */
+  getCriterio_Si_No(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return '1';
+      case 2: return '0';
+    }
+  }
+  getCriterio_Lista_Cdc(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'S';
+      case 2: return 'P';
+      case 3: return 'N';
+    }
+  }
+  
   selectToday() {
     this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
