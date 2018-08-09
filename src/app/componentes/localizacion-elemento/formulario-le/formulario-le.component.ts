@@ -4,7 +4,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import {Proteccion,CamposOpcionales} from '../../../modelo/tabla';
+import { Proteccion, CamposOpcionales } from '../../../modelo/tabla';
+import { criterio_le } from '.././criterio-le';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
@@ -12,13 +13,18 @@ const now = new Date();
   styleUrls: ['./formulario-le.component.scss']
 })
 export class FormularioLeComponent implements OnInit {
-  lident = ['','S','N','?'];
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
-  characters: Proteccion[];
-  campos_Opcionales:CamposOpcionales[];
+  source_proteccion: Proteccion[];
+  campos_Opcionales: CamposOpcionales[];
+  leForm: FormGroup;   //formulario de localizacion del elemento
+  criterio_le = new criterio_le();
+  criterio_si_no = this.criterio_le.si_no;
+  criterio_rango_le = this.criterio_le.rango_le;
+  criterio_rangog = this.criterio_le.rangog;
+  criterio_rangon = this.criterio_le.rangog;
 
-  settings = {
+  settings_proteccion = {
     columns: {
       codigoam: {
         title: 'CODIGOAM'
@@ -31,19 +37,121 @@ export class FormularioLeComponent implements OnInit {
       }
     }
   };
-  settings_Campos_Opcionales= {
+  settings_Campos_Opcionales = {
     columns: {
-     
+
       datos: {
         title: 'DATOS'
       }
     }
-  }; 
-  constructor() { }
+  };
+  constructor(private fb: FormBuilder) {
+    this.crearFormLocalizacion_Elemento();
+  }
 
   ngOnInit() {
   }
+  crearFormLocalizacion_Elemento() {
+    this.leForm = this.fb.group({
+      //página1
+      //identificadores
+      'codigole': ['', Validators.required],
+      'ident': '',
+      'nombres': '',
+      'nomcomuns': '',
+      'rangog': '',
+      'rangon': '',
+      'rangos': '',
+      //localizadores
+      'subnacion': '',
+      'subdivision': '',
+      'codsitio': '',
+      'nomsitio': '',
+      'sitioeva': '',
+      'precision': '',
+      'nommapa': '',
+      'codmapa': '',
+      'nummarg': '',
+      'numpunto': '',
+      'diezdiez': '',
+      'latitud': '',
+      'longitud': '',
+      'coords': '',
+      'coordn': '',
+      'coorde': '',
+      'coordo': '',
+      'direccion': '',
+      'ecoregion': '',
+      'cuenca': '',
+      //status
+      'fechaeva': '',
+      'ultobs': '',
+      'priobs': '',
+      'rangole': '',
+      'fecharangole': '',
+      'comrangole': '',
+      'resprg': '',
+      'datosle': '',
+      'contacto': '',
+      'numcontacto': '',
+      //descripción
+      'desgen': '',
+      'elev': '',
+      'area': '',
+      //protección
+      'lista_proteccion': '',
+      'masterreno': '',
+      'masprotec': '',
+      'masmanejo': '',
+      'involtnc': '',
+      'commanejo': '',
+      'comprot': '',
+      //propietario
+      'prop': '',
+      'infprop': '',
+      'comprop': '',
+      //campos opcionales
+      'lista_campos_opcionales': '',
+      //comentarios generales
+      'comentario': '',
+      //documentación y mantenimiento
+      'sensdatos': '',
+      'limites': '',
+      'fotos': '',
+      'mejorfuente': '',
+      'transcrito': '',
+      'mdrev': '',
+      'cartografo': '',
+      'cc': '',
+      'respdatos': '',
+      'actualizar': ''
 
+    });
+  }
+  /*
+   * Comun para 
+   *  ident, amadicion, masterreno, masprotec, masmanejo, sensdatos, limites, fotos, 
+   *  infprop, mdrev, cc
+   */
+  getCriterio_Si_No(i: number) {
+    switch (i) {
+      case 0: return '';   //carencia de informacion
+      case 1: return '1';  //SI
+      case 2: return '0';  //NO
+      case 3: return '2';  // ? se desconoce
+    }
+  }
+
+  getCriterio_Rangole(i: number) {
+    switch (i) {
+      case 0: return '';   //Desconocida
+      case 1: return 'A'; 
+      case 2: return 'B';  
+      case 3: return 'C';
+      case 3: return 'D';
+      case 3: return 'X';
+    }
+  }
   selectToday() {
     this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
