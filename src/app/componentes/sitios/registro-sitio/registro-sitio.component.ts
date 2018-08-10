@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { criterio_Sitio } from '.././criterio-sitio';
 
 //import { criterio_le } from '.././criterio-le';
 
-import {Identificadores_Sitio,Localizadores_Sitio,CamposOpcionales} from '../../../modelo/tabla';
+import { Identificadores_Sitio, Localizadores_Sitio, CamposOpcionales } from '../../../modelo/tabla';
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
   styleUrls: ['./registro-sitio.component.scss']
 })
 export class RegistroSitioComponent implements OnInit {
-  source_identificadores_Sitio:Identificadores_Sitio[];
-  source_localizadores_Sitio:Localizadores_Sitio[];
-  source_CamposOpcionales_Sitio:CamposOpcionales[];
-  lident = ['','S','N','?'];
+  source_identificadores_Sitio: Identificadores_Sitio[];
+  source_localizadores_Sitio: Localizadores_Sitio[];
+  source_CamposOpcionales_Sitio: CamposOpcionales[];
   sitioForm: FormGroup;   //formulario de sitio
+  criterio_Sitio= new criterio_Sitio();
+  criterio_mapasitio = this.criterio_Sitio.mapasitio;
+  criterio_rangoant= this.criterio_Sitio.rangoant;
+  criterio_impdivbiol = this.criterio_Sitio.impdivbiol;
+  criterio_impnodivbio = this.criterio_Sitio.impnodivbiol;
+  criterio_urgencia = this.criterio_Sitio.urgencia;
 
-  settings_Identificadores_Sitio = { 
+  settings_Identificadores_Sitio = {
     columns: {
       codmacsitio: {
         title: 'CODMACSITIO'
@@ -43,17 +49,17 @@ export class RegistroSitioComponent implements OnInit {
       },
     }
   };
-  settings_CamposOpcionales_Sitio= {
+  settings_CamposOpcionales_Sitio = {
     columns: {
       datos: {
         title: 'DATOS'
       }
-      
+
     }
   };
-  
 
-  constructor(private fb: FormBuilder) { 
+
+  constructor(private fb: FormBuilder) {
     this.crearFormSitio();
   }
 
@@ -85,9 +91,12 @@ export class RegistroSitioComponent implements OnInit {
       'fechamapa': '',
       'dibujante': '',
       'justlimite': '',
-      'areaprisec': '',
-      'areapri': '',
-      'areatotal': '',
+      'areaprisec1': '',//number
+      'areaprisec2': '',
+      'areapri1': '',//number
+      'areapri2': '',
+      'areatotal1': '',//number
+      'areatotal2': '',
       'comsitio': '',
       //página 2
       //importancia del sitio
@@ -125,8 +134,8 @@ export class RegistroSitioComponent implements OnInit {
     });
   }
   //Mapa del sitio
-  getCriterio_MapaSitio(i:number){
-    switch(i){
+  getCriterio_MapaSitio(i: number) {
+    switch (i) {
       case 0: '';
       case 1: 'S';
       case 2: 'P';
@@ -134,49 +143,45 @@ export class RegistroSitioComponent implements OnInit {
     }
   }
   //Rango anterior (se omitieron rango 3 y 4 ya que pierden su sentido en el contexto de Sitio)
-  getCriterio_rangoAnterior(i:number){
-    switch(i){
+  getCriterio_rangoAnterior(i: number) {
+    switch (i) {
       case 0: '';
       case 1: '1';
       case 2: '2';
       case 5: '5';
-
     }
   }
-   //Importancia para la Diversidad Biológica
-   getCriterio_impdivbiol(i:number){
-    switch(i){
+  //Importancia para la Diversidad Biológica
+  getCriterio_impdivbiol(i: number) {
+    switch (i) {
       case 0: '';
       case 1: 'E1';
       case 2: 'E2';
       case 3: 'E3';
       case 4: 'E4';
       case 5: 'E5';
-
     }
   }
   //Importancia No relacionada con la Bio-diversidad
-  getCriterio_impnodivbiol(i:number){
-    switch(i){
+  getCriterio_impnodivbiol(i: number) {
+    switch (i) {
       case 0: '';
       case 1: 'V1';
       case 2: 'V2';
       case 3: 'V3';
       case 4: 'V4';
       case 5: 'V5';
-
     }
   }
   //Urgencia de protección del Sitio
-  getCriterio_Urgencia(i:number){
-    switch(i){
+  getCriterio_Urgencia(i: number) {
+    switch (i) {
       case 0: '';
       case 1: 'U1';
       case 2: 'U2';
       case 3: 'U3';
       case 4: 'U4';
       case 5: 'U5';
-
     }
   }
 }

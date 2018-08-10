@@ -1,4 +1,4 @@
-export class criterioSitio {
+export class criterio_Sitio {
     //mapa del sitio
     mapasitio = ['',
         'Sí,se ha terminado un mapa del sitio que incluye todos los componentes requeridos.',
