@@ -124,4 +124,59 @@ export class RegistroSitioComponent implements OnInit {
 
     });
   }
+  //Mapa del sitio
+  getCriterio_MapaSitio(i:number){
+    switch(i){
+      case 0: '';
+      case 1: 'S';
+      case 2: 'P';
+      case 3: 'N';
+    }
+  }
+  //Rango anterior (se omitieron rango 3 y 4 ya que pierden su sentido en el contexto de Sitio)
+  getCriterio_rangoAnterior(i:number){
+    switch(i){
+      case 0: '';
+      case 1: '1';
+      case 2: '2';
+      case 5: '5';
+
+    }
+  }
+   //Importancia para la Diversidad Biológica
+   getCriterio_impdivbiol(i:number){
+    switch(i){
+      case 0: '';
+      case 1: 'E1';
+      case 2: 'E2';
+      case 3: 'E3';
+      case 4: 'E4';
+      case 5: 'E5';
+
+    }
+  }
+  //Importancia No relacionada con la Bio-diversidad
+  getCriterio_impnodivbiol(i:number){
+    switch(i){
+      case 0: '';
+      case 1: 'V1';
+      case 2: 'V2';
+      case 3: 'V3';
+      case 4: 'V4';
+      case 5: 'V5';
+
+    }
+  }
+  //Urgencia de protección del Sitio
+  getCriterio_Urgencia(i:number){
+    switch(i){
+      case 0: '';
+      case 1: 'U1';
+      case 2: 'U2';
+      case 3: 'U3';
+      case 4: 'U4';
+      case 5: 'U5';
+
+    }
+  }
 }
