@@ -4,7 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { criterio_Jerarquizacion } from '.././criterio-jerarquizacion';
+import { criterio_Jerarquizacion } from '../../../modelo/criterio-jerarquizacion';
 const now = new Date();
 @Component({
   selector: 'app-formulario-jerarquizacion',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { criterio_Sitio } from '.././criterio-sitio';
+import { criterio_Sitio } from '../../../modelo/criterio-sitio';
 
 //import { criterio_le } from '.././criterio-le';
 

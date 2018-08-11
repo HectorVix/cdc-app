@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
 import { disableDebugTools } from '@angular/platform-browser';
-import { criterio_re } from '.././criterio-re';
+import { criterio_re } from '../../../modelo/criterio-re';
 const now = new Date();
 @Component({
   selector: 'app-formulario-re',

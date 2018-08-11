@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { criterio_Jerarquizacion } from '.././criterio-jerarquizacion';
+import { criterio_Jerarquizacion } from '../../../modelo/criterio-jerarquizacion';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-global',

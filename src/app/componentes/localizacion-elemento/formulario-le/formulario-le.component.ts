@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Proteccion, CamposOpcionales } from '../../../modelo/tabla';
-import { criterio_le } from '.././criterio-le';
+import { criterio_le } from '../../../modelo/criterio-le';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
