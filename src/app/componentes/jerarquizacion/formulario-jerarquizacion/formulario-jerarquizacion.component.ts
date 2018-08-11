@@ -71,7 +71,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
   /**Criterios de Jerarquización  
    *   Es comun y con diferente significado segun sea el caso global, nacional o subnacional  para
    *   lestim, abund, dist, leprot, amenaz, fragil
-   * **/L
+   * **/
   getCriterio_Jerarquizacion(i: number) {
     switch (i) {
       case 0: return '';

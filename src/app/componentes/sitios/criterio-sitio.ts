@@ -1,39 +1,39 @@
 export class criterio_Sitio {
     //mapa del sitio
     mapasitio = ['',
-        'Sí,se ha terminado un mapa del sitio que incluye todos los componentes requeridos.',
-        'Un mapa parcial ha sido terminado.',
-        'No existe (no se conoce) un mapa del sitio.'];
+        'S - Sí,se ha terminado un mapa del sitio que incluye todos los componentes requeridos.',
+        'P - Un mapa parcial ha sido terminado.',
+        'N - No existe (no se conoce) un mapa del sitio.'];
     /* los rangos 3 y 4 han sido omitidos de los criterios de rangoant ya que pierden su sentido 
     *en el contexto de  Sitios.
     */
     //rango anterior
     rangoant = ['',
-        'Elemento o ecosistema raro: un elemento G1 o G2 está presente.',
-        'Rasgo natural sobresaliente o terrenos no perturbados: un elemento G3, S1 o S2, o una Localización del Elemento con rango A o B está presente',
-        '', //3 omitido
-        '', //4 omitido
-        'Cualquier Sitio que no se ajusta a los criterios para una jerarquización "1" o "2" .'];
+        '1 - Elemento o ecosistema raro: un elemento G1 o G2 está presente.',
+        '2 - Rasgo natural sobresaliente o terrenos no perturbados: un elemento G3, S1 o S2',
+        '3 - ', //3 omitido
+        '4 - ', //4 omitido
+        '5 - Cualquier Sitio que no se ajusta a los criterios para una jerarquización "1" o "2" .'];
     //importancia de la diversidad biológica
     impdivbiol = ['',
-        'Significado sobresaliente',
-        'Significado alto',
-        'Significado moderado',
-        'Significado modesto',
-        'No presenta un significado conocido, para la biodivirsidad'];
+        'E1 - Significado sobresaliente',
+        'E2 - Significado alto',
+        'E3 - Significado moderado',
+        'E4 - Significado modesto',
+        'E5 - No presenta un significado conocido, para la biodivirsidad'];
     //importancia  no relacionada con la bio-diversidad
     impnodivbiol = ['',
-        'Valores sobresalientes en términos de la salud del ecosistema,la recreación, la estética, la planeación racional de la comunidad, etc.',
-        'Valores altos.',
-        'Valores moderados.',
-        'Sin otro valores importantes discernibles o conocidos.',
-        'Otros valores demostrablemente ausentes o valores negativos existentes y/u otros valores del sitio son incompatibles con la conservación biológica del terreno'];
+        'V1 - Valores sobresalientes en términos de la salud del ecosistema',
+        'V2 - Valores altos.',
+        'V3 - Valores moderados.',
+        'V4 - Sin otro valores importantes discernibles o conocidos.',
+        'V5 - Otros valores demostrablemente ausentes o valores negativos existentes'];
     //urgencia
     urgencia = ['',
-        'Amenazado inmediatamente por severas fuerzas destructoras o sobresale una oportunidad inmediata de protección (en el término de un año a la fecha del rango) --¡ ahora o nunca!.',
-        'Amenaza u oportunidad especial esperada en un plazo de 5 años.',
-        'Amenaza u oportunidad definible, pero no en los próximo 5 años.',
-        'No se vislumbra amenaza u oportunidad conocidas en el futuro',
-        'Protección del terreno completa o existen razones adecuadas para no proteger el sitio --¡no actuar en este sitio!.'];
+        'U1 - Amenazado inmediatamente por severas fuerzas destructoras  --¡ ahora o nunca!.',
+        'U2 - Amenaza u oportunidad especial esperada en un plazo de 5 años.',
+        'U3 - Amenaza u oportunidad definible, pero no en los próximo 5 años.',
+        'U4 - No se vislumbra amenaza u oportunidad conocidas en el futuro',
+        'U5 - Protección del terreno completa o --¡no actuar en este sitio!.'];
     
     }

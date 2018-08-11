@@ -5,7 +5,7 @@ import { criterio_Sitio } from '.././criterio-sitio';
 
 //import { criterio_le } from '.././criterio-le';
 
-import { Identificadores_Sitio, Localizadores_Sitio, CamposOpcionales } from '../../../modelo/tabla';
+import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tabla';
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
@@ -14,13 +14,12 @@ import { Identificadores_Sitio, Localizadores_Sitio, CamposOpcionales } from '..
 export class RegistroSitioComponent implements OnInit {
   source_identificadores_Sitio: Identificadores_Sitio[];
   source_localizadores_Sitio: Localizadores_Sitio[];
-  source_CamposOpcionales_Sitio: CamposOpcionales[];
   sitioForm: FormGroup;   //formulario de sitio
   criterio_Sitio= new criterio_Sitio();
   criterio_mapasitio = this.criterio_Sitio.mapasitio;
   criterio_rangoant= this.criterio_Sitio.rangoant;
   criterio_impdivbiol = this.criterio_Sitio.impdivbiol;
-  criterio_impnodivbio = this.criterio_Sitio.impnodivbiol;
+  criterio_impnodivbiol = this.criterio_Sitio.impnodivbiol;
   criterio_urgencia = this.criterio_Sitio.urgencia;
 
   settings_Identificadores_Sitio = {
@@ -49,14 +48,7 @@ export class RegistroSitioComponent implements OnInit {
       },
     }
   };
-  settings_CamposOpcionales_Sitio = {
-    columns: {
-      datos: {
-        title: 'DATOS'
-      }
-
-    }
-  };
+ 
 
 
   constructor(private fb: FormBuilder) {
@@ -104,12 +96,15 @@ export class RegistroSitioComponent implements OnInit {
       'comrango': '',
       'impdivbiol': '',
       'comdivbiol': '',
+      'imnopdivbiol': '',
+      'comnodivbiol': '',
       'urgencia': '',
       'comurgencia': '',
       //bienes raíces y portección
       'intenccons': '',
       'numlotes': '',
-      'costestprot': '',
+      'costestprot1': '',
+      'costestprot2': '',
       'coddesig': '',
       'designacion': '',
       'comprot': '',

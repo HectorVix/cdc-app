@@ -119,6 +119,7 @@ export class FormularioLeComponent implements OnInit {
       'limites': '',
       'fotos': '',
       'mejorfuente': '',
+      'codfuente': '',
       'transcrito': '',
       'mdrev': '',
       'cartografo': '',
@@ -135,21 +136,20 @@ export class FormularioLeComponent implements OnInit {
    */
   getCriterio_Si_No(i: number) {
     switch (i) {
-      case 0: return '';   //carencia de informacion
+      case 0: return '';  
       case 1: return '1';  //SI
       case 2: return '0';  //NO
-      case 3: return '2';  // ? se desconoce
     }
   }
 
   getCriterio_Rangole(i: number) {
     switch (i) {
-      case 0: return '';   //Desconocida
+      case 0: return ''; 
       case 1: return 'A'; 
       case 2: return 'B';  
       case 3: return 'C';
-      case 3: return 'D';
-      case 3: return 'X';
+      case 4: return 'D';
+      case 5: return 'X';
     }
   }
   selectToday() {
