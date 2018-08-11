@@ -1,5 +1,6 @@
 <div class="card-content white">
     <div class="card-body">
+        <form [formGroup]="areaManejoForm ">
         <ngb-tabset #fAreasManejadas="ngbTabset">
             <!-- página 1 -->
             <ngb-tab id="tab-selectbyid1">
@@ -7,7 +8,7 @@
                     <b>1</b>
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <form action="">
+                   
                       <div class="modal-content">
                         <div class="modal-header color-green">
                           <h5 class="modal-title">Identificadores</h5>
@@ -17,7 +18,7 @@
                             <label for="">CODIGOAM:</label>
                           </div>
                           <div class="md-form col-md-5 mt-5 ">
-                            <input mdbInputDirective type="text" id="formCodigoam" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
+                            <input mdbInputDirective type="text" id="formCodigoam" class="form-control" formControlName="codigoam" data-error="incorrecto, minimo 3 caracteres"
                               data-success="correcto" required>
                           </div>
                         </div>
@@ -407,8 +408,7 @@
                         <!-- fin row -->
                       </div>
                       <!-- fin modal-content -->
-                    </form>
-                    <!-- fin form -->
+                    
                     <div class="text-center ">
                         <p>
                             <button class="btn btn-cyan waves-light" (click)="fAreasManejadas.select('tab-selectbyid2')">Siguiente</button>                     
@@ -425,7 +425,7 @@
                         <b>2</b>
                     </ng-template>
                     <ng-template ngbTabContent>
-                        <form action="">
+                     
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title">Elementos</h5>
@@ -476,9 +476,7 @@
                             </div>
                             <!-- fin row -->
                           </div>
-                          <!-- fin modal-content -->             
-                        </form>
-                        <!-- fin form -->
+                          <!-- fin modal-content -->                                   
                         <div class="text-center ">
                             <p>
                                 <button class="btn btn-cyan waves-light" (click)="fAreasManejadas.select('tab-selectbyid1')">Atras</button>
@@ -492,6 +490,7 @@
             <!-- fin ngb-tab -->            
         </ngb-tabset>
         <!-- fin ngb-tabset -->
+      </form>
     </div>
     <!-- fin card-body -->
 </div>

@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./areas-manejadas.component.scss']
 })
 export class AreasManejadasComponent implements OnInit {
-
-  constructor() { }
-
+  constructor() {}
   ngOnInit() {
   }
-
+ 
 }
