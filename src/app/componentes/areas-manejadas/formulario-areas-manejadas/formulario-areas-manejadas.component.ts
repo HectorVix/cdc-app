@@ -52,10 +52,82 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.areaManejoForm = this.fb.group({
       //página1
       //identificadores
-      'codigoam': ['', Validators.required]
-     
+      'codigoam': ['', Validators.required],
+      'nombream': '',
+      'sinam': '',
+      'ammayor': '',
+      'coddueno': '',
+      'codsitio': '',
+      'nomsitio': '',
+      //localizadores
+      'nacion': '',
+      'subnacion': '',
+      'subdivision': '',
+      'nommapa': '',
+      'codmapa': '',
+      'nummarg': '',
+      'lat': '',
+      'long': '',
+      'coords': '',
+      'coordn': '',
+      'coorde': '',
+      'coordo': '',
+      //decriptores
+      'descripcion': '',
+      'areatot1': '', //number
+      'areatot2': '', 
+      'areasubnac1': '',//number
+      'areasubnac2': '',
+      'multisubnac': '',
+      'limites': '',
+      'continua': '',
+      'involtnc': '',
+      'comentario': '',
+      //status
+      'fechaesta': '',
+      'protasign': '',
+      //manejo
+      'administrador': '',
+      'instadmin': '',
+      'diradmin1': '',
+      'diradmin2': '',
+      'ciudadadmin': '',
+      'subnacadmin': '',
+      'codpostaladmin': '',
+      'telefadminist': '',
+      'accesopub': '',
+      'instcoop': '',
+      'commanejo': '',
+      //elementos
+      'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
+      //campos opcionales
+      'amopc1': '',
+      'amopc2': '',
+      'amopc3': '',
+      'amopc4': '',
+      'amopc5': '',
+      //mantenimiento del registro
+      'respdatos': '',
+      'actualizar': ''    
     });
   
+  }
+ // comun para : multisubnac, limites, continua , involtnc
+  getCriterio_Si_No(i:number){
+    switch(i) {
+      case 0 : return '';
+      case 1 : return '1'; // Sí
+      case 2 : return '0'; // No
+    }
+  }
+
+  getCriterio_Protasign (i:number){
+    switch(i){
+      case 0: return '';
+      case 1: return '1';
+      case 2: return '2';
+      case 3: return '3';
+    }
   }
 
 }

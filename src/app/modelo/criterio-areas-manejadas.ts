@@ -19,6 +19,7 @@ export class criterio_areasManejadas{
     'T - Presente como un elemento transitorio, no reproductivo',
     '? - No hay información disponible sobre su presencia o ausencia'];
 
+   //comun para : multisubnac, limites, continua involtnc
     si_no = ['',
     'Sí',
     'No'];
