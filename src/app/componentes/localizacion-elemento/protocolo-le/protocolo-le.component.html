@@ -16,7 +16,7 @@
                             <div class="col-md-2">
                                 <label for="">CODIGOE:</label>
                             </div>
-                            <div class="md-form col-md-3 mt-5 ">
+                            <div class="md-form col-md-3 mt10">
                                 <input mdbInputDirective type="text" id="formCodigoe" class="form-control"  data-error=""
                                   data-success="correcto" required>
                                   <label for="formCodigoe"></label>
@@ -24,17 +24,17 @@
                               <div class="col-md-1">
                                 <label for="">RANGOG:</label>
                             </div>
-                            <div class="col-md-2">
-                                <select class="form-control color-green color-hover-black"  required>
-                                 <option *ngFor="let sRangog of lrangog" [value]="sRangog">{{sRangog}}</option>                                
+                            <div class="col-md-2 mt10">
+                                <select class="form-control color-green color-hover-black"  >
+                                 <option *ngFor="let sRangog of criterio_rangog" [value]="sRangog">{{sRangog}}</option>                                
                                 </select>
                               </div>     
                               <div class="col-md-1">
                                 <label for="">RANGON:</label>
                             </div>
-                            <div class="col-md-2">
-                                <select class="form-control  color-green color-hover-black"  required>
-                                 <option *ngFor="let sRangon of lrangon" [value]="sRangon">{{sRangon}}</option>                                
+                            <div class="col-md-2 mt10">
+                                <select class="form-control  color-green color-hover-black"  >
+                                 <option *ngFor="let sRangon of criterio_rangon" [value]="sRangon">{{sRangon}}</option>                                
                                 </select>
                               </div>            
                         </div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="md-form col-md-9 mt-20 ">
                             <input mdbInputDirective type="text" id="formNombre" class="form-control"  data-error="incorrecto"
-                              data-success="correcto" required>
+                              data-success="correcto" >
                               <label for="formNombre"></label>
                           </div>
                         </div>
@@ -54,29 +54,28 @@
                             <div class="col-md-2">
                                 <label for="">NOMCOMUN:</label>
                             </div>
-                            <div class="md-form col-md-9 mt-20 ">
+                            <div class="md-form col-md-9 mt-20">
                                 <input mdbInputDirective type="text" id="formNomcomun" class="form-control"  data-error="incorrecto"
-                                  data-success="correcto" required>
+                                  data-success="correcto" >
                                   <label for="formNomcomun"></label>
                               </div>
                         </div>
                         <!-- fin row-->
-                        <div class="row mx-auto">
+                        <div class="row mx-auto color-green">
                             <ng2-smart-table [settings]="settings_Protocolo"
                              [source]="source_Protocolo">
                             </ng2-smart-table>
                         </div>
                         <!-- fin row -->
-                    </div>
+
+                    </div> 
                     <!-- fin modal- content -->
+                    <div class="text-center ">
+                            <button class="btn color-green waves-light"  type="submit" mdbWavesEffect>Guardar</button>                     
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                    
+                    </div>
                   </form>
-                  <!-- fin form -->
-                  <div class="text-center ">
-                      <p>
-                          <button class="btn color-green waves-light"  type="submit" mdbWavesEffect>Guardar</button>                     
-                          <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                      </p>
-                  </div>
+                  <!-- fin form -->                
               </ng-template>
               <!-- fin ng-template -->
           </ngb-tab>

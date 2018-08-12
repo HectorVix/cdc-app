@@ -22,7 +22,7 @@ export class FormularioLeComponent implements OnInit {
   criterio_si_no = this.criterio_le.si_no;
   criterio_rango_le = this.criterio_le.rango_le;
   criterio_rangog = this.criterio_le.rangog;
-  criterio_rangon = this.criterio_le.rangog;
+  criterio_rangon = this.criterio_le.rangon;
 
   settings_proteccion = {
     columns: {

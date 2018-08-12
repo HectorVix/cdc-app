@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {Protocolo} from '../../../modelo/tabla';
+import { criterio_le } from '../../../modelo/criterio-le';
 @Component({
   selector: 'app-protocolo-le',
   templateUrl: './protocolo-le.component.html',
   styleUrls: ['./protocolo-le.component.scss']
 })
 export class ProtocoloLeComponent implements OnInit {
-  lrangog= ['','G1','G2'];
-  lrangon= ['','N1','N2'];
+  criterio_le = new criterio_le();
+  criterio_rangog = this.criterio_le.rangog;
+  criterio_rangon = this.criterio_le.rangon;
   source_Protocolo:Protocolo[];
   settings_Protocolo = {
     columns: {
