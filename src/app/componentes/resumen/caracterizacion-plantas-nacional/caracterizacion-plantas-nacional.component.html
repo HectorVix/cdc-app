@@ -9,21 +9,19 @@
                 <ng-template ngbTabContent>
                     <form action="">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Identificadores:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">CODIGOE:</label>
                                 </div>
-                                <div class="md-form col-md-4 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formCodigoe" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                <div class="md-form col-md-4 mt10">
+                                    <input mdbInputDirective type="text" id="formCodigoe" class="form-control" data-error="  " data-success="  ">
                                     <label for="formCodigoe"></label>
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formnacion" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                <div class="md-form col-md-2 mt10">
+                                    <input mdbInputDirective type="text" id="formnacion" class="form-control" data-error="  " data-success="  " >
                                     <label for="formnacion">&nbsp;&nbsp;&nbsp;&nbsp; NACION</label>
                                 </div>
                             </div>
@@ -33,8 +31,7 @@
                                     <label for="">NOMBREN:</label>
                                 </div>
                                 <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formNombren" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                    <input mdbInputDirective type="text" id="formNombren" class="form-control" data-error="  " data-success="  " >
                                     <label for="formNombren"></label>
                                 </div>
                             </div>
@@ -44,8 +41,7 @@
                                     <label for="">NOMCOMUNN:</label>
                                 </div>
                                 <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto" required>
+                                    <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" data-error="  " data-success="  " >
                                     <label for="formNomcomunn"></label>
                                 </div>
                             </div>
@@ -53,18 +49,18 @@
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Taxonomía:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMSUBESPN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt10">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComsubespn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComsubespn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComsubespn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComsubespn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -72,11 +68,11 @@
                                 <div class="col-md-2">
                                     <label for="">TAXASIMILN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formTaxasimiln" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formTaxasimiln">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formTaxasimiln" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formTaxasimiln">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -84,11 +80,11 @@
                                 <div class="col-md-2">
                                     <label for="">COMIDENTN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComidentn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComidentn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComidentn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComidentn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -96,18 +92,18 @@
                                 <div class="col-md-2">
                                     <label for="">COMTAXN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComtaxn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComtaxn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Status:</h5>
                             </div>
                             <div class="row">
@@ -115,7 +111,7 @@
                                     <label for="">RANGOG:</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-control" required>
+                                    <select class="form-control" >
                                         <option *ngFor="let sRangog of lrangog" [value]="sRangog">{{sRangog}}</option>
                                     </select>
                                 </div>
@@ -123,7 +119,7 @@
                                     <label for="">RANGON:</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-control" required>
+                                    <select class="form-control" >
                                         <option *ngFor="let sRangon of lrangon" [value]="sRangon">{{sRangon}}</option>
                                     </select>
                                 </div>
@@ -131,7 +127,7 @@
                                     <label for="">AEPEU:</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-control" required>
+                                    <select class="form-control" >
                                         <option *ngFor="let sAepeu of laepeu" [value]="sAepeu">{{sAepeu}}</option>
                                     </select>
                                 </div>
@@ -142,22 +138,18 @@
                                     <label for="">CITES:</label>
                                 </div>
                                 <div class="md-form col-md-2 mt-3">
-                                    <input mdbInputDirective type="text" id="formCites" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                    <input mdbInputDirective type="text" id="formCites" class="form-control" data-error="  " data-success="  " >
                                 </div>
                                 <div class="md-form col-md-2 mt-3">
-                                    <input mdbInputDirective type="text" id="formUicn" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                    <input mdbInputDirective type="text" id="formUicn" class="form-control" data-error="  " data-success="  " >
                                     <label for="formUicn">&nbsp;&nbsp;&nbsp;&nbsp;UICN</label>
                                 </div>
                                 <div class="md-form col-md-2 mt-3">
-                                    <input mdbInputDirective type="text" id="formRastreolen" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto" required>
+                                    <input mdbInputDirective type="text" id="formRastreolen" class="form-control" data-error="  " data-success="  " >
                                     <label for="formRastreolen">&nbsp;&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
                                 </div>
                                 <div class="md-form col-md-2 mt-3">
-                                    <input mdbInputDirective type="text" id="formProtnacion" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto" required>
+                                    <input mdbInputDirective type="text" id="formProtnacion" class="form-control" data-error="  " data-success="  " >
                                     <label for="formProtnacion">&nbsp;&nbsp;&nbsp;&nbsp;PROTNACION</label>
                                 </div>
                             </div>
@@ -167,8 +159,7 @@
                                     <label for="">MALEZAN:</label>
                                 </div>
                                 <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formMalezan" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                                        required>
+                                    <input mdbInputDirective type="text" id="formMalezan" class="form-control" data-error="  " data-success="  " >
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -177,8 +168,7 @@
                                     <label for="">CLASIFINSTN:</label>
                                 </div>
                                 <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formClasifinstn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto" required>
+                                    <input mdbInputDirective type="text" id="formClasifinstn" class="form-control" data-error="  " data-success="  " >
                                     <label for="formClasifinstn"></label>
                                 </div>
                             </div>
@@ -189,8 +179,8 @@
                                 </div>
                                 <div class="md-form  col-md-7 mt-5">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComstantn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
+                                    <textarea mdbInputDirective type="text" id="formComstantn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
                                     <label for="formComstantn">Anote</label>
                                 </div>
                             </div>
@@ -198,16 +188,15 @@
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Inventario:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">PRI.INVENTN:</label>
                                 </div>
-                                <div class="md-form col-md-2 mt-3 ">
-                                    <input mdbInputDirective type="text" id="formPriInventn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto" required>
+                                <div class="md-form col-md-2 mt10">
+                                    <input mdbInputDirective type="text" id="formPriInventn" class="form-control" data-error="  " data-success="  " >
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -215,11 +204,11 @@
                                 <div class="col-md-2">
                                     <label for="">NEC.INVENTN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecInventn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta" required></textarea>
-                                    <label for="formCita">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formNecInventn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  " ></textarea>
+                                    <label for="formCita">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -227,11 +216,11 @@
                                 <div class="col-md-2">
                                     <label for="">COM.INVENTN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComInventn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta" required></textarea>
-                                    <label for="formComInventn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComInventn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  " ></textarea>
+                                    <label for="formComInventn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -239,9 +228,8 @@
                                 <div class="col-md-2">
                                     <label for="">RES.PROPN:</label>
                                 </div>
-                                <div class="md-form col-md-4 mt-3 ">
-                                    <input mdbInputDirective type="text" id="formResPropn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto">
+                                <div class="md-form col-md-4 mt-20 ">
+                                    <input mdbInputDirective type="text" id="formResPropn" class="form-control" data-error="  " data-success="  ">
                                     <label for="formResPropn"></label>
                                 </div>
                             </div>
@@ -252,8 +240,8 @@
                     <!-- fin form -->
                     <div class="text-center ">
                         <p>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
-                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                         </p>
                     </div>
                 </ng-template>
@@ -268,15 +256,15 @@
                 <ng-template ngbTabContent>
                     <form action="">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Distribución:</h5>
                             </div>
-                            <div class="row  mx-auto ">
+                            <div class="row  mx-auto color-green ">
                                 <ng2-smart-table [settings]="settings_distribucion1" [source]="source_Distribucion1">
                                 </ng2-smart-table>
                             </div>
                             <!-- fin row -->
-                            <div class="row  mx-auto ">
+                            <div class="row  mx-auto color-green">
                                 <ng2-smart-table [settings]="settings_distribucion2" [source]="source_Distribucion2">
                                 </ng2-smart-table>
                             </div>
@@ -285,23 +273,19 @@
                                 <div class="col-md-2">
                                     <label for="">ELEVMINN:</label>
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formElevminn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto">
+                                <div class="md-form col-md-2 mt10 ">
+                                    <input mdbInputDirective type="text" id="formElevminn" class="form-control" data-error="  " data-success="  ">
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formElevmaxn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto">
+                                <div class="md-form col-md-2 mt10 ">
+                                    <input mdbInputDirective type="text" id="formElevmaxn" class="form-control" data-error="  " data-success="  ">
                                     <label for="formElevmaxn">&nbsp;&nbsp;&nbsp;&nbsp;ELEVMAXN</label>
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formDisyuntn" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto">
+                                <div class="md-form col-md-2 mt10 ">
+                                    <input mdbInputDirective type="text" id="formDisyuntn" class="form-control" data-error="  " data-success="  ">
                                     <label for="formDisyuntn">&nbsp;&nbsp;&nbsp;&nbsp;DISYUNTN</label>
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formPeriferican" class="form-control" data-error="incorrecto, minimo 3 caracteres"
-                                        data-success="correcto">
+                                <div class="md-form col-md-2 mt10 ">
+                                    <input mdbInputDirective type="text" id="formPeriferican" class="form-control" data-error="  " data-success="  ">
                                     <label for="formPeriferican">&nbsp;&nbsp;&nbsp;&nbsp;PERFERICAN</label>
                                 </div>
                             </div>
@@ -311,47 +295,47 @@
                                 <div class="col-md-2">
                                     <label for="">COMDISTN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComdistn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComdistn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComdistn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComdistn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!-- fin modal-content -->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Habitat:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMHABN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt10">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComhabn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComhabn">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComhabn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComhabn">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Ecología:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMECOLN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt10">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComecoln" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                        data-success="correcta"></textarea>
-                                    <label for="formComecoln">Anote</label>
+                                    <textarea mdbInputDirective type="text" id="formComecoln" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
+                                    <label for="formComecoln">Comentario</label>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -361,9 +345,9 @@
                     <!-- fin form -->
                     <div class="text-center ">
                         <p>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>
-                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                         </p>
                     </div>
                 </ng-template>
@@ -378,11 +362,11 @@
                 <ng-template ngbTabContent>
                     <form action="">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Fenología:</h5>
                             </div>
                             <table class="table">
-                                <thead class="thead-light">
+                                <thead class="color-green">
                                     <tr>
                                         <th scope="col">NENEA</th>
                                         <th scope="col">NMARA</th>
@@ -396,50 +380,50 @@
                                     <tr>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNenea1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNenea2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNenea3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNenea4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNenea1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNenea2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNenea3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNenea4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNmara1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmara2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmara3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmara4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNmara1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmara2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmara3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmara4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNmaya1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmaya2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmaya3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmaya4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNmaya1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmaya2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmaya3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmaya4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNjula1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjula2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjula3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjula4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNjula1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjula2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjula3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjula4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formSeta1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSeta2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSeta3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSeta4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formSeta1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSeta2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSeta3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSeta4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNnova1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnova2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnova3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnova4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNnova1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnova2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnova3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnova4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                     </tr>
@@ -447,7 +431,7 @@
                                 </tbody>
                             </table>
                             <table class="table">
-                                <thead class="thead-light">
+                                <thead class="color-green">
                                     <tr>
                                         <th scope="col">NENEB</th>
                                         <th scope="col">NMARB</th>
@@ -461,50 +445,50 @@
                                     <tr>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNeneb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNeneb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNeneb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNeneb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNeneb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNeneb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNeneb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNeneb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNmarb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmarb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmarb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmarb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNmarb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmarb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmarb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmarb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNmayb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmayb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmayb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNmayb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNmayb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmayb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmayb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNmayb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNjulb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjulb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjulb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjulb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNjulb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjulb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjulb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjulb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formSetb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSetb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSetb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formSetb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formSetb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSetb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSetb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formSetb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNnovb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnovb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnovb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNnovb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNnovb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnovb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnovb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNnovb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                     </tr>
@@ -512,7 +496,7 @@
                                 </tbody>
                             </table>
                             <table class="table">
-                                <thead class="thead-light">
+                                <thead class="color-green">
                                     <tr>
                                         <th scope="col">NFEBA</th>
                                         <th scope="col">NABRA</th>
@@ -526,50 +510,50 @@
                                     <tr>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNfeba1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfeba2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfeba3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfeba4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNfeba1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfeba2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfeba3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfeba4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNabra1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabra2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabra3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabra4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNabra1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabra2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabra3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabra4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNjuna1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjuna2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjuna3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjuna4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNjuna1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjuna2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjuna3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjuna4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNagoa1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagoa2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagoa3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagoa4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNagoa1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagoa2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagoa3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagoa4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNocta1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNocta2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNocta3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNocta4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNocta1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNocta2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNocta3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNocta4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNdica1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdica2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdica3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdica4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNdica1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdica2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdica3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdica4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                     </tr>
@@ -577,7 +561,7 @@
                                 </tbody>
                             </table>
                             <table class="table">
-                                <thead class="thead-light">
+                                <thead class="color-green">
                                     <tr>
                                         <th scope="col">NFEBB</th>
                                         <th scope="col">NABRB</th>
@@ -591,50 +575,50 @@
                                     <tr>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNfebb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfebb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfebb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNfebb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNfebb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfebb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfebb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNfebb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNabrb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabrb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabrb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNabrb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNabrb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabrb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabrb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNabrb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNjunb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjunb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjunb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNjunb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNjunb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjunb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjunb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNjunb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNagob1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagob2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagob3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNagob4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNagob1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagob2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagob3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNagob4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNoctb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNoctb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNoctb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNoctb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNoctb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNoctb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNoctb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNoctb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="md-form col-md-4 mt-20">
-                                                <input mdbInputDirective type="text" id="formNdicb1" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdicb2" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdicb3" class="form-control" data-success="correcto">
-                                                <input mdbInputDirective type="text" id="formNdicb4" class="form-control" data-success="correcto">
+                                                <input mdbInputDirective type="text" id="formNdicb1" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdicb2" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdicb3" class="form-control" data-success="  ">
+                                                <input mdbInputDirective type="text" id="formNdicb4" class="form-control" data-success="  ">
                                             </div>
                                         </td>
                                     </tr>
@@ -645,60 +629,59 @@
                                 <div class="col-md-2">
                                     <label for="">COMFENOLN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComfenoln" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                      data-success="correcta"></textarea>
+                                    <textarea mdbInputDirective type="text" id="formComfenoln" class="md-textarea form-control" rows="1" data-error=" " data-success="  "></textarea>
                                     <label for="formComfenoln">Comentarios</label>
-                                  </div>
+                                </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Reproducción:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMREPN:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt10">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComrepn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                      data-success="correcta"></textarea>
+                                    <textarea mdbInputDirective type="text" id="formComrepn" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
                                     <label for="formComrepn">Comentarios</label>
-                                  </div>
+                                </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Manejo:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMMANEJON:</label>
                                 </div>
-                                <div class="md-form  col-md-7 mt-5">
+                                <div class="md-form  col-md-9 mt10">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formCommanejon" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                      data-success="correcta"></textarea>
+                                    <textarea mdbInputDirective type="text" id="formCommanejon" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
+                                        data-success="  "></textarea>
                                     <label for="formCommanejon">Comentarios</label>
-                                  </div>
+                                </div>
                             </div>
                             <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
-                        
+
                     </form>
                     <!-- fin form -->
                     <div class="text-center ">
                         <p>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>
-                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid4')" mdbWavesEffect>Siguiente</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                         </p>
                     </div>
                 </ng-template>
@@ -712,85 +695,151 @@
                 </ng-template>
                 <ng-template ngbTabContent>
                     <form action="">
-                            <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Campos opcionales:</h5>
-                                    </div>
-                                    <div class="row  mx-auto ">
-                                            <ng2-smart-table [settings]="settings_CamposOpcionales"
-                                             [source]="source_CamposOpcionales">
-                                            </ng2-smart-table>
-                                        </div>
-                                        <!-- fin row -->
-                                </div>
-                                <!--fin modal-content-->
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header color-green">
+                                <h5 class="modal-title">Campos opcionales:</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RCPN.OPC1:</label>
+                                </div>
+                                <div class="md-form col-md-9 mt10">
+                                    <input mdbInputDirective type="text" id="formRcpnopc1" class="form-control" data-error=" " data-success=" ">
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RCPN.OPC2:</label>
+                                </div>
+                                <div class="md-form col-md-9 mt-20">
+                                    <input mdbInputDirective type="text" id="formRcpnopc2" class="form-control" data-error=" " data-success=" ">
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RCPN.OPC3:</label>
+                                </div>
+                                <div class="md-form col-md-9 mt-20">
+                                    <input mdbInputDirective type="text" id="formRcpnopc3" class="form-control" data-error=" " data-success=" ">
+                                </div>
+                            </div>
+                            <!-- fin row -->
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RCPN.OPC4:</label>
+                                </div>
+                                <div class="md-form col-md-9 mt-20">
+                                    <input mdbInputDirective type="text" id="formRcpnopc4" class="form-control" data-error=" " data-success=" ">
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="">RCPN.OPC5:</label>
+                                </div>
+                                <div class="md-form  col-md-9 mt-20">
+                                    <i class="fa fa-pencil prefix"></i>
+                                    <textarea mdbInputDirective type="text" id="formRcpnopc5" class="md-textarea form-control" rows="1" data-error=" " data-success=" "></textarea>
+                                    <label for="formRcpnopc5">Anote</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                        </div>
+                        <!--fin modal-content-->
+                        <div class="modal-content">
+                            <div class="modal-header color-green">
                                 <h5 class="modal-title">Manteniento del registro:</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
+                                    <label for="">CODFUENTE:</label>
+                                </div>
+                                <div class="md-form col-md-4 mt10 ">
+                                    <input mdbInputDirective type="text" id="formCodfuente" class="form-control" data-error="  " data-success="  " >
+                                    <label for="formCodfuente"></label>
+                                </div>
+                                <div class="md-form col-md-4 mt10 ">
+                                    <input mdbInputDirective type="text" id="formCita" class="form-control" data-error="  " data-success="  " >
+                                    <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;CITA</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-2">
                                     <label for="">TRANSPAREN:</label>
                                 </div>
-                                <div class="md-form col-md-2 mt-5 ">
-                                        <input mdbInputDirective type="text" id="formTransparen" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                                          data-success="correcto" required>
-                                          <label for="formTransparen"></label>
-                                      </div>
+                                <div class="md-form col-md-4 mt-20 ">
+                                    <input mdbInputDirective type="text" id="formTransparen" class="form-control" data-error="  " data-success="  " >
+                                    <label for="formTransparen"></label>
+                                </div>
                             </div>
                             <!-- fin row -->
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">REFG:</label>
                                 </div>
-                                <div class="md-form  col-md-4 mt-5">
-                                        <i class="fa fa-pencil prefix"></i>
-                                        <textarea mdbInputDirective type="text" id="formRefg" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                          data-success="correcta"  required></textarea>
-                                        <label for="formRefg"></label>
-                                      </div>
-                                      <div class="md-form  col-md-4 mt-5">
-                                            <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formRefn" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                                              data-success="correcta"  required></textarea>
-                                            <label for="formRefn">REFN</label>
-                                          </div>                                 
+                                <div class="md-form  col-md-4 mt-20">
+                                    <i class="fa fa-pencil prefix"></i>
+                                    <textarea mdbInputDirective type="text" id="formRefg" class="md-textarea form-control" rows="1" data-error=" "
+                                        data-success="  " ></textarea>
+                                    <label for="formRefg"></label>
+                                </div>
+                                <div class="md-form  col-md-4 mt-20">
+                                    <i class="fa fa-pencil prefix"></i>
+                                    <textarea mdbInputDirective type="text" id="formRefn" class="md-textarea form-control" rows="1" data-error=" "
+                                        data-success="  " ></textarea>
+                                    <label for="formRefn">REFN</label>
+                                </div>
+                            </div>
+                            <!-- fin row -->
+                          
+                            <div class="row">
+                                <div class="col-md-7">
+                                </div>
+                                <div class="md-form col-md-2 input-group-append mt-10">
+                                    <input mdbInputDirective type="text" id="formEdicionn" class="form-control" 
+                                    ngbDatepicker #dEdicionn="ngbDatepicker">
+                                    <label for="formEdicionn">&nbsp;&nbsp;&nbsp;&nbsp;EDICIÓNN</label>
+                                    <div (click)="dEdicionn.toggle()">
+                                        <i class="fa fa-calendar prefix"></i>
+                                    </div>
+                                </div>
                             </div>
                             <!-- fin row -->
                             <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">EDICIÓNN:</label>
+                                <div class="col-md-7">
                                 </div>
-                                <div class="md-form form-sm  input-group-append mt-0">
-                                        <i class="fa fa-calendar prefix "></i>
-                                        <input mdbInputDirective type="text" id="formEdicionn" class="form-control" ngbDatepicker
-                                          #dEdicionn="ngbDatepicker">
-                                        <label for="formEdicionn"></label>
-                                        <div class="input-group-append ">
-                                          <button class="btn btn-info mb-2 waves-light" (click)="dEdicionn.toggle()" mdbWavesEffect>Date
-                                          </button>
-                                        </div>
-                                       </div>
-                                       <div class="md-form form-sm  input-group-append mt-0">
-                                            <i class="fa fa-calendar prefix "></i>
-                                            <input mdbInputDirective type="text" id="formActualizan" class="form-control" ngbDatepicker
-                                              #dActualizan="ngbDatepicker">
-                                            <label for="formActualizan">ACTUALIZAN</label>
-                                            <div class="input-group-append ">
-                                              <button class="btn btn-info mb-2 waves-light" (click)="dActualizan.toggle()" mdbWavesEffect>Date
-                                              </button>
-                                            </div>
-                                           </div>
+                                <div class="md-form col-md-2 mt-10">
+                                    <input mdbInputDirective type="text" id="formAutoredn" class="form-control"  data-error=" "
+                                      data-success=" ">
+                                      <label for="formAutoredn">&nbsp;&nbsp;&nbsp;&nbsp;AUTOR ED.N</label>
+                                  </div>
                             </div>
+                            <!-- fin row -->
+                            <div class="row">
+                                <div class="col-md-7"> </div>
+                                <div class="md-form col-md-2  input-group-append mt-10">
+                                    <input mdbInputDirective type="text" id="formActualizan" class="form-control"
+                                     ngbDatepicker #dActualizan="ngbDatepicker">
+                                    <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
+                                    <div (click)="dActualizan.toggle()">
+                                        <i class="fa fa-calendar prefix"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fin row -->
                         </div>
                         <!--fin modal-content-->
                     </form>
                     <!-- fin form -->
                     <div class="text-center ">
                         <p>
-                            <button class="btn btn-cyan waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
-                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
-                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
+                            <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                         </p>
                     </div>
                 </ng-template>

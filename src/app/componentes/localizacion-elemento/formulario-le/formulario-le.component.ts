@@ -111,7 +111,7 @@ export class FormularioLeComponent implements OnInit {
       'infprop': '',
       'comprop': '',
       //campos opcionales
-      'lista_campos_opcionales': '',
+      'leopc1': '','leopc2': '','leopc3': '','leopc4': '','leopc5': '','leopc6': '','leopc7': '','leopc8': '','leopc9': '','leopc10': '',
       //comentarios generales
       'comentario': '',
       //documentación y mantenimiento
