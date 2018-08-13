@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FuenteModelo } from '../formulario-resumen-fuente/fuente-modelo';
+import { FuenteModelo } from '../../../modelo/fuente-modelo';
+import { criterio_ResumenesFuente } from '../../../modelo/criterio-resumenes-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-formulario-resumen-fuente',
@@ -9,23 +10,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormularioResumenFuenteComponent implements OnInit {
   fuenteForm: FormGroup;
   fuentemodelo: FuenteModelo;
-  archivado = ['', 'CDC', 'ZOOLOGIA', 'BOTANICA', 'SECCION LIBROS', 'TESIS', 'NO EN CASA'];
-  naturalezaDocument = ['', 'A', 'C', 'F', 'I', 'D', 'L', 'M', 'O', 'P', 'R'];
-
-
+  criterio_ResumenesFuente = new criterio_ResumenesFuente();
+  criterio_codfuente = this.criterio_ResumenesFuente.codfuente;
+  criterio_publicacion_cdc = this.criterio_ResumenesFuente.publicacion_cdc;
+  criterio_valor = this.criterio_ResumenesFuente.valor;
 
   constructor(private fb: FormBuilder) {
-    this.createForm();
+    this.crearForm_ResumenesFuente();
 
   }
-  createForm() {
+  crearForm_ResumenesFuente() {
 
     this.fuenteForm = this.fb.group({
-      'codfuente': [null, Validators.minLength(3)],
-      'cita': [null, Validators.minLength(5)],
+      'codigo': '',
+      'codfuente':'',
+      'cita':'',
       'archivado': '',
       'cobgeo': '',
-      'resumen': [null, Validators.minLength(10)],
+      'coords': '',
+      'coordn': '',
+      'coorde': '',
+      'coordo': '',
+      'resumen': '',
+      //tema
       'comunat': '',
       'comunterr': '',
       'bosque': '',
@@ -38,7 +45,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'comunac': '',
       'palustre': '',
       'lacustre': '',
-      'pluvial': '',
+      'fluvial': '',
       'estuarino': '',
       'maritimo': '',
       'subterp': '',
@@ -56,7 +63,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'moluscos': '',
       'insectos': '',
       'crustaceos': '',
-      'otroantrop': '',
+      'otroartrop': '',
       'otroinvert': '',
       'peces': '',
       'anfibios': '',
@@ -66,24 +73,30 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'cienfisic': '',
       'fisiotopo': '',
       //otros
-      'hidrol    ': '',
-      'geologia  ': '',
-      'suelos    ': '',
-      'clima     ': '',
-      'biologia  ': '',
-      'ecologia  ': '',
-      'funecol   ': '',
-      'diversnat ': '',
+      'hidrol': '',
+      'geologia': '',
+      'suelos': '',
+      'clima': '',
+      'biologia': '',
+      'ecologia': '',
+      'funecol': '',
+      'diversnat': '',
       'inventario': '',
-      'tecinvest ': '',
-      'am        ': '',
+      'tecinvest': '',
+      'am': '',
       'planmanejo': '',
-      'tecmanejo ': '',
-      'estimpamb ': '',
-      'organprot ': '',
-      'herrprot  ': ''
-
-
+      'tecmanejo': '',
+      'estimpamb': '',
+      'organprot': '',
+      'herrprot': '',
+      'publicacioncdc': '',
+      'valor': '',
+      'clave': '',
+      'comentario': '',
+      'notadigest': '',
+      'actualizar': '',
+      'control': '',
+      'bcd': ''
     });
   }
 
@@ -101,5 +114,36 @@ export class FormularioResumenFuenteComponent implements OnInit {
   onSubmit() {
 
     console.log("Form Submitted!");
+  }
+
+  getCriterio_ResumenesFuente(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return 'A';
+      case 2: return 'C';
+      case 3: return 'F';
+      case 4: return 'I';
+      case 5: return 'D';
+      case 6: return 'L';
+      case 7: return 'M';
+      case 8: return 'O';
+      case 9: return 'P';
+      case 10: return 'R';
+    }
+  }
+  getCriterio_Publicacion_cdc(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return '1' //Sí
+      case 2: return '0' //No
+    }
+  }
+  getCriterio_Valor(i: number) {
+    switch (i) {
+      case 0: return '';
+      case 1: return '1'; 
+      case 2: return '2';
+      case 3: return '3'; 
+    }
   }
 }

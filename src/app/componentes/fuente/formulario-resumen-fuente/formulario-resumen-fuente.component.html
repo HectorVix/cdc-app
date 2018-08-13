@@ -11,8 +11,13 @@
                 <div class="col-md-2">
                   <label for="">CODFUENTE:</label>
                 </div>
-                <div class="md-form col-md-4 mt-5">
-                  <input mdbInputDirective type="text" id="form1" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
+                <div class=" col-md-4 mt10">
+                  <select class="form-control color-green"  formControlName="codigo" >
+                    <option *ngFor="let sCodigoFuente of criterio_codfuente; let i1=index;" [value]="getCriterio_ResumenesFuente(i1)">{{sCodigoFuente}}</option>
+                  </select>
+                </div>
+                <div class="md-form col-md-4 mt10">
+                  <input mdbInputDirective type="text" id="form1" class="form-control" data-error="Error" data-success="Correcto"
                     formControlName="codfuente" required>
                   <label for="form1" class="font-weight-light"></label>
                 </div>
@@ -23,11 +28,11 @@
                 <div class="col-md-2">
                   <label for="">CITA:</label>
                 </div>
-                <div class="md-form  col-md-7 mt-5">
+                <div class="md-form  col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                    data-success="correcta" formControlName="cita" required></textarea>
-                  <label for="formCita"></label>
+                  <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="1" data-error=" "
+                    data-success=" " formControlName="cita" ></textarea>
+                  <label for="formCita">Cita Bibliográfica</label>
                 </div>
               </div>
               <!-- fin row -->
@@ -37,24 +42,22 @@
                 <div class=" col-md-2">
                   <label for="">ARCHIVADO:</label>
                 </div>
-                <div class=" col-md-3 mt-5">
-                  <select class="form-control color-green" formControlName="archivado" required>
-                    <option *ngFor="let archivo of archivado" [value]="archivo">{{archivo}}</option>
-                  </select>
-                </div>
+                <div class="md-form col-md-4 mt-20">        
+                  <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" " data-success=" "
+                    formControlName="cobgeo" >
+                  <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
+                </div> 
               </div>      
               <!-- fin row -->
               <div class="row">
                 <div class="col-md-2">
                   <label for="">COBGEO:</label>
                 </div>
-                <!------------------------COBGEO------------------------------ -->
-            
-                <div class="md-form col-md-4 mt-5">
-        
-                  <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                    formControlName="cobgeo" required>
-                  <label for="formCOBGEO"></label>
+                <!------------------------COBGEO------------------------------ -->          
+                <div class="md-form col-md-9 mt-20">      
+                  <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error=" " data-success=" "
+                    formControlName="cobgeo" >
+                  <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del Documento.</label>
                 </div>       
               </div>
               <!-- fin row -->
@@ -64,24 +67,24 @@
                   <label for="">S:</label>
                 </div>
                             
-                    <div class="md-form  col-md-2 mt-5 ">
-                      <input mdbInputDirective type="text" id="formRangoG" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                        required>
+                    <div class="md-form  col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formRangoG" class="form-control" formControlName="coords" data-error=" " data-success=" "
+                        >
                       <label for="formRangoG"></label>
                     </div>
-                    <div class="md-form col-md-2 mt-5 ">
-                      <input mdbInputDirective type="text" id="formRangoN" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                        required>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formRangoN" class="form-control" formControlName="coordn" data-error=" " data-success=" "
+                        >
                       <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
                     </div>
-                    <div class="md-form col-md-2 mt-5 ">
-                      <input mdbInputDirective type="text" id="formRangos" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                        required>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coorde" data-error=" " data-success=" "
+                        >
                       <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;E</label> 
                     </div>
-                    <div class="md-form col-md-2 mt-5 ">
-                        <input mdbInputDirective type="text" id="formRangos" class="form-control" data-error="incorrecto, minimo 3 caracteres" data-success="correcto"
-                          required>
+                    <div class="md-form col-md-2 mt-20">
+                        <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coordo" data-error=" " data-success=" "
+                          >
                         <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;O</label> 
                       </div>
                   
@@ -92,11 +95,11 @@
                  <div class="col-md-2">
                    <label for="">RESUMEN:</label>
                  </div>
-                 <div class="md-form  col-md-7 mt-5">
+                 <div class="md-form  col-md-9 mt-20">
                     <i class="fa fa-pencil prefix"></i>
-                    <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 10 caracteres"
-                      data-success="correcta" formControlName="resumen" required></textarea>
-                    <label for="formResumen"></label>
+                    <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="1" data-error=" "
+                      data-success=" " formControlName="resumen" ></textarea>
+                    <label for="formResumen">Escriba un texto corto  pero representativo del contenido general del documento.</label>
                   </div>
                </div>
                <!-- fin row -->
@@ -107,86 +110,86 @@
                  </div>
                  <div class="col-md-2 ">             
                     <label><input type="checkbox" formControlName="comunat" value="">COMUNAT</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">COMMUNTERR</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">BOSQUE</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">SABANA</label>
+                    <label><input type="checkbox" formControlName="comunterr" value="">COMMUNTERR</label>
+                    <label><input type="checkbox" formControlName="bosque" value="">BOSQUE</label>
+                    <label><input type="checkbox" formControlName="sabana" value="">SABANA</label>
                     <div class="checkbox">
-                        <label><input type="checkbox" formControlName="comunat" value="">PRADO</label>
+                        <label><input type="checkbox" color="color-green" formControlName="comunat" value="">PRADO</label>
                     </div>             
-                    <label><input type="checkbox" formControlName="comunat" value="">CHAPARRAL</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">DESIERTO</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">ALPINO</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">OTROTERR</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">COMUNAC</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">PALUSTRE</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">LACUSTRE</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">FLUVIAL</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">ESTUARINO</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">MARITIMO</label>
-                    <label><input type="checkbox" formControlName="comunat" value="">SUBTERP</label>
+                    <label><input type="checkbox" formControlName="chaparral" value="">CHAPARRAL</label>
+                    <label><input type="checkbox" formControlName="desierto" value="">DESIERTO</label>
+                    <label><input type="checkbox" formControlName="alpino" value="">ALPINO</label>
+                    <label><input type="checkbox" formControlName="otroterr" value="">OTROTERR</label>
+                    <label><input type="checkbox" formControlName="comunac" value="">COMUNAC</label>
+                    <label><input type="checkbox" formControlName="palustre" value="">PALUSTRE</label>
+                    <label><input type="checkbox" formControlName="lacustre" value="">LACUSTRE</label>
+                    <label><input type="checkbox" formControlName="fluvial" value="">FLUVIAL</label>
+                    <label><input type="checkbox" formControlName="estuarino" value="">ESTUARINO</label>
+                    <label><input type="checkbox" formControlName="maritimo" value="">MARITIMO</label>
+                    <label><input type="checkbox" formControlName="subterp" value="">SUBTERP</label>
                     
                     
                   </div>
                   <!--Flora-->
               <div class="col-md-2 ">           
-                   <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORA</label>
+                   <label><input type="checkbox"  formControlName="flora" value="">FLORA</label>
                    <div class="checkbox">
-                      <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORAAC</label>
+                      <label><input type="checkbox"  formControlName="floraac" value="">FLORAAC</label>
                    </div>            
-                   <label><input type="checkbox" name="validate" formControlName="comunat" value="">FLORATERP</label>
-                   <label><input type="checkbox" name="validate" formControlName="comunat" value="">PLNOVASC</label>
-                   <label><input type="checkbox" name="validate" formControlName="comunat" value="">MICROORG</label>
-                   <label><input type="checkbox" name="validate" formControlName="comunat" value="">INFOSITIO</label>
+                   <label><input type="checkbox"  formControlName="floraterp" value="">FLORATERP</label>
+                   <label><input type="checkbox"  formControlName="plnovasc" value="">PLNOVASC</label>
+                   <label><input type="checkbox"  formControlName="microorg" value="">MICROORG</label>
+                   <label><input type="checkbox"  formControlName="infositio" value="">INFOSITIO</label>
                 </div>
                 <!--Fauna-->
                 <div class="col-md-2 ">           
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNA</label>
+                    <label><input type="checkbox"  formControlName="fauna" value="">FAUNA</label>
                     <div class="checkbox">
-                        <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNAAC</label>
+                        <label><input type="checkbox"  formControlName="faunaac" value="">FAUNAAC</label>
                     </div>             
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">FAUNATERR</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">MOLUSCOS</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">INSECTOS</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">CRUSTACEOS</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">OTROARTROP</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">OTROINVERT</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">PECES</label>
+                    <label><input type="checkbox"  formControlName="faunaterr" value="">FAUNATERR</label>
+                    <label><input type="checkbox"  formControlName="moluscos" value="">MOLUSCOS</label>
+                    <label><input type="checkbox"  formControlName="insectos" value="">INSECTOS</label>
+                    <label><input type="checkbox"  formControlName="crustaceos" value="">CRUSTACEOS</label>
+                    <label><input type="checkbox"  formControlName="otroartrop" value="">OTROARTROP</label>
+                    <label><input type="checkbox"  formControlName="otroinvert" value="">OTROINVERT</label>
+                    <label><input type="checkbox"  formControlName="peces" value="">PECES</label>
                     <div class="checkbox">
-                        <label><input type="checkbox" name="validate" formControlName="comunat" value="">ANFIBIOS</label>
+                        <label><input type="checkbox"  formControlName="anfibios" value="">ANFIBIOS</label>
                     </div>              
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">REPTILES</label>
+                    <label><input type="checkbox"  formControlName="reptiles" value="">REPTILES</label>
                     <div class="checkbox">
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">AVES</label>
+                    <label><input type="checkbox"  formControlName="aves" value="">AVES</label>
                     </div>
                     
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">MAMIFEROS</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">CIENFISIC</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">FISIOTOPO</label>          
+                    <label><input type="checkbox"  formControlName="mamiferos" value="">MAMIFEROS</label>
+                    <label><input type="checkbox"  formControlName="cienfisic" value="">CIENFISIC</label>
+                    <label><input type="checkbox"  formControlName="fisiotopo" value="">FISIOTOPO</label>          
                   </div>
                 <!--Otros-->
                 <div class="col-md-2 ">           
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">HIDROL</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">GEOLOGIA</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">SUELOS</label>
+                    <label><input type="checkbox"  formControlName="hidrol" value="">HIDROL</label>
+                    <label><input type="checkbox"  formControlName="geologia" value="">GEOLOGIA</label>
+                    <label><input type="checkbox"  formControlName="suelos" value="">SUELOS</label>
                     <div class="checkbox">
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">CLIMA</label>
+                    <label><input type="checkbox"  formControlName="clima" value="">CLIMA</label>
                     </div>
                     
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">BIOLOGIA</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">ECOLOGIA</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">FUNECOL</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">DIVERSNAT</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">INVENTARIO</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">TECINVEST</label>
+                    <label><input type="checkbox"  formControlName="biologia" value="">BIOLOGIA</label>
+                    <label><input type="checkbox"  formControlName="ecologia" value="">ECOLOGIA</label>
+                    <label><input type="checkbox"  formControlName="funecol" value="">FUNECOL</label>
+                    <label><input type="checkbox"  formControlName="diversnat" value="">DIVERSNAT</label>
+                    <label><input type="checkbox"  formControlName="inventario" value="">INVENTARIO</label>
+                    <label><input type="checkbox"  formControlName="tecinvest" value="">TECINVEST</label>
                     <div class="checkbox">
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">AM</label>
+                    <label><input type="checkbox"  formControlName="am" value="">AM</label>
                     </div>
                     
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">PLANMANEJO</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">TECMANEJO</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">ESTIMPAMB</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">ORGANPROT</label>
-                    <label><input type="checkbox" name="validate" formControlName="comunat" value="">HERRPROT</label>
+                    <label><input type="checkbox"  formControlName="planmanejo" value="">PLANMANEJO</label>
+                    <label><input type="checkbox"  formControlName="tecmanejo" value="">TECMANEJO</label>
+                    <label><input type="checkbox"  formControlName="estimpamb" value="">ESTIMPAMB</label>
+                    <label><input type="checkbox"  formControlName="organprot" value="">ORGANPROT</label>
+                    <label><input type="checkbox"  formControlName="herrprot" value="">HERRPROT</label>
       
                 </div>
                </div>
@@ -195,21 +198,42 @@
                  <div class="col-md-2">
                    <label for="">PUBLICACION.CDC:</label>
                  </div>
-                 <div class="md-form col-md-4 mt-5 ">
-                    <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                      data-success="correcto" required>
-                  </div>
+                 <div class=" col-md-2">
+                  <select class="form-control color-green" formControlName="publicacioncdc" >
+                    <option *ngFor="let sPublicacion of criterio_publicacion_cdc; let i2=index;" [value]="getCriterio_Publicacion_cdc(i2)">{{sPublicacion}}</option>
+                  </select>
+                </div>
+                <div class="col-md-1">
+                  <label for="">VALOR:</label>
+                </div>
+                <div class=" col-md-4">
+                 <select class="form-control color-green" formControlName="valor" >
+                   <option *ngFor="let sValor of criterio_valor; let i3=index;" [value]="getCriterio_Valor(i3)">{{sValor}}</option>
+                 </select>
+               </div>
+               </div>
+               <!-- fin row -->
+               <div class="row">
+                <div class="col-md-2">
+                  <label for="">CLAVE:</label>
+               </div>
+               <div class="md-form  col-md-9 mt10">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formClave" class="md-textarea form-control" formControlName="clave" rows="1" data-error=" "
+                  data-success=" " ></textarea>
+                <label for="formClave">Complemento del campo TEMA.</label>
+              </div>
                </div>
                <!-- fin row -->
                <div class="row">
                 <div class="col-md-2">
                   <label for="">COMENTARIO:</label>
                 </div>
-                <div class="md-form  col-md-7">
+                <div class="md-form  col-md-9 mt-20">
                     <i class="fa fa-pencil prefix"></i>
-                    <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="3" data-error="incorrecto, minimo de 5 caracteres"
-                      data-success="correcta"  required></textarea>
-                    <label for="formCita">Anote .</label>
+                    <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario" rows="1" data-error=" "
+                      data-success=" "  ></textarea>
+                    <label for="formComentario"> Describe de acuerdo al Valor, el tipo de información contenida.</label>
                   </div>
                </div>
                <!-- fin row -->
@@ -217,46 +241,56 @@
                  <div class="col-md-2">
                     <label for="">NOTADIGEST:</label>
                  </div>
-                 <div class="md-form col-md-4 mt-5 ">
-                    <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                      data-success="correcto" required>
-                  </div>
+                 <div class="md-form  col-md-9 mt-20">
+                  <i class="fa fa-pencil prefix"></i>
+                  <textarea mdbInputDirective type="text" id="formNotadigest" class="md-textarea form-control" formControlName="notadigest" rows="1" data-error=" "
+                    data-success=" "  ></textarea>
+                  <label for="formNotadigest">Anotar en este campo hasta qué punto se ha extraído la fuente toda la información .</label>
+                </div>
                </div>
                <!-- fin row -->
                <div class="row">
-                <div class="col-md-2">
-                  <label for="">ACTUALIZAR:</label>
+                <div class="col-md-8">                 
                 </div>
-                <div class="md-form form-sm  input-group-append mt-5">
-                    <i class="fa fa-calendar prefix "></i>
-                    <input mdbInputDirective type="text" id="formActualizaR" class="form-control"  ngbDatepicker
-                      #dActualizar="ngbDatepicker">
-                    <label for="formActualizan">Fecha para actualizar:</label>
-                    <div class="input-group-append ">
-                      <button class="btn btn-info mb-2 waves-light" (click)="dActualizar.toggle()" mdbWavesEffect>Date
-                      </button>
+                <div class="md-form col-md-2 input-group-append mt-20">
+                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                      data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                    <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
+                    <div (click)="dActualizar.toggle()">
+                      <i class="fa fa-calendar prefix"></i>
                     </div>
-                   </div>
-                   <div class="md-form col-md-4  mt-5">
-                      <input mdbInputDirective type="text" id="formIniciales" class="form-control"  data-error="incorrecto, minimo 3 caracteres"
-                        data-success="correcto" required>
-                        <label for="formIniciales">&nbsp;&nbsp;&nbsp;Iniciales Actualizador:</label>
-                    </div>
+                  </div>                  
                </div>
                <!-- fin row -->
+               <div class="row">
+                <div class="col-md-8">                 
+                </div>
+                <div class="md-form col-md-2 input-group-append mt-20">
+                    <input mdbInputDirective type="text" id="formControl" class="form-control" formControlName="control" data-error=" "
+                      data-success=" " ngbDatepicker #dControl="ngbDatepicker">
+                    <label for="formControl">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
+                    <div (click)="dControl.toggle()">
+                      <i class="fa fa-calendar prefix"></i>
+                    </div>
+                  </div>                  
+               </div>
+               <!-- fin row -->
+               <div class="row">
+                 <div class="col-md-8"></div>
+                <div class="md-form col-md-2  mt-20">
+                  <input mdbInputDirective type="text" id="formbcd" class="form-control" formControlName="bcd"  data-error=" "
+                    data-success=" " >
+                    <label for="formbcd">&nbsp;&nbsp;&nbsp;BCD</label>
+                </div>
+               </div>
             </div>
-            <!-- fin modal-content -->
-      
-      
-      
-      
-      
-            <div class="text-center py-4 mt-3">
-              <button class="btn btn-cyan waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button>
-              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+            <!-- fin modal-content -->            
+            <div class="text-center">
+              <button class="btn color-green waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button>
+              <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
             </div>
           </form>
         </div>
       </div>
-      <p>Form value: {{ fuenteForm.value | json }}</p>
+      <p>Valores: {{ fuenteForm.value | json }}</p>
 </div>
