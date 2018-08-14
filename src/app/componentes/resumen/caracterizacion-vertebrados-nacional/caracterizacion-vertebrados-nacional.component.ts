@@ -78,10 +78,11 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
    'aepeu': '',
    'fechaaepeu': '',//date
    'endemismo': '',
+   'comstatg': '',
    'rangon': '',
    'protnacion': '',
    'rastreolen': '',
-   'espdeprtn': '',
+   'espdeportn': '',
    'espcomern': '',
    'pezdeport': '',
    'ndeportpro': '',
@@ -126,7 +127,13 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
    'comecolg': '',
    'comecoln': '',
    //fenología-Estacionalidad
-   'lista_fenologia': '',
+   'fenologia': '',
+   'nenea': '','nabra': '','njula': '','nocta': '',
+   'neneb': '','nabrb': '','njulb': '','noctb': '',
+   'nfeba': '','nmaya': '','nagoa': '','nnova': '',
+   'nfebb': '','nmayb': '','nagob': '','nnovb': '',
+   'nmara': '','njuna': '','nseta': '','ndica': '',
+   'nmarb': '','njunb': '','nsetb': '','ndicb': '',
    'comfenolg': '',
    'comfenoln': '',
    //reproducción
