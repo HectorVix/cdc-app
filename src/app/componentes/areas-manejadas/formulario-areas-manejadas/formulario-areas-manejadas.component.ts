@@ -9,7 +9,6 @@ import { criterio_areasManejadas} from '../../../modelo/criterio-areas-manejadas
   styleUrls: ['./formulario-areas-manejadas.component.scss']
 })
 export class FormularioAreasManejadasComponent implements OnInit {
-  lident = ['','S','N','?'];
   source_Elementos_AreasManejadas:Elementos_AreasManejadas[];
   source_CamposOpcionales_AreasManejadas:CamposOpcionales[];
   areaManejoForm: FormGroup;

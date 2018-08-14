@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Protocolo} from '../../../modelo/tabla';
 import { criterio_le } from '../../../modelo/criterio-le';
 @Component({
@@ -7,6 +8,7 @@ import { criterio_le } from '../../../modelo/criterio-le';
   styleUrls: ['./protocolo-le.component.scss']
 })
 export class ProtocoloLeComponent implements OnInit {
+  protocoloLeForm:FormGroup;
   criterio_le = new criterio_le();
   criterio_rangog = this.criterio_le.rangog;
   criterio_rangon = this.criterio_le.rangon;
@@ -31,9 +33,23 @@ export class ProtocoloLeComponent implements OnInit {
       
     }
   };
-  constructor() { }
+  constructor(private fb:FormBuilder) {
+    this.crearForm_ProtocoloLe();
+   }
 
   ngOnInit() {
   }
 
+  crearForm_ProtocoloLe ()
+  {
+   this.protocoloLeForm= this.fb.group ({
+    'codigoe': ['', Validators.required],
+    'rangog': '',
+    'rangon': '',
+    'nombre': '',
+    'nomcomun': '',
+    'lista_protocolo_le': ''
+   });
+
+  }
 }

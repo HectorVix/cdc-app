@@ -1,5 +1,6 @@
 <div class="card-content white">
   <div class="card-body">
+      <form [formGroup]="contactosForm">
     <ngb-tabset #fContactos="ngbTabset">
       <!-- página 1 -->
       <ngb-tab id="tab-selectbyid1">
@@ -7,7 +8,6 @@
           <b>1</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <form action="">
             <div class="modal-content">
               <div class="modal-header color-green">
                 <h5 class="modal-title">Identificadores:</h5>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="md-form col-md-5 mt10">
                   <i class="fa fa-id-card prefix"></i>
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="numident" data-error=" " data-success=" ">
                   <label for="formNumident"></label>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <i class="fa fa-id-badge prefix"></i>
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="nombreident" data-error=" " data-success=" ">
                   <label for="formNumident"></label>
                 </div>
               </div>
@@ -39,7 +39,7 @@
                   <label for="">TITULO:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="titulo" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <i class="fa fa-user prefix"></i>
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="nombre" data-error=" " data-success=" ">
                   <label for="formNumident"></label>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                   <label for="">APELLIDO.1:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="apellido1" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -68,7 +68,7 @@
                   <label for="">APELLIDO.2:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="apellido2" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -77,7 +77,7 @@
                   <label for="">SUFIJO:</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formNumident" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="sufijo" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -87,7 +87,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <i class="fa fa-map-pin prefix"></i>
-                  <input mdbInputDirective type="text" id="formPosicion" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formPosicion" class="form-control"  formControlName="posicion" data-error=" " data-success=" ">
                   <label for="formPosicion"></label>
                 </div>
               </div>
@@ -97,7 +97,7 @@
                   <label for="">INSTITUCION:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formInstitucion" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formInstitucion" class="form-control" formControlName="institucion" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -113,7 +113,7 @@
                   </div>
                   <div class="md-form col-md-5 mt10">
                       <i class="fa fa-envelope prefix"></i>
-                    <input mdbInputDirective type="text" id="formEmail" class="form-control" data-error=" " data-success=" ">
+                    <input mdbInputDirective type="text" id="formEmail" class="form-control" formControlName="email" data-error=" " data-success=" ">
                   <label for="formEmail"></label>
                   </div>
                 </div>
@@ -122,7 +122,7 @@
                   <label for="">DIR1:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formDir1" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formDir1" class="form-control" formControlName="dir1" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -131,7 +131,7 @@
                   <label for="">DIR2:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formDir2" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formDir2" class="form-control"formControlName="dir2" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -140,7 +140,7 @@
                   <label for="">DIR3:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formDir3" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formDir3" class="form-control" formControlName="dir3" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -149,7 +149,7 @@
                   <label for="">PAIS:</label>
                 </div>
                 <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formPais" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formPais" class="form-control" formControlName="pais" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -158,14 +158,14 @@
                   <label for="">CIUDAD:</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formCiudad" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCiudad" class="form-control" formControlName="ciudad" data-error=" " data-success=" ">
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
                   <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACIÓN</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formCodpostal" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCodpostal" class="form-control" formControlName="codpostal" data-error=" " data-success=" ">
                   <label for="formCodpostal">&nbsp;&nbsp;&nbsp;&nbsp;CODPOSTAL</label>
                 </div>
               </div>
@@ -176,8 +176,8 @@
                 </div>
                 <div class="md-form  col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formMasident" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
-                    data-success="correcta"></textarea>
+                  <textarea mdbInputDirective type="text" id="formMasident" class="md-textarea form-control" formControlName="masident" rows="1" data-error=" "
+                    data-success=" "></textarea>
                   <label for="formMasident">Anote</label>
                 </div>
               </div>
@@ -187,7 +187,7 @@
                   <label for="">SMSA:</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formCodmapa" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCodmapa" class="form-control" formControlName="smsa" data-error=" " data-success=" ">
                 </div>
               </div>
               <!--fin row-->
@@ -196,10 +196,10 @@
                   <label for="">TELEF.TRABAJO:</label>
                 </div>
                 <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="number" id="formTelefTrabajo" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="number" id="formTelefTrabajo" class="form-control" formControlName="teleftrabajo" data-error=" " data-success=" ">
                 </div>
                 <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="number" id="formTelefHogar" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="number" id="formTelefHogar" class="form-control" formControlName="telefhogar" data-error=" " data-success=" ">
                   <label for="">&nbsp;&nbsp;&nbsp;&nbsp;TELEF.HOGAR</label>
                 </div>
               </div>
@@ -216,8 +216,8 @@
                 </div>
                 <div class="md-form  col-md-9 mt10">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formTipocont" class="md-textarea form-control" rows="1" data-error="incorrecto, minimo de 5 caracteres"
-                    data-success="correcta"></textarea>
+                  <textarea mdbInputDirective type="text" id="formTipocont" class="md-textarea form-control" formControlName="tipocont" rows="1" data-error=" "
+                    data-success=" "></textarea>
                   <label for="formTipocont"></label>
                 </div>
               </div>
@@ -234,7 +234,7 @@
                 </div>
                 <div class="md-form  col-md-9 mt10">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formActivcont" class="md-textarea form-control" rows="1" data-error=" "
+                  <textarea mdbInputDirective type="text" id="formActivcont" class="md-textarea form-control" formControlName="activcont" rows="1" data-error=" "
                     data-success=" "></textarea>
                   <label for="formActivcont"></label>
                 </div>
@@ -242,8 +242,6 @@
               <!-- fin row -->
             </div>
             <!-- fin modal-content -->
-          </form>
-          <!-- fin form -->
           <div class="text-center ">
             <p>
               <button class="btn color-green waves-light" (click)="fContactos.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
@@ -260,7 +258,6 @@
           <b>2</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <form action="">
             <div class="modal-content">
               <div class="modal-header color-green">
                 <h5 class="modal-title">Descripción:</h5>
@@ -271,7 +268,7 @@
                 </div>
                 <div class="md-form  col-md-9 mt10">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="1" data-error=" "
+                  <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" formControlName="resumen" rows="1" data-error=" "
                     data-success=" "></textarea>
                   <label for="formResumen">Anote</label>
                 </div>
@@ -288,10 +285,10 @@
                   <label for="">CODDIRP:</label>
                 </div>
                 <div class="md-form col-md-2 mt10">
-                  <input mdbInputDirective type="text" id="formCoddirp" class="form-control" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCoddirp" class="form-control" formControlName="coddirp" data-error=" " data-success=" ">
                 </div>
                 <div class="md-form form-md-2 input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formActualizar" class="form-control" 
+                  <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar"
                   ngbDatepicker #dActualizar="ngbDatepicker">
                   <label for="formActualizar">ACTUALIZAR</label>
                   <div (click)="dActualizar.toggle()">
@@ -308,15 +305,15 @@
                 <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
                 <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
               </p>
-            </div>
-          </form>
-          <!-- fin form -->
+            </div>         
         </ng-template>
         <!-- fin ng-template -->
       </ngb-tab>
       <!-- fin ngb-tab -->
     </ngb-tabset>
     <!-- fin ngb-tabset -->
+  </form>
+  <!-- fin form -->
   </div>
   <!-- fin card-body -->
 </div>
