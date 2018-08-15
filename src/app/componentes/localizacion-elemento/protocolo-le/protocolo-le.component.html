@@ -61,6 +61,17 @@
                               </div>
                         </div>
                         <!-- fin row-->
+                        <div class="row">
+                            <div class="col-md-8"></div>
+                            <div class="md-form col-md-2 input-group-append mt-20">
+                                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha" data-error=" "
+                                  data-success=" " ngbDatepicker #dFecha="ngbDatepicker">
+                                <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
+                                <div (click)="dFecha.toggle()">
+                                  <i class="fa fa-calendar prefix"></i>
+                                </div>
+                              </div>
+                        </div>
                         <div class="row mx-auto color-green">
                             <ng2-smart-table [settings]="settings_Protocolo"
                              [source]="source_Protocolo">

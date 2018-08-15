@@ -48,6 +48,7 @@ export class ProtocoloLeComponent implements OnInit {
     'rangon': '',
     'nombre': '',
     'nomcomun': '',
+    'fecha': '',
     'lista_protocolo_le': ''
    });
 
