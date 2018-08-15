@@ -99,7 +99,7 @@ export class FormularioLeComponent implements OnInit {
       'elev': '',
       'area': '',
       //protección
-      'lista_proteccion': '',
+      //'lista_proteccion': '',
       'masterreno': '',
       'masprotec': '',
       'masmanejo': '',
