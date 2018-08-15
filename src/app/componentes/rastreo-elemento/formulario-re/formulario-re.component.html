@@ -18,11 +18,11 @@
                 <div class="col-md-2">
                   <label for="">CODIGOE:</label>
                 </div>
-                <div class="md-form col-md-4">
+                <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto,ingresa el codigo del elemento correcto"
                     data-success="correcto" required>
                 </div>
-                <div class="md-form col-md-4">
+                <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formTropicos" class="form-control" formControlName="tropicos" data-error="incorrecto"
                     data-success="correcto" required>
                   <label for="formTropicos">&nbsp;&nbsp;&nbsp;&nbsp;TROPICOS</label>
@@ -33,11 +33,11 @@
                 <div class="col-md-2">
                   <label for="">NACION:</label>
                 </div>
-                <div class="md-form col-md-4 mt-1">
+                <div class="md-form col-md-4 mt-7">
                   <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error="incorrecto"
                     data-success="correcto" required>
                 </div>
-                <div class="md-form col-md-4 mt-1">
+                <div class="md-form col-md-4 mt-7">
                   <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error="incorrecto"
                     data-success="correcto" required>
                   <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
@@ -55,10 +55,10 @@
                 <div class="col-md-2">
                   <label for="">CLASETAX:</label>
                 </div>
-                <div class="md-form col-md-4">
+                <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formClasetax" class="form-control" formControlName="clasetax" data-error=" " data-success=" ">
                 </div>
-                <div class="md-form col-md-4">
+                <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formOrden" class="form-control" formControlName="orden" data-error=" " data-success=" ">
                   <label for="formOrden">&nbsp;&nbsp;&nbsp;&nbsp;ORDEN</label>
                 </div>
@@ -83,6 +83,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" " data-success=" ">
+                <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
                 </div>
               </div>
               <div class="row">
@@ -133,7 +134,7 @@
                 <div class="col-md-2">
                   <label for="">NOMCOMUNG:</label>
                 </div>
-                <div class="md-form col-md-9 mt-3">
+                <div class="md-form col-md-9 mt-5">
                   <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nomcomung" data-error=" " data-success=" ">
                 </div>
               </div>
@@ -143,9 +144,9 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtaxg" rows="3"
+                  <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtaxg" rows="1"
                     data-error=" " data-success=" "></textarea>
-                  <label for="formComtaxg"></label>
+                  <label for="formComtaxg">Comentario</label>
                 </div>
               </div>
             </div>
@@ -159,10 +160,11 @@
                 <div class="col-md-2">
                   <label for="">NOMBREN:</label>
                 </div>
-                <div class="md-form col-md-7">
+                <div class="md-form col-md-5 mt10">
                   <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                 <label for="">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
                 </div>
-                <div class="md-form col-md-2">
+                <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="number" id="formNumsinn" class="form-control" formControlName="numsinn" data-error=" " data-success=" ">
                   <label for="formNumsinn">&nbsp;&nbsp;&nbsp;&nbsp;NUMSINN</label>
                 </div>
@@ -174,6 +176,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" formControlName="nomcomunn" data-error=" " data-success=" ">
+               <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
                 </div>
               </div>
               <div class="row">
@@ -182,9 +185,9 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="3" data-error=" " data-success=" "
+                  <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
                     formControlName="comtaxn"></textarea>
-                  <label for="formComtaxn"></label>
+                  <label for="formComtaxn">Comentario</label>
                 </div>
               </div>
 
@@ -231,7 +234,7 @@
                   <label for="formResprg">&nbsp;&nbsp;&nbsp;&nbsp;RESPRG</label>
                 </div>
                 <div class="md-form col-md-2 input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrg" class="form-control" formControlName="fecha_revrg" data-error=" "
+                  <input mdbInputDirective type="text" id="formFechaRevrg" class="form-control" formControlName="fecharevrg" data-error=" "
                     data-success=" " ngbDatepicker #dFechaRevrg="ngbDatepicker">
                   <label for="formFechaRevrg">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRG</label>
                   <div (click)="dFechaRevrg.toggle()">
@@ -250,7 +253,7 @@
                   <label for="formAepeu"></label>
                 </div>
                 <div class="md-form col-md-2 input-group-append mt-20">
-                  <input mdbInputDirective type="text" id="formFechaAepeu" class="form-control" formControlName="fecha_aepeu" data-error=" "
+                  <input mdbInputDirective type="text" id="formFechaAepeu" class="form-control" formControlName="fechaaepeu" data-error=" "
                     data-success=" " ngbDatepicker #dFechaAepeu="ngbDatepicker">
                   <label for="formFechaAepeu">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.AEPEU</label>
                   <div (click)="dFechaAepeu.toggle()">
@@ -323,9 +326,9 @@
                 </div>
 
                 <div class="md-form col-md-3 mt-10">
-                  <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="inst_exsitu" data-error=" "
+                  <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="instexsitu" data-error=" "
                     data-success=" ">
-                  <label for="formInstExsitu">&nbsp;&nbsp;&nbsp;INST.EXSITU:</label>
+                  <label for="formInstExsitu">&nbsp;&nbsp;&nbsp;INST.EXSITU</label>
                 </div>
 
                 <div class="col-md-1 ">
@@ -369,9 +372,9 @@
                   <label for="formRastreolen">&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
                 </div>
                 <div class="md-form col-md-2  input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrn" class="form-control" formControlName="fecha_revrn" data-error=" "
+                  <input mdbInputDirective type="text" id="formFechaRevrn" class="form-control" formControlName="fecharevrn" data-error=" "
                     data-success=" " ngbDatepicker #dFechaRvrn="ngbDatepicker">
-                  <label for="formFechaRevrn">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRN:</label>
+                  <label for="formFechaRevrn">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRN</label>
                   <div (click)="dFechaRvrn.toggle()">
                     <i class="fa fa-calendar prefix"></i>
                   </div>
@@ -457,9 +460,9 @@
                   <label for="formRastreoles">&nbsp;&nbsp;&nbsp;RASTREOLES</label>
                 </div>
                 <div class="md-form col-md-2  input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecha_revrs" data-error=" "
+                  <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
                     data-success=" " ngbDatepicker #dFechaRvrs="ngbDatepicker">
-                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS:</label>
+                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS</label>
                   <div (click)="dFechaRvrs.toggle()">
                     <i class="fa fa-calendar prefix"></i>
                   </div>
@@ -470,11 +473,11 @@
               <!--  2 linea -->
               <div class="row">
                 <div class="col-md-2">
-                  <label for="">LESTIMN:</label>
+                  <label for="">LESTIMS:</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formLestimn" class="form-control" formControlName="lestims" data-error=" " data-success=" ">
-                  <label for="formLestims">&nbsp;&nbsp;&nbsp;&nbsp;LESTIMS</label>
+                  <input mdbInputDirective type="text" id="formLestims" class="form-control" formControlName="lestims" data-error=" " data-success=" ">
+                  <label for="formLestims"></label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
                   <input mdbInputDirective type="text" id="formLeprots" class="form-control" formControlName="leprots" data-error=" " data-success=" ">
@@ -523,7 +526,7 @@
                   <label for="">RE.OPC1</label>
                 </div>
                 <div class="md-form col-md-9 mt-5">
-                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="re_opc1" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="reopc1" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -532,7 +535,7 @@
                   <label for="">RE.OPC2</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="re_opc2" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="reopc2" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -541,7 +544,7 @@
                   <label for="">RE.OPC3</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="re_opc3" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="reopc3" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -550,7 +553,7 @@
                   <label for="">RE.OPC4</label>
                 </div>
                 <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="re_opc4" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="reopc4" data-error=" " data-success=" ">
                 </div>
               </div>
               <!-- fin row -->
@@ -561,7 +564,7 @@
                 <div class="md-form  col-md-9 mt-20">
                   <i class="fa fa-pencil prefix"></i>
                   <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
-                    formControlName="re_opc5"></textarea>
+                    formControlName="reopc5"></textarea>
                   <label for="formReOpc5"></label>
                 </div>
               </div>

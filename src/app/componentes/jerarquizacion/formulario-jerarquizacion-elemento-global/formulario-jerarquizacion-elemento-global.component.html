@@ -8,7 +8,6 @@
         </ng-template>
         <ng-template ngbTabContent>
           <div class="card-content white">
-            <div class="card-body">
                 <form [formGroup]="jerarquizacion_GlobalForm" >
               <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
                 <!-- página 1 -->
@@ -16,8 +15,7 @@
                   <ng-template ngbTabTitle>
                     <b>1</b>
                   </ng-template>
-                  <ng-template ngbTabContent>
-                    
+                  <ng-template ngbTabContent>                   
                       <div class="modal-content">
                         <div class="modal-header color-green">
                           <h5 class="modal-title"><img src="/iconos/logo32.ico">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
@@ -478,10 +476,7 @@
               </ngb-tabset>
               <!-- fin ngb-tabset -->
               </form>
-              <!-- fin form -->
-            </div>
-            <!-- fin card-body -->
-            
+              <!-- fin form -->            
           </div>
           <!-- fin card-content -->
 
