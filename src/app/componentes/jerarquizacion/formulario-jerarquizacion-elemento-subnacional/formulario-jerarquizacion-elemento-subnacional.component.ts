@@ -29,7 +29,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   crear_Jerarquizacion_Global() {
     this.jerarquizacion_SubnacionalForm = this.fb.group({
-      //página1
       'codigoe': ['', Validators.required],    
       'nacion': '',
       'subnacion': '',
@@ -47,12 +46,12 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       'comamenazs': '',
       'otraconsids': '',
       'rangos': '',
-      'fecha_revrs': '',
-      'razon_rs': '',
-      'nec_protecs': '',
-      'nec_invents': '',
-      'nec_manejos': '',
-      'autor_ed': '',
+      'fecharevrs': '',
+      'razonrs': '',
+      'necprotecs': '',
+      'necinvents': '',
+      'necmanejos': '',
+      'autored': '',
       'edicion': '',
       'actualizar': '',
     });

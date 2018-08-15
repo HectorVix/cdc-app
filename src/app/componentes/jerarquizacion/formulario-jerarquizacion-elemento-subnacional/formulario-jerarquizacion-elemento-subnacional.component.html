@@ -14,7 +14,7 @@
                     <form [formGroup]="jerarquizacion_SubnacionalForm" (ngSubmit)="onSubmit()">
                         <div class="modal-content">
                             <div class="modal-header color-green">
-                                <h5 class="modal-title">JERARQUIZACIÓN DEL ELEMENTO (SUBNACIONAL)</h5>
+                                <h5 class="modal-title"><img src="/iconos/logo32.ico">JERARQUIZACIÓN DEL ELEMENTO (SUBNACIONAL)</h5>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
@@ -194,7 +194,7 @@
                                     </select>
                                 </div>
                                 <div class="md-form form-sm  input-group-append mt-10">
-                                    <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecha_revrs" data-error=" "
+                                    <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
                                         data-success=" " ngbDatepicker #dFechaRevrs="ngbDatepicker">
                                     <label for="formFechaRevrs">FECHA.REVRS</label>
                                     <div (click)="dFechaRevrs.toggle()">
@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formRazonRs" class="md-textarea form-control" formControlName="razon_rs" rows="1"
+                                    <textarea mdbInputDirective type="text" id="formRazonRs" class="md-textarea form-control" formControlName="razonrs" rows="1"
                                         data-error=" " data-success=" "></textarea>
                                     <label for="formRazonRs">Dar las razones para este rango, mencionando los mejores factores de jerarquización y
                                         otras consideraciones.</label>
@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecProtecs" class="md-textarea form-control" formControlName="nec_protecs"
+                                    <textarea mdbInputDirective type="text" id="formNecProtecs" class="md-textarea form-control" formControlName="necprotecs"
                                         rows="1" data-error=" " data-success=" "></textarea>
                                     <label for="formNecProtecs">Dar el número estimado de LE adecuados para sostener el elemento a través de su distribución.</label>
                                 </div>
@@ -234,7 +234,7 @@
                                 </div>
                                 <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecInvents" class="md-textarea form-control" formControlName="nec_invents"
+                                    <textarea mdbInputDirective type="text" id="formNecInvents" class="md-textarea form-control" formControlName="necinvents"
                                         rows="1" data-error=" " data-success=" "></textarea>
                                     <label for="formNecInvents">
                                         Escriba las necesidades de investigacion de la biología del elemento.</label>
@@ -247,7 +247,7 @@
                                 </div>
                                 <div class="md-form  col-md-9 mt-20">
                                     <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecManejos" class="md-textarea form-control" formControlName="nec_manejos"
+                                    <textarea mdbInputDirective type="text" id="formNecManejos" class="md-textarea form-control" formControlName="necmanejos"
                                         rows="1" data-error=" " data-success=" "></textarea>
                                     <label for="formNecManejos">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
                                 </div>
@@ -258,7 +258,7 @@
                                     <label for="">AUTOR.ED:</label>
                                 </div>
                                 <div class="md-form col-md-5 mt-20">
-                                    <input mdbInputDirective type="text" id="formAutorEd" class="form-control" formControlName="autor_ed" data-error=" " data-success=" ">
+                                    <input mdbInputDirective type="text" id="formAutorEd" class="form-control" formControlName="autored" data-error=" " data-success=" ">
                                     <label for="formAutorEd">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
                                 </div>
                             </div>

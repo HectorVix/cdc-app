@@ -1,18 +1,18 @@
 export class UsuarioModelo {
-usuarioId:number;    
-nombre: string;
-apellido: string;
-usuario: string;
-sexo: string;
-fechaNacimiento:Date;    
-email: string;
-contrasena: string;
-rolrolid : Rol;
+    usuarioId:       Number;
+    nombre:          String;
+    apellido:        String;
+    usuario:         String;
+    sexo:            String;
+    fechaNacimiento: Date;
+    email:           String;
+    contrasena:      String;
+    rolrolid :       Rol;
 }
 
 export class Rol {
-    rolId :number;
-    nombre: string;
-    usuarioList=null;
+    rolId :      number;
+    nombre:      string;
+    usuarioList= null;
 
 }

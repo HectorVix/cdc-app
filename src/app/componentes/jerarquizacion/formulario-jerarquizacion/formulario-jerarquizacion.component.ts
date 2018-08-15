@@ -51,7 +51,8 @@ export class FormularioJerarquizacionComponent implements OnInit {
       'namenazcom': '',
       //pagina2
       'notroconsi': '',
-      'rangon': '', 'fecharn': '',
+      'rangon': '', 
+      'fecharn': '',
       'nranrzon': '',
       'nnecprotec': '',
       'nnecinvent': '',
