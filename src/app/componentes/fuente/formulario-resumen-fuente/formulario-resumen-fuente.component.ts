@@ -26,6 +26,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'codfuente':'',
       'cita':'',
       'archivado': '',
+      'documentopdf': '',
       'cobgeo': '',
       'coords': '',
       'coordn': '',
