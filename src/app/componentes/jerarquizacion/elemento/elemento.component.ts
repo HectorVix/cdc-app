@@ -44,11 +44,11 @@ export class ElementoComponent implements OnInit {
   addElemento(elemento: elemento_Modelo): void {
     
     console.log(elemento.codigo);
-   // this.rol = new Rol();
-    //this.rol.rolId = 1;
-    //this.usuario = new UsuarioModelo();
-    //this.usuario.rolrolid=this.rol;
-    //elemento.uSUARIOusuarioid=this.usuario;
+    this.rol = new Rol();
+    this.rol.rolId = 1;
+    this.usuario = new UsuarioModelo();
+    this.usuario.rolrolid=this.rol;
+    elemento.uSUARIOusuarioid=this.usuario;
     this.usuarioService.addElemento(elemento)
       .subscribe(
         us => {
