@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
   //pruebas
   data: any;
   fecha: Date;
-  modelo2: NgbDateStruct;
+  modeloDate2: NgbDateStruct;
   rol: Rol;
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -74,8 +74,8 @@ export class LoginPageComponent implements OnInit {
   }
   //Guardar Registro
   onSubmitRegistro() {
-    this.modelo2 = this.registroForm.get('fechaNacimiento').value;
-    this.fecha = this.toModel(this.modelo2);
+    this.modeloDate2 = this.registroForm.get('fechaNacimiento').value;
+    this.fecha = this.toModel(this.modeloDate2);
     this.addUsuario(this.registroForm.value);
   }
 

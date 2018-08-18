@@ -42,6 +42,7 @@ import { ProtocoloLeComponent } from './componentes/localizacion-elemento/protoc
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
+import { ElementoComponent } from './componentes/jerarquizacion/elemento/elemento.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { AyudaComponent } from './componentes/ayuda/ayuda.component';
     ProtocoloLeComponent,
     PerfilComponent,
     EstadisticaComponent,
-    AyudaComponent
+    AyudaComponent,
+    ElementoComponent
    
   
 
