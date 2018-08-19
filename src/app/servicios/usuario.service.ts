@@ -25,19 +25,10 @@ export class UsuarioService {
 
 
   userAuthentication(userName, password) {
-
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded', 'No-Auth': 'True' });
-
-    const req = this.http.post(this.rootUrl + '/us/token', { headers: reqHeader })
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log("Error occured");
-        }
-      );
+    return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+   
   }
 
   getUsuarioDatos() {

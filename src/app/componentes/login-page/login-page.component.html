@@ -1,51 +1,41 @@
 <div class="row">
-    <div class="col-md-6 mx-auto my-5">
-
-        <div class="card tab-black mt-alinear">
-            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-
-            <div class="card-body mx-4">
-                <!--Header-->
-                <div class="text-center">
-                    <h3 class="dark-grey-text mb-5">
-                        <strong>Login:</strong>
-                    </h3>
-                </div>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-                    <div class="md-form form-sm">
-                        <i class="fa fa-envelope prefix"></i>
-                        <input mdbInputDirective type="text" id="LFemail" formControlName="LFemail" class="form-control">
-                        <label for="LFemail">Tu correo</label>
-                    </div>
-                    <div class="md-form form-sm">
-                        <i class="fa fa-lock prefix "></i>
-                        <input mdbInputDirective type="text" id="LFcontrasena" formControlName="LFcontrasena" class="form-control">
-                        <label for="LFcontrasena">Tu Contraseña</label>
-                        <p class="font-small grey-text d-flex justify-content-end">¿Olvidaste tu contraseña?
-                            <a (click)="formRecuperarContrasena.show()" class="blue-text ml-1">Recupérala</a>
+    <div class="col-md-6 mx-auto my-5">    
+            <div class="card color-green mt-alinear">
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                <div class="modal-content">
+                        <div class="modal-header color-green">
+                            <h5 class="modal-tittle">
+                                <img src="/iconos/logo32.ico">Login</h5>
+                        </div>
+                <div class="card-body mx-4">
+                    <!--Header-->
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="md-form form-sm">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input mdbInputDirective type="text" id="LFemail" formControlName="LFemail" class="form-control">
+                            <label for="LFemail">Tu correo</label>
+                        </div>
+                        <div class="md-form form-sm">
+                            <i class="fa fa-lock prefix "></i>
+                            <input mdbInputDirective type="text" id="LFcontrasena" formControlName="LFcontrasena" class="form-control">
+                            <label for="LFcontrasena">Tu Contraseña</label>
+                            <p class="font-small grey-text d-flex justify-content-end">¿Olvidaste tu contraseña?
+                                <a (click)="formRecuperarContrasena.show()" class="blue-text ml-1">Recupérala</a>
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class="btn color-green waves-light" [disabled]="!loginForm.valid" mdbWavesEffect value="Iniciar sesión">
+                        </div>
+                    </form>
+                    <!--Footer-->
+                    <div class="modal-footer mx-5 pt-3 mb-1">
+                        <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
+                            <a (click)="formRegistro.show(); successMessage = null" class="blue-text ml-1"> Regístrate</a>
                         </p>
                     </div>
-
-
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-primary waves-light" [disabled]="!loginForm.valid" mdbWavesEffect value="Iniciar sesión">
-                    </div>
-
-
-
-                </form>
-                <!--Footer-->
-                <div class="modal-footer mx-5 pt-3 mb-1">
-                    <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
-                        <a (click)="formRegistro.show(); successMessage = null" class="blue-text ml-1"> Regístrate</a>
-                    </p>
                 </div>
-
-
             </div>
         </div>
-
     </div>
 </div>
 
@@ -60,24 +50,20 @@
     <div class="modal-dialog cascading-modal" role="document">
         <!--Content-->
         <div class="modal-content">
-
             <!--Header-->
-            <div class="modal-header light-blue darken-3 white-text">
+            <div class="modal-header color-green darken-3 white-text">
                 <h4 class="title">
                     <i class="fa fa-pencil"></i> Registro</h4>
                 <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRegistro.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-
             </div>
-
             <!--Body-->
             <div class="modal-body mb-0">
                 <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 
                 <form [formGroup]="registroForm">
                     <!--Nombre-->
-
                     <div class="row">
                         <div class=" md-form form-sm  col-md-6">
                             <i class="fa fa-user-circle prefix"></i>
@@ -88,10 +74,7 @@
                             <input mdbInputDirective type="text" id="apellido" formControlName="apellido" class="form-control">
                             <label for="apellido">&nbsp;&nbsp;&nbsp;Tu apellido</label>
                         </div>
-
-
                     </div>
-
                     <!--Fecha de nacimiento-->
                     <div class="md-form form-sm input-group-append mt-0">
                         <i class="fa fa-calendar prefix "></i>
@@ -99,34 +82,27 @@
                             #d="ngbDatepicker">
                         <label for="fechaNacimiento">Tu fecha de nacimiento</label>
                         <div class="input-group-append ">
-                            <button class="btn btn-info mb-2 waves-light" (click)="d.toggle()" mdbWavesEffect>Date
+                            <button class="btn color-green mb-2 waves-light" (click)="d.toggle()" mdbWavesEffect>Date
                             </button>
                         </div>
-
-
                     </div>
-
                     <div class="md-form form-sm">
                         <i class="fa fa-envelope prefix"></i>
                         <input mdbInputDirective type="email" id="email" formControlName="email" class="form-control">
                         <label for="email">Tu correo</label>
                     </div>
-
                     <div class="md-form form-sm">
                         <i class="fa fa-exclamation-triangle prefix "></i>
                         <input mdbInputDirective type="email" id="emailConfirmar" ng-model="emailConfirmar">
                         <label for="emailConfirmar">Confirmar tu correo</label>
                     </div>
-
                     <div class="md-form form-sm">
                         <i class="fa fa-lock prefix "></i>
                         <input mdbInputDirective type="password" id="contrasena" formControlName="contrasena" class="form-control">
                         <label for="contrasena">Tu contraseña</label>
                     </div>
-
                     <div class="text-center mt-1-half">
-                        <button class="btn btn-info mb-2 waves-light" mdbWavesEffect (click)="onSubmitRegistro()">Registrar
-
+                        <button class="btn color-green mb-2 waves-light" mdbWavesEffect (click)="onSubmitRegistro()">Registrar
                         </button>
                     </div>
 
@@ -146,9 +122,8 @@
     <div class="modal-dialog cascading-modal" role="document">
         <!--Content-->
         <div class="modal-content">
-
             <!--Header-->
-            <div class="modal-header light-blue darken-3 white-text">
+            <div class="modal-header color-green darken-3 white-text">
                 <h4 class="title">
                     <i class="fa fa-pencil"></i> Recuperar Contraseña</h4>
                 <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRecuperarContrasena.hide()">
@@ -159,29 +134,16 @@
             <div class="modal-body mb-0">
                 <form [formGroup]="recuperarContrasenaForm">
                     <!--Nombre-->
-
-
-
-
                     <div class="md-form form-sm">
                         <i class="fa fa-envelope prefix"></i>
                         <input mdbInputDirective type="email" id="emailRecuperarContrasena" formControlName="emailRecuperarContrasena" class="form-control">
                         <label for="emailRecuperarContrasena">Tu correo</label>
                     </div>
-
-
-
-
-
-
-
                     <div class="text-center mt-1-half">
-                        <button class="btn btn-info mb-2 waves-light" [disabled]="!recuperarContrasenaForm.valid" mdbWavesEffect>Enviar
-
+                        <button class="btn color-green mb-2 waves-light" [disabled]="!recuperarContrasenaForm.valid" mdbWavesEffect>Enviar
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
         <!--/.Content-->

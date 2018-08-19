@@ -7,7 +7,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-
+import { HttpErrorResponse } from '@angular/common/http';
 
 const now = new Date();
 @Component({
@@ -16,7 +16,7 @@ const now = new Date();
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-
+  isLoginError : boolean = false;
   loginForm: FormGroup;
   registroForm: FormGroup;
   recuperarContrasenaForm: FormGroup;
@@ -60,7 +60,8 @@ export class LoginPageComponent implements OnInit {
 
   //logiarse
   onSubmit() {
-
+    console.log(this.loginForm.value);
+/*
     this.usuarioService.getUsuarioDatos()
       .subscribe(
         data => {
@@ -70,7 +71,7 @@ export class LoginPageComponent implements OnInit {
         }, err => {
           this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
         });
-
+*/
   }
   //Guardar Registro
   onSubmitRegistro() {

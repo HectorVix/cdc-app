@@ -38,13 +38,12 @@ export class ElementoComponent implements OnInit {
   onSubmit(){
     console.log(this.elementoForm.value);
     this.addElemento(this.elementoForm.value);
-
+  
   }
 
   addElemento(elemento: elemento_Modelo): void {
     
     console.log(elemento.codigo);
-  
     this.usuarioService.addElemento(elemento)
       .subscribe(
         us => {
