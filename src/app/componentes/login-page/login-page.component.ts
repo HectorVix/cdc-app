@@ -44,7 +44,7 @@ export class LoginPageComponent implements OnInit {
     public datepipe: DatePipe) {
     this.loginForm = fb.group({
       LFemail: ['', [Validators.required, Validators.email]],
-      LFcontrasena: ['', Validators.required],
+      LFcontrasena: ['', Validators.required]
     });
 
     this.crearRegistroForm();
@@ -61,6 +61,15 @@ export class LoginPageComponent implements OnInit {
   //logiarse
   onSubmit() {
     console.log(this.loginForm.value);
+   
+    this.usuarioService.userAuthentication(this.loginForm.get('LFemail').value,this.loginForm.get('LFcontrasena').value)
+      .subscribe((data : any)=>{
+      localStorage.setItem('userToken',data.access_token);
+      this.router.navigate(['/home']);
+    },
+    (err : HttpErrorResponse)=>{
+      this.isLoginError = true;
+    });
 /*
     this.usuarioService.getUsuarioDatos()
       .subscribe(
