@@ -50,7 +50,7 @@ export class UsuarioService {
   }
   //agregar un nuevo elemento
   addElemento(elemento: elemento_Modelo): Observable<elemento_Modelo> {
-    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/regel', elemento, httpOptions);
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/regelemento', elemento, httpOptions);
   }
 
 

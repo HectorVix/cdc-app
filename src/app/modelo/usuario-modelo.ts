@@ -7,26 +7,17 @@ export class UsuarioModelo {
     fechaNacimiento: Date;
     email:           String;
     contrasena:      String;
+    accionList =null;
+    fuenteList=null;
+    elementoList=null;
+    contactosList=null;
     rolrolid :       Rol;
-    constructor (){
-        this.usuarioId=-1;
-        this.nombre='';
-        this.apellido='';
-        this.usuario='';
-        this.sexo='';
-        this.fechaNacimiento=null;
-        this.email='';
-        this.contrasena='';
-    }
+
 }
 
 export class Rol {
     rolId :      number;
     nombre:      string;
     usuarioList= null;
-    constructor (){
-        this.rolId=-1;
-        this.nombre='';
-    }
 
 }
