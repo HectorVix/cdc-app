@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-6 mx-auto my-5">    
-            <div class="card color-green mt-alinear">
-                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                <div class="modal-content">
-                        <div class="modal-header color-green">
-                            <h5 class="modal-tittle">
-                                <img src="/iconos/logo32.ico">Login</h5>
-                        </div>
+    <div class="col-md-6 mx-auto my-5">
+        <div class="card color-green ">
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <div class="modal-content">
+                <div class="modal-header color-green">
+                    <h5 class="modal-tittle">
+                        <img src="/iconos/logo32.ico">Login</h5>
+                </div>
                 <div class="card-body mx-4">
                     <!--Header-->
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -38,12 +38,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 <!--Modal: Registro form-->
 <div mdbModal #formRegistro="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
@@ -105,48 +99,45 @@
                         <button class="btn color-green mb-2 waves-light" mdbWavesEffect (click)="onSubmitRegistro()">Registrar
                         </button>
                     </div>
-
                 </form>
-
             </div>
         </div>
         <!--/.Content-->
     </div>
 </div>
 <!--Modal: Registro form-->
-
-
 <!--Modal: Recuperar Contraseña form-->
-<div mdbModal #formRecuperarContrasena="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header color-green darken-3 white-text">
-                <h4 class="title">
-                    <i class="fa fa-pencil"></i> Recuperar Contraseña</h4>
-                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRecuperarContrasena.hide()">
-                    <span aria-hidden="true">×</span>
-                </button>
+<div class="fondo">
+    <div mdbModal #formRecuperarContrasena="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header color-green darken-3 white-text">
+                    <h4 class="title">
+                        <i class="fa fa-pencil"></i> Recuperar Contraseña</h4>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRecuperarContrasena.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+                    <form [formGroup]="recuperarContrasenaForm">
+                        <!--Nombre-->
+                        <div class="md-form form-sm">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input mdbInputDirective type="email" id="emailRecuperarContrasena" formControlName="emailRecuperarContrasena" class="form-control">
+                            <label for="emailRecuperarContrasena">Tu correo</label>
+                        </div>
+                        <div class="text-center mt-1-half">
+                            <button class="btn color-green mb-2 waves-light" [disabled]="!recuperarContrasenaForm.valid" mdbWavesEffect>Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <!--Body-->
-            <div class="modal-body mb-0">
-                <form [formGroup]="recuperarContrasenaForm">
-                    <!--Nombre-->
-                    <div class="md-form form-sm">
-                        <i class="fa fa-envelope prefix"></i>
-                        <input mdbInputDirective type="email" id="emailRecuperarContrasena" formControlName="emailRecuperarContrasena" class="form-control">
-                        <label for="emailRecuperarContrasena">Tu correo</label>
-                    </div>
-                    <div class="text-center mt-1-half">
-                        <button class="btn color-green mb-2 waves-light" [disabled]="!recuperarContrasenaForm.valid" mdbWavesEffect>Enviar
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <!--/.Content-->
         </div>
-        <!--/.Content-->
     </div>
-</div>
-<!--Modal: Registro form-->
+    <!--Modal: Registro form-->

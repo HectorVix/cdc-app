@@ -43,6 +43,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 import { ElementoComponent } from './componentes/jerarquizacion/elemento/elemento.component';
+import { HomeCdcComponent } from './componentes/home-page/home-cdc/home-cdc.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ElementoComponent } from './componentes/jerarquizacion/elemento/element
     PerfilComponent,
     EstadisticaComponent,
     AyudaComponent,
-    ElementoComponent
+    ElementoComponent,
+    HomeCdcComponent
    
   
 

@@ -45,7 +45,7 @@ const routes: Routes = [
 {path: 'ayuda', component: AyudaComponent},
 
 // {path: '**', component: NotFoundPageComponent},
-{path: '**', component: LoginPageComponent},
+{ path : '', redirectTo:'/login', pathMatch : 'full'}
 
 ];
 
