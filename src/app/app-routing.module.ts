@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomePageComponent} from  './componentes/home-page/home-page.component';
 import {LoginPageComponent} from './componentes/login-page/login-page.component';
-import {RegisterPageComponent} from  './componentes/register-page/register-page.component';
 import {PrivadoPageComponent} from './componentes/privado-page/privado-page.component';
 import {NotFoundPageComponent} from './componentes/not-found-page/not-found-page.component';
 import { FuenteComponent } from './componentes/fuente/fuente.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
 {path: 'home',component: HomePageComponent},
 {path: 'fuente', component: FuenteComponent},
 {path: 'login', component: LoginPageComponent},
-{path: 'register', component: RegisterPageComponent},
 {path: 'privado', component: PrivadoPageComponent},
 {path: 'jerarquizacion', component: JerarquizacionComponent},
 {
@@ -43,8 +41,8 @@ const routes: Routes = [
 {path: 'estadistica', component: EstadisticaComponent},
 {path: 'perfil', component: PerfilComponent},
 {path: 'ayuda', component: AyudaComponent},
-
-// {path: '**', component: NotFoundPageComponent},
+{path: '**', component: NotFoundPageComponent},
+// 
 { path : '', redirectTo:'/login', pathMatch : 'full'}
 
 ];
