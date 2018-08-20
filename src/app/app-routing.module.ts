@@ -17,32 +17,25 @@ import { ResumenComponent } from './componentes/resumen/resumen.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { AyudaComponent } from './componentes/ayuda/ayuda.component';
+import { AuthGuard } from './auth/auth.guard';
 
-const routes: Routes = [
-{path: 'home',component: HomePageComponent},
-{path: 'fuente', component: FuenteComponent},
+export const routes: Routes = [
+{path: 'home',component: HomePageComponent,canActivate:[AuthGuard]},
+{path: 'fuente', component: FuenteComponent,canActivate:[AuthGuard]},
 {path: 'login', component: LoginPageComponent},
-{path: 'privado', component: PrivadoPageComponent},
-{path: 'jerarquizacion', component: JerarquizacionComponent},
-{
-  path: 'jerarquizacion', component: JerarquizacionComponent,
-  children: [{ path: '', component: FormularioJerarquizacionComponent }]
-},
-{
-  path: 'editarjerarquizacion', component: JerarquizacionComponent,
-  children: [{ path: '', component: EditarJerarquizacionComponent }]
-},
-{path: 'rastreoElemento', component: RastreoElementoComponent},
-{path: 'resumen', component: ResumenComponent},
-{path: 'localizacionElemento', component: LocalizacionElementoComponent},
-{path: 'sitios', component: SitiosComponent},
-{path: 'areasManejadas', component: AreasManejadasComponent},
-{path: 'contactos', component: ContactosComponent},
-{path: 'estadistica', component: EstadisticaComponent},
-{path: 'perfil', component: PerfilComponent},
-{path: 'ayuda', component: AyudaComponent},
-{path: '**', component: NotFoundPageComponent},
-// 
+{path: 'privado', component: PrivadoPageComponent,canActivate:[AuthGuard]},
+{path: 'jerarquizacion', component: JerarquizacionComponent,canActivate:[AuthGuard]},
+{path: 'rastreoElemento', component: RastreoElementoComponent,canActivate:[AuthGuard]},
+{path: 'resumen', component: ResumenComponent,canActivate:[AuthGuard]},
+{path: 'localizacionElemento', component: LocalizacionElementoComponent,canActivate:[AuthGuard]},
+{path: 'sitios', component: SitiosComponent,canActivate:[AuthGuard]},
+{path: 'areasManejadas', component: AreasManejadasComponent,canActivate:[AuthGuard]},
+{path: 'contactos', component: ContactosComponent,canActivate:[AuthGuard]},
+{path: 'estadistica', component: EstadisticaComponent,canActivate:[AuthGuard]},
+{path: 'perfil', component: PerfilComponent,canActivate:[AuthGuard]},
+{path: 'ayuda', component: AyudaComponent,canActivate:[AuthGuard]},
+//{path: '**', component: NotFoundPageComponent},
+ 
 { path : '', redirectTo:'/login', pathMatch : 'full'}
 
 ];
