@@ -16,7 +16,7 @@ const now = new Date();
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  isLoginError : boolean = false;
+  isLoginError: boolean = false;
   loginForm: FormGroup;
   registroForm: FormGroup;
   recuperarContrasenaForm: FormGroup;
@@ -60,27 +60,26 @@ export class LoginPageComponent implements OnInit {
 
   //logiarse
   onSubmit() {
-    console.log(this.loginForm.value);
-   
-    this.usuarioService.userAuthentication(this.loginForm.get('LFemail').value,this.loginForm.get('LFcontrasena').value)
-      .subscribe((data : any)=>{
-      localStorage.setItem('userToken',data.access_token);
-      this.router.navigate(['/home']);
-    },
-    (err : HttpErrorResponse)=>{
-      this.isLoginError = true;
-    });
-/*
-    this.usuarioService.getUsuarioDatos()
-      .subscribe(
-        data => {
-          this.data = data;
-          console.log(this.data);
-          this.router.navigate(['/home']);
-        }, err => {
-          this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
+    this.usuarioService.userAuthentication(this.loginForm.get('LFemail').value, this.loginForm.get('LFcontrasena').value)
+      .subscribe((data: any) => {
+        localStorage.setItem('userToken', data.access_token);
+        this.router.navigate(['/home']);
+      },
+        (err: HttpErrorResponse) => {
+          this.changeSuccessMessage('Error al logiarse , usuario invalido o servidor no disponible', 'primary');
+          this.isLoginError = true;
         });
-*/
+    /*
+        this.usuarioService.getUsuarioDatos()
+          .subscribe(
+            data => {
+              this.data = data;
+              console.log(this.data);
+              this.router.navigate(['/home']);
+            }, err => {
+              this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
+            });
+    */
   }
   //Guardar Registro
   onSubmitRegistro() {
@@ -98,10 +97,10 @@ export class LoginPageComponent implements OnInit {
     this.usuarioService.addUsuario(usDatos)
       .subscribe(
         us => {
-          this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');  
-          this.rebuildFormRegisrtro();        
+          this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');
+          this.rebuildFormRegisrtro();
         }, err => {
-          this.changeSuccessMessage('No se pudo registrar, servidor no disponible.', 'warning ');
+          this.changeSuccessMessage('No se pudo registrar, servidor no disponible.', 'primary');
         });
 
   }
