@@ -24,7 +24,7 @@ export class UsuarioService {
 
 
   userAuthentication(userName, password) {
-    var data = "username=" + userName + "password=" + password + "grant_type=password";
+    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'No-Auth': 'True' });
     return this.http.post(this.rootUrl + '/us/token', data, { headers: reqHeader });
 

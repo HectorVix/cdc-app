@@ -31,15 +31,17 @@ export class ElementoComponent implements OnInit {
       'codigo': ['', Validators.required],
       'nombrecomun': '',
       'nombrecientifico': '',
-      'comentario': ''
+      'comentario': '',
+      'fecha': '',
     
     });
   }
   onSubmit(){
     console.log(this.elementoForm.value);
-    this.addElemento(this.elementoForm.value);
-  
+  //  this.addElemento(this.elementoForm.value);
+   
   }
+  
 
   addElemento(elemento: elemento_Modelo): void {
     
@@ -53,4 +55,6 @@ export class ElementoComponent implements OnInit {
           console.log('bad');
         });
   }
+
+
 }

@@ -26,7 +26,7 @@
                       <label for="">NOMBRE COMÚN:</label>
                     </div>
                     <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective type="text" id="formNombrecomun" class="form-control"  data-error=" "
+                      <input mdbInputDirective type="text" id="formNombrecomun" class="form-control" formControlName="nombrecomun" data-error=" "
                         data-success=" ">
                     </div>
                   </div>
@@ -36,7 +36,7 @@
                       <label for="">NOMBRE CIENTÍFICO:</label>
                     </div>
                     <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control"  data-error=" "
+                      <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control" formControlName="nombrecientifico"  data-error=" "
                         data-success=" ">
                     </div>
                   </div>
@@ -47,10 +47,22 @@
                     </div>
                     <div class="md-form  col-md-9 mt-20">
                       <i class="fa fa-pencil prefix"></i>
-                      <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" rows="1" data-error=" "
+                      <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario"  rows="1" data-error=" "
                         data-success=" "></textarea>
                       <label for="formComentario">Anote</label>
                     </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-8"></div>
+                      <div class="md-form col-md-2 input-group-append mt-20">
+                          <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha"  data-error=" "
+                            data-success=" " ngbDatepicker #dFecha="ngbDatepicker">
+                          <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
+                          <div (click)="dFecha.toggle()">
+                            <i class="fa fa-calendar prefix"></i>
+                          </div>
+                        </div>
                   </div>
                   <!-- fin row -->
                </div>

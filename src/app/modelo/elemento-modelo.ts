@@ -5,7 +5,8 @@ export class elemento_Modelo {
  codigo :           String;
  nombrecomun :      String;
  nombrecientifico:  String;
- comentario:        String;    
+ comentario:        String;
+ fecha:             Date;    
  uSUARIOusuarioid :UsuarioModelo;
  fotoList         =null;
 }
