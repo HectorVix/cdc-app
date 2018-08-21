@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { UsuarioModelo } from '../modelo/usuario-modelo';
 import { elemento_Modelo } from '../modelo/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 
 const httpOptions = {
@@ -50,6 +51,10 @@ export class UsuarioService {
       console.error(error);
       return of(result as T);
     };
+  }
+  //Cambiar formato de la fecha
+  toFormato(date: NgbDateStruct): Date {
+    return date ? new Date('' + date.year + '-' + date.month + '-' + date.day) : null;
   }
 
 }

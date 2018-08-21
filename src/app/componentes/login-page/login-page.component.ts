@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
   //pruebas
   data: any;
   fecha: Date;
-  modeloDate2: NgbDateStruct;
+  fechaFormato: NgbDateStruct;
   rol: Rol;
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -66,7 +66,7 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/home']);
       },
         (err: HttpErrorResponse) => {
-          this.changeSuccessMessage('Error al logiarse , usuario invalido o servidor no disponible', 'primary');
+          this.changeSuccessMessage('Correo/contraseña invalidos o servidor no disponible.', 'primary');
           this.isLoginError = true;
         });
     /*
@@ -83,15 +83,15 @@ export class LoginPageComponent implements OnInit {
   }
   //Guardar Registro
   onSubmitRegistro() {
-    this.modeloDate2 = this.registroForm.get('fechaNacimiento').value;
-    this.fecha = this.toModel(this.modeloDate2);
+    this.fechaFormato = this.registroForm.get('fechaNacimiento').value;
+    this.fecha = this.usuarioService.toFormato(this.fechaFormato);
     this.addUsuario(this.registroForm.value);
   }
 
   addUsuario(usDatos: UsuarioModelo): void {
     usDatos.fechaNacimiento = this.fecha;
     this.rol = new Rol();
-    this.rol.rolId = 1;
+    this.rol.rolId = 7;
     usDatos.rolrolid = this.rol;
 
     this.usuarioService.addUsuario(usDatos)
@@ -100,7 +100,7 @@ export class LoginPageComponent implements OnInit {
           this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');
           this.rebuildFormRegisrtro();
         }, err => {
-          this.changeSuccessMessage('No se pudo registrar, servidor no disponible.', 'primary');
+          this.changeSuccessMessage('Error correo ya utilizado o servidor no disponible.', 'primary');
         });
 
   }
@@ -134,10 +134,6 @@ export class LoginPageComponent implements OnInit {
   }
   selectToday() {
     this.model = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-  }
-
-  toModel(date: NgbDateStruct): Date {
-    return date ? new Date('' + date.year + '-' + date.month + '-' + date.day) : null;
   }
 
   public changeSuccessMessage(mensaje: string, tipo: string) {
