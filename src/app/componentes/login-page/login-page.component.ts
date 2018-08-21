@@ -20,14 +20,9 @@ export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   registroForm: FormGroup;
   recuperarContrasenaForm: FormGroup;
-  usDatos: FormGroup;
-  usuarioDatos: any;
-  us: UsuarioModelo[];
   model: NgbDateStruct;
   date: { year: number, month: number };
   emailConfirmar: string;
-  //pruebas
-  data: any;
   fecha: Date;
   fechaFormato: NgbDateStruct;
   rol: Rol;
@@ -68,18 +63,7 @@ export class LoginPageComponent implements OnInit {
         (err: HttpErrorResponse) => {
           this.changeSuccessMessage('Correo/contraseña invalidos o servidor no disponible.', 'primary');
           this.isLoginError = true;
-        });
-    /*
-        this.usuarioService.getUsuarioDatos()
-          .subscribe(
-            data => {
-              this.data = data;
-              console.log(this.data);
-              this.router.navigate(['/home']);
-            }, err => {
-              this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
-            });
-    */
+        });        
   }
   //Guardar Registro
   onSubmitRegistro() {

@@ -8,7 +8,7 @@ export class elemento_Modelo {
  comentario:        String;
  fecha:             Date;    
  uSUARIOusuarioid :UsuarioModelo;
- fotoList         =null;
+ fotoList         =null;     
 }
 
 

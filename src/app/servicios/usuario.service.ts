@@ -6,12 +6,14 @@ import { UsuarioModelo } from '../modelo/usuario-modelo';
 import { elemento_Modelo } from '../modelo/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
-
+const jwthelper = new JwtHelperService();
+const decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +33,8 @@ export class UsuarioService {
 
   }
 
-  getUsuarioDatos() {
-    return this.http.get(this.rootUrl + '/us/');
+  getUsuarioDatos(){
+    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/'+decodedToken.jti);
 
   }
   //agregar un nuevo usuario
@@ -41,7 +43,7 @@ export class UsuarioService {
   }
   //agregar un nuevo elemento
   addElemento(elemento: elemento_Modelo): Observable<elemento_Modelo> {
-    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/regelemento', elemento, httpOptions);
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/reg/elemento/'+decodedToken.jti, elemento, httpOptions);
   }
 
 
