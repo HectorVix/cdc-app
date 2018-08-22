@@ -8,14 +8,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModelo } from '../../../modelo/usuario-modelo';
 
-const jwthelper = new JwtHelperService();
-const decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
   styleUrls: ['./elemento.component.scss']
 })
 export class ElementoComponent implements OnInit {
+  jwthelper = new JwtHelperService();
+  decodedToken = this.jwthelper.decodeToken(localStorage.getItem('userToken'));
   elementoForm: FormGroup;
   fecha: Date;
   fechaFormato: NgbDateStruct;
@@ -40,16 +41,16 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-     console.log(decodedToken.jti);
+    console.log(this.decodedToken.jti);
     this.fechaFormato = this.elementoForm.get('fecha').value;
     this.fecha = this.usuarioService.toFormato(this.fechaFormato);
     this.addElemento(this.elementoForm.value);
-  
+
   }
   addElemento(elemento: elemento_Modelo): void {
     elemento.fecha = this.fecha;
     //elemento.id_aux=decodedToken.jti;
-    this.usuarioService.addElemento(elemento)
+    this.usuarioService.addElemento(elemento,this.decodedToken.jti)
       .subscribe(
         us => {
           console.log('ok');

@@ -12,8 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
-const jwthelper = new JwtHelperService();
-const decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +20,9 @@ const decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
 export class UsuarioService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   data: any;
+  constructor(private http: HttpClient) { 
 
-  constructor(private http: HttpClient) { }
+  }
 
 
 
@@ -33,8 +33,8 @@ export class UsuarioService {
 
   }
 
-  getUsuarioDatos(){
-    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/'+decodedToken.jti);
+  getUsuarioDatos(jti:String) {
+    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/'+jti);
 
   }
   //agregar un nuevo usuario
@@ -42,8 +42,9 @@ export class UsuarioService {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
   }
   //agregar un nuevo elemento
-  addElemento(elemento: elemento_Modelo): Observable<elemento_Modelo> {
-    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/reg/elemento/'+decodedToken.jti, elemento, httpOptions);
+  addElemento(elemento: elemento_Modelo,jti:String): Observable<elemento_Modelo> {
+    console.log(jti);
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/reg/elemento/'+jti, elemento, httpOptions);
   }
 
 
