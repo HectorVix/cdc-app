@@ -7,8 +7,11 @@ import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModelo } from '../../../modelo/usuario-modelo';
-
-
+import { Subject } from 'rxjs';
+export interface Food {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -21,13 +24,27 @@ export class ElementoComponent implements OnInit {
   fecha: Date;
   fechaFormato: NgbDateStruct;
   data: UsuarioModelo;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
 
+  //pruebas
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearForm_Elemento();
   }
 
   ngOnInit() {
-
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
 
   crearForm_Elemento() {
@@ -50,15 +67,19 @@ export class ElementoComponent implements OnInit {
   addElemento(elemento: elemento_Modelo): void {
     elemento.fecha = this.fecha;
     //elemento.id_aux=decodedToken.jti;
-    this.usuarioService.addElemento(elemento,this.decodedToken.jti)
+    this.usuarioService.addElemento(elemento, this.decodedToken.jti)
       .subscribe(
-        us => {
-          console.log('ok');
+        resElemento => {
+          this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
+          this.crearForm_Elemento();
 
         }, err => {
-          console.log('bad');
+          this.changeSuccessMessage('Error  no se pudo guardar', 'primary');
         });
   }
-
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
+  }
 
 }

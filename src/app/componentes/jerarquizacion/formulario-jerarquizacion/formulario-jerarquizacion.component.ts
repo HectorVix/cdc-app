@@ -4,7 +4,9 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { criterio_Jerarquizacion } from '../../../modelo/criterio-jerarquizacion';
+//import { criterio_Jerarquizacion } from '../../../modelo/criterio-jerarquizacion';
+
+import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
 const now = new Date();
 @Component({
   selector: 'app-formulario-jerarquizacion',
@@ -15,11 +17,11 @@ export class FormularioJerarquizacionComponent implements OnInit {
 
   criterio_Jeraquizacion = new criterio_Jerarquizacion();
   criterio_nlestim = this.criterio_Jeraquizacion.lgn_lestim;
-  criterio_nabund = this.criterio_Jeraquizacion.lgn_abund;
-  criterio_ndist = this.criterio_Jeraquizacion.ln_dist;
-  criterio_nleprot = this.criterio_Jeraquizacion.lgn_leprot;
-  criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
-  criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
+ // criterio_nabund = this.criterio_Jeraquizacion.lgn_abund;
+  //criterio_ndist = this.criterio_Jeraquizacion.ln_dist;
+  //criterio_nleprot = this.criterio_Jeraquizacion.lgn_leprot;
+  //criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
+  //criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacionForm: FormGroup;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;

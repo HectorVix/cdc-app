@@ -1,12 +1,12 @@
 <div class="card-content white">
-  <div class="card-body">  
-      <ngb-tabset #JerarquizacionElementoGlobal="ngbTabset">
-        <ngb-tab id="tab-formulario">
-          <ng-template ngbTabTitle>
-            <b>Formulario</b>
-          </ng-template>
-          <ng-template ngbTabContent>
-              <form [formGroup]="jerarquizacionForm" (ngSubmit)="onSubmit()">
+  <div class="card-body">
+    <ngb-tabset #JerarquizacionElementoGlobal="ngbTabset">
+      <ngb-tab id="tab-formulario">
+        <ng-template ngbTabTitle>
+          <b>Formulario</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form [formGroup]="jerarquizacionForm" (ngSubmit)="onSubmit()">
             <ngb-tabset #fJ="ngbTabset">
               <ngb-tab id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
@@ -65,10 +65,13 @@
                         <label for="">NLESTIM:</label>
                       </div>
                       <div class="col-md-5 mt-15">
-                        <select class="form-control color-green" formControlName="nlestim">
-                          <option *ngFor="let sNestim of criterio_nlestim; let i1 = index;" [value]="getCriterio_Jerarquizacion(i1)">{{sNestim}}</option>
-
-                        </select>
+                        <mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nlestim">
+                            <mat-option *ngFor="let sNestim of criterio_nlestim" [value]="sNestim.value">
+                              {{sNestim.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -362,17 +365,17 @@
             <!-- fin ngb-tabset -->
           </form>
           <!-- fin form -->
-          </ng-template>
-        </ngb-tab>
-        <!-- fin ngb-tab -->
-        <ngb-tab id="tab-editar">
-          <ng-template ngbTabTitle>
-            <b>Editar</b>
-          </ng-template>
-        </ngb-tab>
-        <!-- fin ngb-tab -->
-      </ngb-tabset>
-      <!-- fin ngb-tabset -->
+        </ng-template>
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+      <ngb-tab id="tab-editar">
+        <ng-template ngbTabTitle>
+          <b>Editar</b>
+        </ng-template>
+      </ngb-tab>
+      <!-- fin ngb-tab -->
+    </ngb-tabset>
+    <!-- fin ngb-tabset -->
   </div>
   <!-- fin-card-body -->
 </div>

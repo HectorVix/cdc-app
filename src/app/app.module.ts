@@ -46,6 +46,9 @@ import { HomeCdcComponent } from './componentes/home-page/home-cdc/home-cdc.comp
 import { AuthGuard } from './auth/auth.guard';
 import { RouterModule, Router } from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    BrowserAnimationsModule,
+    MatButtonModule, MatCheckboxModule,MatSelectModule
 
   ],
   schemas: [NO_ERRORS_SCHEMA],
