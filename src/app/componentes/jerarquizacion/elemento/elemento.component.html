@@ -69,7 +69,7 @@
             <div class="modal-content">
               <div class="modal-header color-green">
                 <h5 class="modal-tittle">Fotos</h5>
-              </div>            
+              </div>
             </div>
             <!-- fin modal-content  -->
             <div class="text-center">
@@ -85,8 +85,75 @@
       <!-- fin ngb-tab -->
       <ngb-tab id="tab-editar">
         <ng-template ngbTabTitle>
-          <b>Editar</b>
+          <b>Buscar Elemento</b>
         </ng-template>
+        <ng-template ngbTabContent>
+          <mat-card>
+            <!-- <button mat-button><i class="fa fa-pencil"></i></button> -->
+            <form [formGroup]="buscarForm" class="base-form">
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Codigo del Elemento" formControlName="codigo" [errorStateMatcher]="matcher">
+              </mat-form-field>
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Nombre Común" formControlName="nombrecomun" [errorStateMatcher]="matcher">
+              </mat-form-field>
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Nombre Científico" formControlName="nombrecientifico" [errorStateMatcher]="matcher">
+              </mat-form-field>
+              <div class="mat-elevation-z8" class="base-form">
+                <button mat-raised-button class="color-green" (click)="buscarElemento()">Buscar</button>
+              </div>
+
+            </form>
+
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+              <div [hidden]="isLoading">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="progress">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+                    <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                  </ng-container>
+
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                  class="base-element-row"
+                  (click)="mostrarElemento(row) ">
+                  
+                  </tr>
+
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+              </div>
+            </div>
+
+          </mat-card>
+        </ng-template>
+
       </ngb-tab>
       <!-- fin ngb-tab -->
     </ngb-tabset>

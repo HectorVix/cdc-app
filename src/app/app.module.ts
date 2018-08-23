@@ -49,7 +49,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +101,8 @@ import {MatSelectModule} from '@angular/material/select';
     NgbModule.forRoot(),
     Ng2SmartTableModule,
     BrowserAnimationsModule,
-    MatButtonModule, MatCheckboxModule,MatSelectModule
+    MatButtonModule, MatCheckboxModule,MatSelectModule,MatFormFieldModule,MatInputModule,
+    MatTableModule,MatPaginatorModule
 
   ],
   schemas: [NO_ERRORS_SCHEMA],

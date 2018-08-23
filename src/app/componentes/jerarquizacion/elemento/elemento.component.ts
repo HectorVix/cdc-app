@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, FormControl} from '@angular/forms';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { elemento_Modelo } from '../../../modelo/elemento-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
@@ -7,20 +7,36 @@ import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModelo } from '../../../modelo/usuario-modelo';
+import { ControlErrorStateMatcher } from '../../../modelo/error-state-matcher';
 import { Subject } from 'rxjs';
-export interface Food {
-  value: string;
-  viewValue: string;
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+
+export interface UserData {
+  id: string;
+  name: string;
+  progress: string;
+  color: string;
 }
+
+const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
+  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
+const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
+  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
+  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
   styleUrls: ['./elemento.component.scss']
 })
+
 export class ElementoComponent implements OnInit {
+
   jwthelper = new JwtHelperService();
   decodedToken = this.jwthelper.decodeToken(localStorage.getItem('userToken'));
   elementoForm: FormGroup;
+  buscarForm: FormGroup;
   fecha: Date;
   fechaFormato: NgbDateStruct;
   data: UsuarioModelo;
@@ -28,15 +44,40 @@ export class ElementoComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  matcher = new ControlErrorStateMatcher();
+//tabla
+displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+dataSource: MatTableDataSource<UserData>;
+ 
+private paginator: MatPaginator;
+@ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+  this.paginator = mp;
+  this.setDataSourceAttributes();
+}
+//private sort: MatSort;
 
-  //pruebas
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+@ViewChild(MatSort) sort: MatSort
+  
+
+  constructor(private fb: FormBuilder,private fb2: FormBuilder, private usuarioService: UsuarioService) {
     this.crearForm_Elemento();
+    this.crearForm_Buscar();
+    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(users);
+  
+  }
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  mostrarElemento(row:UserData){
+    console.log(row.color);
   }
 
   ngOnInit() {
@@ -45,8 +86,20 @@ export class ElementoComponent implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
-  }
 
+    //this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator
+}
   crearForm_Elemento() {
     this.elementoForm = this.fb.group({
       'codigo': ['', Validators.required],
@@ -54,6 +107,17 @@ export class ElementoComponent implements OnInit {
       'nombrecientifico': '',
       'comentario': '',
       'fecha': '',
+
+    });
+
+  }
+  crearForm_Buscar ()
+  {
+    this.buscarForm = this.fb2.group({
+      'codigo':'',
+      'nombrecomun': '',
+      'nombrecientifico': ''
+      
 
     });
   }
@@ -82,4 +146,21 @@ export class ElementoComponent implements OnInit {
     this._success.next(mensaje);
   }
 
+  //Buscar
+  buscarElemento (){
+
+   console.log(this.buscarForm.value);
+  }
+}
+function createNewUser(id: number): UserData {
+  const name =
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+  return {
+    id: id.toString(),
+    name: name,
+    progress: Math.round(Math.random() * 100).toString(),
+    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+  };
 }
