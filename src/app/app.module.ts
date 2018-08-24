@@ -47,12 +47,13 @@ import { AuthGuard } from './auth/auth.guard';
 import { RouterModule, Router } from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule,MatNativeDateModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDatepickerModule} from '@angular/material/datepicker';
  
 @NgModule({
   declarations: [
@@ -102,7 +103,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     Ng2SmartTableModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule,MatSelectModule,MatFormFieldModule,MatInputModule,
-    MatTableModule,MatPaginatorModule
+    MatTableModule,MatPaginatorModule,MatDatepickerModule,MatNativeDateModule
 
   ],
   schemas: [NO_ERRORS_SCHEMA],

@@ -15,8 +15,10 @@ import { DISABLED } from '@angular/forms/src/model';
 
 export interface ElementoDato {
   codigo: String;
-  usuario:String;
+  usuario: String;
+  fecha: Date;
 }
+
 
 @Component({
   selector: 'app-elemento',
@@ -24,8 +26,9 @@ export interface ElementoDato {
   styleUrls: ['./elemento.component.scss']
 })
 
-export class ElementoComponent implements OnInit {
 
+export class ElementoComponent implements OnInit {
+  date: NgbDateStruct = { day: 14, month: 7, year: 1789 };
   jwthelper = new JwtHelperService();
   decodedToken = this.jwthelper.decodeToken(localStorage.getItem('userToken'));
   elementoForm: FormGroup;
@@ -38,13 +41,15 @@ export class ElementoComponent implements OnInit {
   tipoAlert: string;
   matcher = new ControlErrorStateMatcher();
   //tabla
-  displayedColumns: string[] = ['codigo','usuario'];
+  displayedColumns: string[] = ['codigo', 'fecha', 'usuario'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
   //para pruebas
   data: any;
   private paginator: MatPaginator;
+  private estadoForm: boolean = true;
+
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();
@@ -63,8 +68,14 @@ export class ElementoComponent implements OnInit {
       this.applyFilter('');
     }
   }
-  mostrarElemento(row) {
-    console.log(row.codigo);
+  setElementoBuscado(row) {
+    this.elementoForm = this.fb.group({
+      'codigo': [row.codigo],
+      'nombrecomun': 'd',
+      'nombrecientifico': 'd',
+      'comentario': 'd',
+      'fecha': 'xd',
+    });
   }
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
@@ -122,7 +133,7 @@ export class ElementoComponent implements OnInit {
   }
   //Buscar
   buscarElemento() {
-    this.elementos=new Array();
+    this.elementos = new Array();
     console.log(this.buscarForm.value);
     this.usuarioService.getElementos('alfaomega', 'null', 'null')
       .subscribe(
@@ -132,19 +143,21 @@ export class ElementoComponent implements OnInit {
           for (let elementoVal of this.dataElementos) {
             console.log(elementoVal.codigo);
             console.log(elementoVal.usuariousuarioid.nombre);
-            this.elementos.push(crearElemento(elementoVal,elementoVal.usuariousuarioid.nombre,elementoVal.usuariousuarioid.apellido));
+            this.elementos.push(crearElemento(elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
           }
-          this.dataSource = new MatTableDataSource(this.elementos,);
+          this.dataSource = new MatTableDataSource(this.elementos, );
         }, err => {
-          this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
+          this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }
 }
-function crearElemento(elemento: elemento_Modelo,nombre:String,apellido:String): ElementoDato {
+function crearElemento(elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
 
-  var usuario = nombre.concat( " "+apellido.toString() ); 
+  var usuario = nombre.concat(" " + apellido.toString());
+  console.log(elemento.fecha);
   return {
     codigo: elemento.codigo,
-    usuario: usuario
+    usuario: usuario,
+    fecha: elemento.fecha
   };
 }

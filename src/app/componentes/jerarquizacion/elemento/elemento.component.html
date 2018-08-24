@@ -1,6 +1,6 @@
 <div class="card-content white">
   <div class="card-body">
-    <ngb-tabset #Elemento="ngbTabset">
+    <ngb-tabset #Telemento="ngbTabset">
       <ngb-tab id="tab-formulario">
         <ng-template ngbTabTitle>
           <b>Formulario</b>
@@ -9,14 +9,14 @@
           <form [formGroup]="elementoForm" (ngSubmit)="onSubmit()">
             <div class="modal-content">
               <div class="modal-header color-green">
-                <h5 class="modal-tittle">Nuevo Elemento</h5>
+                <h5 class="modal-tittle">Elemento</h5>
               </div>
               <div class="row">
                 <div class="col-md-2">
                   <label for="">CODIGO ELEMENTO:</label>
                 </div>
                 <div class="md-form col-md-9 mt10">
-                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo" data-error=" " data-success=" " dis>
                 </div>
               </div>
               <!-- fin row -->
@@ -119,7 +119,10 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGO</th>
                     <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
                   </ng-container>
-
+                  <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
+                    <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+                  </ng-container>
                   <ng-container matColumnDef="usuario">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>USUARIO</th>
                       <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
@@ -127,7 +130,8 @@
 
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrarElemento(row)">
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" 
+                  (click)="setElementoBuscado(row) ;Telemento.select('tab-formulario')">
 
                   </tr>
 

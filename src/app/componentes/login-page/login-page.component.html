@@ -116,7 +116,7 @@
                         <label for="contrasena">Tu contraseña</label>
                     </div>
                     <div class="text-center mt-1-half">
-                        <button class="btn color-green mb-2 waves-light" mdbWavesEffect (click)="onSubmitRegistro()">Registrar
+                        <button class="btn color-green mb-2 waves-light" mdbWavesEffect [disabled]="!registroForm.valid" (click)="onSubmitRegistro()">Registrar
                         </button>
                     </div>
                 </form>
