@@ -14,7 +14,8 @@ import { DISABLED } from '@angular/forms/src/model';
 
 
 export interface ElementoDato {
-  codigo: string;
+  codigo: String;
+  usuario:String;
 }
 
 @Component({
@@ -37,7 +38,7 @@ export class ElementoComponent implements OnInit {
   tipoAlert: string;
   matcher = new ControlErrorStateMatcher();
   //tabla
-  displayedColumns: string[] = ['codigo'];
+  displayedColumns: string[] = ['codigo','usuario'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -121,24 +122,29 @@ export class ElementoComponent implements OnInit {
   }
   //Buscar
   buscarElemento() {
+    this.elementos=new Array();
     console.log(this.buscarForm.value);
-    this.usuarioService.getElementos('alfa', 'null', 'null')
+    this.usuarioService.getElementos('alfaomega', 'null', 'null')
       .subscribe(
         data => {
           this.dataElementos = data;
-          console.log(this.data);
+          console.log(this.dataElementos);
           for (let elementoVal of this.dataElementos) {
             console.log(elementoVal.codigo);
-            this.elementos.push(crearElemento(elementoVal.codigo));
+            console.log(elementoVal.usuariousuarioid.nombre);
+            this.elementos.push(crearElemento(elementoVal,elementoVal.usuariousuarioid.nombre,elementoVal.usuariousuarioid.apellido));
           }
-          this.dataSource = new MatTableDataSource(this.elementos);
+          this.dataSource = new MatTableDataSource(this.elementos,);
         }, err => {
           this.changeSuccessMessage('No se pudo logiar, servidor no disponible.', 'warning ');
         });
   }
 }
-function crearElemento(codigo: String): ElementoDato {
+function crearElemento(elemento: elemento_Modelo,nombre:String,apellido:String): ElementoDato {
+
+  var usuario = nombre.concat( " "+apellido.toString() ); 
   return {
-    codigo: codigo.toString()
+    codigo: elemento.codigo,
+    usuario: usuario
   };
 }
