@@ -20,7 +20,7 @@ const httpOptions = {
 export class UsuarioService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   data: any;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
 
@@ -33,18 +33,22 @@ export class UsuarioService {
 
   }
 
-  getUsuarioDatos(jti:String) {
-    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/'+jti);
+  getUsuarioDatos(jti: String) {
+    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/' + jti);
 
   }
+  getElementos(codigo: String, nombrecomun, nombrecientifico) {
+    return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
+  }
+
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
   }
   //agregar un nuevo elemento
-  addElemento(elemento: elemento_Modelo,jti:String): Observable<elemento_Modelo> {
+  addElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
     console.log(jti);
-    return this.http.post<elemento_Modelo>(this.rootUrl + '/us/reg/elemento/'+jti, elemento, httpOptions);
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
 
 
