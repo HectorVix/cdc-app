@@ -69,13 +69,28 @@ export class ElementoComponent implements OnInit {
     }
   }
   setElementoBuscado(row) {
+    console.log("fecha:"+row.fecha);
+   console.log("usuario:"+row.usuario);
+   var date = row.fecha;
+   let d =new Date();
+   d=new Date(date);
+   console.log("fecha nueva"+d);
+  this.date=this.fromModel(d);
+  console.log("Date ngb"+this.date);
     this.elementoForm = this.fb.group({
       'codigo': [row.codigo],
       'nombrecomun': 'd',
       'nombrecientifico': 'd',
       'comentario': 'd',
-      'fecha': 'xd',
+      'fecha': this.date,
     });
+  }
+  fromModel(date: Date): NgbDateStruct {
+    return date ? {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    } : null;
   }
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
