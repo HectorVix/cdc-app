@@ -114,7 +114,14 @@
               <div [hidden]="isLoading">
                 <table mat-table [dataSource]="dataSource" matSort>
 
-                  <!-- ID Column -->
+                  <!-- No. Column -->
+                  <div class="col-md-1">
+                    <ng-container matColumnDef="numero">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+                      <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+                    </ng-container>
+                  </div>
+                  
                   <ng-container matColumnDef="codigo">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGO</th>
                     <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
@@ -122,6 +129,14 @@
                   <ng-container matColumnDef="fecha">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
                     <td mat-cell *matCellDef="let row"> {{row.fecha|date:'yyyy-MM-dd'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="nombrecomun">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRECOMUN</th>
+                    <td mat-cell *matCellDef="let row"> {{row.nombrecomun}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="nombrecientifico">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE CIENTÍFICO</th>
+                    <td mat-cell *matCellDef="let row"> {{row.nombrecientifico}} </td>
                   </ng-container>
                   <ng-container matColumnDef="usuario">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>USUARIO</th>

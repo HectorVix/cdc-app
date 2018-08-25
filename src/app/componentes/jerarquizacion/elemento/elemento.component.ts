@@ -14,9 +14,13 @@ import { DISABLED } from '@angular/forms/src/model';
 
 
 export interface ElementoDato {
+  numero: number;
   codigo: String;
-  usuario: String;
   fecha: Date;
+  nombrecomun: String;
+  nombrecientifico;
+  usuario: String;
+  comentario: String;
 }
 
 
@@ -28,7 +32,8 @@ export interface ElementoDato {
 
 
 export class ElementoComponent implements OnInit {
-  date: NgbDateStruct = { day: 14, month: 7, year: 1789 };
+  dateElemento: NgbDateStruct;
+  k:number;
   jwthelper = new JwtHelperService();
   decodedToken = this.jwthelper.decodeToken(localStorage.getItem('userToken'));
   elementoForm: FormGroup;
@@ -41,7 +46,7 @@ export class ElementoComponent implements OnInit {
   tipoAlert: string;
   matcher = new ControlErrorStateMatcher();
   //tabla
-  displayedColumns: string[] = ['codigo', 'fecha', 'usuario'];
+  displayedColumns: string[] = ['numero','codigo', 'fecha', 'nombrecomun', 'nombrecientifico', 'usuario'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -69,29 +74,20 @@ export class ElementoComponent implements OnInit {
     }
   }
   setElementoBuscado(row) {
-    console.log("fecha:"+row.fecha);
-   console.log("usuario:"+row.usuario);
-   var date = row.fecha;
-   let d =new Date();
-   d=new Date(date);
-   console.log("fecha nueva"+d);
-  this.date=this.fromModel(d);
-  console.log("Date ngb"+this.date);
+
+    var date = row.fecha;
+    let d = new Date();
+    d = new Date(date);
+    this.dateElemento = this.usuarioService.fromModel(d);
     this.elementoForm = this.fb.group({
-      'codigo': [row.codigo],
-      'nombrecomun': 'd',
-      'nombrecientifico': 'd',
-      'comentario': 'd',
-      'fecha': this.date,
+      'codigo': row.codigo,
+      'nombrecomun': row.nombrecomun,
+      'nombrecientifico': row.nombrecientifico,
+      'comentario': row.comentario,
+      'fecha': this.dateElemento,
     });
   }
-  fromModel(date: Date): NgbDateStruct {
-    return date ? {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: date.getDate()
-    } : null;
-  }
+
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
@@ -124,7 +120,6 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.decodedToken.jti);
     this.fechaFormato = this.elementoForm.get('fecha').value;
     this.fecha = this.usuarioService.toFormato(this.fechaFormato);
     this.addElemento(this.elementoForm.value);
@@ -148,17 +143,27 @@ export class ElementoComponent implements OnInit {
   }
   //Buscar
   buscarElemento() {
+
+    //variables necesarias para recuperarse de errores contiente un caracter invisible
+    var codigo = " ";
+    var nombrecomun = " ";
+    var nombrecientifico = " ";
     this.elementos = new Array();
-    console.log(this.buscarForm.value);
-    this.usuarioService.getElementos('alfaomega', 'null', 'null')
+    this.k=0;
+    if (this.buscarForm.get('codigo').value != "")
+      codigo = this.buscarForm.get('codigo').value
+    if (this.buscarForm.get('nombrecomun').value != "")
+      nombrecomun = this.buscarForm.get('nombrecomun').value
+    if (this.buscarForm.get('nombrecientifico').value != "")
+      nombrecientifico = this.buscarForm.get('nombrecientifico').value
+
+    this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
       .subscribe(
         data => {
           this.dataElementos = data;
-          console.log(this.dataElementos);
           for (let elementoVal of this.dataElementos) {
-            console.log(elementoVal.codigo);
-            console.log(elementoVal.usuariousuarioid.nombre);
-            this.elementos.push(crearElemento(elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
+            this.k=this.k+1;
+            this.elementos.push(crearElemento(this.k,elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
           }
           this.dataSource = new MatTableDataSource(this.elementos, );
         }, err => {
@@ -166,13 +171,15 @@ export class ElementoComponent implements OnInit {
         });
   }
 }
-function crearElemento(elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
-
+function crearElemento(k:number,elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
   var usuario = nombre.concat(" " + apellido.toString());
-  console.log(elemento.fecha);
   return {
+    numero:k,
     codigo: elemento.codigo,
-    usuario: usuario,
-    fecha: elemento.fecha
+    nombrecomun: elemento.nombrecomun,
+    nombrecientifico: elemento.nombrecientifico,
+    comentario: elemento.comentario,
+    fecha: elemento.fecha,
+    usuario: usuario
   };
 }

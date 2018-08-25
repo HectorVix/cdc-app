@@ -63,6 +63,12 @@ export class UsuarioService {
   toFormato(date: NgbDateStruct): Date {
     return date ? new Date('' + date.year + '-' + date.month + '-' + date.day) : null;
   }
-
+  fromModel(date: Date): NgbDateStruct {
+    return date ? {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    } : null;
+  }
 }
 
