@@ -64,9 +64,10 @@
                       <div class="col-md-2">
                         <label for="">NLESTIM:</label>
                       </div>
-                      <div class="col-md-5 mt-15">
+                      <div class="col-md-3 mt-15">
                         <mat-form-field>
                           <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nlestim">
+                            <mat-option>-- Ninguna --</mat-option>
                             <mat-option *ngFor="let sNestim of criterio_nlestim" [value]="sNestim.value">
                               {{sNestim.viewValue}}
                             </mat-option>
@@ -93,10 +94,15 @@
                       <div class="col-md-2">
                         <label for="">NABUND:</label>
                       </div>
-                      <div class="col-md-9 mt-15">
-                        <select class="form-control color-green" formControlName="nabund">
-                          <option *ngFor="let sNabund of criterio_nabund; let i2 = index;" [value]="getCriterio_Jerarquizacion(i2)">{{sNabund}}</option>
-                        </select>
+                      <div class="col-md-7 mt-15">                      
+                        <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nabund">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNabund of criterio_nabund" [value]="sNabund.value">
+                                {{sNabund.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -117,10 +123,15 @@
                       <div class="col-md-2">
                         <label for="">NDIST:</label>
                       </div>
-                      <div class="col-md-5 mt-15">
-                        <select class="form-control color-green" formControlName="ndist">
-                          <option *ngFor="let sNdist of criterio_ndist; let i3=index;" [value]="getCriterio_Jerarquizacion(i3)">{{sNdist}}</option>
-                        </select>
+                      <div class="col-md-5 mt-15">                      
+                        <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="ndist">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNdist of criterio_ndist" [value]="sNdist.value">
+                                {{sNdist.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -141,10 +152,15 @@
                       <div class="col-md-2">
                         <label for="">NLEPROT:</label>
                       </div>
-                      <div class="col-md-5 mt-15">
-                        <select class="form-control color-green" formControlName="nleprot" required>
-                          <option *ngFor="let sNleprot of criterio_nleprot; let i4=index;" [value]="getCriterio_Jerarquizacion(i4)">{{sNleprot}}</option>
-                        </select>
+                      <div class="col-md-4 mt-15">                       
+                        <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nleprot">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNleprot of criterio_nleprot" [value]="sNleprot.value">
+                                {{sNleprot.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -166,9 +182,14 @@
                         <label for="">NAMENAZ:</label>
                       </div>
                       <div class="col-md-9 mt-15">
-                        <select class="form-control color-green" formControlName="namenaz">
-                          <option *ngFor="let sNamenaz of criterio_namenaz; let i5=index;" [value]="getCriterio_Jerarquizacion(i5)">{{sNamenaz}}</option>
-                        </select>
+                        <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="namenaz">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNamenaz of criterio_namenaz" [value]="sNamenaz.value">
+                                {{sNamenaz.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -220,13 +241,18 @@
                     <!--  -->
                     <!--  -->
                     <div class="row">
-                      <div class="col-md-2">
+                      <div class="col-md-1">
                         <label for="">RANGON:</label>
                       </div>
                       <div class="col-md-2 mt-15">
-                        <select class="form-control color-green" formControlName="rangon">
-                          <option *ngFor="let sRangon of criterio_rangon; let i6=index" [value]="getCriterio_Jerarquizacion(i6)">{{sRangon}}</option>
-                        </select>
+                        <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                                {{sRangon.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
                       </div>
 
                       <div class="md-form input-group-append mt-10">
