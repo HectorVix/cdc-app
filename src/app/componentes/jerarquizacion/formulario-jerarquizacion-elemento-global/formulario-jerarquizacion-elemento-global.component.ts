@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
+const now = new Date();
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-global',
@@ -17,16 +21,21 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_gamenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_gfragil = this.criterio_Jeraquizacion.lg_fragil;
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
-  jerarquizacion_GlobalForm: FormGroup;
+  jerarquizaciongForm: FormGroup;
+  date: { year: number, month: number };
+  modelDate: NgbDateStruct;
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,public datepipe: DatePipe) {
     this.crear_Jerarquizacion_Global();
    }
 
   ngOnInit() {
   }
+  onSubmit(){
+    console.log(this.jerarquizaciongForm.value);
+  }
   crear_Jerarquizacion_Global() {
-    this.jerarquizacion_GlobalForm = this.fb.group({
+    this.jerarquizaciongForm = this.fb.group({
       //página1
       'codigoe': ['', Validators.required],    
       'nombreg': '',
@@ -68,7 +77,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     });
   
   }
-  onSubmit(){
-    console.log(this.jerarquizacion_GlobalForm.value);
+  selectToday() {
+    this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
 }
