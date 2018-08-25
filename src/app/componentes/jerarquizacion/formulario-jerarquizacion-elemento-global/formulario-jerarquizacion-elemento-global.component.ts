@@ -68,18 +68,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     });
   
   }
- /**Criterios de Jerarquización  
-   *   Es comun y con diferente significado segun sea el caso global, nacional o subnacional  para
-   *   lestim, abund, dist, leprot, amenaz, fragil
-   * **/
-  getCriterio_Jerarquizacion(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'A';
-      case 2: return 'B';
-      case 3: return 'C';
-      case 4: return 'D';
-      case 5: return 'I';
-    }
+  onSubmit(){
+    console.log(this.jerarquizacion_GlobalForm.value);
   }
 }

@@ -7,9 +7,8 @@
           <b>Formulario</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <div class="card-content white">
-                <form [formGroup]="jerarquizacion_GlobalForm" >
-              <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
+            <form [formGroup]="jerarquizacion_GlobalForm" (ngSubmit)="onSubmit()">
+              <ngb-tabset #fJG="ngbTabset">
                 <!-- página 1 -->
                 <ngb-tab id="tab-selectbyid1">
                   <ng-template ngbTabTitle>
@@ -251,7 +250,7 @@
                     <!-- fin form -->
                     <div class="text-center ">
                       <p>
-                        <button class="btn color-green waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                        <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
                         <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                       </p>
                     </div>
@@ -501,7 +500,7 @@
                       <!-- fin modal-content -->
                    
                     <div class="text-center ">                    
-                        <button class="btn color-green waves-light" (click)="fJerarquizacionElementoGlobal.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
+                        <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
                         <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
                         <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                     
                     </div>
@@ -512,11 +511,7 @@
               </ngb-tabset>
               <!-- fin ngb-tabset -->
               </form>
-              <!-- fin form -->            
-          </div>
-          <!-- fin card-content -->
-
-
+              <!-- fin form -->           
         </ng-template>
         <!-- fin ng-template -->
       </ngb-tab>
