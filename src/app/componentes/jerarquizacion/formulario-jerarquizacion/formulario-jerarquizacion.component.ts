@@ -66,7 +66,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
   }
   // this.registroForm.get('fechaNacimiento').value;
   onSubmit() {
-    console.log('Criterio ', this.jerarquizacionForm.get('nlestim').value);
+    console.log('Criterio ', this.jerarquizacionForm.value);
 
   }
   
