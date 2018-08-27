@@ -38,8 +38,13 @@ export class UsuarioService {
     return this.http.get<UsuarioModelo>(this.rootUrl + '/us/' + jti);
 
   }
+  //obtener elementos
   getElementos(codigo: String, nombrecomun, nombrecientifico) {
     return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
+  }
+  //validar y obtener elemento id
+  validarElementoCodigoe(codigoe: String) {
+    return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/'+codigoe);
   }
 
   //agregar un nuevo usuario

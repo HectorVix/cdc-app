@@ -6,13 +6,14 @@
           <b>Formulario</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <form [formGroup]="jerarquizaciongForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="jerarquizaciongForm">
             <ngb-tabset #fJG="ngbTabset">
               <ngb-tab id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
                   <b>1</b>
                 </ng-template>
                 <ng-template ngbTabContent>
+                  <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <div class="modal-content">
                     <div class="modal-header color-green">
                       <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
@@ -22,8 +23,13 @@
                         <label for="">CODIGOE:</label>
                       </div>
                       <div class="md-form col-md-4 mt-1">
-                        <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Valor requerido" data-success="Correcto"
-                          required>
+                        <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Valor requerido"
+                          data-success="Correcto" required>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="mat-elevation-z8" class="base-form">
+                          <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                        </div>
                       </div>
                     </div>
                     <div class="row">
@@ -31,7 +37,8 @@
                         <label for="">NOMBREG:</label>
                       </div>
                       <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error="Valor requerido" data-success="Correcto" required>
+                        <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error="Valor requerido"
+                          data-success="Correcto" required>
                       </div>
                     </div>
                     <div class="row">
@@ -220,8 +227,8 @@
                     </div>
                   </div>
                   <div class="text-center ">
-                      <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
-                      <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                    <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
+                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
 
                   </div>
                 </ng-template>
@@ -414,7 +421,7 @@
                         <input mdbInputDirective type="text" id="formResrg" class="form-control" formControlName="resrg" data-error=" " data-success=" ">
                         <label for="formResrg">&nbsp;&nbsp;&nbsp;&nbsp;Responsable de preparar y mantener el formulario.</label>
                       </div>
-                    </div>                  
+                    </div>
                     <div class="row">
                       <div class="col-md-2">
                         <label for="">EDAUTOR:</label>
@@ -449,13 +456,14 @@
                     </div>
                   </div>
                   <div class="text-center ">
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                     <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                    <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionGlobal()" mdbWavesEffect>Guardar</button>
                     <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                   </div>
-                </ng-template>   
+                </ng-template>
               </ngb-tab>
-   
+
             </ngb-tabset>
 
           </form>

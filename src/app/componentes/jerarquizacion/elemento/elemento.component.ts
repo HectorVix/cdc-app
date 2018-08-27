@@ -136,6 +136,7 @@ export class ElementoComponent implements OnInit {
           this.changeSuccessMessage('Error  no se pudo guardar', 'primary');
         });
   }
+  //mensajes
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);

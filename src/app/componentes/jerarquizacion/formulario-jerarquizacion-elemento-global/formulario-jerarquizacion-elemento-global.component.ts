@@ -8,6 +8,7 @@ import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarqu
 import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion-global-modelo';
 import { Jerarquizacion } from '../../../modelo/jerarquizacion-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
+import { elemento_Modelo } from '../../../modelo/elemento-modelo';
 const now = new Date();
 
 @Component({
@@ -29,14 +30,27 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   jerarquizacionGlobalModelo: jerarquizacion_Global_Modelo;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Global();
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
   onSubmit() {
+ 
+  }
+  guardarRegistroJerarquiazacionGlobal(){
+  
     this.registrarJerarquizacionGlobal();
   }
   crear_Jerarquizacion_Global() {
@@ -82,6 +96,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     });
 
   }
+  //validar codigoe 
+  validarCodigoe (){
+    this.ValidarElementoCodigoe(this.jerarquizaciongForm.get('codigoe').value);
+  }
   //registro nuevo formulario jerarquizacion global
   registrarJerarquizacionGlobal(){
     console.log(this.jerarquizaciongForm.value);
@@ -103,18 +121,38 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     datos.actualizar=actualizar;
     this.jerarquizacionGlobalModelo = datos;
   }
-  //agrega un nueo registro jerarquizacion global
+  //agrega un nuevo registro jerarquizacion global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): void {
-    //elemento.id_aux=decodedToken.jti;
     this.usuarioService.addJerarquizacion(jerarquizacion)
       .subscribe(
         resElemento => {
-          console.log("ok");
+          this.changeSuccessMessage(`Si registro el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
-          console.log("bad");
+          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }
+  ValidarElementoCodigoe(codigoe:String):elemento_Modelo
+  {
+    var elemento:elemento_Modelo;
+    this.usuarioService.validarElementoCodigoe(codigoe)
+    .subscribe(
+      resElemento => {
+        elemento=resElemento;
+        console.log("validado elemento ok:"+resElemento.elementoId);
+        this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+      }, err => {
+        this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+      });
+
+      return elemento;
+  }
+
   selectToday() {
     this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+  }
+   //mensajes
+   public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
   }
 }
