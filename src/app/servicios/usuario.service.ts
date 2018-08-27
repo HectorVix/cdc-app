@@ -7,6 +7,7 @@ import { elemento_Modelo } from '../modelo/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Jerarquizacion } from '../modelo/jerarquizacion-modelo';
 
 
 const httpOptions = {
@@ -50,7 +51,10 @@ export class UsuarioService {
     console.log(jti);
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
-
+  //agregar una nueva jerarquizacion
+  addJerarquizacion(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/',jerarquizacion , httpOptions);
+  }
 
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {

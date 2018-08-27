@@ -5,6 +5,9 @@ import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
+import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion-global-modelo';
+import { Jerarquizacion } from '../../../modelo/jerarquizacion-modelo';
+import { UsuarioService } from '../../../servicios/usuario.service';
 const now = new Date();
 
 @Component({
@@ -22,10 +25,12 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_gfragil = this.criterio_Jeraquizacion.lg_fragil;
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
   jerarquizaciongForm: FormGroup;
+  jerarquizacionModelo:Jerarquizacion;
+  jerarquizacionGlobalModelo:jerarquizacion_Global_Modelo;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
   
-  constructor(private fb: FormBuilder,public datepipe: DatePipe) {
+  constructor(private fb: FormBuilder,public datepipe: DatePipe,private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Global();
    }
 
@@ -33,6 +38,17 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.jerarquizaciongForm.value);
+    this.jerarquizacionModelo = new Jerarquizacion();
+    this.jerarquizacionGlobalModelo = new jerarquizacion_Global_Modelo();
+   this.jerarquizacionModelo.codigoe="hola vix";
+   this.jerarquizacionGlobalModelo.codigoe="hola de nuevo";
+
+  
+   var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
+   globalist.push(this.jerarquizacionGlobalModelo);
+   this.jerarquizacionModelo.globalList=globalist;
+  
+    this.addElemento(this.jerarquizacionModelo);
   }
   crear_Jerarquizacion_Global() {
     this.jerarquizaciongForm = this.fb.group({
@@ -76,6 +92,18 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       'actualizar': ''
     });
   
+  }
+
+  addElemento(jerarquizacion: Jerarquizacion): void {
+    
+    //elemento.id_aux=decodedToken.jti;
+    this.usuarioService.addJerarquizacion(jerarquizacion)
+      .subscribe(
+        resElemento => {
+          console.log("ok");
+        }, err => {
+          console.log("bad");
+        });
   }
   selectToday() {
     this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
