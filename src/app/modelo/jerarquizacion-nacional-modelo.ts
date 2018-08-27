@@ -1,4 +1,5 @@
 export class jerarquizacion_Nacional_Modelo {
+    nacionalId: Number;
     codigoe:    String;
     nombren:    String;
     nacion:     String;

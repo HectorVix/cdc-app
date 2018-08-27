@@ -7,7 +7,10 @@ import { debounceTime } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
 import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/criterio-re';
-const now = new Date();
+import { UsuarioService } from '../../../servicios/usuario.service';
+import { elemento_Modelo } from '../../../modelo/elemento-modelo';
+
+
 @Component({
   selector: 'app-formulario-re',
   templateUrl: './formulario-re.component.html',
@@ -28,13 +31,22 @@ export class FormularioReComponent implements OnInit {
   criterio_iucn = this.criterio_re.iucn;
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
   criterio_listacdc = this.criterio_re.listacdc;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,private usuarioService: UsuarioService
   ) {
     this.crearFormRastreoElemento();
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
 
   //crear formulario Rastreo Elemento
@@ -116,6 +128,35 @@ export class FormularioReComponent implements OnInit {
       'actualizas': ''
     });
   }
+  //validar codigoe 
+  validarCodigoe (){
+    this.ValidarElementoCodigoe(this.reForm.get('codigoe').value);
+  }
+  ValidarElementoCodigoe(codigoe:String):elemento_Modelo
+  {
+    var elemento:elemento_Modelo;
+    this.usuarioService.validarElementoCodigoe(codigoe)
+    .subscribe(
+      resElemento => {
+        elemento=resElemento;
+        console.log("validado elemento ok:"+resElemento.elementoId);
+        this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+      }, err => {
+        this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+      });
+
+      return elemento;
+  }
+
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
+  }
+
+
+
+
+
   /****
    * Comun para 
    * formularg, plancons, resplan, resumenman, formularn
@@ -190,7 +231,4 @@ export class FormularioReComponent implements OnInit {
     }
   }
   
-  selectToday() {
-    this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-  }
 }

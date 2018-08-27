@@ -8,7 +8,8 @@
                     <b>Formulario</b>
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <form [formGroup]="jerarquizacion_SubnacionalForm" (ngSubmit)="onSubmit()">
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                    <form [formGroup]="jerarquizacion_SubnacionalForm">
                         <div class="modal-content">
                             <div class="modal-header color-green">
                                 <h5 class="modal-title">JERARQUIZACIÓN DEL ELEMENTO (SUBNACIONAL)</h5>
@@ -17,15 +18,20 @@
                                 <div class="col-md-2">
                                     <label for="">CODIGOE:</label>
                                 </div>
-                                <div class="md-form col-md-4">
+                                <div class="md-form col-md-4 mt10">
                                     <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto"
                                         data-success=" " required>
                                 </div>
-                                <div class="md-form col-md-2">
+                                <div class="col-md-2">
+                                    <div class="mat-elevation-z8" class="base-form">
+                                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                                    </div>
+                                </div>
+                                <div class="md-form col-md-2 mt10">
                                     <input mdbInputDirective type="text" id="formNacion" class="form-control" data-error=" " formControlName="nacion" data-success=" ">
                                     <label for="formNacion">&nbsp;&nbsp;&nbsp;&nbsp;NACIÓN</label>
                                 </div>
-                                <div class="md-form col-md-2">
+                                <div class="md-form col-md-2 mt10">
                                     <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
                                     <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACIÓN</label>
                                 </div>
@@ -57,13 +63,13 @@
                                 </div>
                                 <div class="col-md-3 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="lestims">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sLestims of criterio_lestims" [value]="sLestims.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="lestims">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sLestims of criterio_lestims" [value]="sLestims.value">
                                                 {{sLestims.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -85,13 +91,13 @@
                                 </div>
                                 <div class="col-md-7 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="abunds">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sAbunds of criterio_abunds" [value]="sAbunds.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="abunds">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sAbunds of criterio_abunds" [value]="sAbunds.value">
                                                 {{sAbunds.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -113,13 +119,13 @@
                                 </div>
                                 <div class="col-md-6 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dists">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sDists of criterio_dists" [value]="sDists.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dists">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sDists of criterio_dists" [value]="sDists.value">
                                                 {{sDists.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -142,13 +148,13 @@
                                 </div>
                                 <div class="col-md-4 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="leprots">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sLeprots of criterio_leprots" [value]="sLeprots.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="leprots">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sLeprots of criterio_leprots" [value]="sLeprots.value">
                                                 {{sLeprots.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -170,13 +176,13 @@
                                 </div>
                                 <div class="col-md-9 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="amenazs">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sAmenazs of criterio_amenazs" [value]="sAmenazs.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="amenazs">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sAmenazs of criterio_amenazs" [value]="sAmenazs.value">
                                                 {{sAmenazs.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -211,13 +217,13 @@
                                 </div>
                                 <div class="col-md-1 mt-15">
                                     <mat-form-field>
-                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangos">
-                                              <mat-option>-- Ninguna --</mat-option>
-                                              <mat-option *ngFor="let sRangos of criterio_rangos" [value]="sRangos.value">
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangos">
+                                            <mat-option>-- Ninguna --</mat-option>
+                                            <mat-option *ngFor="let sRangos of criterio_rangos" [value]="sRangos.value">
                                                 {{sRangos.viewValue}}
-                                              </mat-option>
-                                            </mat-select>
-                                          </mat-form-field>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                                 <div class="md-form form-sm  input-group-append mt-10">
                                     <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
@@ -293,35 +299,35 @@
                                 <div class="col-md-8">
                                 </div>
                                 <div class="md-form form-sm  input-group-append mt-10">
-                                    <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error="Incorrecto" data-success=" "
-                                     ngbDatepicker #dEdicion="ngbDatepicker">
+                                    <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error="Incorrecto"
+                                        data-success=" " ngbDatepicker #dEdicion="ngbDatepicker">
                                     <label for="formEdicion">&nbsp;&nbsp;&nbsp;&nbsp;EDICION</label>
                                     <div (click)="dEdicion.toggle()">
                                         <i class="fa fa-calendar prefix"></i>
                                     </div>
-                                </div>                              
+                                </div>
                             </div>
                             <!-- fin row -->
                             <div class="row">
-                                    <div class="col-md-8">
-                                        </div>
-                                        <div class="md-form form-sm  input-group-append mt-10">
-                                            <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error="Incorrecto" data-success=" "
-                                            ngbDatepicker #dActualizar="ngbDatepicker">
-                                            <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                                            <div (click)="dActualizar.toggle()">
-                                                <i class="fa fa-calendar prefix"></i>
-                                            </div>
-                                        </div> 
+                                <div class="col-md-8">
+                                </div>
+                                <div class="md-form form-sm  input-group-append mt-10">
+                                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error="Incorrecto"
+                                        data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                                    <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
+                                    <div (click)="dActualizar.toggle()">
+                                        <i class="fa fa-calendar prefix"></i>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                         <!-- fin modal-content -->
 
-                        <div class="text-center ">                           
-                                <input class="btn color-green waves-light" type="submit" mdbWavesEffect value="Guardar">
-                                <input class="btn color-green waves-light" type="reset" mdbWavesEffect value="Cancelar">
-                            
+                        <div class="text-center ">
+                            <input class="btn color-green waves-light" type="submit" mdbWavesEffect value="Guardar">
+                            <input class="btn color-green waves-light" type="reset" mdbWavesEffect value="Cancelar">
+
                         </div>
                     </form>
                     <!-- fin form -->

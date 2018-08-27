@@ -56,11 +56,14 @@ export class UsuarioService {
     console.log(jti);
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
-  //agregar una nueva jerarquizacion
+  //agregar una nueva jerarquizacion Global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
     return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global',jerarquizacion , httpOptions);
   }
-
+ //agregar una nueva jerarquizacion Nacional
+ addJerarquizacionNacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+  return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/nacional',jerarquizacion , httpOptions);
+}
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -6,13 +6,14 @@
           <b>Formulario</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <form [formGroup]="jerarquizacionForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="jerarquizacionForm">
             <ngb-tabset #fJ="ngbTabset">
               <ngb-tab id="tab-selectbyid1">
                 <ng-template ngbTabTitle>
                   <b>1</b>
                 </ng-template>
                 <ng-template ngbTabContent>
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <div class="modal-content">
                     <div class="modal-header color-green">
                       <h5 class="modal-tittle">JERARQUIZACIÓN DEL ELEMENTO NACIONAL</h5>
@@ -25,6 +26,11 @@
                       <div class="md-form col-md-4 mt5">
                         <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto"
                           data-success="correcto" required>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="mat-elevation-z8" class="base-form">
+                          <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                        </div>
                       </div>
                     </div>
                     <!--Nombre nacional  -->
@@ -381,8 +387,9 @@
                   </div>
                   <!-- fin modal-content -->
                   <div class="text-center">
+                      <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                     <button class="btn color-green waves-light" (click)="fJ.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                    <input class="btn color-green waves-light" type="submit" mdbWavesEffect value="Guardar">
+                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionNacional()" mdbWavesEffect>Guardar</button>
                     <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                   </div>
                 </ng-template>

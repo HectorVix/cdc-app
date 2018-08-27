@@ -7,8 +7,7 @@
             <b>1</b>
           </ng-template>
           <ng-template ngbTabContent>
-
-
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
             <!-- Identificadores -->
             <div class="modal-content ">
               <div class="modal-header color-green">
@@ -21,6 +20,11 @@
                 <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto,ingresa el codigo del elemento correcto"
                     data-success="correcto" required>
+                </div>
+                <div class="col-md-2">
+                    <div class="mat-elevation-z8" class="base-form">
+                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                    </div>
                 </div>
                 <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formTropicos" class="form-control" formControlName="tropicos" data-error="incorrecto"
