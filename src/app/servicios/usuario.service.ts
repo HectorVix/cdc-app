@@ -57,8 +57,8 @@ export class UsuarioService {
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
   //agregar una nueva jerarquizacion
-  addJerarquizacion(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
-    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/',jerarquizacion , httpOptions);
+  addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global',jerarquizacion , httpOptions);
   }
 
   //para capturar los errores con HttpClient

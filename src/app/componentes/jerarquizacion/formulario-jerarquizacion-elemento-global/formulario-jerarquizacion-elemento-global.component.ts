@@ -123,10 +123,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   //agrega un nuevo registro jerarquizacion global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): void {
-    this.usuarioService.addJerarquizacion(jerarquizacion)
+    this.usuarioService.addJerarquizacionGlobal(jerarquizacion)
       .subscribe(
         resElemento => {
-          this.changeSuccessMessage(`Si registro el elemento:${resElemento.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Si registro la jerarquización  del elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
