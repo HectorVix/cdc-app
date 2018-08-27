@@ -74,7 +74,6 @@ export class ElementoComponent implements OnInit {
     }
   }
   setElementoBuscado(row) {
-
     var date = row.fecha;
     let d = new Date();
     d = new Date(date);

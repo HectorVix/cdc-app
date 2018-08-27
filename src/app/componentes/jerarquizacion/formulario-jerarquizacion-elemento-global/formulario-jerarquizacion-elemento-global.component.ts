@@ -25,35 +25,24 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_gfragil = this.criterio_Jeraquizacion.lg_fragil;
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
   jerarquizaciongForm: FormGroup;
-  jerarquizacionModelo:Jerarquizacion;
-  jerarquizacionGlobalModelo:jerarquizacion_Global_Modelo;
+  jerarquizacionModelo: Jerarquizacion;
+  jerarquizacionGlobalModelo: jerarquizacion_Global_Modelo;
   date: { year: number, month: number };
   modelDate: NgbDateStruct;
-  
-  constructor(private fb: FormBuilder,public datepipe: DatePipe,private usuarioService: UsuarioService) {
+
+  constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Global();
-   }
+  }
 
   ngOnInit() {
   }
-  onSubmit(){
-    console.log(this.jerarquizaciongForm.value);
-    this.jerarquizacionModelo = new Jerarquizacion();
-    this.jerarquizacionGlobalModelo = new jerarquizacion_Global_Modelo();
-   this.jerarquizacionModelo.codigoe="hola vix";
-   this.jerarquizacionGlobalModelo.codigoe="hola de nuevo";
-
-  
-   var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
-   globalist.push(this.jerarquizacionGlobalModelo);
-   this.jerarquizacionModelo.globalList=globalist;
-  
-    this.addElemento(this.jerarquizacionModelo);
+  onSubmit() {
+    this.registrarJerarquizacionGlobal();
   }
   crear_Jerarquizacion_Global() {
     this.jerarquizaciongForm = this.fb.group({
       //página1
-      'codigoe': ['', Validators.required],    
+      'codigoe': ['', Validators.required],
       'nombreg': '',
       'descrielem': '',
       'especle': '',
@@ -91,11 +80,31 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       'edicion': '',
       'actualizar': ''
     });
-  
-  }
 
-  addElemento(jerarquizacion: Jerarquizacion): void {
-    
+  }
+  //registro nuevo formulario jerarquizacion global
+  registrarJerarquizacionGlobal(){
+    console.log(this.jerarquizaciongForm.value);
+    this.jerarquizacionModelo = new Jerarquizacion();
+    this.jerarquizacionGlobalModelo = new jerarquizacion_Global_Modelo();
+    this.jerarquizacionModelo.codigoe = this.jerarquizaciongForm.get('codigoe').value;
+    var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
+    this.setDatosJerarquizacionGlobal(this.jerarquizaciongForm.value);
+    globalist.push(this.jerarquizacionGlobalModelo);
+    this.jerarquizacionModelo.globalList = globalist;
+    this.addJerarquizacionGlobal(this.jerarquizacionModelo);
+  }
+  setDatosJerarquizacionGlobal(datos: jerarquizacion_Global_Modelo) {
+    var fecharg=this.usuarioService.toFormato(this.jerarquizaciongForm.get('fecharg').value);
+    var edicion=this.usuarioService.toFormato(this.jerarquizaciongForm.get('edicion').value);
+    var actualizar=this.usuarioService.toFormato(this.jerarquizaciongForm.get('actualizar').value);
+    datos.fecharg=fecharg;
+    datos.edicion=edicion;
+    datos.actualizar=actualizar;
+    this.jerarquizacionGlobalModelo = datos;
+  }
+  //agrega un nueo registro jerarquizacion global
+  addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): void {
     //elemento.id_aux=decodedToken.jti;
     this.usuarioService.addJerarquizacion(jerarquizacion)
       .subscribe(
