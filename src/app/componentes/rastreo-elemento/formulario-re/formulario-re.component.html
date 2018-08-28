@@ -165,8 +165,8 @@
                   <label for="">NOMBREN:</label>
                 </div>
                 <div class="md-form col-md-5 mt10">
-                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
-                 <label for="">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
+                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                 <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="number" id="formNumsinn" class="form-control" formControlName="numsinn" data-error=" " data-success=" ">
@@ -637,11 +637,10 @@
 
 
             <div class="text-center ">
-              <p>
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                 <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
-                <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                <button class="btn color-green waves-light"  (click) ="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
                 <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-              </p>
             </div>
           </ng-template>
         </ngb-tab>

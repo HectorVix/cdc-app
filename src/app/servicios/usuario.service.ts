@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion-modelo';
-
+import { rastreo_Elemento_Modelo } from '../modelo/rastreo-elemento-modelo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -44,7 +44,7 @@ export class UsuarioService {
   }
   //validar y obtener elemento id
   validarElementoCodigoe(codigoe: String) {
-    return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/'+codigoe);
+    return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/' + codigoe);
   }
 
   //agregar un nuevo usuario
@@ -58,16 +58,21 @@ export class UsuarioService {
   }
   //agregar una nueva jerarquizacion Global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
-    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global',jerarquizacion , httpOptions);
+    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global', jerarquizacion, httpOptions);
   }
- //agregar una nueva jerarquizacion Nacional
- addJerarquizacionNacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
-  return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/nacional',jerarquizacion , httpOptions);
-}
-//agregar una nueva jerarquizacion Subnacional
-addJerarquizacionSubnacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
-  return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/subnacional',jerarquizacion , httpOptions);
-}
+  //agregar una nueva jerarquizacion Nacional
+  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/nacional', jerarquizacion, httpOptions);
+  }
+  //agregar una nueva jerarquizacion Subnacional
+  addJerarquizacionSubnacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+    return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/subnacional', jerarquizacion, httpOptions);
+  }
+  //agregar una nuevo rastreo elemento
+  addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
+    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
+  }
+  rastreo_Elemento_Modelo
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

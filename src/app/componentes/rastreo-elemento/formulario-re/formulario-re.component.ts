@@ -9,6 +9,7 @@ import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/criterio-re';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/elemento-modelo';
+import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo-elemento-modelo';
 
 
 @Component({
@@ -18,8 +19,6 @@ import { elemento_Modelo } from '../../../modelo/elemento-modelo';
 })
 export class FormularioReComponent implements OnInit {
   reForm: FormGroup;
-  date: { year: number, month: number };
-  modelDate: NgbDateStruct;
   criterio_re = new criterio_re();
   criterio_disttax = this.criterio_re.disttax;
   criterio_dudatax = this.criterio_re.dudatax;
@@ -36,7 +35,7 @@ export class FormularioReComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   constructor(
-    private fb: FormBuilder,private usuarioService: UsuarioService
+    private fb: FormBuilder, private usuarioService: UsuarioService
   ) {
     this.crearFormRastreoElemento();
   }
@@ -49,6 +48,34 @@ export class FormularioReComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
   }
 
+
+  guardarRastreoElemento() {
+    console.log(this.reForm.value);
+    var rastreoElementoBase = this.setRastreoElemento(this.reForm.value);
+    this.addRastroeElemento(rastreoElementoBase);
+  }
+  setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
+    datos.fecharevrg = this.usuarioService.toFormato(this.reForm.get('fecharevrg').value);
+    datos.fechaaepeu = this.usuarioService.toFormato(this.reForm.get('fechaaepeu').value);
+    datos.fecharevrn = this.usuarioService.toFormato(this.reForm.get('fecharevrn').value);
+    datos.fecharevrs = this.usuarioService.toFormato(this.reForm.get('fecharevrs').value);
+    datos.actualizag = this.usuarioService.toFormato(this.reForm.get('actualizag').value);
+    datos.actualizan = this.usuarioService.toFormato(this.reForm.get('actualizan').value);
+    datos.actualizas = this.usuarioService.toFormato(this.reForm.get('actualizas').value);
+    return datos;
+  }
+
+  //agrega un nuevo registro rastreo elemento
+  addRastroeElemento(rastreoElemento: rastreo_Elemento_Modelo): void {
+    this.usuarioService.addRastreoElemento(rastreoElemento)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
+          this.crearFormRastreoElemento();
+        }, err => {
+          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+        });
+  }
   //crear formulario Rastreo Elemento
   crearFormRastreoElemento() {
     this.reForm = this.fb.group({
@@ -129,23 +156,22 @@ export class FormularioReComponent implements OnInit {
     });
   }
   //validar codigoe 
-  validarCodigoe (){
+  validarCodigoe() {
     this.ValidarElementoCodigoe(this.reForm.get('codigoe').value);
   }
-  ValidarElementoCodigoe(codigoe:String):elemento_Modelo
-  {
-    var elemento:elemento_Modelo;
+  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
+    var elemento: elemento_Modelo;
     this.usuarioService.validarElementoCodigoe(codigoe)
-    .subscribe(
-      resElemento => {
-        elemento=resElemento;
-        console.log("validado elemento ok:"+resElemento.elementoId);
-        this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
-      }, err => {
-        this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
-      });
+      .subscribe(
+        resElemento => {
+          elemento = resElemento;
+          console.log("validado elemento ok:" + resElemento.elementoId);
+          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+        });
 
-      return elemento;
+    return elemento;
   }
 
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -230,5 +256,5 @@ export class FormularioReComponent implements OnInit {
       case 3: return 'N';
     }
   }
-  
+
 }

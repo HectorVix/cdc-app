@@ -1,6 +1,7 @@
 export class rastreo_Elemento_Modelo {
  //pagina1
       //identificadores
+      rastreoId:        Number;
       codigoe:          String;
       tropicos:         String;
       nacion:           String;
@@ -73,5 +74,9 @@ export class rastreo_Elemento_Modelo {
       actualizag:       Date;
       actualizan:       Date;
       actualizas:       Date;
+
+      localizacionList: any;
+      cARACTERIZACIONcaracterizacionid:any;
+      jERARQUIZACIONjerarquizacionid:Number;
 
 }
