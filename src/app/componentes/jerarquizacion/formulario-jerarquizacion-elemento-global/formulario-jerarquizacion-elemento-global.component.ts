@@ -127,6 +127,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Si registro la jerarquización  del elemento:${resElemento.codigoe}.`, 'success');
+          this.crear_Jerarquizacion_Global();
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });

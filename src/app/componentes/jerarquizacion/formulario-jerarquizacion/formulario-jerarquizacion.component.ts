@@ -84,18 +84,14 @@ export class FormularioJerarquizacionComponent implements OnInit {
   }
   //guardar registro jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
-
-
     var jerarquizacionBase = new Jerarquizacion();
     var jerarquizacionNacional = new jerarquizacion_Nacional_Modelo();
     var nacionalList: Array<jerarquizacion_Nacional_Modelo> = new Array();
-
     jerarquizacionBase.codigoe = this.jerarquizacionForm.get('codigoe').value;
     jerarquizacionNacional = this.setDatosJerarquizacionNacional(this.jerarquizacionForm.value);
     nacionalList.push(jerarquizacionNacional);
     jerarquizacionBase.nacionalList = nacionalList;
     this.addJerarquizacionNacional(jerarquizacionBase)
-
   }
   //setear datos jerarquizacion nacional
   setDatosJerarquizacionNacional(datos: jerarquizacion_Nacional_Modelo): jerarquizacion_Nacional_Modelo {
@@ -114,6 +110,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Se registro la jerarquización nacional del elemento :${resElemento.codigoe}.`, 'success');
+          this.createFormJerarquizacionNacional();
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });

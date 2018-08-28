@@ -1,4 +1,5 @@
 export class jerarquizacion_Subnacional_Modelo {
+    subnacionalId : Number;
     codigoe:     String;
     nacion:      String;
     subnacion:   String;

@@ -64,6 +64,10 @@ export class UsuarioService {
  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
   return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/nacional',jerarquizacion , httpOptions);
 }
+//agregar una nueva jerarquizacion Subnacional
+addJerarquizacionSubnacional(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
+  return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/subnacional',jerarquizacion , httpOptions);
+}
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -6,6 +6,7 @@ import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarqu
 import { Jerarquizacion } from '../../../modelo/jerarquizacion-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/elemento-modelo';
+import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion-subnacional-modelo';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',
@@ -21,14 +22,12 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   criterio_amenazs = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangos = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacion_SubnacionalForm: FormGroup;
-  jerarquizacionModelo: Jerarquizacion;
-  // jerarquizacionGlobalModelo: jerarquizacion_Global_Modelo;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
-    this.crear_Jerarquizacion_Global();
+    this.crear_Jerarquizacion_Subnacional();
   }
 
   ngOnInit() {
@@ -43,7 +42,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
 
     }
   }
-  crear_Jerarquizacion_Global() {
+  crear_Jerarquizacion_Subnacional() {
     this.jerarquizacion_SubnacionalForm = this.fb.group({
       'codigoe': ['', Validators.required],
       'nacion': '',
@@ -76,8 +75,33 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
 
   //guardar registro jerarquizacion subnancional
   guardarRegistroJerarquizacionSubnacional(){
-  
     console.log(this.jerarquizacion_SubnacionalForm.value);
+    var jerarquizacionBase = new Jerarquizacion();
+    var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
+    var subnacionalList: Array<jerarquizacion_Subnacional_Modelo> = new Array();
+    jerarquizacionBase.codigoe = this.jerarquizacion_SubnacionalForm.get('codigoe').value;
+    jerarquizacionSubnacional = this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value);
+    subnacionalList.push(jerarquizacionSubnacional);
+    jerarquizacionBase.subnacionalList = subnacionalList;
+    this.addJerarquizacionNacional(jerarquizacionBase)
+  }
+  //setear datos jerarquizacion subnacioal
+  setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo):jerarquizacion_Subnacional_Modelo {
+    datos.fecharevrs=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
+    datos.edicion=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('edicion').value);
+    datos.actualizar=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
+    return datos;
+  }
+  //agrega un nuevo registro jerarquizacion subnacional
+  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
+    this.usuarioService.addJerarquizacionSubnacional(jerarquizacion)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Se registro la jerarquización subnacional del elemento :${resElemento.codigoe}.`, 'success');
+          this.crear_Jerarquizacion_Subnacional();
+        }, err => {
+          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+        });
   }
   //validar codigoe 
   validarCodigoe (){

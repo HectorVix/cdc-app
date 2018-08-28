@@ -325,8 +325,9 @@
                         <!-- fin modal-content -->
 
                         <div class="text-center ">
-                            <input class="btn color-green waves-light" type="submit" mdbWavesEffect value="Guardar">
-                            <input class="btn color-green waves-light" type="reset" mdbWavesEffect value="Cancelar">
+                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                            <button class="btn color-green waves-light" (click)="guardarRegistroJerarquizacionSubnacional()" mdbWavesEffect>Guardar</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
 
                         </div>
                     </form>
