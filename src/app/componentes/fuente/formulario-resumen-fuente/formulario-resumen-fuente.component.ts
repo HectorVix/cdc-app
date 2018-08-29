@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FuenteModelo } from '../../../modelo/fuente-modelo';
-import { criterio_ResumenesFuente } from '../../../modelo/criterio-resumenes-fuente';
+import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-formulario-resumen-fuente',
@@ -14,6 +14,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
   criterio_codfuente = this.criterio_ResumenesFuente.codfuente;
   criterio_publicacion_cdc = this.criterio_ResumenesFuente.publicacion_cdc;
   criterio_valor = this.criterio_ResumenesFuente.valor;
+  variosList: string[] = ['Comunat', 'Comunterr', 'Bosque', 'Sabana', 'Prado', 'Chaparral','Alpino','Otroterr','Comunac','Palustre','Lacustre','Fluvial','Estuarino','Maritimo','Subterp'];
+  floraList: string[] = ['Flora', 'Floraac', 'Floraterp', 'Plnovasc', 'Microorg', 'Infositio'];
+  faunaList: string[] = ['Fauna', 'Faunaac', 'Faunaterr', 'Moluscos', 'Insectos', 'Crustaceos','Otroartrop','otroinvert','Peces','Anfibios','reptiles','Aves','Mamiferos','Cienfisic','Fisiotopo'];
+  otrosList: string[] = ['Hidrol', 'Geologia', 'Suelos', 'Clima', 'Biologia', 'Ecologia','Funecol','Diversnat','Inventario','Tecinvest','Am','Planmanejo','Tecmanejo','Estimpamb','Organprot','Herrprot'];
 
   constructor(private fb: FormBuilder) {
     this.crearForm_ResumenesFuente();
@@ -23,8 +27,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
     this.fuenteForm = this.fb.group({
       'codigo': '',
-      'codfuente':'',
-      'cita':'',
+      'codfuente': '',
+      'cita': '',
       'archivado': '',
       'documentopdf': '',
       'cobgeo': '',
@@ -34,62 +38,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'coordo': '',
       'resumen': '',
       //tema
-      'comunat': '',
-      'comunterr': '',
-      'bosque': '',
-      'sabana': '',
-      'prado': '',
-      'chaparral': '',
-      'desierto': '',
-      'alpino': '',
-      'otroterr': '',
-      'comunac': '',
-      'palustre': '',
-      'lacustre': '',
-      'fluvial': '',
-      'estuarino': '',
-      'maritimo': '',
-      'subterp': '',
-      //flora
-      'flora': '',
-      'floraac': '',
-      'floraterp': '',
-      'plnovasc': '',
-      'microorg': '',
-      'infositio': '',
-      //fauna
-      'fauna': '',
-      'faunaac': '',
-      'faunaterr': '',
-      'moluscos': '',
-      'insectos': '',
-      'crustaceos': '',
-      'otroartrop': '',
-      'otroinvert': '',
-      'peces': '',
-      'anfibios': '',
-      'reptiles': '',
-      'aves': '',
-      'mamiferos': '',
-      'cienfisic': '',
-      'fisiotopo': '',
-      //otros
-      'hidrol': '',
-      'geologia': '',
-      'suelos': '',
-      'clima': '',
-      'biologia': '',
-      'ecologia': '',
-      'funecol': '',
-      'diversnat': '',
-      'inventario': '',
-      'tecinvest': '',
-      'am': '',
-      'planmanejo': '',
-      'tecmanejo': '',
-      'estimpamb': '',
-      'organprot': '',
-      'herrprot': '',
       'publicacioncdc': '',
       'valor': '',
       'clave': '',
@@ -142,9 +90,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   getCriterio_Valor(i: number) {
     switch (i) {
       case 0: return '';
-      case 1: return '1'; 
+      case 1: return '1';
       case 2: return '2';
-      case 3: return '3'; 
+      case 3: return '3';
     }
   }
 }

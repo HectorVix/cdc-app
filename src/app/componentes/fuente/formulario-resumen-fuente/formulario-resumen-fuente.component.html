@@ -12,9 +12,14 @@
               <label for="">CODFUENTE:</label>
             </div>
             <div class=" col-md-4 mt10">
-              <select class="form-control color-green" formControlName="codigo">
-                <option *ngFor="let sCodigoFuente of criterio_codfuente; let i1=index;" [value]="getCriterio_ResumenesFuente(i1)">{{sCodigoFuente}}</option>
-              </select>
+              <mat-form-field>
+                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="codigo">
+                  <mat-option>-- Ninguna --</mat-option>
+                  <mat-option *ngFor="let sCodigoFuente of criterio_codfuente" [value]="sCodigoFuente.value">
+                    {{sCodigoFuente.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <div class="md-form col-md-4 mt10">
               <input mdbInputDirective type="text" id="form1" class="form-control" data-error="Error" data-success="Correcto" formControlName="codfuente"
@@ -108,229 +113,33 @@
             <div class="col-md-2">
               <label for="">TEMA:</label>
             </div>
-            <div class="col-md-2 ">
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT1" formControlName="comunat">
-                <label class="custom-control-label" for="customControlValidationT1">COMUNAT</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT2" formControlName="comunterr">
-                <label class="custom-control-label" for="customControlValidationT2">COMMUNTERR</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT3" formControlName="bosque">
-                <label class="custom-control-label" for="customControlValidationT3">BOSQUE</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT4" formControlName="sabana">
-                <label class="custom-control-label" for="customControlValidationT4">SABANA</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT5" formControlName="prado">
-                <label class="custom-control-label" for="customControlValidationT5">PRADO</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT6" formControlName="chaparral">
-                <label class="custom-control-label" for="customControlValidationT6">CHAPARRAL</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT7" formControlName="desierto">
-                <label class="custom-control-label" for="customControlValidationT7">DESIERTO</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT8" formControlName="alpino">
-                <label class="custom-control-label" for="customControlValidationT8">ALPINO</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT9" formControlName="otroterr">
-                <label class="custom-control-label" for="customControlValidationT9">OTROTERR</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT10" formControlName="comunac">
-                <label class="custom-control-label" for="customControlValidationT10">COMUNAC</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT11" formControlName="palustre">
-                <label class="custom-control-label" for="customControlValidationT11">PALUSTRE</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT12" formControlName="lacustre">
-                <label class="custom-control-label" for="customControlValidationT12">LACUSTRE</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT13" formControlName="fluvial">
-                <label class="custom-control-label" for="customControlValidationT13">FLUVIAL</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT14" formControlName="estuarino">
-                <label class="custom-control-label" for="customControlValidationT14">ESTUARINO</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT15" formControlName="maritimo">
-                <label class="custom-control-label" for="customControlValidationT15">MARITIMO</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationT16" formControlName="subterp">
-                <label class="custom-control-label" for="customControlValidationT16">SUBTERP</label>
-              </div>
+            <div class="col-md-2">
+              <mat-form-field>
+                <mat-select placeholder="Varios" panelClass="color-panel-green" multiple>
+                  <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <!--Flora-->
-            <div class="col-md-2 ">
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF1" formControlName="flora">
-                <label class="custom-control-label" for="customControlValidationFF1">FLORA</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF2" formControlName="floraac">
-                <label class="custom-control-label" for="customControlValidationFF2">FLORAAC</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF3" formControlName="floraterp">
-                <label class="custom-control-label" for="customControlValidationFF3">FLORATERP</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF4" formControlName="plnovasc">
-                <label class="custom-control-label" for="customControlValidationFF4">PLNOVASC</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF5" formControlName="microorg">
-                <label class="custom-control-label" for="customControlValidationFF5">MICROORG</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationFF6" formControlName="infositio">
-                <label class="custom-control-label" for="customControlValidationFF6">INFOSITIO</label>
-              </div>
+            <div class="col-md-2">
+              <mat-form-field>
+                <mat-select placeholder="Flora" panelClass="color-panel-green" multiple>
+                  <mat-option *ngFor="let flora of floraList" [value]="flora">{{flora}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <!--Fauna-->
-            <div class="col-md-2 ">
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF1" formControlName="fauna">
-                <label class="custom-control-label" for="customControlValidationF1">FAUNA</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF2" formControlName="faunaac">
-                <label class="custom-control-label" for="customControlValidationF2">FAUNAAC</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF3" formControlName="faunaterr">
-                <label class="custom-control-label" for="customControlValidationF3">FAUNATERR</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF4" formControlName="moluscos">
-                <label class="custom-control-label" for="customControlValidationF4">MOLUSCOS</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF5" formControlName="insectos">
-                <label class="custom-control-label" for="customControlValidationF5">INSECTOS</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF6" formControlName="crustaceos">
-                <label class="custom-control-label" for="customControlValidationF6">CRUSTACEOS</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF7" formControlName="otroartrop">
-                <label class="custom-control-label" for="customControlValidationF7">OTROARTROP</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF8" formControlName="otroinvert">
-                <label class="custom-control-label" for="customControlValidationF8">OTROINVERT</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF9" formControlName="peces">
-                <label class="custom-control-label" for="customControlValidationF9">PECES</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF10" formControlName="anfibios">
-                <label class="custom-control-label" for="customControlValidationF10">ANFIBIOS</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF11" formControlName="reptiles">
-                <label class="custom-control-label" for="customControlValidationF11">REPTILES</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF12" formControlName="aves">
-                <label class="custom-control-label" for="customControlValidationF12">AVES</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF13" formControlName="mamiferos">
-                <label class="custom-control-label" for="customControlValidationF13">MAMIFEROS</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF14" formControlName="cienfisic">
-                <label class="custom-control-label" for="customControlValidationF14">CIENFISIC</label>
-              </div>
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationF15" formControlName="fisiotopo">
-                <label class="custom-control-label" for="customControlValidationF15">FISIOTOPO</label>
-              </div>
+            <div class="col-md-2">
+              <mat-form-field>
+                <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple>
+                  <mat-option *ngFor="let fauna of faunaList" [value]="fauna">{{fauna}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <!--Otros-->
-            <div class="col-md-2 ">
-              <div class="custom-control custom-checkbox   mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO1" formControlName="hidrol">
-                <label class="custom-control-label" for="customControlValidationO1">HIDROL</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO2" formControlName="geologia">
-                <label class="custom-control-label" for="customControlValidationO2">GEOLOGIA</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO3" formControlName="suelos">
-                <label class="custom-control-label" for="customControlValidationO3">SUELOS</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO4" formControlName="clima">
-                <label class="custom-control-label" for="customControlValidationO4">CLIMA</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO5" formControlName="biologia">
-                <label class="custom-control-label" for="customControlValidationO5">BIOLOGIA</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO6" formControlName="ecologia">
-                <label class="custom-control-label" for="customControlValidationO6">ECOLOGIA</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO7" formControlName="funecol">
-                <label class="custom-control-label" for="customControlValidationO7">FUNECOL</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO8" formControlName="diversnat">
-                <label class="custom-control-label" for="customControlValidationO8">DIVERSNAT</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO9" formControlName="inventario">
-                <label class="custom-control-label" for="customControlValidationO9">INVENTARIO</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO10" formControlName="tecinvest">
-                <label class="custom-control-label" for="customControlValidationO10">TECINVEST</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO11" formControlName="am">
-                <label class="custom-control-label" for="customControlValidationO11">AM</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO12" formControlName="planmanejo">
-                <label class="custom-control-label" for="customControlValidationO12">PLANMANEJO</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO13" formControlName="tecmanejo">
-                <label class="custom-control-label" for="customControlValidationO13">TECMANEJO</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO14" formControlName="estimpamb">
-                <label class="custom-control-label" for="customControlValidationO14">ESTIMPAMB</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO15" formControlName="organprot">
-                <label class="custom-control-label" for="customControlValidationO15">ORGANPROT</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="customControlValidationO16" formControlName="herrprot">
-                <label class="custom-control-label" for="customControlValidationO16">HERRPROT</label>
-              </div>
-
+            <div class="col-md-2">
+              <mat-form-field>
+                <mat-select placeholder="Otros" panelClass="color-panel-green" multiple>
+                  <mat-option *ngFor="let otros of otrosList" [value]="otros">{{otros}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
           <!-- fin row -->
@@ -339,17 +148,27 @@
               <label for="">PUBLICACION.CDC:</label>
             </div>
             <div class=" col-md-2">
-              <select class="form-control color-green" formControlName="publicacioncdc">
-                <option *ngFor="let sPublicacion of criterio_publicacion_cdc; let i2=index;" [value]="getCriterio_Publicacion_cdc(i2)">{{sPublicacion}}</option>
-              </select>
+              <mat-form-field>
+                <mat-select placeholder="" panelClass="color-panel-green" formControlName="publicacioncdc">
+                  <mat-option>-- Ninguna --</mat-option>
+                  <mat-option *ngFor="let sPublicacion of criterio_publicacion_cdc" [value]="sPublicacion.value">
+                    {{sPublicacion.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <div class="col-md-1">
               <label for="">VALOR:</label>
             </div>
             <div class=" col-md-4">
-              <select class="form-control color-green" formControlName="valor">
-                <option *ngFor="let sValor of criterio_valor; let i3=index;" [value]="getCriterio_Valor(i3)">{{sValor}}</option>
-              </select>
+              <mat-form-field>
+                <mat-select placeholder="VALOR" panelClass="color-panel-green" formControlName="valor">
+                  <mat-option>-- Ninguna --</mat-option>
+                  <mat-option *ngFor="let sValor of criterio_valor" [value]="sValor.value">
+                    {{sValor.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
           <!-- fin row -->
