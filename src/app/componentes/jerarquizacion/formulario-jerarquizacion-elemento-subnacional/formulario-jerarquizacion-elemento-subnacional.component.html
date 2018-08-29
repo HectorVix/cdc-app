@@ -339,19 +339,23 @@
             <!-- Editar -->
             <ngb-tab id="Editar">
                 <ng-template ngbTabTitle>
-                    <b>Editar</b>
+                    <b>Buscar Jerarquización Subnacional</b>
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <form action="">
-
-                    </form>
-                    <!-- fin form -->
-                    <div class="text-center ">
-                        <p>
-                            <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>
-                            <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                        </p>
-                    </div>
+                    <mat-card>
+                        <form class="base-form">
+                            <mat-form-field class="base-full-width">
+                                <input matInput placeholder="Codigo del Elemento">
+                            </mat-form-field>
+                            <mat-form-field class="base-full-width">
+                                <input matInput placeholder="Nombre Subnacional">
+                            </mat-form-field>
+                            <div class="mat-elevation-z8" class="base-form">
+                                <button mat-raised-button class="color-green">Buscar</button>
+                                <button mat-raised-button class="color-green">Buscar Todos</button>
+                            </div>
+                        </form>
+                    </mat-card>                 
                 </ng-template>
                 <!-- fin ng-template -->
             </ngb-tab>

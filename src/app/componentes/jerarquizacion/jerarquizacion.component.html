@@ -6,24 +6,24 @@
         <div class="card tab-black mt-alinear">
           <div class="card-tabs">
             <ngb-tabset #t="ngbTabset">
-              <ngb-tab id="tab-selectbyid1" title="Global">
+              <ngb-tab id="tab-selectbyid1" title="Elemento">
+                <ng-template ngbTabContent>
+                  <app-elemento></app-elemento>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="tab-selectbyid2" title="Global">
                 <ng-template ngbTabContent>
                   <app-formulario-jerarquizacion-elemento-global></app-formulario-jerarquizacion-elemento-global>
                 </ng-template>
               </ngb-tab>
-              <ngb-tab id="tab-selectbyid2" title="Nacional">
+              <ngb-tab id="tab-selectbyid3" title="Nacional">
                 <ng-template ngbTabContent>
                   <app-formulario-jerarquizacion></app-formulario-jerarquizacion>
                 </ng-template>
               </ngb-tab>
-              <ngb-tab id="tab-selectbyid3" title="Subnacional">
+              <ngb-tab id="tab-selectbyid4" title="Subnacional">
                 <ng-template ngbTabContent>
                   <app-formulario-jerarquizacion-elemento-subnacional></app-formulario-jerarquizacion-elemento-subnacional>
-                </ng-template>
-              </ngb-tab>
-              <ngb-tab id="tab-selectbyid4" title="Elemento">
-                <ng-template ngbTabContent>
-                  <app-elemento></app-elemento>
                 </ng-template>
               </ngb-tab>
               <ngb-tab id="tab-selectbyid5" title="Editar">

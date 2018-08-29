@@ -54,6 +54,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
+import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
+import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
+import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
+import { BuscarSitioComponent } from './componentes/sitios/buscar-sitio/buscar-sitio.component';
+import { BuscarCaracterizacionPlantasNacionalComponent } from './componentes/resumen/buscar-caracterizacion-plantas-nacional/buscar-caracterizacion-plantas-nacional.component';
+import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
+import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
+import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
  
 @NgModule({
   declarations: [
@@ -90,7 +99,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     EstadisticaComponent,
     AyudaComponent,
     ElementoComponent,
-    HomeCdcComponent
+    HomeCdcComponent,
+    BuscarRastreoElementoComponent,
+    BuscarLocalizacionElementoComponent,
+    BuscarProtocoloLeComponent,
+    BuscarAreasManejadasComponent,
+    BuscarSitioComponent,
+    BuscarCaracterizacionPlantasNacionalComponent,
+    BuscarCaracterizacionVertebradosNacionalComponent,
+    BuscarContactosComponent,
+    BuscarFuenteComponent
   ],
   imports: [
     BrowserModule,

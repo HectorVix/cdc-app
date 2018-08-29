@@ -34,7 +34,7 @@
                   <label for="">NOMBRES:</label>
                 </div>
                 <div class="md-form col-sm-9 mt-20 ">
-                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nombres" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nombres" data-error=" " data-success=" " required>
                 </div>
               </div>
               <div class="row">
@@ -711,9 +711,10 @@
               <!-- fin row -->
             </div>
             <!--fin modal-content  -->
-            <div class="text-center ">                                 
+            <div class="text-center "> 
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                                
                   <button class="btn color-green waves-light" (click)="fLE.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                  <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                  <button class="btn color-green waves-light"  (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
                   <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>               
               </div>           
           </ng-template>

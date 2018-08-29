@@ -446,8 +446,8 @@
                     <div class="row">
                       <div class="col-md-8"></div>
                       <div class="md-form form-sm  input-group-append mt-10">
-                        <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" " data-success=" "
-                          ngbDatepicker #dActualizar="ngbDatepicker">
+                        <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                          data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
                         <label for="formActualizar">ACTUALIZAR</label>
                         <div (click)="dActualizar.toggle()">
                           <i class="fa fa-calendar prefix"></i>
@@ -474,7 +474,23 @@
       <!-- Editar -->
       <ngb-tab id="tab-editar">
         <ng-template ngbTabTitle>
-          <b>Editar</b>
+          <b>Buscar Jerarquización Global</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <mat-card>
+            <form class="base-form">
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Codigo del Elemento">
+              </mat-form-field>
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Nombre Global">
+              </mat-form-field>
+              <div class="mat-elevation-z8" class="base-form">
+                <button mat-raised-button class="color-green">Buscar</button>              
+                <button mat-raised-button class="color-green">Buscar Todos</button>
+              </div>
+            </form>
+          </mat-card>
         </ng-template>
       </ngb-tab>
       <!-- fin ngb-tab -->

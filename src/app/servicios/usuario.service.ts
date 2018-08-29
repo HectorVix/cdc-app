@@ -9,7 +9,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo-elemento-modelo';
-
+import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -72,6 +72,11 @@ export class UsuarioService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
+   //agregar una nueva localizacion
+   addLocalizacionElemento(localizacionElemento: localizacion_Elemento_Modelo): Observable<localizacion_Elemento_Modelo> {
+    return this.http.post<localizacion_Elemento_Modelo>(this.rootUrl + '/localizar/registro', localizacionElemento, httpOptions);
+  }
+  
   rastreo_Elemento_Modelo
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
