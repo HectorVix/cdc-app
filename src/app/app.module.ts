@@ -63,6 +63,7 @@ import { BuscarCaracterizacionPlantasNacionalComponent } from './componentes/res
 import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
+import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
  
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar
     BuscarCaracterizacionPlantasNacionalComponent,
     BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
-    BuscarFuenteComponent
+    BuscarFuenteComponent,
+    TablaBusquedaComponent
   ],
   imports: [
     BrowserModule,
