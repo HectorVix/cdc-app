@@ -105,48 +105,7 @@
                 <button mat-raised-button class="color-green">Buscar Todos</button>
               </div>
             </form>
-
-            <mat-form-field>
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
-            <div class="mat-elevation-z8">
-              <div [hidden]="isLoading">
-                <table mat-table [dataSource]="dataSource" matSort>
-                  <!-- No. Column -->
-                  <div class="col-md-1">
-                    <ng-container matColumnDef="numero">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-                      <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
-                    </ng-container>
-                  </div>                 
-                  <ng-container matColumnDef="codigo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGO</th>
-                    <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
-                    <td mat-cell *matCellDef="let row"> {{row.fecha|date:'yyyy-MM-dd'}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="nombrecomun">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRECOMUN</th>
-                    <td mat-cell *matCellDef="let row"> {{row.nombrecomun}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="nombrecientifico">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE CIENTÍFICO</th>
-                    <td mat-cell *matCellDef="let row"> {{row.nombrecientifico}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="usuario">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>USUARIO</th>
-                      <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
-                    </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" 
-                  (click)="setElementoBuscado(row) ;Telemento.select('tab-formulario')">
-                  </tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-              </div>
-            </div>
+            <app-tabla-busqueda></app-tabla-busqueda>
           </mat-card>
         </ng-template>
 
