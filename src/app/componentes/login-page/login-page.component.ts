@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
-import { UsuarioModelo, Rol } from '../../modelo/usuario-modelo';
+import { UsuarioModelo, Rol } from '../../modelo/usuario/usuario-modelo';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';

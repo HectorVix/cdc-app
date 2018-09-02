@@ -75,8 +75,9 @@ export class rastreo_Elemento_Modelo {
       actualizan:       Date;
       actualizas:       Date;
 
+      fuenteList:any;
       localizacionList: any;
-      cARACTERIZACIONcaracterizacionid:any;
+     // cARACTERIZACIONcaracterizacionid:any;
       jERARQUIZACIONjerarquizacionid:Number;
 
 }

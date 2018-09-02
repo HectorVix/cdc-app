@@ -3,10 +3,10 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
-import { Jerarquizacion } from '../../../modelo/jerarquizacion-modelo';
+import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { elemento_Modelo } from '../../../modelo/elemento-modelo';
-import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion-subnacional-modelo';
+import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',

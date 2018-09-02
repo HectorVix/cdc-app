@@ -1,4 +1,4 @@
-import { UsuarioModelo } from '../modelo/usuario-modelo';
+import { UsuarioModelo } from '../../modelo/usuario/usuario-modelo';
 
 export class elemento_Modelo {
     elementoId: Number;
@@ -7,8 +7,8 @@ export class elemento_Modelo {
     nombrecientifico: String;
     comentario: String;
     fecha: Date;
-    uSUARIOusuarioid: UsuarioModelo;
     fotoList = null;
+    uSUARIOusuarioid: UsuarioModelo;
 }
 
 

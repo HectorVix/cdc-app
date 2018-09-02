@@ -1,4 +1,4 @@
-import { Jerarquizacion } from '../modelo/jerarquizacion-modelo';
+import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 export class jerarquizacion_Global_Modelo {
 
     codigoe:     String ;

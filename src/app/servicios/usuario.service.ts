@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable, of } from 'rxjs';
-import { UsuarioModelo } from '../modelo/usuario-modelo';
-import { elemento_Modelo } from '../modelo/elemento-modelo';
+import { UsuarioModelo } from '../modelo/usuario/usuario-modelo';
+import { elemento_Modelo } from '../modelo/jerarquizacion/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Jerarquizacion } from '../modelo/jerarquizacion-modelo';
+import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo-elemento-modelo';
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
+import { Localizacion } from '../modelo/localizacion-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -73,11 +74,10 @@ export class UsuarioService {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
    //agregar una nueva localizacion
-   addLocalizacionElemento(localizacionElemento: localizacion_Elemento_Modelo): Observable<localizacion_Elemento_Modelo> {
-    return this.http.post<localizacion_Elemento_Modelo>(this.rootUrl + '/localizar/registro', localizacionElemento, httpOptions);
+   addLocalizacionElemento(localizacion: Localizacion): Observable<Localizacion> {
+    return this.http.post<Localizacion>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
-  
-  rastreo_Elemento_Modelo
+
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

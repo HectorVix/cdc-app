@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { elemento_Modelo } from '../../../modelo/elemento-modelo';
+import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioModelo } from '../../../modelo/usuario-modelo';
+import { UsuarioModelo } from '../../../modelo/usuario/usuario-modelo';
 import { ControlErrorStateMatcher } from '../../../modelo/error-state-matcher';
 import { Subject } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';

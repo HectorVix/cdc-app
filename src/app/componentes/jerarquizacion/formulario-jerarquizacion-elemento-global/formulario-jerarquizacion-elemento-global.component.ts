@@ -5,10 +5,10 @@ import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
-import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion-global-modelo';
-import { Jerarquizacion } from '../../../modelo/jerarquizacion-modelo';
+import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-global-modelo';
+import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
-import { elemento_Modelo } from '../../../modelo/elemento-modelo';
+import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 const now = new Date();
 
 @Component({

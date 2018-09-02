@@ -1,4 +1,4 @@
-import { elemento_Modelo } from '../modelo/elemento-modelo';
+import { elemento_Modelo } from '../../modelo/jerarquizacion/elemento-modelo';
  export class Jerarquizacion {
     jerarquizacionId:Number;
     codigoe:String;
@@ -7,4 +7,5 @@ import { elemento_Modelo } from '../modelo/elemento-modelo';
     subnacionalList:any;
     rastreoList:any;
     eLEMENTOelementoid:elemento_Modelo;
+    estado:Number;
 }

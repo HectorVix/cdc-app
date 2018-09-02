@@ -8,7 +8,7 @@ import { Proteccion, CamposOpcionales } from '../../../modelo/tabla';
 import { criterio_le } from '../../../modelo/criterio-le';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { localizacion_Elemento_Modelo } from '../../../modelo/localizacion-elemento-modelo';
-
+import { Localizacion } from '../../../modelo/localizacion-modelo';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
@@ -143,7 +143,10 @@ export class FormularioLeComponent implements OnInit {
   guardarLocalizacion() {
     console.log(this.leForm.value);
     var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
-    this.addLocalizacionElemento(localizacionElementoBase);
+    var localizacion = new Localizacion();
+    localizacion.codigole='1234';
+
+    this.addLocalizacionElemento(localizacion);
   }
   setLocalizacionElemento(datos: localizacion_Elemento_Modelo): localizacion_Elemento_Modelo {
     datos.fechaeva = this.usuarioService.toFormato(this.leForm.get('fechaeva').value);
@@ -155,9 +158,9 @@ export class FormularioLeComponent implements OnInit {
     return datos;
   }
 
-  //agrega un nuevo registro rastreo elemento
-  addLocalizacionElemento(localizacionElemento: localizacion_Elemento_Modelo): void {
-    this.usuarioService.addLocalizacionElemento(localizacionElemento)
+  //agrega un nuevo registro localización elemento
+  addLocalizacionElemento(localizacion: Localizacion): void {
+    this.usuarioService.addLocalizacionElemento(localizacion)
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Se registro la localización del elemento :${resElemento.codigole}.`, 'success');
