@@ -4,7 +4,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Proteccion, CamposOpcionales } from '../../../modelo/tabla';
+import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { criterio_le } from '../../../modelo/criterio-le';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { localizacion_Elemento_Modelo } from '../../../modelo/localizacion-elemento-modelo';

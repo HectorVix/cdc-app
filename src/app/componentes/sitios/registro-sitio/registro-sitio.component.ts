@@ -5,7 +5,7 @@ import { criterio_Sitio } from '../../../modelo/criterio-sitio';
 
 //import { criterio_le } from '.././criterio-le';
 
-import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tabla';
+import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tablas/tabla';
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',

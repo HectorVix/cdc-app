@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Distribucion1_Resumen,Distribucion2_Resumen,CamposOpcionales} from '../../../modelo/tabla';
+import {Distribucion1_Resumen,Distribucion2_Resumen,CamposOpcionales} from '../../../modelo/tablas/tabla';
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
   templateUrl: './caracterizacion-vertebrados-nacional.component.html',
