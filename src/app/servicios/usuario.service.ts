@@ -8,9 +8,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
-import { rastreo_Elemento_Modelo } from '../modelo/rastreo-elemento-modelo';
+import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
-import { Localizacion } from '../modelo/localizacion-modelo';
+import { Localizacion } from '../modelo/localizacion/localizacion-modelo';
+import { Sitio } from '../modelo/sitio/sitio-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -76,6 +77,10 @@ export class UsuarioService {
    //agregar una nueva localizacion
    addLocalizacionElemento(localizacion: Localizacion): Observable<Localizacion> {
     return this.http.post<Localizacion>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  }
+  //agregar un nuevo sitio
+  addSitio(sitio: Sitio): Observable<Sitio> {
+    return this.http.post<Sitio>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
   }
 
   //para capturar los errores con HttpClient

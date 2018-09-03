@@ -622,9 +622,10 @@
                             <!-- fin row -->
                         </div>
                         <!-- fin modal-content -->
-                        <div class="text-center ">                                                
+                        <div class="text-center "> 
+                                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                                               
                                   <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                                  <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                                  <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
                                   <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                              
                               </div>                  
                     </ng-template>

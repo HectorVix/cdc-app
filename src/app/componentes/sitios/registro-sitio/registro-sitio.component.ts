@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_Sitio } from '../../../modelo/criterio-sitio';
-
+import { debounceTime } from 'rxjs/operators';
+import { UsuarioService } from '../../../servicios/usuario.service';
+import { Sitio } from '../../../modelo/sitio/sitio-modelo';
 //import { criterio_le } from '.././criterio-le';
 
 import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tablas/tabla';
@@ -21,6 +23,10 @@ export class RegistroSitioComponent implements OnInit {
   criterio_impdivbiol = this.criterio_Sitio.impdivbiol;
   criterio_impnodivbiol = this.criterio_Sitio.impnodivbiol;
   criterio_urgencia = this.criterio_Sitio.urgencia;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
 
   settings_Identificadores_Sitio = {
     columns: {
@@ -51,11 +57,16 @@ export class RegistroSitioComponent implements OnInit {
  
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private usuarioService: UsuarioService) {
     this.crearFormSitio();
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
   crearFormSitio() {
     this.sitioForm = this.fb.group({
@@ -128,6 +139,30 @@ export class RegistroSitioComponent implements OnInit {
 
     });
   }
+  guardarSitio() {
+    console.log(this.sitioForm.value);
+   var sitio = new Sitio();
+   sitio.codsitio="hola vix xd";
+
+    this.addSitio(sitio);
+  }
+    //agrega un nuevo registro de sitio 
+    addSitio(sitio: Sitio): void {
+      this.usuarioService.addSitio(sitio)
+        .subscribe(
+          resElemento => {
+            this.changeSuccessMessage(`Se registro el sitio  :${resElemento.codsitio}.`, 'success');
+          //  this.crearFormLocalizacion_Elemento();
+          }, err => {
+            this.changeSuccessMessage('No se pudo regitrar el Sitio.', 'primary');
+          });
+    }
+
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
+  }
+
   //Mapa del sitio
   getCriterio_MapaSitio(i: number) {
     switch (i) {

@@ -1,4 +1,4 @@
-import { rastreo_Elemento_Modelo } from '../modelo/rastreo-elemento-modelo';
+import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
 export class localizacion_Elemento_Modelo {
   //página1
   //identificadores
