@@ -8,7 +8,7 @@ import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { criterio_le } from '../../../modelo/criterio-le';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { localizacion_Elemento_Modelo } from '../../../modelo/localizacion-elemento-modelo';
-import { Localizacion } from '../../../modelo/localizacion-modelo';
+import { Localizacion } from '../../../modelo/localizacion/localizacion-modelo';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
