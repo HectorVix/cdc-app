@@ -12,6 +12,7 @@ import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-mode
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
 import { Localizacion } from '../modelo/localizacion/localizacion-modelo';
 import { Sitio } from '../modelo/sitio/sitio-modelo';
+import { Area } from '../modelo/area/area-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -81,6 +82,10 @@ export class UsuarioService {
   //agregar un nuevo sitio
   addSitio(sitio: Sitio): Observable<Sitio> {
     return this.http.post<Sitio>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
+  }
+  //agregar un area
+  addArea(area: Area): Observable<Area> {
+    return this.http.post<Area>(this.rootUrl + '/area/registro', area, httpOptions);
   }
 
   //para capturar los errores con HttpClient

@@ -485,8 +485,9 @@
               <!-- fin modal-content -->
               <div class="text-center ">
                 <p>
+                  <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <button class="btn color-green waves-light" (click)="fAreasManejadas.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                  <button class="btn  color-green waves-light" mdbWavesEffect>Guardar</button>
+                  <button class="btn  color-green waves-light" (click)="guardarArea()" mdbWavesEffect>Guardar</button>
                   <button class="btn  color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                 </p>
               </div>
