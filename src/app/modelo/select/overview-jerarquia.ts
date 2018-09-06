@@ -1,55 +1,50 @@
-export interface Jerarquia {
-  disabled?: boolean;
-  value: string;
-  viewValue: string;
-}
-
+import {Valor} from '../../modelo/select/overwiew-valor';
 export class criterio_Jerarquizacion {
-  lgn_lestim: Jerarquia[] = [
+  lgn_lestim: Valor[] = [
     {value: 'A', viewValue: '0 - 5 localizaciones conocidas'},
     {value: 'B', viewValue: '6 - 20 localizaciones conocidas'},
     {value: 'C', viewValue: '21 - 100 localizaciones conocidas'},
     {value: 'D', viewValue: '100 o más localizaciones conocidas'}
   ];
-  lgn_abund: Jerarquia[] = [
+  lgn_abund: Valor[] = [
     {value: 'A', viewValue: '< 1000 individuos (PE Y AE), 1000 hectáreas (CN), 30 Km a lo largo de un río (CN)'},
     {value: 'B', viewValue: '6 - 20 localizaciones conocidas'},
     {value: 'C', viewValue: '21 - 100 localizaciones conocidas'},
     {value: 'D', viewValue: '100 o más localizaciones conocidas'}
   ];
-  lg_dist: Jerarquia[] = [
+  lg_dist: Valor[] = [
     {value: 'A', viewValue: 'Endémica de un país, departamento grande o región; una área < 260 km²'},
     {value: 'B', viewValue: 'Edémica regional; una área de 260 - 26,000 km²'},
     {value: 'C', viewValue: 'Moderadamente ampia pero dispersa; una área de 26,000 - 2,600,000 km'},
     {value: 'D', viewValue: 'Amplia; una área > 2,600,000 km²'}
   ];
-  ln_dist: Jerarquia[] = [
+  ln_dist: Valor[] = [
     {value: 'A', viewValue: 'Muy limitada; porcentaje de territorio nacional < 3%'},
     {value: 'B', viewValue: 'Limitada; porcentaje de territorio nacional 3 - 10%'},
     {value: 'C', viewValue: 'Moderadamente amplia; porcentaje de territorio nacional 10 - 50%'},
     {value: 'D', viewValue: 'Amplia; porcentaje de territorio nacional > 50%'}
   ];
-  lgn_leprot: Jerarquia[] = [
+  lgn_leprot: Valor[] = [
     {value: 'A', viewValue: 'Ninguna LE protegida (hasta dónde se conoce)'},
     {value: 'B', viewValue: 'Por lo menos una LE protegida'},
     {value: 'C', viewValue: 'Varias LE protegidas'},
     {value: 'D', viewValue: 'Muchas LE protegidas'},
     {value: 'I', viewValue: 'Se ignora'}
   ];
-  lgn_amenaz: Jerarquia[] = [
+  lgn_amenaz: Valor[] = [
     {value: 'A', viewValue: 'Muy amenazado: El elemento es directamente explotado o amenazado por causas naturalez o por el hombre'},
     {value: 'B', viewValue: 'Moderadamente amenazado: El habitat o comunidad se presta para usos alternos que amenazan al elemento'},
     {value: 'C', viewValue: 'Ligeramente amenazado: El habitat o comunidad se protege ya que no se presta para usos que amenazan al elemento'},
     {value: 'D', viewValue: 'Sin amenaza'}
   ];
-  lg_fragil: Jerarquia[] = [
+  lg_fragil: Valor[] = [
     {value: 'A', viewValue: 'Muy frágil (murciélago en cueva de maternidad)'},
     {value: 'B', viewValue: 'Frágil (Felis spp.)'},
     {value: 'C', viewValue: 'Bastante resistente (perezoso de tres dedos)'},
     {value: 'D', viewValue: 'Resistente (algunas ardillas)'}
 
   ];
-  lg_rango: Jerarquia[] = [
+  lg_rango: Valor[] = [
     {value: 'G1', viewValue: 'G1'},
     {value: 'G2', viewValue: 'G2'},
     {value: 'G3', viewValue: 'G3'},
@@ -60,7 +55,7 @@ export class criterio_Jerarquizacion {
     {value: 'GX', viewValue: 'GX'}
    
   ];
-  ln_rango: Jerarquia[] = [
+  ln_rango: Valor[] = [
     {value: 'N1', viewValue: 'G1'},
     {value: 'N2', viewValue: 'N2'},
     {value: 'N3', viewValue: 'N3'},

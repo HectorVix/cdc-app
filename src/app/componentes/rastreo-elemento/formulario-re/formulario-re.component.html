@@ -7,7 +7,7 @@
             <b>1</b>
           </ng-template>
           <ng-template ngbTabContent>
-              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
             <!-- Identificadores -->
             <div class="modal-content ">
               <div class="modal-header color-green">
@@ -22,9 +22,9 @@
                     data-success="correcto" required>
                 </div>
                 <div class="col-md-2">
-                    <div class="mat-elevation-z8" class="base-form">
-                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
-                    </div>
+                  <div class="mat-elevation-z8" class="base-form">
+                    <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                  </div>
                 </div>
                 <div class="md-form col-md-4 mt10">
                   <input mdbInputDirective type="text" id="formTropicos" class="form-control" formControlName="tropicos" data-error="incorrecto"
@@ -87,7 +87,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" " data-success=" ">
-                <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
+                  <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
                 </div>
               </div>
               <div class="row">
@@ -116,10 +116,14 @@
                 <div class="col-md-2">
                   <label for="">DISTTAX:</label>
                 </div>
-                <div class="col-md-5 mt-10">
-                  <select class="form-control color-green" formControlName="disttax">
-                    <option *ngFor="let sDisttax of criterio_disttax; let i1=index;" [value]="getCriterio_Tax(i1)">{{sDisttax}}</option>
-                  </select>
+                <div class="col-md-3 mt-10">
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="disttax">
+                      <mat-option *ngFor="let sDisttax of criterio_disttax" [value]="sDisttax.value">
+                        {{sDisttax.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -128,9 +132,13 @@
                   <label for="">DUDATAX:</label>
                 </div>
                 <div class="col-md-5">
-                  <select class="form-control color-green" formControlName="dudatax">
-                    <option *ngFor="let sDudatax of criterio_dudatax; let i2=index;" [value]="getCriterio_Tax(i2)">{{sDudatax}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dudatax">
+                      <mat-option *ngFor="let sDudatax of criterio_dudatax" [value]="sDudatax.value">
+                        {{sDudatax.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -166,7 +174,7 @@
                 </div>
                 <div class="md-form col-md-5 mt10">
                   <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
-                 <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
+                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="number" id="formNumsinn" class="form-control" formControlName="numsinn" data-error=" " data-success=" ">
@@ -180,7 +188,7 @@
                 </div>
                 <div class="md-form col-md-9 mt-20">
                   <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" formControlName="nomcomunn" data-error=" " data-success=" ">
-               <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
+                  <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
                 </div>
               </div>
               <div class="row">
@@ -221,19 +229,24 @@
                   <label for="">RANGOG:</label>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="rangog">
-                    <option *ngFor="let sRangog of criterio_rangog" [value]="sRangog">{{sRangog}}</option>
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <label for="">FORMULAR:</label>
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
+                      <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
+                        {{sRangog.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="formularg">
-                    <option *ngFor="let sFormularg of criterio_compu_manual; let i3=index;" [value]="getCriterio_Compu_Manual(i3)">{{sFormularg}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder="FORMULAR" panelClass="color-panel-green" formControlName="formularg">
+                      <mat-option *ngFor="let sFormularg of criterio_compu_manual" [value]="sFormularg.value">
+                        {{sFormularg.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div class="md-form col-md-2 mt10">
+                <div class="md-form col-md-3 mt10">
                   <input mdbInputDirective type="text" id="formResprg" class="form-control" formControlName="resprg" data-error=" " data-success=" ">
                   <label for="formResprg">&nbsp;&nbsp;&nbsp;&nbsp;RESPRG</label>
                 </div>
@@ -256,6 +269,24 @@
                   <input mdbInputDirective type="text" id="formAepeu" class="form-control" formControlName="aepeu" data-error=" " data-success=" ">
                   <label for="formAepeu"></label>
                 </div>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="CITES" panelClass="color-panel-green" formControlName="cites">
+                      <mat-option *ngFor="let sCites of criterio_cites" [value]="sCites.value">
+                        {{sCites.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="IUCN" panelClass="color-panel-green" formControlName="iucn">
+                      <mat-option *ngFor="let sUicn of criterio_iucn" [value]="sUicn.value">
+                        {{sUicn.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
                 <div class="md-form col-md-2 input-group-append mt-20">
                   <input mdbInputDirective type="text" id="formFechaAepeu" class="form-control" formControlName="fechaaepeu" data-error=" "
                     data-success=" " ngbDatepicker #dFechaAepeu="ngbDatepicker">
@@ -264,25 +295,7 @@
                     <i class="fa fa-calendar prefix"></i>
                   </div>
                 </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">CITES:</label>
-                </div>
-                <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="cites">
-                    <option *ngFor="let sCites of criterio_cites; let i4=index;" [value]="getCriterio_Cites(i4)">{{sCites}}</option>
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <label for="">IUCN:</label>
-                </div>
-                <div class="col-md-5">
-                  <select class="form-control color-green" formControlName="iucn">
-                    <option *ngFor="let sUicn of criterio_iucn; let i5=index;" [value]="getCriterio_Iucn(i5)">{{sUicn}}</option>
-                  </select>
-                </div>
+
               </div>
               <!-- fin row -->
               <!-- 3 linea -->
@@ -290,32 +303,34 @@
                 <div class="col-md-2">
                   <label for="">PLANSCONS:</label>
                 </div>
-                <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="planscons">
-                    <option *ngFor="let sPlanscons of criterio_compu_manual; let i6=index;" [value]="getCriterio_Compu_Manual(i6)">{{sPlanscons}}</option>
-                  </select>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="planscons">
+                      <mat-option *ngFor="let sPlanscons of criterio_compu_manual" [value]="sPlanscons.value">
+                        {{sPlanscons.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
 
-                <div class="md-form col-md-2">
+                <div class="md-form col-md-2 mt-20">
                   <input mdbInputDirective type="text" id="formResplan" class="form-control" formControlName="resplan" data-error=" " data-success=" ">
                   <label for="formResplan">&nbsp;&nbsp;&nbsp;RESPLAN:</label>
                 </div>
-                <div class="col-md-1">
-                  <label for="">RESUMENM</label>
+                <div class="col-md-3 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="RESUMENM" panelClass="color-panel-green" formControlName="resumenman">
+                      <mat-option *ngFor="let sResumenman of criterio_compu_manual" [value]="sResumenman.value">
+                        {{sResumenman.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="resumenman">
-                    <option *ngFor="let sResumenman of criterio_compu_manual; let i7=index" [value]="getCriterio_Compu_Manual(i7)">{{sResumenman}}</option>
-                  </select>
-                </div>
-
-                <div class="md-form col-md-2">
+                <div class="md-form col-md-2 mt-20">
                   <input mdbInputDirective type="text" id="formRes_resumen" class="form-control" formControlName="resresumen" data-error=" "
                     data-success=" ">
                   <label for="formRes_resumen">&nbsp;&nbsp;&nbsp;RESRESUMEN</label>
                 </div>
-
-
               </div>
 
               <!-- 4 linea -->
@@ -323,25 +338,29 @@
                 <div class="col-md-2">
                   <label for="">EXSITU:</label>
                 </div>
-                <div class="col-md-2 mt-10">
-                  <select class="form-control color-green" formControlName="exsitu">
-                    <option *ngFor="let sExsitu of criterio_si_no; let i8=index;" [value]="getCriterio_Si_No(i8)">{{sExsitu}}</option>
-                  </select>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="exsitu">
+                      <mat-option *ngFor="let sExsitu of criterio_si_no" [value]="sExsitu.value">
+                        {{sExsitu.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
 
-                <div class="md-form col-md-3 mt-10">
+                <div class="md-form col-md-3 mt-20">
                   <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="instexsitu" data-error=" "
                     data-success=" ">
                   <label for="formInstExsitu">&nbsp;&nbsp;&nbsp;INST.EXSITU</label>
                 </div>
-
-                <div class="col-md-1 ">
-                  <label for="">ENDEMISMO:</label>
-                </div>
-                <div class="col-md-4 mt-10">
-                  <select class="form-control color-green" formControlName="endemismo">
-                    <option *ngFor="let sEndemismo of criterio_endemismo; let i9=index;" [value]="getCriterio_Endemismo(i9)">{{sEndemismo}}</option>
-                  </select>
+                <div class="col-md-4 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="ENDEMISMO" panelClass="color-panel-green" formControlName="endemismo">
+                      <mat-option *ngFor="let sEndemismo of criterio_endemismo" [value]="sEndemismo.value">
+                        {{sEndemismo.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -358,17 +377,22 @@
                   <label for="">RANGON:</label>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="rangon">
-                    <option *ngFor="let sRangon of criterio_rangon" [value]="sRangon">{{sRangon}}</option>
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <label for="">FORMLARN:</label>
+                  <mat-form-field>
+                      <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                        <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                          {{sRangon.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="formularn">
-                    <option *ngFor="let sFormularn of criterio_compu_manual; let i10=index;" [value]="getCriterio_Compu_Manual(i10)">{{sFormularn}}</option>
-                  </select>
+                  <mat-form-field>
+                      <mat-select placeholder="FORMLARN" panelClass="color-panel-green" formControlName="formularn">
+                        <mat-option *ngFor="let sFormularn of criterio_compu_manual" [value]="sFormularn.value">
+                          {{sFormularn.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
@@ -411,24 +435,22 @@
               </div>
               <!-- fin row -->
               <!-- 3 linea -->
-
               <div class="row">
                 <div class="col-md-2">
                   <label for="">REFNOMBRE:</label>
                 </div>
-
                 <div class="md-form col-md-4 mt-20">
                   <input mdbInputDirective type="text" id="formRefnombren" class="form-control" formControlName="refnombren" data-error=" "
                     data-success=" ">
-
                 </div>
-                <div class="col-md-2">
-                  <label for="">TRANSPARENCIAN:</label>
-                </div>
-                <div class="col-md-2 mt-10">
-                  <select class="form-control color-green" formControlName="transparencian">
-                    <option *ngFor="let sTransparencian of criterio_si_no; let i11=index;" [value]="getCriterio_Si_No(i11)">{{sTransparencian}}</option>
-                  </select>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                      <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="transparencian">
+                        <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                          {{sTransparencian.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -446,17 +468,25 @@
                   <label for="">RANGOS:</label>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="rangos">
-                    <option *ngFor="let sRangos of criterio_rangon" [value]="sRangos">{{sRangos}}</option>
-                  </select>
+                  <mat-form-field>
+                      <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="rangos">
+                        <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
+                          {{sRangos.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="col-md-1">
                   <label for="">FORMLARS:</label>
                 </div>
                 <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="formulars">
-                    <option *ngFor="let sFormulars of criterio_compu_manual; let i12=index;" [value]="getCriterio_Compu_Manual(i12)">{{sFormulars}}</option>
-                  </select>
+                  <mat-form-field>
+                      <mat-select placeholder="FORMLARS" panelClass="color-panel-green" formControlName="formulars">
+                        <mat-option *ngFor="let sFormulars of criterio_compu_manual" [value]="sFormulars.value">
+                          {{sFormulars.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="text" id="formRastreoles" class="form-control" formControlName="rastreoles" data-error=" "
@@ -512,10 +542,14 @@
                 <div class="col-md-2">
                   <label for="">TRANSPARENCIAS:</label>
                 </div>
-                <div class="col-md-2 mt-10">
-                  <select class="form-control color-green" formControlName="transparencias">
-                    <option *ngFor="let sTransparencian of criterio_si_no; let i13=index;" [value]="getCriterio_Si_No(i13)">{{sTransparencian}}</option>
-                  </select>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                      <mat-select placeholder="TRANSPARENCIAS" panelClass="color-panel-green" formControlName="transparencias">
+                        <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                          {{sTransparencian.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -637,13 +671,13 @@
 
 
             <div class="text-center ">
-                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
-                <button class="btn color-green waves-light"  (click) ="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
-                <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+              <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
+              <button class="btn color-green waves-light" (click)="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
+              <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
             </div>
           </ng-template>
-        </ngb-tab>   
+        </ngb-tab>
       </ngb-tabset>
     </form>
     <!-- fin form -->

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
 import { disableDebugTools } from '@angular/platform-browser';
-import { criterio_re } from '../../../modelo/criterio-re';
+import { criterio_re } from '../../../modelo/select/overview-rastreo';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';

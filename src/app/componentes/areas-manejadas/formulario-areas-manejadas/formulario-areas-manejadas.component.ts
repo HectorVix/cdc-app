@@ -131,7 +131,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.addArea(area);
 
   }
-  //agrega un nueva area
+  //agrega una nueva area
   addArea(area: Area): void {
     this.usuarioService.addArea(area)
       .subscribe(
