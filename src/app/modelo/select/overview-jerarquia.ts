@@ -68,7 +68,7 @@ export class criterio_Jerarquizacion {
     {value: 'NR', viewValue: 'NR'},
     {value: 'NRF', viewValue: 'NRF'},
     {value: 'NU', viewValue: 'NU'},
-    {value: 'NX', viewValue: 'NX'},
+    {value: 'NX', viewValue: 'NX'}
   ];
 }
 

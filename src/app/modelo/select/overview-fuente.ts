@@ -15,7 +15,7 @@
 
     publicacion_cdc: Valor[] = [
         {value: '1', viewValue: 'Sí'},
-        {value: '0', viewValue: 'No'},
+        {value: '0', viewValue: 'No'}
       ];
 
       valor: Valor[] = [

@@ -11,7 +11,7 @@ export class criterio_re {
   dudatax: Valor[] = [
     { value: 'A', viewValue: 'Indudablemente una especie válida' },
     { value: 'B', viewValue: 'Posiblemente no válida como especie pero si como subespecie' },
-    { value: 'C', viewValue: 'Probablemente no sea diferente a ningún nivel taxonómico' },
+    { value: 'C', viewValue: 'Probablemente no sea diferente a ningún nivel taxonómico' }
   ];
 
   rangog: Valor[] = [
@@ -37,16 +37,16 @@ export class criterio_re {
     { value: 'NR', viewValue: 'NR' },
     { value: 'NRF', viewValue: 'NRF' },
     { value: 'NU', viewValue: 'NU' },
-    { value: 'NX', viewValue: 'NX' },
+    { value: 'NX', viewValue: 'NX' }
   ];
   compu_manual: Valor[] = [
     { value: 'C', viewValue: 'Computarizado' },
-    { value: 'M', viewValue: 'Manual' },
+    { value: 'M', viewValue: 'Manual' }
   ];
   cites: Valor[] = [
     { value: '1', viewValue: 'Apéndice I' },
     { value: '2', viewValue: 'Apéndice II' },
-    { value: '3', viewValue: 'Apéndice III' },
+    { value: '3', viewValue: 'Apéndice III' }
   ];
   iucn: Valor[] = [
     { value: 'EX', viewValue: 'En peligro' },
@@ -55,20 +55,20 @@ export class criterio_re {
     { value: 'I', viewValue: 'Indeterminada' },
     { value: 'K', viewValue: 'Insuficientemente conocida' },
     { value: 'O', viewValue: 'Fuera de peligro' },
-    { value: 'NT', viewValue: 'No está en peligro (endémicas)' },
+    { value: 'NT', viewValue: 'No está en peligro (endémicas)' }
   ];
   si_no: Valor[] = [
     { value: '1', viewValue: 'Sí' },
-    { value: '0', viewValue: 'No' },
+    { value: '0', viewValue: 'No' }
   ];
   endemismo: Valor[] = [
     { value: 'S', viewValue: 'Endémico a jurisdicción CDC sub-nacional' },
     { value: 'N', viewValue: 'Endémico nacional' },
-    { value: 'M', viewValue: 'multinacional,no edémico' },
+    { value: 'M', viewValue: 'multinacional,no edémico' }
   ];
   listacdc: Valor[] = [
     { value: 'S', viewValue: 'SÍ' },
     { value: 'P', viewValue: 'Propuesta para la lista pero no está siendo activamente inventariado' },
-    { value: 'N', viewValue: 'No está siendo activamente inventariado, no concierne, locamente abundante, exótica, etc.' },
+    { value: 'N', viewValue: 'No está siendo activamente inventariado, no concierne, locamente abundante, exótica, etc.' }
   ];
 }

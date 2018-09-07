@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Elementos_AreasManejadas, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { criterio_areasManejadas } from '../../../modelo/criterio-areas-manejadas';
+import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
 import { Area } from '../../../modelo/area/area-modelo';

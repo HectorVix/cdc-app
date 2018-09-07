@@ -2,7 +2,7 @@ import { Valor } from '../../modelo/select/overwiew-valor';
 export class criterio_le {
   si_no: Valor[] = [
     { value: '1', viewValue: 'Sí' },
-    { value: '0', viewValue: 'No' },
+    { value: '0', viewValue: 'No' }
   ];
   rango_le: Valor[] = [
     { value: 'A', viewValue: 'Excelente' },
@@ -34,7 +34,7 @@ export class criterio_le {
     { value: 'NR', viewValue: 'NR' },
     { value: 'NRF', viewValue: 'NRF' },
     { value: 'NU', viewValue: 'NU' },
-    { value: 'NX', viewValue: 'NX' },
+    { value: 'NX', viewValue: 'NX' }
   ];
 }
 

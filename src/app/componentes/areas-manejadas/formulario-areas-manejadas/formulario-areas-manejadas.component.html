@@ -200,36 +200,44 @@
                     <label for="">MULTISUBNAC:</label>
                   </div>
                   <div class="col-md-2 mt-15">
-                    <select class="form-control color-green" formControlName="multisubnac">
-                      <option *ngFor="let sMultisubnac of criterio_si_no ; let i1=index;" [value]="getCriterio_Si_No (i1)">{{sMultisubnac}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-1">
-                    <label for="">LIMITES:</label>
+                    <mat-form-field>
+                      <mat-select placeholder=" " panelClass="color-panel-green" formControlName="multisubnac">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sMultisubnac of criterio_si_no" [value]="sMultisubnac.value">
+                          {{sMultisubnac.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                   <div class="col-md-2 mt-15">
-                    <select class="form-control color-green" formControlName="limites">
-                      <option *ngFor="let sLimites of criterio_si_no; let i2=index;" [value]="getCriterio_Si_No(i2)">{{sLimites}}</option>
-                    </select>
+                    <mat-form-field>
+                      <mat-select placeholder="LIMITES" panelClass="color-panel-green" formControlName="limites">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sLimites of criterio_si_no" [value]="sLimites.value">
+                          {{sLimites.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
-                </div>
-                <!-- fin row -->
-                <div class="row">
-                  <div class="col-md-2">
-                    <label for="">CONTINUA:</label>
+                  <div class="col-md-2 mt-15">
+                    <mat-form-field>
+                      <mat-select placeholder="CONTINUA" panelClass="color-panel-green" formControlName="continua">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sContinua of criterio_si_no" [value]="sContinua.value">
+                          {{sContinua.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
-                  <div class="col-md-2">
-                    <select class="form-control color-green" formControlName="continua">
-                      <option *ngFor="let sContinua of criterio_si_no; let i3=index;" [value]="getCriterio_Si_No(i3)">{{sContinua}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-1">
-                    <label for="">INVOL.TNC:</label>
-                  </div>
-                  <div class="col-md-2">
-                    <select class="form-control color-green" formControlName="involtnc">
-                      <option *ngFor="let sInvoltnc of criterio_si_no; let i4=index;" [value]="getCriterio_Si_No(i4)">{{sInvoltnc}}</option>
-                    </select>
+                  <div class="col-md-2 mt-15">
+                    <mat-form-field>
+                      <mat-select placeholder="INVOL.TNC" panelClass="color-panel-green" formControlName="involtnc">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sInvoltnc of criterio_si_no" [value]="sInvoltnc.value">
+                          {{sInvoltnc.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                 </div>
                 <!-- fin row -->
@@ -256,10 +264,15 @@
                   <div class="col-md-2">
                     <label for="">PROTASIGN:</label>
                   </div>
-                  <div class="col-md-3 mt10">
-                    <select class="form-control color-green" formControlName="protasign">
-                      <option *ngFor="let sProtasign of criterio_protasign; let i5=index;" [value]="getCriterio_Protasign">{{sProtasign}}</option>
-                    </select>
+                  <div class="col-md-2 mt10">
+                    <mat-form-field>
+                      <mat-select placeholder=" " panelClass="color-panel-green" formControlName="protasign">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sProtasign of criterio_protasign" [value]="sProtasign.value">
+                          {{sProtasign.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                   <div class="md-form col-md-2  input-group-append mt10">
                     <input mdbInputDirective type="text" id="formFechaesta" class="form-control" formControlName="fechaesta" data-error=" " data-success=" "
@@ -346,12 +359,17 @@
                 <!-- fin row -->
                 <div class="row">
                   <div class="col-md-2">
-                    <label for="">ACCESOFUB:</label>
+                    <label for="">ACCESOPUB:</label>
                   </div>
-                  <div class="col-md-3 mt-15">
-                    <select class="form-control color-green" formControlName="accesopub">
-                      <option *ngFor="let sAccesofub of criterio_accesopub; let i6=index;" [value]="getCriterio_Protasign(i6)">{{sAccesofub}}</option>
-                    </select>
+                  <div class="col-md-2 mt-15">
+                    <mat-form-field>
+                      <mat-select placeholder=" " panelClass="color-panel-green" formControlName="accesopub">
+                        <mat-option>--- Ninguna ---</mat-option>
+                        <mat-option *ngFor="let sAccesofub of criterio_accesopub" [value]="sAccesofub.value">
+                          {{sAccesofub.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                 </div>
                 <!-- fin row -->
