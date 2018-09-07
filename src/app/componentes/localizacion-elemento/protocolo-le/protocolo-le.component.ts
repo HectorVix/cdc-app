@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Protocolo} from '../../../modelo/tablas/tabla';
-import { criterio_le } from '../../../modelo/criterio-le';
+import { criterio_le } from '../../../modelo/select/overview-localizacion';
 @Component({
   selector: 'app-protocolo-le',
   templateUrl: './protocolo-le.component.html',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { criterio_Sitio } from '../../../modelo/criterio-sitio';
+import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { Sitio } from '../../../modelo/sitio/sitio-modelo';
@@ -107,7 +107,7 @@ export class RegistroSitioComponent implements OnInit {
       'comrango': '',
       'impdivbiol': '',
       'comdivbiol': '',
-      'imnopdivbiol': '',
+      'impnodivbiol': '',
       'comnodivbiol': '',
       'urgencia': '',
       'comurgencia': '',

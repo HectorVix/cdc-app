@@ -151,12 +151,16 @@
                                 <div class="col-md-2">
                                     <label for="">MAPASITIO:</label>
                                 </div>
-                                <div class="col-md-7">
-                                    <select class="form-control color-green mt-15" formControlName="mapasitio">
-                                        <option *ngFor="let sMapasitio of criterio_mapasitio; let i1=index;" [value]="getCriterio_MapaSitio(i1)">{{sMapasitio}}</option>
-                                    </select>
+                                <div class="col-md-7 mt-20">
+                                    <mat-form-field>
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="mapasitio">
+                                            <mat-option *ngFor="let sMapasitio of criterio_mapasitio" [value]="sMapasitio.value">
+                                                {{sMapasitio.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
-                                <div class="md-form col-md-2  input-group-append mt-5">
+                                <div class="md-form col-md-2  input-group-append mt-20">
                                     <input mdbInputDirective type="text" id="formFechamapa" class="form-control" formControlName="fechamapa" data-error=" " data-success=" "
                                         ngbDatepicker #dFechamapa="ngbDatepicker">
                                     <label for="formFechamapa">&nbsp;&nbsp;&nbsp;&nbsp;FECHAMAPA</label>
@@ -277,10 +281,14 @@
                                 <div class="col-md-2">
                                     <label for="">RANGOANT:</label>
                                 </div>
-                                <div class="col-md-8 mt5">
-                                    <select class="form-control color-green" formControlName="rangoant">
-                                        <option *ngFor="let sRangoant of criterio_rangoant; let i1=index;" [value]="getCriterio_rangoAnterior(i1)">{{sRangoant}}</option>
-                                    </select>
+                                <div class="col-md-6 mt5">
+                                    <mat-form-field>
+                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangoant">
+                                            <mat-option *ngFor="let sRangoant of criterio_rangoant" [value]="sRangoant.value">
+                                                {{sRangoant.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -300,10 +308,14 @@
                                 <div class="col-md-2">
                                     <label for="">IMPDIVBIOL:</label>
                                 </div>
-                                <div class="col-md-6 mt-20">
-                                    <select class="form-control color-green" formControlName="impdivbiol">
-                                        <option *ngFor="let sImpdivbiol of criterio_impdivbiol; let i2=index;" [value]="getCriterio_impdivbiol(i2)">{{sImpdivbiol}}</option>
-                                    </select>
+                                <div class="col-md-5 mt-20">
+                                    <mat-form-field>
+                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impdivbiol">
+                                                <mat-option *ngFor="let sImpdivbiol of criterio_impdivbiol" [value]="sImpdivbiol.value">
+                                                    {{sImpdivbiol.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -326,10 +338,14 @@
                                 <div class="col-md-2">
                                     <label for="">IMPNODIVBIOL:</label>
                                 </div>
-                                <div class="col-md-8 mt-20">
-                                    <select class="form-control color-green" formControlNombre="impnodivbiol">
-                                        <option *ngFor="let sImpnodivbiol of criterio_impnodivbiol; let i3=index;" [value]="getCriterio_impnodivbiol(i3)">{{sImpnodivbiol}}</option>
-                                    </select>
+                                <div class="col-md-6 mt-20">
+                                    <mat-form-field>
+                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impnodivbiol">
+                                                <mat-option *ngFor="let sImpnodivbiol of criterio_impnodivbiol" [value]="sImpnodivbiol.value">
+                                                    {{sImpnodivbiol.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -349,10 +365,14 @@
                                 <div class="col-md-2">
                                     <label for="">URGENCIA:</label>
                                 </div>
-                                <div class="col-md-8 mt-20">
-                                    <select class="form-control color-green" formControlName="urgencia">
-                                        <option *ngFor="let sUrgencia of criterio_urgencia; let i4=index;" [value]="getCriterio_Urgencia(i4)">{{sUrgencia}}</option>
-                                    </select>
+                                <div class="col-md-7 mt-20">
+                                    <mat-form-field>
+                                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="urgencia">
+                                                <mat-option *ngFor="let sUrgencia of criterio_urgencia" [value]="sUrgencia.value">
+                                                    {{sUrgencia.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                 </div>
                             </div>
                             <!-- fin row -->
@@ -596,14 +616,14 @@
                                         data-error=" " data-success=" "></textarea>
                                     <label for="formRbsopc5">Anote</label>
                                 </div>
-                            </div>    
-                        </div>                                                     
-                            <!-- fin modal-content -->
-                            <div class="modal-content">
-                                <div class="modal-header color-green">
-                                    <h5 class="modal-title">Mantenimiento del Registro</h5>
-                                </div>
-                                <div class="row">
+                            </div>
+                        </div>
+                        <!-- fin modal-content -->
+                        <div class="modal-content">
+                            <div class="modal-header color-green">
+                                <h5 class="modal-title">Mantenimiento del Registro</h5>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label for="">RESPDATOS:</label>
                                 </div>
@@ -611,8 +631,8 @@
                                     <input mdbInputDirective type="text" id="formRespdatos" class="form-control" formControlName="respdatos" data-error=" " data-success=" ">
                                 </div>
                                 <div class="md-form form-md-2  input-group-append mt10">
-                                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" " data-success=" "
-                                    ngbDatepicker #dActualizar="ngbDatepicker">
+                                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                                        data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
                                     <label for="formActualizar">ACTUALIZAR</label>
                                     <div (click)="dActualizar.toggle()">
                                         <i class="fa fa-calendar prefix"></i>
@@ -622,12 +642,12 @@
                             <!-- fin row -->
                         </div>
                         <!-- fin modal-content -->
-                        <div class="text-center "> 
-                                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                                               
-                                  <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                                  <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
-                                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                              
-                              </div>                  
+                        <div class="text-center ">
+                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                            <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
+                            <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
+                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        </div>
                     </ng-template>
                     <!-- fin ng-template -->
                 </ngb-tab>
