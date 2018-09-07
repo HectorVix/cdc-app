@@ -119,6 +119,7 @@
                 <div class="col-md-3 mt-10">
                   <mat-form-field>
                     <mat-select placeholder=" " panelClass="color-panel-green" formControlName="disttax">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sDisttax of criterio_disttax" [value]="sDisttax.value">
                         {{sDisttax.viewValue}}
                       </mat-option>
@@ -134,6 +135,7 @@
                 <div class="col-md-5">
                   <mat-form-field>
                     <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dudatax">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sDudatax of criterio_dudatax" [value]="sDudatax.value">
                         {{sDudatax.viewValue}}
                       </mat-option>
@@ -231,6 +233,7 @@
                 <div class="col-md-2 mt10">
                   <mat-form-field>
                     <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
                         {{sRangog.viewValue}}
                       </mat-option>
@@ -240,6 +243,7 @@
                 <div class="col-md-2 mt10">
                   <mat-form-field>
                     <mat-select placeholder="FORMULAR" panelClass="color-panel-green" formControlName="formularg">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sFormularg of criterio_compu_manual" [value]="sFormularg.value">
                         {{sFormularg.viewValue}}
                       </mat-option>
@@ -272,6 +276,7 @@
                 <div class="col-md-2 mt-20">
                   <mat-form-field>
                     <mat-select placeholder="CITES" panelClass="color-panel-green" formControlName="cites">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sCites of criterio_cites" [value]="sCites.value">
                         {{sCites.viewValue}}
                       </mat-option>
@@ -281,6 +286,7 @@
                 <div class="col-md-3 mt-20">
                   <mat-form-field>
                     <mat-select placeholder="IUCN" panelClass="color-panel-green" formControlName="iucn">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sUicn of criterio_iucn" [value]="sUicn.value">
                         {{sUicn.viewValue}}
                       </mat-option>
@@ -306,6 +312,7 @@
                 <div class="col-md-2 mt-20">
                   <mat-form-field>
                     <mat-select placeholder=" " panelClass="color-panel-green" formControlName="planscons">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sPlanscons of criterio_compu_manual" [value]="sPlanscons.value">
                         {{sPlanscons.viewValue}}
                       </mat-option>
@@ -320,6 +327,7 @@
                 <div class="col-md-3 mt-20">
                   <mat-form-field>
                     <mat-select placeholder="RESUMENM" panelClass="color-panel-green" formControlName="resumenman">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sResumenman of criterio_compu_manual" [value]="sResumenman.value">
                         {{sResumenman.viewValue}}
                       </mat-option>
@@ -341,6 +349,7 @@
                 <div class="col-md-2 mt-20">
                   <mat-form-field>
                     <mat-select placeholder=" " panelClass="color-panel-green" formControlName="exsitu">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sExsitu of criterio_si_no" [value]="sExsitu.value">
                         {{sExsitu.viewValue}}
                       </mat-option>
@@ -356,6 +365,7 @@
                 <div class="col-md-4 mt-20">
                   <mat-form-field>
                     <mat-select placeholder="ENDEMISMO" panelClass="color-panel-green" formControlName="endemismo">
+                      <mat-option>-- Ninguna --</mat-option>
                       <mat-option *ngFor="let sEndemismo of criterio_endemismo" [value]="sEndemismo.value">
                         {{sEndemismo.viewValue}}
                       </mat-option>
@@ -378,21 +388,23 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <mat-form-field>
-                      <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
-                        <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
-                          {{sRangon.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                        {{sRangon.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-2 mt10">
                   <mat-form-field>
-                      <mat-select placeholder="FORMLARN" panelClass="color-panel-green" formControlName="formularn">
-                        <mat-option *ngFor="let sFormularn of criterio_compu_manual" [value]="sFormularn.value">
-                          {{sFormularn.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="FORMLARN" panelClass="color-panel-green" formControlName="formularn">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sFormularn of criterio_compu_manual" [value]="sFormularn.value">
+                        {{sFormularn.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
@@ -445,12 +457,13 @@
                 </div>
                 <div class="col-md-2 mt-20">
                   <mat-form-field>
-                      <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="transparencian">
-                        <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
-                          {{sTransparencian.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="transparencian">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                        {{sTransparencian.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -469,24 +482,26 @@
                 </div>
                 <div class="col-md-2 mt10">
                   <mat-form-field>
-                      <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="rangos">
-                        <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
-                          {{sRangos.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="rangos">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
+                        {{sRangos.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-1">
                   <label for="">FORMLARS:</label>
                 </div>
                 <div class="col-md-2 mt10">
                   <mat-form-field>
-                      <mat-select placeholder="FORMLARS" panelClass="color-panel-green" formControlName="formulars">
-                        <mat-option *ngFor="let sFormulars of criterio_compu_manual" [value]="sFormulars.value">
-                          {{sFormulars.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="FORMLARS" panelClass="color-panel-green" formControlName="formulars">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sFormulars of criterio_compu_manual" [value]="sFormulars.value">
+                        {{sFormulars.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 mt10">
                   <input mdbInputDirective type="text" id="formRastreoles" class="form-control" formControlName="rastreoles" data-error=" "
@@ -544,12 +559,13 @@
                 </div>
                 <div class="col-md-2 mt-20">
                   <mat-form-field>
-                      <mat-select placeholder="TRANSPARENCIAS" panelClass="color-panel-green" formControlName="transparencias">
-                        <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
-                          {{sTransparencian.viewValue}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="TRANSPARENCIAS" panelClass="color-panel-green" formControlName="transparencias">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                        {{sTransparencian.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->

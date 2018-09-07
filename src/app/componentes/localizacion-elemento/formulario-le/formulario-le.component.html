@@ -20,13 +20,15 @@
                   <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error="Incorrecto "
                     data-success=" " required>
                 </div>
-                <div class="col-md-1">
-                  <label for="">IDENT:</label>
-                </div>
-                <div class="col-md-2 mt5">
-                  <select class="form-control color-green" formControlName="ident">
-                    <option *ngFor="let sIdent of criterio_si_no; let i1=index;" [value]="getCriterio_Si_No(i1)">{{sIdent}}</option>
-                  </select>
+                <div class="col-md-2 mt-0">
+                  <mat-form-field>
+                    <mat-select placeholder="IDENT" panelClass="color-panel-green" formControlName="ident">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sIdent of criterio_si_no" [value]="sIdent.value">
+                        {{sIdent.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <div class="row">
@@ -34,7 +36,8 @@
                   <label for="">NOMBRES:</label>
                 </div>
                 <div class="md-form col-sm-9 mt-20 ">
-                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nombres" data-error=" " data-success=" " required>
+                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nombres" data-error=" " data-success=" "
+                    required>
                 </div>
               </div>
               <div class="row">
@@ -229,8 +232,21 @@
               </div>
               <!--fin row -->
               <div class="row">
-                <div class="col-md-7"></div>
-                <div class="md-form col-md-2 input-group-append mt-10">
+                <div class="col-md-2">
+                  <label for="">RANGOLE:</label>
+                </div>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangole">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sRangole of criterio_rango_le" [value]="sRangole.value">
+                        {{sRangole.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="md-form col-md-2 input-group-append mt-20">
                   <input mdbInputDirective type="text" id="formUltobs" class="form-control" formControlName="ultobs" data-error=" " data-success=" "
                     ngbDatepicker #dUltobs="ngbDatepicker">
                   <label for="formUltobs">&nbsp;&nbsp;&nbsp;&nbsp;ULTOBS</label>
@@ -241,16 +257,8 @@
               </div>
               <!--fin row -->
               <div class="row">
-                <div class="col-md-2">
-                  <label for="">RANGOLE:</label>
-                </div>
-                <div class="col-md-2">
-                  <select class="form-control color-green">
-                    <option *ngFor="let sRangole of criterio_rango_le; let i1=index;" [value]="getCriterio_Rangole(i1)">{{sRangole}}</option>
-                  </select>
-                </div>
-                <div class="col-md-3"></div>
-                <div class="md-form col-md-2 input-group-append mt-10">
+                <div class="col-md-7"></div>
+                <div class="md-form col-md-2 input-group-append mt-20">
                   <input mdbInputDirective type="text" id="formFecharangole" class="form-control" formControlName="fecharangole" data-error=" "
                     data-success=" " ngbDatepicker #dFecharangole="ngbDatepicker">
                   <label for="formFecharangole">&nbsp;&nbsp;&nbsp;&nbsp;FECHARANGOLE</label>
@@ -362,43 +370,48 @@
                 <div class="col-md-2">
                   <label for="">MASTERRRENO:</label>
                 </div>
-
                 <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="masterreno">
-                    <option *ngFor="let sMasterreno of criterio_si_no; let i2=index;" [value]="getCriterio_Si_No(i2)">{{sMasterreno}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="masterreno">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sMasterreno of criterio_si_no" [value]="sMasterreno.value">
+                        {{sMasterreno.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-2">
-                  <label for="">MASPROTEC:</label>
+                  <mat-form-field>
+                    <mat-select placeholder="MASPROTEC" panelClass="color-panel-green" formControlName="masprotec">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sMasprotec of criterio_si_no" [value]="sMasprotec.value">
+                        {{sMasprotec.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-2">
-                  <select class="form-control color-green" formControName="masprotec">
-                    <option *ngFor="let sMasprotec of criterio_si_no; let i3=index;" [value]="getCriterio_Si_No(i3)">{{sMasprotec}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder="MASMANEJO" panelClass="color-panel-green" formControlName="masmanejo">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sMasmanejo of criterio_si_no" [value]="sMasmanejo.value">
+                        {{sMasmanejo.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <mat-select placeholder="INVOL.TNC" panelClass="color-panel-green" formControlName="involtnc">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sInvoltnc of criterio_si_no" [value]="sInvoltnc.value">
+                        {{sInvoltnc.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">MASMANEJO:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="masmanejo">
-                    <option *ngFor="let sMasmanejo of criterio_si_no; let i4=index;" [value]="getCriterio_Si_No(i4)">{{sMasmanejo}}</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="">INVOL.TNC:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <select class="form-control color-green" formControlName="involtnc">
-                    <option *ngFor="let sInvoltnc of criterio_si_no; let i5=index;" [value]="getCriterio_Si_No(i5)">{{sInvoltnc}}</option>
-                  </select>
-                </div>
-              </div>
-              <!-- fin row -->
-
-
               <div class="row">
                 <div class="col-md-2">
                   <label for="">COMMANEJO:</label>
@@ -436,13 +449,15 @@
                 <div class="md-form col-md-5 mt-3">
                   <input mdbInputDirective type="text" id="formProp" class="form-control" formControlName="prop" data-error=" " data-success=" ">
                 </div>
-                <div class="col-md-1">
-                  <label for="">INFPROP:</label>
-                </div>
                 <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="infprop">
-                    <option *ngFor="let sInfprop of  criterio_si_no; let i6=index;" [value]="getCriterio_Si_No(i6)">{{sInfprop}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder="INFPROP" panelClass="color-panel-green" formControlName="infprop">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sInfprop of criterio_si_no" [value]="sInfprop.value">
+                        {{sInfprop.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <div class="row">
@@ -465,108 +480,100 @@
               </div>
               <div class="row">
                 <div class="col-md-2">
-                    <label for="">LE.OPC1:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt10">
-                    <input mdbInputDirective type="text" id="formLeopc1" class="form-control" formControlName="leopc1"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
-                <div class="col-md-2">
-                    <label for="">LE.OPC2:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc2" class="form-control" formControlName="leopc2"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
-                <div class="col-md-2">
-                    <label for="">LE.OPC3:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc3" class="form-control" formControlName="leopc3"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-
-             <div class="row">
-                <div class="col-md-2">
-                    <label for="">LE.OPC4:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc4" class="form-control" formControlName="leopc4"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
-                <div class="col-md-2">
-                  <label for="">LE.OPC5:</label>
+                  <label for="">LE.OPC1:</label>
                 </div>
-                <div class="md-form  col-md-9 mt-20">
-                    <i class="fa fa-pencil prefix"></i>
-                    <textarea mdbInputDirective type="text" id="formLeopc5" class="md-textarea form-control" formControlName="leopc5"  rows="1" data-error=" "
-                      data-success=" "></textarea>
-                    <label for="formLeopc5">Anote</label>
-                  </div>
+                <div class="md-form col-md-9 mt10">
+                  <input mdbInputDirective type="text" id="formLeopc1" class="form-control" formControlName="leopc1" data-error=" " data-success=" ">
+                </div>
               </div>
               <!-- fin row -->
               <div class="row">
                 <div class="col-md-2">
-                    <label for="">Le.OPC6:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc6" class="form-control" formControlName="leopc6"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
+                  <label for="">LE.OPC2:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc2" class="form-control" formControlName="leopc2" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
                 <div class="col-md-2">
-                    <label for="">LE.OPC7:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc7" class="form-control" formControlName="leopc7"  data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
-                <div class="col-md-2">
-                    <label for="">LE.OPC8:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc8" class="form-control"  formControlName="leopc8" data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
+                  <label for="">LE.OPC3:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc3" class="form-control" formControlName="leopc3" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
 
-             <div class="row">
+              <div class="row">
                 <div class="col-md-2">
-                    <label for="">LE.OPC9:</label>
-                  </div>
-                  <div class="md-form col-md-9 mt-20">
-                    <input mdbInputDirective type="text" id="formLeopc9" class="form-control" formControlName="leopc9" data-error=" "
-                      data-success=" ">
-                  </div>
-             </div>
-             <!-- fin row -->
-             <div class="row">
+                  <label for="">LE.OPC4:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc4" class="form-control" formControlName="leopc4" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">LE.OPC5:</label>
+                </div>
+                <div class="md-form  col-md-9 mt-20">
+                  <i class="fa fa-pencil prefix"></i>
+                  <textarea mdbInputDirective type="text" id="formLeopc5" class="md-textarea form-control" formControlName="leopc5" rows="1"
+                    data-error=" " data-success=" "></textarea>
+                  <label for="formLeopc5">Anote</label>
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">Le.OPC6:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc6" class="form-control" formControlName="leopc6" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">LE.OPC7:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc7" class="form-control" formControlName="leopc7" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">LE.OPC8:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc8" class="form-control" formControlName="leopc8" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="">LE.OPC9:</label>
+                </div>
+                <div class="md-form col-md-9 mt-20">
+                  <input mdbInputDirective type="text" id="formLeopc9" class="form-control" formControlName="leopc9" data-error=" " data-success=" ">
+                </div>
+              </div>
+              <!-- fin row -->
+              <div class="row">
                 <div class="col-md-2">
                   <label for="">LE.OPC10:</label>
                 </div>
                 <div class="md-form  col-md-9 mt-20">
-                    <i class="fa fa-pencil prefix"></i>
-                    <textarea mdbInputDirective type="text" id="formLeopc10" class="md-textarea form-control"  formControlName="leopc10" rows="1" data-error=" "
-                      data-success=" "></textarea>
-                    <label for="formRcpnopc5">Anote</label>
-                  </div>
+                  <i class="fa fa-pencil prefix"></i>
+                  <textarea mdbInputDirective type="text" id="formLeopc10" class="md-textarea form-control" formControlName="leopc10" rows="1"
+                    data-error=" " data-success=" "></textarea>
+                  <label for="formRcpnopc5">Anote</label>
+                </div>
               </div>
               <!-- fin row -->
             </div>
@@ -595,7 +602,8 @@
                 </div>
                 <div class="md-form  col-md-9 mt10">
                   <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario" rows="2" data-error=" " data-success=" "></textarea>
+                  <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario"
+                    rows="2" data-error=" " data-success=" "></textarea>
                   <label for="formComentario">Cualquier información no incluída en otros campos como.</label>
                 </div>
               </div>
@@ -611,25 +619,34 @@
                   <label for="">SENSDATOS:</label>
                 </div>
                 <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="sensdatos">
-                    <option *ngFor="let sSensdatos of criterio_si_no; let i7=index;" [value]="getCriterio_Si_No(i7)">{{sSensdatos}}</option>
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <label for="">LIMITES:</label>
-                </div>
-                <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="limites">
-                    <option *ngFor="let sLimites of criterio_si_no; let i8=index;" [value]="getCriterio_Si_No(i8)">{{sLimites}}</option>
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <label for="">FOTOS:</label>
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="sensdatos">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sSensdatos of criterio_si_no" [value]="sSensdatos.value">
+                        {{sSensdatos.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-2">
-                  <select class="form-control color-green" formControlName="fotos">
-                    <option *ngFor="let sFotos of criterio_si_no; let i9=index;" [value]="getCriterio_Si_No(i9)">{{sFotos}}</option>
-                  </select>
+                  <mat-form-field>
+                    <mat-select placeholder="LIMITES" panelClass="color-panel-green" formControlName="limites">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sLimites of criterio_si_no" [value]="sLimites.value">
+                        {{sLimites.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <mat-select placeholder="FOTOS" panelClass="color-panel-green" formControlName="fotos">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sFotos of criterio_si_no" [value]="sFotos.value">
+                        {{sFotos.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- fin row -->
@@ -650,17 +667,18 @@
                   <label for="">CODFUENTE</label>
                 </div>
                 <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formCodfuente" class="form-control" formControlName="codfuente"
-                   data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formCodfuente" class="form-control" formControlName="codfuente" data-error=" " data-success=" ">
                   <label for="formCodfuente"></label>
                 </div>
-                <div class="col-md-1">
-                  <label for="">MDREV:</label>
-                </div>
-                <div class="col-md-2 mt-10">
-                  <select class="form-control color-green" formControlName="mdrev">
-                    <option *ngFor="let sMdrev of criterio_si_no; let i10=index;" [value]="getCriterio_Si_No(i10)">{{sMdrev}}</option>
-                  </select>
+                <div class="col-md-2 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="MDREV" panelClass="color-panel-green" formControlName="mdrev">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sMdrev of criterio_si_no" [value]="sMdrev.value">
+                        {{sMdrev.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 input-group-append mt-20">
                   <input mdbInputDirective type="text" id="formTranscrito" class="form-control" formControlName="transcrito" data-error=" "
@@ -676,10 +694,15 @@
                 <div class="col-md-2">
                   <label for="">CC:</label>
                 </div>
-                <div class="col-md-2 mt-10">
-                  <select class="form-control color-green" formControlName="cc">
-                    <option *ngFor="let sCc of criterio_si_no; let i11=index;" [value]="getCriterio_Si_No(i10)">{{sCc}}</option>
-                  </select>
+                <div class="col-md-2 mt-15">
+                  <mat-form-field>
+                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="cc">
+                      <mat-option>-- Ninguna --</mat-option>
+                      <mat-option *ngFor="let sCc of criterio_si_no" [value]="sCc.value">
+                        {{sCc.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="md-form col-md-2 input-group-append mt-15">
                   <input mdbInputDirective type="text" id="formCartografo" class="form-control" formControlName="cartografo" data-error=" "
@@ -696,27 +719,26 @@
                   <label for="">RESPDATOS:</label>
                 </div>
                 <div class="md-form col-md-2 mt-20 ">
-                  <input mdbInputDirective type="text" id="formRespdatos" class="form-control" formControlName="respdatos" data-error=" "
-                    data-success=" ">
+                  <input mdbInputDirective type="text" id="formRespdatos" class="form-control" formControlName="respdatos" data-error=" " data-success=" ">
                 </div>
                 <div class="md-form col-md-2 input-group-append mt-15">
-                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
-                      data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
-                    <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                    <div (click)="dActualizar.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
-                    </div>
+                  <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                    data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                  <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
+                  <div (click)="dActualizar.toggle()">
+                    <i class="fa fa-calendar prefix"></i>
                   </div>
+                </div>
               </div>
               <!-- fin row -->
             </div>
             <!--fin modal-content  -->
-            <div class="text-center "> 
-                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                                
-                  <button class="btn color-green waves-light" (click)="fLE.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                  <button class="btn color-green waves-light"  (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
-                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>               
-              </div>           
+            <div class="text-center ">
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+              <button class="btn color-green waves-light" (click)="fLE.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
+              <button class="btn color-green waves-light" (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
+              <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+            </div>
           </ng-template>
         </ngb-tab>
 

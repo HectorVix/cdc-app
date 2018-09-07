@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
-import { criterio_le } from '../../../modelo/criterio-le';
+import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { localizacion_Elemento_Modelo } from '../../../modelo/localizacion-elemento-modelo';
 import { Localizacion } from '../../../modelo/localizacion/localizacion-modelo';
