@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
-import { Area } from '../../../modelo/area/area-modelo';
+import { area_Modelo } from '../../../modelo/area/area-modelo';
 @Component({
   selector: 'app-formulario-areas-manejadas',
   templateUrl: './formulario-areas-manejadas.component.html',
@@ -79,7 +79,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       'codmapa': '',
       'nummarg': '',
       'lat': '',
-      'long': '',
+      'long1': '',
       'coords': '',
       'coordn': '',
       'coorde': '',
@@ -87,17 +87,17 @@ export class FormularioAreasManejadasComponent implements OnInit {
       //decriptores
       'descripcion': '',
       'areatot1': '', //number
-      'areatot2': '',
+      'areatot2': '', //number
       'areasubnac1': '',//number
-      'areasubnac2': '',
-      'multisubnac': '',
-      'limites': '',
-      'continua': '',
-      'involtnc': '',
+      'areasubnac2': '',//number
+      'multisubnac':null, //boolean
+      'limites':null,//boolean
+      'continua':null,//boolean
+      'involtnc':null, //boolean
       'comentario': '',
       //status
       'fechaesta': '',
-      'protasign': '',
+      'protasign': '', //varchar(1)
       //manejo
       'administrador': '',
       'instadmin': '',
@@ -107,11 +107,11 @@ export class FormularioAreasManejadasComponent implements OnInit {
       'subnacadmin': '',
       'codpostaladmin': '',
       'telefadminist': '',
-      'accesopub': '',
+      'accesopub': '', //varchar(1)
       'instcoop': '',
       'commanejo': '',
       //elementos
-      'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
+     // 'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
       //campos opcionales
       'amopc1': '',
       'amopc2': '',
@@ -126,13 +126,25 @@ export class FormularioAreasManejadasComponent implements OnInit {
   }
   guardarArea() {
     console.log(this.areaManejoForm.value);
-    var area = new Area();
-    area.codigoam = "hola vix area manejo";
-    this.addArea(area);
+    var area = new area_Modelo();
+    var areasManejadasBase=this.setAreasManejadas(this.areaManejoForm.value);
+    area.codigoam = this.areaManejoForm.get('codigoam').value;
+    area.nombream='prueba1';
+    area.nomsitio='tikal';
+    area.coordo='35º25""';
+    area.comentario='areas';
+    area.commanejo='good';
+    area.respdatos="benita";
+    this.addArea(areasManejadasBase);
 
   }
+  setAreasManejadas(datos:area_Modelo): area_Modelo {
+    datos.fechaesta = this.usuarioService.toFormato(this.areaManejoForm.get('fechaesta').value);
+    datos.actualizar = this.usuarioService.toFormato(this.areaManejoForm.get('actualizar').value);
+    return datos;
+  }
   //agrega una nueva area
-  addArea(area: Area): void {
+  addArea(area:area_Modelo): void {
     this.usuarioService.addArea(area)
       .subscribe(
         resElemento => {
@@ -146,24 +158,6 @@ export class FormularioAreasManejadasComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
-  }
-
-  // comun para : multisubnac, limites, continua , involtnc
-  getCriterio_Si_No(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return '1'; // Sí
-      case 2: return '0'; // No
-    }
-  }
-
-  getCriterio_Protasign(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return '1';
-      case 2: return '2';
-      case 3: return '3';
-    }
   }
 
 }

@@ -20,7 +20,7 @@ export class criterio_areasManejadas {
 
     ];
     si_no: Valor[] = [
-        { value: '1', viewValue: 'Sí' },
-        { value: '0', viewValue: 'No' }
+        { value: 'true', viewValue: 'Sí' },
+        { value: 'false', viewValue: 'No' }
     ];
 }

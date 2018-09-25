@@ -12,7 +12,7 @@ import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-mode
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
 import { Localizacion_Modelo} from '../modelo/localizacion/localizacion-modelo';
 import { Sitio } from '../modelo/sitio/sitio-modelo';
-import { Area } from '../modelo/area/area-modelo';
+import { area_Modelo } from '../modelo/area/area-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -84,8 +84,8 @@ export class UsuarioService {
     return this.http.post<Sitio>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
   }
   //agregar un area
-  addArea(area: Area): Observable<Area> {
-    return this.http.post<Area>(this.rootUrl + '/area/registro', area, httpOptions);
+  addArea(area: area_Modelo): Observable<area_Modelo> {
+    return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
   }
 
   //para capturar los errores con HttpClient

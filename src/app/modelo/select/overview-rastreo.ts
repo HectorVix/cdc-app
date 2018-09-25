@@ -58,8 +58,8 @@ export class criterio_re {
     { value: 'NT', viewValue: 'No está en peligro (endémicas)' }
   ];
   si_no: Valor[] = [
-    { value: '1', viewValue: 'Sí' },
-    { value: '0', viewValue: 'No' }
+    { value: 'true', viewValue: 'Sí' },
+    { value: 'false', viewValue: 'No' }
   ];
   endemismo: Valor[] = [
     { value: 'S', viewValue: 'Endémico a jurisdicción CDC sub-nacional' },
