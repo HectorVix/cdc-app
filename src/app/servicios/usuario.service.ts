@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
-import { Localizacion } from '../modelo/localizacion/localizacion-modelo';
+import { Localizacion_Modelo} from '../modelo/localizacion/localizacion-modelo';
 import { Sitio } from '../modelo/sitio/sitio-modelo';
 import { Area } from '../modelo/area/area-modelo';
 const httpOptions = {
@@ -76,8 +76,8 @@ export class UsuarioService {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
    //agregar una nueva localizacion
-   addLocalizacionElemento(localizacion: Localizacion): Observable<Localizacion> {
-    return this.http.post<Localizacion>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
   //agregar un nuevo sitio
   addSitio(sitio: Sitio): Observable<Sitio> {

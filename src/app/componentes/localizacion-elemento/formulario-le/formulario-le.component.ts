@@ -8,7 +8,7 @@ import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { localizacion_Elemento_Modelo } from '../../../modelo/localizacion-elemento-modelo';
-import { Localizacion } from '../../../modelo/localizacion/localizacion-modelo';
+import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
@@ -66,19 +66,19 @@ export class FormularioLeComponent implements OnInit {
       //página1
       //identificadores
       'codigole': ['', Validators.required],
-      'ident': '',
-      'nombres': '',
-      'nomcomuns': '',
-      'rangog': '',
-      'rangon': '',
-      'rangos': '',
+      'ident':null,
+    //  'nombres': '',
+      //'nomcomuns': '',
+      //'rangog': '',
+      //'rangon': '',
+      //'rangos': '',
       //localizadores
       'subnacion': '',
       'subdivision': '',
       'codsitio': '',
       'nomsitio': '',
       'sitioeva': '',
-      'precision': '',
+      'precisionl': '',
       'nommapa': '',
       'codmapa': '',
       'nummarg': '',
@@ -100,7 +100,7 @@ export class FormularioLeComponent implements OnInit {
       'rangole': '',
       'fecharangole': '',
       'comrangole': '',
-      'resprg': '',
+      //'resprg': '',
       'datosle': '',
       'contacto': '',
       'numcontacto': '',
@@ -110,30 +110,40 @@ export class FormularioLeComponent implements OnInit {
       'area': '',
       //protección
       //'lista_proteccion': '',
-      'masterreno': '',
-      'masprotec': '',
-      'masmanejo': '',
-      'involtnc': '',
+      'masterreno':null,
+      'masprotec':null,
+      'masmanejo':null,
+      'involtnc': null,
       'commanejo': '',
       'comprot': '',
       //propietario
       'prop': '',
-      'infprop': '',
+      'infprop': null,
       'comprop': '',
       //campos opcionales
-      'leopc1': '', 'leopc2': '', 'leopc3': '', 'leopc4': '', 'leopc5': '', 'leopc6': '', 'leopc7': '', 'leopc8': '', 'leopc9': '', 'leopc10': '',
+      'leopc1': '', 
+      'leopc2': '', 
+      'leopc3': '', 
+      'leopc4': '', 
+      'leopc5': '', 
+      'leopc6': '',
+      'leopc7': '', 
+      'leopc8': '', 
+      'leopc9': '', 
+      'leopc10': '',
       //comentarios generales
       'comentario': '',
       //documentación y mantenimiento
-      'sensdatos': '',
-      'limites': '',
-      'fotos': '',
+      'sensdatos':null,
+      'limites':null,
+      'fotos':null,
       'mejorfuente': '',
       'codfuente': '',
+      
+      'mdrev':null,
       'transcrito': '',
-      'mdrev': '',
+      'cc':null,
       'cartografo': '',
-      'cc': '',
       'respdatos': '',
       'actualizar': ''
 
@@ -141,14 +151,26 @@ export class FormularioLeComponent implements OnInit {
   }
 
   guardarLocalizacion() {
-    console.log(this.leForm.value);
+   // console.log(this.leForm.value);
     var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
-    var localizacion = new Localizacion();
-    localizacion.codigole='1234';
+    var localizacion = new Localizacion_Modelo();
+    localizacion.codigole = '1234';
 
-    this.addLocalizacionElemento(localizacion);
+    if (this.leForm.get('ident').value != 'true' || this.leForm.get('ident').value != 'false')
+      localizacion.ident = null;
+    else
+      localizacion.ident = this.leForm.get('ident').value;
+
+    localizacion.cuenca = 'dato de prueba';
+    localizacion.numcontacto = 'sdd';
+    localizacion.comprot = 'aaaa1';
+    localizacion.comprop = "propietario";
+    localizacion.leopc10 = 'opcion10';
+    localizacion.cc=true;
+    console.log(localizacionElementoBase);
+   this.addLocalizacionElemento(localizacionElementoBase);
   }
-  setLocalizacionElemento(datos: localizacion_Elemento_Modelo): localizacion_Elemento_Modelo {
+  setLocalizacionElemento(datos:Localizacion_Modelo): Localizacion_Modelo {
     datos.fechaeva = this.usuarioService.toFormato(this.leForm.get('fechaeva').value);
     datos.ultobs = this.usuarioService.toFormato(this.leForm.get('ultobs').value);
     datos.fecharangole = this.usuarioService.toFormato(this.leForm.get('fecharangole').value);
@@ -159,12 +181,12 @@ export class FormularioLeComponent implements OnInit {
   }
 
   //agrega un nuevo registro localización elemento
-  addLocalizacionElemento(localizacion: Localizacion): void {
+  addLocalizacionElemento(localizacion: Localizacion_Modelo): void {
     this.usuarioService.addLocalizacionElemento(localizacion)
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Se registro la localización del elemento :${resElemento.codigole}.`, 'success');
-        //  this.crearFormLocalizacion_Elemento();
+          //  this.crearFormLocalizacion_Elemento();
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
@@ -173,32 +195,6 @@ export class FormularioLeComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
-  }
-
-
-  /*
-   * Comun para 
-   *  ident, amadicion, masterreno, masprotec, masmanejo, sensdatos, limites, fotos, 
-   *  infprop, mdrev, cc
-   */
-
-  getCriterio_Si_No(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return '1';  //SI
-      case 2: return '0';  //NO
-    }
-  }
-
-  getCriterio_Rangole(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'A';
-      case 2: return 'B';
-      case 3: return 'C';
-      case 4: return 'D';
-      case 5: return 'X';
-    }
   }
 
 }

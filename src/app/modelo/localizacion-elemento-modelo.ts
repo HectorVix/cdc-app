@@ -19,7 +19,7 @@ export class localizacion_Elemento_Modelo {
   codsitio: String;
   nomsitio: String;
   sitioeva: String;
-  precision: String;
+  precisionl: String;
   nommapa: String;
   codmapa: String;
   nummarg: String;
@@ -83,5 +83,5 @@ export class localizacion_Elemento_Modelo {
   ecomonitoreoList: any;
   protocoloList: any;
   rASTREOrastreoid: rastreo_Elemento_Modelo;
-
+  observacionesList:any;
 }

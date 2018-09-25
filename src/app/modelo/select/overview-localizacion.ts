@@ -1,8 +1,8 @@
-import { Valor } from '../../modelo/select/overwiew-valor';
+import { Valor} from '../../modelo/select/overwiew-valor';
 export class criterio_le {
   si_no: Valor[] = [
-    { value: '1', viewValue: 'Sí' },
-    { value: '0', viewValue: 'No' }
+    { value: 'true', viewValue: 'Sí' },
+    { value: 'false', viewValue: 'No' }
   ];
   rango_le: Valor[] = [
     { value: 'A', viewValue: 'Excelente' },
