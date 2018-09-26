@@ -90,10 +90,10 @@ export class FormularioAreasManejadasComponent implements OnInit {
       'areatot2': '', //number
       'areasubnac1': '',//number
       'areasubnac2': '',//number
-      'multisubnac':null, //boolean
-      'limites':null,//boolean
-      'continua':null,//boolean
-      'involtnc':null, //boolean
+      'multisubnac': null, //boolean
+      'limites': null,//boolean
+      'continua': null,//boolean
+      'involtnc': null, //boolean
       'comentario': '',
       //status
       'fechaesta': '',
@@ -111,7 +111,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       'instcoop': '',
       'commanejo': '',
       //elementos
-     // 'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
+      // 'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
       //campos opcionales
       'amopc1': '',
       'amopc2': '',
@@ -125,26 +125,17 @@ export class FormularioAreasManejadasComponent implements OnInit {
 
   }
   guardarArea() {
-    console.log(this.areaManejoForm.value);
-    var area = new area_Modelo();
-    var areasManejadasBase=this.setAreasManejadas(this.areaManejoForm.value);
-    area.codigoam = this.areaManejoForm.get('codigoam').value;
-    area.nombream='prueba1';
-    area.nomsitio='tikal';
-    area.coordo='35º25""';
-    area.comentario='areas';
-    area.commanejo='good';
-    area.respdatos="benita";
+    var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
     this.addArea(areasManejadasBase);
 
   }
-  setAreasManejadas(datos:area_Modelo): area_Modelo {
+  setAreasManejadas(datos: area_Modelo): area_Modelo {
     datos.fechaesta = this.usuarioService.toFormato(this.areaManejoForm.get('fechaesta').value);
     datos.actualizar = this.usuarioService.toFormato(this.areaManejoForm.get('actualizar').value);
     return datos;
   }
   //agrega una nueva area
-  addArea(area:area_Modelo): void {
+  addArea(area: area_Modelo): void {
     this.usuarioService.addArea(area)
       .subscribe(
         resElemento => {

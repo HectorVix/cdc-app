@@ -66,8 +66,8 @@ export class FormularioLeComponent implements OnInit {
       //página1
       //identificadores
       'codigole': ['', Validators.required],
-      'ident':null,
-    //  'nombres': '',
+      'ident': null,
+      //  'nombres': '',
       //'nomcomuns': '',
       //'rangog': '',
       //'rangon': '',
@@ -110,9 +110,9 @@ export class FormularioLeComponent implements OnInit {
       'area': '',
       //protección
       //'lista_proteccion': '',
-      'masterreno':null,
-      'masprotec':null,
-      'masmanejo':null,
+      'masterreno': null,
+      'masprotec': null,
+      'masmanejo': null,
       'involtnc': null,
       'commanejo': '',
       'comprot': '',
@@ -121,28 +121,28 @@ export class FormularioLeComponent implements OnInit {
       'infprop': null,
       'comprop': '',
       //campos opcionales
-      'leopc1': '', 
-      'leopc2': '', 
-      'leopc3': '', 
-      'leopc4': '', 
-      'leopc5': '', 
+      'leopc1': '',
+      'leopc2': '',
+      'leopc3': '',
+      'leopc4': '',
+      'leopc5': '',
       'leopc6': '',
-      'leopc7': '', 
-      'leopc8': '', 
-      'leopc9': '', 
+      'leopc7': '',
+      'leopc8': '',
+      'leopc9': '',
       'leopc10': '',
       //comentarios generales
       'comentario': '',
       //documentación y mantenimiento
-      'sensdatos':null,
-      'limites':null,
-      'fotos':null,
+      'sensdatos': null,
+      'limites': null,
+      'fotos': null,
       'mejorfuente': '',
       'codfuente': '',
-      
-      'mdrev':null,
+
+      'mdrev': null,
       'transcrito': '',
-      'cc':null,
+      'cc': null,
       'cartografo': '',
       'respdatos': '',
       'actualizar': ''
@@ -151,26 +151,10 @@ export class FormularioLeComponent implements OnInit {
   }
 
   guardarLocalizacion() {
-   // console.log(this.leForm.value);
     var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
-    var localizacion = new Localizacion_Modelo();
-    localizacion.codigole = '1234';
-
-    if (this.leForm.get('ident').value != 'true' || this.leForm.get('ident').value != 'false')
-      localizacion.ident = null;
-    else
-      localizacion.ident = this.leForm.get('ident').value;
-
-    localizacion.cuenca = 'dato de prueba';
-    localizacion.numcontacto = 'sdd';
-    localizacion.comprot = 'aaaa1';
-    localizacion.comprop = "propietario";
-    localizacion.leopc10 = 'opcion10';
-    localizacion.cc=true;
-    console.log(localizacionElementoBase);
-   this.addLocalizacionElemento(localizacionElementoBase);
+    this.addLocalizacionElemento(localizacionElementoBase);
   }
-  setLocalizacionElemento(datos:Localizacion_Modelo): Localizacion_Modelo {
+  setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
     datos.fechaeva = this.usuarioService.toFormato(this.leForm.get('fechaeva').value);
     datos.ultobs = this.usuarioService.toFormato(this.leForm.get('ultobs').value);
     datos.fecharangole = this.usuarioService.toFormato(this.leForm.get('fecharangole').value);

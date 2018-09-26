@@ -11,7 +11,7 @@ import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
 import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
 import { Localizacion_Modelo} from '../modelo/localizacion/localizacion-modelo';
-import { Sitio } from '../modelo/sitio/sitio-modelo';
+import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -80,8 +80,8 @@ export class UsuarioService {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
   //agregar un nuevo sitio
-  addSitio(sitio: Sitio): Observable<Sitio> {
-    return this.http.post<Sitio>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
+  addSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
+    return this.http.post<sitio_Modelo>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
   }
   //agregar un area
   addArea(area: area_Modelo): Observable<area_Modelo> {
