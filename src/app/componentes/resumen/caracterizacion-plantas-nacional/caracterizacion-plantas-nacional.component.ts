@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
-
+import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',

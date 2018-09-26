@@ -9,10 +9,10 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
-import { localizacion_Elemento_Modelo } from '../modelo/localizacion-elemento-modelo';
 import { Localizacion_Modelo} from '../modelo/localizacion/localizacion-modelo';
 import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
+import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -87,7 +87,14 @@ export class UsuarioService {
   addArea(area: area_Modelo): Observable<area_Modelo> {
     return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
   }
-
+  //agregar una caracterizacion planta
+  addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
+  }
+//agregar una caracterizacion vertebrados
+addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+  return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/veretebrado', caracterizacion, httpOptions);
+}
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

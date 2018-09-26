@@ -138,13 +138,6 @@ export class RegistroSitioComponent implements OnInit {
   guardarSitio() {
     console.log(this.sitioForm.value);
     var sitioBase = this.setSitio(this.sitioForm.value);
-    var sitio = new sitio_Modelo();
-    sitio.codsitio = "hola vix xd";
-    sitio.coordo = '32º55""';
-    sitio.comsitio = 'good good';
-    sitio.comurgencia = 'urge ajja';
-    sitio.comprot = 'vamos vamos';
-    sitio.respdatos = 'genial';
     this.addSitio(sitioBase);
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {
