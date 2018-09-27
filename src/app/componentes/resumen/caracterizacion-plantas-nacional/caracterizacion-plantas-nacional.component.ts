@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
+import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { UsuarioService } from '../../../servicios/usuario.service';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -13,6 +17,10 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   source_Distribucion1: Distribucion1_Resumen[];
   source_Distribucion2: Distribucion2_Resumen[];
   source_CamposOpcionales: CamposOpcionales[];
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
 
   settings_CamposOpcionales = {
     columns: {
@@ -50,11 +58,16 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       }
     }
   };
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearForm_CaracterizacionPlantasNacional();
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
   crearForm_CaracterizacionPlantasNacional() {
     this.caracterizacionPlantasNacionalForm = this.fb.group({
@@ -84,8 +97,9 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'necinventn': '',
       'cominventn': '',
       'respropn': '',
-      'lista_distribucion1': '',
-      'lista_distribucion2': '',
+      //ditribucion
+      //'lista_distribucion1': '',
+      //'lista_distribucion2': '',
       'elevminn': '', //number
       'elevmaxn': '', //number
       'disyuntn': '',
@@ -102,42 +116,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       //ecología
       'comecoln': '',
       //fenología
-      //enero
-      'nenea1': '', 'nenea2': '', 'nenea3': '', 'nenea4': '',
-      'neneb1': '', 'neneb2': '', 'neneb3': '', 'neneb4': '',
-      //febrero
-      'nfeba1': '', 'nfeba2': '', 'nfeba3': '', 'nfeba4': '',
-      'nfebb1': '', 'nfebb2': '', 'nfebb3': '', 'nfebb4': '',
-      //marzo
-      'nmara1': '', 'nmara2': '', 'nmara3': '', 'nmara4': '',
-      'nmarb1': '', 'nmarb2': '', 'nmarb3': '', 'nmarb4': '',
-      //abril
-      'nabra1': '', 'nabra2': '', 'nabra3': '', 'nabra4': '',
-      'nabrb1': '', 'nabrb2': '', 'nabrb3': '', 'nabrb4': '',
-      //mayo
-      'nmaya1': '','nmaya2': '','nmaya3': '','nmaya4': '',
-      'nmayb1': '','nmayb2': '','nmayb3': '','nmayb4': '',
-      //junio
-      'njuna1': '','njuna2': '','njuna3': '','njuna4': '',
-      'njunb1': '','njunb2': '','njunb3': '','njunb4': '',
-      //julio
-      'njula1': '','njula2': '','njula3': '','njula4': '',
-      'njulb1': '','njulb2': '','njulb3': '','njulb4': '',
-      //agosto
-      'nagoa1': '','nagoa2': '','nagoa3': '','nagoa4': '',
-      'nagob1': '','nagob2': '','nagob3': '','nagob4': '',
-      //septiembre
-      'nseta1': '','nseta2': '','nseta3': '','nseta4': '',
-      'nsetb1': '','nsetb2': '','nsetb3': '','nsetb4': '',
-      //octubre
-      'nocta1': '','nocta2': '','nocta3': '','nocta4': '',
-      'noctb1': '','noctb2': '','noctb3': '','noctb4': '',
-      //noviembre
-      'nnova1': '','nnova2': '','nnova3': '','nnova4': '',
-      'nnovb1': '','nnovb2': '','nnovb3': '','nnovb4': '',
-      //diciembre
-      'ndica1': '','ndica2': '','ndica3': '','ndica4': '',
-      'ndicb1': '','ndicb2': '','ndicb3': '','ndicb4': '',
+
       'comfenoln': '',
       //reproducción
       'comrepn': '',
@@ -161,5 +140,38 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     });
 
   }
+  guardarCPlanta() {
+    console.log(this.caracterizacionPlantasNacionalForm.value);
+    var cplanta = new caracterizacion_Modelo();
+    var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
+    var planta: Array<planta_Modelo> = new Array();
+    planta.push(plantaBase);
+    cplanta.plantaList = planta;
+    this.addCaracterizacionPlanta(cplanta);
+  }
+
+  setPlanta(datos: planta_Modelo): planta_Modelo {
+    datos.edicionn = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('edicionn').value);
+    datos.actualizan = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('actualizan').value);
+    return datos;
+  }
+  //agrega un nuevo registro de caracterizacion de planta
+  addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): void {
+    this.usuarioService.addCaracterizacionPlanta(caracterizacion)
+      .subscribe(
+        resPlanta => {
+          this.changeSuccessMessage(`Se registro la caracterizacion de la planta :${resPlanta.codigoe}.`, 'success');
+          //  this.crearFormLocalizacion_Elemento();
+        }, err => {
+          this.changeSuccessMessage('No se pudo regitrar la caracterizacion de la planta.', 'primary');
+        });
+  }
+
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
+  }
+
+
 
 }

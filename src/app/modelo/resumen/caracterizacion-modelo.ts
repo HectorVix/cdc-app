@@ -1,7 +1,10 @@
+import { elemento_Modelo } from '../../modelo/jerarquizacion/elemento-modelo';
 export class caracterizacion_Modelo{
     caracterizacionId:Number;
+    //identificadores
     codigoe:String;
-    eLEMENTOelementoid:any;
+    //relaciones
+    eLEMENTOelementoid:elemento_Modelo;
     plantaList:any;
     vertebradoList:any;
 }
