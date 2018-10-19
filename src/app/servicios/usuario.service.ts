@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { UsuarioModelo } from '../modelo/usuario/usuario-modelo';
 import { elemento_Modelo } from '../modelo/jerarquizacion/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
-import { Localizacion_Modelo} from '../modelo/localizacion/localizacion-modelo';
+import { Localizacion_Modelo } from '../modelo/localizacion/localizacion-modelo';
 import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
 import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo';
@@ -75,8 +75,8 @@ export class UsuarioService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
-   //agregar una nueva localizacion
-   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+  //agregar una nueva localizacion
+  addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
   //agregar un nuevo sitio
@@ -91,10 +91,20 @@ export class UsuarioService {
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
     return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
   }
-//agregar una caracterizacion vertebrados
-addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
-  return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/veretebrado', caracterizacion, httpOptions);
-}
+  //agregar una caracterizacion vertebrados
+  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/veretebrado', caracterizacion, httpOptions);
+  }
+
+  public upload(files: Set<File>): { [key: string]: Observable<number> } {
+    const status = {};
+    files.forEach(file => {
+      const formData: FormData = new FormData();
+      formData.append('file', file, file.name);
+      console.log('Archivo', file.name);
+    });
+    return status;
+  }
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

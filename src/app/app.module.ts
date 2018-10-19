@@ -47,7 +47,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { RouterModule, Router } from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatNativeDateModule ,MatDialogModule, MatListModule, MatProgressBarModule} from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -64,7 +64,7 @@ import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
-import { UploadModule } from './upload/upload.module';
+
 
 @NgModule({
   declarations: [
@@ -124,8 +124,8 @@ import { UploadModule } from './upload/upload.module';
     Ng2SmartTableModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
-    MatTableModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,
-    UploadModule
+    MatTableModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,MatDialogModule, MatListModule, MatProgressBarModule,
+
 
 
   ],

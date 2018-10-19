@@ -52,8 +52,25 @@
               <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
             </div>
             <div class="form-group mt-15">
-              <app-upload></app-upload>
+              <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+              <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                <div>
+                  <button [disabled]="uploading || uploadSuccessful" mat-raised-button color="primary" class="add-files-btn" (click)="agregarArchivos()">
+                    Agrear Archivos
+                  </button>
+                </div>
 
+                <mat-dialog-content fxFlex>
+                  <mat-list>
+                    <mat-list-item *ngFor="let archivo of archivos">
+                      <h4 mat-line>{{archivo.name}}</h4>
+                      <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[archivo.name].progress | async"></mat-progress-bar>
+                    </mat-list-item>
+                  </mat-list>
+                </mat-dialog-content>
+
+
+              </div>
             </div>
           </div>
           <!-- fin row -->
@@ -242,8 +259,11 @@
         </div>
         <!-- fin modal-content -->
         <div class="text-center">
-          <button class="btn color-green waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button>
-          <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+          <!-- <button class="btn color-green waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button> -->
+
+          <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
+          <button class="btn  color-green waves-light" (click)="guardarFuente()" mdbWavesEffect>Guardar</button>
+
         </div>
       </form>
     </div>
