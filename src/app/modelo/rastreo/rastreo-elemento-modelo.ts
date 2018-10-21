@@ -37,7 +37,7 @@ export class rastreo_Elemento_Modelo {
       resplan:          String;
       resumenman:       String;
       resresumen:       String;
-      exsitu:           String;
+      exsitu:           Boolean;
       instexsitu:       String;
       endemismo:        String;
       //status (nacional)
@@ -50,7 +50,7 @@ export class rastreo_Elemento_Modelo {
       abundn:           String;
       protnacion:       String;
       refnombren:       String;
-      transparencian:   String;
+      transparencian:   Boolean;
       //status (subnacional)
       rangos:           String;
       fecharevrs:       Date;
@@ -61,7 +61,7 @@ export class rastreo_Elemento_Modelo {
       abunds:           String;
       protsubnac:       String;
       refnombres:       String;
-      transparencias:   String;
+      transparencias:   Boolean;
       //campos opcionales
       reopc1:           String;
       reopc2:           String;

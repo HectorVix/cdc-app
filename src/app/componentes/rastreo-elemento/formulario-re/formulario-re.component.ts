@@ -165,7 +165,6 @@ export class FormularioReComponent implements OnInit {
       .subscribe(
         resElemento => {
           elemento = resElemento;
-          console.log("validado elemento ok:" + resElemento.elementoId);
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
