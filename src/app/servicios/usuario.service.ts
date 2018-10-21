@@ -13,6 +13,7 @@ import { Localizacion_Modelo } from '../modelo/localizacion/localizacion-modelo'
 import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
 import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo';
+import { fuente_Modelo } from '../modelo/fuente/fuente-modelo';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -95,7 +96,10 @@ export class UsuarioService {
   addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
     return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/veretebrado', caracterizacion, httpOptions);
   }
-
+  //agregar un resumen de fuente
+  addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
+    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
+  }
   public upload(files: Set<File>): { [key: string]: Observable<number> } {
     const status = {};
     files.forEach(file => {

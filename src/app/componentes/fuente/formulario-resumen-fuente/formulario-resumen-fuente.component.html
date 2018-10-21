@@ -55,11 +55,10 @@
               <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
               <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
                 <div>
-                  <button [disabled]="uploading || uploadSuccessful" mat-raised-button color="primary" class="add-files-btn" (click)="agregarArchivos()">
+                  <button [disabled]="uploading || uploadSuccessful" mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
                     Agrear Archivos
                   </button>
                 </div>
-
                 <mat-dialog-content fxFlex>
                   <mat-list>
                     <mat-list-item *ngFor="let archivo of archivos">
@@ -68,8 +67,6 @@
                     </mat-list-item>
                   </mat-list>
                 </mat-dialog-content>
-
-
               </div>
             </div>
           </div>
@@ -259,8 +256,7 @@
         </div>
         <!-- fin modal-content -->
         <div class="text-center">
-          <!-- <button class="btn color-green waves-light" type="submit" [disabled]="!fuenteForm.valid" mdbWavesEffect>Guardar</button> -->
-
+          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
           <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
           <button class="btn  color-green waves-light" (click)="guardarFuente()" mdbWavesEffect>Guardar</button>
 

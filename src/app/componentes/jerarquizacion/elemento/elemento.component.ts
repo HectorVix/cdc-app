@@ -33,27 +33,25 @@ export interface ElementoDato {
 
 export class ElementoComponent implements OnInit {
   dateElemento: NgbDateStruct;
-  k:number;
-  jwthelper = new JwtHelperService();
-  decodedToken = this.jwthelper.decodeToken(localStorage.getItem('userToken'));
+  k: number;
   elementoForm: FormGroup;
   buscarForm: FormGroup;
-  fecha: Date;
-  fechaFormato: NgbDateStruct;
+  //alertas
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   matcher = new ControlErrorStateMatcher();
   //tabla
-  displayedColumns: string[] = ['numero','codigo', 'fecha', 'nombrecomun', 'nombrecientifico', 'usuario'];
+  displayedColumns: string[] = ['numero', 'codigo', 'fecha', 'nombrecomun', 'nombrecientifico', 'usuario'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
-  //para pruebas
-  data: any;
   private paginator: MatPaginator;
   private estadoForm: boolean = true;
+
+  //para pruebas
+  data: any;
 
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
@@ -119,15 +117,18 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.fechaFormato = this.elementoForm.get('fecha').value;
-    this.fecha = this.usuarioService.toFormato(this.fechaFormato);
+    var elementoBase = this.setElemento(this.elementoForm.value);
     this.addElemento(this.elementoForm.value);
 
   }
+  setElemento(elemento: elemento_Modelo): elemento_Modelo {
+    elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
+    return elemento;
+  }
   addElemento(elemento: elemento_Modelo): void {
-    elemento.fecha = this.fecha;
-    //elemento.id_aux=decodedToken.jti;
-    this.usuarioService.addElemento(elemento, this.decodedToken.jti)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.usuarioService.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
@@ -149,12 +150,12 @@ export class ElementoComponent implements OnInit {
     var nombrecomun = " ";
     var nombrecientifico = " ";
     this.elementos = new Array();
-    this.k=0;
-    if (this.buscarForm.get('codigo').value != "")
+    this.k = 0;
+    if (this.buscarForm.get('codigo').value != null)
       codigo = this.buscarForm.get('codigo').value
-    if (this.buscarForm.get('nombrecomun').value != "")
+    if (this.buscarForm.get('nombrecomun').value != null)
       nombrecomun = this.buscarForm.get('nombrecomun').value
-    if (this.buscarForm.get('nombrecientifico').value != "")
+    if (this.buscarForm.get('nombrecientifico').value != null)
       nombrecientifico = this.buscarForm.get('nombrecientifico').value
 
     this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
@@ -162,8 +163,8 @@ export class ElementoComponent implements OnInit {
         data => {
           this.dataElementos = data;
           for (let elementoVal of this.dataElementos) {
-            this.k=this.k+1;
-            this.elementos.push(crearElemento(this.k,elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
+            this.k = this.k + 1;
+            this.elementos.push(crearElemento(this.k, elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
           }
           this.dataSource = new MatTableDataSource(this.elementos, );
         }, err => {
@@ -171,10 +172,11 @@ export class ElementoComponent implements OnInit {
         });
   }
 }
-function crearElemento(k:number,elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
-  var usuario = nombre.concat(" " + apellido.toString());
+function crearElemento(k: number, elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
+  //var usuario = nombre.concat(" " + apellido.toString());
+  var usuario = '' + nombre + ' ' + apellido;
   return {
-    numero:k,
+    numero: k,
     codigo: elemento.codigo,
     nombrecomun: elemento.nombrecomun,
     nombrecientifico: elemento.nombrecientifico,

@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FuenteModelo } from '../../../modelo/fuente-modelo';
+import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UsuarioService } from '../../../servicios/usuario.service';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
   styleUrls: ['./formulario-resumen-fuente.component.scss']
 })
 export class FormularioResumenFuenteComponent implements OnInit {
+  //archivos
   @ViewChild('file') file;
   public archivos: Set<File> = new Set();
   progress;
@@ -19,9 +23,13 @@ export class FormularioResumenFuenteComponent implements OnInit {
   showCancelButton = true;
   uploading = false;
   uploadSuccessful = false;
-
+  //mensajes
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
+  //formulario
   fuenteForm: FormGroup;
-  fuentemodelo: FuenteModelo;
   criterio_ResumenesFuente = new criterio_ResumenesFuente();
   criterio_codfuente = this.criterio_ResumenesFuente.codfuente;
   criterio_publicacion_cdc = this.criterio_ResumenesFuente.publicacion_cdc;
@@ -69,13 +77,16 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
 
   ngOnInit() {
-
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
   }
 
   onSubmit() {
-
-    console.log("Form Submitted!");
   }
+
   agregarArchivos() {
     this.file.nativeElement.click();
   }
@@ -88,13 +99,34 @@ export class FormularioResumenFuenteComponent implements OnInit {
     }
   }
   guardarFuente() {
-    this.uploading = true;
-    this.usuarioServicio.upload(this.archivos);
+    // this.uploading = true;
+    //  this.usuarioServicio.upload(this.archivos);
+    var fuenteBase = new fuente_Modelo();
+    fuenteBase.codfuente = 'vamos bien';
+    this.addArea(fuenteBase);
 
+  }
+  //agrega una nueva fuente
+  addArea(fuente: fuente_Modelo): void {
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    console.log(decodedToken);
+    this.usuarioServicio.addFuente(fuente, decodedToken.jti)
+      .subscribe(
+        resFuente => {
+          this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
+          //  this.crearFormFuente();
+        }, err => {
+          this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
+        });
   }
   cancelar() {
     this.archivos = new Set();
     this.fuenteForm.reset;
     this.uploading = false;
+  }
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
   }
 }
