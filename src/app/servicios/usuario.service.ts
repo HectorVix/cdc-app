@@ -118,7 +118,9 @@ export class UsuarioService {
   }
   //Cambiar formato de la fecha
   toFormato(date: NgbDateStruct): Date {
-    return date ? new Date('' + date.year + '-' + date.month + '-' + date.day) : null;
+    var dia = date.day;
+    dia = dia + 1;
+    return date ? new Date('' + date.year + '-' + date.month + '-' + dia) : null;
   }
   fromModel(date: Date): NgbDateStruct {
     return date ? {

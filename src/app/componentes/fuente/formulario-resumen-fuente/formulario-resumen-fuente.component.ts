@@ -46,11 +46,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
   crearForm_ResumenesFuente() {
 
     this.fuenteForm = this.fb.group({
-      'codigo': '',
+      
       'codfuente': '',
       'cita': '',
       'archivado': '',
-      'documentopdf': '',
       'cobgeo': '',
       'coords': '',
       'coordn': '',
@@ -63,8 +62,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'clave': '',
       'comentario': '',
       'notadigest': '',
-      'actualizar': '',
-      'control': '',
+      'actualizar': '', //date
+      'control': '',    //date
       'bcd': ''
     });
   }
@@ -101,10 +100,16 @@ export class FormularioResumenFuenteComponent implements OnInit {
   guardarFuente() {
     // this.uploading = true;
     //  this.usuarioServicio.upload(this.archivos);
-    var fuenteBase = new fuente_Modelo();
-    fuenteBase.codfuente = 'vamos bien';
+    var fuenteBase =this.setFuente(this.fuenteForm.value);
     this.addArea(fuenteBase);
 
+  }
+  setFuente(fuente: fuente_Modelo): fuente_Modelo {
+    console.log(this.fuenteForm.get('actualizar').value);
+    fuente.actualizar = this.usuarioServicio.toFormato(this.fuenteForm.get('actualizar').value);
+    console.log('fecha',fuente.actualizar);
+    fuente.control = this.usuarioServicio.toFormato(this.fuenteForm.get('control').value);
+    return fuente;
   }
   //agrega una nueva fuente
   addArea(fuente: fuente_Modelo): void {

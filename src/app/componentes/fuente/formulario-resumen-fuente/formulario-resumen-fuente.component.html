@@ -13,7 +13,7 @@
             </div>
             <div class=" col-md-4 mt10">
               <mat-form-field>
-                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="codigo">
+                <mat-select placeholder=" " panelClass="color-panel-green" >
                   <mat-option>-- Ninguna --</mat-option>
                   <mat-option *ngFor="let sCodigoFuente of criterio_codfuente" [value]="sCodigoFuente.value">
                     {{sCodigoFuente.viewValue}}
@@ -48,7 +48,7 @@
               <label for="">ARCHIVADO:</label>
             </div>
             <div class="md-form col-md-4 mt-20">
-              <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" " data-success=" " formControlName="cobgeo">
+              <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" " data-success=" " formControlName="archivado">
               <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
             </div>
             <div class="form-group mt-15">
