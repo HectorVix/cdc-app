@@ -1,5 +1,6 @@
 
 export class fuente_Modelo {
+    naturalezadocumento: String;
     fuenteId: Number;
     codfuente: String;
     cita: String;
@@ -10,6 +11,10 @@ export class fuente_Modelo {
     coorde: String;
     coordo: String;
     resumen: String;
+    varios:Boolean;
+    flora:Boolean;
+    fauna:Boolean;
+    otros:Boolean;
     publicacioncdc: Boolean;
     valor: String;
     clave: String;
@@ -22,4 +27,5 @@ export class fuente_Modelo {
     rASTREOrastreoid: Number;
     uSUARIOusuarioid: Number;
     archivoList = null;
+    temaList:any;
 }

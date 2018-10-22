@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
+import { tema_Modelo } from '../../../modelo/fuente/tema-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
@@ -46,7 +47,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   crearForm_ResumenesFuente() {
 
     this.fuenteForm = this.fb.group({
-      
+      'naturalezadocumento': '',
       'codfuente': '',
       'cita': '',
       'archivado': '',
@@ -57,7 +58,11 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'coordo': '',
       'resumen': '',
       //tema
-      'publicacioncdc': '',
+      'varios': null,
+      'flora': null,
+      'fauna': null,
+      'otros': null,
+      'publicacioncdc': null,
       'valor': '',
       'clave': '',
       'comentario': '',
@@ -100,14 +105,62 @@ export class FormularioResumenFuenteComponent implements OnInit {
   guardarFuente() {
     // this.uploading = true;
     //  this.usuarioServicio.upload(this.archivos);
-    var fuenteBase =this.setFuente(this.fuenteForm.value);
-    this.addArea(fuenteBase);
 
+    var temaList: Array<tema_Modelo> = new Array();
+    var varios = this.fuenteForm.get('varios').value;
+    var flora = this.fuenteForm.get('flora').value;
+    var fauna = this.fuenteForm.get('fauna').value;
+    var otros = this.fuenteForm.get('otros').value;
+    var fuenteBase = this.setFuente(this.fuenteForm.value);
+
+    for (let tema of varios) {
+      var temaModelo = new tema_Modelo();
+      temaModelo.nombre = tema;
+      temaModelo.tipo = 1;
+      temaList.push(temaModelo);
+    }
+    for (let tema of flora) {
+      var temaModelo = new tema_Modelo();
+      temaModelo.nombre = tema;
+      temaModelo.tipo = 1;
+      temaList.push(temaModelo);
+    }
+    for (let tema of fauna) {
+      var temaModelo = new tema_Modelo();
+      temaModelo.nombre = tema;
+      temaModelo.tipo = 1;
+      temaList.push(temaModelo);
+    }
+    for (let tema of otros) {
+      var temaModelo = new tema_Modelo();
+      temaModelo.nombre = tema;
+      temaModelo.tipo = 1;
+      temaList.push(temaModelo);
+    }
+    fuenteBase.temaList = temaList;
+    this.addArea(fuenteBase);
   }
+
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
-    console.log(this.fuenteForm.get('actualizar').value);
+
+    if (fuente.varios)
+      fuente.varios = true;
+    else
+      fuente.varios = false;
+
+    if (fuente.flora)
+      fuente.flora = true;
+    else
+      fuente.flora = false;
+    if (fuente.fauna)
+      fuente.fauna = true;
+    else
+      fuente.fauna = false;
+    if (fuente.otros)
+      fuente.otros = true;
+    else
+      fuente.otros = false;
     fuente.actualizar = this.usuarioServicio.toFormato(this.fuenteForm.get('actualizar').value);
-    console.log('fecha',fuente.actualizar);
     fuente.control = this.usuarioServicio.toFormato(this.fuenteForm.get('control').value);
     return fuente;
   }
@@ -115,7 +168,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   addArea(fuente: fuente_Modelo): void {
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    console.log(decodedToken);
     this.usuarioServicio.addFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {

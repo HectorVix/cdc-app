@@ -116,7 +116,7 @@ export class FormularioReComponent implements OnInit {
       'resplan': '',
       'resumenman': '',
       'resresumen': '',
-      'exsitu': '',
+      'exsitu': null,
       'instexsitu': '',
       'endemismo': '',
       //status (nacional)
@@ -129,7 +129,7 @@ export class FormularioReComponent implements OnInit {
       'abundn': '',
       'protnacion': '',
       'refnombren': '',
-      'transparencian': '',
+      'transparencian': null,
       //status (subnacional)
       'rangos': '',
       'fecharevrs': '',
@@ -140,7 +140,7 @@ export class FormularioReComponent implements OnInit {
       'abunds': '',
       'protsubnac': '',
       'refnombres': '',
-      'transparencias': '',
+      'transparencias': null,
       //campos opcionales
       'reopc1': '',
       'reopc2': '',
