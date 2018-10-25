@@ -52,22 +52,24 @@
               <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
             </div>
             <div class="form-group mt-15">
-              <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
-              <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
-                <div>
-                  <button [disabled]="uploading || uploadSuccessful" mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
-                    Agrear Archivos
-                  </button>
-                </div>
-                <mat-dialog-content fxFlex>
-                  <mat-list>
-                    <mat-list-item *ngFor="let archivo of archivos">
-                      <h4 mat-line>{{archivo.name}}</h4>
-                      <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[archivo.name].progress | async"></mat-progress-bar>
-                    </mat-list-item>
-                  </mat-list>
-                </mat-dialog-content>
+              <div>
+                <button [disabled]="uploading || uploadSuccessful" mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
+                  Agrear Archivos
+                </button>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+            <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+              <mat-dialog-content fxFlex>
+                <mat-list>
+                  <mat-list-item *ngFor="let archivo of archivos">
+                    <h4 mat-line>{{archivo.name}}</h4>
+                    <mat-progress-bar *ngIf="progreso" mode="determinate" [value]="progreso[archivo.name].progreso | async"></mat-progress-bar>
+                  </mat-list-item>
+                </mat-list>
+              </mat-dialog-content>
             </div>
           </div>
           <!-- fin row -->
@@ -127,8 +129,8 @@
             </div>
             <div class="col-md-2">
               <mat-form-field>
-                <mat-select placeholder="Varios" panelClass="color-panel-green" multiple formControlName="varios"  >
-                  <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>  
+                <mat-select placeholder="Varios" panelClass="color-panel-green" multiple formControlName="varios">
+                  <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -141,14 +143,14 @@
             </div>
             <div class="col-md-2">
               <mat-form-field>
-                <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple formControlName="fauna" >
+                <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple formControlName="fauna">
                   <mat-option *ngFor="let fauna of faunaList" [value]="fauna">{{fauna}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-md-2">
               <mat-form-field>
-                <mat-select placeholder="Otros" panelClass="color-panel-green" multiple formControlName="otros" >
+                <mat-select placeholder="Otros" panelClass="color-panel-green" multiple formControlName="otros">
                   <mat-option *ngFor="let otros of otrosList" [value]="otros">{{otros}}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -258,7 +260,7 @@
         <div class="text-center">
           <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
           <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
-          <button class="btn  color-green waves-light"  mdbWavesEffect (click)="guardarFuente()">Guardar</button>
+          <button class="btn  color-green waves-light" mdbWavesEffect (click)="guardarFuente()">Guardar</button>
 
         </div>
       </form>

@@ -25,7 +25,7 @@ export class fuente_Modelo {
     bcd: String;
 
     rASTREOrastreoid: Number;
-    uSUARIOusuarioid: Number;
-    archivoList = null;
+    uSUARIOusuarioid: Number
+    archivoList:null;
     temaList:any;
 }

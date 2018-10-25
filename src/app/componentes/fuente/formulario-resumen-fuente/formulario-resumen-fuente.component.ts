@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 import { tema_Modelo } from '../../../modelo/fuente/tema-modelo';
+import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
@@ -16,14 +17,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class FormularioResumenFuenteComponent implements OnInit {
   //archivos
-  @ViewChild('file') file;
+  @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
-  progress;
-  canBeClosed = true;
-  primaryButtonText = 'Upload';
-  showCancelButton = true;
-  uploading = false;
-  uploadSuccessful = false;
+  progreso;
+  cargando = false;
+  cargadoExitoso = false;
   //mensajes
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -92,19 +90,32 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
 
   agregarArchivos() {
-    this.file.nativeElement.click();
+    this.archivo.nativeElement.click();
   }
   onFilesAdded() {
-    const files: { [key: string]: File } = this.file.nativeElement.files;
-    for (let key in files) {
+    var archivos: { [key: string]: File } = this.archivo.nativeElement.files;
+    for (let key in archivos) {
       if (!isNaN(parseInt(key))) {
-        this.archivos.add(files[key]);
+        this.archivos.add(archivos[key]);
       }
     }
   }
+
+  cargarArchivos() {
+    this.cargando = true;
+    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos);
+    let allProgressObservables = [];
+    for (let key in this.progreso) {
+      allProgressObservables.push(this.progreso[key].progreso);
+    }
+    forkJoin(allProgressObservables).subscribe(end => {
+      this.cargadoExitoso = true;
+      this.cargando = false;
+    });
+
+  }
   guardarFuente() {
-    // this.uploading = true;
-    //  this.usuarioServicio.upload(this.archivos);
+    this.cargarArchivos();
 
     var temaList: Array<tema_Modelo> = new Array();
     var varios = this.fuenteForm.get('varios').value;
@@ -113,33 +124,43 @@ export class FormularioResumenFuenteComponent implements OnInit {
     var otros = this.fuenteForm.get('otros').value;
     var fuenteBase = this.setFuente(this.fuenteForm.value);
 
-    for (let tema of varios) {
-      var temaModelo = new tema_Modelo();
-      temaModelo.nombre = tema;
-      temaModelo.tipo = 1;
-      temaList.push(temaModelo);
+
+    if (varios) {
+      for (let tema of varios) {
+        var temaModelo = new tema_Modelo();
+        temaModelo.nombre = tema;
+        temaModelo.tipo = 1;
+        temaList.push(temaModelo);
+      }
     }
-    for (let tema of flora) {
-      var temaModelo = new tema_Modelo();
-      temaModelo.nombre = tema;
-      temaModelo.tipo = 1;
-      temaList.push(temaModelo);
+    if (flora) {
+      for (let tema of flora) {
+        var temaModelo = new tema_Modelo();
+        temaModelo.nombre = tema;
+        temaModelo.tipo = 2;
+        temaList.push(temaModelo);
+      }
     }
-    for (let tema of fauna) {
-      var temaModelo = new tema_Modelo();
-      temaModelo.nombre = tema;
-      temaModelo.tipo = 1;
-      temaList.push(temaModelo);
+    if (fauna) {
+      for (let tema of fauna) {
+        var temaModelo = new tema_Modelo();
+        temaModelo.nombre = tema;
+        temaModelo.tipo = 3;
+        temaList.push(temaModelo);
+      }
     }
-    for (let tema of otros) {
-      var temaModelo = new tema_Modelo();
-      temaModelo.nombre = tema;
-      temaModelo.tipo = 1;
-      temaList.push(temaModelo);
+    if (otros) {
+      for (let tema of otros) {
+        var temaModelo = new tema_Modelo();
+        temaModelo.nombre = tema;
+        temaModelo.tipo = 4;
+        temaList.push(temaModelo);
+      }
     }
     fuenteBase.temaList = temaList;
-    this.addArea(fuenteBase);
+    this.addFuente(fuenteBase);
   }
+
 
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
 
@@ -165,7 +186,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     return fuente;
   }
   //agrega una nueva fuente
-  addArea(fuente: fuente_Modelo): void {
+  addFuente(fuente: fuente_Modelo): void {
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioServicio.addFuente(fuente, decodedToken.jti)
@@ -180,7 +201,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   cancelar() {
     this.archivos = new Set();
     this.fuenteForm.reset;
-    this.uploading = false;
+    this.cargando = false;
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;

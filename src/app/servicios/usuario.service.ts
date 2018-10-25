@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable, of, Subject } from 'rxjs';
 import { UsuarioModelo } from '../modelo/usuario/usuario-modelo';
@@ -100,14 +101,29 @@ export class UsuarioService {
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
   }
-  public upload(files: Set<File>): { [key: string]: Observable<number> } {
-    const status = {};
-    files.forEach(file => {
-      const formData: FormData = new FormData();
-      formData.append('file', file, file.name);
-      console.log('Archivo', file.name);
+  //cargar archivos
+  public cargarArchivos(archivos: Set<File>): { [key: string]: Observable<number> } {
+    const estado = {};
+    archivos.forEach(archivo => {
+      var formData: FormData = new FormData();
+      formData.append('file', archivo, archivo.name);
+      var req = new HttpRequest('POST', this.rootUrl + '/fuente/cargarArchivos/', formData, {
+        reportProgress: true
+      });
+      var progreso = new Subject<number>();
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+          progreso.next(porcentajeCargado);
+        } else if (event instanceof HttpResponse) {
+          progreso.complete();
+        }
+      });
+      estado[archivo.name] = {
+        progreso: progreso.asObservable()
+      };
     });
-    return status;
+    return estado;
   }
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
