@@ -102,12 +102,12 @@ export class UsuarioService {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
   }
   //cargar archivos
-  public cargarArchivos(archivos: Set<File>): { [key: string]: Observable<number> } {
+  public cargarArchivos(archivos: Set<File>,fuenteid:Number): { [key: string]: Observable<number> } {
     const estado = {};
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       formData.append('file', archivo, archivo.name);
-      var req = new HttpRequest('POST', this.rootUrl + '/fuente/cargarArchivos/', formData, {
+      var req = new HttpRequest('POST', this.rootUrl + '/fuente/cargarArchivos/'+fuenteid, formData, {
         reportProgress: true
       });
       var progreso = new Subject<number>();

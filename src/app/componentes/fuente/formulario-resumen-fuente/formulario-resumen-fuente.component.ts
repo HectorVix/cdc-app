@@ -75,6 +75,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   resetForm() {
 
     this.fuenteForm.reset();
+   
   }
 
 
@@ -101,9 +102,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
     }
   }
 
-  cargarArchivos() {
+  cargarArchivos(fuenteId:Number) {
     this.cargando = true;
-    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos);
+    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos,fuenteId);
     let allProgressObservables = [];
     for (let key in this.progreso) {
       allProgressObservables.push(this.progreso[key].progreso);
@@ -115,8 +116,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
   }
   guardarFuente() {
-    this.cargarArchivos();
-
     var temaList: Array<tema_Modelo> = new Array();
     var varios = this.fuenteForm.get('varios').value;
     var flora = this.fuenteForm.get('flora').value;
@@ -192,8 +191,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.usuarioServicio.addFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
+          this.cargarArchivos(resFuente.fuenteId);
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
           //  this.crearFormFuente();
+          
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
         });
@@ -202,6 +203,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos = new Set();
     this.fuenteForm.reset;
     this.cargando = false;
+    this.progreso={};
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
