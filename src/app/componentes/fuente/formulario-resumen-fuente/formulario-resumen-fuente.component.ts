@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 import { tema_Modelo } from '../../../modelo/fuente/tema-modelo';
 import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -75,7 +75,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   resetForm() {
 
     this.fuenteForm.reset();
-   
+
   }
 
 
@@ -102,9 +102,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
     }
   }
 
-  cargarArchivos(fuenteId:Number) {
+  cargarArchivos(fuenteId: Number) {
     this.cargando = true;
-    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos,fuenteId);
+    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos, fuenteId);
     let allProgressObservables = [];
     for (let key in this.progreso) {
       allProgressObservables.push(this.progreso[key].progreso);
@@ -194,7 +194,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.cargarArchivos(resFuente.fuenteId);
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
           //  this.crearFormFuente();
-          
+
         }, err => {
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
         });
@@ -203,7 +203,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos = new Set();
     this.fuenteForm.reset;
     this.cargando = false;
-    this.progreso={};
+    this.progreso = {};
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;

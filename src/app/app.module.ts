@@ -47,13 +47,10 @@ import { AuthGuard } from './auth/auth.guard';
 import { RouterModule, Router } from '@angular/router';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatNativeDateModule ,MatDialogModule, MatListModule, MatProgressBarModule} from '@angular/material';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
+  MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,MatGridListModule
+} from '@angular/material';
 import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
 import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
 import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
@@ -64,7 +61,9 @@ import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
-
+import 'hammerjs';
+import 'mousetrap'; 
+import { ModalGalleryModule } from 'angular-modal-gallery';
 
 @NgModule({
   declarations: [
@@ -124,10 +123,8 @@ import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqu
     Ng2SmartTableModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
-    MatTableModule, MatPaginatorModule, MatDatepickerModule, MatNativeDateModule,MatDialogModule, MatListModule, MatProgressBarModule,
-
-
-
+    MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,MatGridListModule,
+    ModalGalleryModule.forRoot() 
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [UsuarioService, DatePipe, AuthGuard, {
