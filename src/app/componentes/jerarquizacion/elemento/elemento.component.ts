@@ -70,7 +70,9 @@ export class ElementoComponent implements OnInit {
   dataElementos: any;
   private paginator: MatPaginator;
   private estadoForm: boolean = true;
-
+  //archivos
+  @ViewChild('file') archivo;
+  public archivos: Set<File> = new Set();
   //para pruebas
   data: any;
 
@@ -139,8 +141,8 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-    var elementoBase = this.setElemento(this.elementoForm.value);
-    this.addElemento(this.elementoForm.value);
+    // var elementoBase = this.setElemento(this.elementoForm.value);
+    // this.addElemento(this.elementoForm.value);
 
   }
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
@@ -232,9 +234,10 @@ export class ElementoComponent implements OnInit {
 
   plainGalleryGrid: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.GRID,
-    layout: new GridLayout({ width: '80px', height: '80px' }, { length: 3, wrap: true })
+    layout: new GridLayout({ width: '80px', height: '80px' }, { length: 7, wrap: true })
   };
-  images: Image[] = [
+
+  imagenes: Image[] = [
     new Image(0, {
       img: '../assets/imagenes/gallery/img1.jpg',
 
@@ -250,17 +253,10 @@ export class ElementoComponent implements OnInit {
         description: 'Description 3',
 
       }
-    ),
-    new Image(3, {
-      img: '../assets/imagenes/gallery/img4.jpg',
-      description: 'Description 4',
-
-    }),
-    new Image(4, {
-      img: '../assets/imagenes/gallery/img5.jpg'
-    },
     )
+
   ];
+
 
   dotsConfig: DotsConfig = {
     visible: false
@@ -424,12 +420,12 @@ export class ElementoComponent implements OnInit {
   };
   openImageModalRow(image: Image) {
     console.log('Opening modal gallery from custom plain gallery row, with image: ', image);
-    const index: number = this.getCurrentIndexCustomLayout(image, this.images);
+    const index: number = this.getCurrentIndexCustomLayout(image, this.imagenes);
     this.customPlainGalleryRowConfig = Object.assign({}, this.customPlainGalleryRowConfig, { layout: new AdvancedLayout(index, true) });
   }
   openImageModalRowDescription(image: Image) {
     console.log('Opening modal gallery from custom plain gallery row and description, with image: ', image);
-    // const index: number = this.getCurrentIndexCustomLayout(image, this.imagesRect);
+    // const index: number = this.getCurrentIndexCustomLayout(image, this.imagenesRect);
     // this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(index, true) });
   }
 
@@ -439,8 +435,8 @@ export class ElementoComponent implements OnInit {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
-      console.log('delete in app with images count ' + this.images.length);
-      this.images = this.images.filter((val: Image) => event.image && val.id !== event.image.id);
+      console.log('delete in app with imagenes count ' + this.imagenes.length);
+      this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
     }
   }
 
@@ -459,10 +455,10 @@ export class ElementoComponent implements OnInit {
     }
     if (event.button.type === ButtonType.CUSTOM) {
       console.log('adding a new random image at the end');
-      this.addRandomImage();
+      this.addImage();
 
       setTimeout(() => {
-        this.galleryService.openGallery(galleryId, this.images.length - 1);
+        this.galleryService.openGallery(galleryId, this.imagenes.length - 1);
       }, 0);
     }
   }
@@ -512,10 +508,10 @@ export class ElementoComponent implements OnInit {
     }, 3000);
   }
 
-  addRandomImage() {
-    const imageToCopy: Image = this.images[Math.floor(Math.random() * this.images.length)];
-    const newImage: Image = new Image(this.images.length - 1 + 1, imageToCopy.modal, imageToCopy.plain);
-    this.images = [...this.images, newImage];
+  addImage() {
+    const imageToCopy: Image = this.imagenes[Math.floor(Math.random() * this.imagenes.length)];
+    const newImage: Image = new Image(this.imagenes.length - 1 + 1, imageToCopy.modal, imageToCopy.plain);
+    this.imagenes = [...this.imagenes, newImage];
   }
 
   openModalViaService(id: number | undefined, index: number) {
@@ -527,9 +523,37 @@ export class ElementoComponent implements OnInit {
     return item.id;
   }
 
-  private getCurrentIndexCustomLayout(image: Image, images: Image[]): number {
-    return image ? images.indexOf(image) : -1;
+  private getCurrentIndexCustomLayout(image: Image, imagenes: Image[]): number {
+    return image ? imagenes.indexOf(image) : -1;
   }
+  //archivos
+  agregarArchivos() {
+    this.archivo.nativeElement.click();
+  }
+  onFilesAdded() {
+    var archivos: { [key: string]: File } = this.archivo.nativeElement.files;
+    for (let key in archivos) {
+      if (!isNaN(parseInt(key))) {
+        this.archivos.add(archivos[key]);
+        this.agregarImagen(archivos[key]);
+      }
+    }
+
+  }
+  base64String = '';
+  agregarImagen(file: File) {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (onLoadPhotoEvent: any) => {
+      this.base64String = onLoadPhotoEvent.target.result;
+      var imagen = new Image(0, {
+        img: this.base64String
+      });
+      const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
+      this.imagenes = [...this.imagenes, nuevaImagen]
+    }
+  }
+
 }
 function crearElemento(k: number, elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
   var usuario = '' + nombre + ' ' + apellido;
