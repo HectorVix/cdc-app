@@ -141,9 +141,13 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-    // var elementoBase = this.setElemento(this.elementoForm.value);
-    // this.addElemento(this.elementoForm.value);
+   
 
+  }
+  guardarElemento()
+  {
+    var elementoBase = this.setElemento(this.elementoForm.value);
+     this.addElemento(this.elementoForm.value);
   }
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);

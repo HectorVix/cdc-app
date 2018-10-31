@@ -72,12 +72,12 @@
                 <h5 class="modal-tittle">Fotos</h5>
               </div>
               <div class="row">
-                  <div class="col-md-2">
-                <div class="mat-elevation-z8" class="base-form">
-                  <input type="file" #file style="display: none" accept="image/*" (change)="onFilesAdded()"  multiple />
-                  <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
+                <div class="col-md-2">
+                  <div class="mat-elevation-z8" class="base-form">
+                    <input type="file" #file style="display: none" accept="image/*" (change)="onFilesAdded()" multiple />
+                    <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
+                  </div>
                 </div>
-              </div>
               </div>
               <section>
                 <br>
@@ -88,9 +88,8 @@
             </div>
             <!-- fin modal-content  -->
             <div class="text-center">
-              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-              <!-- <input type="submit" class="btn color-green waves-light" [disabled]="!elementoForm.valid" mdbWavesEffect value="Guardar"> -->
-              <button class="btn color-green waves-light" [disabled]="!elementoForm.valid" mdbWavesEffect>Guardar</button>
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>         
+              <button class="btn color-green waves-light" type="button" (click)="guardarElemento()" mdbWavesEffect>Guardar </button>
               <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar </button>
             </div>
           </form>
