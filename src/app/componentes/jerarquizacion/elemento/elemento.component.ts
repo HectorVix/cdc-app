@@ -73,6 +73,8 @@ export class ElementoComponent implements OnInit {
   //archivos
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
+  //loading
+  loading:boolean ;
   //para pruebas
   data: any;
 
@@ -87,6 +89,7 @@ export class ElementoComponent implements OnInit {
     this.crearForm_Elemento();
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
+    this.loading=false;
   }
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
@@ -141,13 +144,13 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-   
+
 
   }
-  guardarElemento()
-  {
+  guardarElemento() {
+    this.loading=true;
     var elementoBase = this.setElemento(this.elementoForm.value);
-     this.addElemento(this.elementoForm.value);
+    this.addElemento(this.elementoForm.value);
   }
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
@@ -159,9 +162,11 @@ export class ElementoComponent implements OnInit {
     this.usuarioService.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
+          this.loading=false;
           this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
           this.crearForm_Elemento();
         }, err => {
+          this.loading=false;
           this.changeSuccessMessage('Error  no se pudo guardar', 'primary');
         });
   }
@@ -330,7 +335,7 @@ export class ElementoComponent implements OnInit {
       {
         className: 'ext-url-image',
         type: ButtonType.EXTURL,
-        extUrlInNewTab: true // <--- this is the important thing to understand this example
+        extUrlInNewTab: true
       },
       {
         className: 'download-image',

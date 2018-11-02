@@ -85,9 +85,27 @@
                   (show)="onVisibleIndex($event)" (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
                 </ks-modal-gallery>
               </section>
+              <div class="lds-css">
+                <div class="lds-gear" >
+                  <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+              
             </div>
             <!-- fin modal-content  -->
             <div class="text-center">
+                <div class="loading" *ngIf="loading" >
+                    <img src="../../assets/imagenes/load.gif">
+                  </div>
               <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>         
               <button class="btn color-green waves-light" type="button" (click)="guardarElemento()" mdbWavesEffect>Guardar </button>
               <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar </button>
