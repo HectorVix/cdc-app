@@ -36,8 +36,7 @@
                   <label for="">NOMBRES:</label>
                 </div>
                 <div class="md-form col-sm-9 mt-20 ">
-                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control"  data-error=" " data-success=" "
-                    required>
+                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" data-error=" " data-success=" " required>
                 </div>
               </div>
               <div class="row">
@@ -53,7 +52,7 @@
                   <label for="">RANGOS LE:</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formRangoG" class="form-control"  data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formRangoG" class="form-control" data-error=" " data-success=" ">
                   <label for="formRangoG">&nbsp;&nbsp;&nbsp;&nbsp;RANGOG</label>
                 </div>
                 <div class="md-form col-md-2 mt-20">
@@ -61,7 +60,7 @@
                   <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;RANGON</label>
                 </div>
                 <div class="md-form col-md-2 mt-20 ">
-                  <input mdbInputDirective type="text" id="formRangos" class="form-control"  data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formRangos" class="form-control" data-error=" " data-success=" ">
                   <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;RANGOS</label>
                 </div>
               </div>
@@ -122,7 +121,8 @@
                   <label for="">PRECISION:</label>
                 </div>
                 <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formPrecision" class="form-control" formControlName="precisionl" data-error=" " data-success=" ">
+                  <input mdbInputDirective type="text" id="formPrecision" class="form-control" formControlName="precisionl" data-error=" "
+                    data-success=" ">
                   <label for="formPrecision"></label>
                 </div>
               </div>
@@ -164,7 +164,7 @@
                 <div class="md-form col-md-2 mt-20 ">
                   <input mdbInputDirective type="text" id="formLongitud" class="form-control" formControlName="longitud" data-error=" " data-success=" ">
                   <label for="formLongitud">&nbsp;&nbsp;&nbsp;&nbsp;LONGITUD</label>
-                </div>               
+                </div>
               </div>
               <div class="row">
                 <div class="col-md-2">
@@ -742,10 +742,13 @@
             </div>
             <!--fin modal-content  -->
             <div class="text-center ">
+              <div *ngIf="loading">
+                <img src="../../assets/imagenes/load.gif">
+              </div>
               <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
               <button class="btn color-green waves-light" (click)="fLE.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-              <button class="btn color-green waves-light" (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
               <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+              <button class="btn color-green waves-light" (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
             </div>
           </ng-template>
         </ngb-tab>

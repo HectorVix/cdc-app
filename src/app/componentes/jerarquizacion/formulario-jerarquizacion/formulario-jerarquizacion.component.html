@@ -13,7 +13,7 @@
                   <b>1</b>
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                  <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <div class="modal-content">
                     <div class="modal-header color-green">
                       <h5 class="modal-tittle">JERARQUIZACIÓN DEL ELEMENTO NACIONAL</h5>
@@ -100,15 +100,15 @@
                       <div class="col-md-2">
                         <label for="">NABUND:</label>
                       </div>
-                      <div class="col-md-7 mt-15">                      
+                      <div class="col-md-7 mt-15">
                         <mat-form-field>
-                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nabund">
-                              <mat-option>-- Ninguna --</mat-option>
-                              <mat-option *ngFor="let sNabund of criterio_nabund" [value]="sNabund.value">
-                                {{sNabund.viewValue}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nabund">
+                            <mat-option>-- Ninguna --</mat-option>
+                            <mat-option *ngFor="let sNabund of criterio_nabund" [value]="sNabund.value">
+                              {{sNabund.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -129,15 +129,15 @@
                       <div class="col-md-2">
                         <label for="">NDIST:</label>
                       </div>
-                      <div class="col-md-5 mt-15">                      
+                      <div class="col-md-5 mt-15">
                         <mat-form-field>
-                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="ndist">
-                              <mat-option>-- Ninguna --</mat-option>
-                              <mat-option *ngFor="let sNdist of criterio_ndist" [value]="sNdist.value">
-                                {{sNdist.viewValue}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="ndist">
+                            <mat-option>-- Ninguna --</mat-option>
+                            <mat-option *ngFor="let sNdist of criterio_ndist" [value]="sNdist.value">
+                              {{sNdist.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -158,15 +158,15 @@
                       <div class="col-md-2">
                         <label for="">NLEPROT:</label>
                       </div>
-                      <div class="col-md-4 mt-15">                       
+                      <div class="col-md-4 mt-15">
                         <mat-form-field>
-                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nleprot">
-                              <mat-option>-- Ninguna --</mat-option>
-                              <mat-option *ngFor="let sNleprot of criterio_nleprot" [value]="sNleprot.value">
-                                {{sNleprot.viewValue}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nleprot">
+                            <mat-option>-- Ninguna --</mat-option>
+                            <mat-option *ngFor="let sNleprot of criterio_nleprot" [value]="sNleprot.value">
+                              {{sNleprot.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -189,13 +189,13 @@
                       </div>
                       <div class="col-md-9 mt-15">
                         <mat-form-field>
-                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="namenaz">
-                              <mat-option>-- Ninguna --</mat-option>
-                              <mat-option *ngFor="let sNamenaz of criterio_namenaz" [value]="sNamenaz.value">
-                                {{sNamenaz.viewValue}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="namenaz">
+                            <mat-option>-- Ninguna --</mat-option>
+                            <mat-option *ngFor="let sNamenaz of criterio_namenaz" [value]="sNamenaz.value">
+                              {{sNamenaz.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
                     </div>
                     <!--  -->
@@ -252,13 +252,13 @@
                       </div>
                       <div class="col-md-2 mt-15">
                         <mat-form-field>
-                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
-                              <mat-option>-- Ninguna --</mat-option>
-                              <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
-                                {{sRangon.viewValue}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                            <mat-option>-- Ninguna --</mat-option>
+                            <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                              {{sRangon.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
                       </div>
 
                       <div class="md-form input-group-append mt-10">
@@ -387,10 +387,13 @@
                   </div>
                   <!-- fin modal-content -->
                   <div class="text-center">
-                      <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                    <div *ngIf="loading">
+                      <img src="../../assets/imagenes/load.gif">
+                    </div>
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                     <button class="btn color-green waves-light" (click)="fJ.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionNacional()" mdbWavesEffect>Guardar</button>
                     <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionNacional()" mdbWavesEffect>Guardar</button>
                   </div>
                 </ng-template>
               </ngb-tab>
@@ -406,22 +409,22 @@
           <b>Buscar Jerarquización Nacional</b>
         </ng-template>
         <ng-template ngbTabContent>
-            <mat-card>
-              <form class="base-form">
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Codigo del Elemento">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Nombre Nacional">
-                </mat-form-field>
-                <div class="mat-elevation-z8" class="base-form">
-                  <button mat-raised-button class="color-green">Buscar</button>              
-                  <button mat-raised-button class="color-green">Buscar Todos</button>
-                </div>
-              </form>
-              <app-tabla-busqueda></app-tabla-busqueda>
-            </mat-card>
-          </ng-template>
+          <mat-card>
+            <form class="base-form">
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Codigo del Elemento">
+              </mat-form-field>
+              <mat-form-field class="base-full-width">
+                <input matInput placeholder="Nombre Nacional">
+              </mat-form-field>
+              <div class="mat-elevation-z8" class="base-form">
+                <button mat-raised-button class="color-green">Buscar</button>
+                <button mat-raised-button class="color-green">Buscar Todos</button>
+              </div>
+            </form>
+            <app-tabla-busqueda></app-tabla-busqueda>
+          </mat-card>
+        </ng-template>
       </ngb-tab>
       <!-- fin ngb-tab -->
     </ngb-tabset>

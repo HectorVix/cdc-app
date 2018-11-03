@@ -6,7 +6,6 @@
           <div class="modal-header color-green">
             <h5 class="modal-title">Formulario de resumen fuente</h5>
           </div>
-          <!------------------------CODFUENTE------------------------------ -->
           <div class="row">
             <div class="col-md-2">
               <label for="">CODFUENTE:</label>
@@ -28,7 +27,6 @@
             </div>
           </div>
           <!-- fin row -->
-          <!------------------------CITA------------------------------ -->
           <div class="row">
             <div class="col-md-2">
               <label for="">CITA:</label>
@@ -41,8 +39,6 @@
             </div>
           </div>
           <!-- fin row -->
-
-          <!--------------------------ARCHIVADO---------------------------- -->
           <div class="row">
             <div class=" col-md-2">
               <label for="">ARCHIVADO:</label>
@@ -77,14 +73,12 @@
             <div class="col-md-2">
               <label for="">COBGEO:</label>
             </div>
-            <!------------------------COBGEO------------------------------ -->
             <div class="md-form col-md-9 mt-20">
               <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error=" " data-success=" " formControlName="cobgeo">
               <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del Documento.</label>
             </div>
           </div>
           <!-- fin row -->
-          <!-- ----------------------------- Coordenadas ------------------------ -->
           <div class="row">
             <div class="col-md-2">
               <label for="">S:</label>
@@ -109,7 +103,7 @@
 
           </div>
           <!--fin row  -->
-          <!------------------------RESUMEN------------------------------ -->
+
           <div class="row">
             <div class="col-md-2">
               <label for="">RESUMEN:</label>
@@ -122,7 +116,7 @@
             </div>
           </div>
           <!-- fin row -->
-          <!------------------------TEMA------------------------------ -->
+
           <div class="row">
             <div class="col-md-2">
               <label for="">TEMA:</label>
@@ -258,6 +252,9 @@
         </div>
         <!-- fin modal-content -->
         <div class="text-center">
+          <div *ngIf="loading">
+            <img src="../../assets/imagenes/load.gif">
+          </div>
           <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
           <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
           <button class="btn  color-green waves-light" mdbWavesEffect (click)="guardarFuente()">Guardar</button>

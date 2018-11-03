@@ -89,7 +89,7 @@
                                 <div class="md-form col-md-2 mt10">
                                     <input mdbInputDirective type="text" id="formLong" class="form-control" formControlName="long1" data-error=" " data-success=" ">
                                     <label for="formLong">&nbsp;&nbsp;&nbsp;&nbsp;LONG</label>
-                                </div> 
+                                </div>
                             </div>
                             <!-- fin row -->
                             <div class="row">
@@ -648,10 +648,13 @@
                         </div>
                         <!-- fin modal-content -->
                         <div class="text-center ">
+                            <div *ngIf="loading">
+                                <img src="../../assets/imagenes/load.gif">
+                            </div>
                             <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                             <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                            <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
                             <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
                         </div>
                     </ng-template>
                     <!-- fin ng-template -->

@@ -456,10 +456,13 @@
                     </div>
                   </div>
                   <div class="text-center ">
+                    <div *ngIf="loading">
+                      <img src="../../assets/imagenes/load.gif">
+                    </div>
                     <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                     <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionGlobal()" mdbWavesEffect>Guardar</button>
                     <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionGlobal()" mdbWavesEffect>Guardar</button>
                   </div>
                 </ng-template>
               </ngb-tab>
@@ -486,7 +489,7 @@
                 <input matInput placeholder="Nombre Global">
               </mat-form-field>
               <div class="mat-elevation-z8" class="base-form">
-                <button mat-raised-button class="color-green">Buscar</button>              
+                <button mat-raised-button class="color-green">Buscar</button>
                 <button mat-raised-button class="color-green">Buscar Todos</button>
               </div>
             </form>

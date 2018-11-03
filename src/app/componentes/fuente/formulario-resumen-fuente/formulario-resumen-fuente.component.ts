@@ -37,10 +37,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
   floraList: string[] = ['Flora', 'Floraac', 'Floraterp', 'Plnovasc', 'Microorg', 'Infositio'];
   faunaList: string[] = ['Fauna', 'Faunaac', 'Faunaterr', 'Moluscos', 'Insectos', 'Crustaceos', 'Otroartrop', 'otroinvert', 'Peces', 'Anfibios', 'reptiles', 'Aves', 'Mamiferos', 'Cienfisic', 'Fisiotopo'];
   otrosList: string[] = ['Hidrol', 'Geologia', 'Suelos', 'Clima', 'Biologia', 'Ecologia', 'Funecol', 'Diversnat', 'Inventario', 'Tecinvest', 'Am', 'Planmanejo', 'Tecmanejo', 'Estimpamb', 'Organprot', 'Herrprot'];
-
+ //loading
+ loading:boolean;
   constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService) {
     this.crearForm_ResumenesFuente();
-
   }
   crearForm_ResumenesFuente() {
 
@@ -103,6 +103,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
 
   cargarArchivos(fuenteId: Number) {
+
     this.cargando = true;
     this.progreso = this.usuarioServicio.cargarArchivos(this.archivos, fuenteId);
     let allProgressObservables = [];
@@ -186,16 +187,19 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   //agrega una nueva fuente
   addFuente(fuente: fuente_Modelo): void {
+    this.loading=true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioServicio.addFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
           this.cargarArchivos(resFuente.fuenteId);
+          this.loading=false;
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
           //  this.crearFormFuente();
 
         }, err => {
+          this.loading=false;
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
         });
   }

@@ -34,6 +34,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Global();
@@ -47,10 +48,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
   }
   onSubmit() {
- 
+
   }
-  guardarRegistroJerarquiazacionGlobal(){
-  
+  guardarRegistroJerarquiazacionGlobal() {
+
     this.registrarJerarquizacionGlobal();
   }
   crear_Jerarquizacion_Global() {
@@ -97,11 +98,11 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
 
   }
   //validar codigoe 
-  validarCodigoe (){
+  validarCodigoe() {
     this.ValidarElementoCodigoe(this.jerarquizaciongForm.get('codigoe').value);
   }
   //registro nuevo formulario jerarquizacion global
-  registrarJerarquizacionGlobal(){
+  registrarJerarquizacionGlobal() {
     console.log(this.jerarquizaciongForm.value);
     this.jerarquizacionModelo = new Jerarquizacion();
     this.jerarquizacionGlobalModelo = new jerarquizacion_Global_Modelo();
@@ -113,46 +114,48 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.addJerarquizacionGlobal(this.jerarquizacionModelo);
   }
   setDatosJerarquizacionGlobal(datos: jerarquizacion_Global_Modelo) {
-    var fecharg=this.usuarioService.toFormato(this.jerarquizaciongForm.get('fecharg').value);
-    var edicion=this.usuarioService.toFormato(this.jerarquizaciongForm.get('edicion').value);
-    var actualizar=this.usuarioService.toFormato(this.jerarquizaciongForm.get('actualizar').value);
-    datos.fecharg=fecharg;
-    datos.edicion=edicion;
-    datos.actualizar=actualizar;
+    var fecharg = this.usuarioService.toFormato(this.jerarquizaciongForm.get('fecharg').value);
+    var edicion = this.usuarioService.toFormato(this.jerarquizaciongForm.get('edicion').value);
+    var actualizar = this.usuarioService.toFormato(this.jerarquizaciongForm.get('actualizar').value);
+    datos.fecharg = fecharg;
+    datos.edicion = edicion;
+    datos.actualizar = actualizar;
     this.jerarquizacionGlobalModelo = datos;
   }
   //agrega un nuevo registro jerarquizacion global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): void {
+    this.loading = true;
     this.usuarioService.addJerarquizacionGlobal(jerarquizacion)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Si registro la jerarquización  del elemento:${resElemento.codigoe}.`, 'success');
           this.crear_Jerarquizacion_Global();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }
-  ValidarElementoCodigoe(codigoe:String):elemento_Modelo
-  {
-    var elemento:elemento_Modelo;
+  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
+    var elemento: elemento_Modelo;
     this.usuarioService.validarElementoCodigoe(codigoe)
-    .subscribe(
-      resElemento => {
-        elemento=resElemento;
-        console.log("validado elemento ok:"+resElemento.elementoId);
-        this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
-      }, err => {
-        this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
-      });
+      .subscribe(
+        resElemento => {
+          elemento = resElemento;
+          console.log("validado elemento ok:" + resElemento.elementoId);
+          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+        });
 
-      return elemento;
+    return elemento;
   }
 
   selectToday() {
     this.modelDate = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
   }
-   //mensajes
-   public changeSuccessMessage(mensaje: string, tipo: string) {
+  //mensajes
+  public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }

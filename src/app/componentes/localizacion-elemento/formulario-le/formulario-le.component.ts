@@ -28,6 +28,7 @@ export class FormularioLeComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
   settings_proteccion = {
     columns: {
       codigoam: {
@@ -165,12 +166,14 @@ export class FormularioLeComponent implements OnInit {
 
   //agrega un nuevo registro localización elemento
   addLocalizacionElemento(localizacion: Localizacion_Modelo): void {
+    this.loading = true;
     this.usuarioService.addLocalizacionElemento(localizacion)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro la localización del elemento :${resElemento.codigole}.`, 'success');
-          //  this.crearFormLocalizacion_Elemento();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }

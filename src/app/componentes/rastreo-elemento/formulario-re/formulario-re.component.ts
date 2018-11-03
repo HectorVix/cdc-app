@@ -34,9 +34,10 @@ export class FormularioReComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
+  
   constructor(
-    private fb: FormBuilder, private usuarioService: UsuarioService
-  ) {
+    private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearFormRastreoElemento();
   }
 
@@ -50,7 +51,6 @@ export class FormularioReComponent implements OnInit {
 
 
   guardarRastreoElemento() {
-    console.log(this.reForm.value);
     var rastreoElementoBase = this.setRastreoElemento(this.reForm.value);
     this.addRastroeElemento(rastreoElementoBase);
   }
@@ -67,12 +67,15 @@ export class FormularioReComponent implements OnInit {
 
   //agrega un nuevo registro rastreo elemento
   addRastroeElemento(rastreoElemento: rastreo_Elemento_Modelo): void {
+    this.loading = true;
     this.usuarioService.addRastreoElemento(rastreoElemento)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
           this.crearFormRastreoElemento();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }
@@ -177,83 +180,4 @@ export class FormularioReComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-
-
-
-
-
-  /****
-   * Comun para 
-   * formularg, plancons, resplan, resumenman, formularn
-   */
-  getCriterio_Compu_Manual(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'C';
-      case 2: return 'M';
-    }
-
-  }
-  /****
- * Comun para 
- * disttax, dudatax
- */
-  getCriterio_Tax(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'A';
-      case 2: return 'B';
-      case 3: return 'C';
-      case 4: return 'D';
-    }
-  }
-  getCriterio_Endemismo(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'S';
-      case 2: return 'N';
-      case 3: return 'M';
-    }
-  }
-  getCriterio_Cites(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return '1';
-      case 2: return '2';
-      case 3: return '3';
-    }
-  }
-  getCriterio_Iucn(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'EX';
-      case 2: return 'E';
-      case 3: return 'V';
-      case 4: return 'R';
-      case 5: return 'I';
-      case 6: return 'K';
-      case 7: return 'O';
-      case 8: return 'NT';
-    }
-  }
-  /*
-  * Comun para 
-  * exsitu, transparen
-  */
-  getCriterio_Si_No(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return '1';
-      case 2: return '0';
-    }
-  }
-  getCriterio_Lista_Cdc(i: number) {
-    switch (i) {
-      case 0: return '';
-      case 1: return 'S';
-      case 2: return 'P';
-      case 3: return 'N';
-    }
-  }
-
 }

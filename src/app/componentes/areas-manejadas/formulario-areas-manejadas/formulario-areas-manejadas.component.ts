@@ -24,6 +24,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
 
   settings_Elementos_AreasManejadas = {
     columns: {
@@ -136,12 +137,14 @@ export class FormularioAreasManejadasComponent implements OnInit {
   }
   //agrega una nueva area
   addArea(area: area_Modelo): void {
+    this.loading = true;
     this.usuarioService.addArea(area)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro el area  :${resElemento.codigoam}.`, 'success');
-          //  this.crearFormLocalizacion_Elemento();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar el area.', 'primary');
         });
   }

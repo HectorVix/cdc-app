@@ -681,13 +681,14 @@
               <!-- fin row -->
             </div>
             <!-- fin modal-content -->
-
-
             <div class="text-center ">
+              <div *ngIf="loading">
+                <img src="../../assets/imagenes/load.gif">
+              </div>
               <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
               <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
-              <button class="btn color-green waves-light" (click)="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
               <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+              <button class="btn color-green waves-light" (click)="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
             </div>
           </ng-template>
         </ngb-tab>

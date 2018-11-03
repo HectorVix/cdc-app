@@ -396,7 +396,7 @@
                             <div class="modal-header color-green">
                                 <h5 class="modal-title">Fenología:</h5>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="">COMFENOLN:</label>
@@ -605,10 +605,13 @@
                         </div>
                         <!--fin modal-content-->
                         <div class="text-center ">
+                            <div *ngIf="loading">
+                                <img src="../../assets/imagenes/load.gif">
+                            </div>
                             <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                             <button class="btn color-green waves-light" (click)="fCaracterizacionPlatasNacional.select('tab-selectbyid3')" mdbWavesEffect>Atras</button>
-                            <button class="btn color-green waves-light" (click)="guardarCPlanta()"  mdbWavesEffect>Guardar</button>
                             <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="guardarCPlanta()" mdbWavesEffect>Guardar</button>
 
                         </div>
                     </ng-template>

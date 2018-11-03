@@ -89,7 +89,6 @@ export class ElementoComponent implements OnInit {
     this.crearForm_Elemento();
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
-    this.loading=false;
   }
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;

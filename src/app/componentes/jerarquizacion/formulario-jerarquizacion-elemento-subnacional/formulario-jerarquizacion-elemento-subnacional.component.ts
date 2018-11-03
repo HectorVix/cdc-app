@@ -26,6 +26,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Subnacional();
   }
@@ -74,7 +75,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
 
   //guardar registro jerarquizacion subnancional
-  guardarRegistroJerarquizacionSubnacional(){
+  guardarRegistroJerarquizacionSubnacional() {
     console.log(this.jerarquizacion_SubnacionalForm.value);
     var jerarquizacionBase = new Jerarquizacion();
     var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
@@ -86,45 +87,47 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     this.addJerarquizacionNacional(jerarquizacionBase)
   }
   //setear datos jerarquizacion subnacioal
-  setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo):jerarquizacion_Subnacional_Modelo {
-    datos.fecharevrs=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
-    datos.edicion=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('edicion').value);
-    datos.actualizar=this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
+  setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo): jerarquizacion_Subnacional_Modelo {
+    datos.fecharevrs = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
+    datos.edicion = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('edicion').value);
+    datos.actualizar = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion subnacional
   addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
+    this.loading = true;
     this.usuarioService.addJerarquizacionSubnacional(jerarquizacion)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro la jerarquización subnacional del elemento :${resElemento.codigoe}.`, 'success');
           this.crear_Jerarquizacion_Subnacional();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }
   //validar codigoe 
-  validarCodigoe (){
+  validarCodigoe() {
     this.ValidarElementoCodigoe(this.jerarquizacion_SubnacionalForm.get('codigoe').value);
   }
-  ValidarElementoCodigoe(codigoe:String):elemento_Modelo
-  {
-    var elemento:elemento_Modelo;
+  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
+    var elemento: elemento_Modelo;
     this.usuarioService.validarElementoCodigoe(codigoe)
-    .subscribe(
-      resElemento => {
-        elemento=resElemento;
-        console.log("validado elemento ok:"+resElemento.elementoId);
-        this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
-      }, err => {
-        this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
-      });
+      .subscribe(
+        resElemento => {
+          elemento = resElemento;
+          console.log("validado elemento ok:" + resElemento.elementoId);
+          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+        });
 
-      return elemento;
+    return elemento;
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
 }
- 
+

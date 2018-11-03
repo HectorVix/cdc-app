@@ -27,7 +27,7 @@ export class RegistroSitioComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
-
+  loading: boolean;
   settings_Identificadores_Sitio = {
     columns: {
       codmacsitio: {
@@ -54,9 +54,6 @@ export class RegistroSitioComponent implements OnInit {
       },
     }
   };
-
-
-
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearFormSitio();
   }
@@ -136,24 +133,24 @@ export class RegistroSitioComponent implements OnInit {
     });
   }
   guardarSitio() {
-    console.log(this.sitioForm.value);
     var sitioBase = this.setSitio(this.sitioForm.value);
     this.addSitio(sitioBase);
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {
     datos.fechamapa = this.usuarioService.toFormato(this.sitioForm.get('fechamapa').value);
     datos.actualizar = this.usuarioService.toFormato(this.sitioForm.get('actualizar').value);
-
     return datos;
   }
   //agrega un nuevo registro de sitio 
   addSitio(sitio: sitio_Modelo): void {
+    this.loading = true;
     this.usuarioService.addSitio(sitio)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro el sitio  :${resElemento.codsitio}.`, 'success');
-          //  this.crearFormLocalizacion_Elemento();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar el Sitio.', 'primary');
         });
   }

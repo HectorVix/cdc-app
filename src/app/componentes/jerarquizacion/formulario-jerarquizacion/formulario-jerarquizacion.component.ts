@@ -25,16 +25,12 @@ export class FormularioJerarquizacionComponent implements OnInit {
   criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacionForm: FormGroup;
-  // jerarquizacionGlobalModelo: jerarquizacion_Global_Modelo;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
-
-  constructor(
-    private fb: FormBuilder,
-    private usuarioService: UsuarioService
-  ) {
+  loading: boolean;
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.createFormJerarquizacionNacional();
   }
 
@@ -77,10 +73,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
       'actualizar': ''
     });
   }
-  // this.registroForm.get('fechaNacimiento').value;
   onSubmit() {
-
-
   }
   //guardar registro jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
@@ -106,12 +99,15 @@ export class FormularioJerarquizacionComponent implements OnInit {
   //agrega un nuevo registro jerarquizacion global
 
   addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
+    this.loading = true;
     this.usuarioService.addJerarquizacionNacional(jerarquizacion)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro la jerarquización nacional del elemento :${resElemento.codigoe}.`, 'success');
           this.createFormJerarquizacionNacional();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }

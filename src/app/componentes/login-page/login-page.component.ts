@@ -30,6 +30,7 @@ export class LoginPageComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
 
   constructor(public fb: FormBuilder,
     private usuarioService: UsuarioService,
@@ -55,15 +56,18 @@ export class LoginPageComponent implements OnInit {
 
   //logiarse
   onSubmit() {
+    this.loading = true;
     this.usuarioService.userAuthentication(this.loginForm.get('LFemail').value, this.loginForm.get('LFcontrasena').value)
       .subscribe((data: any) => {
+        this.loading = false;
         localStorage.setItem('userToken', data.access_token);
         this.router.navigate(['/home']);
       },
         (err: HttpErrorResponse) => {
+          this.loading = false;
           this.changeSuccessMessage('Correo/contraseña invalidos o servidor no disponible.', 'primary');
           this.isLoginError = true;
-        });        
+        });
   }
   //Guardar Registro
   onSubmitRegistro() {
@@ -73,6 +77,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   addUsuario(usDatos: UsuarioModelo): void {
+    this.loading = true;
     usDatos.fechaNacimiento = this.fecha;
     this.rol = new Rol();
     this.rol.rolId = 7;
@@ -81,9 +86,11 @@ export class LoginPageComponent implements OnInit {
     this.usuarioService.addUsuario(usDatos)
       .subscribe(
         us => {
+          this.loading = false;
           this.changeSuccessMessage(`Registro exitoso:${us.nombre}.`, 'success');
           this.rebuildFormRegisrtro();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('Error correo ya utilizado o servidor no disponible.', 'primary');
         });
 

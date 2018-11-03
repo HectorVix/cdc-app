@@ -44,6 +44,9 @@
                             </p>
                         </div>
                         <div class="text-center">
+                            <div *ngIf="loading">
+                                <img src="../../assets/imagenes/load.gif">
+                            </div>
                             <input type="submit" class="btn color-green waves-light" [disabled]="!loginForm.valid" mdbWavesEffect value="Iniciar sesión">
                         </div>
                     </form>
@@ -116,6 +119,9 @@
                         <label for="contrasena">Tu contraseña</label>
                     </div>
                     <div class="text-center mt-1-half">
+                        <div *ngIf="loading">
+                            <img src="../../assets/imagenes/load.gif">
+                        </div>
                         <button class="btn color-green mb-2 waves-light" mdbWavesEffect [disabled]="!registroForm.valid" (click)="onSubmitRegistro()">Registrar
                         </button>
                     </div>

@@ -1,6 +1,5 @@
 <div class="card-content white">
     <div class="card-body">
-
         <ngb-tabset #fJerarquizacionElementoGlobal="ngbTabset">
             <!-- Formulario -->
             <ngb-tab id="Formulario">
@@ -325,9 +324,12 @@
                         <!-- fin modal-content -->
 
                         <div class="text-center ">
-                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                            <button class="btn color-green waves-light" (click)="guardarRegistroJerarquizacionSubnacional()" mdbWavesEffect>Guardar</button>
+                            <div *ngIf="loading">
+                                <img src="../../assets/imagenes/load.gif">
+                            </div>
+                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                          
                             <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                            <button class="btn color-green waves-light" (click)="guardarRegistroJerarquizacionSubnacional()" mdbWavesEffect>Guardar</button>
 
                         </div>
                     </form>
@@ -356,7 +358,7 @@
                             </div>
                         </form>
                         <app-tabla-busqueda></app-tabla-busqueda>
-                    </mat-card>                 
+                    </mat-card>
                 </ng-template>
                 <!-- fin ng-template -->
             </ngb-tab>

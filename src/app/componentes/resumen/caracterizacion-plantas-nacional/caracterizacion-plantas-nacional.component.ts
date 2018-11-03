@@ -21,6 +21,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  loading: boolean;
 
   settings_CamposOpcionales = {
     columns: {
@@ -157,12 +158,14 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   }
   //agrega un nuevo registro de caracterizacion de planta
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): void {
+    this.loading = true;
     this.usuarioService.addCaracterizacionPlanta(caracterizacion)
       .subscribe(
         resPlanta => {
+          this.loading = false;
           this.changeSuccessMessage(`Se registro la caracterizacion de la planta :${resPlanta.codigoe}.`, 'success');
-          //  this.crearFormLocalizacion_Elemento();
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar la caracterizacion de la planta.', 'primary');
         });
   }
