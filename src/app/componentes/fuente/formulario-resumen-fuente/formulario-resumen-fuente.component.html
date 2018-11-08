@@ -50,7 +50,7 @@
             <div class="form-group mt-15">
               <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
               <div>
-                <button [disabled]="uploading || uploadSuccessful" mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
+                <button mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
                   Agrear Archivos
                 </button>
               </div>

@@ -3,7 +3,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
   <div class="mat-elevation-z8">
-    <div [hidden]="isLoading">
+    <div>
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- No. Column -->
         <div class="col-md-1">
