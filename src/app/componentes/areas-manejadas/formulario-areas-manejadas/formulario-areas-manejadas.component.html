@@ -505,7 +505,7 @@
               <!-- fin modal-content -->
               <div class="text-center ">
                 <div *ngIf="loading">
-                  <img src="../../assets/imagenes/load.gif">
+                  <img src="assets/imagenes/load.gif">
                 </div>
                 <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                 <button class="btn color-green waves-light" (click)="fAreasManejadas.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
