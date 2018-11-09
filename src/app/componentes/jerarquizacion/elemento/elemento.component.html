@@ -66,27 +66,8 @@
               </div>
               <!-- fin row -->
             </div>
-            <!-- fin modal-content  -->
-            <div class="modal-content">
-              <div class="modal-header color-green">
-                <h5 class="modal-tittle">Fotos</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <div class="mat-elevation-z8" class="base-form">
-                    <input type="file" #file style="display: none" accept="image/*" (change)="onFilesAdded()" multiple />
-                    <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
-                  </div>
-                </div>
-              </div>
-              <section>
-                <br>
-                <ks-modal-gallery [id]="5" [modalImages]="imagenes" [plainGalleryConfig]="plainGalleryGrid" [buttonsConfig]="buttonsConfigFull"
-                  (show)="onVisibleIndex($event)" (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)">
-                </ks-modal-gallery>
-              </section>
-            </div>
-            <!-- fin modal-content  -->
+            <app-galeria></app-galeria>
+            <!-- fin modal-content  -->                     
             <div class="text-center">
               <div *ngIf="loading">
                 <img src="assets/imagenes/load.gif">

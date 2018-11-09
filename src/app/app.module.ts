@@ -64,6 +64,7 @@ import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqu
 import 'hammerjs';
 import 'mousetrap'; 
 import { ModalGalleryModule } from 'angular-modal-gallery';
+import { GaleriaComponent } from './componentes/galeria/galeria.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { ModalGalleryModule } from 'angular-modal-gallery';
     BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
     BuscarFuenteComponent,
-    TablaBusquedaComponent
+    TablaBusquedaComponent,
+    GaleriaComponent
   ],
   imports: [
     BrowserModule,
