@@ -128,7 +128,7 @@ export class ElementoComponent implements OnInit {
   }
 
   guardarElemento() {
-   //console.log ('privado',this.privado.saludo);
+    this.usuarioService.cargarFotos(this.galeria.archivos);
     this.loading=true;
     var elementoBase = this.setElemento(this.elementoForm.value);
     this.addElemento(this.elementoForm.value);

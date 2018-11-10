@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomePageComponent} from  './componentes/home-page/home-page.component';
 import {LoginPageComponent} from './componentes/login-page/login-page.component';
-import {PrivadoPageComponent} from './componentes/privado-page/privado-page.component';
 import {NotFoundPageComponent} from './componentes/not-found-page/not-found-page.component';
 import { FuenteComponent } from './componentes/fuente/fuente.component';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
@@ -23,7 +22,6 @@ export const routes: Routes = [
 {path: 'home',component: HomePageComponent,canActivate:[AuthGuard]},
 {path: 'fuente', component: FuenteComponent,canActivate:[AuthGuard]},
 {path: 'login', component: LoginPageComponent},
-{path: 'privado', component: PrivadoPageComponent,canActivate:[AuthGuard]},
 {path: 'jerarquizacion', component: JerarquizacionComponent,canActivate:[AuthGuard]},
 {path: 'rastreoElemento', component: RastreoElementoComponent,canActivate:[AuthGuard]},
 {path: 'resumen', component: ResumenComponent,canActivate:[AuthGuard]},

@@ -365,7 +365,8 @@ export class GaleriaComponent implements OnInit {
    reader.onload = (onLoadPhotoEvent: any) => {
      this.base64String = onLoadPhotoEvent.target.result;
      var imagen = new Image(0, {
-       img: this.base64String
+       img: this.base64String,
+       description: ''
      });
      const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
      this.imagenes = [...this.imagenes, nuevaImagen]

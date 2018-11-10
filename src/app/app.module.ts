@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './componentes/home-page/home-page.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { LoginPageComponent } from './componentes/login-page/login-page.component';
-import { PrivadoPageComponent } from './componentes/privado-page/privado-page.component';
 import { NotFoundPageComponent } from './componentes/not-found-page/not-found-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormularioResumenFuenteComponent } from './componentes/fuente/formulario-resumen-fuente/formulario-resumen-fuente.component';
@@ -72,7 +71,6 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
     HomePageComponent,
     NavbarComponent,
     LoginPageComponent,
-    PrivadoPageComponent,
     NotFoundPageComponent,
     FormularioResumenFuenteComponent,
     JerarquizacionComponent,
