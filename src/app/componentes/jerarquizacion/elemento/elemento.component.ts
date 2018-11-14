@@ -13,6 +13,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { MatSelectModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogoComponent } from '../../../componentes/dialogo/dialogo.component';
 
 export interface ElementoDato {
   numero: number;
@@ -185,7 +186,16 @@ export class ElementoComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }
- 
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(DialogoComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    if(result)
+     this.guardarElemento();
+    });
+  }
 
 }
 function crearElemento(k: number, elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {

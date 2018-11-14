@@ -48,7 +48,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
-  MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,MatGridListModule
+  MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,MatGridListModule,MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material';
 import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
 import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
@@ -64,6 +64,7 @@ import 'hammerjs';
 import 'mousetrap'; 
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
+import { DialogoComponent } from './componentes/dialogo/dialogo.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
     BuscarContactosComponent,
     BuscarFuenteComponent,
     TablaBusquedaComponent,
-    GaleriaComponent
+    GaleriaComponent,
+    DialogoComponent
   ],
   imports: [
     BrowserModule,
@@ -131,8 +133,8 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
-
+  },{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+  entryComponents: [DialogoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
