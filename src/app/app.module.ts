@@ -48,7 +48,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
-  MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule,MatGridListModule,MAT_DIALOG_DEFAULT_OPTIONS
+  MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
 import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
@@ -61,10 +62,11 @@ import { BuscarContactosComponent } from './componentes/contactos/buscar-contact
 import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
 import 'hammerjs';
-import 'mousetrap'; 
+import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
-import { DialogoComponent } from './componentes/dialogo/dialogo.component';
+import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
+import { FotoDatosComponent } from './componentes/dialogo/foto-datos/foto-datos.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,8 @@ import { DialogoComponent } from './componentes/dialogo/dialogo.component';
     BuscarFuenteComponent,
     TablaBusquedaComponent,
     GaleriaComponent,
-    DialogoComponent
+    ConfirmacionComponent,
+    FotoDatosComponent
   ],
   imports: [
     BrowserModule,
@@ -125,16 +128,19 @@ import { DialogoComponent } from './componentes/dialogo/dialogo.component';
     Ng2SmartTableModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
-    MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,MatGridListModule,
-    ModalGalleryModule.forRoot() 
+    MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule, MatGridListModule,MatDatepickerModule,MatNativeDateModule,
+    ModalGalleryModule.forRoot()
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [UsuarioService, DatePipe, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
-  entryComponents: [DialogoComponent],
+  }, 
+  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+  
+ ],
+  entryComponents: [ConfirmacionComponent,FotoDatosComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

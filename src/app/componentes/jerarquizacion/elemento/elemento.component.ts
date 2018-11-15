@@ -13,7 +13,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { MatSelectModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogoComponent } from '../../../componentes/dialogo/dialogo.component';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 
 export interface ElementoDato {
   numero: number;
@@ -187,8 +187,9 @@ export class ElementoComponent implements OnInit {
         });
   }
   openDialogo(): void {
-    const dialogRef = this.dialog.open(DialogoComponent, {
-      width: '250px'
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px',
+       height: '250px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
