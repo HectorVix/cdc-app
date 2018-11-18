@@ -49,7 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDatepickerModule, MatNativeDateModule
+  MatDatepickerModule, MatNativeDateModule, MatTabsModule
 } from '@angular/material';
 import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
 import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
@@ -66,7 +66,6 @@ import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
-import { FotoDatosComponent } from './componentes/dialogo/foto-datos/foto-datos.component';
 
 @NgModule({
   declarations: [
@@ -114,8 +113,7 @@ import { FotoDatosComponent } from './componentes/dialogo/foto-datos/foto-datos.
     BuscarFuenteComponent,
     TablaBusquedaComponent,
     GaleriaComponent,
-    ConfirmacionComponent,
-    FotoDatosComponent
+    ConfirmacionComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +126,8 @@ import { FotoDatosComponent } from './componentes/dialogo/foto-datos/foto-datos.
     Ng2SmartTableModule,
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
-    MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule, MatGridListModule,MatDatepickerModule,MatNativeDateModule,
+    MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,
+    MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule,
     ModalGalleryModule.forRoot()
   ],
   schemas: [NO_ERRORS_SCHEMA],
@@ -136,11 +135,11 @@ import { FotoDatosComponent } from './componentes/dialogo/foto-datos/foto-datos.
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, 
-  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
-  
- ],
-  entryComponents: [ConfirmacionComponent,FotoDatosComponent],
+  },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+
+  ],
+  entryComponents: [ConfirmacionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

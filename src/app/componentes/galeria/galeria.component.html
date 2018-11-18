@@ -2,46 +2,27 @@
   <div class="modal-header color-green">
     <h5 class="modal-tittle">Fotos</h5>
   </div>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="mat-elevation-z8" class="base-form">
-        <input type="file" #file style="display: none" accept="image/*" (change)="onFilesAdded()" multiple />
-        <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Galeria">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="mat-elevation-z8" class="base-form">
+            <input type="file" #file style="display: none" accept="image/*" (change)="onFilesAdded()" multiple />
+            <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <section>
-    <br>
-    <ks-modal-gallery [id]="1" [modalImages]="imagenes" [plainGalleryConfig]="plainGalleryGrid" 
-    [buttonsConfig]="customButtonsFontAwesomeConfig"
-      (show)="onVisibleIndex($event)" [currentImageConfig]="{downloadable: true}" (customButtonBeforeHook)="onCustomButtonBeforeHook($event)"
-      (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)" (buttonBeforeHook)="onCustomButtonBeforeHook($event, 1)"
-      (buttonAfterHook)="onCustomButtonAfterHook($event, 1)">
-    </ks-modal-gallery>
-  </section>
+      <section>
+        <br>
+        <ks-modal-gallery [id]="1" [modalImages]="imagenes" [plainGalleryConfig]="plainGalleryGrid" [buttonsConfig]="customButtonsFontAwesomeConfig"
+          (show)="onVisibleIndex($event)" [currentImageConfig]="{downloadable: true}" (customButtonBeforeHook)="onCustomButtonBeforeHook($event)"
+          (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)" (buttonBeforeHook)="onCustomButtonBeforeHook($event, 1)"
+          (buttonAfterHook)="onCustomButtonAfterHook($event, 1)">
+        </ks-modal-gallery>
+      </section>
+    </mat-tab>
+    <mat-tab label="Descripción">
+    </mat-tab>
+  </mat-tab-group>
 </div>
 <!-- fin modal-content  -->
-<!--Modal: Registro form-->
-<!--Modal: Recuperar Contraseña form-->
-<div mdbModal #formRecuperarContrasena="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header color-green darken-3 white-text">
-        <h4 class="title">
-          <i class="fa fa-pencil"></i> Recuperar Contraseña</h4>
-        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="formRecuperarContrasena.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <!--Body-->
-      <div class="modal-body mb-0">
-        
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
-<!--Modal: Registro form-->

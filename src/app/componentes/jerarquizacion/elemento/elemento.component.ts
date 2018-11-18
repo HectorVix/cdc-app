@@ -188,8 +188,7 @@ export class ElementoComponent implements OnInit {
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
-      width: '250px',
-       height: '250px'
+      width: '250px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -20,8 +20,6 @@ import {
   PreviewConfig
 } from 'angular-modal-gallery';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { FotoDatosComponent } from '../../componentes/dialogo/foto-datos/foto-datos.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface Foto {
   archivo: File
@@ -39,7 +37,7 @@ export class GaleriaComponent implements OnInit {
 
   public archivos_descripcion: Set<Foto> = new Set();
 
-  constructor(private galleryService: GalleryService, public dialog: MatDialog) { }
+  constructor(private galleryService: GalleryService) { }
 
   ngOnInit() {
   }
@@ -317,23 +315,8 @@ export class GaleriaComponent implements OnInit {
     var archivos: { [key: string]: File } = this.archivo.nativeElement.files;
     for (let key in archivos) {
       if (!isNaN(parseInt(key))) {
-        
-        var dialogRef =this.dialog.open(FotoDatosComponent, {
-          width: '250px'
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            this.archivos.add(archivos[key]);
-            this.agregarImagen(archivos[key]);
-            dialogRef.close();
-            this.dialog.closeAll;
-  
-          }
-           else {
-             dialogRef.close;
-             this.dialog.closeAll;
-           }
-        });
+        this.archivos.add(archivos[key]);
+        this.agregarImagen(archivos[key]);
       }
     }
 
