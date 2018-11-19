@@ -16,7 +16,6 @@ import { FormularioResumenFuenteComponent } from './componentes/fuente/formulari
 import { UsuarioService } from './servicios/usuario.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
-import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component';
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
 import { FormularioReComponent } from './componentes/rastreo-elemento/formulario-re/formulario-re.component';
 import { EditarReComponent } from './componentes/rastreo-elemento/editar-re/editar-re.component';
@@ -77,7 +76,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     FormularioResumenFuenteComponent,
     JerarquizacionComponent,
     FormularioJerarquizacionComponent,
-    EditarJerarquizacionComponent,
     RastreoElementoComponent,
     FormularioReComponent,
     EditarReComponent,

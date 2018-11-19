@@ -6,7 +6,6 @@ import {NotFoundPageComponent} from './componentes/not-found-page/not-found-page
 import { FuenteComponent } from './componentes/fuente/fuente.component';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
-import { EditarJerarquizacionComponent } from './componentes/jerarquizacion/editar-jerarquizacion/editar-jerarquizacion.component'
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
 import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
 import { SitiosComponent } from './componentes/sitios/sitios.component';
