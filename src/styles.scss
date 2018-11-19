@@ -73,6 +73,6 @@ tr.base-element-row:active{
 .tab-black {
   background-color: #000;
 }
-.ui-datepicker { width: 40%; padding: .2em .2em 0; }
-
-.ui-datepicker { font-size: 25% }
+.base-stretched-tabs {
+  max-width: 1250px;
+}
