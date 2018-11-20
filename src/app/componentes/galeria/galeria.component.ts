@@ -44,6 +44,8 @@ export class GaleriaComponent implements OnInit {
   //Galeria
   imageIndex = 1;
   galleryId = 1;
+  estadoDes = false;
+  descripcionIndex = 0;
   customPlainGalleryRowConfig: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.CUSTOM,
     layout: new AdvancedLayout(-1, true)
@@ -130,39 +132,31 @@ export class GaleriaComponent implements OnInit {
   };
 
 
-
-  customButtonsFontAwesomeConfig: ButtonsConfig = {
+  personalizadoButtons: ButtonsConfig = {
     visible: true,
     strategy: ButtonsStrategy.CUSTOM,
     buttons: [
       {
-        className: 'fa fa-pencil',
-        type: ButtonType.CUSTOM,
-        title: 'Editar',
-        fontSize: '30px'
-      },
-      {
-        className: 'fa fa-trash',
+        className: 'delete-image',
         type: ButtonType.DELETE,
         title: 'Eliminar',
         fontSize: '30px'
       },
       {
-        className: 'fa fa-download',
+        className: 'download-image',
         type: ButtonType.DOWNLOAD,
         title: 'Descargar',
         fontSize: '30px'
       },
       {
-        className: 'fa fa-times',
+        className: 'close-image',
         type: ButtonType.CLOSE,
-        ariaLabel: 'custom close aria label',
         title: 'Cerrar',
         fontSize: '30px'
       }
-
     ]
   };
+
   previewConfigOneImage: PreviewConfig = {
     visible: true,
     number: 1
@@ -209,29 +203,22 @@ export class GaleriaComponent implements OnInit {
     previewScrollNextTitle: 'CUSTOM Scroll next previews'
   };
   openImageModalRow(image: Image) {
-    console.log('Opening modal gallery from custom plain gallery row, with image: ', image);
     const index: number = this.getCurrentIndexCustomLayout(image, this.imagenes);
     this.customPlainGalleryRowConfig = Object.assign({}, this.customPlainGalleryRowConfig, { layout: new AdvancedLayout(index, true) });
   }
   openImageModalRowDescription(image: Image) {
-    console.log('Opening modal gallery from custom plain gallery row and description, with image: ', image);
-    // const index: number = this.getCurrentIndexCustomLayout(image, this.imagenesRect);
-    // this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(index, true) });
   }
 
   onButtonBeforeHook(event: ButtonEvent) {
-    console.log('onButtonBeforeHook ', event);
     if (!event || !event.button) {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
-      console.log('delete in app with imagenes count ' + this.imagenes.length);
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
     }
   }
 
   onButtonAfterHook(event: ButtonEvent) {
-    console.log('onButtonAfterHook ', event);
     if (!event || !event.button) {
       return;
     }
@@ -239,64 +226,43 @@ export class GaleriaComponent implements OnInit {
   }
 
   onCustomButtonBeforeHook(event: ButtonEvent, galleryId: number | undefined) {
-    console.log('onCustomButtonBeforeHook with galleryId=' + galleryId + ' and event: ', event);
     if (!event || !event.button) {
       return;
     }
-    if (event.button.type === ButtonType.CUSTOM) {
-      console.log('Editando ...', event.image.id);
-    }
-
   }
 
   onCustomButtonAfterHook(event: ButtonEvent, galleryId: number | undefined) {
-    console.log('onCustomButtonAfterHook with galleryId=' + galleryId + ' and event: ', event);
     if (!event || !event.button) {
       return;
     }
   }
 
   onImageLoaded(event: ImageModalEvent) {
-    console.log('onImageLoaded action: ' + Action[event.action]);
-    console.log('onImageLoaded result:' + event.result);
   }
 
   onVisibleIndex(event: ImageModalEvent) {
-    console.log('onVisibleIndex action: ' + Action[event.action]);
-    console.log('onVisibleIndex result:' + event.result);
   }
 
   onIsFirstImage(event: ImageModalEvent) {
-    console.log('onIsFirstImage onfirst action: ' + Action[event.action]);
-    console.log('onIsFirstImage onfirst result:' + event.result);
   }
 
   onIsLastImage(event: ImageModalEvent) {
-    console.log('onIsLastImage onlast action: ' + Action[event.action]);
-    console.log('onIsLastImage onlast result:' + event.result);
   }
 
   onCloseImageModal(event: ImageModalEvent) {
-    console.log('onClose action: ' + Action[event.action]);
-    console.log('onClose result:' + event.result);
     this.customPlainGalleryRowConfig = Object.assign({}, this.customPlainGalleryRowConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryColumnConfig = Object.assign({}, this.customPlainGalleryColumnConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(-1, true) });
   }
 
   onShowAutoCloseExample(event: ImageModalEvent, galleryId: number) {
-    console.log(`onShowAutoCloseExample with id=${galleryId} action: ` + Action[event.action]);
-    console.log('onShowAutoCloseExample result:' + event.result);
-    console.log('Starting timeout of 3 second to close modal gallery automatically');
     setTimeout(() => {
-      console.log('setTimeout end - closing gallery with id=' + galleryId);
       this.galleryService.navigate.closed;
     }, 3000);
   }
 
 
   openModalViaService(id: number | undefined, index: number) {
-    console.log('opening gallery with index ' + index);
     this.galleryService.openGallery(id, index);
   }
 

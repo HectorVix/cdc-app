@@ -78,3 +78,11 @@ tr.base-element-row:active{
 .base-stretched-tabs {
   max-width: 1250px;
 }
+.base-tam-y {
+  max-height: 600px;
+}
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  white-space: nowrap;
+}
