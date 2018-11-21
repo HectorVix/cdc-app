@@ -7,7 +7,8 @@
       <div class="row">
         <div class="col-md-2">
           <div class="mat-elevation-z8" class="base-form">
-            <input type="file" #file style="display: none" accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFilesAdded()" multiple />
+            <input type="file" #file style="display: none" accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFilesAdded()"
+              multiple />
             <button mat-raised-button class="add-files-btn  color-green" (click)="agregarArchivos()">Agregar</button>
           </div>
         </div>
@@ -16,22 +17,22 @@
         <br>
         <ks-modal-gallery [id]="1" [modalImages]="imagenes" [plainGalleryConfig]="plainGalleryGrid" [buttonsConfig]="personalizadoButtons"
           (show)="onVisibleIndex($event)" [currentImageConfig]="{downloadable: true}" (customButtonBeforeHook)="onCustomButtonBeforeHook($event)"
-          (buttonBeforeHook)="onButtonBeforeHook($event)" (buttonAfterHook)="onButtonAfterHook($event)" (buttonBeforeHook)="onCustomButtonBeforeHook($event, 1)"
+          (buttonBeforeHook)="onButtonBeforeHook($event,descripcionIndex)" (buttonAfterHook)="onButtonAfterHook($event)" (buttonBeforeHook)="onCustomButtonBeforeHook($event, 1)"
           (buttonAfterHook)="onCustomButtonAfterHook($event, 1)">
         </ks-modal-gallery>
       </section>
     </mat-tab>
     <mat-tab label="Descripción">
       <div class="row">
-        <button mat-button>
+        <button mat-button (click)="anterior()">
           <i class="fa fa-chevron-left prefix"></i>
         </button>
-        <button mat-button>
+        <button mat-button (click)="siguiente()">
           <i class="fa fa-chevron-right prefix"></i>
         </button>
       </div>
       <div class="scrolling-wrapper base-tam-y ">
-        <ng-tempplate *ngIf="imagenes.length>=1">
+        <ng-tempplate *ngIf="imagenes.length>=1 ">
           <img *ngIf="imagenes[descripcionIndex].plain && imagenes[descripcionIndex].plain.img; else noThumb" [src]="imagenes[descripcionIndex].plain.img"
           />
           <ng-template #noThumb>
@@ -40,10 +41,10 @@
         </ng-tempplate>
       </div>
       <div class="row">
-        <button mat-button>
+        <button mat-button (click)="anterior()">
           <i class="fa fa-chevron-left prefix"></i>
         </button>
-        <button mat-button>
+        <button mat-button (click)="siguiente()">
           <i class="fa fa-chevron-right prefix"></i>
         </button>
       </div>

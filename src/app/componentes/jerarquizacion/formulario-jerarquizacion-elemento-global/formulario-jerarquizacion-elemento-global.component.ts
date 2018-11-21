@@ -35,7 +35,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-
+  selected = new FormControl(0);
   constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService) {
     this.crear_Jerarquizacion_Global();
   }
@@ -158,5 +158,11 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+  tabPagina1() {
+    this.selected.setValue(0);
   }
 }

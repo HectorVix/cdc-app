@@ -20,6 +20,7 @@ import {
   PreviewConfig
 } from 'angular-modal-gallery';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import {FormControl} from '@angular/forms';
 
 export interface Foto {
   archivo: File
@@ -34,7 +35,6 @@ export class GaleriaComponent implements OnInit {
   //archivos
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
-
   public archivos_descripcion: Set<Foto> = new Set();
 
   constructor(private galleryService: GalleryService) { }
@@ -44,7 +44,6 @@ export class GaleriaComponent implements OnInit {
   //Galeria
   imageIndex = 1;
   galleryId = 1;
-  estadoDes = false;
   descripcionIndex = 0;
   customPlainGalleryRowConfig: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.CUSTOM,
@@ -209,12 +208,24 @@ export class GaleriaComponent implements OnInit {
   openImageModalRowDescription(image: Image) {
   }
 
-  onButtonBeforeHook(event: ButtonEvent) {
+  onButtonBeforeHook(event: ButtonEvent, index: number) {
     if (!event || !event.button) {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
+      console.log('onVisibleIndex result:' + index);
+      var cont = 0;
+      this.archivos.forEach(archivo => {
+
+        if (cont == index) {
+          this.archivos.delete(archivo);
+          this.archivo.nativeElement.value = "";
+          console.log("foto:", archivo.name, 'pos:', cont);
+
+        }
+        cont = cont + 1;
+      });
     }
   }
 
@@ -299,6 +310,18 @@ export class GaleriaComponent implements OnInit {
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
+    }
+  }
+  anterior() {
+    if (this.descripcionIndex == 0) { }
+    else {
+      this.descripcionIndex = this.descripcionIndex - 1;
+    }
+  }
+  siguiente() {
+    if (this.descripcionIndex == this.imagenes.length - 1) { }
+    else {
+      this.descripcionIndex = this.descripcionIndex + 1;
     }
   }
 }
