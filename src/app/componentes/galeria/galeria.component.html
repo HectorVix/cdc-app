@@ -16,9 +16,8 @@
       <section>
         <br>
         <ks-modal-gallery [id]="1" [modalImages]="imagenes" [plainGalleryConfig]="plainGalleryGrid" [buttonsConfig]="personalizadoButtons"
-          (show)="onVisibleIndex($event)" [currentImageConfig]="{downloadable: true}" (customButtonBeforeHook)="onCustomButtonBeforeHook($event)"
-          (buttonBeforeHook)="onButtonBeforeHook($event,descripcionIndex)" (buttonAfterHook)="onButtonAfterHook($event)" (buttonBeforeHook)="onCustomButtonBeforeHook($event, 1)"
-          (buttonAfterHook)="onCustomButtonAfterHook($event, 1)">
+          (show)="onVisibleIndex($event)" [currentImageConfig]="{downloadable: true}" (buttonBeforeHook)="onButtonBeforeHook($event,descripcionIndex)"
+          (buttonAfterHook)="onButtonAfterHook($event)">
         </ks-modal-gallery>
       </section>
     </mat-tab>

@@ -464,21 +464,25 @@
           <b>Buscar Jerarquización Global</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <mat-card>
-            <form class="base-form">
-              <mat-form-field class="base-full-width">
-                <input matInput placeholder="Codigo del Elemento">
-              </mat-form-field>
-              <mat-form-field class="base-full-width">
-                <input matInput placeholder="Nombre Global">
-              </mat-form-field>
-              <div class="mat-elevation-z8" class="base-form">
-                <button mat-raised-button class="color-green">Buscar</button>
-                <button mat-raised-button class="color-green">Buscar Todos</button>
-              </div>
-            </form>
-            <app-tabla-busqueda></app-tabla-busqueda>
-          </mat-card>
+          <div class="modal-content mat-elevation-z4">
+            <div class="modal-header color-green">
+            </div>
+            <mat-card>
+              <form class="base-form">
+                <mat-form-field class="base-full-width">
+                  <input matInput placeholder="Codigo del Elemento">
+                </mat-form-field>
+                <mat-form-field class="base-full-width">
+                  <input matInput placeholder="Nombre Global">
+                </mat-form-field>
+                <div class="mat-elevation-z8" class="base-form">
+                  <button mat-raised-button class="color-green">Buscar</button>
+                  <button mat-raised-button class="color-green">Buscar Todos</button>
+                </div>
+              </form>
+            </mat-card>
+          </div>
+          <app-tabla-busqueda></app-tabla-busqueda>
         </ng-template>
       </ngb-tab>
       <!-- fin ngb-tab -->

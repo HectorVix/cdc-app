@@ -327,7 +327,7 @@
                             <div *ngIf="loading">
                                 <img src="assets/imagenes/load.gif">
                             </div>
-                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>                          
+                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                             <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                             <button class="btn color-green waves-light" (click)="guardarRegistroJerarquizacionSubnacional()" mdbWavesEffect>Guardar</button>
 
@@ -339,26 +339,29 @@
             </ngb-tab>
             <!-- fin ngb-tab -->
             <!-- Editar -->
-            <ngb-tab id="Editar">
+            <ngb-tab id="Buscar">
                 <ng-template ngbTabTitle>
                     <b>Buscar Jerarquización Subnacional</b>
                 </ng-template>
                 <ng-template ngbTabContent>
-                    <mat-card>
-                        <form class="base-form">
-                            <mat-form-field class="base-full-width">
-                                <input matInput placeholder="Codigo del Elemento">
-                            </mat-form-field>
-                            <mat-form-field class="base-full-width">
-                                <input matInput placeholder="Nombre Subnacional">
-                            </mat-form-field>
-                            <div class="mat-elevation-z8" class="base-form">
-                                <button mat-raised-button class="color-green">Buscar</button>
-                                <button mat-raised-button class="color-green">Buscar Todos</button>
-                            </div>
-                        </form>
-                        <app-tabla-busqueda></app-tabla-busqueda>
-                    </mat-card>
+                    <div class="modal-content mat-elevation-z4">
+                        <div class="modal-header color-green"></div>                    
+                            <mat-card>
+                                <form class="base-form">
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Codigo del Elemento">
+                                    </mat-form-field>
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Nombre Subnacional">
+                                    </mat-form-field>
+                                    <div class="mat-elevation-z8" class="base-form">
+                                        <button mat-raised-button class="color-green">Buscar</button>
+                                        <button mat-raised-button class="color-green">Buscar Todos</button>
+                                    </div>
+                                </form>
+                            </mat-card>
+                    </div>
+                    <app-tabla-busqueda></app-tabla-busqueda>
                 </ng-template>
                 <!-- fin ng-template -->
             </ngb-tab>
