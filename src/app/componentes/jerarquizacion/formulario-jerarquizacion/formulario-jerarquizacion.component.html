@@ -6,6 +6,7 @@
           <b>Formulario</b>
         </ng-template>
         <ng-template ngbTabContent>
+<<<<<<< HEAD
           <form [formGroup]="jerarquizacionForm">
             <mat-tab-group dynamicHeight [selectedIndex]="selected.value">
               <mat-tab label="1">
@@ -385,6 +386,387 @@
               </mat-tab>
             </mat-tab-group>
           </form>
+=======
+            <form [formGroup]="jerarquizacionForm">
+            <mat-tab-group dynamicHeight  [selectedIndex]="selected.value">
+                <mat-tab label="1">
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                    <div class="modal-content mat-elevation-z4">
+                      <div class="modal-header color-green">
+                        <h5 class="modal-tittle">JERARQUIZACIÓN DEL ELEMENTO NACIONAL</h5>
+                      </div>
+                      <!-- Codigo del elemento -->
+                      <div class="row">
+                        <div class="col-md-2 ">
+                          <label for="">CODIGOE:</label>
+                        </div>
+                        <div class="md-form col-md-4 mt5">
+                          <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto"
+                            data-success="correcto" required>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="mat-elevation-z8" class="base-form">
+                            <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--Nombre nacional  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NOMBREN:</label>
+                        </div>
+                        <div class="md-form col-md-9 mt-15">
+                          <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                        </div>
+                      </div>
+                      <!--codigo del pais -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NACION:</label>
+                        </div>
+                        <div class="md-form col-md-4 mt-20">
+                          <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
+                        </div>
+                      </div>
+  
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label>NLOCTIP:</label>
+                        </div>
+                        <div class="md-form  col-md-9 mt-20">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNloctip" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="nloctip"></textarea>
+                          <label for="formNloctip">Identificar el mejor sitio conocido en el pais.</label>
+                        </div>
+                      </div>
+  
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NLESTIM:</label>
+                        </div>
+                        <div class="col-md-3 mt-15">
+                          <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nlestim">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNestim of criterio_nlestim" [value]="sNestim.value">
+                                {{sNestim.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NLESTIMCOM:</label>
+                        </div>
+                        <div class="md-form col-md-9 mt10">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNlestimcom" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="nlestimcom"></textarea>
+                          <label for="formNlestimcom">Anote el número exacto de localizaciones existentes conocidas.</label>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <!-- *** -->
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NABUND:</label>
+                        </div>
+                        <div class="col-md-7 mt-15">
+                          <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nabund">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNabund of criterio_nabund" [value]="sNabund.value">
+                                {{sNabund.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NABUNDCOM:</label>
+                        </div>
+                        <div class="md-form  col-md-9 mt10">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNabundcom" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="nabundcom"></textarea>
+                          <label for="formNabundcom">A menudo resulta complicado estimar la abundancia de un elemento.</label>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NDIST:</label>
+                        </div>
+                        <div class="col-md-5 mt-15">
+                          <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="ndist">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNdist of criterio_ndist" [value]="sNdist.value">
+                                {{sNdist.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NDISTCOM:</label>
+                        </div>
+                        <div class="md-form  col-md-9 mt10">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNdistcom" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="ndistcom"></textarea>
+                          <label for="formNdistcom">Describa en forma general la distribución, presente e hihistórica dentro de su región.</label>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NLEPROT:</label>
+                        </div>
+                        <div class="col-md-4 mt-15">
+                          <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="nleprot">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNleprot of criterio_nleprot" [value]="sNleprot.value">
+                                {{sNleprot.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NLEPROTCOM:</label>
+                        </div>
+                        <div class="md-form col-md-9 mt10">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNleprotcom" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="nleprotcom" required></textarea>
+                          <label for="formNleprotcom">En qué país o países están protegidas y que tipo de protección tienen.</label>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NAMENAZ:</label>
+                        </div>
+                        <div class="col-md-9 mt-15">
+                          <mat-form-field>
+                            <mat-select placeholder=" " panelClass="color-panel-green" formControlName="namenaz">
+                              <mat-option>-- Ninguna --</mat-option>
+                              <mat-option *ngFor="let sNamenaz of criterio_namenaz" [value]="sNamenaz.value">
+                                {{sNamenaz.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">NAMENAZCOM:</label>
+                        </div>
+                        <div class="md-form col-md-9 mt10">
+                          <i class="fa fa-pencil prefix"></i>
+                          <textarea mdbInputDirective type="text" id="formNamenazcom" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                            formControlName="namenazcom"></textarea>
+                          <label for="formNamenazcom">Indique la amenaza, por ejemplo: "tierras primarias para cultivos".</label>
+                        </div>
+                      </div>
+                      <!--  -->
+                    </div>
+                    <!-- fin modal-content -->
+                    <div class="text-center">
+                      <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
+                      <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="2">
+                    <div class="modal-content mat-elevation-z4">
+                        <div class="modal-header color-green">
+                          <h5 class="modal-title">JERARQUIZACIÓN DEL ELEMENTO NACIONAL</h5>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NOTROCONSI:</label>
+                          </div>
+                          <div class="md-form col-md-9 mt10">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNotroconsi" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                              formControlName="notroconsi"></textarea>
+                            <label for="formNotroconsi">Anote cualiesquiera otros factores que considere importantes para jerarquizar el elemento.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-1">
+                            <label for="">RANGON:</label>
+                          </div>
+                          <div class="col-md-2 mt-15">
+                            <mat-form-field>
+                              <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                                <mat-option>-- Ninguna --</mat-option>
+                                <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                                  {{sRangon.viewValue}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+    
+                          <div class="md-form input-group-append mt-10">
+                            <input mdbInputDirective type="text" id="formFecharn" class="form-control" formControlName="fecharn" ngbDatepicker #dFecharn="ngbDatepicker"
+                              data-error="Incorrecto" data-success=" ">
+                            <label for="formFecharn">FECHARN</label>
+                            <div (click)="dFecharn.toggle()">
+                              <i class="fa fa-calendar prefix"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- **** -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NRANRZON:</label>
+                          </div>
+                          <div class="md-form col-md-9 mt-10">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNranrzon" class="md-textarea form-control" rows="3" data-error=" " data-success=" "
+                              formControlName="nranrzon"></textarea>
+                            <label for="formNranrzon">Dar las razones para este rango, mencionando los mejores factores de jerarquización y otras consideraciones.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NNECPROTEC:</label>
+                          </div>
+                          <div class="md-form col-md-9 mt-10 ">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNnecprotec" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                              formControlName="nnecprotec"></textarea>
+                            <label for="formNnecprotec">Dar el número estimado de LE adecuados.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NNECINVENT:</label>
+                          </div>
+                          <div class="md-form  col-md-9 mt-10">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNnecinvent" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                              formControlName="nnecinvent"></textarea>
+                            <label for="formNnecinvent">Necesidades de inventario.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NNECESTUDI:</label>
+                          </div>
+                          <div class="md-form  col-md-9 mt-10">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNnecestudi" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                              formControlName="nnecestudi"></textarea>
+                            <label for="formNnecestudi">Escriba las necesidades de investigación de la biologia del elemento.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">NNECMAEJO:</label>
+                          </div>
+                          <div class="md-form  col-md-9 mt-10">
+                            <i class="fa fa-pencil prefix"></i>
+                            <textarea mdbInputDirective type="text" id="formNnecmaejo" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                              formControlName="nnecmaejo"></textarea>
+                            <label for="formNnecmaejo">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">RESRN:</label>
+                          </div>
+                          <div class="md-form col-md-9 mt-10">
+                            <input mdbInputDirective type="text" id="formResrn" class="form-control" formControlName="resrn" data-error=" " data-success=" ">
+                            <label for="formResrn">&nbsp;&nbsp;&nbsp;&nbsp;Indica la oficina responsable de preparar y mantener el formulário de jerarquización
+                              globa o local.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label for="">EDAUTOR:</label>
+                          </div>
+                          <div class="md-form col-md-4 mt-10">
+                            <input mdbInputDirective type="text" id="formEdautor" class="form-control" formControlName="edautor" data-error=" " data-success=" ">
+                            <label for="">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-md-9">
+                          </div>
+                          <div class="md-form  input-group-append mt-5">
+                            <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error="Incorrecto"
+                              data-success=" " ngbDatepicker #dEdicion="ngbDatepicker">
+                            <label for="formEdicion">EDICION</label>
+                            <div (click)="dEdicion.toggle()">
+                              <i class="fa fa-calendar prefix"></i>
+                            </div>
+                          </div>
+    
+                        </div>
+                        <!-- fin row -->
+                        <div class="row">
+                          <div class="col-md-9">
+                          </div>
+                          <div class="md-form  input-group-append mt-5">
+                            <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error="Incorrecto"
+                              data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                            <label for="formActualizar">ACTUALIZAR</label>
+                            <div (click)="dActualizar.toggle()">
+                              <i class="fa fa-calendar prefix"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- fin row -->
+                      </div>
+                      <!-- fin modal-content -->
+                      <div class="text-center">
+                        <div *ngIf="loading">
+                          <img src="assets/imagenes/load.gif">
+                        </div>
+                        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                        <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
+                        <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                        <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionNacional()" mdbWavesEffect>Guardar</button>
+                      </div>
+                </mat-tab>
+              </mat-tab-group>
+            </form>
+>>>>>>> 06311b6269df5b8085fc340db3ea40ce9198538a
         </ng-template>
       </ngb-tab>
       <!-- fin ngb-tab -->
