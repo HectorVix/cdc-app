@@ -1,25 +1,33 @@
 <app-navbar></app-navbar>
-<div class="base-stretched-tabs tab-black mt-alinear ml-alinear mat-elevation-z4">
-  <ngb-tabset #t="ngbTabset">
-    <ngb-tab id="tab-selectbyid1" title="Elemento">
-      <ng-template ngbTabContent>
-        <app-elemento></app-elemento>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="tab-selectbyid2" title="Global">
-      <ng-template ngbTabContent>
-        <app-formulario-jerarquizacion-elemento-global></app-formulario-jerarquizacion-elemento-global>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="tab-selectbyid3" title="Nacional">
-      <ng-template ngbTabContent>
-        <app-formulario-jerarquizacion></app-formulario-jerarquizacion>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="tab-selectbyid4" title="Subnacional">
-      <ng-template ngbTabContent>
-        <app-formulario-jerarquizacion-elemento-subnacional></app-formulario-jerarquizacion-elemento-subnacional>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+<div class="fondo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-black mt-alinear ml-alinear mat-elevation-z4">
+          <ngb-tabset #t="ngbTabset">
+            <ngb-tab id="tab-selectbyid1" title="Elemento">
+              <ng-template ngbTabContent>
+                <app-elemento></app-elemento>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid2" title="Global">
+              <ng-template ngbTabContent>
+                <app-formulario-jerarquizacion-elemento-global></app-formulario-jerarquizacion-elemento-global>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid3" title="Nacional">
+              <ng-template ngbTabContent>
+                <app-formulario-jerarquizacion></app-formulario-jerarquizacion>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-selectbyid4" title="Subnacional">
+              <ng-template ngbTabContent>
+                <app-formulario-jerarquizacion-elemento-subnacional></app-formulario-jerarquizacion-elemento-subnacional>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

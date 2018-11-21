@@ -30,6 +30,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
+  selected = new FormControl(0);
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.createFormJerarquizacionNacional();
   }
@@ -135,5 +136,10 @@ export class FormularioJerarquizacionComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
 }

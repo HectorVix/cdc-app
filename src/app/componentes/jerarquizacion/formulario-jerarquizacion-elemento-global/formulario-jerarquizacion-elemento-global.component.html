@@ -7,470 +7,454 @@
         </ng-template>
         <ng-template ngbTabContent>
           <form [formGroup]="jerarquizaciongForm">
-            <ngb-tabset #fJG="ngbTabset">
-              <ngb-tab id="tab-selectbyid1" >
-                <ng-template ngbTabTitle>
-                  <b>1</b>
-                </ng-template>
-                <ng-template ngbTabContent>
+            <mat-tab-group dynamicHeight [selectedIndex]="selected.value">
+              <mat-tab label="1">
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">CODIGOE:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt-1">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Valor requerido"
+                        data-success="Correcto" required>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="mat-elevation-z8" class="base-form">
+                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NOMBREG:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error="Valor requerido"
+                        data-success="Correcto" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">DESCRIELEM:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formDescrielem" class="form-control" formControlName="descrielem" data-error=" "
+                        data-success=" ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECLE:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formEspecle" class="md-textarea form-control" formControlName="especle" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formEspecle">Especificaciones LE. Describa como aparece el elemento en su región.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECRANGA:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formEspecranga" class="md-textarea form-control" formControlName="especranga"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formEspecranga">Escríba una descripción de qué es un LE para este rango.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECRANGB:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formEspecrangb" class="md-textarea form-control" formControlName="especrangb"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formEspecrangb">Escríba una descripción de qué es un LE para este rango.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECRANGC:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formEspecrangc" class="md-textarea form-control" formControlName="especrangc"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formEspecrangc">Escríba una descripción de qué es un LE para este rango.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECRANGD:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formEspecrangd" class="md-textarea form-control" formControlName="especrangd"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formEspecrangd">Escríba una descripción de qué es un LE para este rango.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">HABITAT:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formHabitat" class="md-textarea form-control" formControlName="habitat" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formHabitat">Para especies , describa el habitat. Para comunidades , definir la comunidad</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">PERMANENCIA:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formPermanencia" class="md-textarea form-control" formControlName="permanencia"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formPermanencia">Anote información que indique el grado de permanencia o estabilidad de la LE.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GLOCTIP:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formLoctipg" class="form-control" formControlName="gloctip" data-error=" " data-success=" ">
+                      <label for="formLoctipg">&nbsp;&nbsp;&nbsp;&nbsp;Indentificar el mejor sitio conocido en el país.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">COMTAX:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtax" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formComtaxg">Indique la distinción taxonómica del elemento.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GLESTIM:</label>
+                    </div>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="glestim">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sGlestim of criterio_glestim" [value]="sGlestim.value">
+                            {{sGlestim.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GLESTIMCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-0">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formComlestimg" class="md-textarea form-control" formControlName="glestimcom"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formComlestimg">De ser posible anote el número exacto de localizaciones existentes conocidas.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GABUND:</label>
+                    </div>
+                    <div class="col-md-7 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gabund">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sAbundg of criterio_gabund" [value]="sAbundg.value">
+                            {{sAbundg.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GABUNDCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9  mt-0">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGabundcom" class="md-textarea form-control" formControlName="gabundcom" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formGabundcom">A menudo resulta complicado estimar la abundancia de un elemento. Comente sobre esto. </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GDIST:</label>
+                    </div>
+                    <div class="col-md-6 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gdist">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sDistg of criterio_gdist" [value]="sDistg.value">
+                            {{sDistg.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GDISTCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-0">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGdistcom" class="md-textarea form-control" formControlName="gdistcom" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formGdistcom">Se especifica los países o regiones ecológicas donde se encuentra el elemento actualmente.</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center ">
+                  <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
+                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                </div>
+              </mat-tab>
+              <mat-tab label="2">
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GLEPROT:</label>
+                    </div>
+                    <div class="col-md-4 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gleprot">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sGleprot of criterio_gleprot" [value]="sGleprot.value">
+                            {{sGleprot.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GLEPROTCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGleprotcom" class="md-textarea form-control" formControlName="gleprotcom"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGleprotcom">En qué país o países están protegidas y qué tipo de protección tienen.</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GAMENAZ:</label>
+                    </div>
+                    <div class="col-md-9 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gamenaz">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sGamenaz of criterio_gamenaz" [value]="sGamenaz.value">
+                            {{sGamenaz.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GAMENAZCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-0">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGamenazcom" class="md-textarea form-control" formControlName="gamenazcom"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGamenazcom">Indique la amenaza, por ejemplo: "tierras primarias para cultivos"</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GFRAGIL:</label>
+                    </div>
+                    <div class="col-md-4 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gfragil">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sGfragil of criterio_gfragil" [value]="sGfragil.value">
+                            {{sGfragil.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GFRAGILCOM:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-0">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGfragilcom" class="md-textarea form-control" formControlName="gfragilcom"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGfragilcom">Comente al respecto. Por ejemplo, por qué es frágil.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GOTROCONSI:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-10">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGotroconsi" class="md-textarea form-control" formControlName="gotroconsi"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGotroconsi">0tro criterios. Anote cualiesquiera otros factores que considere importantes.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RANGOG:</label>
+                    </div>
+                    <div class="col-md-1 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
+                            {{sRangog.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append mt-10">
+                      <input mdbInputDirective type="text" id="formFecharg" class="form-control" formControlName="fecharg" data-error=" " data-success=" "
+                        ngbDatepicker #dFecharg="ngbDatepicker">
+                      <label for="formFecharg">&nbsp;&nbsp;&nbsp;&nbsp;FECHARG</label>
+                      <div (click)="dFecharg.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GRANRAZON:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGranranzon" class="md-textarea form-control" formControlName="granrazon"
+                        rows="3" data-error=" " data-success=" "></textarea>
+                      <label for="formGranranzon">Dar las razones para este rango, mencionando los mejores factores de jerarquización y otras consideraciones.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GNECPROTEC:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGnecprotec" class="md-textarea form-control" formControlName="gnecprotec"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGnecprotec">Dar el número estimado de LE adecuados para sostener el elemento a través de su distribución.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GNECINVENT:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGnecinvent" class="md-textarea form-control" formControlName="gnecinvent"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGnecinvent">Necesidades de inventario.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GNECESTUDI:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGnecestudi" class="md-textarea form-control" formControlName="gnecestudi"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGnecestudi">Escriba las necesidades de investigacion de la biología del elemento.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">GNECMANEJO:</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formGnecmanejo" class="md-textarea form-control" formControlName="gnecmanejo"
+                        rows="1" data-error=" " data-success=" "></textarea>
+                      <label for="formGnecmanejo">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RESRG:</label>
+                    </div>
+                    <div class="md-form col-md-5 mt-20 ">
+                      <input mdbInputDirective type="text" id="formResrg" class="form-control" formControlName="resrg" data-error=" " data-success=" ">
+                      <label for="formResrg">&nbsp;&nbsp;&nbsp;&nbsp;Responsable de preparar y mantener el formulario.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">EDAUTOR:</label>
+                    </div>
+                    <div class="md-form col-md-7 mt-20 ">
+                      <input mdbInputDirective type="text" id="formEdautor" class="form-control" formControlName="edautor" data-error=" " data-success=" ">
+                      <label for="formEdautor">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="md-form form-sm  input-group-append mt-10">
+                      <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error=" " data-success=" "
+                        ngbDatepicker #dEdicion="ngbDatepicker">
+                      <label for="formEdicion">EDICION</label>
+                      <div (click)="dEdicion.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="md-form form-sm  input-group-append mt-10">
+                      <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                        data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                      <label for="formActualizar">ACTUALIZAR</label>
+                      <div (click)="dActualizar.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center ">
+                  <div *ngIf="loading">
+                    <img src="assets/imagenes/load.gif">
+                  </div>
                   <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                  <div class="modal-content">
-                    <div class="modal-header color-green">
-                      <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">CODIGOE:</label>
-                      </div>
-                      <div class="md-form col-md-4 mt-1">
-                        <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Valor requerido"
-                          data-success="Correcto" required>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="mat-elevation-z8" class="base-form">
-                          <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">NOMBREG:</label>
-                      </div>
-                      <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error="Valor requerido"
-                          data-success="Correcto" required>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">DESCRIELEM:</label>
-                      </div>
-                      <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective type="text" id="formDescrielem" class="form-control" formControlName="descrielem" data-error=" "
-                          data-success=" ">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">ESPECLE:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formEspecle" class="md-textarea form-control" formControlName="especle" rows="1"
-                          data-error=" " data-success=" "></textarea>
-                        <label for="formEspecle">Especificaciones LE. Describa como aparece el elemento en su región.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">ESPECRANGA:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formEspecranga" class="md-textarea form-control" formControlName="especranga"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formEspecranga">Escríba una descripción de qué es un LE para este rango.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">ESPECRANGB:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formEspecrangb" class="md-textarea form-control" formControlName="especrangb"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formEspecrangb">Escríba una descripción de qué es un LE para este rango.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">ESPECRANGC:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formEspecrangc" class="md-textarea form-control" formControlName="especrangc"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formEspecrangc">Escríba una descripción de qué es un LE para este rango.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">ESPECRANGD:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formEspecrangd" class="md-textarea form-control" formControlName="especrangd"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formEspecrangd">Escríba una descripción de qué es un LE para este rango.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">HABITAT:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formHabitat" class="md-textarea form-control" formControlName="habitat" rows="1"
-                          data-error=" " data-success=" "></textarea>
-                        <label for="formHabitat">Para especies , describa el habitat. Para comunidades , definir la comunidad</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">PERMANENCIA:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formPermanencia" class="md-textarea form-control" formControlName="permanencia"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formPermanencia">Anote información que indique el grado de permanencia o estabilidad de la LE.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GLOCTIP:</label>
-                      </div>
-                      <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective type="text" id="formLoctipg" class="form-control" formControlName="gloctip" data-error=" " data-success=" ">
-                        <label for="formLoctipg">&nbsp;&nbsp;&nbsp;&nbsp;Indentificar el mejor sitio conocido en el país.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">COMTAX:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtax" rows="1"
-                          data-error=" " data-success=" "></textarea>
-                        <label for="formComtaxg">Indique la distinción taxonómica del elemento.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GLESTIM:</label>
-                      </div>
-                      <div class="col-md-3 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="glestim">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sGlestim of criterio_glestim" [value]="sGlestim.value">
-                              {{sGlestim.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GLESTIMCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-0">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formComlestimg" class="md-textarea form-control" formControlName="glestimcom"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formComlestimg">De ser posible anote el número exacto de localizaciones existentes conocidas.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GABUND:</label>
-                      </div>
-                      <div class="col-md-7 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gabund">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sAbundg of criterio_gabund" [value]="sAbundg.value">
-                              {{sAbundg.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GABUNDCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9  mt-0">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGabundcom" class="md-textarea form-control" formControlName="gabundcom" rows="1"
-                          data-error=" " data-success=" "></textarea>
-                        <label for="formGabundcom">A menudo resulta complicado estimar la abundancia de un elemento. Comente sobre esto. </label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GDIST:</label>
-                      </div>
-                      <div class="col-md-6 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gdist">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sDistg of criterio_gdist" [value]="sDistg.value">
-                              {{sDistg.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GDISTCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-0">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGdistcom" class="md-textarea form-control" formControlName="gdistcom" rows="1"
-                          data-error=" " data-success=" "></textarea>
-                        <label for="formGdistcom">Se especifica los países o regiones ecológicas donde se encuentra el elemento actualmente.</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-center ">
-                    <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
-                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-
-                  </div>
-                </ng-template>
-              </ngb-tab>
-              <!-- pagína 2 -->
-              <ngb-tab id="tab-selectbyid2">
-                <ng-template ngbTabTitle>
-                  <b>2</b>
-                </ng-template>
-                <ng-template ngbTabContent>
-
-                  <div class="modal-content">
-                    <div class="modal-header color-green">
-                      <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GLEPROT:</label>
-                      </div>
-                      <div class="col-md-4 mt10">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gleprot">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sGleprot of criterio_gleprot" [value]="sGleprot.value">
-                              {{sGleprot.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <!-- fin row -->
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GLEPROTCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGleprotcom" class="md-textarea form-control" formControlName="gleprotcom"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGleprotcom">En qué país o países están protegidas y qué tipo de protección tienen.</label>
-                      </div>
-                    </div>
-                    <!-- fin row -->
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GAMENAZ:</label>
-                      </div>
-                      <div class="col-md-9 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gamenaz">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sGamenaz of criterio_gamenaz" [value]="sGamenaz.value">
-                              {{sGamenaz.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GAMENAZCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-0">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGamenazcom" class="md-textarea form-control" formControlName="gamenazcom"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGamenazcom">Indique la amenaza, por ejemplo: "tierras primarias para cultivos"</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GFRAGIL:</label>
-                      </div>
-                      <div class="col-md-4 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="gfragil">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sGfragil of criterio_gfragil" [value]="sGfragil.value">
-                              {{sGfragil.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GFRAGILCOM:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-0">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGfragilcom" class="md-textarea form-control" formControlName="gfragilcom"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGfragilcom">Comente al respecto. Por ejemplo, por qué es frágil.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GOTROCONSI:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-10">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGotroconsi" class="md-textarea form-control" formControlName="gotroconsi"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGotroconsi">0tro criterios. Anote cualiesquiera otros factores que considere importantes.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">RANGOG:</label>
-                      </div>
-                      <div class="col-md-1 mt-15">
-                        <mat-form-field>
-                          <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
-                            <mat-option>-- Ninguna --</mat-option>
-                            <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
-                              {{sRangog.viewValue}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                      <div class="md-form col-md-2 input-group-append mt-10">
-                        <input mdbInputDirective type="text" id="formFecharg" class="form-control" formControlName="fecharg" data-error=" " data-success=" "
-                          ngbDatepicker #dFecharg="ngbDatepicker">
-                        <label for="formFecharg">&nbsp;&nbsp;&nbsp;&nbsp;FECHARG</label>
-                        <div (click)="dFecharg.toggle()">
-                          <i class="fa fa-calendar prefix"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GRANRAZON:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-20">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGranranzon" class="md-textarea form-control" formControlName="granrazon"
-                          rows="3" data-error=" " data-success=" "></textarea>
-                        <label for="formGranranzon">Dar las razones para este rango, mencionando los mejores factores de jerarquización y otras consideraciones.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GNECPROTEC:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-20">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGnecprotec" class="md-textarea form-control" formControlName="gnecprotec"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGnecprotec">Dar el número estimado de LE adecuados para sostener el elemento a través de su distribución.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GNECINVENT:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-20">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGnecinvent" class="md-textarea form-control" formControlName="gnecinvent"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGnecinvent">Necesidades de inventario.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GNECESTUDI:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-20">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGnecestudi" class="md-textarea form-control" formControlName="gnecestudi"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGnecestudi">Escriba las necesidades de investigacion de la biología del elemento.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">GNECMANEJO:</label>
-                      </div>
-                      <div class="md-form  col-md-9 mt-20">
-                        <i class="fa fa-pencil prefix"></i>
-                        <textarea mdbInputDirective type="text" id="formGnecmanejo" class="md-textarea form-control" formControlName="gnecmanejo"
-                          rows="1" data-error=" " data-success=" "></textarea>
-                        <label for="formGnecmanejo">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">RESRG:</label>
-                      </div>
-                      <div class="md-form col-md-5 mt-20 ">
-                        <input mdbInputDirective type="text" id="formResrg" class="form-control" formControlName="resrg" data-error=" " data-success=" ">
-                        <label for="formResrg">&nbsp;&nbsp;&nbsp;&nbsp;Responsable de preparar y mantener el formulario.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <label for="">EDAUTOR:</label>
-                      </div>
-                      <div class="md-form col-md-7 mt-20 ">
-                        <input mdbInputDirective type="text" id="formEdautor" class="form-control" formControlName="edautor" data-error=" " data-success=" ">
-                        <label for="formEdautor">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-8">
-                      </div>
-                      <div class="md-form form-sm  input-group-append mt-10">
-                        <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error=" " data-success=" "
-                          ngbDatepicker #dEdicion="ngbDatepicker">
-                        <label for="formEdicion">EDICION</label>
-                        <div (click)="dEdicion.toggle()">
-                          <i class="fa fa-calendar prefix"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-8"></div>
-                      <div class="md-form form-sm  input-group-append mt-10">
-                        <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
-                          data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
-                        <label for="formActualizar">ACTUALIZAR</label>
-                        <div (click)="dActualizar.toggle()">
-                          <i class="fa fa-calendar prefix"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-center ">
-                    <div *ngIf="loading">
-                      <img src="assets/imagenes/load.gif">
-                    </div>
-                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                    <button class="btn color-green waves-light" (click)="fJG.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                    <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionGlobal()" mdbWavesEffect>Guardar</button>
-                  </div>
-                </ng-template>
-              </ngb-tab>
-
-            </ngb-tabset>
-
+                  <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
+                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                  <button class="btn color-green waves-light" (click)="guardarRegistroJerarquiazacionGlobal()" mdbWavesEffect>Guardar</button>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
           </form>
-
         </ng-template>
       </ngb-tab>
       <!-- fin ngb-tab -->
