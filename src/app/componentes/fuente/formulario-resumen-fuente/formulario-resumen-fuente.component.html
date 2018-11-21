@@ -1,266 +1,292 @@
-<div class="fondo-dark-gray">
-  <div class="card-content white">
-    <div class="card-body">
-      <form [formGroup]="fuenteForm">
-        <div class="modal-content">
+<div class="container white">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Formulario">
+      <div class="card-body">
+        <form [formGroup]="fuenteForm">
+          <div class="modal-content mat-elevation-z4">
+            <div class="modal-header color-green">
+              <h5 class="modal-title">Formulario de resumen fuente</h5>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">CODFUENTE:</label>
+              </div>
+              <div class=" col-md-4 mt10">
+                <mat-form-field>
+                  <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezadocumento">
+                    <mat-option>-- Ninguna --</mat-option>
+                    <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente" [value]="naturalezaDocumento.value">
+                      {{naturalezaDocumento.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="md-form col-md-4 mt10">
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="Error" data-success="Correcto" formControlName="codfuente"
+                  required>
+                <label for="form1" class="font-weight-light"></label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">CITA:</label>
+              </div>
+              <div class="md-form  col-md-9 mt-20">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                  formControlName="cita"></textarea>
+                <label for="formCita">Cita Bibliográfica</label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class=" col-md-2">
+                <label for="">ARCHIVADO:</label>
+              </div>
+              <div class="md-form col-md-4 mt-20">
+                <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" " data-success=" " formControlName="archivado">
+                <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
+              </div>
+              <div class="form-group mt-15">
+                <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+                <div>
+                  <button mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
+                    Agrear Archivos
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                <mat-dialog-content fxFlex>
+                  <mat-list>
+                    <mat-list-item *ngFor="let archivo of archivos">
+                      <h4 mat-line>{{archivo.name}}</h4>
+                      <mat-progress-bar *ngIf="progreso" mode="determinate" [value]="progreso[archivo.name].progreso | async"></mat-progress-bar>
+                    </mat-list-item>
+                  </mat-list>
+                </mat-dialog-content>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">COBGEO:</label>
+              </div>
+              <div class="md-form col-md-9 mt-20">
+                <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error=" " data-success=" " formControlName="cobgeo">
+                <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del Documento.</label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">S:</label>
+              </div>
+
+              <div class="md-form  col-md-2 mt-20">
+                <input mdbInputDirective type="text" id="formRangoG" class="form-control" formControlName="coords" data-error=" " data-success=" ">
+                <label for="formRangoG"></label>
+              </div>
+              <div class="md-form col-md-2 mt-20">
+                <input mdbInputDirective type="text" id="formRangoN" class="form-control" formControlName="coordn" data-error=" " data-success=" ">
+                <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
+              </div>
+              <div class="md-form col-md-2 mt-20">
+                <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coorde" data-error=" " data-success=" ">
+                <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
+              </div>
+              <div class="md-form col-md-2 mt-20">
+                <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coordo" data-error=" " data-success=" ">
+                <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
+              </div>
+
+            </div>
+            <!--fin row  -->
+
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">RESUMEN:</label>
+              </div>
+              <div class="md-form  col-md-9 mt-20">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                  formControlName="resumen"></textarea>
+                <label for="formResumen">Escriba un texto corto pero representativo del contenido general del documento.</label>
+              </div>
+            </div>
+            <!-- fin row -->
+
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">TEMA:</label>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="Varios" panelClass="color-panel-green" multiple formControlName="varios">
+                    <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="Flora" panelClass="color-panel-green" multiple formControlName="flora">
+                    <mat-option *ngFor="let flora of floraList" [value]="flora">{{flora}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple formControlName="fauna">
+                    <mat-option *ngFor="let fauna of faunaList" [value]="fauna">{{fauna}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="Otros" panelClass="color-panel-green" multiple formControlName="otros">
+                    <mat-option *ngFor="let otros of otrosList" [value]="otros">{{otros}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">PUBLICACION.CDC:</label>
+              </div>
+              <div class=" col-md-2">
+                <mat-form-field>
+                  <mat-select placeholder="" panelClass="color-panel-green" formControlName="publicacioncdc">
+                    <mat-option>-- Ninguna --</mat-option>
+                    <mat-option *ngFor="let sPublicacion of criterio_publicacion_cdc" [value]="sPublicacion.value">
+                      {{sPublicacion.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-1">
+                <label for="">VALOR:</label>
+              </div>
+              <div class=" col-md-4">
+                <mat-form-field>
+                  <mat-select placeholder="VALOR" panelClass="color-panel-green" formControlName="valor">
+                    <mat-option>-- Ninguna --</mat-option>
+                    <mat-option *ngFor="let sValor of criterio_valor" [value]="sValor.value">
+                      {{sValor.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">CLAVE:</label>
+              </div>
+              <div class="md-form  col-md-9 mt10">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formClave" class="md-textarea form-control" formControlName="clave" rows="1"
+                  data-error=" " data-success=" "></textarea>
+                <label for="formClave">Complemento del campo TEMA.</label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">COMENTARIO:</label>
+              </div>
+              <div class="md-form  col-md-9 mt-20">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario"
+                  rows="1" data-error=" " data-success=" "></textarea>
+                <label for="formComentario"> Describe de acuerdo al Valor, el tipo de información contenida.</label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">NOTADIGEST:</label>
+              </div>
+              <div class="md-form  col-md-9 mt-20">
+                <i class="fa fa-pencil prefix"></i>
+                <textarea mdbInputDirective type="text" id="formNotadigest" class="md-textarea form-control" formControlName="notadigest"
+                  rows="1" data-error=" " data-success=" "></textarea>
+                <label for="formNotadigest">Anotar en este campo hasta qué punto se ha extraído la fuente toda la información .</label>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-8">
+              </div>
+              <div class="md-form col-md-2 input-group-append mt-20">
+                <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                  data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
+                <div (click)="dActualizar.toggle()">
+                  <i class="fa fa-calendar prefix"></i>
+                </div>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-8">
+              </div>
+              <div class="md-form col-md-2 input-group-append mt-20">
+                <input mdbInputDirective type="text" id="formControl" class="form-control" formControlName="control" data-error=" " data-success=" "
+                  ngbDatepicker #dControl="ngbDatepicker">
+                <label for="formControl">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL</label>
+                <div (click)="dControl.toggle()">
+                  <i class="fa fa-calendar prefix"></i>
+                </div>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-8"></div>
+              <div class="md-form col-md-2  mt-20">
+                <input mdbInputDirective type="text" id="formbcd" class="form-control" formControlName="bcd" data-error=" " data-success=" ">
+                <label for="formbcd">&nbsp;&nbsp;&nbsp;BCD</label>
+              </div>
+            </div>
+          </div>
+          <!-- fin modal-content -->
+          <div class="text-center">
+            <div *ngIf="loading">
+              <img src="assets/imagenes/load.gif">
+            </div>
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
+            <button class="btn  color-green waves-light" mdbWavesEffect (click)="guardarFuente()">Guardar</button>
+
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+    <mat-tab label="Buscar">
+      <div class="card-body">
+        <div class="modal-content mat-elevation-z4">
           <div class="modal-header color-green">
-            <h5 class="modal-title">Formulario de resumen fuente</h5>
           </div>
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">CODFUENTE:</label>
+          <form class="base-form">
+            <mat-form-field class="base-full-width">
+              <input matInput placeholder="Codigo de la Fuente">
+            </mat-form-field>
+            <mat-form-field class="base-full-width">
+              <input matInput placeholder="Cita">
+            </mat-form-field>
+            <mat-form-field class="base-full-width">
+              <input matInput placeholder="Archivado">
+            </mat-form-field>
+            <div class="mat-elevation-z8" class="base-form">
+              <button mat-raised-button class="color-green" (click)="buscarElemento()">Buscar</button>
+              <button mat-raised-button class="color-green">Buscar Todos</button>
             </div>
-            <div class=" col-md-4 mt10">
-              <mat-form-field>
-                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezadocumento">
-                  <mat-option>-- Ninguna --</mat-option>
-                  <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente" [value]="naturalezaDocumento.value">
-                    {{naturalezaDocumento.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="md-form col-md-4 mt10">
-              <input mdbInputDirective type="text" id="form1" class="form-control" data-error="Error" data-success="Correcto" formControlName="codfuente"
-                required>
-              <label for="form1" class="font-weight-light"></label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">CITA:</label>
-            </div>
-            <div class="md-form  col-md-9 mt-20">
-              <i class="fa fa-pencil prefix"></i>
-              <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
-                formControlName="cita"></textarea>
-              <label for="formCita">Cita Bibliográfica</label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class=" col-md-2">
-              <label for="">ARCHIVADO:</label>
-            </div>
-            <div class="md-form col-md-4 mt-20">
-              <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" " data-success=" " formControlName="archivado">
-              <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
-            </div>
-            <div class="form-group mt-15">
-              <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
-              <div>
-                <button mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
-                  Agrear Archivos
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
-              <mat-dialog-content fxFlex>
-                <mat-list>
-                  <mat-list-item *ngFor="let archivo of archivos">
-                    <h4 mat-line>{{archivo.name}}</h4>
-                    <mat-progress-bar *ngIf="progreso" mode="determinate" [value]="progreso[archivo.name].progreso | async"></mat-progress-bar>
-                  </mat-list-item>
-                </mat-list>
-              </mat-dialog-content>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">COBGEO:</label>
-            </div>
-            <div class="md-form col-md-9 mt-20">
-              <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error=" " data-success=" " formControlName="cobgeo">
-              <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del Documento.</label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">S:</label>
-            </div>
-
-            <div class="md-form  col-md-2 mt-20">
-              <input mdbInputDirective type="text" id="formRangoG" class="form-control" formControlName="coords" data-error=" " data-success=" ">
-              <label for="formRangoG"></label>
-            </div>
-            <div class="md-form col-md-2 mt-20">
-              <input mdbInputDirective type="text" id="formRangoN" class="form-control" formControlName="coordn" data-error=" " data-success=" ">
-              <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
-            </div>
-            <div class="md-form col-md-2 mt-20">
-              <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coorde" data-error=" " data-success=" ">
-              <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
-            </div>
-            <div class="md-form col-md-2 mt-20">
-              <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coordo" data-error=" " data-success=" ">
-              <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
-            </div>
-
-          </div>
-          <!--fin row  -->
-
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">RESUMEN:</label>
-            </div>
-            <div class="md-form  col-md-9 mt-20">
-              <i class="fa fa-pencil prefix"></i>
-              <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
-                formControlName="resumen"></textarea>
-              <label for="formResumen">Escriba un texto corto pero representativo del contenido general del documento.</label>
-            </div>
-          </div>
-          <!-- fin row -->
-
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">TEMA:</label>
-            </div>
-            <div class="col-md-2">
-              <mat-form-field>
-                <mat-select placeholder="Varios" panelClass="color-panel-green" multiple formControlName="varios">
-                  <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-2">
-              <mat-form-field>
-                <mat-select placeholder="Flora" panelClass="color-panel-green" multiple formControlName="flora">
-                  <mat-option *ngFor="let flora of floraList" [value]="flora">{{flora}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-2">
-              <mat-form-field>
-                <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple formControlName="fauna">
-                  <mat-option *ngFor="let fauna of faunaList" [value]="fauna">{{fauna}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-2">
-              <mat-form-field>
-                <mat-select placeholder="Otros" panelClass="color-panel-green" multiple formControlName="otros">
-                  <mat-option *ngFor="let otros of otrosList" [value]="otros">{{otros}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">PUBLICACION.CDC:</label>
-            </div>
-            <div class=" col-md-2">
-              <mat-form-field>
-                <mat-select placeholder="" panelClass="color-panel-green" formControlName="publicacioncdc">
-                  <mat-option>-- Ninguna --</mat-option>
-                  <mat-option *ngFor="let sPublicacion of criterio_publicacion_cdc" [value]="sPublicacion.value">
-                    {{sPublicacion.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-1">
-              <label for="">VALOR:</label>
-            </div>
-            <div class=" col-md-4">
-              <mat-form-field>
-                <mat-select placeholder="VALOR" panelClass="color-panel-green" formControlName="valor">
-                  <mat-option>-- Ninguna --</mat-option>
-                  <mat-option *ngFor="let sValor of criterio_valor" [value]="sValor.value">
-                    {{sValor.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">CLAVE:</label>
-            </div>
-            <div class="md-form  col-md-9 mt10">
-              <i class="fa fa-pencil prefix"></i>
-              <textarea mdbInputDirective type="text" id="formClave" class="md-textarea form-control" formControlName="clave" rows="1"
-                data-error=" " data-success=" "></textarea>
-              <label for="formClave">Complemento del campo TEMA.</label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">COMENTARIO:</label>
-            </div>
-            <div class="md-form  col-md-9 mt-20">
-              <i class="fa fa-pencil prefix"></i>
-              <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario"
-                rows="1" data-error=" " data-success=" "></textarea>
-              <label for="formComentario"> Describe de acuerdo al Valor, el tipo de información contenida.</label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-2">
-              <label for="">NOTADIGEST:</label>
-            </div>
-            <div class="md-form  col-md-9 mt-20">
-              <i class="fa fa-pencil prefix"></i>
-              <textarea mdbInputDirective type="text" id="formNotadigest" class="md-textarea form-control" formControlName="notadigest"
-                rows="1" data-error=" " data-success=" "></textarea>
-              <label for="formNotadigest">Anotar en este campo hasta qué punto se ha extraído la fuente toda la información .</label>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-8">
-            </div>
-            <div class="md-form col-md-2 input-group-append mt-20">
-              <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
-                data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
-              <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-              <div (click)="dActualizar.toggle()">
-                <i class="fa fa-calendar prefix"></i>
-              </div>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-8">
-            </div>
-            <div class="md-form col-md-2 input-group-append mt-20">
-              <input mdbInputDirective type="text" id="formControl" class="form-control" formControlName="control" data-error=" " data-success=" "
-                ngbDatepicker #dControl="ngbDatepicker">
-              <label for="formControl">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL</label>
-              <div (click)="dControl.toggle()">
-                <i class="fa fa-calendar prefix"></i>
-              </div>
-            </div>
-          </div>
-          <!-- fin row -->
-          <div class="row">
-            <div class="col-md-8"></div>
-            <div class="md-form col-md-2  mt-20">
-              <input mdbInputDirective type="text" id="formbcd" class="form-control" formControlName="bcd" data-error=" " data-success=" ">
-              <label for="formbcd">&nbsp;&nbsp;&nbsp;BCD</label>
-            </div>
-          </div>
+          </form>
         </div>
-        <!-- fin modal-content -->
-        <div class="text-center">
-          <div *ngIf="loading">
-            <img src="assets/imagenes/load.gif">
-          </div>
-          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-          <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
-          <button class="btn  color-green waves-light" mdbWavesEffect (click)="guardarFuente()">Guardar</button>
-
-        </div>
-      </form>
-    </div>
-  </div>
+        <app-tabla-busqueda></app-tabla-busqueda>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

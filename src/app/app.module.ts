@@ -58,7 +58,6 @@ import { BuscarSitioComponent } from './componentes/sitios/buscar-sitio/buscar-s
 import { BuscarCaracterizacionPlantasNacionalComponent } from './componentes/resumen/buscar-caracterizacion-plantas-nacional/buscar-caracterizacion-plantas-nacional.component';
 import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
-import { BuscarFuenteComponent } from './componentes/fuente/buscar-fuente/buscar-fuente.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
 import 'hammerjs';
 import 'mousetrap';
@@ -108,7 +107,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     BuscarCaracterizacionPlantasNacionalComponent,
     BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
-    BuscarFuenteComponent,
     TablaBusquedaComponent,
     GaleriaComponent,
     ConfirmacionComponent
