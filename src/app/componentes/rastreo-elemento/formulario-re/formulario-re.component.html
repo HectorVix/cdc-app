@@ -1,699 +1,726 @@
 <div class="card-content white">
   <div class="card-body">
-    <form [formGroup]="reForm">
-      <ngb-tabset #fR="ngbTabset">
-        <ngb-tab id="tab-pag1">
-          <ng-template ngbTabTitle>
-            <b>1</b>
-          </ng-template>
-          <ng-template ngbTabContent>
-            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-            <!-- Identificadores -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Identificadores</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">CODIGOE:</label>
+    <ngb-tabset #fR="ngbTabset">
+      <ngb-tab id="tab-formulario">
+        <ng-template ngbTabTitle>
+          <b>Formulario</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <form [formGroup]="reForm">
+            <mat-tab-group dynamicHeight [selectedIndex]="selected.value">
+              <mat-tab label="1">
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                <!-- Identificadores -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Identificadores</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">CODIGOE:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt10">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto,ingresa el codigo del elemento correcto"
+                        data-success="correcto" required>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="mat-elevation-z8" class="base-form">
+                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                      </div>
+                    </div>
+                    <div class="md-form col-md-4 mt10">
+                      <input mdbInputDirective type="text" id="formTropicos" class="form-control" formControlName="tropicos" data-error="incorrecto"
+                        data-success="correcto" required>
+                      <label for="formTropicos">&nbsp;&nbsp;&nbsp;&nbsp;TROPICOS</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NACION:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt-7">
+                      <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error="incorrecto"
+                        data-success="correcto" required>
+                    </div>
+                    <div class="md-form col-md-4 mt-7">
+                      <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error="incorrecto"
+                        data-success="correcto" required>
+                      <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
                 </div>
-                <div class="md-form col-md-4 mt10">
-                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto,ingresa el codigo del elemento correcto"
-                    data-success="correcto" required>
-                </div>
-                <div class="col-md-2">
-                  <div class="mat-elevation-z8" class="base-form">
-                    <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                <!-- fin modal-content -->
+                <!-- Taxonomia (Global) -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Taxonomia (Global)</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">CLASETAX:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt10">
+                      <input mdbInputDirective type="text" id="formClasetax" class="form-control" formControlName="clasetax" data-error=" " data-success=" ">
+                    </div>
+                    <div class="md-form col-md-4 mt10">
+                      <input mdbInputDirective type="text" id="formOrden" class="form-control" formControlName="orden" data-error=" " data-success=" ">
+                      <label for="formOrden">&nbsp;&nbsp;&nbsp;&nbsp;ORDEN</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">FAMILIA:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt-20">
+                      <input mdbInputDirective type="text" id="formFamilia" class="form-control" formControlName="familia" data-error=" " data-success=" ">
+                    </div>
+                    <div class="md-form col-md-4 mt-20">
+                      <input mdbInputDirective type="text" id="formGenero" class="form-control" formControlName="genero" data-error=" " data-success=" ">
+                      <label for="formGenero">&nbsp;&nbsp;&nbsp;&nbsp;GENERO</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NOMBREG:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" " data-success=" ">
+                      <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">AUTOR:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formAutor" class="form-control" formControlName="autor" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">FUENTENOM:</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="number" id="formAutor" class="form-control" formControlName="autor" data-error=" " data-success=" ">
+                    </div>
+                    <div class="md-form col-md-3 mt-20">
+                      <input mdbInputDirective type="text" id="formRefnombreg" class="form-control" formControlName="refnombreg" data-error=" "
+                        data-success=" ">
+                      <label for="formRefnombreg">&nbsp;&nbsp;&nbsp;&nbsp;REFNOMBRE</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">DISTTAX:</label>
+                    </div>
+                    <div class="col-md-3 mt-10">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="disttax">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sDisttax of criterio_disttax" [value]="sDisttax.value">
+                            {{sDisttax.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">DUDATAX:</label>
+                    </div>
+                    <div class="col-md-5">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dudatax">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sDudatax of criterio_dudatax" [value]="sDudatax.value">
+                            {{sDudatax.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NOMCOMUNG:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-5">
+                      <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nomcomung" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">COMTAXG:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtaxg" rows="1"
+                        data-error=" " data-success=" "></textarea>
+                      <label for="formComtaxg">Comentario</label>
+                    </div>
                   </div>
                 </div>
-                <div class="md-form col-md-4 mt10">
-                  <input mdbInputDirective type="text" id="formTropicos" class="form-control" formControlName="tropicos" data-error="incorrecto"
-                    data-success="correcto" required>
-                  <label for="formTropicos">&nbsp;&nbsp;&nbsp;&nbsp;TROPICOS</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">NACION:</label>
-                </div>
-                <div class="md-form col-md-4 mt-7">
-                  <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error="incorrecto"
-                    data-success="correcto" required>
-                </div>
-                <div class="md-form col-md-4 mt-7">
-                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error="incorrecto"
-                    data-success="correcto" required>
-                  <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
-                </div>
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <!-- Taxonomia (Global) -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Taxonomia (Global)</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">CLASETAX:</label>
-                </div>
-                <div class="md-form col-md-4 mt10">
-                  <input mdbInputDirective type="text" id="formClasetax" class="form-control" formControlName="clasetax" data-error=" " data-success=" ">
-                </div>
-                <div class="md-form col-md-4 mt10">
-                  <input mdbInputDirective type="text" id="formOrden" class="form-control" formControlName="orden" data-error=" " data-success=" ">
-                  <label for="formOrden">&nbsp;&nbsp;&nbsp;&nbsp;ORDEN</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">FAMILIA:</label>
-                </div>
-                <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formFamilia" class="form-control" formControlName="familia" data-error=" " data-success=" ">
-                </div>
-                <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formGenero" class="form-control" formControlName="genero" data-error=" " data-success=" ">
-                  <label for="formGenero">&nbsp;&nbsp;&nbsp;&nbsp;GENERO</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">NOMBREG:</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" " data-success=" ">
-                  <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">AUTOR:</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formAutor" class="form-control" formControlName="autor" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">FUENTENOM:</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="number" id="formAutor" class="form-control" formControlName="autor" data-error=" " data-success=" ">
-                </div>
-                <div class="md-form col-md-3 mt-20">
-                  <input mdbInputDirective type="text" id="formRefnombreg" class="form-control" formControlName="refnombreg" data-error=" "
-                    data-success=" ">
-                  <label for="formRefnombreg">&nbsp;&nbsp;&nbsp;&nbsp;REFNOMBRE</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">DISTTAX:</label>
-                </div>
-                <div class="col-md-3 mt-10">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="disttax">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sDisttax of criterio_disttax" [value]="sDisttax.value">
-                        {{sDisttax.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">DUDATAX:</label>
-                </div>
-                <div class="col-md-5">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="dudatax">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sDudatax of criterio_dudatax" [value]="sDudatax.value">
-                        {{sDudatax.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">NOMCOMUNG:</label>
-                </div>
-                <div class="md-form col-md-9 mt-5">
-                  <input mdbInputDirective type="text" id="formNomcomung" class="form-control" formControlName="nomcomung" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">COMTAXG:</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formComtaxg" class="md-textarea form-control" formControlName="comtaxg" rows="1"
-                    data-error=" " data-success=" "></textarea>
-                  <label for="formComtaxg">Comentario</label>
-                </div>
-              </div>
-            </div>
-            <!-- fin modal-content -->
-            <!-- Taxonomia (Nacional) -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Taxonomia (Nacional)</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">NOMBREN:</label>
-                </div>
-                <div class="md-form col-md-5 mt10">
-                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
-                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
-                </div>
-                <div class="md-form col-md-2 mt10">
-                  <input mdbInputDirective type="number" id="formNumsinn" class="form-control" formControlName="numsinn" data-error=" " data-success=" ">
-                  <label for="formNumsinn">&nbsp;&nbsp;&nbsp;&nbsp;NUMSINN</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">NOMCOMUNN:</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" formControlName="nomcomunn" data-error=" " data-success=" ">
-                  <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">COMTAXN:</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
-                    formControlName="comtaxn"></textarea>
-                  <label for="formComtaxn">Comentario</label>
-                </div>
-              </div>
-
-            </div>
-            <!-- fin modal-content -->
-            <!-- fin form -->
-            <div class="text-center ">
-              <p>
-                <button class="btn color-green waves-light" (click)="fR.select('tab-pag2')" mdbWavesEffect>Siguiente</button>
-                <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-              </p>
-            </div>
-          </ng-template>
-        </ngb-tab>
-        <ngb-tab id="tab-pag2">
-          <ng-template ngbTabTitle>
-            <b>2</b>
-          </ng-template>
-          <ng-template ngbTabContent>
-            <!-- Status (Global) -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Status (Global)</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RANGOG:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
-                        {{sRangog.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder="FORMULAR" panelClass="color-panel-green" formControlName="formularg">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sFormularg of criterio_compu_manual" [value]="sFormularg.value">
-                        {{sFormularg.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="md-form col-md-3 mt10">
-                  <input mdbInputDirective type="text" id="formResprg" class="form-control" formControlName="resprg" data-error=" " data-success=" ">
-                  <label for="formResprg">&nbsp;&nbsp;&nbsp;&nbsp;RESPRG</label>
-                </div>
-                <div class="md-form col-md-2 input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrg" class="form-control" formControlName="fecharevrg" data-error=" "
-                    data-success=" " ngbDatepicker #dFechaRevrg="ngbDatepicker">
-                  <label for="formFechaRevrg">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRG</label>
-                  <div (click)="dFechaRevrg.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+                <!-- fin modal-content -->
+                <!-- Taxonomia (Nacional) -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Taxonomia (Nacional)</h5>
                   </div>
-                </div>
-              </div>
-              <!-- fin row -->
-              <!-- 2 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">AEPEU:</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formAepeu" class="form-control" formControlName="aepeu" data-error=" " data-success=" ">
-                  <label for="formAepeu"></label>
-                </div>
-                <div class="col-md-2 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="CITES" panelClass="color-panel-green" formControlName="cites">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sCites of criterio_cites" [value]="sCites.value">
-                        {{sCites.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-3 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="IUCN" panelClass="color-panel-green" formControlName="iucn">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sUicn of criterio_iucn" [value]="sUicn.value">
-                        {{sUicn.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="md-form col-md-2 input-group-append mt-20">
-                  <input mdbInputDirective type="text" id="formFechaAepeu" class="form-control" formControlName="fechaaepeu" data-error=" "
-                    data-success=" " ngbDatepicker #dFechaAepeu="ngbDatepicker">
-                  <label for="formFechaAepeu">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.AEPEU</label>
-                  <div (click)="dFechaAepeu.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NOMBREN:</label>
+                    </div>
+                    <div class="md-form col-md-5 mt10">
+                      <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                      <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el país.</label>
+                    </div>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="number" id="formNumsinn" class="form-control" formControlName="numsinn" data-error=" " data-success=" ">
+                      <label for="formNumsinn">&nbsp;&nbsp;&nbsp;&nbsp;NUMSINN</label>
+                    </div>
                   </div>
-                </div>
-
-              </div>
-              <!-- fin row -->
-              <!-- 3 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">PLANSCONS:</label>
-                </div>
-                <div class="col-md-2 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="planscons">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sPlanscons of criterio_compu_manual" [value]="sPlanscons.value">
-                        {{sPlanscons.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formResplan" class="form-control" formControlName="resplan" data-error=" " data-success=" ">
-                  <label for="formResplan">&nbsp;&nbsp;&nbsp;RESPLAN</label>
-                </div>
-                <div class="col-md-3 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="RESUMENM" panelClass="color-panel-green" formControlName="resumenman">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sResumenman of criterio_compu_manual" [value]="sResumenman.value">
-                        {{sResumenman.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formRes_resumen" class="form-control" formControlName="resresumen" data-error=" "
-                    data-success=" ">
-                  <label for="formRes_resumen">&nbsp;&nbsp;&nbsp;RESRESUMEN</label>
-                </div>
-              </div>
-
-              <!-- 4 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">EXSITU:</label>
-                </div>
-                <div class="col-md-2 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="exsitu">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sExsitu of criterio_si_no" [value]="sExsitu.value">
-                        {{sExsitu.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="md-form col-md-3 mt-20">
-                  <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="instexsitu" data-error=" "
-                    data-success=" ">
-                  <label for="formInstExsitu">&nbsp;&nbsp;&nbsp;INST.EXSITU</label>
-                </div>
-                <div class="col-md-4 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="ENDEMISMO" panelClass="color-panel-green" formControlName="endemismo">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sEndemismo of criterio_endemismo" [value]="sEndemismo.value">
-                        {{sEndemismo.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <!-- Status (Nacional) -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Status (Nacional)</h5>
-              </div>
-              <!-- 1 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RANGON:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
-                        {{sRangon.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder="FORMLARN" panelClass="color-panel-green" formControlName="formularn">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sFormularn of criterio_compu_manual" [value]="sFormularn.value">
-                        {{sFormularn.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="md-form col-md-2 mt10">
-                  <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
-                    data-success=" ">
-                  <label for="formRastreolen">&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
-                </div>
-                <div class="md-form col-md-2  input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrn" class="form-control" formControlName="fecharevrn" data-error=" "
-                    data-success=" " ngbDatepicker #dFechaRvrn="ngbDatepicker">
-                  <label for="formFechaRevrn">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRN</label>
-                  <div (click)="dFechaRvrn.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">NOMCOMUNN:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formNomcomunn" class="form-control" formControlName="nomcomunn" data-error=" " data-success=" ">
+                      <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
+                    </div>
                   </div>
-                </div>
-
-
-              </div>
-              <!--  2 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">LESTIMN:</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formLestimn" class="form-control" formControlName="lestimn" data-error=" " data-success=" ">
-                  <label for="formLestimn">&nbsp;&nbsp;&nbsp;&nbsp;LESTIMN</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formLeprotn" class="form-control" formControlName="leprotn" data-error=" " data-success=" ">
-                  <label for="formLeprotn">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTN</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formAbundn" class="form-control" formControlName="abundn" data-error=" " data-success=" ">
-                  <label for="formAbundn">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDN</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formProtnacion" class="form-control" formControlName="protnacion" data-error=" "
-                    data-success=" ">
-                  <label for="formProtnacion">&nbsp;&nbsp;&nbsp;&nbsp;PROTNACION</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <!-- 3 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">REFNOMBRE:</label>
-                </div>
-                <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formRefnombren" class="form-control" formControlName="refnombren" data-error=" "
-                    data-success=" ">
-                </div>
-                <div class="col-md-2 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="transparencian">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
-                        {{sTransparencian.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <!-- Status (Subnacional) -->
-            <div class="modal-content ">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Status (Subnacional)</h5>
-              </div>
-
-              <!-- 1 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RANGOS:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="rangos">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
-                        {{sRangos.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-1">
-                  <label for="">FORMLARS:</label>
-                </div>
-                <div class="col-md-2 mt10">
-                  <mat-form-field>
-                    <mat-select placeholder="FORMLARS" panelClass="color-panel-green" formControlName="formulars">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sFormulars of criterio_compu_manual" [value]="sFormulars.value">
-                        {{sFormulars.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="md-form col-md-2 mt10">
-                  <input mdbInputDirective type="text" id="formRastreoles" class="form-control" formControlName="rastreoles" data-error=" "
-                    data-success=" ">
-                  <label for="formRastreoles">&nbsp;&nbsp;&nbsp;RASTREOLES</label>
-                </div>
-                <div class="md-form col-md-2  input-group-append mt10">
-                  <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
-                    data-success=" " ngbDatepicker #dFechaRvrs="ngbDatepicker">
-                  <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS</label>
-                  <div (click)="dFechaRvrs.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">COMTAXN:</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formComtaxn" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                        formControlName="comtaxn"></textarea>
+                      <label for="formComtaxn">Comentario</label>
+                    </div>
                   </div>
-                </div>
 
-
-              </div>
-              <!--  2 linea -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">LESTIMS:</label>
                 </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formLestims" class="form-control" formControlName="lestims" data-error=" " data-success=" ">
-                  <label for="formLestims"></label>
+                <!-- fin modal-content -->
+                <!-- fin form -->
+                <div class="text-center ">
+                  <p>
+                    <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
+                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                  </p>
                 </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formLeprots" class="form-control" formControlName="leprots" data-error=" " data-success=" ">
-                  <label for="formLeprots">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTS</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formAbunds" class="form-control" formControlName="abunds" data-error=" " data-success=" ">
-                  <label for="formAbunds">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDS</label>
-                </div>
-                <div class="md-form col-md-2 mt-20">
-                  <input mdbInputDirective type="text" id="formProtsubnac" class="form-control" formControlName="protsubnac" data-error=" "
-                    data-success=" ">
-                  <label for="formProtsubnac">&nbsp;&nbsp;&nbsp;&nbsp;PROTSUBNAC</label>
-                </div>
-              </div>
-              <!-- fin row -->
-              <!-- 3 linea -->
-
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">REFNOMBRE:</label>
-                </div>
-
-                <div class="md-form col-md-4 mt-20">
-                  <input mdbInputDirective type="text" id="formRefnombres" class="form-control" formControlName="refnombres" data-error=" "
-                    data-success=" ">
-                </div>
-                <div class="col-md-2 mt-20">
-                  <mat-form-field>
-                    <mat-select placeholder="TRANSPARENCIAS" panelClass="color-panel-green" formControlName="transparencias">
-                      <mat-option>-- Ninguna --</mat-option>
-                      <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
-                        {{sTransparencian.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <div class="modal-content">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Campos Opcionales</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RE.OPC1</label>
-                </div>
-                <div class="md-form col-md-9 mt-5">
-                  <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="reopc1" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RE.OPC2</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="reopc2" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RE.OPC3</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="reopc3" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RE.OPC4</label>
-                </div>
-                <div class="md-form col-md-9 mt-20">
-                  <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="reopc4" data-error=" " data-success=" ">
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">RE.OPC5</label>
-                </div>
-                <div class="md-form  col-md-9 mt-20">
-                  <i class="fa fa-pencil prefix"></i>
-                  <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
-                    formControlName="reopc5"></textarea>
-                  <label for="formReOpc5"></label>
-                </div>
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <div class="modal-content">
-              <div class="modal-header color-green">
-                <h5 class="modal-title">Mantenimiento del Registro</h5>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <label for="">CODFUENTEN:</label>
-                </div>
-                <div class="md-form col-md-3 mt10">
-                  <input mdbInputDirective type="text" id="formCodfuenten" class="form-control" formControlName="codfuenten" data-error=" "
-                    data-success=" ">
-                </div>
-                <div class="md-form col-md-3 mt10">
-                  <input mdbInputDirective type="text" id="formCodfuentes" class="form-control" formControlName="codfuentes" data-error=" "
-                    data-success=" ">
-                  <label for="formCodfuentes">&nbsp;&nbsp;&nbsp;&nbsp;CODFUENTES</label>
-                </div>
-                <div class="md-form col-md-2 input-group-append   mt10 ">
-                  <input mdbInputDirective type="text" id="formActualizag" class="form-control" formControlName="actualizag" data-error=" "
-                    data-success=" " ngbDatepicker #dActualizag="ngbDatepicker">
-                  <label for="formActualizag">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
-                  <div (click)="dActualizag.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+              </mat-tab>
+              <mat-tab label="2">
+                <!-- Status (Global) -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Status (Global)</h5>
                   </div>
-                </div>
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-8">
-                  <label for=""> </label>
-                </div>
-                <div class="md-form col-md-2 input-group-append   mt-20 ">
-                  <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" data-error=" "
-                    data-success=" " ngbDatepicker #dActualizan="ngbDatepicker">
-                  <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
-                  <div (click)="dActualizan.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RANGOG:</label>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
+                            {{sRangog.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="FORMULAR" panelClass="color-panel-green" formControlName="formularg">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sFormularg of criterio_compu_manual" [value]="sFormularg.value">
+                            {{sFormularg.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-3 mt10">
+                      <input mdbInputDirective type="text" id="formResprg" class="form-control" formControlName="resprg" data-error=" " data-success=" ">
+                      <label for="formResprg">&nbsp;&nbsp;&nbsp;&nbsp;RESPRG</label>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append mt10">
+                      <input mdbInputDirective type="text" id="formFechaRevrg" class="form-control" formControlName="fecharevrg" data-error=" "
+                        data-success=" " ngbDatepicker #dFechaRevrg="ngbDatepicker">
+                      <label for="formFechaRevrg">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRG</label>
+                      <div (click)="dFechaRevrg.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <!-- fin row -->
+                  <!-- 2 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">AEPEU:</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formAepeu" class="form-control" formControlName="aepeu" data-error=" " data-success=" ">
+                      <label for="formAepeu"></label>
+                    </div>
+                    <div class="col-md-2 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="CITES" panelClass="color-panel-green" formControlName="cites">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sCites of criterio_cites" [value]="sCites.value">
+                            {{sCites.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="IUCN" panelClass="color-panel-green" formControlName="iucn">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sUicn of criterio_iucn" [value]="sUicn.value">
+                            {{sUicn.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append mt-20">
+                      <input mdbInputDirective type="text" id="formFechaAepeu" class="form-control" formControlName="fechaaepeu" data-error=" "
+                        data-success=" " ngbDatepicker #dFechaAepeu="ngbDatepicker">
+                      <label for="formFechaAepeu">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.AEPEU</label>
+                      <div (click)="dFechaAepeu.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
 
-              </div>
-              <!-- fin row -->
-              <div class="row">
-                <div class="col-md-8">
-                  <label for=""> </label>
-                </div>
-                <div class="md-form col-md-2 input-group-append   mt-20 ">
-                  <input mdbInputDirective type="text" id="formActualizas" class="form-control" formControlName="actualizas" data-error=" "
-                    data-success=" " ngbDatepicker #dActualizas="ngbDatepicker">
-                  <label for="formActualizas">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAS</label>
-                  <div (click)="dActualizas.toggle()">
-                    <i class="fa fa-calendar prefix"></i>
                   </div>
-                </div>
+                  <!-- fin row -->
+                  <!-- 3 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">PLANSCONS:</label>
+                    </div>
+                    <div class="col-md-2 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="planscons">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sPlanscons of criterio_compu_manual" [value]="sPlanscons.value">
+                            {{sPlanscons.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
 
-              </div>
-              <!-- fin row -->
-            </div>
-            <!-- fin modal-content -->
-            <div class="text-center ">
-              <div *ngIf="loading">
-                <img src="assets/imagenes/load.gif">
-              </div>
-              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-              <button class="btn color-green waves-light" (click)="fR.select('tab-pag1')" mdbWavesEffect>Atras</button>
-              <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-              <button class="btn color-green waves-light" (click)="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
-            </div>
-          </ng-template>
-        </ngb-tab>
-      </ngb-tabset>
-    </form>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formResplan" class="form-control" formControlName="resplan" data-error=" " data-success=" ">
+                      <label for="formResplan">&nbsp;&nbsp;&nbsp;RESPLAN</label>
+                    </div>
+                    <div class="col-md-3 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="RESUMENM" panelClass="color-panel-green" formControlName="resumenman">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sResumenman of criterio_compu_manual" [value]="sResumenman.value">
+                            {{sResumenman.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formRes_resumen" class="form-control" formControlName="resresumen" data-error=" "
+                        data-success=" ">
+                      <label for="formRes_resumen">&nbsp;&nbsp;&nbsp;RESRESUMEN</label>
+                    </div>
+                  </div>
+
+                  <!-- 4 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">EXSITU:</label>
+                    </div>
+                    <div class="col-md-2 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="exsitu">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sExsitu of criterio_si_no" [value]="sExsitu.value">
+                            {{sExsitu.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="md-form col-md-3 mt-20">
+                      <input mdbInputDirective type="text" id="formInstExsitu" class="form-control" formControlName="instexsitu" data-error=" "
+                        data-success=" ">
+                      <label for="formInstExsitu">&nbsp;&nbsp;&nbsp;INST.EXSITU</label>
+                    </div>
+                    <div class="col-md-4 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="ENDEMISMO" panelClass="color-panel-green" formControlName="endemismo">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sEndemismo of criterio_endemismo" [value]="sEndemismo.value">
+                            {{sEndemismo.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                </div>
+                <!-- fin modal-content -->
+                <!-- Status (Nacional) -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Status (Nacional)</h5>
+                  </div>
+                  <!-- 1 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RANGON:</label>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
+                            {{sRangon.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="FORMLARN" panelClass="color-panel-green" formControlName="formularn">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sFormularn of criterio_compu_manual" [value]="sFormularn.value">
+                            {{sFormularn.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="text" id="formRastreolen" class="form-control" formControlName="rastreolen" data-error=" "
+                        data-success=" ">
+                      <label for="formRastreolen">&nbsp;&nbsp;&nbsp;RASTREOLEN</label>
+                    </div>
+                    <div class="md-form col-md-2  input-group-append mt10">
+                      <input mdbInputDirective type="text" id="formFechaRevrn" class="form-control" formControlName="fecharevrn" data-error=" "
+                        data-success=" " ngbDatepicker #dFechaRvrn="ngbDatepicker">
+                      <label for="formFechaRevrn">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRN</label>
+                      <div (click)="dFechaRvrn.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!--  2 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">LESTIMN:</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formLestimn" class="form-control" formControlName="lestimn" data-error=" " data-success=" ">
+                      <label for="formLestimn">&nbsp;&nbsp;&nbsp;&nbsp;LESTIMN</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formLeprotn" class="form-control" formControlName="leprotn" data-error=" " data-success=" ">
+                      <label for="formLeprotn">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTN</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formAbundn" class="form-control" formControlName="abundn" data-error=" " data-success=" ">
+                      <label for="formAbundn">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDN</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formProtnacion" class="form-control" formControlName="protnacion" data-error=" "
+                        data-success=" ">
+                      <label for="formProtnacion">&nbsp;&nbsp;&nbsp;&nbsp;PROTNACION</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <!-- 3 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">REFNOMBRE:</label>
+                    </div>
+                    <div class="md-form col-md-4 mt-20">
+                      <input mdbInputDirective type="text" id="formRefnombren" class="form-control" formControlName="refnombren" data-error=" "
+                        data-success=" ">
+                    </div>
+                    <div class="col-md-2 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="transparencian">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                            {{sTransparencian.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                </div>
+                <!-- fin modal-content -->
+                <!-- Status (Subnacional) -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Status (Subnacional)</h5>
+                  </div>
+
+                  <!-- 1 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RANGOS:</label>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="TRANSPARENCIAN" panelClass="color-panel-green" formControlName="rangos">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
+                            {{sRangos.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-1">
+                      <label for="">FORMLARS:</label>
+                    </div>
+                    <div class="col-md-2 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="FORMLARS" panelClass="color-panel-green" formControlName="formulars">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sFormulars of criterio_compu_manual" [value]="sFormulars.value">
+                            {{sFormulars.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="text" id="formRastreoles" class="form-control" formControlName="rastreoles" data-error=" "
+                        data-success=" ">
+                      <label for="formRastreoles">&nbsp;&nbsp;&nbsp;RASTREOLES</label>
+                    </div>
+                    <div class="md-form col-md-2  input-group-append mt10">
+                      <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
+                        data-success=" " ngbDatepicker #dFechaRvrs="ngbDatepicker">
+                      <label for="formFechaRevrs">&nbsp;&nbsp;&nbsp;&nbsp;FECHA.REVRS</label>
+                      <div (click)="dFechaRvrs.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!--  2 linea -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">LESTIMS:</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formLestims" class="form-control" formControlName="lestims" data-error=" " data-success=" ">
+                      <label for="formLestims"></label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formLeprots" class="form-control" formControlName="leprots" data-error=" " data-success=" ">
+                      <label for="formLeprots">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTS</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formAbunds" class="form-control" formControlName="abunds" data-error=" " data-success=" ">
+                      <label for="formAbunds">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDS</label>
+                    </div>
+                    <div class="md-form col-md-2 mt-20">
+                      <input mdbInputDirective type="text" id="formProtsubnac" class="form-control" formControlName="protsubnac" data-error=" "
+                        data-success=" ">
+                      <label for="formProtsubnac">&nbsp;&nbsp;&nbsp;&nbsp;PROTSUBNAC</label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <!-- 3 linea -->
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">REFNOMBRE:</label>
+                    </div>
+
+                    <div class="md-form col-md-4 mt-20">
+                      <input mdbInputDirective type="text" id="formRefnombres" class="form-control" formControlName="refnombres" data-error=" "
+                        data-success=" ">
+                    </div>
+                    <div class="col-md-2 mt-20">
+                      <mat-form-field>
+                        <mat-select placeholder="TRANSPARENCIAS" panelClass="color-panel-green" formControlName="transparencias">
+                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option *ngFor="let sTransparencian of criterio_si_no" [value]="sTransparencian.value">
+                            {{sTransparencian.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Campos Opcionales</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RE.OPC1</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-5">
+                      <input mdbInputDirective type="text" id="formReOpc1" class="form-control" formControlName="reopc1" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RE.OPC2</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formReOpc2" class="form-control" formControlName="reopc2" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RE.OPC3</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formReOpc3" class="form-control" formControlName="reopc3" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RE.OPC4</label>
+                    </div>
+                    <div class="md-form col-md-9 mt-20">
+                      <input mdbInputDirective type="text" id="formReOpc4" class="form-control" formControlName="reopc4" data-error=" " data-success=" ">
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">RE.OPC5</label>
+                    </div>
+                    <div class="md-form  col-md-9 mt-20">
+                      <i class="fa fa-pencil prefix"></i>
+                      <textarea mdbInputDirective type="text" id="formReOpc5" class="md-textarea form-control" rows="1" data-error=" " data-success=" "
+                        formControlName="reopc5"></textarea>
+                      <label for="formReOpc5"></label>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">Mantenimiento del Registro</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">CODFUENTEN:</label>
+                    </div>
+                    <div class="md-form col-md-3 mt10">
+                      <input mdbInputDirective type="text" id="formCodfuenten" class="form-control" formControlName="codfuenten" data-error=" "
+                        data-success=" ">
+                    </div>
+                    <div class="md-form col-md-3 mt10">
+                      <input mdbInputDirective type="text" id="formCodfuentes" class="form-control" formControlName="codfuentes" data-error=" "
+                        data-success=" ">
+                      <label for="formCodfuentes">&nbsp;&nbsp;&nbsp;&nbsp;CODFUENTES</label>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append   mt10 ">
+                      <input mdbInputDirective type="text" id="formActualizag" class="form-control" formControlName="actualizag" data-error=" "
+                        data-success=" " ngbDatepicker #dActualizag="ngbDatepicker">
+                      <label for="formActualizag">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAG</label>
+                      <div (click)="dActualizag.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <label for=""> </label>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append   mt-20 ">
+                      <input mdbInputDirective type="text" id="formActualizan" class="form-control" formControlName="actualizan" data-error=" "
+                        data-success=" " ngbDatepicker #dActualizan="ngbDatepicker">
+                      <label for="formActualizan">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAN</label>
+                      <div (click)="dActualizan.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-8">
+                      <label for=""> </label>
+                    </div>
+                    <div class="md-form col-md-2 input-group-append   mt-20 ">
+                      <input mdbInputDirective type="text" id="formActualizas" class="form-control" formControlName="actualizas" data-error=" "
+                        data-success=" " ngbDatepicker #dActualizas="ngbDatepicker">
+                      <label for="formActualizas">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAS</label>
+                      <div (click)="dActualizas.toggle()">
+                        <i class="fa fa-calendar prefix"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                </div>
+                <!-- fin modal-content -->
+                <div class="text-center ">
+                  <div *ngIf="loading">
+                    <img src="assets/imagenes/load.gif">
+                  </div>
+                  <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                  <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
+                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                  <button class="btn color-green waves-light" (click)="guardarRastreoElemento()" mdbWavesEffect>Guardar</button>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </form>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-buscar">
+        <ng-template ngbTabTitle>
+          <b>Buscar</b>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <div class="modal-content mat-elevation-z4">
+            <div class="modal-header color-green"></div>
+            <mat-card>
+              <form class="base-form">
+                <mat-form-field class="base-full-width">
+                  <input matInput placeholder="Codigo del Elemento">
+                </mat-form-field>             
+                <mat-form-field class="base-full-width">
+                  <input matInput placeholder="Nombre común nacional">
+                </mat-form-field>
+                <mat-form-field class="base-full-width">
+                  <input matInput placeholder="Ref Nombre">
+                </mat-form-field>
+                <div class="mat-elevation-z8" class="base-form">
+                  <button mat-raised-button class="color-green">Buscar</button>
+                  <button mat-raised-button class="color-green">Buscar Todos</button>
+                </div>
+              </form>
+            </mat-card>
+          </div>
+          <app-tabla-busqueda></app-tabla-busqueda>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
     <!-- fin form -->
   </div>
   <!-- fin car-body -->

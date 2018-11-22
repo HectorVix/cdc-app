@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
@@ -35,7 +35,8 @@ export class FormularioReComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-  
+  selected = new FormControl(0);
+
   constructor(
     private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearFormRastreoElemento();
@@ -179,5 +180,11 @@ export class FormularioReComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+  tabPagina1() {
+    this.selected.setValue(0);
   }
 }

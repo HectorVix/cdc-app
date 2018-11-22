@@ -18,7 +18,6 @@ import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquiza
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
 import { FormularioReComponent } from './componentes/rastreo-elemento/formulario-re/formulario-re.component';
-import { EditarReComponent } from './componentes/rastreo-elemento/editar-re/editar-re.component';
 import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
@@ -50,7 +49,6 @@ import {
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
   MatDatepickerModule, MatNativeDateModule, MatTabsModule
 } from '@angular/material';
-import { BuscarRastreoElementoComponent } from './componentes/rastreo-elemento/buscar-rastreo-elemento/buscar-rastreo-elemento.component';
 import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
 import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
 import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
@@ -77,7 +75,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     FormularioJerarquizacionComponent,
     RastreoElementoComponent,
     FormularioReComponent,
-    EditarReComponent,
     LocalizacionElementoComponent,
     SitiosComponent,
     AreasManejadasComponent,
@@ -99,7 +96,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
-    BuscarRastreoElementoComponent,
     BuscarLocalizacionElementoComponent,
     BuscarProtocoloLeComponent,
     BuscarAreasManejadasComponent,
