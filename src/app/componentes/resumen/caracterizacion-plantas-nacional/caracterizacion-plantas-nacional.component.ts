@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
@@ -22,6 +22,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
+  selected = new FormControl(0);
 
   settings_CamposOpcionales = {
     columns: {
@@ -175,6 +176,19 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this._success.next(mensaje);
   }
 
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
 
+  }
+  tabPagina3() {
+    this.selected.setValue(2);
 
+  }
+  tabPagina4() {
+    this.selected.setValue(3);
+
+  }
 }

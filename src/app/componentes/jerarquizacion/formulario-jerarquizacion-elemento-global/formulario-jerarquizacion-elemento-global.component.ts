@@ -159,10 +159,11 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-  tabPagina2() {
-    this.selected.setValue(1);
-  }
   tabPagina1() {
     this.selected.setValue(0);
   }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+ 
 }
