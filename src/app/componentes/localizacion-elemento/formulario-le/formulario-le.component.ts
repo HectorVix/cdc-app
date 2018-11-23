@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
@@ -50,6 +50,7 @@ export class FormularioLeComponent implements OnInit {
       }
     }
   };
+  selected = new FormControl(0);
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearFormLocalizacion_Elemento();
   }
@@ -182,5 +183,13 @@ export class FormularioLeComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+  tabPagina3() {
+    this.selected.setValue(2);
+  }
 }

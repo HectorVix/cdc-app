@@ -22,7 +22,6 @@ import { LocalizacionElementoComponent } from './componentes/localizacion-elemen
 import { SitiosComponent } from './componentes/sitios/sitios.component';
 import { AreasManejadasComponent } from './componentes/areas-manejadas/areas-manejadas.component';
 import { FormularioLeComponent } from './componentes/localizacion-elemento/formulario-le/formulario-le.component';
-import { EditarLeComponent } from './componentes/localizacion-elemento/editar-le/editar-le.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FuenteComponent } from './componentes/fuente/fuente.component';
 import { RegistroSitioComponent } from './componentes/sitios/registro-sitio/registro-sitio.component';
@@ -49,7 +48,6 @@ import {
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
   MatDatepickerModule, MatNativeDateModule, MatTabsModule
 } from '@angular/material';
-import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-elemento/buscar-localizacion-elemento/buscar-localizacion-elemento.component';
 import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
 import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
 import { BuscarSitioComponent } from './componentes/sitios/buscar-sitio/buscar-sitio.component';
@@ -78,7 +76,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     SitiosComponent,
     AreasManejadasComponent,
     FormularioLeComponent,
-    EditarLeComponent,
     FuenteComponent,
     RegistroSitioComponent,
     FormularioAreasManejadasComponent,
@@ -95,7 +92,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
-    BuscarLocalizacionElementoComponent,
     BuscarProtocoloLeComponent,
     BuscarAreasManejadasComponent,
     BuscarSitioComponent,
