@@ -53,7 +53,6 @@ import { BuscarLocalizacionElementoComponent } from './componentes/localizacion-
 import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
 import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
 import { BuscarSitioComponent } from './componentes/sitios/buscar-sitio/buscar-sitio.component';
-import { BuscarCaracterizacionPlantasNacionalComponent } from './componentes/resumen/buscar-caracterizacion-plantas-nacional/buscar-caracterizacion-plantas-nacional.component';
 import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
@@ -100,7 +99,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     BuscarProtocoloLeComponent,
     BuscarAreasManejadasComponent,
     BuscarSitioComponent,
-    BuscarCaracterizacionPlantasNacionalComponent,
     BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
     TablaBusquedaComponent,
