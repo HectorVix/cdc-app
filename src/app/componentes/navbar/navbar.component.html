@@ -1,48 +1,73 @@
 <div class="fondo">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <div class="icon-bar" role="navigation">
     <a class="active">
-      <img src="iconos/logo32.ico"> CDC
+      <img src="iconos/logo.ico"> CDC
     </a>
     <a [routerLink]="['/home']">
-      <img src="iconos/home32.ico"> Home
+      <img src="iconos/home.ico"> Home
     </a>
     <a [routerLink]="['/fuente']">
-      <img src="iconos/fuente32.ico"> Fuentes
+      <img src="iconos/fuente.ico"> Fuentes
     </a>
-    <a [routerLink]="['/jerarquizacion']">
-      <img src="iconos/jerarquizacion32.ico"> Jerarquía
+    <a [matMenuTriggerFor]="elemento">
+      <img src="iconos/elemento.ico"> Elemento
     </a>
-    <a [routerLink]="['/rastreoElemento']">
-      <img src="iconos/rastreo32.ico"> Rastreo
+    <a [matMenuTriggerFor]="resumen">
+      <img src="iconos/resumen.ico"> Resumen
     </a>
-    <a [routerLink]="['/resumen']">
-      <img src="iconos/resumen32.ico"> Resumen
-    </a>
-    <a [routerLink]="['/localizacionElemento']">
-      <img src="iconos/localizacion32.ico"> Localización
-    </a>
-    <a [routerLink]="['/estadistica']">
-      <img src="iconos/estadisticas32.ico"> Estadística
-    </a>
-    <a [routerLink]="['/sitios']">
-      <img src="iconos/sitios32.ico"> Sitios
-    </a>
-    <a (click)="Logout()"> 
-      <img src="iconos/lock32.ico"> Cerar sesión
-    </a>
-    <a [routerLink]="['/areasManejadas']">
-      <img src="iconos/area32.ico"> Área
-    </a>
-    <a [routerLink]="['/contactos']">
-      <img src="iconos/contacto32.ico"> Contactos
+    <a [matMenuTriggerFor]="depto">
+      <img src="iconos/ruta.ico"> Depto
     </a>
     <a [routerLink]="['/perfil']">
       <img src="iconos/perfil32.ico"> Perfil
     </a>
-    <a [routerLink]="['/ayuda']">
-      <img src="iconos/ayuda32.ico"> Ayuda
+    <a (click)="Logout()">
+      <img src="iconos/lock32.ico"> Cerar sesión
     </a>
-   
   </div>
 </div>
+
+<mat-menu #elemento="matMenu">
+  <button mat-menu-item [routerLink]="['/jerarquizacion']">
+    <img src="iconos/jerarquizacion.ico">Jerarquización</button>
+  <button mat-menu-item [routerLink]="['/rastreoElemento']">
+    <img src="iconos/rastreo.ico">Rastreo</button>
+  <button mat-menu-item [routerLink]="['/localizacionElemento']">
+    <img src="iconos/localizacion.ico">Localización</button>
+</mat-menu>
+<mat-menu #depto="matMenu">
+  <button mat-menu-item [routerLink]="['/sitios']">
+    <img src="iconos/sitios.ico">Sitios</button>
+  <button mat-menu-item [routerLink]="['/areasManejadas']">
+    <img src="iconos/area.ico">Areás</button>
+  <button mat-menu-item [routerLink]="['/contactos']">
+    <img src="iconos/contacto.ico">Contactos</button>
+</mat-menu>
+<mat-menu #resumen="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="reportes">Reportes</button>
+  <button mat-menu-item [routerLink]="['/resumen']">Resumen</button>
+</mat-menu>
+<mat-menu #reportes="matMenu">
+  <button mat-menu-item>Fuente</button>
+  <button mat-menu-item [matMenuTriggerFor]="elementoReporte">Elemento</button>
+  <button mat-menu-item>Plantas</button>
+  <button mat-menu-item>Vertebrados</button>
+  <button mat-menu-item>Insectos</button>
+  <button mat-menu-item [matMenuTriggerFor]="deptoReporte">Departamento</button>
+</mat-menu>
+<mat-menu #elementoReporte="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="jerarquizacion">Jerarquización</button>
+  <button mat-menu-item>Rastreo</button>
+  <button mat-menu-item>Localización</button>
+</mat-menu>
+<mat-menu #jerarquizacion="matMenu">
+  <button mat-menu-item>Elemento</button>
+  <button mat-menu-item>Global</button>
+  <button mat-menu-item>Nacional</button>
+  <button mat-menu-item>Subnacional</button>
+</mat-menu>
+<mat-menu #deptoReporte="matMenu">
+  <button mat-menu-item>Sitios</button>
+  <button mat-menu-item>Areás</button>
+  <button mat-menu-item>Contactos</button>
+</mat-menu>

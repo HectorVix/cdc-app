@@ -46,7 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDatepickerModule, MatNativeDateModule, MatTabsModule
+  MatDatepickerModule, MatNativeDateModule, MatTabsModule ,MatMenuModule
 } from '@angular/material';
 import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
 import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
@@ -59,6 +59,8 @@ import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
+// import {FlexLayoutModule} from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -114,7 +116,7 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
     MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,
     MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule,
-    ModalGalleryModule.forRoot()
+    ModalGalleryModule.forRoot(),MatMenuModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [UsuarioService, DatePipe, AuthGuard, {
