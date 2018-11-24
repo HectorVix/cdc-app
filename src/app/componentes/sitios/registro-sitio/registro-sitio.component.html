@@ -1,670 +1,624 @@
 <div class="card-content white">
     <div class="card-body">
-        <form [formGroup]="sitioForm">
-            <ngb-tabset #fRegistroSitio="ngbTabset">
-                <!-- página 1 -->
-                <ngb-tab id="tab-selectbyid1">
-                    <ng-template ngbTabTitle>
-                        <b>1</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Identificadores</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">CODSITIO:</label>
-                                </div>
-                                <div class="md-form col-md-4 mt-5 ">
-                                    <input mdbInputDirective type="text" id="formNomcomungs" class="form-control" formControlName="codsitio" data-error="Incorrecto"
-                                        data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">NOMSITIO:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-20">
-                                    <input mdbInputDirective type="text" id="formNomsitio" class="form-control" formControlName="nomsitio" data-error=" " data-success=" ">
-                                    <label for="formNomsitio"></label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">SIN.SITIO:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-20">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formSinsitio" class="md-textarea form-control" formControlName="sinsitio" rows="2"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formSinsitio">Anote</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row  mx-auto color-green">
-                                <ng2-smart-table [settings]="settings_Identificadores_Sitio" [source]="source_Identificadores_Sitio">
-                                </ng2-smart-table>
-                            </div>
-                            <!-- fin row -->
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Localizadores</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">NACION:</label>
-                                </div>
-                                <div class="md-form col-md-2 mt10">
-                                    <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
-                                </div>
-                                <div class="md-form col-md-2 mt10">
-                                    <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
-                                    <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
-                                </div>
-                                <div class="md-form col-md-2 mt10">
-                                    <input mdbInputDirective type="text" id="formSiteresp" class="form-control" formControlName="siteresp" data-error=" " data-success=" ">
-                                    <label for="formSiteresp">&nbsp;&nbsp;&nbsp;&nbsp;SITERESP</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row  mx-auto color-green">
-                                <ng2-smart-table [settings]="settings_Localizadores_Sitio" [source]="source_Localizadores_Sitio">
-                                </ng2-smart-table>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">LAT:</label>
-                                </div>
-                                <div class="md-form col-md-2 mt10">
-                                    <input mdbInputDirective type="text" id="formLat" class="form-control" formControlName="lat" data-error=" " data-success=" ">
-                                    <label for="formLat"></label>
-                                </div>
-                                <div class="md-form col-md-2 mt10">
-                                    <input mdbInputDirective type="text" id="formLong" class="form-control" formControlName="long1" data-error=" " data-success=" ">
-                                    <label for="formLong">&nbsp;&nbsp;&nbsp;&nbsp;LONG</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">S:</label>
-                                </div>
-
-                                <div class="md-form  col-md-2 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formS" class="form-control" formControlName="coords" data-error=" " data-success=" ">
-                                    <label for="formS"></label>
-                                </div>
-                                <div class="md-form col-md-2 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formN" class="form-control" formControlName="coordn" data-error=" " data-success=" ">
-                                    <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
-                                </div>
-                                <div class="md-form col-md-2 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formE" class="form-control" formControlName="coorde" data-error=" " data-success=" ">
-                                    <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
-                                </div>
-                                <div class="md-form col-md-2 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formO" class="form-control" formControlName="coordo" data-error=" " data-success=" ">
-                                    <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
-                                </div>
-
-                            </div>
-                            <!--fin row  -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">DIRECCION:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formDireccion" class="md-textarea form-control" formControlName="direccion" rows="3"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formDireccion">Anote la dirección exacta al Sitio. Utilice una marca ubicable y que sea relativamente
-                                        permanente en o cerca del sitio, como punto de partida.</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Descriptores del Sitio/Diseño</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">DESCRITO:</label>
-                                </div>
-                                <div class="md-form  col-md-9">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formDescrito" class="md-textarea form-control" formControlName="descrito" rows="3"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formDescrito">Escriba una descripción visual, general, del Sitio.</label>
-                                </div>
-
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">MAPASITIO:</label>
-                                </div>
-                                <div class="col-md-7 mt-20">
-                                    <mat-form-field>
-                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="mapasitio">
-                                            <mat-option>-- Ninguna --</mat-option>
-                                            <mat-option *ngFor="let sMapasitio of criterio_mapasitio" [value]="sMapasitio.value">
-                                                {{sMapasitio.viewValue}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="md-form col-md-2  input-group-append mt-20">
-                                    <input mdbInputDirective type="text" id="formFechamapa" class="form-control" formControlName="fechamapa" data-error=" " data-success=" "
-                                        ngbDatepicker #dFechamapa="ngbDatepicker">
-                                    <label for="formFechamapa">&nbsp;&nbsp;&nbsp;&nbsp;FECHAMAPA</label>
-                                    <div (click)="dFechamapa.toggle()">
-                                        <i class="fa fa-calendar prefix"></i>
+        <ngb-tabset #fRegistroSitio="ngbTabset">
+            <ngb-tab id="tab-formulario">
+                <ng-template ngbTabTitle>
+                    <b>Formulario</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form [formGroup]="sitioForm">
+                        <mat-tab-group dynamicHeight [selectedIndex]="selected.value">
+                            <mat-tab label="1">
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Identificadores</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">CODSITIO:</label>
+                                        </div>
+                                        <div class="md-form col-md-4 mt-5 ">
+                                            <input mdbInputDirective type="text" id="formNomcomungs" class="form-control" formControlName="codsitio" data-error="Incorrecto"
+                                                data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">NOMSITIO:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20">
+                                            <input mdbInputDirective type="text" id="formNomsitio" class="form-control" formControlName="nomsitio" data-error=" " data-success=" ">
+                                            <label for="formNomsitio"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">SIN.SITIO:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-20">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formSinsitio" class="md-textarea form-control" formControlName="sinsitio" rows="2"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formSinsitio">Anote</label>
+                                        </div>
+                                    </div>
+                                    <div class="row  mx-auto color-green">
+                                        <ng2-smart-table [settings]="settings_Identificadores_Sitio" [source]="source_Identificadores_Sitio">
+                                        </ng2-smart-table>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">DIBUJANTE:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formDibujantes" class="form-control" formControlName="dibujante" data-error=" "
-                                        data-success=" ">
-                                    <label for="formDibujantes">&nbsp;&nbsp;&nbsp;&nbsp;Escriba el nombre de la persona , quien diseño el Sitio y determino
-                                        sus limites.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">JUSTLIMITE:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formJustlimite" class="md-textarea form-control" formControlName="justlimite"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formJustlimite">Explique los argumentos biológicos utilizados para determinar la ubicación de los limites
-                                        primarios y secundarios del Sitio.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">AREAPRISEC:</label>
-                                </div>
-                                <div class="md-form col-md-2 mt-20">
-                                    <input mdbInputDirective type="number" id="formAreaPrisecU" class="form-control" formControlName="areaprisec1" data-error="Incorrecto"
-                                        data-success=" ">
-                                    <label for="formAreaPrisecU"></label>
-                                </div>
-                                <h5>
-                                    <label for="">.</label>
-                                </h5>
-                                <div class="md-form col-md-1 mt-20">
-                                    <input mdbInputDirective type="number" id="formAreaPrisecD" class="form-control" formControlName="areaprisec2" data-error="Incorrecto"
-                                        data-success=" ">
-                                </div>
-
-                                <div class="md-form col-md-2 mt-20">
-                                    <input mdbInputDirective type="number" id="formAreaPricU" class="form-control" formControlName="areapri1" data-error=" "
-                                        data-success=" ">
-                                    <label for="formAreaPricU">&nbsp;&nbsp;&nbsp;&nbsp;AREAPRI</label>
-                                </div>
-                                <h5>
-                                    <label for="">.</label>
-                                </h5>
-                                <div class="md-form col-md-1 mt-20">
-                                    <input mdbInputDirective type="number" id="formAreaPrisD" class="form-control" formControlName="areapri2" data-error=" "
-                                        data-success=" ">
-                                </div>
-
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">AREATOTAL:</label>
-                                </div>
-                                <div class="md-form col-md-2 mt-20 ">
-                                    <input mdbInputDirective type="number" id="formAreaTotalU" class="form-control" formControlName="areatotal1" data-error=" "
-                                        data-success=" ">
-                                </div>
-                                <h5>
-                                    <label for="">.</label>
-                                </h5>
-                                <div class="md-form col-md-1 mt-20">
-                                    <input mdbInputDirective type="number" id="formAreaTotalD" class="form-control" formControlName="areatotal2" data-error=" "
-                                        data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMSITIO:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComsitio" class="md-textarea form-control" formControlName="comsitio" rows="2"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formComsitio">Comentarios generales con respecto al sitio.</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="text-center ">
-                            <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Siguiente</button>
-                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                        </div>
-
-                    </ng-template>
-                    <!-- fin ng-template -->
-                </ngb-tab>
-                <!-- fin ngb-tab -->
-                <!-- página 2 -->
-                <ngb-tab id="tab-selectbyid2">
-                    <ng-template ngbTabTitle>
-                        <b>2</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Importancia del Sitio</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RANGOANT:</label>
-                                </div>
-                                <div class="col-md-6 mt5">
-                                    <mat-form-field>
-                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangoant">
-                                            <mat-option>-- Ninguna --</mat-option>
-                                            <mat-option *ngFor="let sRangoant of criterio_rangoant" [value]="sRangoant.value">
-                                                {{sRangoant.viewValue}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMRANGO:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComrango" class="md-textarea form-control" formControlName="comrango" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formComrango">Escriba el comentario que justifique la jeraquía ecológica del sitio que se indicó.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">IMPDIVBIOL:</label>
-                                </div>
-                                <div class="col-md-5 mt-20">
-                                    <mat-form-field>
-                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impdivbiol">
-                                            <mat-option>-- Ninguna --</mat-option>
-                                            <mat-option *ngFor="let sImpdivbiol of criterio_impdivbiol" [value]="sImpdivbiol.value">
-                                                {{sImpdivbiol.viewValue}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMDIVBIOL:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComdivbiol" class="md-textarea form-control" formControlName="comdivbiol"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formComdivbiol">Escriba un comentario que justifique la jeraquía sobre significado para la diversidad
-                                        biológica.
-                                    </label>
-                                </div>
-
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">IMPNODIVBIOL:</label>
-                                </div>
-                                <div class="col-md-6 mt-20">
-                                    <mat-form-field>
-                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impnodivbiol">
-                                            <mat-option>-- Ninguna --</mat-option>
-                                            <mat-option *ngFor="let sImpnodivbiol of criterio_impnodivbiol" [value]="sImpnodivbiol.value">
-                                                {{sImpnodivbiol.viewValue}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMNODIVBIOL:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComnodivbiol" class="md-textarea form-control" formControlName="comnodivbiol"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formComnodivbiol">Escriba comentrios que justifiquen el significado, no relacionado con la diversidad biológica.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">URGENCIA:</label>
-                                </div>
-                                <div class="col-md-7 mt-20">
-                                    <mat-form-field>
-                                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="urgencia">
-                                            <mat-option>-- Ninguna --</mat-option>
-                                            <mat-option *ngFor="let sUrgencia of criterio_urgencia" [value]="sUrgencia.value">
-                                                {{sUrgencia.viewValue}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMURGENCIA:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComurgencia" class="md-textarea form-control" formControlName="comurgencia"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formComurgencia">Escriba un comentario que justifique la jerarquía de urgencia que se asigna al Sitio.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Bienes Raíces y Protección</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">INTENCCONS:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formIntenccons" class="md-textarea form-control" formControlName="intenccons"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formIntenccons">Resuma la intenciones de conservacion generales para el Sitio.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">NUMLOTES:</label>
-                                </div>
-                                <div class="md-form col-md-3 mt-20 ">
-                                    <input mdbInputDirective type="number" id="formNumlotes" class="form-control" formControlName="numlotes" data-error=" " data-success=" ">
-                                </div>
-                                <div class="md-form col-md-3 mt-20 ">
-                                    <input mdbInputDirective type="number" id="formCostestprot" class="form-control" formControlName="costestprot1" data-error=" "
-                                        data-success=" ">
-                                    <label for="formCostestprot">&nbsp;&nbsp;&nbsp;&nbsp;COSTESTPROT</label>
-                                </div>
-                                <h5>
-                                    <label for="">.</label>
-                                </h5>
-                                <div class="md-form col-md-1 mt-20 ">
-                                    <input mdbInputDirective type="number" id="formCostestprot" class="form-control" formControlName="costestprot2" data-error=" "
-                                        data-success=" ">
-                                    <label for="formCostestprot"></label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">CODDESIG:</label>
-                                </div>
-                                <div class="md-form col-md-3 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formCoddesig" class="form-control" formControlName="coddesig" data-error=" " data-success=" ">
-                                </div>
-                                <div class="md-form col-md-3 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formDesignacion" class="form-control" formControlName="designacion" data-error=" "
-                                        data-success=" ">
-                                    <label for="formDesignacion">&nbsp;&nbsp;&nbsp;&nbsp;DESIGNACION</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMPROT:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-20">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComprot" class="md-textarea form-control" formControlName="comprot" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formComprot">Resuma el nivel general de la protección actualmente dada al sitio.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Administracción</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMUSOTIERRA:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComusotierra" class="md-textarea form-control" formControlName="comusotierra"
-                                        rows="1" data-error=" " data-success=" " required></textarea>
-                                    <label for="formComusotierra">Describa el uso actual y pasado del terreno, las mejoras y estructuras existentes.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMPELIGRNAT:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formCompeligrnat" class="md-textarea form-control" formControlName="compeligrnat"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formCompeligrnat">Describa los peligros o riesgos naturales potenciales (p.ej.: riscos, cavernas, cascadas,
-                                        etc.).
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMEXOTICAS:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComexoticas" class="md-textarea form-control" formControlName="comexoticas"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formComexoticas">Describa la flora y fauna exótica potencialente dañina.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">USOTIERRAF</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formUsotierraf" class="md-textarea form-control" formControlName="usotierraf"
-                                        rows="1" data-error=" " data-success=" "></textarea>
-                                    <label for="formUsotierraf">Describa los usos de la tierra, fuera del Sitio (p.ej.: cultivos, tala de madera, pastoreo,
-                                        basurero o botadero, etc.).</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">NECINFORM:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-0">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecinform" class="md-textarea form-control" formControlName="necinform" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formNecinform">Indique en forma resumida, el tipo de información que se necesita con el fin de manejar
-                                        adecuadamente el Sitio y los elementos que contiene.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">NECMANEJO:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formNecmanejo" class="md-textarea form-control" formControlName="necmanejo" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formNecmanejo">Resuma la necesidades de manejo esperadas para el Sitio y para los elementos dentro de
-                                        este.
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">COMAM:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-10">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formComam" class="md-textarea form-control" formControlName="comam" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formComam">Explique la relación entre el Sitio y el Area de Manejo.</label>
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                        </div>
-                        <!-- final modal-content -->
-                        <div class="text-center ">
-                            <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid1')" mdbWavesEffect>Atras</button>
-                            <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid3')" mdbWavesEffect>Siguiente</button>
-                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                        </div>
-                    </ng-template>
-                    <!-- fin ng-template -->
-                </ngb-tab>
-                <!-- fin ngb-tab -->
-                <ngb-tab id="tab-selectbyid3">
-                    <ng-template ngbTabTitle>
-                        <b>3</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Campos Opcionales</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RBS.OPC1:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-3 ">
-                                    <input mdbInputDirective type="text" id="formRbsopc1" formControlName="rbsopc1" class="form-control" data-error=" " data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RBS.OPC2:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formRbsopc2" formControlName="rbsopc2" class="form-control" data-error=" " data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RBS.OPC3:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formRbsopc3" formControlName="rbsopc3" class="form-control" data-error=" " data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RBS.OPC4:</label>
-                                </div>
-                                <div class="md-form col-md-9 mt-20 ">
-                                    <input mdbInputDirective type="text" id="formRbsopc4" formControlName="rbsopc4" class="form-control" data-error=" " data-success=" ">
-                                </div>
-                            </div>
-                            <!-- fin row -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RBS.OPC5:</label>
-                                </div>
-                                <div class="md-form  col-md-9 mt-20">
-                                    <i class="fa fa-pencil prefix"></i>
-                                    <textarea mdbInputDirective type="text" id="formRbsopc5" class="md-textarea form-control" formControlName="rbsopc5" rows="1"
-                                        data-error=" " data-success=" "></textarea>
-                                    <label for="formRbsopc5">Anote</label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin modal-content -->
-                        <div class="modal-content">
-                            <div class="modal-header color-green">
-                                <h5 class="modal-title">Mantenimiento del Registro</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="">RESPDATOS:</label>
-                                </div>
-                                <div class="md-form col-md-4 mt1">
-                                    <input mdbInputDirective type="text" id="formRespdatos" class="form-control" formControlName="respdatos" data-error=" " data-success=" ">
-                                </div>
-                                <div class="md-form form-md-2  input-group-append mt10">
-                                    <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
-                                        data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
-                                    <label for="formActualizar">ACTUALIZAR</label>
-                                    <div (click)="dActualizar.toggle()">
-                                        <i class="fa fa-calendar prefix"></i>
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Localizadores</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">NACION:</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt10">
+                                            <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
+                                        </div>
+                                        <div class="md-form col-md-2 mt10">
+                                            <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
+                                            <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt10">
+                                            <input mdbInputDirective type="text" id="formSiteresp" class="form-control" formControlName="siteresp" data-error=" " data-success=" ">
+                                            <label for="formSiteresp">&nbsp;&nbsp;&nbsp;&nbsp;SITERESP</label>
+                                        </div>
+                                    </div>
+                                    <div class="row  mx-auto color-green">
+                                        <ng2-smart-table [settings]="settings_Localizadores_Sitio" [source]="source_Localizadores_Sitio">
+                                        </ng2-smart-table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">LAT:</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt10">
+                                            <input mdbInputDirective type="text" id="formLat" class="form-control" formControlName="lat" data-error=" " data-success=" ">
+                                            <label for="formLat"></label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt10">
+                                            <input mdbInputDirective type="text" id="formLong" class="form-control" formControlName="long1" data-error=" " data-success=" ">
+                                            <label for="formLong">&nbsp;&nbsp;&nbsp;&nbsp;LONG</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">S:</label>
+                                        </div>
+                                        <div class="md-form  col-md-2 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formS" class="form-control" formControlName="coords" data-error=" " data-success=" ">
+                                            <label for="formS"></label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formN" class="form-control" formControlName="coordn" data-error=" " data-success=" ">
+                                            <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formE" class="form-control" formControlName="coorde" data-error=" " data-success=" ">
+                                            <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formO" class="form-control" formControlName="coordo" data-error=" " data-success=" ">
+                                            <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">DIRECCION:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formDireccion" class="md-textarea form-control" formControlName="direccion" rows="3"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formDireccion">Anote la dirección exacta al Sitio. Utilice una marca ubicable y que sea relativamente
+                                                permanente en o cerca del sitio, como punto de partida.</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- fin row -->
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Descriptores del Sitio/Diseño</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">DESCRITO:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formDescrito" class="md-textarea form-control" formControlName="descrito" rows="3"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formDescrito">Escriba una descripción visual, general, del Sitio.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">MAPASITIO:</label>
+                                        </div>
+                                        <div class="col-md-7 mt-20">
+                                            <mat-form-field>
+                                                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="mapasitio">
+                                                    <mat-option>-- Ninguna --</mat-option>
+                                                    <mat-option *ngFor="let sMapasitio of criterio_mapasitio" [value]="sMapasitio.value">
+                                                        {{sMapasitio.viewValue}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="md-form col-md-2  input-group-append mt-20">
+                                            <input mdbInputDirective type="text" id="formFechamapa" class="form-control" formControlName="fechamapa" data-error=" " data-success=" "
+                                                ngbDatepicker #dFechamapa="ngbDatepicker">
+                                            <label for="formFechamapa">&nbsp;&nbsp;&nbsp;&nbsp;FECHAMAPA</label>
+                                            <div (click)="dFechamapa.toggle()">
+                                                <i class="fa fa-calendar prefix"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">DIBUJANTE:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formDibujantes" class="form-control" formControlName="dibujante" data-error=" "
+                                                data-success=" ">
+                                            <label for="formDibujantes">&nbsp;&nbsp;&nbsp;&nbsp;Escriba el nombre de la persona , quien diseño el Sitio
+                                                y determino sus limites.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">JUSTLIMITE:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formJustlimite" class="md-textarea form-control" formControlName="justlimite"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formJustlimite">Explique los argumentos biológicos utilizados para determinar la ubicación de
+                                                los limites primarios y secundarios del Sitio.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">AREAPRISEC:</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt-20">
+                                            <input mdbInputDirective type="number" id="formAreaPrisecU" class="form-control" formControlName="areaprisec1" data-error="Incorrecto"
+                                                data-success=" ">
+                                            <label for="formAreaPrisecU"></label>
+                                        </div>
+                                        <h5>
+                                            <label for="">.</label>
+                                        </h5>
+                                        <div class="md-form col-md-1 mt-20">
+                                            <input mdbInputDirective type="number" id="formAreaPrisecD" class="form-control" formControlName="areaprisec2" data-error="Incorrecto"
+                                                data-success=" ">
+                                        </div>
+
+                                        <div class="md-form col-md-2 mt-20">
+                                            <input mdbInputDirective type="number" id="formAreaPricU" class="form-control" formControlName="areapri1" data-error=" "
+                                                data-success=" ">
+                                            <label for="formAreaPricU">&nbsp;&nbsp;&nbsp;&nbsp;AREAPRI</label>
+                                        </div>
+                                        <h5>
+                                            <label for="">.</label>
+                                        </h5>
+                                        <div class="md-form col-md-1 mt-20">
+                                            <input mdbInputDirective type="number" id="formAreaPrisD" class="form-control" formControlName="areapri2" data-error=" "
+                                                data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">AREATOTAL:</label>
+                                        </div>
+                                        <div class="md-form col-md-2 mt-20 ">
+                                            <input mdbInputDirective type="number" id="formAreaTotalU" class="form-control" formControlName="areatotal1" data-error=" "
+                                                data-success=" ">
+                                        </div>
+                                        <h5>
+                                            <label for="">.</label>
+                                        </h5>
+                                        <div class="md-form col-md-1 mt-20">
+                                            <input mdbInputDirective type="number" id="formAreaTotalD" class="form-control" formControlName="areatotal2" data-error=" "
+                                                data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMSITIO:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComsitio" class="md-textarea form-control" formControlName="comsitio" rows="2"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formComsitio">Comentarios generales con respecto al sitio.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center ">
+                                    <button class="btn color-green waves-light" (click)="tabPagina2();" mdbWavesEffect>Siguiente</button>
+                                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="2">
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Importancia del Sitio</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RANGOANT:</label>
+                                        </div>
+                                        <div class="col-md-6 mt5">
+                                            <mat-form-field>
+                                                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangoant">
+                                                    <mat-option>-- Ninguna --</mat-option>
+                                                    <mat-option *ngFor="let sRangoant of criterio_rangoant" [value]="sRangoant.value">
+                                                        {{sRangoant.viewValue}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMRANGO:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComrango" class="md-textarea form-control" formControlName="comrango" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formComrango">Escriba el comentario que justifique la jeraquía ecológica del sitio que se indicó.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">IMPDIVBIOL:</label>
+                                        </div>
+                                        <div class="col-md-5 mt-20">
+                                            <mat-form-field>
+                                                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impdivbiol">
+                                                    <mat-option>-- Ninguna --</mat-option>
+                                                    <mat-option *ngFor="let sImpdivbiol of criterio_impdivbiol" [value]="sImpdivbiol.value">
+                                                        {{sImpdivbiol.viewValue}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMDIVBIOL:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComdivbiol" class="md-textarea form-control" formControlName="comdivbiol"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formComdivbiol">Escriba un comentario que justifique la jeraquía sobre significado para la diversidad
+                                                biológica.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">IMPNODIVBIOL:</label>
+                                        </div>
+                                        <div class="col-md-6 mt-20">
+                                            <mat-form-field>
+                                                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="impnodivbiol">
+                                                    <mat-option>-- Ninguna --</mat-option>
+                                                    <mat-option *ngFor="let sImpnodivbiol of criterio_impnodivbiol" [value]="sImpnodivbiol.value">
+                                                        {{sImpnodivbiol.viewValue}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMNODIVBIOL:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComnodivbiol" class="md-textarea form-control" formControlName="comnodivbiol"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formComnodivbiol">Escriba comentrios que justifiquen el significado, no relacionado con la diversidad
+                                                biológica.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">URGENCIA:</label>
+                                        </div>
+                                        <div class="col-md-7 mt-20">
+                                            <mat-form-field>
+                                                <mat-select placeholder=" " panelClass="color-panel-green" formControlName="urgencia">
+                                                    <mat-option>-- Ninguna --</mat-option>
+                                                    <mat-option *ngFor="let sUrgencia of criterio_urgencia" [value]="sUrgencia.value">
+                                                        {{sUrgencia.viewValue}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMURGENCIA:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComurgencia" class="md-textarea form-control" formControlName="comurgencia"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formComurgencia">Escriba un comentario que justifique la jerarquía de urgencia que se asigna al
+                                                Sitio.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Bienes Raíces y Protección</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">INTENCCONS:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formIntenccons" class="md-textarea form-control" formControlName="intenccons"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formIntenccons">Resuma la intenciones de conservacion generales para el Sitio.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">NUMLOTES:</label>
+                                        </div>
+                                        <div class="md-form col-md-3 mt-20 ">
+                                            <input mdbInputDirective type="number" id="formNumlotes" class="form-control" formControlName="numlotes" data-error=" " data-success=" ">
+                                        </div>
+                                        <div class="md-form col-md-3 mt-20 ">
+                                            <input mdbInputDirective type="number" id="formCostestprot" class="form-control" formControlName="costestprot1" data-error=" "
+                                                data-success=" ">
+                                            <label for="formCostestprot">&nbsp;&nbsp;&nbsp;&nbsp;COSTESTPROT</label>
+                                        </div>
+                                        <h5>
+                                            <label for="">.</label>
+                                        </h5>
+                                        <div class="md-form col-md-1 mt-20 ">
+                                            <input mdbInputDirective type="number" id="formCostestprot" class="form-control" formControlName="costestprot2" data-error=" "
+                                                data-success=" ">
+                                            <label for="formCostestprot"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">CODDESIG:</label>
+                                        </div>
+                                        <div class="md-form col-md-3 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formCoddesig" class="form-control" formControlName="coddesig" data-error=" " data-success=" ">
+                                        </div>
+                                        <div class="md-form col-md-3 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formDesignacion" class="form-control" formControlName="designacion" data-error=" "
+                                                data-success=" ">
+                                            <label for="formDesignacion">&nbsp;&nbsp;&nbsp;&nbsp;DESIGNACION</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMPROT:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-20">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComprot" class="md-textarea form-control" formControlName="comprot" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formComprot">Resuma el nivel general de la protección actualmente dada al sitio.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Administracción</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMUSOTIERRA:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComusotierra" class="md-textarea form-control" formControlName="comusotierra"
+                                                rows="1" data-error=" " data-success=" " required></textarea>
+                                            <label for="formComusotierra">Describa el uso actual y pasado del terreno, las mejoras y estructuras existentes.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMPELIGRNAT:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formCompeligrnat" class="md-textarea form-control" formControlName="compeligrnat"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formCompeligrnat">Describa los peligros o riesgos naturales potenciales (p.ej.: riscos, cavernas,
+                                                cascadas, etc.).
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMEXOTICAS:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComexoticas" class="md-textarea form-control" formControlName="comexoticas"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formComexoticas">Describa la flora y fauna exótica potencialente dañina.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">USOTIERRAF</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formUsotierraf" class="md-textarea form-control" formControlName="usotierraf"
+                                                rows="1" data-error=" " data-success=" "></textarea>
+                                            <label for="formUsotierraf">Describa los usos de la tierra, fuera del Sitio (p.ej.: cultivos, tala de madera,
+                                                pastoreo, basurero o botadero, etc.).</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">NECINFORM:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-0">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formNecinform" class="md-textarea form-control" formControlName="necinform" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formNecinform">Indique en forma resumida, el tipo de información que se necesita con el fin
+                                                de manejar adecuadamente el Sitio y los elementos que contiene.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">NECMANEJO:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formNecmanejo" class="md-textarea form-control" formControlName="necmanejo" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formNecmanejo">Resuma la necesidades de manejo esperadas para el Sitio y para los elementos
+                                                dentro de este.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">COMAM:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-10">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formComam" class="md-textarea form-control" formControlName="comam" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formComam">Explique la relación entre el Sitio y el Area de Manejo.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center ">
+                                    <button class="btn color-green waves-light" (click)="tabPagina1();" mdbWavesEffect>Atras</button>
+                                    <button class="btn color-green waves-light" (click)="tabPagina3();" mdbWavesEffect>Siguiente</button>
+                                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="3">
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Campos Opcionales</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RBS.OPC1:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-3 ">
+                                            <input mdbInputDirective type="text" id="formRbsopc1" formControlName="rbsopc1" class="form-control" data-error=" " data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RBS.OPC2:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formRbsopc2" formControlName="rbsopc2" class="form-control" data-error=" " data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RBS.OPC3:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formRbsopc3" formControlName="rbsopc3" class="form-control" data-error=" " data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RBS.OPC4:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20 ">
+                                            <input mdbInputDirective type="text" id="formRbsopc4" formControlName="rbsopc4" class="form-control" data-error=" " data-success=" ">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RBS.OPC5:</label>
+                                        </div>
+                                        <div class="md-form  col-md-9 mt-20">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective type="text" id="formRbsopc5" class="md-textarea form-control" formControlName="rbsopc5" rows="1"
+                                                data-error=" " data-success=" "></textarea>
+                                            <label for="formRbsopc5">Anote</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-content mat-elevation-z4">
+                                    <div class="modal-header color-green">
+                                        <h5 class="modal-title">Mantenimiento del Registro</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">RESPDATOS:</label>
+                                        </div>
+                                        <div class="md-form col-md-4 mt1">
+                                            <input mdbInputDirective type="text" id="formRespdatos" class="form-control" formControlName="respdatos" data-error=" " data-success=" ">
+                                        </div>
+                                        <div class="md-form form-md-2  input-group-append mt10">
+                                            <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error=" "
+                                                data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                                            <label for="formActualizar">ACTUALIZAR</label>
+                                            <div (click)="dActualizar.toggle()">
+                                                <i class="fa fa-calendar prefix"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center ">
+                                    <div *ngIf="loading">
+                                        <img src="assets/imagenes/load.gif">
+                                    </div>
+                                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                                    <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Atras</button>
+                                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                    <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </form>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-buscar">
+                <ng-template ngbTabTitle>
+                    <b>Buscar</b>
+                    <ng-template ngbTabContent>
+                        <div class="modal-content mat-elevation-z4">
+                            <form class="base-form">
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Codigo del Sitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nombre del Sitio">
+                                </mat-form-field>
+                                <div class="mat-elevation-z8" class="base-form">
+                                    <button mat-raised-button class="color-green">Buscar</button>
+                                    <button mat-raised-button class="color-green">Buscar Todos</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- fin modal-content -->
-                        <div class="text-center ">
-                            <div *ngIf="loading">
-                                <img src="assets/imagenes/load.gif">
-                            </div>
-                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                            <button class="btn color-green waves-light" (click)="fRegistroSitio.select('tab-selectbyid2')" mdbWavesEffect>Atras</button>
-                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                            <button class="btn color-green waves-light" (click)="guardarSitio()" mdbWavesEffect>Guardar</button>
-                        </div>
+                        <app-tabla-busqueda></app-tabla-busqueda>
                     </ng-template>
-                    <!-- fin ng-template -->
-                </ngb-tab>
-                <!-- fin ngb-tab -->
-            </ngb-tabset>
-            <!-- fin ngb-tabset -->
-        </form>
-        <!-- fin form -->
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
-    <!-- fin card-body -->
 </div>
-<!-- fin card-content -->

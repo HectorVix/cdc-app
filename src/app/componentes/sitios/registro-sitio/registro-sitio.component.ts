@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
 import { debounceTime } from 'rxjs/operators';
@@ -54,6 +54,7 @@ export class RegistroSitioComponent implements OnInit {
       },
     }
   };
+  selected = new FormControl(0);
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crearFormSitio();
   }
@@ -158,5 +159,14 @@ export class RegistroSitioComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
+  }
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
+  tabPagina3() {
+    this.selected.setValue(2);
   }
 }

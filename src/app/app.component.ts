@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CanActivate } from '@angular/router';
 
 @Component({
   selector: 'app-root',
