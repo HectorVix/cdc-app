@@ -1,14 +1,9 @@
 <div class="card-content white">
-  <div class="card-body">
-      <ngb-tabset #fProtocolo="ngbTabset">
-          <!-- página 1 -->
-          <ngb-tab id="tab-selectbyid1">
-              <ng-template ngbTabTitle>
-                  <b>Protocolos</b>
-              </ng-template>
-              <ng-template ngbTabContent>
-                  <form [formGroup]="protocoloLeForm">
-                    <div class="modal-content">
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="Formulario">
+            <div class="card-body">
+                <form [formGroup]="protocoloLeForm">
+                    <div class="modal-content mat-elevation-z8">
                         <div class="modal-header  color-green">
                             <h5 class="modal-title">Protocolo LE</h5>
                         </div>
@@ -17,103 +12,92 @@
                                 <label for="">CODIGOE:</label>
                             </div>
                             <div class="md-form col-md-3 mt10">
-                                <input mdbInputDirective type="text" id="formCodigoe" class="form-control"  formControlName="codigoe" data-error=""
-                                  data-success="correcto" required>
-                                  <label for="formCodigoe"></label>
-                              </div> 
-                              <div class="col-md-1">
+                                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="" data-success="correcto"
+                                    required>
+                                <label for="formCodigoe"></label>
+                            </div>
+                            <div class="col-md-1">
                                 <label for="">RANGOG:</label>
                             </div>
                             <div class="col-md-2 mt10">
-                                <select class="form-control color-green color-hover-black"  formControlName="rangog">
-                                 <option *ngFor="let sRangog of criterio_rangog" [value]="sRangog">{{sRangog}}</option>                                
+                                <select class="form-control color-green color-hover-black" formControlName="rangog">
+                                    <option *ngFor="let sRangog of criterio_rangog" [value]="sRangog">{{sRangog}}</option>
                                 </select>
-                              </div>     
-                              <div class="col-md-1">
+                            </div>
+                            <div class="col-md-1">
                                 <label for="">RANGON:</label>
                             </div>
                             <div class="col-md-2 mt10">
                                 <select class="form-control  color-green color-hover-black" formControlName="rangon">
-                                 <option *ngFor="let sRangon of criterio_rangon" [value]="sRangon">{{sRangon}}</option>                                
+                                    <option *ngFor="let sRangon of criterio_rangon" [value]="sRangon">{{sRangon}}</option>
                                 </select>
-                              </div>            
+                            </div>
                         </div>
-                        <!-- fin row -->
                         <div class="row">
-                        <div class="col-md-2">
-                            <label for="">NOMBRE:</label>
+                            <div class="col-md-2">
+                                <label for="">NOMBRE:</label>
+                            </div>
+                            <div class="md-form col-md-9 mt-20 ">
+                                <input mdbInputDirective type="text" id="formNombre" class="form-control" formControlName="nombre" data-error="incorrecto"
+                                    data-success="correcto">
+                                <label for="formNombre"></label>
+                            </div>
                         </div>
-                        <div class="md-form col-md-9 mt-20 ">
-                            <input mdbInputDirective type="text" id="formNombre" class="form-control" formControlName="nombre"  data-error="incorrecto"
-                              data-success="correcto" >
-                              <label for="formNombre"></label>
-                          </div>
-                        </div>
-                        <!-- fin row -->
                         <div class="row">
                             <div class="col-md-2">
                                 <label for="">NOMCOMUN:</label>
                             </div>
                             <div class="md-form col-md-9 mt-20">
-                                <input mdbInputDirective type="text" id="formNomcomun" class="form-control" formControlName="nomcomun"  data-error="incorrecto"
-                                  data-success="correcto" >
-                                  <label for="formNomcomun"></label>
-                              </div>
+                                <input mdbInputDirective type="text" id="formNomcomun" class="form-control" formControlName="nomcomun" data-error="incorrecto"
+                                    data-success="correcto">
+                                <label for="formNomcomun"></label>
+                            </div>
                         </div>
-                        <!-- fin row-->
                         <div class="row">
                             <div class="col-md-8"></div>
                             <div class="md-form col-md-2 input-group-append mt-20">
-                                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha" data-error=" "
-                                  data-success=" " ngbDatepicker #dFecha="ngbDatepicker">
+                                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha" data-error=" " data-success=" "
+                                    ngbDatepicker #dFecha="ngbDatepicker">
                                 <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
                                 <div (click)="dFecha.toggle()">
-                                  <i class="fa fa-calendar prefix"></i>
+                                    <i class="fa fa-calendar prefix"></i>
                                 </div>
-                              </div>
+                            </div>
                         </div>
                         <div class="row mx-auto color-green">
-                            <ng2-smart-table [settings]="settings_Protocolo"
-                             [source]="source_Protocolo">
+                            <ng2-smart-table [settings]="settings_Protocolo" [source]="source_Protocolo">
                             </ng2-smart-table>
                         </div>
-                        <!-- fin row -->
-
-                    </div> 
-                    <!-- fin modal- content -->
-                    <div class="text-center ">
-                            <button class="btn color-green waves-light"  type="submit" mdbWavesEffect>Guardar</button>                     
-                            <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>                    
                     </div>
-                  </form>
-                  <!-- fin form -->                
-              </ng-template>
-              <!-- fin ng-template -->
-          </ngb-tab>
-          <!-- fin ngb-tab -->
-          <!-- página 2 -->
-          <ngb-tab id="tab-selectbyid2">
-                  <ng-template ngbTabTitle>
-                      <b>Editar</b>
-                  </ng-template>
-                  <ng-template ngbTabContent>
-                      <form action="">
-  
-                      </form>
-                      <!-- fin form -->
-                      <div class="text-center ">
-                          <p>
-                              <button class="btn btn-cyan waves-light" type="submit" mdbWavesEffect>Guardar</button>                 
-                              <button class="btn btn-cyan waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                          </p>
-                      </div>
-                  </ng-template>
-                  <!-- fin ng-template -->
-              </ngb-tab>
-          <!-- fin ngb-tab -->         
-      </ngb-tabset>
-      <!-- fin ngb-tabset -->
-  </div>
-  <!-- fin card-body -->
+                    <div class="text-center ">
+                        <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
+                        <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Buscar">
+            <div class="card-body">
+                <div class="modal-content mat-elevation-z8">
+                    <div class="modal-header color-green"></div>
+                    <form class="base-form">
+                        <mat-form-field class="base-full-width">
+                            <input matInput placeholder="Codigo del Elemento">
+                        </mat-form-field>
+                        <mat-form-field class="base-full-width">
+                            <input matInput placeholder="Nombre">
+                        </mat-form-field>
+                        <mat-form-field class="base-full-width">
+                            <input matInput placeholder="Nombre Común">
+                        </mat-form-field>
+                        <div class="mat-elevation-z8" class="base-form">
+                            <button mat-raised-button class="color-green">Buscar</button>
+                            <button mat-raised-button class="color-green">Buscar Todos</button>
+                        </div>
+                    </form>
+                </div>
+                <app-tabla-busqueda></app-tabla-busqueda>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-<!-- fin card-content -->

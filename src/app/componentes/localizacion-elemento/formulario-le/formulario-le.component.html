@@ -9,7 +9,7 @@
           <form [formGroup]="leForm">
             <mat-tab-group dynamicHeight [selectedIndex]="selected.value">
               <mat-tab label="1">
-                <div class="modal-content  ">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Identificadores</h5>
                   </div>
@@ -66,8 +66,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal-content -->
-                <div class="modal-content ">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Localizadores</h5>
                   </div>
@@ -85,7 +84,6 @@
                       <label for="formSubdivision">&nbsp;&nbsp;&nbsp;&nbsp;SUBDIVISION</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">CODSITIO:</label>
@@ -115,9 +113,7 @@
                       <label for="formSitioeva">Anote</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
-
                     <div class="col-md-2">
                       <label for="">PRECISION:</label>
                     </div>
@@ -127,7 +123,6 @@
                       <label for="formPrecision"></label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">NOMMAPA:</label>
@@ -153,7 +148,6 @@
                       <label for="formDiezdiez">&nbsp;&nbsp;&nbsp;&nbsp;DIEZDIEZ</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">COORDENADAS:</label>
@@ -187,7 +181,6 @@
                       <label for="formCoordo">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">DIRECCION:</label>
@@ -212,11 +205,9 @@
                       <label for="formCuenca">&nbsp;&nbsp;&nbsp;&nbsp;CUENCA</label>
                     </div>
                   </div>
-                  <!-- fin row -->
+
                 </div>
-                <!-- fin modal-content -->
-                <!-- Status -->
-                <div class="modal-content ">
+                <div class="modal-content mat-elevation-z4 ">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Status</h5>
                   </div>
@@ -239,7 +230,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">RANGOLE:</label>
@@ -264,7 +254,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--fin row -->
                   <div class="row">
                     <div class="col-md-7"></div>
                     <div class="md-form col-md-2 input-group-append mt-20">
@@ -276,7 +265,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">COMRANGOLE:</label>
@@ -319,15 +307,13 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal-content -->
-                <!--  -->
                 <div class="text-center ">
                   <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
                   <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                 </div>
               </mat-tab>
               <mat-tab label="2">
-                <div class="modal-content">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Descripción</h5>
                   </div>
@@ -359,8 +345,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal-content -->
-                <div class="modal-content ">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Protección</h5>
                   </div>
@@ -368,7 +353,6 @@
                     <ng2-smart-table [settings]="settings_proteccion" [source]="source_proteccion">
                     </ng2-smart-table>
                   </div>
-
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">MASTERRRENO:</label>
@@ -414,7 +398,6 @@
                       </mat-form-field>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">COMMANEJO:</label>
@@ -438,10 +421,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal-content -->
-
-                <!-- Propietario -->
-                <div class="modal-content">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Propietario</h5>
                   </div>
@@ -476,8 +456,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal -content -->
-                <div class="modal-content">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Campos Opcionales</h5>
                   </div>
@@ -489,7 +468,6 @@
                       <input mdbInputDirective type="text" id="formLeopc1" class="form-control" formControlName="leopc1" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC2:</label>
@@ -498,7 +476,6 @@
                       <input mdbInputDirective type="text" id="formLeopc2" class="form-control" formControlName="leopc2" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC3:</label>
@@ -507,8 +484,6 @@
                       <input mdbInputDirective type="text" id="formLeopc3" class="form-control" formControlName="leopc3" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
-
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC4:</label>
@@ -517,7 +492,6 @@
                       <input mdbInputDirective type="text" id="formLeopc4" class="form-control" formControlName="leopc4" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC5:</label>
@@ -529,7 +503,6 @@
                       <label for="formLeopc5">Anote</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">Le.OPC6:</label>
@@ -538,7 +511,6 @@
                       <input mdbInputDirective type="text" id="formLeopc6" class="form-control" formControlName="leopc6" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC7:</label>
@@ -547,7 +519,6 @@
                       <input mdbInputDirective type="text" id="formLeopc7" class="form-control" formControlName="leopc7" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC8:</label>
@@ -556,8 +527,6 @@
                       <input mdbInputDirective type="text" id="formLeopc8" class="form-control" formControlName="leopc8" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
-
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC9:</label>
@@ -566,7 +535,6 @@
                       <input mdbInputDirective type="text" id="formLeopc9" class="form-control" formControlName="leopc9" data-error=" " data-success=" ">
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">LE.OPC10:</label>
@@ -578,9 +546,7 @@
                       <label for="formRcpnopc5">Anote</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                 </div>
-                <!-- fin modal-content -->
                 <div class="text-center">
                   <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
                   <button class="btn color-green waves-light" (click)="tabPagina3()" mdbWavesEffect>Siguiente</button>
@@ -588,7 +554,7 @@
                 </div>
               </mat-tab>
               <mat-tab label="3">
-                <div class="modal-content ">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Comentarios generales</h5>
                   </div>
@@ -604,9 +570,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modal-content -->
-                <!--  -->
-                <div class="modal-content ">
+                <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">Documentación y Mantenimiento</h5>
                   </div>
@@ -645,7 +609,6 @@
                       </mat-form-field>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">MEJORFUENTE</label>
@@ -657,7 +620,6 @@
                       <label for="formMejorfuente">El mejor fuente de información sobre esta LE; no necesariamente la más reciente.</label>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">CODFUENTE</label>
@@ -685,7 +647,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">CC:</label>
@@ -709,7 +670,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">RESPDATOS:</label>
@@ -726,9 +686,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- fin row -->
                 </div>
-                <!--fin modal-content  -->
                 <div class="text-center ">
                   <div *ngIf="loading">
                     <img src="assets/imagenes/load.gif">
@@ -739,7 +697,6 @@
                   <button class="btn color-green waves-light" (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
                 </div>
               </mat-tab>
-
             </mat-tab-group>
           </form>
         </ng-template>
@@ -771,7 +728,5 @@
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
-    <!-- fin form -->
   </div>
-  <!-- fin card-body -->
 </div>

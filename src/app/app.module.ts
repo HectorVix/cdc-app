@@ -46,11 +46,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDatepickerModule, MatNativeDateModule, MatTabsModule ,MatMenuModule
+  MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule
 } from '@angular/material';
-import { BuscarProtocoloLeComponent } from './componentes/localizacion-elemento/buscar-protocolo-le/buscar-protocolo-le.component';
 import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
-import { BuscarSitioComponent } from './componentes/sitios/buscar-sitio/buscar-sitio.component';
 import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
@@ -94,9 +92,7 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
-    BuscarProtocoloLeComponent,
     BuscarAreasManejadasComponent,
-    BuscarSitioComponent,
     BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
     TablaBusquedaComponent,
@@ -116,7 +112,7 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
     MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,
     MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule,
-    ModalGalleryModule.forRoot(),MatMenuModule
+    ModalGalleryModule.forRoot(), MatMenuModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [UsuarioService, DatePipe, AuthGuard, {
