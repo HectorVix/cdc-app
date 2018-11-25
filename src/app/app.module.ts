@@ -48,8 +48,6 @@ import {
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
   MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule
 } from '@angular/material';
-import { BuscarAreasManejadasComponent } from './componentes/areas-manejadas/buscar-areas-manejadas/buscar-areas-manejadas.component';
-import { BuscarCaracterizacionVertebradosNacionalComponent } from './componentes/resumen/buscar-caracterizacion-vertebrados-nacional/buscar-caracterizacion-vertebrados-nacional.component';
 import { BuscarContactosComponent } from './componentes/contactos/buscar-contactos/buscar-contactos.component';
 import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
 import 'hammerjs';
@@ -92,8 +90,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
-    BuscarAreasManejadasComponent,
-    BuscarCaracterizacionVertebradosNacionalComponent,
     BuscarContactosComponent,
     TablaBusquedaComponent,
     GaleriaComponent,

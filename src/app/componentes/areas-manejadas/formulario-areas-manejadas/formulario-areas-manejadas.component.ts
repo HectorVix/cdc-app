@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Elementos_AreasManejadas, CamposOpcionales } from '../../../modelo/tablas/tabla';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { UsuarioService } from '../../../servicios/usuario.service';
@@ -49,7 +49,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       }
     }
   };
-
+  selected = new FormControl(0);
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.crear_areaManejoForm();
   }
@@ -153,5 +153,10 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
+  tabPagina2() {
+    this.selected.setValue(1);
+  }
 }

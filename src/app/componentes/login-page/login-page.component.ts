@@ -45,6 +45,7 @@ export class LoginPageComponent implements OnInit {
 
     this.crearRegistroForm();
     this.restablecerContrasenaForm();
+    localStorage.removeItem('userToken');
   }
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
