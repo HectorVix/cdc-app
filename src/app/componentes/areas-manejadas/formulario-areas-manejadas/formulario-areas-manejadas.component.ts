@@ -6,6 +6,8 @@ import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
 import { area_Modelo } from '../../../modelo/area/area-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-formulario-areas-manejadas',
   templateUrl: './formulario-areas-manejadas.component.html',
@@ -50,7 +52,8 @@ export class FormularioAreasManejadasComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crear_areaManejoForm();
   }
 
@@ -158,5 +161,15 @@ export class FormularioAreasManejadasComponent implements OnInit {
   }
   tabPagina2() {
     this.selected.setValue(1);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarArea();
+    });
   }
 }

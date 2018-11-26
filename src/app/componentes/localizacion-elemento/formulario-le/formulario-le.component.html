@@ -694,7 +694,7 @@
                   <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Atras</button>
                   <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                  <button class="btn color-green waves-light" (click)="guardarLocalizacion()" mdbWavesEffect>Guardar</button>
+                  <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
                 </div>
               </mat-tab>
             </mat-tab-group>

@@ -7,6 +7,8 @@ import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-mo
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',
@@ -27,7 +29,8 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crear_Jerarquizacion_Subnacional();
   }
 
@@ -129,5 +132,14 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-}
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarRegistroJerarquizacionSubnacional();
+    });
+  }
+}

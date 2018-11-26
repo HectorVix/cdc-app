@@ -5,7 +5,8 @@ import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { sitio_Modelo } from '../../../modelo/sitio/sitio-modelo';
-//import { criterio_le } from '.././criterio-le';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 
 import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tablas/tabla';
 @Component({
@@ -55,7 +56,8 @@ export class RegistroSitioComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crearFormSitio();
   }
 
@@ -168,5 +170,15 @@ export class RegistroSitioComponent implements OnInit {
   }
   tabPagina3() {
     this.selected.setValue(2);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarSitio();
+    });
   }
 }

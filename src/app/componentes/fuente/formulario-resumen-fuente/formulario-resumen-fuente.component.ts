@@ -9,7 +9,8 @@ import { UsuarioService } from '../../../servicios/usuario.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -37,9 +38,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   floraList: string[] = ['Flora', 'Floraac', 'Floraterp', 'Plnovasc', 'Microorg', 'Infositio'];
   faunaList: string[] = ['Fauna', 'Faunaac', 'Faunaterr', 'Moluscos', 'Insectos', 'Crustaceos', 'Otroartrop', 'otroinvert', 'Peces', 'Anfibios', 'reptiles', 'Aves', 'Mamiferos', 'Cienfisic', 'Fisiotopo'];
   otrosList: string[] = ['Hidrol', 'Geologia', 'Suelos', 'Clima', 'Biologia', 'Ecologia', 'Funecol', 'Diversnat', 'Inventario', 'Tecinvest', 'Am', 'Planmanejo', 'Tecmanejo', 'Estimpamb', 'Organprot', 'Herrprot'];
- //loading
- loading:boolean;
-  constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService) {
+  //loading
+  loading: boolean;
+  constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService, private dialog: MatDialog) {
     this.crearForm_ResumenesFuente();
   }
   crearForm_ResumenesFuente() {
@@ -187,19 +188,19 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   //agrega una nueva fuente
   addFuente(fuente: fuente_Modelo): void {
-    this.loading=true;
+    this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioServicio.addFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
           this.cargarArchivos(resFuente.fuenteId);
-          this.loading=false;
+          this.loading = false;
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
           //  this.crearFormFuente();
 
         }, err => {
-          this.loading=false;
+          this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
         });
   }
@@ -212,5 +213,15 @@ export class FormularioResumenFuenteComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarFuente();
+    });
   }
 }

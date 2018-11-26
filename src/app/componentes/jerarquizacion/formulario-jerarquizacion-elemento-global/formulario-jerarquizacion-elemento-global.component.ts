@@ -9,6 +9,8 @@ import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion/jer
 import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 const now = new Date();
 
 @Component({
@@ -36,7 +38,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, public datepipe: DatePipe, private usuarioService: UsuarioService, private dialog: MatDialog) {
     this.crear_Jerarquizacion_Global();
   }
 
@@ -165,5 +167,14 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   tabPagina2() {
     this.selected.setValue(1);
   }
- 
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarRegistroJerarquiazacionGlobal();
+    });
+  }
 }

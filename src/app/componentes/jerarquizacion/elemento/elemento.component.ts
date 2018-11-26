@@ -9,10 +9,9 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModelo } from '../../../modelo/usuario/usuario-modelo';
 import { ControlErrorStateMatcher } from '../../../modelo/error/error-state-matcher';
 import { Subject } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource ,MatSelectModule, MatDialog} from '@angular/material';
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
-import { MatSelectModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 
 export interface ElementoDato {
@@ -66,7 +65,7 @@ export class ElementoComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
-    public dialog: MatDialog) {
+    private dialog: MatDialog) {
     this.crearForm_Elemento();
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);

@@ -6,6 +6,8 @@ import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -60,7 +62,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       }
     }
   };
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional();
   }
 
@@ -190,5 +193,15 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   tabPagina4() {
     this.selected.setValue(3);
 
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarCPlanta();
+    });
   }
 }

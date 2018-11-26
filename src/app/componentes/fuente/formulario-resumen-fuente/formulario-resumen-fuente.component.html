@@ -258,7 +258,7 @@
             </div>
             <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
             <button class="btn  color-green waves-light" (click)="cancelar()" mdbWavesEffect>Cancelar</button>
-            <button class="btn  color-green waves-light" mdbWavesEffect (click)="guardarFuente()">Guardar</button>
+            <button class="btn  color-green waves-light" mdbWavesEffect (click)="openDialogo()">Guardar</button>
 
           </div>
         </form>

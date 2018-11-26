@@ -10,6 +10,8 @@ import { criterio_re } from '../../../modelo/select/overview-rastreo';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -38,7 +40,8 @@ export class FormularioReComponent implements OnInit {
   selected = new FormControl(0);
 
   constructor(
-    private fb: FormBuilder, private usuarioService: UsuarioService) {
+    private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crearFormRastreoElemento();
   }
 
@@ -186,5 +189,15 @@ export class FormularioReComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarRastreoElemento();
+    });
   }
 }

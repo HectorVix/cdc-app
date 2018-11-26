@@ -9,6 +9,8 @@ import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-mo
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-formulario-jerarquizacion',
@@ -31,7 +33,8 @@ export class FormularioJerarquizacionComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.createFormJerarquizacionNacional();
   }
 
@@ -141,5 +144,15 @@ export class FormularioJerarquizacionComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    if(result)
+     this.guardarRegistroJerarquiazacionNacional();
+    });
   }
 }

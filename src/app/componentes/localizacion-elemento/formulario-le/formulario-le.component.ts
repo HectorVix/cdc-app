@@ -8,6 +8,8 @@ import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
 const now = new Date();
 @Component({
   selector: 'app-formulario-le',
@@ -51,7 +53,9 @@ export class FormularioLeComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+
+  constructor (private fb: FormBuilder, private usuarioService: UsuarioService,
+    private dialog: MatDialog) {
     this.crearFormLocalizacion_Elemento();
   }
 
@@ -191,5 +195,15 @@ export class FormularioLeComponent implements OnInit {
   }
   tabPagina3() {
     this.selected.setValue(2);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardarLocalizacion();
+    });
   }
 }
