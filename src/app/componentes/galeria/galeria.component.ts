@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {
   AccessibilityConfig,
   Action,
@@ -20,12 +20,10 @@ import {
   PreviewConfig
 } from 'angular-modal-gallery';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
+import { FooterRowOutlet } from '@angular/cdk/table';
 
-export interface Foto {
-  archivo: File
-  descripcion: String;
-}
 @Component({
   selector: 'app-galeria',
   templateUrl: './galeria.component.html',
@@ -35,16 +33,27 @@ export class GaleriaComponent implements OnInit {
   //archivos
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
-  public archivos_descripcion: Set<Foto> = new Set();
-
-  constructor(private galleryService: GalleryService) { }
-
-  ngOnInit() {
-  }
+  public baseFotoModelo: Array<foto_Modelo> = new Array();
+  private tam_inicial = 0;
   //Galeria
   imageIndex = 1;
   galleryId = 1;
   descripcionIndex = 0;
+  datosFotografias = [];
+  //datos Foto
+  descripcion: String = '';
+  comentario: String = '';
+  autor: String = '';
+  fecha: Date;
+
+
+
+  constructor(private galleryService: GalleryService) {
+  }
+
+  ngOnInit() {
+  }
+
   customPlainGalleryRowConfig: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.CUSTOM,
     layout: new AdvancedLayout(-1, true)
@@ -313,15 +322,68 @@ export class GaleriaComponent implements OnInit {
     }
   }
   anterior() {
-    if (this.descripcionIndex == 0) { }
+    if (this.descripcionIndex == 0) {
+      this.descripcion = '';
+      this.comentario = '';
+      this.autor = '';
+      this.fecha= new Date();
+      this.setDatosFotos(this.descripcionIndex);
+    }
     else {
       this.descripcionIndex = this.descripcionIndex - 1;
+      this.descripcion = '';
+      this.comentario = '';
+      this.autor = '';
+      this.fecha= new Date();
+      this.setDatosFotos(this.descripcionIndex);
     }
   }
   siguiente() {
-    if (this.descripcionIndex == this.imagenes.length - 1) { }
+    if (this.descripcionIndex == this.imagenes.length - 1) {
+      this.descripcion = '';
+      this.comentario = '';
+      this.autor = '';
+      this.fecha= new Date();
+      this.setDatosFotos(this.descripcionIndex);
+    }
     else {
+      this.descripcion = '';
+      this.comentario = '';
+      this.autor = '';
+      this.fecha= new Date();
       this.descripcionIndex = this.descripcionIndex + 1;
+      this.setDatosFotos(this.descripcionIndex);
+    }
+  }
+
+  onChanges() {
+    if (this.imagenes.length > 0) {
+      this.datosFotografias[this.descripcionIndex] = {
+        descripcion: this.descripcion,
+        comentario: this.comentario,
+        autor: this.autor,
+        fecha: this.fecha,
+      };
+      //  console.log(this.datosFotografias);
+    }
+    for (let key of this.datosFotografias) {
+      var baseFotoModelo = new foto_Modelo();
+      baseFotoModelo = key;
+      // keys.push({ key: key, value: value[key] });
+      // console.log(baseFotoModelo);
+    }
+  }
+  setDatosFotos(index: number) {
+    if (this.imagenes.length > 0) {
+      var datos = new foto_Modelo();
+      if (this.datosFotografias[index]) {
+        datos = this.datosFotografias[index];
+        this.descripcion = datos.descripcion;
+        this.comentario = datos.comentario;
+        this.autor = datos.autor;
+        this.fecha = datos.fecha;
+        console.log('index:', index);
+      }
     }
   }
 }
