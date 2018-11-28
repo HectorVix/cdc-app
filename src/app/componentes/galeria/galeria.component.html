@@ -47,37 +47,41 @@
           <i class="fa fa-chevron-right prefix"></i>
         </button>
       </div>
-      <div class="row">
-        <div class="col-md-7">
-          <mat-form-field>
-            <textarea matInput [(ngModel)]="descripcion" placeholder="Descripción" (ngModelChange)="onChanges()"></textarea>
-          </mat-form-field>
+      <div class="modal-content mat-elevation-z4">
+        <div class="modal-header color-green"></div>
+        <div class="row">
+          <div class="col-md-7">
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="descripcion" placeholder="Descripción" (ngModelChange)="onChanges()"></textarea>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-7">
-          <mat-form-field>
-            <textarea matInput [(ngModel)]="comentario" placeholder="Comentarios" (ngModelChange)="onChanges()"></textarea>
-          </mat-form-field>
+        <div class="row">
+          <div class="col-md-7">
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="comentario" placeholder="Comentarios" (ngModelChange)="onChanges()"></textarea>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-7">
-          <mat-form-field>
-            <input matInput [(ngModel)]="autor" placeholder="Autor" (ngModelChange)="onChanges()">
-          </mat-form-field>
+        <div class="row">
+          <div class="col-md-7">
+            <mat-form-field>
+              <input matInput [(ngModel)]="autor" placeholder="Autor" (ngModelChange)="onChanges()">
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="md-form col-md-4 input-group-append mt5">
-          <input mdbInputDirective type="text" id="formFecha" class="form-control" [(ngModel)]="fecha" (ngModelChange)="onChanges()" data-error=" " data-success=" "
-            ngbDatepicker #dFechaCreacion="ngbDatepicker">
-          <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;Fecha creación</label>
-          <div (click)="dFechaCreacion.toggle()">
-            <i class="fa fa-calendar prefix"></i>
+        <div class="row">
+          <div class="md-form col-md-4 input-group-append mt5">
+            <input mdbInputDirective type="text" id="formFecha" class="form-control" [(ngModel)]="fecha" (ngModelChange)="onChanges()"
+              data-error=" " data-success=" " ngbDatepicker #dFechaCreacion="ngbDatepicker">
+            <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;Fecha creación</label>
+            <div (click)="dFechaCreacion.toggle()">
+              <i class="fa fa-calendar prefix"></i>
+            </div>
           </div>
         </div>
       </div>
+
 
     </mat-tab>
   </mat-tab-group>

@@ -128,7 +128,7 @@ export class ElementoComponent implements OnInit {
   }
 
   guardarElemento() {
-    this.usuarioService.cargarFotos(this.galeria.archivos);
+    this.usuarioService.cargarFotos(this.galeria.archivos,this.galeria.datosFotografias);
     this.loading=true;
     var elementoBase = this.setElemento(this.elementoForm.value);
     this.addElemento(this.elementoForm.value);
@@ -145,7 +145,7 @@ export class ElementoComponent implements OnInit {
         resElemento => {
           this.loading=false;
           this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
-          this.crearForm_Elemento();
+         // this.crearForm_Elemento();
         }, err => {
           this.loading=false;
           this.changeSuccessMessage('Error  no se pudo guardar', 'primary');

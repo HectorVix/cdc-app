@@ -15,6 +15,8 @@ import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
 import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo';
 import { fuente_Modelo } from '../modelo/fuente/fuente-modelo';
+import { foto_Modelo } from '../modelo/fotoDatos/foto-datos';
+import { formatDate } from '@angular/common';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -125,6 +127,44 @@ export class UsuarioService {
     });
     return estado;
   }
+  cargarFotos(archivos: Set<File>, datosFotos: any) {
+    var cont = 0;
+    const estado = {};
+    var baseFotoModelo = new foto_Modelo();
+    baseFotoModelo = datosFotos[cont];
+    var fechaCreacion;
+    if (baseFotoModelo.fecha) {
+      fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+    }
+    else {
+      baseFotoModelo.fecha = new Date();
+    }
+    archivos.forEach(archivo => {
+      var formData: FormData = new FormData();
+      formData.append('file', '' + archivo, archivo.name);
+      formData.append('descripcion', '' + baseFotoModelo.descripcion.toString());
+      formData.append('comentario', '' + baseFotoModelo.comentario.toString());
+      formData.append('autor', '' + baseFotoModelo.autor.toString());
+      formData.append('fecha', fechaCreacion);
+      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + 1, formData, {
+        reportProgress: true
+      });
+      var progreso = new Subject<number>();
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+          progreso.next(porcentajeCargado);
+        } else if (event instanceof HttpResponse) {
+          progreso.complete();
+        }
+      });
+      estado[archivo.name] = {
+        progreso: progreso.asObservable()
+      };
+      cont = cont + 1;
+    });
+    return estado;
+  }
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -145,12 +185,7 @@ export class UsuarioService {
       day: date.getDate()
     } : null;
   }
-  cargarFotos(archivos: Set<File>) {
-
-    archivos.forEach(archivo => {
-      var formData: FormData = new FormData();
-      formData.append('file', archivo, archivo.name);
-      console.log("foto:", archivo.name);
-    });
+  toFormato2(date): String {
+    return date ? new String('' + date.day + '/' + date.month + '/' + date.year) : null;
   }
 }

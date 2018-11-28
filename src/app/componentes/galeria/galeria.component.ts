@@ -363,26 +363,19 @@ export class GaleriaComponent implements OnInit {
         comentario: this.comentario,
         autor: this.autor,
         fecha: this.fecha,
-      };
-      //  console.log(this.datosFotografias);
+      }; 
     }
-    for (let key of this.datosFotografias) {
-      var baseFotoModelo = new foto_Modelo();
-      baseFotoModelo = key;
-      // keys.push({ key: key, value: value[key] });
-      // console.log(baseFotoModelo);
-    }
+  
   }
   setDatosFotos(index: number) {
-    if (this.imagenes.length > 0) {
-      var datos = new foto_Modelo();
+    if (this.imagenes.length > 0) {    
       if (this.datosFotografias[index]) {
+        var datos = new foto_Modelo();
         datos = this.datosFotografias[index];
         this.descripcion = datos.descripcion;
         this.comentario = datos.comentario;
         this.autor = datos.autor;
-        this.fecha = datos.fecha;
-        console.log('index:', index);
+        this.fecha = datos.fecha;    
       }
     }
   }
