@@ -315,7 +315,7 @@ export class GaleriaComponent implements OnInit {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: 'vamos'
+        description: ''
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
@@ -323,34 +323,22 @@ export class GaleriaComponent implements OnInit {
   }
   anterior() {
     if (this.descripcionIndex == 0) {
-      this.descripcion = '';
-      this.comentario = '';
-      this.autor = '';
-      this.fecha= new Date();
+      this.nuevoDatosFotos()
       this.setDatosFotos(this.descripcionIndex);
     }
     else {
+      this.nuevoDatosFotos()
       this.descripcionIndex = this.descripcionIndex - 1;
-      this.descripcion = '';
-      this.comentario = '';
-      this.autor = '';
-      this.fecha= new Date();
       this.setDatosFotos(this.descripcionIndex);
     }
   }
   siguiente() {
     if (this.descripcionIndex == this.imagenes.length - 1) {
-      this.descripcion = '';
-      this.comentario = '';
-      this.autor = '';
-      this.fecha= new Date();
+      this.nuevoDatosFotos()
       this.setDatosFotos(this.descripcionIndex);
     }
     else {
-      this.descripcion = '';
-      this.comentario = '';
-      this.autor = '';
-      this.fecha= new Date();
+      this.nuevoDatosFotos()
       this.descripcionIndex = this.descripcionIndex + 1;
       this.setDatosFotos(this.descripcionIndex);
     }
@@ -363,20 +351,26 @@ export class GaleriaComponent implements OnInit {
         comentario: this.comentario,
         autor: this.autor,
         fecha: this.fecha,
-      }; 
+      };
     }
-  
+
   }
   setDatosFotos(index: number) {
-    if (this.imagenes.length > 0) {    
+    if (this.imagenes.length > 0) {
       if (this.datosFotografias[index]) {
         var datos = new foto_Modelo();
         datos = this.datosFotografias[index];
         this.descripcion = datos.descripcion;
         this.comentario = datos.comentario;
         this.autor = datos.autor;
-        this.fecha = datos.fecha;    
+        this.fecha = datos.fecha;
       }
     }
+  }
+  nuevoDatosFotos() {
+    this.descripcion = '';
+    this.comentario = '';
+    this.autor = '';
+    this.fecha = new Date();
   }
 }
