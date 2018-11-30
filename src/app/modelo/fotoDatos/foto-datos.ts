@@ -1,6 +1,6 @@
 export class foto_Modelo {
-    descripcion: String;
-    comentario: String;
-    autor: String;
+    descripcion: string;
+    comentario: string;
+    autor: string;
     fecha: Date;
 }

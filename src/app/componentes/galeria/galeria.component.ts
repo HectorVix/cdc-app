@@ -39,12 +39,13 @@ export class GaleriaComponent implements OnInit {
   imageIndex = 1;
   galleryId = 1;
   descripcionIndex = 0;
-  datosFotografias = [];
+  public datosFotografias = [];
   //datos Foto
-  descripcion: String = '';
-  comentario: String = '';
-  autor: String = '';
+  descripcion: string ="";
+  comentario: string = ' ';
+  autor: string = '';
   fecha: Date;
+  public estadoEditar=false;
 
 
 
@@ -345,6 +346,7 @@ export class GaleriaComponent implements OnInit {
   }
 
   onChanges() {
+    this.estadoEditar=true;
     if (this.imagenes.length > 0) {
       this.datosFotografias[this.descripcionIndex] = {
         descripcion: this.descripcion,

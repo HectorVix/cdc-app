@@ -9,7 +9,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioModelo } from '../../../modelo/usuario/usuario-modelo';
 import { ControlErrorStateMatcher } from '../../../modelo/error/error-state-matcher';
 import { Subject } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource ,MatSelectModule, MatDialog} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
@@ -51,7 +51,7 @@ export class ElementoComponent implements OnInit {
   private paginator: MatPaginator;
   private estadoForm: boolean = true;
   //loading
-  loading:boolean ;
+  loading: boolean;
   //para pruebas
   data: any;
   //componente galeria
@@ -128,26 +128,39 @@ export class ElementoComponent implements OnInit {
   }
 
   guardarElemento() {
-    this.usuarioService.cargarFotos(this.galeria.archivos,this.galeria.datosFotografias);
-    this.loading=true;
+    
     var elementoBase = this.setElemento(this.elementoForm.value);
-    this.addElemento(this.elementoForm.value);
+    if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar) {
+      this.addElemento(this.elementoForm.value, 1);
+    }
+    else if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar == false) {
+      this.changeSuccessMessage('Error  no se pudo guardar , falta editar las fotos', 'primary');
+    }
+    else if (this.galeria.archivos.size==0){
+      this.addElemento(this.elementoForm.value, 0);
+    }
+
+
   }
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
     return elemento;
   }
-  addElemento(elemento: elemento_Modelo): void {
+  addElemento(elemento: elemento_Modelo, tipo: Number): void {
+    this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioService.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          this.loading=false;
+          if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar && tipo == 1) {
+            this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias);
+          }
+          this.loading = false;
           this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
-         // this.crearForm_Elemento();
+
         }, err => {
-          this.loading=false;
+          this.loading = false;
           this.changeSuccessMessage('Error  no se pudo guardar', 'primary');
         });
   }
@@ -191,8 +204,8 @@ export class ElementoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-    if(result)
-     this.guardarElemento();
+      if (result)
+        this.guardarElemento();
     });
   }
 

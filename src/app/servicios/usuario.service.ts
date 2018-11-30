@@ -130,26 +130,24 @@ export class UsuarioService {
   cargarFotos(archivos: Set<File>, datosFotos: any) {
     var cont = 0;
     const estado = {};
-    var baseFotoModelo = new foto_Modelo();
-    baseFotoModelo = datosFotos[cont];
+    
     var fechaCreacion;
     
-    if (baseFotoModelo.fecha) {
-      fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
-      console.log('estado1:',fechaCreacion);
-    }
-    else {
-      let today= new Date();
-      var date = this.toFormato3(today); 
-      console.log('estado2:',date);
-    }
+   
+   
     
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
+      var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = datosFotos[cont];
+          if (baseFotoModelo.fecha) {
+            fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+            console.log('estado1:',fechaCreacion);
+          }
       formData.append('file', archivo, archivo.name);
-      formData.append('descripcion', baseFotoModelo.descripcion.toString());
-      formData.append('comentario', baseFotoModelo.comentario.toString());
-      formData.append('autor', baseFotoModelo.autor.toString());
+      formData.append('descripcion', baseFotoModelo.descripcion);
+      formData.append('comentario', baseFotoModelo.comentario);
+      formData.append('autor', baseFotoModelo.autor);
       formData.append('fecha', fechaCreacion);
       var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + 1, formData, {
         reportProgress: true
@@ -190,12 +188,7 @@ export class UsuarioService {
       day: date.getDate()
     } : null;
   }
-  toFormato2(date): String {
-    return date ? new String('' + date.day + '/' + date.month + '/' + date.year) : null;
-  }
-  toFormato3(date:Date): String {
-    var dia;
-    return dia ? new String('' + date.getDate + '/' + date.getMinutes + '/' + date.getFullYear) : null;
-  }
-  
+  toFormato2(date): string {
+    return '' + date.day + '/' + date.month + '/' + date.year;
+  }  
 }
