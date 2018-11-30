@@ -123,37 +123,33 @@ export class ElementoComponent implements OnInit {
     });
   }
   onSubmit() {
-
-
   }
 
   guardarElemento() {
-    
     var elementoBase = this.setElemento(this.elementoForm.value);
-    if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar) {
-      this.addElemento(this.elementoForm.value, 1);
+    if (this.galeria.archivos.size > 0) {
+      if (this.galeria.estadoEditar)
+        this.addElemento(this.elementoForm.value);
+      else
+        this.changeSuccessMessage('Error  no se pudo guardar , falta editar las fotos', 'primary');
     }
-    else if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar == false) {
-      this.changeSuccessMessage('Error  no se pudo guardar , falta editar las fotos', 'primary');
+    else {
+      this.addElemento(this.elementoForm.value);
     }
-    else if (this.galeria.archivos.size==0){
-      this.addElemento(this.elementoForm.value, 0);
-    }
-
-
   }
+
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
     return elemento;
   }
-  addElemento(elemento: elemento_Modelo, tipo: Number): void {
+  addElemento(elemento: elemento_Modelo): void {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioService.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar && tipo == 1) {
+          if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar) {
             this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias);
           }
           this.loading = false;
