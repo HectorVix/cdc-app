@@ -3,4 +3,5 @@ export class foto_Modelo {
     comentario: string;
     autor: string;
     fecha: Date;
+    editado: boolean;
 }

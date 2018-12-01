@@ -41,15 +41,14 @@ export class GaleriaComponent implements OnInit {
   descripcionIndex = 0;
   public datosFotografias = [];
   //datos Foto
-  descripcion: string ="";
+  descripcion: string = "";
   comentario: string = ' ';
   autor: string = '';
   fecha: Date;
-  public estadoEditar=false;
-
-
+  public editado: Boolean;
 
   constructor(private galleryService: GalleryService) {
+    this.editado = false;
   }
 
   ngOnInit() {
@@ -346,13 +345,13 @@ export class GaleriaComponent implements OnInit {
   }
 
   onChanges() {
-    this.estadoEditar=true;
     if (this.imagenes.length > 0) {
       this.datosFotografias[this.descripcionIndex] = {
         descripcion: this.descripcion,
         comentario: this.comentario,
         autor: this.autor,
         fecha: this.fecha,
+        editado: true
       };
     }
 
@@ -374,5 +373,33 @@ export class GaleriaComponent implements OnInit {
     this.comentario = '';
     this.autor = '';
     this.fecha = new Date();
+  }
+  validarDatosFotos() {
+    var tipo = -1;
+    if (this.datosFotografias.length == 1 && this.imagenes.length == 1)
+      tipo = 0;
+    if (this.datosFotografias.length == this.imagenes.length && this.datosFotografias.length > 1 && this.imagenes.length > 1)
+      tipo = 1;
+    switch (tipo) {
+      case 0: {
+        this.editado = true
+        break; //necesario dado que al estar el formulario vacio de editar fotos  se buguea y da error, no grave pero no muestra nada
+      }
+      case 1: {
+        for (let i = 0; i < this.imagenes.length - 1; i++) {
+          var datos = new foto_Modelo();
+          datos = this.datosFotografias[i];
+          if (datos.editado) {
+            this.editado = true;
+          }
+          else {
+            i = this.imagenes.length;
+            this.editado = false;
+          }
+        }
+        break;
+      }
+      default: { this.editado = false; }
+    }
   }
 }
