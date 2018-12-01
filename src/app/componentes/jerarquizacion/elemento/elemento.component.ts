@@ -129,17 +129,17 @@ export class ElementoComponent implements OnInit {
     var elementoBase = this.setElemento(this.elementoForm.value);
     this.galeria.validarDatosFotos();
     if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
-
       this.addElemento(this.elementoForm.value);
-      console.log('aki valido');
     }
     if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
       this.addElemento(this.elementoForm.value);
     }
     if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
-      this.changeSuccessMessage('Error  no se pudo guardar falta editar las fotos', 'primary');
-    }
 
+      if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
+      else
+        this.changeSuccessMessage('Error  no se pudo guardar falta editar las fotos', 'primary');
+    }
   }
 
   setElemento(elemento: elemento_Modelo): elemento_Modelo {
