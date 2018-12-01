@@ -150,7 +150,8 @@ export class ElementoComponent implements OnInit {
       .subscribe(
         resElemento => {
           if (this.galeria.archivos.size > 0 && this.galeria.estadoEditar) {
-            this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias);
+            var elemento_id=resElemento.elementoId;
+            this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias,elemento_id);
           }
           this.loading = false;
           this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');

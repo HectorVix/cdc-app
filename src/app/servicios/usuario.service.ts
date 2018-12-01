@@ -127,15 +127,10 @@ export class UsuarioService {
     });
     return estado;
   }
-  cargarFotos(archivos: Set<File>, datosFotos: any) {
+  cargarFotos(archivos: Set<File>, datosFotos: any,elemento_id:Number) {
     var cont = 0;
     const estado = {};
-    
     var fechaCreacion;
-    
-   
-   
-    
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       var baseFotoModelo = new foto_Modelo();
@@ -149,7 +144,7 @@ export class UsuarioService {
       formData.append('comentario', baseFotoModelo.comentario);
       formData.append('autor', baseFotoModelo.autor);
       formData.append('fecha', fechaCreacion);
-      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + 1, formData, {
+      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
         reportProgress: true
       });
       var progreso = new Subject<number>();
