@@ -13,6 +13,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { TablaBusquedaComponent } from '../../../componentes/tabla-busqueda/tabla-busqueda.component';
 
 export interface ElementoDato {
   numero: number;
@@ -24,7 +25,6 @@ export interface ElementoDato {
   comentario: String;
 }
 
-
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -34,7 +34,6 @@ export interface ElementoDato {
 
 export class ElementoComponent implements OnInit {
   dateElemento: NgbDateStruct;
-  k: number;
   elementoForm: FormGroup;
   buscarForm: FormGroup;
   //alertas
@@ -43,26 +42,26 @@ export class ElementoComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   matcher = new ControlErrorStateMatcher();
-  //tabla
+  //---------------------------------tabla
+  k: number;
   displayedColumns: string[] = ['numero', 'codigo', 'fecha', 'nombrecomun', 'nombrecientifico', 'usuario'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
   private paginator: MatPaginator;
-  private estadoForm: boolean = true;
-  //loading
-  loading: boolean;
-  //para pruebas
-  data: any;
-  //componente galeria
-  @ViewChild(GaleriaComponent)
-  private galeria: GaleriaComponent;
-
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.setDataSourceAttributes();
   }
-  @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  //componente galeria
+  @ViewChild(GaleriaComponent)
+  private galeria: GaleriaComponent;
+  //componente tabla busqueda
+  @ViewChild(TablaBusquedaComponent)
+  private tablaBusqueda: TablaBusquedaComponent;
+  loading: boolean;
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
@@ -70,11 +69,26 @@ export class ElementoComponent implements OnInit {
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
   }
+  ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.paginator && this.sort) {
       this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
   setElementoBuscado(row) {
@@ -91,21 +105,7 @@ export class ElementoComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    setTimeout(() => this.staticAlertClosed = true, 20000);
-    this._success.subscribe((message) => this.successMessage = message);
-    this._success.pipe(
-      debounceTime(5000)
-    ).subscribe(() => this.successMessage = null);
-    //this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+
   crearForm_Elemento() {
     this.elementoForm = this.fb.group({
       'codigo': ['', Validators.required],
@@ -182,11 +182,11 @@ export class ElementoComponent implements OnInit {
     var nombrecientifico = " ";
     this.elementos = new Array();
     this.k = 0;
-    if (this.buscarForm.get('codigo').value != null)
+    if (this.buscarForm.get('codigo').value != "")
       codigo = this.buscarForm.get('codigo').value
-    if (this.buscarForm.get('nombrecomun').value != null)
+    if (this.buscarForm.get('nombrecomun').value != "")
       nombrecomun = this.buscarForm.get('nombrecomun').value
-    if (this.buscarForm.get('nombrecientifico').value != null)
+    if (this.buscarForm.get('nombrecientifico').value != "")
       nombrecientifico = this.buscarForm.get('nombrecientifico').value
 
     this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
@@ -202,6 +202,7 @@ export class ElementoComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }
+
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
       width: '250px'
@@ -212,10 +213,9 @@ export class ElementoComponent implements OnInit {
         this.guardarElemento();
     });
   }
-
 }
 function crearElemento(k: number, elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
-  var usuario = '' + nombre + ' ' + apellido;
+  var usuario = nombre.concat(" " + apellido.toString());
   return {
     numero: k,
     codigo: elemento.codigo,

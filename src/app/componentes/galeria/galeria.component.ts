@@ -23,6 +23,7 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
 import { FooterRowOutlet } from '@angular/cdk/table';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-galeria',
@@ -46,8 +47,10 @@ export class GaleriaComponent implements OnInit {
   autor: string = '';
   fecha: Date;
   public editado: Boolean;
+  //
+  fotoElemento: File;
 
-  constructor(private galleryService: GalleryService) {
+  constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
     this.editado = false;
   }
 
@@ -308,11 +311,12 @@ export class GaleriaComponent implements OnInit {
 
   }
   base64String = '';
-  agregarImagen(file: File) {
+  public agregarImagen(file: File) {
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (onLoadPhotoEvent: any) => {
       this.base64String = onLoadPhotoEvent.target.result;
+      console.log('base64:', this.base64String);
       var imagen = new Image(0, {
         img: this.base64String,
         description: ''
@@ -401,5 +405,30 @@ export class GaleriaComponent implements OnInit {
       }
       default: { this.editado = false; }
     }
+  }
+
+  getFoto() {
+    this.usuarioService.getFoto(101)
+      .subscribe(
+        data => {
+          console.log('hola xd');
+          console.log(data);
+          var file = this.blobToFile(data, 'hola.png');
+
+          console.log(file);
+          //  this.archivo.nativeElement.value = file;
+          this.agregarImagen(file);
+          console.log('aki va');
+        }, err => {
+          console.log('Error xd');
+
+        });
+
+  }
+  public blobToFile = (fotoBlob: Blob, fileName: string): File => {
+    var fb: any = fotoBlob;
+    fb.lastModifiedDate = new Date();
+    fb.name = fileName;
+    return <File>fotoBlob;
   }
 }

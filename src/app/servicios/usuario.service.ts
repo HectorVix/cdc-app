@@ -127,18 +127,18 @@ export class UsuarioService {
     });
     return estado;
   }
-  cargarFotos(archivos: Set<File>, datosFotos: any,elemento_id:Number) {
+  cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number) {
     var cont = 0;
     const estado = {};
     var fechaCreacion;
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = datosFotos[cont];
-          if (baseFotoModelo.fecha) {
-            fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
-            console.log('estado1:',fechaCreacion);
-          }
+      baseFotoModelo = datosFotos[cont];
+      if (baseFotoModelo.fecha) {
+        fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+        console.log('estado1:', fechaCreacion);
+      }
       formData.append('file', archivo, archivo.name);
       formData.append('descripcion', baseFotoModelo.descripcion);
       formData.append('comentario', baseFotoModelo.comentario);
@@ -163,6 +163,12 @@ export class UsuarioService {
     });
     return estado;
   }
+  //obtener foto por id
+  public getFoto(id: Number):Observable<Blob>{
+    return this.http.get(this.rootUrl + '/elemento/imagen/' + id, {responseType: "blob"});
+  }
+
+
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -185,5 +191,5 @@ export class UsuarioService {
   }
   toFormato2(date): string {
     return '' + date.day + '/' + date.month + '/' + date.year;
-  }  
+  }
 }
