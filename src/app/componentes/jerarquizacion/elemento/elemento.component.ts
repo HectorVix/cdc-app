@@ -62,6 +62,7 @@ export class ElementoComponent implements OnInit {
   @ViewChild(TablaBusquedaComponent)
   private tablaBusqueda: TablaBusquedaComponent;
   loading: boolean;
+  selected = new FormControl(0);
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
@@ -103,6 +104,7 @@ export class ElementoComponent implements OnInit {
       'comentario': row.comentario,
       'fecha': this.dateElemento,
     });
+    this.selected.setValue(0);
   }
 
 
@@ -182,12 +184,12 @@ export class ElementoComponent implements OnInit {
     var nombrecientifico = " ";
     this.elementos = new Array();
     this.k = 0;
-    if (this.buscarForm.get('codigo').value != "")
-      codigo = this.buscarForm.get('codigo').value
-    if (this.buscarForm.get('nombrecomun').value != "")
-      nombrecomun = this.buscarForm.get('nombrecomun').value
-    if (this.buscarForm.get('nombrecientifico').value != "")
-      nombrecientifico = this.buscarForm.get('nombrecientifico').value
+    if (this.buscarForm.get('codigo').value)
+      codigo = this.buscarForm.get('codigo').value;
+    if (this.buscarForm.get('nombrecomun').value)
+      nombrecomun = this.buscarForm.get('nombrecomun').value;
+    if (this.buscarForm.get('nombrecientifico').value)
+      nombrecientifico = this.buscarForm.get('nombrecientifico').value;
 
     this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
       .subscribe(
