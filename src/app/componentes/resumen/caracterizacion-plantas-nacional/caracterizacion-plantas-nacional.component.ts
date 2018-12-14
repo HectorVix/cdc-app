@@ -121,7 +121,36 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       //ecología
       'comecoln': '',
       //fenología
+      'nenea1':'',
+      'nenea2':'',
+      'nenea3':'',
+      'nenea4':'',
 
+      'nmara1':'',
+      'nmara2':'',
+      'nmara3':'',
+      'nmara4':'',
+
+      'nmaya1':'',
+      'nmaya2':'',
+      'nmaya3':'',
+      'nmaya4':'',
+      
+      'njula1':'',
+      'njula2':'',
+      'njula3':'',
+      'njula4':'',
+
+      'nseta1':'',
+      'nseta2':'',
+      'nseta3':'',
+      'nseta4':'',
+
+      'nnova1':'',
+      'nnova2':'',
+      'nnova3':'',
+      'nnova4':'',
+   
       'comfenoln': '',
       //reproducción
       'comrepn': '',
