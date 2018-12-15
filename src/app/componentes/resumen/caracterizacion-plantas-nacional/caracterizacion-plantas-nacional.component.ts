@@ -121,7 +121,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       //ecología
       'comecoln': '',
       //fenología
-      //1 linea
+      //1 línea
       'nenea1':'',
       'nenea2':'',
       'nenea3':'',
@@ -151,8 +151,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'nnova2':'',
       'nnova3':'',
       'nnova4':'',
-      //2 linea
-      
+
+      //2 línea
       'neneb1':'',
       'neneb2':'',
       'neneb3':'',
@@ -182,7 +182,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'nnovb2':'',
       'nnovb3':'',
       'nnovb4':'',
-
+      
+      //3 línea
    
       'comfenoln': '',
       //reproducción
