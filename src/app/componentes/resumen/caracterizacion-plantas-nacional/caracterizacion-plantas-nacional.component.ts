@@ -215,6 +215,35 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'ndica4':'',
 
       //4 línea
+      'nfebb1':'',
+      'nfebb2':'',
+      'nfebb3':'',
+      'nfebb4':'',
+     
+      'nabrb1':'',
+      'nabrb2':'',
+      'nabrb3':'',
+      'nabrb4':'',
+
+      'njunb1':'',
+      'njunb2':'',
+      'njunb3':'',
+      'njunb4':'',
+
+      'nagob1':'',
+      'nagob2':'',
+      'nagob3':'',
+      'nagob4':'',
+      
+      'noctb1':'',
+      'noctb2':'',
+      'noctb3':'',
+      'noctb4':'',
+
+      'ndicb1':'',
+      'ndicb2':'',
+      'ndicb3':'',
+      'ndicb4':'',
 
       'comfenoln': '',
       //reproducción

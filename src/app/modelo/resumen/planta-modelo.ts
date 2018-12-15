@@ -137,6 +137,35 @@ export class planta_Modelo {
     'ndica4': String;
 
     //4 línea
+    'nfebb1': String;
+    'nbebb2': String;
+    'nfebb3': String;
+    'nfebb4': String;
+
+    'nabrb1': String;
+    'nabrb2': String;
+    'nabrb3': String;
+    'nabrb4': String;
+
+    'njunb1': String;
+    'njunb2': String;
+    'njunb3': String;
+    'njunb4': String;
+
+    'nagob1': String;
+    'nagob2': String;
+    'nagob3': String;
+    'nagob4': String;
+
+    'noctb1': String;
+    'noctb2': String;
+    'noctb3': String;
+    'noctb4': String;
+
+    'ndicb1': String;
+    'ndicb2': String;
+    'ndicb3': String;
+    'ndicb4': String;
 
     comfenoln: String;
     //reproduccion
