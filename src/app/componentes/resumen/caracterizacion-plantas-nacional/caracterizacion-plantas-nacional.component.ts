@@ -182,9 +182,40 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'nnovb2':'',
       'nnovb3':'',
       'nnovb4':'',
-      
+
       //3 línea
-   
+      'nfeba1':'',
+      'nfeba2':'',
+      'nfeba3':'',
+      'nfeba4':'',
+
+      'nabra1':'',
+      'nabra2':'',
+      'nabra3':'',
+      'nabra4':'',
+
+      'njuna1':'',
+      'njuna2':'',
+      'njuna3':'',
+      'njuna4':'',
+
+      'nagoa1':'',
+      'nagoa2':'',
+      'nagoa3':'',
+      'nagoa4':'',
+
+      'nocta1':'',
+      'nocta2':'',
+      'nocta3':'',
+      'nocta4':'',
+
+      'ndica1':'',
+      'ndica2':'',
+      'ndica3':'',
+      'ndica4':'',
+
+      //4 línea
+
       'comfenoln': '',
       //reproducción
       'comrepn': '',
