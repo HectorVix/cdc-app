@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
+import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
@@ -16,7 +17,7 @@ import { MatDialog } from '@angular/material';
 })
 export class CaracterizacionPlantasNacionalComponent implements OnInit {
   caracterizacionPlantasNacionalForm: FormGroup;
-  source_Distribucion1: Distribucion1_Resumen[];
+ // source_Distribucion1: Distribucion1_Resumen[];
   source_Distribucion2: Distribucion2_Resumen[];
   source_CamposOpcionales: CamposOpcionales[];
   private _success = new Subject<string>();
@@ -62,6 +63,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       }
     }
   };
+  data_distribucion = [];
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional();
@@ -122,128 +124,128 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'comecoln': '',
       //fenología
       //1 línea
-      'nenea1':'',
-      'nenea2':'',
-      'nenea3':'',
-      'nenea4':'',
+      'nenea1': '',
+      'nenea2': '',
+      'nenea3': '',
+      'nenea4': '',
 
-      'nmara1':'',
-      'nmara2':'',
-      'nmara3':'',
-      'nmara4':'',
+      'nmara1': '',
+      'nmara2': '',
+      'nmara3': '',
+      'nmara4': '',
 
-      'nmaya1':'',
-      'nmaya2':'',
-      'nmaya3':'',
-      'nmaya4':'',
-      
-      'njula1':'',
-      'njula2':'',
-      'njula3':'',
-      'njula4':'',
+      'nmaya1': '',
+      'nmaya2': '',
+      'nmaya3': '',
+      'nmaya4': '',
 
-      'nseta1':'',
-      'nseta2':'',
-      'nseta3':'',
-      'nseta4':'',
+      'njula1': '',
+      'njula2': '',
+      'njula3': '',
+      'njula4': '',
 
-      'nnova1':'',
-      'nnova2':'',
-      'nnova3':'',
-      'nnova4':'',
+      'nseta1': '',
+      'nseta2': '',
+      'nseta3': '',
+      'nseta4': '',
+
+      'nnova1': '',
+      'nnova2': '',
+      'nnova3': '',
+      'nnova4': '',
 
       //2 línea
-      'neneb1':'',
-      'neneb2':'',
-      'neneb3':'',
-      'neneb4':'',
+      'neneb1': '',
+      'neneb2': '',
+      'neneb3': '',
+      'neneb4': '',
 
-      'nmarb1':'',
-      'nmarb2':'',
-      'nmarb3':'',
-      'nmarb4':'',
+      'nmarb1': '',
+      'nmarb2': '',
+      'nmarb3': '',
+      'nmarb4': '',
 
-      'nmayb1':'',
-      'nmayb2':'',
-      'nmayb3':'',
-      'nmayb4':'',
-      
-      'njulb1':'',
-      'njulb2':'',
-      'njulb3':'',
-      'njulb4':'',
+      'nmayb1': '',
+      'nmayb2': '',
+      'nmayb3': '',
+      'nmayb4': '',
 
-      'nsetb1':'',
-      'nsetb2':'',
-      'nsetb3':'',
-      'nsetb4':'',
+      'njulb1': '',
+      'njulb2': '',
+      'njulb3': '',
+      'njulb4': '',
 
-      'nnovb1':'',
-      'nnovb2':'',
-      'nnovb3':'',
-      'nnovb4':'',
+      'nsetb1': '',
+      'nsetb2': '',
+      'nsetb3': '',
+      'nsetb4': '',
+
+      'nnovb1': '',
+      'nnovb2': '',
+      'nnovb3': '',
+      'nnovb4': '',
 
       //3 línea
-      'nfeba1':'',
-      'nfeba2':'',
-      'nfeba3':'',
-      'nfeba4':'',
+      'nfeba1': '',
+      'nfeba2': '',
+      'nfeba3': '',
+      'nfeba4': '',
 
-      'nabra1':'',
-      'nabra2':'',
-      'nabra3':'',
-      'nabra4':'',
+      'nabra1': '',
+      'nabra2': '',
+      'nabra3': '',
+      'nabra4': '',
 
-      'njuna1':'',
-      'njuna2':'',
-      'njuna3':'',
-      'njuna4':'',
+      'njuna1': '',
+      'njuna2': '',
+      'njuna3': '',
+      'njuna4': '',
 
-      'nagoa1':'',
-      'nagoa2':'',
-      'nagoa3':'',
-      'nagoa4':'',
+      'nagoa1': '',
+      'nagoa2': '',
+      'nagoa3': '',
+      'nagoa4': '',
 
-      'nocta1':'',
-      'nocta2':'',
-      'nocta3':'',
-      'nocta4':'',
+      'nocta1': '',
+      'nocta2': '',
+      'nocta3': '',
+      'nocta4': '',
 
-      'ndica1':'',
-      'ndica2':'',
-      'ndica3':'',
-      'ndica4':'',
+      'ndica1': '',
+      'ndica2': '',
+      'ndica3': '',
+      'ndica4': '',
 
       //4 línea
-      'nfebb1':'',
-      'nfebb2':'',
-      'nfebb3':'',
-      'nfebb4':'',
-     
-      'nabrb1':'',
-      'nabrb2':'',
-      'nabrb3':'',
-      'nabrb4':'',
+      'nfebb1': '',
+      'nfebb2': '',
+      'nfebb3': '',
+      'nfebb4': '',
 
-      'njunb1':'',
-      'njunb2':'',
-      'njunb3':'',
-      'njunb4':'',
+      'nabrb1': '',
+      'nabrb2': '',
+      'nabrb3': '',
+      'nabrb4': '',
 
-      'nagob1':'',
-      'nagob2':'',
-      'nagob3':'',
-      'nagob4':'',
-      
-      'noctb1':'',
-      'noctb2':'',
-      'noctb3':'',
-      'noctb4':'',
+      'njunb1': '',
+      'njunb2': '',
+      'njunb3': '',
+      'njunb4': '',
 
-      'ndicb1':'',
-      'ndicb2':'',
-      'ndicb3':'',
-      'ndicb4':'',
+      'nagob1': '',
+      'nagob2': '',
+      'nagob3': '',
+      'nagob4': '',
+
+      'noctb1': '',
+      'noctb2': '',
+      'noctb3': '',
+      'noctb4': '',
+
+      'ndicb1': '',
+      'ndicb2': '',
+      'ndicb3': '',
+      'ndicb4': '',
 
       'comfenoln': '',
       //reproducción
@@ -273,6 +275,16 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     var cplanta = new caracterizacion_Modelo();
     var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
     var planta: Array<planta_Modelo> = new Array();
+    var distribucion: Array<distribucion_Modelo> = new Array();
+    var distribucionBase = new distribucion_Modelo();
+    this.data_distribucion.forEach(distribucion1 => {
+      distribucionBase.distribucionId = 1;
+      distribucionBase.codsubnac = distribucion1.codsubnac;
+      distribucionBase.nomsubnac = distribucion1.nomsubnac;
+      distribucionBase.statsubnac = distribucion1.statsubnac;
+      distribucion.push(distribucionBase);
+    });
+    plantaBase.distribucionList = distribucion;
     planta.push(plantaBase);
     cplanta.plantaList = planta;
     this.addCaracterizacionPlanta(cplanta);
@@ -326,5 +338,10 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       if (result)
         this.guardarCPlanta();
     });
+  }
+  nuevoFormulario(){
+    console.log('Nuevo form');
+    this.crearForm_CaracterizacionPlantasNacional();
+    this.data_distribucion = [];
   }
 }

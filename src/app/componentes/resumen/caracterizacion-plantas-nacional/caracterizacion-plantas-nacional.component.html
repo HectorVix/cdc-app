@@ -247,7 +247,7 @@
                                         <h5 class="modal-title">Distribución:</h5>
                                     </div>
                                     <div class="row  mx-auto color-green ">
-                                        <ng2-smart-table [settings]="settings_distribucion1" [source]="source_Distribucion1">
+                                        <ng2-smart-table [settings]="settings_distribucion1" [source]="data_distribucion">
                                         </ng2-smart-table>
                                     </div>
                                     <!-- fin row -->
@@ -815,7 +815,7 @@
                                     </div>
                                     <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                                     <button class="btn color-green waves-light" (click)="tabPagina3()" mdbWavesEffect>Atras</button>
-                                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                    <button class="btn color-green waves-light" (click)="nuevoFormulario()" mdbWavesEffect>Nuevo</button>
                                     <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
                                 </div>
                             </mat-tab>
