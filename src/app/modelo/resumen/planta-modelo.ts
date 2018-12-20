@@ -191,5 +191,6 @@ export class planta_Modelo {
     cARACTERIZACIONcaracterizacionid: any;
     fotoList: any;
     distribucionList: any;
+    distribucion2List: any;
 
 }

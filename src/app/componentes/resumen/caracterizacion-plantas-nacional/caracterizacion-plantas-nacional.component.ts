@@ -4,6 +4,7 @@ import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
+import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
@@ -50,7 +51,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   settings_distribucion2 = {
     columns: {
       codecoregn: {
-        title: 'CODECORGN'
+        title: 'CODECOREGN'
       },
       statecoregn: {
         title: 'STATECOREGN'
@@ -63,7 +64,9 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       }
     }
   };
+
   data_distribucion = [];
+  data_distribucion2 = [];
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional();
@@ -276,15 +279,27 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
     var planta: Array<planta_Modelo> = new Array();
     var distribucion: Array<distribucion_Modelo> = new Array();
+    var distribucion2: Array<distribucion2_Modelo> = new Array();
 
-    this.data_distribucion.forEach(distribucion1 => {
+    this.data_distribucion.forEach(data_distribucion1 => {
       var distribucionBase = new distribucion_Modelo();
-      distribucionBase.codsubnac = distribucion1.codsubnac;
-      distribucionBase.nomsubnac = distribucion1.nomsubnac;
-      distribucionBase.statsubnac = distribucion1.statsubnac;
+      distribucionBase.codsubnac = data_distribucion1.codsubnac;
+      distribucionBase.nomsubnac = data_distribucion1.nomsubnac;
+      distribucionBase.statsubnac = data_distribucion1.statsubnac;
       distribucion.push(distribucionBase);
     });
+    console.log('aki vamos dis2');
+    this.data_distribucion2.forEach(data_distribucion2 => {
+      var distribucionBase2 = new distribucion2_Modelo();
+      distribucionBase2.codecoregn = data_distribucion2.codecoregn;
+      distribucionBase2.statecoregn = data_distribucion2.statecoregn;
+      distribucionBase2.codcuencan = data_distribucion2.codcuencan;
+      distribucionBase2.statcuencan = data_distribucion2.statcuencan;
+      console.log(distribucionBase2);
+      distribucion2.push(distribucionBase2);
+    });
     plantaBase.distribucionList = distribucion;
+    plantaBase.distribucion2List = distribucion2;
     planta.push(plantaBase);
     cplanta.plantaList = planta;
     this.addCaracterizacionPlanta(cplanta);
