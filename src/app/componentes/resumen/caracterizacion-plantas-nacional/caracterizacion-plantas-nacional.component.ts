@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material';
 })
 export class CaracterizacionPlantasNacionalComponent implements OnInit {
   caracterizacionPlantasNacionalForm: FormGroup;
- // source_Distribucion1: Distribucion1_Resumen[];
+  // source_Distribucion1: Distribucion1_Resumen[];
   source_Distribucion2: Distribucion2_Resumen[];
   source_CamposOpcionales: CamposOpcionales[];
   private _success = new Subject<string>();
@@ -276,9 +276,9 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
     var planta: Array<planta_Modelo> = new Array();
     var distribucion: Array<distribucion_Modelo> = new Array();
-    var distribucionBase = new distribucion_Modelo();
+
     this.data_distribucion.forEach(distribucion1 => {
-      distribucionBase.distribucionId = 1;
+      var distribucionBase = new distribucion_Modelo();
       distribucionBase.codsubnac = distribucion1.codsubnac;
       distribucionBase.nomsubnac = distribucion1.nomsubnac;
       distribucionBase.statsubnac = distribucion1.statsubnac;
@@ -339,7 +339,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         this.guardarCPlanta();
     });
   }
-  nuevoFormulario(){
+  nuevoFormulario() {
     console.log('Nuevo form');
     this.crearForm_CaracterizacionPlantasNacional();
     this.data_distribucion = [];
