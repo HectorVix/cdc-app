@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
@@ -18,23 +17,12 @@ import { MatDialog } from '@angular/material';
 })
 export class CaracterizacionPlantasNacionalComponent implements OnInit {
   caracterizacionPlantasNacionalForm: FormGroup;
-  // source_Distribucion1: Distribucion1_Resumen[];
-  source_Distribucion2: Distribucion2_Resumen[];
-  source_CamposOpcionales: CamposOpcionales[];
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
   selected = new FormControl(0);
-
-  settings_CamposOpcionales = {
-    columns: {
-      datos: {
-        title: 'RCPN.OPC'
-      }
-    }
-  };
   settings_distribucion1 = {
     columns: {
       codsubnac: {
@@ -274,7 +262,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
 
   }
   guardarCPlanta() {
-    console.log(this.caracterizacionPlantasNacionalForm.value);
     var cplanta = new caracterizacion_Modelo();
     var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
     var planta: Array<planta_Modelo> = new Array();
@@ -288,14 +275,13 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       distribucionBase.statsubnac = data_distribucion1.statsubnac;
       distribucion.push(distribucionBase);
     });
-    console.log('aki vamos dis2');
+    
     this.data_distribucion2.forEach(data_distribucion2 => {
       var distribucionBase2 = new distribucion2_Modelo();
       distribucionBase2.codecoregn = data_distribucion2.codecoregn;
       distribucionBase2.statecoregn = data_distribucion2.statecoregn;
       distribucionBase2.codcuencan = data_distribucion2.codcuencan;
       distribucionBase2.statcuencan = data_distribucion2.statcuencan;
-      console.log(distribucionBase2);
       distribucion2.push(distribucionBase2);
     });
     plantaBase.distribucionList = distribucion;
@@ -355,7 +341,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     });
   }
   nuevoFormulario() {
-    console.log('Nuevo form');
     this.crearForm_CaracterizacionPlantasNacional();
     this.data_distribucion = [];
   }

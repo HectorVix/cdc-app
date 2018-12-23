@@ -8,6 +8,7 @@ import { Proteccion, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
+import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
 const now = new Date();
@@ -18,8 +19,7 @@ const now = new Date();
 })
 export class FormularioLeComponent implements OnInit {
 
-  source_proteccion: Proteccion[];
-  campos_Opcionales: CamposOpcionales[];
+  data_proteccion = [];
   leForm: FormGroup;
   criterio_le = new criterio_le();
   criterio_si_no = this.criterio_le.si_no;
@@ -39,22 +39,15 @@ export class FormularioLeComponent implements OnInit {
       nombream: {
         title: 'NOMBREAM'
       },
-      CONTENIDO: {
+      contenido: {
         title: 'CONTENIDO'
       }
     }
   };
-  settings_Campos_Opcionales = {
-    columns: {
 
-      datos: {
-        title: 'DATOS'
-      }
-    }
-  };
   selected = new FormControl(0);
 
-  constructor (private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
     this.crearFormLocalizacion_Elemento();
   }
@@ -157,6 +150,16 @@ export class FormularioLeComponent implements OnInit {
 
   guardarLocalizacion() {
     var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
+    var proteccion: Array<proteccion_Modelo> = new Array();
+
+    this.data_proteccion.forEach(data_proteccion => {
+      var proteccionBase = new proteccion_Modelo();
+      proteccionBase.codigoam = data_proteccion.codigoam;
+      proteccionBase.nombream = data_proteccion.nombream;
+      proteccionBase.contenido = data_proteccion.contenido;
+      proteccion.push(proteccionBase);
+    });
+    localizacionElementoBase.proteccionList = proteccion;
     this.addLocalizacionElemento(localizacionElementoBase);
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
