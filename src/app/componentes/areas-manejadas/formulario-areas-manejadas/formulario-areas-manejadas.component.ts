@@ -6,6 +6,7 @@ import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
 import { area_Modelo } from '../../../modelo/area/area-modelo';
+import { listaElemento_Modelo } from '../../../modelo/area/listaElemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
 @Component({
@@ -14,8 +15,7 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./formulario-areas-manejadas.component.scss']
 })
 export class FormularioAreasManejadasComponent implements OnInit {
-  source_Elementos_AreasManejadas: Elementos_AreasManejadas[];
-  source_CamposOpcionales_AreasManejadas: CamposOpcionales[];
+  data_listaElemento=[];
   areaManejoForm: FormGroup;
   criterio_areasManejadas = new criterio_areasManejadas();
   criterio_protasign = this.criterio_areasManejadas.protasign;
@@ -130,6 +130,18 @@ export class FormularioAreasManejadasComponent implements OnInit {
   }
   guardarArea() {
     var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
+    var listaElemento: Array<listaElemento_Modelo> = new Array();
+
+    this.data_listaElemento.forEach(data_listaElemento => {
+      var listaElementoBase = new listaElemento_Modelo();
+      listaElementoBase.codigoe=data_listaElemento.codigoe;
+      listaElementoBase.nombres=data_listaElemento.nombres;
+      listaElementoBase.status=data_listaElemento.status;
+      listaElementoBase.codfuente=data_listaElemento.codfuente;
+      listaElemento.push(listaElementoBase);
+    });
+
+    areasManejadasBase.listaElementoList=listaElemento;
     this.addArea(areasManejadasBase);
 
   }
