@@ -5,18 +5,20 @@ import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { sitio_Modelo } from '../../../modelo/sitio/sitio-modelo';
+import { macsitio_Modelo } from '../../../modelo/sitio/macsitio-modelo';
+import { subdivision_Modelo } from '../../../modelo/sitio/subdivision-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
 
-import { Identificadores_Sitio, Localizadores_Sitio } from '../../../modelo/tablas/tabla';
+
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
   styleUrls: ['./registro-sitio.component.scss']
 })
 export class RegistroSitioComponent implements OnInit {
-  source_identificadores_Sitio: Identificadores_Sitio[];
-  source_localizadores_Sitio: Localizadores_Sitio[];
+  data_macsitio = [];
+  data_subdivision = [];
   sitioForm: FormGroup;   //formulario de sitio
   criterio_Sitio = new criterio_Sitio();
   criterio_mapasitio = this.criterio_Sitio.mapasitio;
@@ -137,6 +139,27 @@ export class RegistroSitioComponent implements OnInit {
   }
   guardarSitio() {
     var sitioBase = this.setSitio(this.sitioForm.value);
+    var macsitio: Array<macsitio_Modelo> = new Array();
+    var subdivision: Array<subdivision_Modelo> = new Array();
+
+    this.data_macsitio.forEach(data_macsitio => {
+      var macsitioBase = new macsitio_Modelo();
+      macsitioBase.codmacsitio = data_macsitio.codmacsitio;
+      macsitioBase.nommacsitio = data_macsitio.nommacsitio;
+      macsitio.push(macsitioBase);
+    });
+
+    this.data_subdivision.forEach(data_subdivision => {
+      var subdivisionBase = new subdivision_Modelo();
+      subdivisionBase.codsubdiv = data_subdivision.codsubdiv;
+      subdivisionBase.nomsubdiv = data_subdivision.nomsubdiv;
+      subdivisionBase.nommapa = data_subdivision.nommapa;
+      subdivisionBase.codmapa = data_subdivision.codmapa;
+      subdivision.push(subdivisionBase);
+    });
+
+    sitioBase.macsitioList = macsitio;
+    sitioBase.subdivisionList = subdivision;
     this.addSitio(sitioBase);
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {

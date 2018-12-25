@@ -67,4 +67,7 @@ export class sitio_Modelo {
     areaList:any;
     fotoList:any;
     oberservacionesList:any;
+    macsitioList:any;
+    subdivisionList:any;
+
 }
