@@ -151,12 +151,12 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       'comecoln': '',
       //fenología-Estacionalidad
       'fenologia': '',
-      // 'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
-      //'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
-      //'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
-      //'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
-      //'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
-      //'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
+      'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
+      'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
+      'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
+      'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
+      'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
+      'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
       'comfenolg': '',
       'comfenoln': '',
       //reproducción
@@ -194,7 +194,6 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
 
     caracterizacion_Vertebrado.vertebradoList = vertebradoLista;
     this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
-    console.log('alfaomega');
   }
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
     datos.fechaaepeu = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('fechaaepeu').value);

@@ -1,7 +1,7 @@
 export class vertebrado_Modelo {
     vertebradoId: Number;
     //identificadores
-    codigoe: String;  
+    codigoe: String;
     nacion: String;
     nombreg: String;
     autor: String;
@@ -71,12 +71,12 @@ export class vertebrado_Modelo {
     comecoln: String;
     //fenología-Estacionalidad
     fenologia: String;
-    // nenea: String; nabra: String; njula: String; nocta: String;
-    //neneb: String; nabrb: String; njulb: String; noctb: String;
-    //nfeba: String; nmaya: String; nagoa: String; nnova: String;
-    //nfebb: String; nmayb: String; nagob: String; nnovb: String;
-    //nmara: String; njuna: String; nseta: String; ndica: String;
-    //nmarb: String; njunb: String; nsetb: String; ndicb: String;
+    nenea: String; nabra: String; njula: String; nocta: String;
+    neneb: String; nabrb: String; njulb: String; noctb: String;
+    nfeba: String; nmaya: String; nagoa: String; nnova: String;
+    nfebb: String; nmayb: String; nagob: String; nnovb: String;
+    nmara: String; njuna: String; nseta: String; ndica: String;
+    nmarb: String; njunb: String; nsetb: String; ndicb: String;
     comfenolg: String;
     comfenoln: String;
     //reproducción
@@ -103,7 +103,7 @@ export class vertebrado_Modelo {
     ediciong: Date; //date
     actualizag: Date; //date
     edicionn: Date;  //date
-    actualizan:Date; //date
+    actualizan: Date; //date
     //relaciones
     cARACTERIZACIONcaracterizacionid: any;
     fotoList: any;
