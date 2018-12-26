@@ -97,7 +97,7 @@ export class UsuarioService {
   }
   //agregar una caracterizacion vertebrados
   addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
-    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/veretebrado', caracterizacion, httpOptions);
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
   }
   //agregar un resumen de fuente
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {

@@ -864,6 +864,13 @@
                                     </div>
                                     <!-- fin row -->
                                 </div>
+                                <div class="text-center">
+                                    <div *ngIf="loading">
+                                        <img src="assets/imagenes/load.gif">
+                                    </div>
+                                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                                   
+                                </div>
                                 <!-- fin modal-content -->
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
@@ -924,8 +931,8 @@
                                 <div class="text-center ">
                                     <p>
                                         <button class="btn color-green waves-light" (click)="tabPagina4()" mdbWavesEffect>Atras</button>
-                                        <button class="btn color-green waves-light" type="submit" mdbWavesEffect>Guardar</button>
                                         <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                        <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
                                     </p>
                                 </div>
                             </mat-tab>
@@ -938,32 +945,32 @@
                     <ng-template ngbTabTitle>
                         <b>Buscar</b>
                     </ng-template>
-                  <ng-template ngbTabContent>
-                      <div class="modal-content  mat-elevation-z4">
-                          <div class="modal-header color-green"></div>
-                          <mat-card>
+                    <ng-template ngbTabContent>
+                        <div class="modal-content  mat-elevation-z4">
+                            <div class="modal-header color-green"></div>
+                            <mat-card>
                                 <form class="base-form">
-                                  <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Codigo del Elemento">
-                                  </mat-form-field>
-                                  <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Nombre  Global">
-                                  </mat-form-field>
-                                  <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Nombre  Nacional">
-                                  </mat-form-field>
-                                  <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Nombre Común Nacional">
-                                  </mat-form-field>
-                                  <div class="mat-elevation-z8" class="base-form">
-                                    <button mat-raised-button class="color-green">Buscar</button>
-                                    <button mat-raised-button class="color-green">Buscar Todos</button>
-                                  </div>
-                                </form>                             
-                              </mat-card>
-                      </div>
-                      <app-tabla-busqueda></app-tabla-busqueda>
-                  </ng-template>
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Codigo del Elemento">
+                                    </mat-form-field>
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Nombre  Global">
+                                    </mat-form-field>
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Nombre  Nacional">
+                                    </mat-form-field>
+                                    <mat-form-field class="base-full-width">
+                                        <input matInput placeholder="Nombre Común Nacional">
+                                    </mat-form-field>
+                                    <div class="mat-elevation-z8" class="base-form">
+                                        <button mat-raised-button class="color-green">Buscar</button>
+                                        <button mat-raised-button class="color-green">Buscar Todos</button>
+                                    </div>
+                                </form>
+                            </mat-card>
+                        </div>
+                        <app-tabla-busqueda></app-tabla-busqueda>
+                    </ng-template>
 
                 </ngb-tab>
             </ngb-tabset>

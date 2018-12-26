@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
+import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
+import { vertebrado_Modelo } from '../../../modelo/resumen/vertebrado-modelo';
+
+import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material';
+import { UsuarioService } from '../../../servicios/usuario.service';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
   templateUrl: './caracterizacion-vertebrados-nacional.component.html',
@@ -8,9 +17,18 @@ import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '
 })
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   caracterizacionVertebradosNacional: FormGroup;
+  cVertebradoPruebas: FormGroup;
+
   source_Distribucion1: Distribucion1_Resumen[];
   source_Distribucion2: Distribucion2_Resumen[];
   source_CamposOpcionales: CamposOpcionales[];
+
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
+  loading: boolean;
+
 
   settings_CamposOpcionales = {
     columns: {
@@ -49,11 +67,16 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private usuarioService: UsuarioService, ) {
     this.crearForm_caracterizacionVertebradosNacional();
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 50000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(10000)
+    ).subscribe(() => this.successMessage = null);
   }
   crearForm_caracterizacionVertebradosNacional() {
     this.caracterizacionVertebradosNacional = this.fb.group({
@@ -90,8 +113,8 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       'pesten': '',
       'comstatn': '',
       //distribución
-      'lista_distribucion1': '',
-      'lista_distribucion2': '',
+      //'lista_distribucion1': '',
+      //'lista_distribucion2': '',
       'elevminn': '',
       'elevmaxn': '',
       'comdistg': '',
@@ -128,12 +151,12 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       'comecoln': '',
       //fenología-Estacionalidad
       'fenologia': '',
-      'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
-      'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
-      'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
-      'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
-      'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
-      'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
+      // 'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
+      //'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
+      //'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
+      //'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
+      //'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
+      //'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
       'comfenolg': '',
       'comfenoln': '',
       //reproducción
@@ -162,7 +185,144 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       'edicionn': '',  //date
       'actualizan': ''//date
     });
+    this.cVertebradoPruebas = this.fb.group({
+      //identificadores
+      'codigoe': ['', Validators.required],
+      'nacion': '',
+      'nombreg': '',
+      'autor': '',
+      'nombren': '',
+      'nomcomunn': 'fin1',
+      //taxonomía
+      'clasetax': 'ini2',
+      'orden': '',
+      'familia': '',
+      'genero': '',
+      'comtaxg': '',
+      'comsubespn': 'fin2',
+      //status
+      'rangog': 'ini3',
+      'cites': '',
+      'uicn': '',
+      'aepeu': '',
+      'fechaaepeu': '',//date
+      'endemismo': '',
+      'comstatg': '',
+      'rangon': '',
+      'protnacion': '',
+      'rastreolen': '',
+      'espdeportn': '',
+      'espcomern': '',
+      'pezdeport': '',
+      'ndeportpro': '',
+      'cazapieln': '',
+      'pesten': '',
+      'comstatn': 'fin3',
+      //distribución
+      //'lista_distribucion1': '',
+      //'lista_distribucion2': '',
+      'elevminn': 'ini4',
+      'elevmaxn': '',
+      'comdistg': '',
+      'comdistn': 'fin4',
+      //migración
+      'residente': 'ini5',
+      'miglocal': '',
+      'migdist': '',
+      'repn': '',
+      'norepn': '',
+      'transmign': '',
+      'aparirregn': '',
+      'mign': '',
+      'commigg': '',
+      'commign': 'fin5',
+      //habitat
+      'marino': 'ini6',
+      'estuarino': '',
+      'fluvial': '',
+      'lacustre': '',
+      'palustre': '',
+      'terrestre': '',
+      'subterran': '',
+      'factorespe': '',
+      'comhabg': '',
+      'comhabrep': '',
+      'comhabn': 'fin6',
+      //hábitos alimenticios
+      'habitosalim': 'ini7',
+      'comalimg': '',
+      'comalimn': '',
+      //ecología
+      'comecolg': '',
+      'comecoln': 'fin7',
+      //fenología-Estacionalidad
+      'fenologia': 'ini8',
+      // 'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
+      //'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
+      //'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
+      //'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
+      //'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
+      //'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
+      'comfenolg': '',
+      'comfenoln': 'fin8',
+      //reproducción
+      'colrep': 'ini9',
+      'comrepg': '',
+      'comrepn': 'fin9',
+      //manejo
+      'commanejog': 'ini10',
+      'commanejon': 'fin10',
+      //atributos misceláneos
+      'usoeconom': 'ini11',
+      'longitud': '',
+      'peso': 'fin11',
+      //campos opcionales
+      'rcvnopc1': 'ini12',
+      'rcvnopc2': '',
+      'rcvnopc3': '',
+      'rcvnopc4': '',
+      'rcvnopc5': 'fin12',
+      //referencias
+      'refg': 'ini13',
+      'refn': 'fin13',
+      //matenimiento del registro
+      'ediciong': '', //date
+      'actualizag': '', //date
+      'edicionn': '',  //date
+      'actualizan': ''//date
+    });
   }
+  guardar_Caracterizacion_Vertebrado() {
+    var caracterizacion_Vertebrado = new caracterizacion_Modelo();
+    var vertebradoLista: Array<vertebrado_Modelo> = new Array();
+    var vertebradoBase = this.setVertebrado(this.cVertebradoPruebas.value);
+    vertebradoLista.push(vertebradoBase);
+
+    caracterizacion_Vertebrado.vertebradoList = vertebradoLista;
+    this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
+    console.log('alfaomega');
+  }
+  setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
+    //  datos.edicionn = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('edicionn').value);
+    //datos.actualizan = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('actualizan').value);
+    datos.codigoe = "alfaomega";
+    return datos;
+  }
+  //agrega un nuevo registro de caracterizacion de vertebrado nacional
+  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): void {
+    this.loading = true;
+    this.usuarioService.addCaracterizacionVertebrado(caracterizacion)
+      .subscribe(
+        resVertebrado => {
+          this.loading = false;
+          this.changeSuccessMessage(`Se registro la caracterizacion del vertebrado :${resVertebrado.codigoe}.`, 'success');
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se pudo regitrar la caracterizacion del vertebrado. Comprueba que exista el elemento, verifica que el servidor este disponible , tiene que estar activo CORS Toggle', 
+          'primary');
+        });
+  }
+
   tabPagina1() {
     this.selected.setValue(0);
   }
@@ -177,5 +337,19 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   }
   tabPagina5() {
     this.selected.setValue(4);
+  }
+  openDialogo(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.guardar_Caracterizacion_Vertebrado();
+    });
+  }
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
   }
 }
