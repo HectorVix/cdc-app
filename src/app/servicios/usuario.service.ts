@@ -17,6 +17,8 @@ import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo
 import { fuente_Modelo } from '../modelo/fuente/fuente-modelo';
 import { foto_Modelo } from '../modelo/fotoDatos/foto-datos';
 import { formatDate } from '@angular/common';
+import { contacto_Modelo } from '../modelo/contacto/contacto-modelo';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -91,6 +93,13 @@ export class UsuarioService {
   addArea(area: area_Modelo): Observable<area_Modelo> {
     return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
   }
+  //agregar un contacto
+  addContacto(contacto: contacto_Modelo, jti: Number): Observable<contacto_Modelo> {
+    return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions)
+    .pipe(
+      catchError(this.handleError<contacto_Modelo>('addContacto'))
+    );
+  }
   //agregar una caracterizacion planta
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
     return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
@@ -164,8 +173,8 @@ export class UsuarioService {
     return estado;
   }
   //obtener foto por id
-  public getFoto(id: Number):Observable<Blob>{
-    return this.http.get(this.rootUrl + '/elemento/imagen/' + id, {responseType: "blob"});
+  public getFoto(id: Number): Observable<Blob> {
+    return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
   }
 
 

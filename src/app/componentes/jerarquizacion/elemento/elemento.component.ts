@@ -58,9 +58,7 @@ export class ElementoComponent implements OnInit {
   //componente galeria
   @ViewChild(GaleriaComponent)
   private galeria: GaleriaComponent;
-  //componente tabla busqueda
-  @ViewChild(TablaBusquedaComponent)
-  private tablaBusqueda: TablaBusquedaComponent;
+  
   loading: boolean;
   selected = new FormControl(0);
 
