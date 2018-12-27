@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Distribucion1_Resumen, Distribucion2_Resumen, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { vertebrado_Modelo } from '../../../modelo/resumen/vertebrado-modelo';
-
+import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
+import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
 import { UsuarioService } from '../../../servicios/usuario.service';
@@ -18,25 +19,14 @@ import { debounceTime } from 'rxjs/operators';
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   caracterizacionVertebradosNacional: FormGroup;
   cVertebradoPruebas: FormGroup;
-
-  source_Distribucion1: Distribucion1_Resumen[];
-  source_Distribucion2: Distribucion2_Resumen[];
-  source_CamposOpcionales: CamposOpcionales[];
-
+  data_Distribucion1=[];
+  data_Distribucion2=[];
+ 
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-
-
-  settings_CamposOpcionales = {
-    columns: {
-      datos: {
-        title: 'RCVN.OPC'
-      }
-    }
-  };
   settings_Distribucion1 = {
     columns: {
       codsubnac: {
@@ -189,9 +179,29 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   guardar_Caracterizacion_Vertebrado() {
     var caracterizacion_Vertebrado = new caracterizacion_Modelo();
     var vertebradoLista: Array<vertebrado_Modelo> = new Array();
-    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacional.value);
-    vertebradoLista.push(vertebradoBase);
+    var distribucion1: Array<distribucion_Modelo> = new Array();
+    var distribucion2: Array<distribucion2_Modelo> = new Array();
 
+    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacional.value);
+    this.data_Distribucion1.forEach(data_distribucion1 => {
+      var distribucionBase = new distribucion_Modelo();
+      distribucionBase.codsubnac = data_distribucion1.codsubnac;
+      distribucionBase.nomsubnac = data_distribucion1.nomsubnac;
+      distribucionBase.statsubnac = data_distribucion1.statsubnac;
+      distribucion1.push(distribucionBase);
+    });
+    
+    this.data_Distribucion2.forEach(data_distribucion2 => {
+      var distribucionBase2 = new distribucion2_Modelo();
+      distribucionBase2.codecoregn = data_distribucion2.codecoregn;
+      distribucionBase2.statecoregn = data_distribucion2.statecoregn;
+      distribucionBase2.codcuencan = data_distribucion2.codcuencan;
+      distribucionBase2.statcuencan = data_distribucion2.statcuencan;
+      distribucion2.push(distribucionBase2);
+    });
+    vertebradoBase.distribucionList = distribucion1;
+    vertebradoBase.distribucion2List = distribucion2;
+    vertebradoLista.push(vertebradoBase);
     caracterizacion_Vertebrado.vertebradoList = vertebradoLista;
     this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
   }

@@ -109,4 +109,5 @@ export class vertebrado_Modelo {
     fotoList: any;
     vERTEBRADOvertebradoid: any;
     distribucionList: any;
+    distribucion2List: any;
 }
