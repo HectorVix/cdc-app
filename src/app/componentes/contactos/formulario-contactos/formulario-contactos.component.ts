@@ -15,6 +15,7 @@ import { contacto_Modelo } from '../../../modelo/contacto/contacto-modelo';
 })
 export class FormularioContactosComponent implements OnInit {
   contactosForm: FormGroup;
+  contactosFormPruebas: FormGroup;
   selected = new FormControl(0);
   loading: boolean;
   //alertas
@@ -73,6 +74,42 @@ export class FormularioContactosComponent implements OnInit {
       'actualizar': ''//*date
 
     });
+
+    this.contactosFormPruebas = this.fb.group({
+      //identificadores
+      'numident': 'pruebas3',
+      'nombreident': '',
+      'titulo': '',
+      'nombre': '',
+      'apellido1': '',
+      'apellido2': '',
+      'sufijo': '',
+      'posicion': '',
+      'institucion': '',
+      //localizadores
+      'email': '',
+      'dir1': '',
+      'dir2': '',
+      'dir3': '',
+      'pais': '',
+      'ciudad': '',
+      'subnacion': '',
+      'codpostal': '',
+      'masident': '',
+      'smsa': '',
+      'teleftrabajo': '', //*number
+      'telefhogar': '',   //*number
+      //tipos de contactos
+      'tipocont': '',
+      //actividades con el contacto
+      'activcont': '',
+      //descripción
+      'resumen': '',
+      //documentación y mantenimiento
+      'coddirp': '',
+      'actualizar': ''//*date
+    });
+
   }
   tabPagina1() {
     this.selected.setValue(0);
@@ -92,12 +129,11 @@ export class FormularioContactosComponent implements OnInit {
   }
   guardarContacto() {
     console.log('vamos bien xd3');
-    var contactoBase = new contacto_Modelo;
-    contactoBase.numident= 'paso1';
+    var contactoBase = this.setContacto(this.contactosForm.value);
     this.addContacto(contactoBase);
   }
   setContacto(contacto: contacto_Modelo): contacto_Modelo {
-    //c.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
+    contacto.actualizar = this.usuarioService.toFormatoDateTime(this.contactosForm.get('actualizar').value);
     return contacto;
   }
   addContacto(contacto: contacto_Modelo): void {
@@ -109,10 +145,9 @@ export class FormularioContactosComponent implements OnInit {
         resContacto => {
           this.loading = false;
           this.changeSuccessMessage(`Registro exitoso, numero de identificación:${resContacto.numident}.`, 'success');
-
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo guardar', 'primary');
+          this.changeSuccessMessage(`Error no se pudo guardar:${contacto.numident}.`, 'primary');
         });
   }
   //mensajes

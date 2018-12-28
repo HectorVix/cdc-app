@@ -30,11 +30,11 @@ const httpOptions = {
 export class UsuarioService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   data: any;
+  mensajeErrores: String;
+
   constructor(private http: HttpClient) {
 
   }
-
-
 
   userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
@@ -96,9 +96,9 @@ export class UsuarioService {
   //agregar un contacto
   addContacto(contacto: contacto_Modelo, jti: Number): Observable<contacto_Modelo> {
     return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions)
-    .pipe(
-      catchError(this.handleError<contacto_Modelo>('addContacto'))
-    );
+      .pipe(
+        catchError(this.handleError<contacto_Modelo>('addContacto'))
+      );
   }
   //agregar una caracterizacion planta
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
@@ -182,14 +182,31 @@ export class UsuarioService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
+  }
+  private log(message: string) {
+    // this.messageService.add(`HeroService: ${message}`);
+    // this.mensajes.add(`CDC Servicio: ${message}`);
+    console.log(`CDC Servicio: ${message}`);
+    this.mensajeErrores = (`CDC Servicio: ${message}`);
+  }
+  public get mensajeError() {
+    return this.mensajeError;
   }
   //Cambiar formato de la fecha
   toFormato(date: NgbDateStruct): Date {
     var dia = date.day;
     dia = dia + 1;
     return date ? new Date('' + date.year + '-' + date.month + '-' + dia) : null;
+  }
+  //Cambiar formato de la fecha y tiempo
+  toFormatoDateTime(date: NgbDateStruct): Date {
+    var elAhora = new Date();
+    var dia = date.day;
+    dia = dia + 1;
+    return date ? new Date('' + date.year + '-' + date.month + '-' + dia + ' ' + elAhora.getHours() + ':' + elAhora.getMinutes() + ':' + elAhora.getSeconds()) : null;
   }
   fromModel(date: Date): NgbDateStruct {
     return date ? {
