@@ -1,83 +1,82 @@
 export class rastreo_Elemento_Modelo {
- //pagina1
+      //pagina1
       //identificadores
-      rastreoId:        Number;
-      codigoe:          String;
-      tropicos:         String;
-      nacion:           String;
-      subnacion:        String;
+      rastreoId: Number;
+      codigoe: String;
+      tropicos: String;
+      nacion: String;
+      subnacion: String;
       //taxonomia (global)
-      clasetax:         String;
-      orden:            String;
-      familia:          String;
-      genero:           String;
-      nombreg:          String;
-      autor:            String;
-      fuentenom:        Number;
-      refnombreg:       String;
-      disttax:          String;
-      dudatax:          String;
-      nomcomung:        String;
-      comtaxg:          String;
+      clasetax: String;
+      orden: String;
+      familia: String;
+      genero: String;
+      nombreg: String;
+      autor: String;
+      fuentenom: Number;
+      refnombreg: String;
+      disttax: String;
+      dudatax: String;
+      nomcomung: String;
+      comtaxg: String;
       //taxonomia (nacional)
-      nombren:          String;
-      numsinn:          Number;
-      nomcomunn:        String;
-      comtaxn:          String;
+      nombren: String;
+      numsinn: Number;
+      nomcomunn: String;
+      comtaxn: String;
       //status (global)
-      rangog:           String;
-      fecharevrg:       Date;
-      formularg:        String;
-      resprg:           String;
-      aepeu:            String;
-      fechaaepeu:       Date;
-      cites:            String;
-      iucn:             String;
-      planscons:        String;
-      resplan:          String;
-      resumenman:       String;
-      resresumen:       String;
-      exsitu:           Boolean;
-      instexsitu:       String;
-      endemismo:        String;
+      rangog: String;
+      fecharevrg: Date;
+      formularg: String;
+      resprg: String;
+      aepeu: String;
+      fechaaepeu: Date;
+      cites: String;
+      iucn: String;
+      planscons: String;
+      resplan: String;
+      resumenman: String;
+      resresumen: String;
+      exsitu: Boolean;
+      instexsitu: String;
+      endemismo: String;
       //status (nacional)
-      rangon:           String;
-      fecharevrn:       Date;
-      formularn:        String;
-      rastreolen:       String;
-      lestimn:          String;
-      leprotn:          String;
-      abundn:           String;
-      protnacion:       String;
-      refnombren:       String;
-      transparencian:   Boolean;
+      rangon: String;
+      fecharevrn: Date;
+      formularn: String;
+      rastreolen: String;
+      lestimn: String;
+      leprotn: String;
+      abundn: String;
+      protnacion: String;
+      refnombren: String;
+      transparencian: Boolean;
       //status (subnacional)
-      rangos:           String;
-      fecharevrs:       Date;
-      formulars:        String;
-      rastreoles:       String;
-      lestims:          String;
-      leprots:          String;
-      abunds:           String;
-      protsubnac:       String;
-      refnombres:       String;
-      transparencias:   Boolean;
+      rangos: String;
+      fecharevrs: Date;
+      formulars: String;
+      rastreoles: String;
+      lestims: String;
+      leprots: String;
+      abunds: String;
+      protsubnac: String;
+      refnombres: String;
+      transparencias: Boolean;
       //campos opcionales
-      reopc1:           String;
-      reopc2:           String;
-      reopc3:           String;
-      reopc4:           String;
-      reopc5:           String;
+      reopc1: String;
+      reopc2: String;
+      reopc3: String;
+      reopc4: String;
+      reopc5: String;
       // manteniiento del registro
-      codfuenten:       String;
-      codfuentes:       String;
-      actualizag:       Date;
-      actualizan:       Date;
-      actualizas:       Date;
-
-      fuenteList:any;
+      codfuenten: String;
+      codfuentes: String;
+      actualizag: Date;
+      actualizan: Date;
+      actualizas: Date;
+      //relaciones
+      fuenteList: any;
       localizacionList: any;
-     // cARACTERIZACIONcaracterizacionid:any;
-      jERARQUIZACIONjerarquizacionid:Number;
-
+      eLEMENTOelementoid: Number;
+      observacionesList: any;
 }

@@ -89,8 +89,8 @@ export class FormularioReComponent implements OnInit {
       //pagina1
       //identificadores
       'codigoe': ['', Validators.required],
-      'tropicos': ['', Validators.required],
-      'nacion': ['', Validators.required],
+      'tropicos': '',
+      'nacion': '',
       'subnacion': '',
       //taxonomia (global)
       'clasetax': '',
