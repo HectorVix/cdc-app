@@ -11,6 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Jerarquizacion } from '../modelo/jerarquizacion/jerarquizacion-modelo';
 import { rastreo_Elemento_Modelo } from '../modelo/rastreo/rastreo-elemento-modelo';
 import { Localizacion_Modelo } from '../modelo/localizacion/localizacion-modelo';
+import { protocolo_LE_Modelo } from '../modelo/localizacion/protocolo-le-modelo';
 import { sitio_Modelo } from '../modelo/sitio/sitio-modelo';
 import { area_Modelo } from '../modelo/area/area-modelo';
 import { caracterizacion_Modelo } from '../modelo/resumen/caracterizacion-modelo';
@@ -81,9 +82,16 @@ export class UsuarioService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
-  //agregar una nueva localizacion
+  //agregar una nueva localización
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  }
+  //agregar nuevo protocolo LE
+  addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
+    return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions)
+      .pipe(
+        catchError(this.handleError<protocolo_LE_Modelo>('addProtocoloLE'))
+      );
   }
   //agregar un nuevo sitio
   addSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
@@ -95,10 +103,7 @@ export class UsuarioService {
   }
   //agregar un contacto
   addContacto(contacto: contacto_Modelo, jti: Number): Observable<contacto_Modelo> {
-    return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions)
-      .pipe(
-        catchError(this.handleError<contacto_Modelo>('addContacto'))
-      );
+    return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions);
   }
   //agregar una caracterizacion planta
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
