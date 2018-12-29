@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { protocolo_LE_Modelo } from '../../../modelo/localizacion/protocolo-le-modelo';
+import { dispersion_Modelo } from '../../../modelo/localizacion/dispersion-modelo';
 
 @Component({
   selector: 'app-protocolo-le',
@@ -16,20 +17,19 @@ import { protocolo_LE_Modelo } from '../../../modelo/localizacion/protocolo-le-m
 })
 export class ProtocoloLeComponent implements OnInit {
   protocoloLeForm: FormGroup;
-  protocoloLeFormPruebas: FormGroup;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-  source_Protocolo: Protocolo[];
+  data_dispersion = [];
   settings_Protocolo = {
     columns: {
       le: {
         title: 'LE'
       },
-      nommapaNummarg: {
-        title: 'NOMMAPA NUMMARG'
+      nommapanummarg: {
+        title: 'MAPA'
       },
       prov: {
         title: 'PROV'
@@ -37,8 +37,8 @@ export class ProtocoloLeComponent implements OnInit {
       direccion: {
         title: 'DIRECCION'
       },
-      ultObs: {
-        title: 'ULT OBS'
+      ultobs: {
+        title: 'ULTOBS'
       }
 
     }
@@ -66,21 +66,21 @@ export class ProtocoloLeComponent implements OnInit {
       'nomcomun': '',
       'fecha': '',
     });
-    this.protocoloLeFormPruebas = this.fb.group({
-      'codigoe': 'paso3',
-      'rangog': '',
-      'rangon': '',
-      'rangos': '',
-      'nombre': '',
-      'nomcomun': '',
-      'fecha': '',
-    });
   }
   guardarProtocolo() {
-    console.log('aki vamos ok');
     var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
-
-
+    var dispersionLista: Array<dispersion_Modelo> = new Array();
+   this.data_dispersion.forEach(data_dispersion => {
+      var dispersionBase = new dispersion_Modelo();
+      dispersionBase.le = data_dispersion.le;
+      dispersionBase.nommapanummarg = data_dispersion.nommapanummarg;
+      dispersionBase.prov = data_dispersion.prov;
+      dispersionBase.direccion = data_dispersion.direccion;
+      dispersionBase.ultobs = data_dispersion.ultobs;
+      dispersionLista.push(dispersionBase);
+    });
+    
+    protocoloLE_Base.dispersionList = dispersionLista;
     this.addLocalizacionElemento(protocoloLE_Base);
   }
   setProtocoloLE(protocoloLe): protocolo_LE_Modelo {

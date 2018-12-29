@@ -88,10 +88,10 @@ export class UsuarioService {
   }
   //agregar nuevo protocolo LE
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
-    return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions)
-      .pipe(
-        catchError(this.handleError<protocolo_LE_Modelo>('addProtocoloLE'))
-      );
+    return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
+    //.pipe(
+    //  catchError(this.handleError<protocolo_LE_Modelo>('addProtocoloLE'))
+    //  );
   }
   //agregar un nuevo sitio
   addSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
@@ -181,8 +181,7 @@ export class UsuarioService {
   public getFoto(id: Number): Observable<Blob> {
     return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
   }
-
-
+  
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -192,8 +191,6 @@ export class UsuarioService {
     };
   }
   private log(message: string) {
-    // this.messageService.add(`HeroService: ${message}`);
-    // this.mensajes.add(`CDC Servicio: ${message}`);
     console.log(`CDC Servicio: ${message}`);
     this.mensajeErrores = (`CDC Servicio: ${message}`);
   }
