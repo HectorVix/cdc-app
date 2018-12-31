@@ -17,11 +17,11 @@ import { TablaBusquedaComponent } from '../../../componentes/tabla-busqueda/tabl
 
 export interface ElementoDato {
   numero: number;
+  elmendoId: Number;
   codigo: String;
-  fecha: Date;
+  fecha: String;
   nombrecomun: String;
   nombrecientifico;
-  usuario: String;
   comentario: String;
 }
 
@@ -44,7 +44,7 @@ export class ElementoComponent implements OnInit {
   matcher = new ControlErrorStateMatcher();
   //---------------------------------tabla
   k: number;
-  displayedColumns: string[] = ['numero', 'codigo', 'fecha', 'nombrecomun', 'nombrecientifico', 'usuario'];
+  displayedColumns: string[] = ['numero', 'codigo', 'nombrecomun', 'nombrecientifico'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -58,9 +58,13 @@ export class ElementoComponent implements OnInit {
   //componente galeria
   @ViewChild(GaleriaComponent)
   private galeria: GaleriaComponent;
-  
+
   loading: boolean;
   selected = new FormControl(0);
+
+  //segun el caso
+  editar = true;
+  guardar = false;
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
@@ -96,6 +100,7 @@ export class ElementoComponent implements OnInit {
     d = new Date(date);
     this.dateElemento = this.usuarioService.fromModel(d);
     this.elementoForm = this.fb.group({
+      'elementoId': row.elmendoId,
       'codigo': row.codigo,
       'nombrecomun': row.nombrecomun,
       'nombrecientifico': row.nombrecientifico,
@@ -103,6 +108,8 @@ export class ElementoComponent implements OnInit {
       'fecha': this.dateElemento,
     });
     this.selected.setValue(0);
+    console.log('elementoId:', this.elementoForm.get('elementoId').value);
+
   }
 
 
@@ -126,24 +133,29 @@ export class ElementoComponent implements OnInit {
   }
 
   guardarElemento() {
-    var elementoBase = this.setElemento(this.elementoForm.value);
-    this.galeria.validarDatosFotos();
-    if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
-      this.addElemento(this.elementoForm.value);
-    }
-    if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
-      this.addElemento(this.elementoForm.value);
-    }
-    if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
+    if (this.elementoForm.get('codigo').value && this.elementoForm.get('fecha').value) {
+      var elementoBase = this.setElemento(this.elementoForm.value);
+      this.galeria.validarDatosFotos();
+      if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
+        this.addElemento(this.elementoForm.value);
+      }
+      if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
+        this.addElemento(this.elementoForm.value);
+      }
+      if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
 
-      if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
-      else
-        this.changeSuccessMessage('Error  no se pudo guardar falta editar las fotos', 'primary');
+        if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
+        else
+          this.changeSuccessMessage('Error  no se pudo guardar falta editar las fotos', 'primary');
+      }
+    }
+    else {
+      this.changeSuccessMessage('Error  no se pudo guardar, ingresa un codigo elemento valido y la fecha son obligatorios', 'primary');
     }
   }
 
-  setElemento(elemento: elemento_Modelo): elemento_Modelo {
-    elemento.fecha = this.usuarioService.toFormato(this.elementoForm.get('fecha').value);
+  setElemento(elemento): elemento_Modelo {
+    elemento.fecha = this.usuarioService.toFormatoDateTime(elemento.fecha);
     return elemento;
   }
   addElemento(elemento: elemento_Modelo): void {
@@ -193,11 +205,12 @@ export class ElementoComponent implements OnInit {
       .subscribe(
         data => {
           this.dataElementos = data;
+          console.log('CDC ELEMENTO:', data);
           for (let elementoVal of this.dataElementos) {
             this.k = this.k + 1;
-            this.elementos.push(crearElemento(this.k, elementoVal, elementoVal.usuariousuarioid.nombre, elementoVal.usuariousuarioid.apellido));
+            this.elementos.push(crearElemento(this.k, elementoVal));
           }
-          this.dataSource = new MatTableDataSource(this.elementos, );
+          this.dataSource = new MatTableDataSource(this.elementos);
         }, err => {
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
@@ -213,16 +226,37 @@ export class ElementoComponent implements OnInit {
         this.guardarElemento();
     });
   }
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editarElemento();
+    });
+  }
+  editarElemento(){
+    console.log('ok vamos editando bien');
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearForm_Elemento();
+    this.crearForm_Buscar();
+    this.galeria.nuevo();
+    this.elementos = new Array();
+    this.dataElementos = [];
+  }
 }
-function crearElemento(k: number, elemento: elemento_Modelo, nombre: String, apellido: String): ElementoDato {
-  var usuario = nombre.concat(" " + apellido.toString());
+function crearElemento(k: number, elemento: elemento_Modelo): ElementoDato {
   return {
     numero: k,
+    elmendoId: elemento.elementoId,
     codigo: elemento.codigo,
     nombrecomun: elemento.nombrecomun,
     nombrecientifico: elemento.nombrecientifico,
     comentario: elemento.comentario,
-    fecha: elemento.fecha,
-    usuario: usuario
+    fecha: elemento.fecha
   };
 }

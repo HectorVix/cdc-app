@@ -47,6 +47,8 @@ export class GaleriaComponent implements OnInit {
   autor: string = '';
   fecha: Date;
   public editado: Boolean;
+  //imagenes
+  imagenes: Image[] = [];
   //
   fotoElemento: File;
 
@@ -96,7 +98,6 @@ export class GaleriaComponent implements OnInit {
     layout: new GridLayout({ width: '80px', height: '80px' }, { length: 7, wrap: true })
   };
 
-  imagenes: Image[] = [];
   dotsConfig: DotsConfig = {
     visible: false
   };
@@ -430,5 +431,20 @@ export class GaleriaComponent implements OnInit {
     fb.lastModifiedDate = new Date();
     fb.name = fileName;
     return <File>fotoBlob;
+  }
+  public nuevo() {
+    this.archivo.nativeElement.value = "";
+    this.archivos = new Set();
+    this.baseFotoModelo = new Array();
+    this.tam_inicial = 0;
+    //Galeria
+    this.imageIndex = 1;
+    this.galleryId = 1;
+    this.descripcionIndex = 0;
+    this.datosFotografias = [];
+    //datos Foto
+    this.descripcion = "";
+    this.comentario = "";
+    this.imagenes=[];
   }
 }
