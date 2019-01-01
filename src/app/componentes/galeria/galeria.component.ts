@@ -227,14 +227,14 @@ export class GaleriaComponent implements OnInit {
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
-      console.log('onVisibleIndex result:' + index);
+      //console.log('onVisibleIndex result:' + index);
       var cont = 0;
       this.archivos.forEach(archivo => {
 
         if (cont == index) {
           this.archivos.delete(archivo);
           this.archivo.nativeElement.value = "";
-          console.log("foto:", archivo.name, 'pos:', cont);
+          // console.log("foto:", archivo.name, 'pos:', cont);
 
         }
         cont = cont + 1;
@@ -317,7 +317,7 @@ export class GaleriaComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = (onLoadPhotoEvent: any) => {
       this.base64String = onLoadPhotoEvent.target.result;
-      console.log('base64:', this.base64String);
+      //console.log('base64:', this.base64String);
       var imagen = new Image(0, {
         img: this.base64String,
         description: ''
@@ -408,18 +408,21 @@ export class GaleriaComponent implements OnInit {
     }
   }
 
-  getFoto() {
-    this.usuarioService.getFoto(101)
+  public getFoto(elementoId: Number, foto: foto_Modelo, posicion): void {
+    this.usuarioService.getFoto(elementoId)
       .subscribe(
         data => {
-          console.log('hola xd');
           console.log(data);
           var file = this.blobToFile(data, 'hola.png');
-
-          console.log(file);
-          //  this.archivo.nativeElement.value = file;
           this.agregarImagen(file);
-          console.log('aki va');
+
+          this.datosFotografias[posicion] = {
+            descripcion: foto.descripcion,
+            comentario: foto.comentario,
+            autor: foto.autor,
+            fecha: foto.fecha,
+            editado: true
+          };
         }, err => {
           console.log('Error xd');
 
@@ -445,6 +448,6 @@ export class GaleriaComponent implements OnInit {
     //datos Foto
     this.descripcion = "";
     this.comentario = "";
-    this.imagenes=[];
+    this.imagenes = [];
   }
 }

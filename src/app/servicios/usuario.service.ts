@@ -48,15 +48,19 @@ export class UsuarioService {
     return this.http.get<UsuarioModelo>(this.rootUrl + '/us/' + jti);
 
   }
+  //------------------------------------------------------------------------------------------------------
   //obtener elementos
   getElementos(codigo: String, nombrecomun, nombrecientifico) {
     return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
   }
-  //validar y obtener elemento id
-  validarElementoCodigoe(codigoe: String) {
-    return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/' + codigoe);
+  //obtener foto por id
+  public getFoto(id: Number): Observable<Blob> {
+    return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
   }
-
+  getDatosFotos(elementoId:String):Observable<foto_Modelo> {
+    return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
+  }
+//--------------------------------------------------------------------------------------------------------
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
@@ -116,6 +120,12 @@ export class UsuarioService {
   //agregar un resumen de fuente
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
+  }
+
+  //------------------------------------------------------------------------------------------------------------------------
+  //validar y obtener elemento id
+  validarElementoCodigoe(codigoe: String) {
+    return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/' + codigoe);
   }
   //cargar archivos
   public cargarArchivos(archivos: Set<File>, fuenteid: Number): { [key: string]: Observable<number> } {
@@ -177,11 +187,7 @@ export class UsuarioService {
     });
     return estado;
   }
-  //obtener foto por id
-  public getFoto(id: Number): Observable<Blob> {
-    return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
-  }
-  
+
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

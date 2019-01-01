@@ -14,6 +14,7 @@ import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { TablaBusquedaComponent } from '../../../componentes/tabla-busqueda/tabla-busqueda.component';
+import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 
 export interface ElementoDato {
   numero: number;
@@ -108,11 +109,31 @@ export class ElementoComponent implements OnInit {
       'fecha': this.dateElemento,
     });
     this.selected.setValue(0);
+    //aki buscar fotos por elementoId
     console.log('elementoId:', this.elementoForm.get('elementoId').value);
+    this.galeria.nuevo();
+
+
+    this.getFoto_Datos(row.elmendoId);
 
   }
-
-
+  data_resFoto: any;
+  getFoto_Datos(elementoId: String) {
+    var cont = 0;
+    this.usuarioService.getDatosFotos(elementoId).subscribe(
+      resFoto => {
+        console.log('cdc fotos:', resFoto);
+        this.data_resFoto = resFoto;
+        for (let fotoVal of this.data_resFoto) {
+          var foto = new foto_Modelo();
+          foto = fotoVal;
+          console.log('fotoId:', foto.fotoId);
+          this.galeria.getFoto(foto.fotoId, foto, cont);
+          console.log('contador :', cont);
+          cont = cont + 1;
+        }
+      });
+  }
   crearForm_Elemento() {
     this.elementoForm = this.fb.group({
       'codigo': ['', Validators.required],
@@ -236,7 +257,7 @@ export class ElementoComponent implements OnInit {
         this.editarElemento();
     });
   }
-  editarElemento(){
+  editarElemento() {
     console.log('ok vamos editando bien');
   }
   nuevo() {
