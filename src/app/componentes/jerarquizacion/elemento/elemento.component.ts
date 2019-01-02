@@ -112,8 +112,6 @@ export class ElementoComponent implements OnInit {
     //aki buscar fotos por elementoId
     console.log('elementoId:', this.elementoForm.get('elementoId').value);
     this.galeria.nuevo();
-
-
     this.getFoto_Datos(row.elmendoId);
 
   }

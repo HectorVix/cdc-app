@@ -5,4 +5,6 @@ export class foto_Modelo {
     autor: string;
     fecha: Date;
     editado: boolean;
+    nombre:string;
+    posicion:Number;
 }

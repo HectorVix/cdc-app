@@ -57,10 +57,10 @@ export class UsuarioService {
   public getFoto(id: Number): Observable<Blob> {
     return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
   }
-  getDatosFotos(elementoId:String):Observable<foto_Modelo> {
+  getDatosFotos(elementoId: String): Observable<foto_Modelo> {
     return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
   }
-//--------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
@@ -152,13 +152,13 @@ export class UsuarioService {
     return estado;
   }
   cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number) {
-    var cont = 0;
+    var posicion = 0;
     const estado = {};
     var fechaCreacion;
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       var baseFotoModelo = new foto_Modelo();
-      baseFotoModelo = datosFotos[cont];
+      baseFotoModelo = datosFotos[posicion];
       if (baseFotoModelo.fecha) {
         fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
         console.log('estado1:', fechaCreacion);
@@ -168,6 +168,9 @@ export class UsuarioService {
       formData.append('comentario', baseFotoModelo.comentario);
       formData.append('autor', baseFotoModelo.autor);
       formData.append('fecha', fechaCreacion);
+      formData.append('posicion', '' + posicion);
+      posicion = posicion + 1;
+      console.log('Posicion:', posicion);
       var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
         reportProgress: true
       });
@@ -183,7 +186,6 @@ export class UsuarioService {
       estado[archivo.name] = {
         progreso: progreso.asObservable()
       };
-      cont = cont + 1;
     });
     return estado;
   }

@@ -413,7 +413,7 @@ export class GaleriaComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          var file = this.blobToFile(data, 'hola.png');
+          var file = this.blobToFile(data,foto.nombre);
           this.agregarImagen(file);
 
           this.datosFotografias[posicion] = {
