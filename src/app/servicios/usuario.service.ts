@@ -208,14 +208,14 @@ export class UsuarioService {
   //Cambiar formato de la fecha
   toFormato(date: NgbDateStruct): Date {
     var dia = date.day;
-    dia = dia + 1;
+    // dia = dia + 1;
     return date ? new Date('' + date.year + '-' + date.month + '-' + dia) : null;
   }
   //Cambiar formato de la fecha y tiempo
   toFormatoDateTime(date: NgbDateStruct): Date {
     var elAhora = new Date();
     var dia = date.day;
-    dia = dia + 1;
+    // dia = dia + 1;
     return date ? new Date('' + date.year + '-' + date.month + '-' + dia + ' ' + elAhora.getHours() + ':' + elAhora.getMinutes() + ':' + elAhora.getSeconds()) : null;
   }
   fromModel(date: Date): NgbDateStruct {

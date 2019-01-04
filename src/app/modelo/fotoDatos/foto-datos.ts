@@ -3,7 +3,7 @@ export class foto_Modelo {
     descripcion: string;
     comentario: string;
     autor: string;
-    fecha: Date;
+    fecha;
     editado: boolean;
     nombre:string;
     posicion:number;

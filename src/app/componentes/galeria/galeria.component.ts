@@ -22,9 +22,9 @@ import {
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
-import { imagen_Modelo } from '../../modelo/fotoDatos/imagen-posicion';
 import { FooterRowOutlet } from '@angular/cdk/table';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-galeria',
@@ -36,7 +36,6 @@ export class GaleriaComponent implements OnInit {
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
   public baseFotoModelo: Array<foto_Modelo> = new Array();
-  public baseImagenModelo: Array<imagen_Modelo> = new Array();
   private tam_inicial = 0;
   //Galeria
   imageIndex = 1;
@@ -44,15 +43,15 @@ export class GaleriaComponent implements OnInit {
   descripcionIndex = 0;
   public datosFotografias = [];
   //datos Foto
-  descripcion: string = "";
-  comentario: string = ' ';
+  descripcion: string = '';
+  comentario: string = '';
   autor: string = '';
-  fecha: Date;
+  fecha: NgbDateStruct;
   public editado: Boolean;
   //imagenes
   imagenes: Image[] = [];
-  //
   fotoElemento: File;
+  dateElemento: NgbDateStruct;
 
   constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
     this.editado = false;
@@ -229,15 +228,12 @@ export class GaleriaComponent implements OnInit {
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
-      //console.log('onVisibleIndex result:' + index);
       var cont = 0;
       this.archivos.forEach(archivo => {
 
         if (cont == index) {
           this.archivos.delete(archivo);
           this.archivo.nativeElement.value = "";
-          // console.log("foto:", archivo.name, 'pos:', cont);
-
         }
         cont = cont + 1;
       });
@@ -319,7 +315,6 @@ export class GaleriaComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = (onLoadPhotoEvent: any) => {
       this.base64String = onLoadPhotoEvent.target.result;
-      //console.log('base64:', this.base64String);
       var imagen = new Image(0, {
         img: this.base64String,
         description: ''
@@ -328,9 +323,11 @@ export class GaleriaComponent implements OnInit {
       this.imagenes = [...this.imagenes, nuevaImagen]
     }
   }
-  public agregarImagenBase64String(base64String) {
-    
-      this.base64String = base64String;
+  public agregarImagenBusqueda(file: File, fotoModelo) {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (onLoadPhotoEvent: any) => {
+      this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
         description: ''
@@ -338,16 +335,27 @@ export class GaleriaComponent implements OnInit {
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
     }
-    dataURItoBlob(dataURI) {
-      const byteString = atob(dataURI);
-      const arrayBuffer = new ArrayBuffer(byteString.length);
-      const int8Array = new Uint8Array(arrayBuffer);
-      for (let i = 0; i < byteString.length; i++) {
-        int8Array[i] = byteString.charCodeAt(i);
-      }
-      const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });    
-      return blob;
-   }
+    let d = new Date();
+    d = new Date(fotoModelo.fecha);
+    this.dateElemento = this.usuarioService.fromModel(d);
+    this.datosFotografias[fotoModelo.posicion] = {
+      descripcion: fotoModelo.descripcion,
+      comentario: fotoModelo.comentario,
+      autor: fotoModelo.autor,
+      fecha: this.dateElemento,
+      editado: true
+    };
+  }
+  dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+    return blob;
+  }
   anterior() {
     if (this.descripcionIndex == 0) {
       this.nuevoDatosFotos()
@@ -399,7 +407,7 @@ export class GaleriaComponent implements OnInit {
     this.descripcion = '';
     this.comentario = '';
     this.autor = '';
-    this.fecha = new Date();
+    this.fecha = null;
   }
   validarDatosFotos() {
     var tipo = -1;
@@ -429,43 +437,14 @@ export class GaleriaComponent implements OnInit {
       default: { this.editado = false; }
     }
   }
-
-  public ordernarListaFotos(){
-    console.log("ordenado lista imagenes:");
-    this.baseImagenModelo.forEach(data => {
-      console.log("ordenado lista imagenes:",data);
-    });
-  }
-  public getFoto(elementoId: Number, foto: foto_Modelo): void {
-    this.usuarioService.getFoto(elementoId)
-      .subscribe(
-        data => {
-          console.log(data);
-          var file = this.blobToFile(data,foto.nombre);
-          var imagenModelo= new imagen_Modelo();
-           imagenModelo.file=file;
-           imagenModelo.posicion=foto.posicion;
-           this.baseImagenModelo.push(imagenModelo);
-          this.agregarImagen(file);
-          
-          this.datosFotografias[foto.posicion] = {
-            descripcion: foto.descripcion,
-            comentario: foto.comentario,
-            autor: foto.autor,
-            fecha: foto.fecha,
-            editado: true
-          };
-        }, err => {
-          console.log('Error xd');
-
-        });
-
-  }
-  public blobToFile = (fotoBlob: Blob, fileName: string): File => {
-    var fb: any = fotoBlob;
-    fb.lastModifiedDate = new Date();
-    fb.name = fileName;
-    return <File>fotoBlob;
+  public mostrarDatosInicio(descripcion, comentario, autor, fecha) {
+    let d = new Date();
+    d = new Date(fecha);
+    this.dateElemento = this.usuarioService.fromModel(d);
+    this.descripcion = descripcion;
+    this.comentario = comentario;
+    this.autor = autor;
+    this.fecha = this.dateElemento;
   }
   public nuevo() {
     this.archivo.nativeElement.value = "";
@@ -480,6 +459,9 @@ export class GaleriaComponent implements OnInit {
     //datos Foto
     this.descripcion = "";
     this.comentario = "";
+    this.autor = '';
+    this.fecha = null;
     this.imagenes = [];
+    this.dateElemento = null;
   }
 }

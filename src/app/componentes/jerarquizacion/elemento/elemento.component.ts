@@ -109,39 +109,26 @@ export class ElementoComponent implements OnInit {
       'fecha': this.dateElemento,
     });
     this.selected.setValue(0);
-    //aki buscar fotos por elementoId
-    console.log('elementoId:', this.elementoForm.get('elementoId').value);
     this.galeria.nuevo();
     this.getFoto_Datos(row.elmendoId);
-
   }
   data_resFoto: any;
   getFoto_Datos(elementoId: String) {
     const date = new Date().valueOf();
     this.usuarioService.getDatosFotos(elementoId).subscribe(
-     
       resFoto => {
-        console.log('cdc fotos:', resFoto);
         this.data_resFoto = resFoto;
         for (let fotoVal of this.data_resFoto) {
-
           var foto = new foto_Modelo();
           foto = fotoVal;
-          console.log('fotoId:', foto.fotoId);
-          console.log('imagen:', foto.imagen);
-          const imageName = date + '.' + foto.nombre + '.jpeg';
-// call method that creates a blob from dataUri
-const imageBlob = this.galeria.dataURItoBlob(foto.imagen);
-const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-          this.galeria.agregarImagen(imageFile);
-          //this.galeria.getFoto(foto.fotoId, foto);
-          
-         
+          if (foto.posicion == 0)
+            this.galeria.mostrarDatosInicio(foto.descripcion, foto.comentario, foto.autor, foto.fecha);
+          const nombreImagen = date + '.' + foto.nombre;
+          const imageBlob = this.galeria.dataURItoBlob(foto.imagen);
+          const imageFile = new File([imageBlob], nombreImagen, { type: 'image/jpeg' });
+          this.galeria.agregarImagenBusqueda(imageFile, foto);
         }
       });
-
-      // ordenar fotos
-      this.galeria.ordernarListaFotos();
   }
   crearForm_Elemento() {
     this.elementoForm = this.fb.group({
@@ -235,7 +222,6 @@ const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
       .subscribe(
         data => {
           this.dataElementos = data;
-          console.log('CDC ELEMENTO:', data);
           for (let elementoVal of this.dataElementos) {
             this.k = this.k + 1;
             this.elementos.push(crearElemento(this.k, elementoVal));
