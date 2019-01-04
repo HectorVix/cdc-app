@@ -6,5 +6,6 @@ export class foto_Modelo {
     fecha: Date;
     editado: boolean;
     nombre:string;
-    posicion:Number;
+    posicion:number;
+    imagen;
 }

@@ -31,7 +31,7 @@
         </button>
       </div>
       <div class="scrolling-wrapper base-tam-y ">
-        <ng-tempplate *ngIf="imagenes.length>=1 ">
+        <ng-tempplate *ngIf="imagenes.length>=1 && ordenar==true ">
           <img *ngIf="imagenes[descripcionIndex].plain && imagenes[descripcionIndex].plain.img; else noThumb" [src]="imagenes[descripcionIndex].plain.img"
           />
           <ng-template #noThumb>

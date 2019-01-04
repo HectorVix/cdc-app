@@ -117,20 +117,31 @@ export class ElementoComponent implements OnInit {
   }
   data_resFoto: any;
   getFoto_Datos(elementoId: String) {
-    var cont = 0;
+    const date = new Date().valueOf();
     this.usuarioService.getDatosFotos(elementoId).subscribe(
+     
       resFoto => {
         console.log('cdc fotos:', resFoto);
         this.data_resFoto = resFoto;
         for (let fotoVal of this.data_resFoto) {
+
           var foto = new foto_Modelo();
           foto = fotoVal;
           console.log('fotoId:', foto.fotoId);
-          this.galeria.getFoto(foto.fotoId, foto, cont);
-          console.log('contador :', cont);
-          cont = cont + 1;
+          console.log('imagen:', foto.imagen);
+          const imageName = date + '.' + foto.nombre + '.jpeg';
+// call method that creates a blob from dataUri
+const imageBlob = this.galeria.dataURItoBlob(foto.imagen);
+const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+          this.galeria.agregarImagen(imageFile);
+          //this.galeria.getFoto(foto.fotoId, foto);
+          
+         
         }
       });
+
+      // ordenar fotos
+      this.galeria.ordernarListaFotos();
   }
   crearForm_Elemento() {
     this.elementoForm = this.fb.group({

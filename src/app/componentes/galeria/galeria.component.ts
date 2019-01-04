@@ -22,6 +22,7 @@ import {
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
+import { imagen_Modelo } from '../../modelo/fotoDatos/imagen-posicion';
 import { FooterRowOutlet } from '@angular/cdk/table';
 import { UsuarioService } from '../../servicios/usuario.service';
 
@@ -35,6 +36,7 @@ export class GaleriaComponent implements OnInit {
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
   public baseFotoModelo: Array<foto_Modelo> = new Array();
+  public baseImagenModelo: Array<imagen_Modelo> = new Array();
   private tam_inicial = 0;
   //Galeria
   imageIndex = 1;
@@ -326,6 +328,26 @@ export class GaleriaComponent implements OnInit {
       this.imagenes = [...this.imagenes, nuevaImagen]
     }
   }
+  public agregarImagenBase64String(base64String) {
+    
+      this.base64String = base64String;
+      var imagen = new Image(0, {
+        img: this.base64String,
+        description: ''
+      });
+      const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
+      this.imagenes = [...this.imagenes, nuevaImagen]
+    }
+    dataURItoBlob(dataURI) {
+      const byteString = atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });    
+      return blob;
+   }
   anterior() {
     if (this.descripcionIndex == 0) {
       this.nuevoDatosFotos()
@@ -408,15 +430,25 @@ export class GaleriaComponent implements OnInit {
     }
   }
 
-  public getFoto(elementoId: Number, foto: foto_Modelo, posicion): void {
+  public ordernarListaFotos(){
+    console.log("ordenado lista imagenes:");
+    this.baseImagenModelo.forEach(data => {
+      console.log("ordenado lista imagenes:",data);
+    });
+  }
+  public getFoto(elementoId: Number, foto: foto_Modelo): void {
     this.usuarioService.getFoto(elementoId)
       .subscribe(
         data => {
           console.log(data);
           var file = this.blobToFile(data,foto.nombre);
+          var imagenModelo= new imagen_Modelo();
+           imagenModelo.file=file;
+           imagenModelo.posicion=foto.posicion;
+           this.baseImagenModelo.push(imagenModelo);
           this.agregarImagen(file);
-
-          this.datosFotografias[posicion] = {
+          
+          this.datosFotografias[foto.posicion] = {
             descripcion: foto.descripcion,
             comentario: foto.comentario,
             autor: foto.autor,
