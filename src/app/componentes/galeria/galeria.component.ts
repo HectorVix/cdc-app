@@ -51,6 +51,7 @@ export class GaleriaComponent implements OnInit {
   //imagenes
   imagenes: Image[] = [];
   fotoElemento: File;
+  selected = new FormControl(0);
 
   constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
     this.editado = false;
@@ -249,7 +250,7 @@ export class GaleriaComponent implements OnInit {
       }
       this.descripcionIndex = 0;
       this.datosFotografias = datosFotos;
-      //muestra el recorrido actual  y reodenado luego de la eliminaciónde un foto
+      //muestra el recorrido actual  y reodenado luego de la eliminación de una foto
       if (posActual != -1) {
         this.mostrar_Datos_PosActual(posActual);
         this.descripcionIndex = posActual;
@@ -266,12 +267,19 @@ export class GaleriaComponent implements OnInit {
     }
   }
   mostrar_Datos_PosActual(posActual) {
+    this.descripcionIndex = posActual;
     var datoFotoModeloActual = new foto_Modelo();
     datoFotoModeloActual = this.datosFotografias[posActual];
-    this.descripcion = datoFotoModeloActual.descripcion;
+    if (datoFotoModeloActual.descripcion)
+      var descripcion = datoFotoModeloActual.descripcion;
+    else
+      descripcion = '';
+
+    this.descripcion = '' + descripcion;
     this.comentario = datoFotoModeloActual.comentario;
     this.autor = datoFotoModeloActual.autor;
     this.fecha = this.getFecha(datoFotoModeloActual.fecha);
+
   }
 
   onButtonAfterHook(event: ButtonEvent) {
@@ -327,6 +335,30 @@ export class GaleriaComponent implements OnInit {
   }
 
   private getCurrentIndexCustomLayout(image: Image, imagenes: Image[]): number {
+    /* Por cuestiones de tiempo  la edición, posicionamiento valido, recorrido de imaganes se trabajo utilizando el sentido común , 
+    una mejor forma y mas eficaz seria hacer todos estos procesos mediante un polinomio, no lo utilicé  por qué  aun desconozco cómo implementarlo en este lenguaje.
+    */
+    const posActual = image ? imagenes.indexOf(image) : -1;
+    this.validarDatosFotos();
+    if (this.editado) { }
+    else {
+      var posFinal = this.datosFotografias.length;
+      if (posActual != -1) {
+        this.datosFotografias[posFinal] = {
+          descripcion: '',
+          comentario: '',
+          autor: '',
+          fecha: null,
+          editado: true,
+        };
+        this.validarDatosFotos();
+      }
+
+    }
+    if (posActual != -1 && this.editado) {
+      this.mostrar_Datos_PosActual(posActual);
+      this.selected.setValue(1);//se posiciona en la imagen actual para editarla
+    }
     return image ? imagenes.indexOf(image) : -1;
   }
   //archivos
@@ -485,11 +517,12 @@ export class GaleriaComponent implements OnInit {
     this.descripcionIndex = 0;
     this.datosFotografias = [];
     //datos Foto
-    this.descripcion = "";
-    this.comentario = "";
+    this.descripcion = '';
+    this.comentario = '';
     this.autor = '';
     this.fecha = null;
     this.imagenes = [];
+    this.selected = new FormControl(0);
   }
   getFecha(fecha) {
     if (fecha != null) {
