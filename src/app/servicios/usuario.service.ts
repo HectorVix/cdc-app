@@ -70,6 +70,11 @@ export class UsuarioService {
     console.log(jti);
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
+  //editar elemento
+  editarElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
+    console.log(jti);
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/editar/' + jti, elemento, httpOptions);
+  }
   //agregar una nueva jerarquizacion Global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
     return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global', jerarquizacion, httpOptions);
@@ -90,6 +95,7 @@ export class UsuarioService {
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
+  
   //agregar nuevo protocolo LE
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
     return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
@@ -228,4 +234,6 @@ export class UsuarioService {
   toFormato2(date): string {
     return '' + date.day + '/' + date.month + '/' + date.year;
   }
+  //editar
+
 }

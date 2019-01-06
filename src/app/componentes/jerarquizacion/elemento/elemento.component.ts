@@ -111,6 +111,8 @@ export class ElementoComponent implements OnInit {
     this.selected.setValue(0);
     this.galeria.nuevo();
     this.getFoto_Datos(row.elmendoId);
+    this.editar = false;
+    this.guardar = true;
   }
   data_resFoto: any;
   getFoto_Datos(elementoId: String) {
@@ -170,10 +172,37 @@ export class ElementoComponent implements OnInit {
       this.changeSuccessMessage('Error  no se pudo guardar, ingresa un codigo elemento valido y la fecha son obligatorios', 'primary');
     }
   }
-
+  editarElemento() {
+    var elementoBase = this.setElemento(this.elementoForm.value);
+    console.log(elementoBase.comentario);
+    console.log(elementoBase.elementoId);
+    this.updateElemento(this.elementoForm.value);
+  }
   setElemento(elemento): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormatoDateTime(elemento.fecha);
     return elemento;
+  }
+  updateElemento(elemento: elemento_Modelo): void {
+    this.loading = true;
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.usuarioService.editarElemento(elemento, decodedToken.jti)
+      .subscribe(
+        resElemento => {
+          if (this.galeria.archivos.size > 0 && this.galeria.editado) {
+            var elemento_id = resElemento.elementoId;
+            //this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
+          }
+          else {
+            this.loading = false;
+          }
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
+
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error  no se pudo editar, los codigo de elementos son unicos no se pueden repetir', 'primary');
+        });
   }
   addElemento(elemento: elemento_Modelo): void {
     this.loading = true;
@@ -251,9 +280,6 @@ export class ElementoComponent implements OnInit {
       if (result)
         this.editarElemento();
     });
-  }
-  editarElemento() {
-    console.log('ok vamos editando bien');
   }
   nuevo() {
     this.editar = true;
