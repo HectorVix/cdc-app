@@ -233,7 +233,7 @@ export class ElementoComponent implements OnInit {
   }
   //Buscar
   buscarElemento() {
-
+    this.loading = true;
     //variables necesarias para recuperarse de errores contiente un caracter invisible
     var codigo = " ";
     var nombrecomun = " ";
@@ -256,6 +256,7 @@ export class ElementoComponent implements OnInit {
             this.elementos.push(crearElemento(this.k, elementoVal));
           }
           this.dataSource = new MatTableDataSource(this.elementos);
+          this.loading = false;
         }, err => {
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });

@@ -223,14 +223,37 @@ export class GaleriaComponent implements OnInit {
   }
 
   onButtonBeforeHook(event: ButtonEvent, index: number) {
+    const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);//si se eliminan varias seguidas o solo 1
     if (!event || !event.button) {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       var cont = 0;
+      var datosFotos = [];
+      var ordenNuevo = 0;
+      // se reodena los datos fotos sin la imagen eliminada y sus datoas
+      for (let i = 0; i < this.datosFotografias.length; i++) {
+        if (i != posActual) {
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = this.datosFotografias[i];
+          let d = new Date();
+          d = new Date(baseFotoModelo.fecha);
+          var dateElemento = this.usuarioService.fromModel(d);
+          datosFotos[ordenNuevo] = {
+            descripcion: baseFotoModelo.descripcion,
+            comentario: baseFotoModelo.comentario,
+            autor: baseFotoModelo.autor,
+            fecha: dateElemento,
+            editado: true
+          };
+          ordenNuevo = ordenNuevo + 1;
+        }
+      }
+      this.descripcionIndex = 0;
+      this.datosFotografias = datosFotos;
+      this.datosInicio();
       this.archivos.forEach(archivo => {
-
         if (cont == index) {
           this.archivos.delete(archivo);
           this.archivo.nativeElement.value = "";
@@ -238,6 +261,17 @@ export class GaleriaComponent implements OnInit {
         cont = cont + 1;
       });
     }
+  }
+  datosInicio() {
+    var datoFotoModeloInicio = new foto_Modelo();
+    datoFotoModeloInicio = this.datosFotografias[0];
+    let d = new Date();
+    d = new Date(datoFotoModeloInicio.fecha);
+    var dateElemento = this.usuarioService.fromModel(d);
+    this.descripcion = datoFotoModeloInicio.descripcion;
+    this.comentario = datoFotoModeloInicio.comentario;
+    this.autor = datoFotoModeloInicio.autor;
+    this.fecha = dateElemento;
   }
 
   onButtonAfterHook(event: ButtonEvent) {
@@ -337,12 +371,12 @@ export class GaleriaComponent implements OnInit {
     }
     let d = new Date();
     d = new Date(fotoModelo.fecha);
-    this.dateElemento = this.usuarioService.fromModel(d);
+    var dateElemento = this.usuarioService.fromModel(d);
     this.datosFotografias[fotoModelo.posicion] = {
       descripcion: fotoModelo.descripcion,
       comentario: fotoModelo.comentario,
       autor: fotoModelo.autor,
-      fecha: this.dateElemento,
+      fecha: dateElemento,
       editado: true
     };
   }

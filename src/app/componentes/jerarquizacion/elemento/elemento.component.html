@@ -103,6 +103,11 @@
               <button mat-raised-button class="color-green" (click)="buscarElemento()">Buscar</button>
             </div>
           </form>
+          <div class="text-center">
+            <div *ngIf="loading">
+              <img src="assets/imagenes/load.gif">
+            </div>
+          </div>
         </div>
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
