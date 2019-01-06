@@ -51,7 +51,6 @@ export class GaleriaComponent implements OnInit {
   //imagenes
   imagenes: Image[] = [];
   fotoElemento: File;
-  dateElemento: NgbDateStruct;
 
   constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
     this.editado = false;
@@ -223,7 +222,8 @@ export class GaleriaComponent implements OnInit {
   }
 
   onButtonBeforeHook(event: ButtonEvent, index: number) {
-    const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);//si se eliminan varias seguidas o solo 1
+    //si se eliminan varias seguidas o solo 1
+    const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);
     if (!event || !event.button) {
       return;
     }
@@ -232,19 +232,16 @@ export class GaleriaComponent implements OnInit {
       var cont = 0;
       var datosFotos = [];
       var ordenNuevo = 0;
-      // se reodena los datos fotos sin la imagen eliminada y sus datoas
+      // se reodena los datos fotos sin la imagen eliminada y sus datos
       for (let i = 0; i < this.datosFotografias.length; i++) {
         if (i != posActual) {
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = this.datosFotografias[i];
-          let d = new Date();
-          d = new Date(baseFotoModelo.fecha);
-          var dateElemento = this.usuarioService.fromModel(d);
           datosFotos[ordenNuevo] = {
             descripcion: baseFotoModelo.descripcion,
             comentario: baseFotoModelo.comentario,
             autor: baseFotoModelo.autor,
-            fecha: dateElemento,
+            fecha: this.getFecha(baseFotoModelo.fecha),
             editado: true
           };
           ordenNuevo = ordenNuevo + 1;
@@ -252,7 +249,13 @@ export class GaleriaComponent implements OnInit {
       }
       this.descripcionIndex = 0;
       this.datosFotografias = datosFotos;
-      this.datosInicio();
+      //muestra el recorrido actual  y reodenado luego de la eliminaciónde un foto
+      if (posActual != -1) {
+        this.mostrar_Datos_PosActual(posActual);
+        this.descripcionIndex = posActual;
+      }
+      if (this.datosFotografias.length == 0)
+        this.nuevoDatosFotos();
       this.archivos.forEach(archivo => {
         if (cont == index) {
           this.archivos.delete(archivo);
@@ -262,16 +265,13 @@ export class GaleriaComponent implements OnInit {
       });
     }
   }
-  datosInicio() {
-    var datoFotoModeloInicio = new foto_Modelo();
-    datoFotoModeloInicio = this.datosFotografias[0];
-    let d = new Date();
-    d = new Date(datoFotoModeloInicio.fecha);
-    var dateElemento = this.usuarioService.fromModel(d);
-    this.descripcion = datoFotoModeloInicio.descripcion;
-    this.comentario = datoFotoModeloInicio.comentario;
-    this.autor = datoFotoModeloInicio.autor;
-    this.fecha = dateElemento;
+  mostrar_Datos_PosActual(posActual) {
+    var datoFotoModeloActual = new foto_Modelo();
+    datoFotoModeloActual = this.datosFotografias[posActual];
+    this.descripcion = datoFotoModeloActual.descripcion;
+    this.comentario = datoFotoModeloActual.comentario;
+    this.autor = datoFotoModeloActual.autor;
+    this.fecha = this.getFecha(datoFotoModeloActual.fecha);
   }
 
   onButtonAfterHook(event: ButtonEvent) {
@@ -369,14 +369,11 @@ export class GaleriaComponent implements OnInit {
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
     }
-    let d = new Date();
-    d = new Date(fotoModelo.fecha);
-    var dateElemento = this.usuarioService.fromModel(d);
     this.datosFotografias[fotoModelo.posicion] = {
       descripcion: fotoModelo.descripcion,
       comentario: fotoModelo.comentario,
       autor: fotoModelo.autor,
-      fecha: dateElemento,
+      fecha: this.getFecha(fotoModelo.fecha),
       editado: true
     };
   }
@@ -472,13 +469,10 @@ export class GaleriaComponent implements OnInit {
     }
   }
   public mostrarDatosInicio(descripcion, comentario, autor, fecha) {
-    let d = new Date();
-    d = new Date(fecha);
-    this.dateElemento = this.usuarioService.fromModel(d);
     this.descripcion = descripcion;
     this.comentario = comentario;
     this.autor = autor;
-    this.fecha = this.dateElemento;
+    this.fecha = this.getFecha(fecha);
   }
   public nuevo() {
     this.archivo.nativeElement.value = "";
@@ -496,6 +490,13 @@ export class GaleriaComponent implements OnInit {
     this.autor = '';
     this.fecha = null;
     this.imagenes = [];
-    this.dateElemento = null;
+  }
+  getFecha(fecha) {
+    if (fecha != null) {
+      let d = new Date();
+      d = new Date(fecha);
+      var dateElemento = this.usuarioService.fromModel(d);// más eficaz
+    }
+    return dateElemento; //aunque se definio dentro de un if es alcanzable dentro del metodo
   }
 }
