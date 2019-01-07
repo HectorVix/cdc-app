@@ -182,21 +182,8 @@ export class ElementoComponent implements OnInit {
       this.galeria.validarDatosFotos();
       console.log('editr:', this.galeria.editado);
       console.log('tam imagenes:', this.galeria.imagenes.length);
-      if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
-        this.updateElemento(this.elementoForm.value);
-      }
-      if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
-        this.updateElemento(this.elementoForm.value);
-      }
-      if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
 
-        if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
-        else
-          this.changeSuccessMessage('Error  no se pudo editar falta editar las fotos', 'primary');
-      }
-    }
-    else {
-      this.changeSuccessMessage('Error  no se pudo guardar, ingresa un codigo elemento valido y la fecha son obligatorios', 'primary');
+      this.updateElemento(this.elementoForm.value);
     }
   }
   setElemento(elemento): elemento_Modelo {
@@ -219,16 +206,18 @@ export class ElementoComponent implements OnInit {
           console.log('editr:', this.galeria.editado);
           console.log('tam imagenes:', this.galeria.imagenes.length);
           console.log('tam archivos:', this.galeria.archivos.size);
-          if (this.galeria.archivos.size > 0 && this.galeria.editado) {
+          console.log('tam inicial:', this.tam_Inicial_ListaFotos);
+          console.log('tam final:', this.galeria.getTam_final_ListaFotos());
+          if ((this.galeria.archivos.size > 0 && this.galeria.editado)) {
             console.log('aki valida');
             var elemento_id = resElemento.elementoId;
-             this.usuarioService.update_FotoId_Lista(
-               this.galeria.archivos,
-               this.galeria.datosFotografias,
-               elemento_id,
-               this.fotoId_Lista,
-               this.tam_Inicial_ListaFotos,
-               this.galeria.getTam_final_ListaFotos());
+            this.usuarioService.update_FotoId_Lista(
+              this.galeria.archivos,
+              this.galeria.datosFotografias,
+              elemento_id,
+              this.fotoId_Lista,
+              this.tam_Inicial_ListaFotos,
+              this.galeria.getTam_final_ListaFotos());
           }
           else {
             this.loading = false;

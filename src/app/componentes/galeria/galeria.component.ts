@@ -251,7 +251,7 @@ export class GaleriaComponent implements OnInit {
         default: {
           console.log('ok default');
           for (let i = 0; i < this.datosFotografias.length; i++) {
-            if (posActual != -1) {
+            if (i != posActual) {//todos menos el que se elimino
               var baseFotoModelo = new foto_Modelo();
               baseFotoModelo = this.datosFotografias[i];
               datosFotos[ordenNuevo] = {
@@ -266,8 +266,9 @@ export class GaleriaComponent implements OnInit {
           }
           this.descripcionIndex = 0;
           this.datosFotografias = datosFotos;
-          if (this.datosFotografias.length == 0)
+          if (this.datosFotografias.length == 0) {
             this.nuevoDatosFotos();
+          }
           this.archivos.forEach(archivo => {
             if (cont == posActual) {
               this.archivos.delete(archivo);
@@ -280,13 +281,16 @@ export class GaleriaComponent implements OnInit {
     }
   }
   mostrar_Datos_PosActual(posActual) {
-    this.descripcionIndex = posActual;
-    var datoFotoModeloActual = new foto_Modelo();
-    datoFotoModeloActual = this.datosFotografias[posActual];
-    this.descripcion = datoFotoModeloActual.descripcion;
-    this.comentario = datoFotoModeloActual.comentario;
-    this.autor = datoFotoModeloActual.autor;
-    this.fecha = this.getFecha(datoFotoModeloActual.fecha);
+    if (this.datosFotografias.length > 0) {
+      this.descripcionIndex = posActual;
+      this.posicionarse = this.descripcionIndex + 1;
+      var datoFotoModeloActual = new foto_Modelo();
+      datoFotoModeloActual = this.datosFotografias[posActual];
+      this.descripcion = datoFotoModeloActual.descripcion;
+      this.comentario = datoFotoModeloActual.comentario;
+      this.autor = datoFotoModeloActual.autor;
+      this.fecha = this.getFecha(datoFotoModeloActual.fecha);
+    }
   }
 
   onButtonAfterHook(event: ButtonEvent) {
@@ -370,6 +374,7 @@ export class GaleriaComponent implements OnInit {
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
+      this.nuevo_Editar_DatosFotos(this.imagenes.length - 1);
     }
   }
   public agregarImagenBusqueda(file: File, fotoModelo) {
@@ -405,27 +410,33 @@ export class GaleriaComponent implements OnInit {
   }
   anterior() {
     if (this.descripcionIndex == 0) {
-      this.nuevoDatosFotos()
-      this.setDatosFotos(this.descripcionIndex);
+      this.nuevoDatosFotos();
+      this.mostrar_Datos_PosActual(this.descripcionIndex);
     }
     else {
-      this.nuevoDatosFotos()
+      this.nuevoDatosFotos();
       this.descripcionIndex = this.descripcionIndex - 1;
-      this.setDatosFotos(this.descripcionIndex);
+      this.mostrar_Datos_PosActual(this.descripcionIndex);
     }
   }
   siguiente() {
     if (this.descripcionIndex == this.imagenes.length - 1) {
-      this.nuevoDatosFotos()
-      this.setDatosFotos(this.descripcionIndex);
+      this.nuevoDatosFotos();
+      this.mostrar_Datos_PosActual(this.descripcionIndex);
     }
     else {
-      this.nuevoDatosFotos()
+      this.nuevoDatosFotos();
       this.descripcionIndex = this.descripcionIndex + 1;
-      this.setDatosFotos(this.descripcionIndex);
+      this.mostrar_Datos_PosActual(this.descripcionIndex);
     }
   }
-
+  inicio() {
+    this.mostrar_Datos_PosActual(0);
+  }
+  fin() {
+    if (this.datosFotografias.length >= 1)
+      this.mostrar_Datos_PosActual(this.datosFotografias.length - 1);
+  }
   onChanges() {
     if (this.imagenes.length > 0) {
       this.datosFotografias[this.descripcionIndex] = {
@@ -438,7 +449,7 @@ export class GaleriaComponent implements OnInit {
     }
 
   }
-  setDatosFotos(index: number) {
+  nuevo_Editar_DatosFotos(index: number) {
     if (this.imagenes.length > 0) {
       if (this.datosFotografias[index]) {
         var datos = new foto_Modelo();
@@ -458,27 +469,18 @@ export class GaleriaComponent implements OnInit {
   }
   validarDatosFotos() {
     var tipo = -1;
-    if (this.datosFotografias.length == 1 && this.imagenes.length == 1)
-      tipo = 0;
-    if (this.datosFotografias.length == this.imagenes.length && this.datosFotografias.length > 1 && this.imagenes.length > 1)
+    if (this.datosFotografias.length == this.imagenes.length && this.datosFotografias.length >= 1 && this.imagenes.length >= 1)
       tipo = 1;
+    if (this.datosFotografias.length == 0 && this.imagenes.length >= 1 || this.datosFotografias.length < this.imagenes.length)
+      tipo = 2;
     switch (tipo) {
-      case 0: {
+      case 1: {
         this.editado = true
+        this.changeSuccessMessage('Error  no se pudo editar falta editar las fotos', 's');
         break; //necesario dado que al estar el formulario vacio de editar fotos  se buguea y da error, no grave pero no muestra nada
       }
-      case 1: {
-        for (let i = 0; i < this.imagenes.length - 1; i++) {
-          var datos = new foto_Modelo();
-          datos = this.datosFotografias[i];
-          if (datos.editado) {
-            this.editado = true;
-          }
-          else {
-            i = this.imagenes.length;
-            this.editado = false;
-          }
-        }
+      case 2: {
+        this.editado = false;
         break;
       }
       default: { this.editado = false; }

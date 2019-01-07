@@ -48,7 +48,10 @@
         </button>
       </div>
       <div class="row">
-        <div class="col-md-2">
+          <button mat-button (click)="inicio()">
+              Inicio
+            </button>
+        <div class="col-md-1">
           <mat-form-field>
             <input matInput type="number" [(ngModel)]="posicionarse" placeholder="Numero">
           </mat-form-field>
@@ -56,6 +59,9 @@
         <button mat-button (click)="mostrar_Imagen_Posicion()">
           Ir
         </button>
+        <button mat-button (click)="fin()">
+            Fin
+          </button>
         <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
       <div class="modal-content mat-elevation-z4">
