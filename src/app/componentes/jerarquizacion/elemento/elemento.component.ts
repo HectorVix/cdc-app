@@ -59,14 +59,15 @@ export class ElementoComponent implements OnInit {
   //componente galeria
   @ViewChild(GaleriaComponent)
   private galeria: GaleriaComponent;
-
   loading: boolean;
   selected = new FormControl(0);
-
   //segun el caso
   editar = true;
   guardar = false;
-
+  //lista fotos
+  data_resFoto: any;
+  tam_Inicial_ListaFotos = 0;
+  fotoId_Lista = [];
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog) {
     this.crearForm_Elemento();
@@ -114,15 +115,18 @@ export class ElementoComponent implements OnInit {
     this.editar = false;
     this.guardar = true;
   }
-  data_resFoto: any;
+
   getFoto_Datos(elementoId: String) {
     const date = new Date().valueOf();
     this.usuarioService.getDatosFotos(elementoId).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inical de la lista de fotos guardadas
         for (let fotoVal of this.data_resFoto) {
           var foto = new foto_Modelo();
           foto = fotoVal;
+          console.log('fotoId:', foto.fotoId);
+          this.fotoId_Lista.push(foto.fotoId);
           if (foto.posicion == 0)
             this.galeria.mostrarDatosInicio(foto.descripcion, foto.comentario, foto.autor, foto.fecha);
           const nombreImagen = date + '.' + foto.nombre;
@@ -173,25 +177,58 @@ export class ElementoComponent implements OnInit {
     }
   }
   editarElemento() {
-    var elementoBase = this.setElemento(this.elementoForm.value);
-    console.log(elementoBase.comentario);
-    console.log(elementoBase.elementoId);
-    this.updateElemento(this.elementoForm.value);
+    if (this.elementoForm.get('codigo').value && this.elementoForm.get('fecha').value) {
+      var elementoBase = this.setElemento(this.elementoForm.value);
+      this.galeria.validarDatosFotos();
+      console.log('editr:', this.galeria.editado);
+      console.log('tam imagenes:', this.galeria.imagenes.length);
+      if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
+        this.updateElemento(this.elementoForm.value);
+      }
+      if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
+        this.updateElemento(this.elementoForm.value);
+      }
+      if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
+
+        if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
+        else
+          this.changeSuccessMessage('Error  no se pudo editar falta editar las fotos', 'primary');
+      }
+    }
+    else {
+      this.changeSuccessMessage('Error  no se pudo guardar, ingresa un codigo elemento valido y la fecha son obligatorios', 'primary');
+    }
   }
   setElemento(elemento): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormatoDateTime(elemento.fecha);
     return elemento;
   }
   updateElemento(elemento: elemento_Modelo): void {
+    console.log('tam lista foto Id:', this.fotoId_Lista.length);
+    for (let i = 0; i < this.fotoId_Lista.length; i++) {
+      var fotoId = this.fotoId_Lista[i];
+      console.log('Foto Id para actualizar:', fotoId);
+    }
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioService.editarElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
+          console.log('aki valida afuera');
+          console.log('editr:', this.galeria.editado);
+          console.log('tam imagenes:', this.galeria.imagenes.length);
+          console.log('tam archivos:', this.galeria.archivos.size);
           if (this.galeria.archivos.size > 0 && this.galeria.editado) {
+            console.log('aki valida');
             var elemento_id = resElemento.elementoId;
-            //this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
+             this.usuarioService.update_FotoId_Lista(
+               this.galeria.archivos,
+               this.galeria.datosFotografias,
+               elemento_id,
+               this.fotoId_Lista,
+               this.tam_Inicial_ListaFotos,
+               this.galeria.getTam_final_ListaFotos());
           }
           else {
             this.loading = false;
@@ -290,6 +327,7 @@ export class ElementoComponent implements OnInit {
     this.galeria.nuevo();
     this.elementos = new Array();
     this.dataElementos = [];
+    this.tam_Inicial_ListaFotos = 0;
   }
 }
 function crearElemento(k: number, elemento: elemento_Modelo): ElementoDato {

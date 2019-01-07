@@ -335,7 +335,7 @@ export class GaleriaComponent implements OnInit {
   }
 
   private getCurrentIndexCustomLayout(image: Image, imagenes: Image[]): number {
-    /* Por cuestiones de tiempo  la edición, posicionamiento valido, recorrido de imaganes se trabajo utilizando el sentido común , 
+    /* Por cuestiones de tiempo  la edición, posicionamiento valido, recorrido de imagenes se trabajo utilizando el sentido común , 
     una mejor forma y mas eficaz seria hacer todos estos procesos mediante un polinomio, no lo utilicé  por qué  aun desconozco cómo implementarlo en este lenguaje.
     */
     const posActual = image ? imagenes.indexOf(image) : -1;
@@ -390,6 +390,7 @@ export class GaleriaComponent implements OnInit {
     }
   }
   public agregarImagenBusqueda(file: File, fotoModelo) {
+    this.archivos.add(file);
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (onLoadPhotoEvent: any) => {
@@ -531,5 +532,8 @@ export class GaleriaComponent implements OnInit {
       var dateElemento = this.usuarioService.fromModel(d);// más eficaz
     }
     return dateElemento; //aunque se definio dentro de un if es alcanzable dentro del metodo
+  }
+  public getTam_final_ListaFotos() {
+    return this.datosFotografias.length;
   }
 }

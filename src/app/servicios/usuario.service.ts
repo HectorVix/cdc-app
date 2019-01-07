@@ -95,7 +95,7 @@ export class UsuarioService {
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
-  
+
   //agregar nuevo protocolo LE
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
     return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
@@ -157,6 +157,7 @@ export class UsuarioService {
     });
     return estado;
   }
+  //guardar la  lista de fotos
   cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number) {
     var posicion = 0;
     const estado = {};
@@ -194,6 +195,43 @@ export class UsuarioService {
       };
     });
     return estado;
+  }
+  // actualizar  lista de fotos
+  update_FotoId_Lista(archivos: Set<File>,
+    datosFotos: any,
+    elemento_id: Number,
+    fotoId_Lista,
+    tam_Inicial_ListaFotos,
+    tam_Final_ListaFotos:number) {
+    var tipo = -1;
+    console.log('entro');
+    console.log('tam final',tam_Final_ListaFotos);
+    console.log('tam inicial',tam_Inicial_ListaFotos);
+    if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
+      tipo = 1;
+    }
+    if (tam_Final_ListaFotos > tam_Inicial_ListaFotos) {
+      tipo = 2;
+    }
+    if (tam_Final_ListaFotos < tam_Inicial_ListaFotos) {
+      tipo = 3;
+    }
+    switch (tipo) {
+
+      case 1: {
+        console.log('tipo1');
+      } break;
+      case 2: {
+        console.log('tipo2');
+      }
+        break;
+      case 3: {
+        console.log('tipo3');
+      }
+        break;
+      default: { console.log('nada'); break; }
+    }
+
   }
 
   //para capturar los errores con HttpClient
