@@ -161,7 +161,7 @@ export class UsuarioService {
   cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number) {
     var posicion = 0;
     const estado = {};
-    var fechaCreacion;
+    var fechaCreacion = null;
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       var baseFotoModelo = new foto_Modelo();
@@ -202,11 +202,11 @@ export class UsuarioService {
     elemento_id: Number,
     fotoId_Lista,
     tam_Inicial_ListaFotos,
-    tam_Final_ListaFotos:number) {
+    tam_Final_ListaFotos: number) {
     var tipo = -1;
     console.log('entro');
-    console.log('tam final',tam_Final_ListaFotos);
-    console.log('tam inicial',tam_Inicial_ListaFotos);
+    console.log('tam final', tam_Final_ListaFotos);
+    console.log('tam inicial', tam_Inicial_ListaFotos);
     if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
       tipo = 1;
     }
@@ -220,9 +220,48 @@ export class UsuarioService {
 
       case 1: {
         console.log('tipo1');
+        var posicion = 0;
+        var fechaCreacion = null;
+        for (let i = 0; i < archivos.size; i++) {
+          var formData: FormData = new FormData();
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = datosFotos[posicion];
+          var fotoId = fotoId_Lista[i];
+          if (baseFotoModelo.fecha) {
+            fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+            console.log('estado1:', fechaCreacion);
+          }
+          //actualizar
+          console.log('Update:', fotoId, 'posicion:', posicion);
+
+          posicion = posicion + 1;
+          // console.log('Posicion:', posicion);
+        }
       } break;
       case 2: {
         console.log('tipo2');
+        var posicion = 0;
+        var fechaCreacion = null;
+        for (let i = 0; i < archivos.size; i++) {
+          var formData: FormData = new FormData();
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = datosFotos[posicion];
+          var fotoId = fotoId_Lista[i];
+          if (baseFotoModelo.fecha) {
+            fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+            console.log('estado1:', fechaCreacion);
+          }
+          //actualizar
+          if (i <= tam_Inicial_ListaFotos - 1) {
+            console.log('Update:', fotoId, 'poscion:', posicion);
+          }
+          // se crea un nuevo regitro de fotos
+          else {
+            console.log('Nuevo:fotoId', 'posicion:', posicion);
+          }
+          posicion = posicion + 1;
+          // console.log('Posicion:', posicion);
+        }
       }
         break;
       case 3: {
