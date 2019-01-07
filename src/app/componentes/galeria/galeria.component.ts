@@ -233,53 +233,49 @@ export class GaleriaComponent implements OnInit {
       var cont = 0;
       var datosFotos = [];
       var ordenNuevo = 0;
-      // se reodena los datos fotos sin la imagen eliminada y sus datos
-      for (let i = 0; i < this.datosFotografias.length; i++) {
-        if (i != posActual) {
-          var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = this.datosFotografias[i];
-          datosFotos[ordenNuevo] = {
-            descripcion: baseFotoModelo.descripcion,
-            comentario: baseFotoModelo.comentario,
-            autor: baseFotoModelo.autor,
-            fecha: this.getFecha(baseFotoModelo.fecha),
-            editado: true
-          };
-          ordenNuevo = ordenNuevo + 1;
-        }
+      console.log('posActual:', posActual);
+      console.log('Index:', +index);
+      switch (posActual) {
+        case -1: break; // cuando se buguea la posActual es -1
+        default: {
+          console.log('ok default');
+          for (let i = 0; i < this.datosFotografias.length; i++) {
+            if (posActual != -1) {
+              var baseFotoModelo = new foto_Modelo();
+              baseFotoModelo = this.datosFotografias[i];
+              datosFotos[ordenNuevo] = {
+                descripcion: baseFotoModelo.descripcion,
+                comentario: baseFotoModelo.comentario,
+                autor: baseFotoModelo.autor,
+                fecha: this.getFecha(baseFotoModelo.fecha),
+                editado: true
+              };
+              ordenNuevo = ordenNuevo + 1;
+            }
+          }
+          this.descripcionIndex = 0;
+          this.datosFotografias = datosFotos;
+          if (this.datosFotografias.length == 0)
+            this.nuevoDatosFotos();
+          this.archivos.forEach(archivo => {
+            if (cont == posActual) {
+              this.archivos.delete(archivo);
+              this.archivo.nativeElement.value = "";
+            }
+            cont = cont + 1;
+          });
+        } break;
       }
-      this.descripcionIndex = 0;
-      this.datosFotografias = datosFotos;
-      //muestra el recorrido actual  y reodenado luego de la eliminación de una foto
-      if (posActual != -1) {
-        this.mostrar_Datos_PosActual(posActual);
-        this.descripcionIndex = posActual;
-      }
-      if (this.datosFotografias.length == 0)
-        this.nuevoDatosFotos();
-      this.archivos.forEach(archivo => {
-        if (cont == index) {
-          this.archivos.delete(archivo);
-          this.archivo.nativeElement.value = "";
-        }
-        cont = cont + 1;
-      });
     }
   }
   mostrar_Datos_PosActual(posActual) {
     this.descripcionIndex = posActual;
     var datoFotoModeloActual = new foto_Modelo();
     datoFotoModeloActual = this.datosFotografias[posActual];
-    if (datoFotoModeloActual.descripcion)
-      var descripcion = datoFotoModeloActual.descripcion;
-    else
-      descripcion = '';
-
-    this.descripcion = '' + descripcion;
+    this.descripcion = datoFotoModeloActual.descripcion;
     this.comentario = datoFotoModeloActual.comentario;
     this.autor = datoFotoModeloActual.autor;
     this.fecha = this.getFecha(datoFotoModeloActual.fecha);
-
   }
 
   onButtonAfterHook(event: ButtonEvent) {
@@ -335,30 +331,6 @@ export class GaleriaComponent implements OnInit {
   }
 
   private getCurrentIndexCustomLayout(image: Image, imagenes: Image[]): number {
-    /* Por cuestiones de tiempo  la edición, posicionamiento valido, recorrido de imagenes se trabajo utilizando el sentido común , 
-    una mejor forma y mas eficaz seria hacer todos estos procesos mediante un polinomio, no lo utilicé  por qué  aun desconozco cómo implementarlo en este lenguaje.
-    */
-    const posActual = image ? imagenes.indexOf(image) : -1;
-    this.validarDatosFotos();
-    if (this.editado) { }
-    else {
-      var posFinal = this.datosFotografias.length;
-      if (posActual != -1) {
-        this.datosFotografias[posFinal] = {
-          descripcion: '',
-          comentario: '',
-          autor: '',
-          fecha: null,
-          editado: true,
-        };
-        this.validarDatosFotos();
-      }
-
-    }
-    if (posActual != -1 && this.editado) {
-      this.mostrar_Datos_PosActual(posActual);
-      this.selected.setValue(1);//se posiciona en la imagen actual para editarla
-    }
     return image ? imagenes.indexOf(image) : -1;
   }
   //archivos
