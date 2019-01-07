@@ -213,8 +213,11 @@ export class UsuarioService {
     if (tam_Final_ListaFotos > tam_Inicial_ListaFotos) {
       tipo = 2;
     }
-    if (tam_Final_ListaFotos < tam_Inicial_ListaFotos) {
+    if (tam_Final_ListaFotos < tam_Inicial_ListaFotos && tam_Final_ListaFotos >= 1) {
       tipo = 3;
+    }
+    if (tam_Final_ListaFotos ==0 && tam_Inicial_ListaFotos >= 1) {
+      tipo = 4;
     }
     switch (tipo) {
 
@@ -231,7 +234,7 @@ export class UsuarioService {
             fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
             console.log('estado1:', fechaCreacion);
           }
-          //actualizar
+          //se actualizan todos
           console.log('Update:', fotoId, 'posicion:', posicion);
 
           posicion = posicion + 1;
@@ -265,9 +268,12 @@ export class UsuarioService {
       }
         break;
       case 3: {
-        console.log('tipo3');
+        console.log('tipo3'); // se borran los que no se utilizan
       }
         break;
+      case 4: {
+        console.log('tipo4'); // se borran todos
+      } break;
       default: { console.log('nada'); break; }
     }
 
@@ -311,6 +317,15 @@ export class UsuarioService {
   toFormato2(date): string {
     return '' + date.day + '/' + date.month + '/' + date.year;
   }
-  //editar
+
+  getFecha(fecha) {
+    var dateElemento = null;
+    if (fecha != null) {
+      let d = new Date();
+      d = new Date(fecha);
+      dateElemento = this.fromModel(d);
+    }
+    return dateElemento;
+  }
 
 }

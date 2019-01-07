@@ -34,7 +34,7 @@ export interface ElementoDato {
 
 
 export class ElementoComponent implements OnInit {
-  dateElemento: NgbDateStruct;
+  //dateElemento: NgbDateStruct;
   elementoForm: FormGroup;
   buscarForm: FormGroup;
   //alertas
@@ -97,17 +97,13 @@ export class ElementoComponent implements OnInit {
     }
   }
   setElementoBuscado(row) {
-    var date = row.fecha;
-    let d = new Date();
-    d = new Date(date);
-    this.dateElemento = this.usuarioService.fromModel(d);
     this.elementoForm = this.fb.group({
       'elementoId': row.elmendoId,
       'codigo': row.codigo,
       'nombrecomun': row.nombrecomun,
       'nombrecientifico': row.nombrecientifico,
       'comentario': row.comentario,
-      'fecha': this.dateElemento,
+      'fecha': this.usuarioService.getFecha(row.fecha),
     });
     this.selected.setValue(0);
     this.galeria.nuevo();
@@ -142,7 +138,7 @@ export class ElementoComponent implements OnInit {
       'nombrecomun': '',
       'nombrecientifico': '',
       'comentario': '',
-      'fecha': '',
+      'fecha': null,
     });
   }
   crearForm_Buscar() {
@@ -158,31 +154,13 @@ export class ElementoComponent implements OnInit {
   guardarElemento() {
     if (this.elementoForm.get('codigo').value && this.elementoForm.get('fecha').value) {
       var elementoBase = this.setElemento(this.elementoForm.value);
-      this.galeria.validarDatosFotos();
-      if (this.galeria.imagenes.length > 0 && this.galeria.editado) {
-        this.addElemento(this.elementoForm.value);
-      }
-      if (this.galeria.editado == false && this.galeria.imagenes.length == 0) {
-        this.addElemento(this.elementoForm.value);
-      }
-      if (this.galeria.editado != true && this.galeria.datosFotografias.length >= 0) {
+      this.addElemento(this.elementoForm.value);
+    }
 
-        if (this.galeria.imagenes.length == 0 && this.galeria.datosFotografias.length == 0) { }
-        else
-          this.changeSuccessMessage('Error  no se pudo guardar falta editar las fotos', 'primary');
-      }
-    }
-    else {
-      this.changeSuccessMessage('Error  no se pudo guardar, ingresa un codigo elemento valido y la fecha son obligatorios', 'primary');
-    }
   }
   editarElemento() {
     if (this.elementoForm.get('codigo').value && this.elementoForm.get('fecha').value) {
       var elementoBase = this.setElemento(this.elementoForm.value);
-      this.galeria.validarDatosFotos();
-      console.log('editr:', this.galeria.editado);
-      console.log('tam imagenes:', this.galeria.imagenes.length);
-
       this.updateElemento(this.elementoForm.value);
     }
   }
@@ -203,12 +181,11 @@ export class ElementoComponent implements OnInit {
       .subscribe(
         resElemento => {
           console.log('aki valida afuera');
-          console.log('editr:', this.galeria.editado);
           console.log('tam imagenes:', this.galeria.imagenes.length);
           console.log('tam archivos:', this.galeria.archivos.size);
           console.log('tam inicial:', this.tam_Inicial_ListaFotos);
           console.log('tam final:', this.galeria.getTam_final_ListaFotos());
-          if ((this.galeria.archivos.size > 0 && this.galeria.editado)) {
+          if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
             console.log('aki valida');
             var elemento_id = resElemento.elementoId;
             this.usuarioService.update_FotoId_Lista(
@@ -237,7 +214,7 @@ export class ElementoComponent implements OnInit {
     this.usuarioService.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          if (this.galeria.archivos.size > 0 && this.galeria.editado) {
+          if (this.galeria.archivos.size > 0) {
             var elemento_id = resElemento.elementoId;
             this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
           }

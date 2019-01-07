@@ -49,7 +49,6 @@ export class GaleriaComponent implements OnInit {
   comentario: string = '';
   autor: string = '';
   fecha: NgbDateStruct;
-  public editado: Boolean;
   //imagenes
   imagenes: Image[] = [];
   fotoElemento: File;
@@ -60,7 +59,6 @@ export class GaleriaComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
-    this.editado = false;
   }
 
   ngOnInit() {
@@ -244,12 +242,9 @@ export class GaleriaComponent implements OnInit {
       var cont = 0;
       var datosFotos = [];
       var ordenNuevo = 0;
-      console.log('posActual:', posActual);
-      console.log('Index:', +index);
       switch (posActual) {
         case -1: break; // cuando se buguea la posActual es -1
         default: {
-          console.log('ok default');
           for (let i = 0; i < this.datosFotografias.length; i++) {
             if (i != posActual) {//todos menos el que se elimino
               var baseFotoModelo = new foto_Modelo();
@@ -258,7 +253,7 @@ export class GaleriaComponent implements OnInit {
                 descripcion: baseFotoModelo.descripcion,
                 comentario: baseFotoModelo.comentario,
                 autor: baseFotoModelo.autor,
-                fecha: this.getFecha(baseFotoModelo.fecha),
+                fecha: this.usuarioService.getFecha(baseFotoModelo.fecha),
                 editado: true
               };
               ordenNuevo = ordenNuevo + 1;
@@ -289,7 +284,7 @@ export class GaleriaComponent implements OnInit {
       this.descripcion = datoFotoModeloActual.descripcion;
       this.comentario = datoFotoModeloActual.comentario;
       this.autor = datoFotoModeloActual.autor;
-      this.fecha = this.getFecha(datoFotoModeloActual.fecha);
+      this.fecha = this.usuarioService.getFecha(datoFotoModeloActual.fecha);
     }
   }
 
@@ -394,7 +389,7 @@ export class GaleriaComponent implements OnInit {
       descripcion: fotoModelo.descripcion,
       comentario: fotoModelo.comentario,
       autor: fotoModelo.autor,
-      fecha: this.getFecha(fotoModelo.fecha),
+      fecha: this.usuarioService.getFecha(fotoModelo.fecha),
       editado: true
     };
   }
@@ -450,16 +445,13 @@ export class GaleriaComponent implements OnInit {
 
   }
   nuevo_Editar_DatosFotos(index: number) {
-    if (this.imagenes.length > 0) {
-      if (this.datosFotografias[index]) {
-        var datos = new foto_Modelo();
-        datos = this.datosFotografias[index];
-        this.descripcion = datos.descripcion;
-        this.comentario = datos.comentario;
-        this.autor = datos.autor;
-        this.fecha = datos.fecha;
-      }
-    }
+    this.datosFotografias[index] = {
+      descripcion: '',
+      comentario: '',
+      autor: '',
+      fecha: '',
+      editado: true
+    };
   }
   nuevoDatosFotos() {
     this.descripcion = '';
@@ -467,30 +459,11 @@ export class GaleriaComponent implements OnInit {
     this.autor = '';
     this.fecha = null;
   }
-  validarDatosFotos() {
-    var tipo = -1;
-    if (this.datosFotografias.length == this.imagenes.length && this.datosFotografias.length >= 1 && this.imagenes.length >= 1)
-      tipo = 1;
-    if (this.datosFotografias.length == 0 && this.imagenes.length >= 1 || this.datosFotografias.length < this.imagenes.length)
-      tipo = 2;
-    switch (tipo) {
-      case 1: {
-        this.editado = true
-        this.changeSuccessMessage('Error  no se pudo editar falta editar las fotos', 's');
-        break; //necesario dado que al estar el formulario vacio de editar fotos  se buguea y da error, no grave pero no muestra nada
-      }
-      case 2: {
-        this.editado = false;
-        break;
-      }
-      default: { this.editado = false; }
-    }
-  }
   public mostrarDatosInicio(descripcion, comentario, autor, fecha) {
     this.descripcion = descripcion;
     this.comentario = comentario;
     this.autor = autor;
-    this.fecha = this.getFecha(fecha);
+    this.fecha = this.usuarioService.getFecha(fecha);
   }
   public nuevo() {
     this.archivo.nativeElement.value = "";
@@ -510,19 +483,12 @@ export class GaleriaComponent implements OnInit {
     this.imagenes = [];
     this.posicionarse = 1;
   }
-  getFecha(fecha) {
-    if (fecha != null) {
-      let d = new Date();
-      d = new Date(fecha);
-      var dateElemento = this.usuarioService.fromModel(d);// más eficaz
-    }
-    return dateElemento; //aunque se definio dentro de un if es alcanzable dentro del metodo
-  }
+
   public getTam_final_ListaFotos() {
     return this.datosFotografias.length;
   }
   mostrar_Imagen_Posicion() {
-    if (validarEntero(this.posicionarse) && this.posicionarse > 0 && this.posicionarse <= this.datosFotografias.length && this.datosFotografias.length >= 1)
+    if (validarEntero(this.posicionarse) && this.posicionarse > 0 && this.posicionarse <= this.datosFotografias.length && this.datosFotografias.length >= 1 && this.datosFotografias.length >= 1)
       this.mostrar_Datos_PosActual(this.posicionarse - 1);
     else { this.changeSuccessMessage('Error: Ingresa un número valido. Por ejemplo 1 , 2 , 3 ... 4 ... 15 ... 70 ... , tambien debe estar dentro del rango del número de tu lista de fotos. ', 'primary'); }
   }
