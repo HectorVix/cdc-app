@@ -168,7 +168,6 @@ export class UsuarioService {
       baseFotoModelo = datosFotos[posicion];
       if (baseFotoModelo.fecha) {
         fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
-        console.log('estado1:', fechaCreacion);
       }
       formData.append('file', archivo, archivo.name);
       formData.append('descripcion', baseFotoModelo.descripcion);
@@ -177,7 +176,6 @@ export class UsuarioService {
       formData.append('fecha', fechaCreacion);
       formData.append('posicion', '' + posicion);
       posicion = posicion + 1;
-      console.log('Posicion:', posicion);
       var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
         reportProgress: true
       });
@@ -216,7 +214,7 @@ export class UsuarioService {
     if (tam_Final_ListaFotos < tam_Inicial_ListaFotos && tam_Final_ListaFotos >= 1) {
       tipo = 3;
     }
-    if (tam_Final_ListaFotos ==0 && tam_Inicial_ListaFotos >= 1) {
+    if (tam_Final_ListaFotos == 0 && tam_Inicial_ListaFotos >= 1) {
       tipo = 4;
     }
     switch (tipo) {
@@ -224,23 +222,41 @@ export class UsuarioService {
       case 1: {
         console.log('tipo1');
         var posicion = 0;
+        const estado = {};
         var fechaCreacion = null;
-        for (let i = 0; i < archivos.size; i++) {
+        archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = datosFotos[posicion];
-          var fotoId = fotoId_Lista[i];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
-            console.log('estado1:', fechaCreacion);
           }
-          //se actualizan todos
-          console.log('Update:', fotoId, 'posicion:', posicion);
-
+          formData.append('file', archivo, archivo.name);
+          formData.append('descripcion', baseFotoModelo.descripcion);
+          formData.append('comentario', baseFotoModelo.comentario);
+          formData.append('autor', baseFotoModelo.autor);
+          formData.append('fecha', fechaCreacion);
+          formData.append('posicion', '' + posicion);
+          var fotoId = fotoId_Lista[posicion];
           posicion = posicion + 1;
-          // console.log('Posicion:', posicion);
-        }
-      } break;
+          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+            reportProgress: true
+          });
+          var progreso = new Subject<number>();
+          this.http.request(req).subscribe(event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+              progreso.next(porcentajeCargado);
+            } else if (event instanceof HttpResponse) {
+              progreso.complete();
+            }
+          });
+          estado[archivo.name] = {
+            progreso: progreso.asObservable()
+          };
+        });
+        return estado;
+      }
       case 2: {
         console.log('tipo2');
         var posicion = 0;

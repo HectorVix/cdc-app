@@ -125,9 +125,9 @@ export class ElementoComponent implements OnInit {
           this.fotoId_Lista.push(foto.fotoId);
           if (foto.posicion == 0)
             this.galeria.mostrarDatosInicio(foto.descripcion, foto.comentario, foto.autor, foto.fecha);
-          const nombreImagen = date + '.' + foto.nombre;
+        //  const nombreImagen = date + '.' + foto.nombre;
           const imageBlob = this.galeria.dataURItoBlob(foto.imagen);
-          const imageFile = new File([imageBlob], nombreImagen, { type: 'image/jpeg' });
+          const imageFile = new File([imageBlob], foto.nombre, { type: 'image/jpeg' });
           this.galeria.agregarImagenBusqueda(imageFile, foto);
         }
       });
@@ -163,6 +163,9 @@ export class ElementoComponent implements OnInit {
       var elementoBase = this.setElemento(this.elementoForm.value);
       this.updateElemento(this.elementoForm.value);
     }
+    else {
+      this.changeSuccessMessage('El código del elemento y la fecha son obligatorios', 'primary');
+    }
   }
   setElemento(elemento): elemento_Modelo {
     elemento.fecha = this.usuarioService.toFormatoDateTime(elemento.fecha);
@@ -187,11 +190,11 @@ export class ElementoComponent implements OnInit {
           console.log('tam final:', this.galeria.getTam_final_ListaFotos());
           if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
             console.log('aki valida');
-            var elemento_id = resElemento.elementoId;
+           // var elemento_id = resElemento.elementoId;
             this.usuarioService.update_FotoId_Lista(
               this.galeria.archivos,
               this.galeria.datosFotografias,
-              elemento_id,
+              elemento.elementoId,
               this.fotoId_Lista,
               this.tam_Inicial_ListaFotos,
               this.galeria.getTam_final_ListaFotos());
