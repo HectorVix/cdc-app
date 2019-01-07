@@ -25,6 +25,8 @@ import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
 import { FooterRowOutlet } from '@angular/cdk/table';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-galeria',
@@ -51,13 +53,22 @@ export class GaleriaComponent implements OnInit {
   //imagenes
   imagenes: Image[] = [];
   fotoElemento: File;
-  selected = new FormControl(0);
-
+  posicionarse = 1;
+  //alertas
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
+  tipoAlert: string;
   constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
     this.editado = false;
   }
 
   ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(10000)
+    ).subscribe(() => this.successMessage = null);
   }
 
   customPlainGalleryRowConfig: PlainGalleryConfig = {
@@ -495,7 +506,7 @@ export class GaleriaComponent implements OnInit {
     this.autor = '';
     this.fecha = null;
     this.imagenes = [];
-    this.selected = new FormControl(0);
+    this.posicionarse = 1;
   }
   getFecha(fecha) {
     if (fecha != null) {
@@ -508,4 +519,20 @@ export class GaleriaComponent implements OnInit {
   public getTam_final_ListaFotos() {
     return this.datosFotografias.length;
   }
+  mostrar_Imagen_Posicion() {
+    if (validarEntero(this.posicionarse) && this.posicionarse > 0 && this.posicionarse <= this.datosFotografias.length && this.datosFotografias.length >= 1)
+      this.mostrar_Datos_PosActual(this.posicionarse - 1);
+    else { this.changeSuccessMessage('Error: Ingresa un número valido. Por ejemplo 1 , 2 , 3 ... 4 ... 15 ... 70 ... , tambien debe estar dentro del rango del número de tu lista de fotos. ', 'primary'); }
+  }
+  //mensajes
+  public changeSuccessMessage(mensaje: string, tipo: string) {
+    this.tipoAlert = tipo;
+    this._success.next(mensaje);
+  }
+}
+function validarEntero(x) {
+  if (Number.isInteger(x)) {
+    return true;
+  }
+  return false;
 }

@@ -2,7 +2,7 @@
   <div class="modal-header color-green">
     <h5 class="modal-tittle">Fotos</h5>
   </div>
-  <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+  <mat-tab-group dynamicHeight>
     <mat-tab label="Galeria">
       <div class="row">
         <div class="col-md-2">
@@ -46,6 +46,17 @@
         <button mat-button (click)="siguiente()">
           <i class="fa fa-chevron-right prefix"></i>
         </button>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <mat-form-field>
+            <input matInput type="number" [(ngModel)]="posicionarse" placeholder="Numero">
+          </mat-form-field>
+        </div>
+        <button mat-button (click)="mostrar_Imagen_Posicion()">
+          Ir
+        </button>
+        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
       <div class="modal-content mat-elevation-z4">
         <div class="modal-header color-green"></div>

@@ -78,7 +78,7 @@ export class ElementoComponent implements OnInit {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
