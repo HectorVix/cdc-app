@@ -21,7 +21,8 @@ import { formatDate } from '@angular/common';
 import { contacto_Modelo } from '../modelo/contacto/contacto-modelo';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
+  //headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 
@@ -202,9 +203,6 @@ export class UsuarioService {
     tam_Inicial_ListaFotos,
     tam_Final_ListaFotos: number) {
     var tipo = -1;
-    console.log('entro');
-    console.log('tam final', tam_Final_ListaFotos);
-    console.log('tam inicial', tam_Inicial_ListaFotos);
     if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
       tipo = 1;
     }
@@ -218,9 +216,7 @@ export class UsuarioService {
       tipo = 4;
     }
     switch (tipo) {
-
-      case 1: {
-        console.log('tipo1');
+      case 1: { //listas final igual a la inicial
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
@@ -255,36 +251,94 @@ export class UsuarioService {
             progreso: progreso.asObservable()
           };
         });
-        return estado;
       }
-      case 2: {
-        console.log('tipo2');
+        break;
+      case 2: { // la lista final es mayor a la inicial
         var posicion = 0;
+        const estado = {};
         var fechaCreacion = null;
-        for (let i = 0; i < archivos.size; i++) {
+        archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = datosFotos[posicion];
-          var fotoId = fotoId_Lista[i];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
-            console.log('estado1:', fechaCreacion);
           }
-          //actualizar
-          if (i <= tam_Inicial_ListaFotos - 1) {
-            console.log('Update:', fotoId, 'poscion:', posicion);
+          formData.append('file', archivo, archivo.name);
+          formData.append('descripcion', baseFotoModelo.descripcion);
+          formData.append('comentario', baseFotoModelo.comentario);
+          formData.append('autor', baseFotoModelo.autor);
+          formData.append('fecha', fechaCreacion);
+          formData.append('posicion', '' + posicion);
+          var fotoId = fotoId_Lista[posicion];
+          if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId ,pueden ser nuevas que estan dentro del rango tamaño inicial
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+              reportProgress: true
+            });
           }
-          // se crea un nuevo regitro de fotos
-          else {
-            console.log('Nuevo:fotoId', 'posicion:', posicion);
+          else {//se cargan las nuevas fotos que están fuera del tamaño inicial
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
+              reportProgress: true
+            });
           }
+          var progreso = new Subject<number>();
+          this.http.request(req).subscribe(event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+              progreso.next(porcentajeCargado);
+            } else if (event instanceof HttpResponse) {
+              progreso.complete();
+            }
+          });
+          estado[archivo.name] = {
+            progreso: progreso.asObservable()
+          };
           posicion = posicion + 1;
-          // console.log('Posicion:', posicion);
-        }
+        });
       }
         break;
       case 3: {
         console.log('tipo3'); // se borran los que no se utilizan
+        var posicion = 0;
+        const estado = {};
+        var fechaCreacion = null;
+        archivos.forEach(archivo => {
+          var formData: FormData = new FormData();
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = datosFotos[posicion];
+          if (baseFotoModelo.fecha) {
+            fechaCreacion = this.toFormato2(baseFotoModelo.fecha);
+          }
+          formData.append('file', archivo, archivo.name);
+          formData.append('descripcion', baseFotoModelo.descripcion);
+          formData.append('comentario', baseFotoModelo.comentario);
+          formData.append('autor', baseFotoModelo.autor);
+          formData.append('fecha', fechaCreacion);
+          formData.append('posicion', '' + posicion);
+          var fotoId = fotoId_Lista[posicion];
+          posicion = posicion + 1;
+          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+            reportProgress: true
+          });
+          var progreso = new Subject<number>();
+          this.http.request(req).subscribe(event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+              progreso.next(porcentajeCargado);
+            } else if (event instanceof HttpResponse) {
+              progreso.complete();
+            }
+          });
+          estado[archivo.name] = {
+            progreso: progreso.asObservable()
+          };
+        });
+        for (let i = tam_Final_ListaFotos - 1; i < tam_Inicial_ListaFotos - 1; i++) {
+          console.log('delete:', i);
+        }
+
+
+        // this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions); 
       }
         break;
       case 4: {

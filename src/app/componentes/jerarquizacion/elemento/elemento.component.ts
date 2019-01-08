@@ -120,8 +120,7 @@ export class ElementoComponent implements OnInit {
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inical de la lista de fotos guardadas
         for (let fotoVal of this.data_resFoto) {
           var foto = new foto_Modelo();
-          foto = fotoVal;
-          console.log('fotoId:', foto.fotoId);
+          foto = fotoVal;         
           this.fotoId_Lista.push(foto.fotoId);
           if (foto.posicion == 0)
             this.galeria.mostrarDatosInicio(foto.descripcion, foto.comentario, foto.autor, foto.fecha);
@@ -172,25 +171,13 @@ export class ElementoComponent implements OnInit {
     return elemento;
   }
   updateElemento(elemento: elemento_Modelo): void {
-    console.log('tam lista foto Id:', this.fotoId_Lista.length);
-    for (let i = 0; i < this.fotoId_Lista.length; i++) {
-      var fotoId = this.fotoId_Lista[i];
-      console.log('Foto Id para actualizar:', fotoId);
-    }
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     this.usuarioService.editarElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          console.log('aki valida afuera');
-          console.log('tam imagenes:', this.galeria.imagenes.length);
-          console.log('tam archivos:', this.galeria.archivos.size);
-          console.log('tam inicial:', this.tam_Inicial_ListaFotos);
-          console.log('tam final:', this.galeria.getTam_final_ListaFotos());
           if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
-            console.log('aki valida');
-           // var elemento_id = resElemento.elementoId;
             this.usuarioService.update_FotoId_Lista(
               this.galeria.archivos,
               this.galeria.datosFotografias,
