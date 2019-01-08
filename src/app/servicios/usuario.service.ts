@@ -68,12 +68,10 @@ export class UsuarioService {
   }
   //agregar un nuevo elemento
   addElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
-    console.log(jti);
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
   //editar elemento
   editarElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
-    console.log(jti);
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/editar/' + jti, elemento, httpOptions);
   }
   //agregar una nueva jerarquizacion Global
@@ -298,7 +296,6 @@ export class UsuarioService {
       }
         break;
       case 3: {
-        console.log('tipo3'); // se borran los que no se utilizan
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
@@ -333,20 +330,20 @@ export class UsuarioService {
             progreso: progreso.asObservable()
           };
         });
-        for (let i = tam_Final_ListaFotos - 1; i < tam_Inicial_ListaFotos - 1; i++) {
-          console.log('delete:', i);
+        for (let i = tam_Final_ListaFotos; i < tam_Inicial_ListaFotos; i++) {
+          var fotoId = fotoId_Lista[i];
+          this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
         }
-
-
-        // this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions); 
       }
         break;
       case 4: {
-        console.log('tipo4'); // se borran todos
+        for (let i = 0; i < fotoId_Lista.length; i++) {
+          var fotoId = fotoId_Lista[i];
+          this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
+        }
       } break;
-      default: { console.log('nada'); break; }
+      default: { break; }
     }
-
   }
 
   //para capturar los errores con HttpClient
