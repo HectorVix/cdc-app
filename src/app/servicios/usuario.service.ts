@@ -61,6 +61,10 @@ export class UsuarioService {
   getDatosFotos(elementoId: String): Observable<foto_Modelo> {
     return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
   }
+  //obtener Rastreo del Elemento por codigoe, subnacion, nombreg, nombrecomunnn
+  getRastreoElemento(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
+    return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+  }
   //--------------------------------------------------------------------------------------------------------
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {

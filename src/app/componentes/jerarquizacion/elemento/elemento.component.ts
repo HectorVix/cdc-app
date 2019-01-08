@@ -13,18 +13,8 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
 import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { TablaBusquedaComponent } from '../../../componentes/tabla-busqueda/tabla-busqueda.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
-
-export interface ElementoDato {
-  numero: number;
-  elmendoId: Number;
-  codigo: String;
-  fecha: String;
-  nombrecomun: String;
-  nombrecientifico;
-  comentario: String;
-}
+import { ElementoDato } from '../../../modelo/tablas/elemento-dato';
 
 @Component({
   selector: 'app-elemento',
@@ -158,6 +148,8 @@ export class ElementoComponent implements OnInit {
 
   }
   editarElemento() {
+    this.elementos = new Array();
+    this.dataSource = new MatTableDataSource(this.elementos);
     if (this.elementoForm.get('codigo').value && this.elementoForm.get('fecha').value) {
       var elementoBase = this.setElemento(this.elementoForm.value);
       this.updateElemento(this.elementoForm.value);

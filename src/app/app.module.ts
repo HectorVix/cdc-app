@@ -48,7 +48,6 @@ import {
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
   MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule
 } from '@angular/material';
-import { TablaBusquedaComponent } from './componentes/tabla-busqueda/tabla-busqueda.component';
 import 'hammerjs';
 import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
@@ -89,7 +88,6 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
-    TablaBusquedaComponent,
     GaleriaComponent,
     ConfirmacionComponent
   ],

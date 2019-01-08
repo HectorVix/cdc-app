@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
@@ -11,8 +11,18 @@ import { UsuarioService } from '../../../servicios/usuario.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
+//--------------tabla------------------------------------
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 
+export interface ratreoElemento_Datos {
+  numero: number;
+  rastreoId: Number;
+  codigoe: String;
+  departamento: String;
+  nombreg: String;
+  nombren: String;
+  nombrecomunn: String
+}
 
 @Component({
   selector: 'app-formulario-re',
@@ -38,11 +48,25 @@ export class FormularioReComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   selected = new FormControl(0);
-
+  buscarForm: FormGroup;
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigoe', 'departamento', 'nombreg', 'nombren', 'nombrecomunn'];
+  dataSource: MatTableDataSource<ratreoElemento_Datos>;
+  listaRatreoElementos: Array<ratreoElemento_Datos> = new Array();
+  private dataRatreoElemento: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //-----------------------------------
   constructor(
     private fb: FormBuilder, private usuarioService: UsuarioService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private fb2: FormBuilder) {
     this.crearFormRastreoElemento();
+    this.crearForm_Buscar();
+    this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
   }
 
   ngOnInit() {
@@ -52,7 +76,19 @@ export class FormularioReComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
   }
-
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   guardarRastreoElemento() {
     var rastreoElementoBase = this.setRastreoElemento(this.reForm.value);
@@ -200,4 +236,75 @@ export class FormularioReComponent implements OnInit {
         this.guardarRastreoElemento();
     });
   }
+  crearForm_Buscar() {
+    this.buscarForm = this.fb2.group({
+      'codigo': '',
+      'subnacion': '',
+      'nombreg': '',
+      'nombren': '',
+      'nombrecomunnn': ''
+    });
+  }
+  buscar_RatreoElemento() {
+    this.getRatreoElemento();
+
+  }
+  getRatreoElemento() {
+    this.loading = true;
+    var a = "a";
+    var b = "b";
+    var c = "c";
+    var d = "d";
+    var e = "e";
+    if (this.buscarForm.get('codigo').value)
+      a = this.buscarForm.get('codigo').value;
+    if (this.buscarForm.get('subnacion').value)
+      b = this.buscarForm.get('subnacion').value;
+    if (this.buscarForm.get('nombreg').value)
+      c = this.buscarForm.get('nombreg').value;
+    if (this.buscarForm.get('nombren').value)
+      d = this.buscarForm.get('nombren').value;
+    if (this.buscarForm.get('nombrecomunnn').value)
+      e = this.buscarForm.get('nombrecomunnn').value;
+
+    console.log(' busquedas', a, b, c, d, e);
+    this.usuarioService.getRastreoElemento(a, b, c, d, e)
+      .subscribe(
+        data => {
+          this.dataRatreoElemento = data;
+          this.loading = false;
+          console.log(this.dataRatreoElemento);
+          var k = 0;
+          for (let reVal of this.dataRatreoElemento) {
+            k = k + 1;
+            this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+          }
+          this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+        }, err => {
+          this.changeSuccessMessage('No se encontro información.', 'warning ');
+        });
+  }
+
+  getRastreoElemento_id(id: Number) {
+    this.dataRatreoElemento.forEach(dataRatreoElemento => {
+      var ratreoElemento_Busqueda = new rastreo_Elemento_Modelo();
+      ratreoElemento_Busqueda = dataRatreoElemento;
+      if (id == ratreoElemento_Busqueda.rastreoId)
+        console.log(ratreoElemento_Busqueda);
+    });
+  }
+  pruebas() {
+    this.getRastreoElemento_id(2);
+  }
+}
+function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Datos {
+  return {
+    numero: k,
+    rastreoId: re.rastreoId,
+    codigoe: re.codigoe,
+    departamento: re.subnacion,
+    nombreg: re.nombreg,
+    nombren: re.nombren,
+    nombrecomunn: re.nomcomunn
+  };
 }
