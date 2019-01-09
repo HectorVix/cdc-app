@@ -85,18 +85,14 @@ export class FormularioReComponent implements OnInit {
   }
 
   guardarRastreoElemento() {
-    if (this.reForm.get('codigoe').value
-      && this.reForm.get('fecharevrg').value
-      && this.reForm.get('fechaaepeu').value
-      && this.reForm.get('fecharevrn').value
-      && this.reForm.get('fecharevrs').value
-      && this.reForm.get('actualizag').value
-      && this.reForm.get('actualizan').value
-      && this.reForm.get('actualizas').value) {
-      this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
+    if (this.reForm.get('codigoe').value) {
+      if (this.validarFechas())
+        this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
+      else
+        this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
     }
     else
-      this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
+      this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
   }
   setRastreoElemento(datos): rastreo_Elemento_Modelo {
     datos.fecharevrg = this.usuarioService.toFormatoDateTime(datos.fecharevrg);
@@ -106,6 +102,12 @@ export class FormularioReComponent implements OnInit {
     datos.actualizag = this.usuarioService.toFormatoDateTime(datos.actualizag);
     datos.actualizan = this.usuarioService.toFormatoDateTime(datos.actualizan);
     datos.actualizas = this.usuarioService.toFormatoDateTime(datos.actualizas);
+    if (!datos.exsitu)
+      datos.exsitu = null;
+    if (!datos.transparencian)
+      datos.transparencian = null;
+    if (!datos.transparencias)
+      datos.transparencias = null;
     return datos;
   }
 
@@ -117,7 +119,7 @@ export class FormularioReComponent implements OnInit {
         resElemento => {
           this.loading = false;
           this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
-         // this.crearFormRastreoElemento();
+          // this.crearFormRastreoElemento();
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.El codigoe debe ser valido', 'primary');
@@ -214,9 +216,8 @@ export class FormularioReComponent implements OnInit {
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
           valido = true;
         }, err => {
-          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigoe valido.', 'primary');
         });
-
     return valido;
   }
 
@@ -238,6 +239,16 @@ export class FormularioReComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result)
         this.guardarRastreoElemento();
+    });
+  }
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editarRastreoElemento();
     });
   }
   crearForm_Buscar() {
@@ -313,6 +324,7 @@ export class FormularioReComponent implements OnInit {
   //crear formulario Rastreo Ellemento busqueda para editarlo
   crearFormRastreoElementoo_Buscado(re: rastreo_Elemento_Modelo) {
     this.reForm = this.fb.group({
+      'rastreoId': re.rastreoId,
       //pagina1
       //identificadores
       'codigoe': re.codigoe,
@@ -395,6 +407,42 @@ export class FormularioReComponent implements OnInit {
     this.crearFormRastreoElemento();
     this.crearForm_Buscar();
     this.tabPagina1();
+  }
+  updateRastreoElemento(re: rastreo_Elemento_Modelo): void {
+    this.loading = true;
+    this.usuarioService.editarRastreoElemento(re)
+      .subscribe(
+        resRe => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso ,codigo del rastreo elemento:${resRe.codigoe}.`, 'success');
+
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error  no se pudo editar, el codigoe debe ser valido', 'primary');
+        });
+  }
+  editarRastreoElemento() {
+    if (this.reForm.get('codigoe').value) {
+      if (this.validarFechas())
+        this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
+      else
+        this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
+    }
+    else
+      this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
+  }
+  validarFechas(): Boolean {
+    if (this.reForm.get('fecharevrg').value
+      && this.reForm.get('fechaaepeu').value
+      && this.reForm.get('fecharevrn').value
+      && this.reForm.get('fecharevrs').value
+      && this.reForm.get('actualizag').value
+      && this.reForm.get('actualizan').value
+      && this.reForm.get('actualizas').value) {
+      return true;
+    }
+    else
+      return false;
   }
 }
 function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {

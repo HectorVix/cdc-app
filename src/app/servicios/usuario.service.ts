@@ -94,6 +94,13 @@ export class UsuarioService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
+  //editar rastreo elemento
+  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
+    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions)
+      .pipe(
+        catchError(this.handleError<rastreo_Elemento_Modelo>('editarRastreoElemento'))
+      );
+  }
   //agregar una nueva localización
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
