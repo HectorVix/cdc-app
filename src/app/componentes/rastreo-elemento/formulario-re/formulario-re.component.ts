@@ -52,8 +52,9 @@ export class FormularioReComponent implements OnInit {
   }
   @ViewChild(MatSort) sort: MatSort;
   //-----------------------------------
-  editar = false;
-  guardar = true;
+  editar = true;
+  guardar = false;
+
   constructor(
     private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog, private fb2: FormBuilder) {
@@ -66,7 +67,7 @@ export class FormularioReComponent implements OnInit {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
   setDataSourceAttributes() {
@@ -84,17 +85,27 @@ export class FormularioReComponent implements OnInit {
   }
 
   guardarRastreoElemento() {
-    var rastreoElementoBase = this.setRastreoElemento(this.reForm.value);
-    this.addRastroeElemento(rastreoElementoBase);
+    if (this.reForm.get('codigoe').value
+      && this.reForm.get('fecharevrg').value
+      && this.reForm.get('fechaaepeu').value
+      && this.reForm.get('fecharevrn').value
+      && this.reForm.get('fecharevrs').value
+      && this.reForm.get('actualizag').value
+      && this.reForm.get('actualizan').value
+      && this.reForm.get('actualizas').value) {
+      this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
+    }
+    else
+      this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
   }
-  setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
-    datos.fecharevrg = this.usuarioService.toFormato(this.reForm.get('fecharevrg').value);
-    datos.fechaaepeu = this.usuarioService.toFormato(this.reForm.get('fechaaepeu').value);
-    datos.fecharevrn = this.usuarioService.toFormato(this.reForm.get('fecharevrn').value);
-    datos.fecharevrs = this.usuarioService.toFormato(this.reForm.get('fecharevrs').value);
-    datos.actualizag = this.usuarioService.toFormato(this.reForm.get('actualizag').value);
-    datos.actualizan = this.usuarioService.toFormato(this.reForm.get('actualizan').value);
-    datos.actualizas = this.usuarioService.toFormato(this.reForm.get('actualizas').value);
+  setRastreoElemento(datos): rastreo_Elemento_Modelo {
+    datos.fecharevrg = this.usuarioService.toFormatoDateTime(datos.fecharevrg);
+    datos.fechaaepeu = this.usuarioService.toFormatoDateTime(datos.fechaaepeu);
+    datos.fecharevrn = this.usuarioService.toFormatoDateTime(datos.fecharevrn);
+    datos.fecharevrs = this.usuarioService.toFormatoDateTime(datos.fecharevrs);
+    datos.actualizag = this.usuarioService.toFormatoDateTime(datos.actualizag);
+    datos.actualizan = this.usuarioService.toFormatoDateTime(datos.actualizan);
+    datos.actualizas = this.usuarioService.toFormatoDateTime(datos.actualizas);
     return datos;
   }
 
@@ -106,10 +117,10 @@ export class FormularioReComponent implements OnInit {
         resElemento => {
           this.loading = false;
           this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
-          this.crearFormRastreoElemento();
+         // this.crearFormRastreoElemento();
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar.El codigoe debe ser valido', 'primary');
         });
   }
   //crear formulario Rastreo Elemento
@@ -192,21 +203,21 @@ export class FormularioReComponent implements OnInit {
     });
   }
   //validar codigoe 
-  validarCodigoe() {
-    this.ValidarElementoCodigoe(this.reForm.get('codigoe').value);
+  validarCodigoe(): Boolean {
+    return this.ValidarElementoCodigoe(this.reForm.get('codigoe').value);
   }
-  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
-    var elemento: elemento_Modelo;
+  ValidarElementoCodigoe(codigoe: String): Boolean {
+    var valido = false;
     this.usuarioService.validarElementoCodigoe(codigoe)
       .subscribe(
         resElemento => {
-          elemento = resElemento;
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+          valido = true;
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
         });
 
-    return elemento;
+    return valido;
   }
 
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -379,7 +390,11 @@ export class FormularioReComponent implements OnInit {
     });
   }
   nuevo() {
-
+    this.editar = true;
+    this.guardar = false;
+    this.crearFormRastreoElemento();
+    this.crearForm_Buscar();
+    this.tabPagina1();
   }
 }
 function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
