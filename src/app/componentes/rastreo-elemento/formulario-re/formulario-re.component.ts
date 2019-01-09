@@ -13,16 +13,7 @@ import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-element
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-
-export interface ratreoElemento_Datos {
-  numero: number;
-  rastreoId: Number;
-  codigoe: String;
-  departamento: String;
-  nombreg: String;
-  nombren: String;
-  nombrecomunn: String
-}
+import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
 
 @Component({
   selector: 'app-formulario-re',
@@ -51,8 +42,8 @@ export class FormularioReComponent implements OnInit {
   buscarForm: FormGroup;
   //---------------------------------tabla
   displayedColumns: string[] = ['numero', 'codigoe', 'departamento', 'nombreg', 'nombren', 'nombrecomunn'];
-  dataSource: MatTableDataSource<ratreoElemento_Datos>;
-  listaRatreoElementos: Array<ratreoElemento_Datos> = new Array();
+  dataSource: MatTableDataSource<ratreoElemento_Dato>;
+  listaRatreoElementos: Array<ratreoElemento_Dato> = new Array();
   private dataRatreoElemento: any;
   private paginator: MatPaginator;
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
@@ -61,6 +52,8 @@ export class FormularioReComponent implements OnInit {
   }
   @ViewChild(MatSort) sort: MatSort;
   //-----------------------------------
+  editar = false;
+  guardar = true;
   constructor(
     private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog, private fb2: FormBuilder) {
@@ -301,6 +294,10 @@ export class FormularioReComponent implements OnInit {
     var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
     console.log(rastreoElemento_Busqueda);
     this.crearFormRastreoElementoo_Buscado(this.getRastreoElemento_id(row.rastreoId));
+    this.listaRatreoElementos = [];
+    this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+    this.editar = false;
+    this.guardar = true;
   }
   //crear formulario Rastreo Ellemento busqueda para editarlo
   crearFormRastreoElementoo_Buscado(re: rastreo_Elemento_Modelo) {
@@ -380,14 +377,12 @@ export class FormularioReComponent implements OnInit {
       'actualizan': this.usuarioService.getFecha(re.actualizan),
       'actualizas': this.usuarioService.getFecha(re.actualizas)
     });
-    //this.selected.setValue(0);
-    //  this.galeria.nuevo();
+  }
+  nuevo() {
 
-    //this.editar = false;
-    // this.guardar = true;
   }
 }
-function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Datos {
+function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   return {
     numero: k,
     rastreoId: re.rastreoId,

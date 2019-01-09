@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Elementos_AreasManejadas, CamposOpcionales } from '../../../modelo/tablas/tabla';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';

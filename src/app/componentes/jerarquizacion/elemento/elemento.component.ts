@@ -14,7 +14,7 @@ import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
-import { ElementoDato } from '../../../modelo/tablas/elemento-dato';
+import { ElementoDato } from '../../../modelo/tabla/elemento-dato';
 
 @Component({
   selector: 'app-elemento',

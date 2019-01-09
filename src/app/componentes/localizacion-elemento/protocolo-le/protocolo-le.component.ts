@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Protocolo } from '../../../modelo/tablas/tabla';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { UsuarioService } from '../../../servicios/usuario.service';
 // import { DatePipe } from '@angular/common'
