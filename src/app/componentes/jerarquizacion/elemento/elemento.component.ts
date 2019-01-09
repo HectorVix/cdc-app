@@ -243,6 +243,7 @@ export class ElementoComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.elementos);
           this.loading = false;
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }

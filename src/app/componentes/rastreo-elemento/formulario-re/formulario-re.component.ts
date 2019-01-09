@@ -148,11 +148,11 @@ export class FormularioReComponent implements OnInit {
       'comtaxn': '',
       //status (global)
       'rangog': '',
-      'fecharevrg': '',
+      'fecharevrg': null,
       'formularg': '',
       'resprg': '',
       'aepeu': '',
-      'fechaaepeu': '',
+      'fechaaepeu': null,
       'cites': '',
       'iucn': '',
       'planscons': '',
@@ -164,7 +164,7 @@ export class FormularioReComponent implements OnInit {
       'endemismo': '',
       //status (nacional)
       'rangon': '',
-      'fecharevrn': '',
+      'fecharevrn': null,
       'formularn': '',
       'rastreolen': '',
       'lestimn': '',
@@ -175,7 +175,7 @@ export class FormularioReComponent implements OnInit {
       'transparencian': null,
       //status (subnacional)
       'rangos': '',
-      'fecharevrs': '',
+      'fecharevrs': null,
       'formulars': '',
       'rastreoles': '',
       'lestims': '',
@@ -193,9 +193,9 @@ export class FormularioReComponent implements OnInit {
       // manteniiento del registro
       'codfuenten': '',
       'codfuentes': '',
-      'actualizag': '',
-      'actualizan': '',
-      'actualizas': ''
+      'actualizag': null,
+      'actualizan': null,
+      'actualizas': null
     });
   }
   //validar codigoe 
@@ -281,20 +281,110 @@ export class FormularioReComponent implements OnInit {
           }
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
-          this.changeSuccessMessage('No se encontro información.', 'warning ');
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información. Comprueba que este activo CORB.', 'warning ');
         });
   }
 
-  getRastreoElemento_id(id: Number) {
+  getRastreoElemento_id(id: Number): rastreo_Elemento_Modelo {
+    var rastreoElementoBusqueda = new rastreo_Elemento_Modelo();
     this.dataRatreoElemento.forEach(dataRatreoElemento => {
-      var ratreoElemento_Busqueda = new rastreo_Elemento_Modelo();
+      var ratreoElemento_Busqueda = new rastreo_Elemento_Modelo();// necesario dado que si reutiliza conserva la primera asignación
       ratreoElemento_Busqueda = dataRatreoElemento;
       if (id == ratreoElemento_Busqueda.rastreoId)
-        console.log(ratreoElemento_Busqueda);
+        rastreoElementoBusqueda = ratreoElemento_Busqueda;
     });
+    return rastreoElementoBusqueda;
   }
-  pruebas() {
-    this.getRastreoElemento_id(2);
+
+  mostrar_RastreoElemento_Busqueda(row) {
+    var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
+    console.log(rastreoElemento_Busqueda);
+    this.crearFormRastreoElementoo_Buscado(this.getRastreoElemento_id(row.rastreoId));
+  }
+  //crear formulario Rastreo Ellemento busqueda para editarlo
+  crearFormRastreoElementoo_Buscado(re: rastreo_Elemento_Modelo) {
+    this.reForm = this.fb.group({
+      //pagina1
+      //identificadores
+      'codigoe': re.codigoe,
+      'tropicos': re.tropicos,
+      'nacion': re.nacion,
+      'subnacion': re.subnacion,
+      //taxonomia (global)
+      'clasetax': re.clasetax,
+      'orden': re.orden,
+      'familia': re.familia,
+      'genero': re.genero,
+      'nombreg': re.nombreg,
+      'autor': re.autor,
+      'fuentenom': re.fuentenom,
+      'refnombreg': re.refnombreg,
+      'disttax': re.disttax,
+      'dudatax': re.dudatax,
+      'nomcomung': re.nomcomung,
+      'comtaxg': re.comtaxg,
+      //taxonomia (nacional)
+      'nombren': re.nombren,
+      'numsinn': re.numsinn,
+      'nomcomunn': re.nomcomunn,
+      'comtaxn': re.comtaxn,
+      //status (global)
+      'rangog': re.rangog,
+      'fecharevrg': this.usuarioService.getFecha(re.fecharevrg),
+      'formularg': re.formularg,
+      'resprg': re.resprg,
+      'aepeu': re.aepeu,
+      'fechaaepeu': this.usuarioService.getFecha(re.fechaaepeu),
+      'cites': re.cites,
+      'iucn': re.iucn,
+      'planscons': re.planscons,
+      'resplan': re.resplan,
+      'resumenman': re.resumenman,
+      'resresumen': re.resresumen,
+      'exsitu': '' + re.exsitu,
+      'instexsitu': re.instexsitu,
+      'endemismo': re.endemismo,
+      //status (nacional)
+      'rangon': re.rangon,
+      'fecharevrn': this.usuarioService.getFecha(re.fecharevrn),
+      'formularn': re.formularn,
+      'rastreolen': re.rastreolen,
+      'lestimn': re.lestimn,
+      'leprotn': re.leprotn,
+      'abundn': re.abundn,
+      'protnacion': re.protnacion,
+      'refnombren': re.refnombren,
+      'transparencian': '' + re.transparencian,
+      //status (subnacional)
+      'rangos': re.rangos,
+      'fecharevrs': this.usuarioService.getFecha(re.fecharevrs),
+      'formulars': re.formulars,
+      'rastreoles': re.rastreoles,
+      'lestims': re.lestims,
+      'leprots': re.leprots,
+      'abunds': re.abunds,
+      'protsubnac': re.protsubnac,
+      'refnombres': re.refnombres,
+      'transparencias': '' + re.transparencias,
+      //campos opcionales
+      'reopc1': re.reopc1,
+      'reopc2': re.reopc2,
+      'reopc3': re.reopc3,
+      'reopc4': re.reopc4,
+      'reopc5': re.reopc5,
+      // manteniiento del registro
+      'codfuenten': re.codfuenten,
+      'codfuentes': re.codfuentes,
+      'actualizag': this.usuarioService.getFecha(re.actualizag),
+      'actualizan': this.usuarioService.getFecha(re.actualizan),
+      'actualizas': this.usuarioService.getFecha(re.actualizas)
+    });
+    //this.selected.setValue(0);
+    //  this.galeria.nuevo();
+
+    //this.editar = false;
+    // this.guardar = true;
   }
 }
 function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Datos {
