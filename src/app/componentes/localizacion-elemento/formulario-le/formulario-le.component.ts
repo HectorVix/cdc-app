@@ -256,25 +256,22 @@ export class FormularioLeComponent implements OnInit {
   buscarLE() {
     this.lista_LE = new Array();
     this.loading = true;
-    //variables necesarias para recuperarse de errores contiente un caracter invisible
+    //variables necesarias para recuperarse de errores
     var codigole = "~^ªº~†⑦→∞¬¬";
     var nombres = "~^ªº~†⑦→∞¬¬";
     var nomcomuns = "~^ªº~†⑦→∞¬¬";
-
     if (this.buscarForm.get('codigole').value)
       codigole = this.buscarForm.get('codigole').value;
     if (this.buscarForm.get('nombres').value)
       nombres = this.buscarForm.get('nombres').value;
     if (this.buscarForm.get('nomcomuns').value)
       nomcomuns = this.buscarForm.get('nomcomuns').value;
-    console.log('buscar:', codigole, nombres, nomcomuns);
     this.usuarioService.getLocalizacionElemento(codigole)
       .subscribe(
         data => {
           this.dataLE = data;
           var k = 0;
           for (let elementoVal of this.dataLE) {
-            var leVal = new Localizacion_Modelo();
             k = k + 1;
             this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
           }
@@ -299,7 +296,7 @@ export class FormularioLeComponent implements OnInit {
     this.guardar = true;
   }
 
-  crearFormLocalizacionElemento_Buscado(row) {
+  crearFormLocalizacionElemento_Buscado(row: Localizacion_Modelo) {
     this.leForm = this.fb.group({
       'localizacionId': row.localizacionId,
       //página1

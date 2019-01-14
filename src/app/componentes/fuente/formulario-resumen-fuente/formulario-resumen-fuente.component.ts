@@ -10,7 +10,9 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
+//--------------tabla------------------------------------
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+//import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -30,6 +32,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   tipoAlert: string;
   //formulario
   fuenteForm: FormGroup;
+  buscarForm: FormGroup;
   criterio_ResumenesFuente = new criterio_ResumenesFuente();
   criterio_codfuente = this.criterio_ResumenesFuente.codfuente;
   criterio_publicacion_cdc = this.criterio_ResumenesFuente.publicacion_cdc;
@@ -40,8 +43,23 @@ export class FormularioResumenFuenteComponent implements OnInit {
   otrosList: string[] = ['Hidrol', 'Geologia', 'Suelos', 'Clima', 'Biologia', 'Ecologia', 'Funecol', 'Diversnat', 'Inventario', 'Tecinvest', 'Am', 'Planmanejo', 'Tecmanejo', 'Estimpamb', 'Organprot', 'Herrprot'];
   //loading
   loading: boolean;
-  constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService, private dialog: MatDialog) {
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigole'];
+  //dataSource: MatTableDataSource<localizacionElemento_Dato>;
+  //lista_LE: Array<localizacionElemento_Dato> = new Array();
+  dataFuente: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    // this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService,
+    private dialog: MatDialog,
+    private fb2: FormBuilder) {
     this.crearForm_ResumenesFuente();
+    this.crearForm_Buscar();
   }
   crearForm_ResumenesFuente() {
 
@@ -104,7 +122,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
 
   cargarArchivos(fuenteId: Number) {
-
     this.cargando = true;
     this.progreso = this.usuarioServicio.cargarArchivos(this.archivos, fuenteId);
     let allProgressObservables = [];
@@ -124,8 +141,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
     var fauna = this.fuenteForm.get('fauna').value;
     var otros = this.fuenteForm.get('otros').value;
     var fuenteBase = this.setFuente(this.fuenteForm.value);
-
-
     if (varios) {
       for (let tema of varios) {
         var temaModelo = new tema_Modelo();
@@ -164,7 +179,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
 
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
-
     if (fuente.varios)
       fuente.varios = true;
     else
@@ -198,7 +212,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.loading = false;
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
           //  this.crearFormFuente();
-
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
@@ -222,6 +235,52 @@ export class FormularioResumenFuenteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result)
         this.guardarFuente();
+    });
+  }
+  buscarFuente() {
+    //this.lista_LE = new Array();
+    this.loading = true;
+    var a = "~^ªº~†⑦→∞¬¬";
+    var b = "~^ªº~†⑦→∞¬¬";
+    var c = "~^ªº~†⑦→∞¬¬";
+    var d = "~^ªº~†⑦→∞¬¬";
+    var e = "~^ªº~†⑦→∞¬¬";
+    if (this.buscarForm.get('codigoFuente').value)
+      a = this.buscarForm.get('codigoFuente').value;
+    if (this.buscarForm.get('naturalezaDocumento').value)
+      b = this.buscarForm.get('naturalezaDocumento').value;
+    if (this.buscarForm.get('cita').value)
+      c = this.buscarForm.get('cita').value;
+    if (this.buscarForm.get('cita').value)
+      d = this.buscarForm.get('archivado').value;
+    if (this.buscarForm.get('clave').value)
+      e = this.buscarForm.get('clave').value;
+    console.log('buscar:', a, b, c, d, e);
+
+    this.usuarioServicio.getFuente(b, a, c, d, e)
+      .subscribe(
+        data => {
+          this.dataFuente = data;
+          var k = 0;
+          for (let fuenteVal of this.dataFuente) {
+            k = k + 1;
+            console.log('data:', fuenteVal);
+            //this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
+          }
+          // this.dataSource = new MatTableDataSource(this.lista_LE);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  crearForm_Buscar() {
+    this.buscarForm = this.fb2.group({
+      'codigoFuente': '',
+      'naturalezaDocumento': '',
+      'cita': '',
+      'archivado': '',
+      'clave': ''
     });
   }
 }

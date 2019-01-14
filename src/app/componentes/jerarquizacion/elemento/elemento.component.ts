@@ -241,7 +241,6 @@ export class ElementoComponent implements OnInit {
       nombrecomun = this.buscarForm.get('nombrecomun').value;
     if (this.buscarForm.get('nombrecientifico').value)
       nombrecientifico = this.buscarForm.get('nombrecientifico').value;
-
     this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
       .subscribe(
         data => {

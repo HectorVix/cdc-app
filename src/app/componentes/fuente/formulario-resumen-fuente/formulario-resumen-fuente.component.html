@@ -267,26 +267,37 @@
     <mat-tab label="Buscar">
       <div class="card-body">
         <div class="modal-content mat-elevation-z4">
-          <div class="modal-header color-green">
-          </div>
-          <form class="base-form">
+          <div class="modal-header color-green"></div>
+          <form [formGroup]="buscarForm" class="base-form">
             <mat-form-field class="base-full-width">
-              <input matInput placeholder="Codigo de la Fuente">
+              <input matInput placeholder="Codigo de la fuente" formControlName="codigoFuente">
             </mat-form-field>
             <mat-form-field class="base-full-width">
-              <input matInput placeholder="Cita">
+              <input matInput placeholder="Naturaleza del documento" formControlName="naturalezaDocumento">
             </mat-form-field>
             <mat-form-field class="base-full-width">
-              <input matInput placeholder="Archivado">
+              <input matInput placeholder="Cita" formControlName="cita">
+            </mat-form-field>
+            <mat-form-field class="base-full-width">
+              <input matInput placeholder="Archivado" formControlName="archivado">
+            </mat-form-field>
+            <mat-form-field class="base-full-width">
+              <input matInput placeholder="Clave" formControlName="clave">
             </mat-form-field>
             <div class="mat-elevation-z8" class="base-form">
-              <button mat-raised-button class="color-green">Buscar</button>
-              <button mat-raised-button class="color-green">Buscar Todos</button>
+              <button mat-raised-button class="color-green" (click)="buscarFuente()">Buscar</button>
             </div>
           </form>
+          <div class="text-center">
+            <div *ngIf="loading">
+              <img src="assets/imagenes/load.gif">
+            </div>
+          </div>
+          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
         </div>
-        <app-tabla-busqueda></app-tabla-busqueda>
       </div>
+      <!-- fin card-body -->
+
     </mat-tab>
   </mat-tab-group>
 </div>

@@ -719,11 +719,9 @@
                   <button mat-raised-button class="color-green" (click)="buscar_RatreoElemento()">Buscar</button>
                 </div>
               </form>
-              <div class="car-body">
-                <div class="text-center">
-                  <div *ngIf="loading">
-                    <img src="assets/imagenes/load.gif">
-                  </div>
+              <div class="text-center">
+                <div *ngIf="loading">
+                  <img src="assets/imagenes/load.gif">
                 </div>
               </div>
               <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>

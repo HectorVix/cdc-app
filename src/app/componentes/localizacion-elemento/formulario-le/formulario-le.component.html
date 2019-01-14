@@ -724,14 +724,11 @@
               </mat-form-field>
               <div class="mat-elevation-z8" class="base-form">
                 <button mat-raised-button class="color-green" (click)="buscarLE()">Buscar</button>
-                <button mat-raised-button class="color-green">Buscar Todos</button>
               </div>
             </form>
-            <div class="car-body">
-              <div class="text-center">
-                <div *ngIf="loading">
-                  <img src="assets/imagenes/load.gif">
-                </div>
+            <div class="text-center">
+              <div *ngIf="loading">
+                <img src="assets/imagenes/load.gif">
               </div>
             </div>
             <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>

@@ -65,9 +65,15 @@ export class UsuarioService {
   getRastreoElemento(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
-  //obtener Rastreo del Elemento por codigole, nombres, nomcomuns
+  //obtener Localización del Elemento por codigole, nombres, nomcomuns
   getLocalizacionElemento(a: String): Observable<Localizacion_Modelo> {
     return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
+  }
+  /*obtener Fuente por codigofuente, naturaleza del documento
+   cita, archivado o una clave
+   */
+  getFuente(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
+    return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   //--------------------------------------------------------------------------------------------------------
   //agregar un nuevo usuario
