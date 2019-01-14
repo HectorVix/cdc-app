@@ -102,12 +102,12 @@ export class FormularioReComponent implements OnInit {
     datos.actualizag = this.usuarioService.toFormatoDateTime(datos.actualizag);
     datos.actualizan = this.usuarioService.toFormatoDateTime(datos.actualizan);
     datos.actualizas = this.usuarioService.toFormatoDateTime(datos.actualizas);
-    if (!datos.exsitu)
-      datos.exsitu = null;
-    if (!datos.transparencian)
-      datos.transparencian = null;
-    if (!datos.transparencias)
-      datos.transparencias = null;
+    if (datos.exsitu = "null")
+      datos.exsitu = "";
+    if (datos.transparencian = "null")
+      datos.transparencian = "";
+    if (datos.transparencias = "null")
+      datos.transparencias = "";
     return datos;
   }
 
@@ -266,11 +266,11 @@ export class FormularioReComponent implements OnInit {
   }
   getRatreoElemento() {
     this.loading = true;
-    var a = "a";
-    var b = "b";
-    var c = "c";
-    var d = "d";
-    var e = "e";
+    var a = "~^ªº~†⑦→∞¬¬";
+    var b = "~^ªº~†⑦→∞¬¬";
+    var c = "~^ªº~†⑦→∞¬¬";
+    var d = "~^ªº~†⑦→∞¬¬";
+    var e = "~^ªº~†⑦→∞¬¬";
     if (this.buscarForm.get('codigo').value)
       a = this.buscarForm.get('codigo').value;
     if (this.buscarForm.get('subnacion').value)
@@ -288,7 +288,6 @@ export class FormularioReComponent implements OnInit {
         data => {
           this.dataRatreoElemento = data;
           this.loading = false;
-          console.log(this.dataRatreoElemento);
           var k = 0;
           for (let reVal of this.dataRatreoElemento) {
             k = k + 1;
@@ -316,8 +315,6 @@ export class FormularioReComponent implements OnInit {
     var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
     console.log(rastreoElemento_Busqueda);
     this.crearFormRastreoElementoo_Buscado(this.getRastreoElemento_id(row.rastreoId));
-    this.listaRatreoElementos = [];
-    this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
     this.editar = false;
     this.guardar = true;
   }
@@ -362,7 +359,7 @@ export class FormularioReComponent implements OnInit {
       'resplan': re.resplan,
       'resumenman': re.resumenman,
       'resresumen': re.resresumen,
-      'exsitu': '' + re.exsitu,
+      'exsitu': "" + re.exsitu,
       'instexsitu': re.instexsitu,
       'endemismo': re.endemismo,
       //status (nacional)
@@ -375,7 +372,7 @@ export class FormularioReComponent implements OnInit {
       'abundn': re.abundn,
       'protnacion': re.protnacion,
       'refnombren': re.refnombren,
-      'transparencian': '' + re.transparencian,
+      'transparencian': "" + re.transparencian,
       //status (subnacional)
       'rangos': re.rangos,
       'fecharevrs': this.usuarioService.getFecha(re.fecharevrs),
@@ -386,7 +383,7 @@ export class FormularioReComponent implements OnInit {
       'abunds': re.abunds,
       'protsubnac': re.protsubnac,
       'refnombres': re.refnombres,
-      'transparencias': '' + re.transparencias,
+      'transparencias': "" + re.transparencias,
       //campos opcionales
       'reopc1': re.reopc1,
       'reopc2': re.reopc2,
@@ -415,7 +412,8 @@ export class FormularioReComponent implements OnInit {
         resRe => {
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso ,codigo del rastreo elemento:${resRe.codigoe}.`, 'success');
-
+          this.listaRatreoElementos = new Array();
+          this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar, el codigoe debe ser valido', 'primary');

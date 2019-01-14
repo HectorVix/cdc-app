@@ -65,6 +65,10 @@ export class UsuarioService {
   getRastreoElemento(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+  //obtener Rastreo del Elemento por codigole, nombres, nomcomuns
+  getLocalizacionElemento(a: String): Observable<Localizacion_Modelo> {
+    return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
+  }
   //--------------------------------------------------------------------------------------------------------
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
@@ -96,14 +100,18 @@ export class UsuarioService {
   }
   //editar rastreo elemento
   editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
-    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions)
-      .pipe(
-        catchError(this.handleError<rastreo_Elemento_Modelo>('editarRastreoElemento'))
-      );
+    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
+
   }
   //agregar una nueva localización
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  }
+  editarLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions)
+      .pipe(
+        catchError(this.handleError<Localizacion_Modelo>('editarLocalizacionElemento'))
+      );
   }
 
   //agregar nuevo protocolo LE

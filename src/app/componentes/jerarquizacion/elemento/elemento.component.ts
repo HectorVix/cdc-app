@@ -156,8 +156,6 @@ export class ElementoComponent implements OnInit {
 
   }
   editarElemento() {
-    this.elementos = new Array();
-    this.dataSource = new MatTableDataSource(this.elementos);
     if (this.elementoForm.get('codigo').value) {
       if (this.elementoForm.get('fecha').value) {
         var elementoBase = this.setElemento(this.elementoForm.value);
@@ -193,7 +191,8 @@ export class ElementoComponent implements OnInit {
           }
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
-
+          this.elementos = new Array();
+          this.dataSource = new MatTableDataSource(this.elementos);
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar', 'primary');
@@ -229,10 +228,10 @@ export class ElementoComponent implements OnInit {
   //Buscar
   buscarElemento() {
     this.loading = true;
-    //variables necesarias para recuperarse de errores contiente un caracter invisible
-    var codigo = " ";
-    var nombrecomun = " ";
-    var nombrecientifico = " ";
+    //variables necesarias para recuperarse de errores 
+    var codigo = "~^ªº~†⑦→∞¬¬";
+    var nombrecomun = "~^ªº~†⑦→∞¬¬";
+    var nombrecientifico = "~^ªº~†⑦→∞¬¬";
     this.elementos = new Array();
     this.k = 0;
     if (this.buscarForm.get('codigo').value)
