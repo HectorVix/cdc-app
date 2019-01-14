@@ -59,8 +59,8 @@ export class FormularioLeComponent implements OnInit {
   }
   @ViewChild(MatSort) sort: MatSort;
   //------------------------------------------
-  editar = false;
-  guardar = true;
+  editar = true;
+  guardar = false;
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
     private dialog: MatDialog, private fb2: FormBuilder) {
@@ -94,7 +94,7 @@ export class FormularioLeComponent implements OnInit {
       //página1
       //identificadores
       'codigole': ['', Validators.required],
-      'ident': null,
+      'ident': "",
       //  'nombres': '',
       //'nomcomuns': '',
       //'rangog': '',
@@ -138,15 +138,15 @@ export class FormularioLeComponent implements OnInit {
       'area': '',
       //protección
       //'lista_proteccion': '',
-      'masterreno': null,
-      'masprotec': null,
-      'masmanejo': null,
-      'involtnc': null,
+      'masterreno': "",
+      'masprotec': "",
+      'masmanejo': "",
+      'involtnc': "",
       'commanejo': '',
       'comprot': '',
       //propietario
       'prop': '',
-      'infprop': null,
+      'infprop': "",
       'comprop': '',
       //campos opcionales
       'leopc1': '',
@@ -162,15 +162,15 @@ export class FormularioLeComponent implements OnInit {
       //comentarios generales
       'comentario': '',
       //documentación y mantenimiento
-      'sensdatos': null,
-      'limites': null,
-      'fotos': null,
+      'sensdatos': "",
+      'limites': "",
+      'fotos': "",
       'mejorfuente': '',
       'codfuente': '',
 
-      'mdrev': null,
+      'mdrev': "",
       'transcrito': '',
-      'cc': null,
+      'cc': "",
       'cartografo': '',
       'respdatos': '',
       'actualizar': ''
@@ -193,12 +193,12 @@ export class FormularioLeComponent implements OnInit {
     this.addLocalizacionElemento(localizacionElementoBase);
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
-    datos.fechaeva = this.usuarioService.toFormato(this.leForm.get('fechaeva').value);
-    datos.ultobs = this.usuarioService.toFormato(this.leForm.get('ultobs').value);
-    datos.fecharangole = this.usuarioService.toFormato(this.leForm.get('fecharangole').value);
-    datos.transcrito = this.usuarioService.toFormato(this.leForm.get('transcrito').value);
-    datos.cartografo = this.usuarioService.toFormato(this.leForm.get('cartografo').value);
-    datos.actualizar = this.usuarioService.toFormato(this.leForm.get('actualizar').value);
+    datos.fechaeva = this.usuarioService.toFormatoDateTime(this.leForm.get('fechaeva').value);
+    datos.ultobs = this.usuarioService.toFormatoDateTime(this.leForm.get('ultobs').value);
+    datos.fecharangole = this.usuarioService.toFormatoDateTime(this.leForm.get('fecharangole').value);
+    datos.transcrito = this.usuarioService.toFormatoDateTime(this.leForm.get('transcrito').value);
+    datos.cartografo = this.usuarioService.toFormatoDateTime(this.leForm.get('cartografo').value);
+    datos.actualizar = this.usuarioService.toFormatoDateTime(this.leForm.get('actualizar').value);
     return datos;
   }
 
@@ -254,6 +254,7 @@ export class FormularioLeComponent implements OnInit {
     this.updateLocalizacionElemento(this.setLocalizacionElemento(this.leForm.value));
   }
   buscarLE() {
+    this.lista_LE = new Array();
     this.loading = true;
     //variables necesarias para recuperarse de errores contiente un caracter invisible
     var codigole = "~^ªº~†⑦→∞¬¬";
@@ -304,7 +305,7 @@ export class FormularioLeComponent implements OnInit {
       //página1
       //identificadores
       'codigole': row.codigole,
-      'ident': null,
+      'ident': "" + row.ident,
       //  'nombres': '',
       //'nomcomuns': '',
       //'rangog': '',
@@ -312,11 +313,11 @@ export class FormularioLeComponent implements OnInit {
       //'rangos': '',
       //localizadores
       'subnacion': row.subnacion,
-      'subdivision':row.subdivision,
+      'subdivision': row.subdivision,
       'codsitio': row.codsitio,
       'nomsitio': row.nomsitio,
       'sitioeva': row.sitioeva,
-      'precisionl':row.precisionl,
+      'precisionl': row.precisionl,
       'nommapa': row.nommapa,
       'codmapa': row.codmapa,
       'nummarg': row.nummarg,
@@ -328,13 +329,13 @@ export class FormularioLeComponent implements OnInit {
       'coordn': row.coordn,
       'coorde': row.coorde,
       'coordo': row.coordo,
-      'direccion':row.direccion,
+      'direccion': row.direccion,
       'ecoregion': row.ecoregion,
-      'cuenca':row.cuenca,
+      'cuenca': row.cuenca,
       //status
       'fechaeva': this.usuarioService.getFecha(row.fechaeva),
-      'ultobs':row.ultobs,
-      'priobs':row.priobs,
+      'ultobs': this.usuarioService.getFecha(row.ultobs),
+      'priobs': row.priobs,
       'rangole': row.rangole,
       'fecharangole': this.usuarioService.getFecha(row.fecharangole),
       'comrangole': row.comrangole,
@@ -362,7 +363,7 @@ export class FormularioLeComponent implements OnInit {
       'leopc1': row.leopc1,
       'leopc2': row.leopc2,
       'leopc3': row.leopc3,
-      'leopc4':row.leopc4,
+      'leopc4': row.leopc4,
       'leopc5': row.leopc5,
       'leopc6': row.leopc6,
       'leopc7': row.leopc7,
@@ -379,11 +380,11 @@ export class FormularioLeComponent implements OnInit {
       'codfuente': row.codfuente,
 
       'mdrev': null,
-      'transcrito': row.transcrito,
+      'transcrito': this.usuarioService.getFecha(row.transcrito),
       'cc': null,
-      'cartografo': row.cartografo,
+      'cartografo': this.usuarioService.getFecha(row.cartografo),
       'respdatos': row.respdatos,
-      'actualizar': ''
+      'actualizar': this.usuarioService.getFecha(row.actualizar)
 
     });
   }

@@ -91,20 +91,14 @@ export class FormularioReComponent implements OnInit {
     else
       this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
   }
-  setRastreoElemento(datos): rastreo_Elemento_Modelo {
-    datos.fecharevrg = this.usuarioService.toFormatoDateTime(datos.fecharevrg);
-    datos.fechaaepeu = this.usuarioService.toFormatoDateTime(datos.fechaaepeu);
-    datos.fecharevrn = this.usuarioService.toFormatoDateTime(datos.fecharevrn);
-    datos.fecharevrs = this.usuarioService.toFormatoDateTime(datos.fecharevrs);
-    datos.actualizag = this.usuarioService.toFormatoDateTime(datos.actualizag);
-    datos.actualizan = this.usuarioService.toFormatoDateTime(datos.actualizan);
-    datos.actualizas = this.usuarioService.toFormatoDateTime(datos.actualizas);
-    if (datos.exsitu = "null")
-      datos.exsitu = "";
-    if (datos.transparencian = "null")
-      datos.transparencian = "";
-    if (datos.transparencias = "null")
-      datos.transparencias = "";
+  setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
+    datos.fecharevrg = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrg').value);
+    datos.fechaaepeu = this.usuarioService.toFormatoDateTime(this.reForm.get('fechaaepeu').value);
+    datos.fecharevrn = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrn').value);
+    datos.fecharevrs = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrs').value);
+    datos.actualizag = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizag').value);
+    datos.actualizan = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizan').value);
+    datos.actualizas = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizas').value);
     return datos;
   }
 
@@ -262,6 +256,7 @@ export class FormularioReComponent implements OnInit {
 
   }
   getRatreoElemento() {
+    this.listaRatreoElementos = new Array();
     this.loading = true;
     var a = "~^ªº~†⑦→∞¬¬";
     var b = "~^ªº~†⑦→∞¬¬";

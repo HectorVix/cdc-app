@@ -40,10 +40,10 @@ export class Localizacion_Modelo {
     elev:Number;
     area:Number;
     //proteccion
-    masterreno:String;
-    masprotec:String;
-    masmanejo:String;
-    involtnc:String;
+    masterreno:Boolean;
+    masprotec:Boolean;
+    masmanejo:Boolean;
+    involtnc:Boolean;
     commanejo:String;
     comprot:String;
     //propietario
