@@ -349,15 +349,15 @@ export class FormularioLeComponent implements OnInit {
       'area': row.area,
       //protección
       //'lista_proteccion': '',
-      'masterreno': null,
-      'masprotec': null,
-      'masmanejo': null,
-      'involtnc': null,
+      'masterreno': "" + row.masterreno,
+      'masprotec': "" + row.masprotec,
+      'masmanejo': "" + row.masmanejo,
+      'involtnc': "" + row.involtnc,
       'commanejo': row.commanejo,
       'comprot': row.comprot,
       //propietario
       'prop': row.prop,
-      'infprop': null,
+      'infprop': "" + row.infprop,
       'comprop': row.comprop,
       //campos opcionales
       'leopc1': row.leopc1,
@@ -373,15 +373,15 @@ export class FormularioLeComponent implements OnInit {
       //comentarios generales
       'comentario': row.comentario,
       //documentación y mantenimiento
-      'sensdatos': null,
-      'limites': null,
-      'fotos': null,
+      'sensdatos': "" + row.sensdatos,
+      'limites': "" + row.limites,
+      'fotos': "" + row.fotos,
       'mejorfuente': row.mejorfuente,
       'codfuente': row.codfuente,
 
-      'mdrev': null,
+      'mdrev': "" + row.mdrev,
       'transcrito': this.usuarioService.getFecha(row.transcrito),
-      'cc': null,
+      'cc': "" + row.cc,
       'cartografo': this.usuarioService.getFecha(row.cartografo),
       'respdatos': row.respdatos,
       'actualizar': this.usuarioService.getFecha(row.actualizar)
