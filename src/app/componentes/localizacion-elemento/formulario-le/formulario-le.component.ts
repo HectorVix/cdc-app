@@ -250,7 +250,8 @@ export class FormularioLeComponent implements OnInit {
     });
   }
   editar_LocalizacionElemento() {
-
+    console.log('listo para editar')
+    this.updateLocalizacionElemento(this.setLocalizacionElemento(this.leForm.value));
   }
   buscarLE() {
     this.loading = true;
@@ -310,78 +311,78 @@ export class FormularioLeComponent implements OnInit {
       //'rangon': '',
       //'rangos': '',
       //localizadores
-      'subnacion': '',
-      'subdivision': '',
-      'codsitio': '',
-      'nomsitio': '',
-      'sitioeva': '',
-      'precisionl': '',
-      'nommapa': '',
-      'codmapa': '',
-      'nummarg': '',
-      'numpunto': '',
-      'diezdiez': '',
-      'latitud': '',
-      'longitud': '',
-      'coords': '',
-      'coordn': '',
-      'coorde': '',
-      'coordo': '',
-      'direccion': '',
-      'ecoregion': '',
-      'cuenca': '',
+      'subnacion': row.subnacion,
+      'subdivision':row.subdivision,
+      'codsitio': row.codsitio,
+      'nomsitio': row.nomsitio,
+      'sitioeva': row.sitioeva,
+      'precisionl':row.precisionl,
+      'nommapa': row.nommapa,
+      'codmapa': row.codmapa,
+      'nummarg': row.nummarg,
+      'numpunto': row.numpunto,
+      'diezdiez': row.diezdiez,
+      'latitud': row.latitud,
+      'longitud': row.longitud,
+      'coords': row.coords,
+      'coordn': row.coordn,
+      'coorde': row.coorde,
+      'coordo': row.coordo,
+      'direccion':row.direccion,
+      'ecoregion': row.ecoregion,
+      'cuenca':row.cuenca,
       //status
-      'fechaeva': '',
-      'ultobs': '',
-      'priobs': '',
-      'rangole': '',
-      'fecharangole': '',
-      'comrangole': '',
+      'fechaeva': this.usuarioService.getFecha(row.fechaeva),
+      'ultobs':row.ultobs,
+      'priobs':row.priobs,
+      'rangole': row.rangole,
+      'fecharangole': this.usuarioService.getFecha(row.fecharangole),
+      'comrangole': row.comrangole,
       //'resprg': '',
-      'datosle': '',
-      'contacto': '',
-      'numcontacto': '',
+      'datosle': row.datosle,
+      'contacto': row.contacto,
+      'numcontacto': row.numcontacto,
       //descripción
-      'desgen': '',
-      'elev': '',
-      'area': '',
+      'desgen': row.desgen,
+      'elev': row.elev,
+      'area': row.area,
       //protección
       //'lista_proteccion': '',
       'masterreno': null,
       'masprotec': null,
       'masmanejo': null,
       'involtnc': null,
-      'commanejo': '',
-      'comprot': '',
+      'commanejo': row.commanejo,
+      'comprot': row.comprot,
       //propietario
-      'prop': '',
+      'prop': row.prop,
       'infprop': null,
-      'comprop': '',
+      'comprop': row.comprop,
       //campos opcionales
-      'leopc1': '',
-      'leopc2': '',
-      'leopc3': '',
-      'leopc4': '',
-      'leopc5': '',
-      'leopc6': '',
-      'leopc7': '',
-      'leopc8': '',
-      'leopc9': '',
-      'leopc10': '',
+      'leopc1': row.leopc1,
+      'leopc2': row.leopc2,
+      'leopc3': row.leopc3,
+      'leopc4':row.leopc4,
+      'leopc5': row.leopc5,
+      'leopc6': row.leopc6,
+      'leopc7': row.leopc7,
+      'leopc8': row.leopc8,
+      'leopc9': row.leopc9,
+      'leopc10': row.leopc10,
       //comentarios generales
-      'comentario': '',
+      'comentario': row.comentario,
       //documentación y mantenimiento
       'sensdatos': null,
       'limites': null,
       'fotos': null,
-      'mejorfuente': '',
-      'codfuente': '',
+      'mejorfuente': row.mejorfuente,
+      'codfuente': row.codfuente,
 
       'mdrev': null,
-      'transcrito': '',
+      'transcrito': row.transcrito,
       'cc': null,
-      'cartografo': '',
-      'respdatos': '',
+      'cartografo': row.cartografo,
+      'respdatos': row.respdatos,
       'actualizar': ''
 
     });
@@ -396,6 +397,27 @@ export class FormularioLeComponent implements OnInit {
       }
     });
     return localizacionElementoBusqueda;
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearFormLocalizacion_Elemento();
+    this.crearForm_Buscar();
+    this.tabPagina1();
+  }
+  updateLocalizacionElemento(le: Localizacion_Modelo): void {
+    this.loading = true;
+    this.usuarioService.editarLocalizacionElemento(le)
+      .subscribe(
+        resLe => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso ,codigo de localización del elemento:${resLe.codigole}.`, 'success');
+          this.lista_LE = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_LE);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
+        });
   }
 }
 

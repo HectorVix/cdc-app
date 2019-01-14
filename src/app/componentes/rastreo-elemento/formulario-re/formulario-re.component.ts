@@ -86,10 +86,7 @@ export class FormularioReComponent implements OnInit {
 
   guardarRastreoElemento() {
     if (this.reForm.get('codigoe').value) {
-      if (this.validarFechas())
-        this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
-      else
-        this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
+      this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
     }
     else
       this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
@@ -421,26 +418,10 @@ export class FormularioReComponent implements OnInit {
   }
   editarRastreoElemento() {
     if (this.reForm.get('codigoe').value) {
-      if (this.validarFechas())
-        this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
-      else
-        this.changeSuccessMessage('No se pudo regitrar.Todas las fechas son obligatorias.', 'primary');
+      this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
     }
     else
       this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
-  }
-  validarFechas(): Boolean {
-    if (this.reForm.get('fecharevrg').value
-      && this.reForm.get('fechaaepeu').value
-      && this.reForm.get('fecharevrn').value
-      && this.reForm.get('fecharevrs').value
-      && this.reForm.get('actualizag').value
-      && this.reForm.get('actualizan').value
-      && this.reForm.get('actualizas').value) {
-      return true;
-    }
-    else
-      return false;
   }
 }
 function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {

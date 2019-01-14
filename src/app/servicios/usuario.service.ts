@@ -125,7 +125,7 @@ export class UsuarioService {
   addSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
     return this.http.post<sitio_Modelo>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
   }
-  //agregar un area
+  //agregar  area
   addArea(area: area_Modelo): Observable<area_Modelo> {
     return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
   }
@@ -388,10 +388,14 @@ export class UsuarioService {
   }
   //Cambiar formato de la fecha y tiempo
   toFormatoDateTime(date: NgbDateStruct): Date {
-    var elAhora = new Date();
-    var dia = date.day;
-    // dia = dia + 1;
-    return date ? new Date('' + date.year + '-' + date.month + '-' + dia + ' ' + elAhora.getHours() + ':' + elAhora.getMinutes() + ':' + elAhora.getSeconds()) : null;
+    if (date) {
+      var elAhora = new Date();
+      var dia = date.day;
+      // dia = dia + 1;
+      return date ? new Date('' + date.year + '-' + date.month + '-' + dia + ' ' + elAhora.getHours() + ':' + elAhora.getMinutes() + ':' + elAhora.getSeconds()) : null;
+    }
+    else
+      return null;
   }
   fromModel(date: Date): NgbDateStruct {
     return date ? {
@@ -405,11 +409,11 @@ export class UsuarioService {
   }
 
   getFecha(fecha) {
-    var dateElemento = null;
+    var dateElemento: NgbDateStruct = null;
     if (fecha != null) {
       let d = new Date();
       d = new Date(fecha);
-      dateElemento = this.fromModel(d);
+      return this.fromModel(d);
     }
     return dateElemento;
   }
