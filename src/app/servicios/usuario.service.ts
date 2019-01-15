@@ -151,7 +151,13 @@ export class UsuarioService {
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
   }
-
+  //editar fuente
+  editarFuente(fuente: fuente_Modelo): Observable<fuente_Modelo> {
+    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/editar', fuente, httpOptions)
+      .pipe(
+        catchError(this.handleError<fuente_Modelo>('editarFuente'))
+      );
+  }
   //------------------------------------------------------------------------------------------------------------------------
   //validar y obtener elemento id
   validarElementoCodigoe(codigoe: String) {

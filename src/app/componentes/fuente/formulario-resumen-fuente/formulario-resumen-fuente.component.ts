@@ -3,7 +3,7 @@ import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 import { tema_Modelo } from '../../../modelo/fuente/tema-modelo';
 import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import { Subject } from 'rxjs';
@@ -55,6 +55,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   @ViewChild(MatSort) sort: MatSort;
   //------------------------------------------
+  selected = new FormControl(0);
+  editar = true;
+  guardar = false;
   constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService,
     private dialog: MatDialog,
     private fb2: FormBuilder) {
@@ -83,7 +86,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
     }
   }
   crearForm_ResumenesFuente() {
-
     this.fuenteForm = this.fb.group({
       'naturalezadocumento': '',
       'codfuente': '',
@@ -111,9 +113,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     });
   }
   resetForm() {
-
     this.fuenteForm.reset();
-
   }
   agregarArchivos() {
     this.archivo.nativeElement.click();
@@ -199,8 +199,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
       fuente.otros = true;
     else
       fuente.otros = false;
-    fuente.actualizar = this.usuarioServicio.toFormato(this.fuenteForm.get('actualizar').value);
-    fuente.control = this.usuarioServicio.toFormato(this.fuenteForm.get('control').value);
+    fuente.actualizar = this.usuarioServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
+    fuente.control = this.usuarioServicio.toFormatoDateTime(this.fuenteForm.get('control').value);
     return fuente;
   }
   //agrega una nueva fuente
@@ -238,6 +238,16 @@ export class FormularioResumenFuenteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result)
         this.guardarFuente();
+    });
+  }
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editar_Fuente();
     });
   }
   buscarFuente() {
@@ -286,6 +296,83 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'clave': ''
     });
   }
+  mostrar_Fuente_Busqueda(row: fuente_Dato) {
+    this.crearForm_Fuente_Buscado(this.getFuente_id(row.fuenteId));
+    this.tabPagina1();
+    this.editar = false;
+    this.guardar = true;
+  }
+  crearForm_Fuente_Buscado(row: fuente_Modelo) {
+    this.fuenteForm = this.fb.group({
+      'fuenteId': row.fuenteId,
+      'naturalezadocumento': row.naturalezadocumento,
+      'codfuente': row.codfuente,
+      'cita': row.cita,
+      'archivado': row.archivado,
+      'cobgeo': row.cobgeo,
+      'coords': row.coords,
+      'coordn': row.coordn,
+      'coorde': row.coorde,
+      'coordo': row.coordo,
+      'resumen': row.resumen,
+      //tema
+      'varios': "",
+      'flora': "",
+      'fauna': "",
+      'otros': "",
+      'publicacioncdc': row.publicacioncdc,
+      'valor': row.valor,
+      'clave': row.clave,
+      'comentario': row.comentario,
+      'notadigest': row.notadigest,
+      'actualizar': this.usuarioServicio.getFecha(row.actualizar),
+      'control': this.usuarioServicio.getFecha(row.control),
+      'bcd': row.bcd
+    });
+  }
+  getFuente_id(id: Number): fuente_Modelo {
+    var fuenteBusqueda = new fuente_Modelo();
+    this.dataFuente.forEach(dataFuente => {
+      var fuente_Busqueda_Aux = new fuente_Modelo();// necesario dado que si reutiliza conserva la primera asignación
+      fuente_Busqueda_Aux = dataFuente;
+      if (id == fuente_Busqueda_Aux.fuenteId) {
+        fuenteBusqueda = fuente_Busqueda_Aux;
+      }
+    });
+    return fuenteBusqueda;
+  }
+  tabPagina1() {
+    this.selected.setValue(0);
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearForm_ResumenesFuente();
+    this.crearForm_Buscar();
+    this.tabPagina1();
+    this.resetForm();
+    this.archivos = new Set();
+    this.archivo.nativeElement.value = "";
+  }
+  editar_Fuente() {
+    console.log('listo para editar');
+    this.updateFuente(this.setFuente(this.fuenteForm.value));
+  }
+  updateFuente(fuente: fuente_Modelo): void {
+    this.loading = true;
+    this.usuarioServicio.editarFuente(fuente)
+      .subscribe(
+        resFuente => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso ,codigo de la fuente:${resFuente.codfuente}.`, 'success');
+          this.lista_Fuente = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_Fuente);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error  no se pudo editar, el codigo de la fuente debe ser valido', 'primary');
+        });
+  }
+
 }
 function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
   if (naturalezaDocumento == "A")
