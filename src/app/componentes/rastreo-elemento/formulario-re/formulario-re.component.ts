@@ -303,8 +303,8 @@ export class FormularioReComponent implements OnInit {
 
   mostrar_RastreoElemento_Busqueda(row) {
     var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
-    console.log(rastreoElemento_Busqueda);
     this.crearFormRastreoElementoo_Buscado(this.getRastreoElemento_id(row.rastreoId));
+    this.tabPagina1();
     this.editar = false;
     this.guardar = true;
   }
@@ -417,7 +417,7 @@ export class FormularioReComponent implements OnInit {
       this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
   }
 }
-function crearRastreoElemento(k: number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
+function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   return {
     numero: k,
     rastreoId: re.rastreoId,

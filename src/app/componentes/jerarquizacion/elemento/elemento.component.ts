@@ -289,7 +289,7 @@ export class ElementoComponent implements OnInit {
     this.loading = false;
   }
 }
-function crearElemento(k: number, elemento: elemento_Modelo): ElementoDato {
+function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
   return {
     numero: k,
     elmendoId: elemento.elementoId,

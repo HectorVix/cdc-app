@@ -1,5 +1,5 @@
 export interface localizacionElemento_Dato {
-    numero: number;
+    numero: Number;
     LocalizacionId: Number;
     codigole: String;
 }

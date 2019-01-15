@@ -250,7 +250,6 @@ export class FormularioLeComponent implements OnInit {
     });
   }
   editar_LocalizacionElemento() {
-    console.log('listo para editar')
     this.updateLocalizacionElemento(this.setLocalizacionElemento(this.leForm.value));
   }
   buscarLE() {
@@ -418,8 +417,7 @@ export class FormularioLeComponent implements OnInit {
         });
   }
 }
-
-function crearLocalizacionElemento(k: number, localizacionId: Number, codigole): localizacionElemento_Dato {
+function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {
   return {
     numero: k,
     LocalizacionId: localizacionId,

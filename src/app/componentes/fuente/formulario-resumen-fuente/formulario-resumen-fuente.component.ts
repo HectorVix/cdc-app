@@ -12,7 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-//import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
+import { fuente_Dato } from '../../../modelo/tabla/fuente-dato'
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -44,14 +44,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
   //loading
   loading: boolean;
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigole'];
-  //dataSource: MatTableDataSource<localizacionElemento_Dato>;
-  //lista_LE: Array<localizacionElemento_Dato> = new Array();
+  displayedColumns: string[] = ['numero', 'naturalezaDocumento', 'codigoFuente', 'cita', 'clave'];
+  dataSource: MatTableDataSource<fuente_Dato>;
+  lista_Fuente: Array<fuente_Dato> = new Array();
   dataFuente: any;
   private paginator: MatPaginator;
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
-    // this.setDataSourceAttributes();
+    this.setDataSourceAttributes();
   }
   @ViewChild(MatSort) sort: MatSort;
   //------------------------------------------
@@ -60,6 +60,27 @@ export class FormularioResumenFuenteComponent implements OnInit {
     private fb2: FormBuilder) {
     this.crearForm_ResumenesFuente();
     this.crearForm_Buscar();
+    this.dataSource = new MatTableDataSource(this.lista_Fuente);
+  }
+  ngOnInit() {
+    setTimeout(() => this.staticAlertClosed = true, 20000);
+    this._success.subscribe((message) => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = null);
+  }
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   crearForm_ResumenesFuente() {
 
@@ -89,26 +110,11 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'bcd': ''
     });
   }
-
-
   resetForm() {
 
     this.fuenteForm.reset();
 
   }
-
-
-  ngOnInit() {
-    setTimeout(() => this.staticAlertClosed = true, 20000);
-    this._success.subscribe((message) => this.successMessage = message);
-    this._success.pipe(
-      debounceTime(5000)
-    ).subscribe(() => this.successMessage = null);
-  }
-
-  onSubmit() {
-  }
-
   agregarArchivos() {
     this.archivo.nativeElement.click();
   }
@@ -120,7 +126,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
       }
     }
   }
-
   cargarArchivos(fuenteId: Number) {
     this.cargando = true;
     this.progreso = this.usuarioServicio.cargarArchivos(this.archivos, fuenteId);
@@ -176,8 +181,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
     fuenteBase.temaList = temaList;
     this.addFuente(fuenteBase);
   }
-
-
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
     if (fuente.varios)
       fuente.varios = true;
@@ -238,7 +241,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     });
   }
   buscarFuente() {
-    //this.lista_LE = new Array();
+    this.lista_Fuente = new Array();
     this.loading = true;
     var a = "~^ªº~†⑦→∞¬¬";
     var b = "~^ªº~†⑦→∞¬¬";
@@ -262,12 +265,12 @@ export class FormularioResumenFuenteComponent implements OnInit {
         data => {
           this.dataFuente = data;
           var k = 0;
-          for (let fuenteVal of this.dataFuente) {
+          for (let val of this.dataFuente) {
             k = k + 1;
-            console.log('data:', fuenteVal);
-            //this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
+            console.log('data:', val);
+            this.lista_Fuente.push(crearFuente(k, val.fuenteId, val.naturalezadocumento, val.codfuente, val.cita, val.clave));
           }
-          // this.dataSource = new MatTableDataSource(this.lista_LE);
+          this.dataSource = new MatTableDataSource(this.lista_Fuente);
           this.loading = false;
         }, err => {
           this.loading = false;
@@ -283,4 +286,32 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'clave': ''
     });
   }
+}
+function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
+  if (naturalezaDocumento == "A")
+    naturalezaDocumento = "Articulo";
+  if (naturalezaDocumento == "C")
+    naturalezaDocumento = "Trabajo de campo";
+  if (naturalezaDocumento == "F")
+    naturalezaDocumento = "Fotos o ilustraciones";
+  if (naturalezaDocumento == "I")
+    naturalezaDocumento = "Inédito";
+  if (naturalezaDocumento == "L")
+    naturalezaDocumento = "Libro";
+  if (naturalezaDocumento == "M")
+    naturalezaDocumento = "Mapas e imágenes";
+  if (naturalezaDocumento == "O")
+    naturalezaDocumento = "Organizaciones";
+  if (naturalezaDocumento == "P")
+    naturalezaDocumento = "Comunicaciones personales";
+  if (naturalezaDocumento == "R")
+    naturalezaDocumento = "Revistas, periódicos y publicaciones";
+  return {
+    numero: k,
+    fuenteId: fuenteId,
+    naturalezaDocumento: naturalezaDocumento,
+    codigoFuente: codigoFuente,
+    cita: cita,
+    clave: clave
+  };
 }

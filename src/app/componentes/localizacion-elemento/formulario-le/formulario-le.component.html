@@ -736,7 +736,7 @@
           <!-- Fin modal-content -->
           <!-- Tabla busqueda-->
           <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
           </mat-form-field>
           <div class="mat-elevation-z8" *ngIf="dataSource">
             <table mat-table [dataSource]="dataSource" matSort>
@@ -752,7 +752,7 @@
                 <td mat-cell *matCellDef="let row"> {{row.codigole}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrar_LocalizacionElemento_Busqueda(row); fLE.select('tab-formulario') ;tabPagina1();">
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrar_LocalizacionElemento_Busqueda(row); fLE.select('tab-formulario') ;">
               </tr>
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

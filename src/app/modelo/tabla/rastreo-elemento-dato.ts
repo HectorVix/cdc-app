@@ -1,5 +1,5 @@
 export interface ratreoElemento_Dato {
-    numero: number;
+    numero: Number;
     rastreoId: Number;
     codigoe: String;
     departamento: String;

@@ -1,5 +1,5 @@
 export interface ElementoDato {
-    numero: number;
+    numero: Number;
     elmendoId: Number;
     codigo: String;
     nombrecomun: String;
