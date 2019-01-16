@@ -22,7 +22,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   //archivos
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
-  progreso;
+  progreso: any;
   cargando = false;
   cargadoExitoso = false;
   //mensajes
@@ -353,6 +353,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.resetForm();
     this.archivos = new Set();
     this.archivo.nativeElement.value = "";
+    this.progreso = null;
   }
   editar_Fuente() {
     console.log('listo para editar');
@@ -360,7 +361,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   updateFuente(fuente: fuente_Modelo): void {
     this.loading = true;
-    this.usuarioServicio.editarFuente(fuente)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.usuarioServicio.editarFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
           this.loading = false;
