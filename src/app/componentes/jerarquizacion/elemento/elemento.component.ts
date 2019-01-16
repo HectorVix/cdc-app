@@ -6,7 +6,6 @@ import { UsuarioService } from '../../../servicios/usuario.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioModelo } from '../../../modelo/usuario/usuario-modelo';
 import { ControlErrorStateMatcher } from '../../../modelo/error/error-state-matcher';
 import { Subject } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';

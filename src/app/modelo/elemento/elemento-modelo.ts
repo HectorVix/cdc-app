@@ -10,3 +10,5 @@ export class elemento_Modelo {
     fotoList = null;
     uSUARIOusuarioid: usuario_Modelo;
 }
+
+

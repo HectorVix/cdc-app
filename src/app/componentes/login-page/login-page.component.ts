@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { UsuarioService } from '../../servicios/usuario.service';
+import { UsuarioService } from '../../servicios/usuario/usuario.service';
+import { FechaService } from '../../servicios/fecha/fecha.service';
 import { Router } from '@angular/router';
-import { UsuarioModelo, Rol } from '../../modelo/usuario/usuario-modelo';
+import { usuario_Modelo, Rol } from '../../modelo/usuario/usuario-modelo';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
@@ -33,7 +34,8 @@ export class LoginPageComponent implements OnInit {
   loading: boolean;
 
   constructor(public fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private usuarioServicio: UsuarioService,
+    private fechaServicio: FechaService,
     private router: Router,
     public fb2: FormBuilder,
     public fb3: FormBuilder,
@@ -51,14 +53,14 @@ export class LoginPageComponent implements OnInit {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
 
   //logiarse
   onSubmit() {
     this.loading = true;
-    this.usuarioService.userAuthentication(this.loginForm.get('LFemail').value, this.loginForm.get('LFcontrasena').value)
+    this.usuarioServicio.userAuthentication(this.loginForm.get('LFemail').value, this.loginForm.get('LFcontrasena').value)
       .subscribe((data: any) => {
         this.loading = false;
         localStorage.setItem('userToken', data.access_token);
@@ -72,19 +74,19 @@ export class LoginPageComponent implements OnInit {
   }
   //Guardar Registro
   onSubmitRegistro() {
-    this.fechaFormato = this.registroForm.get('fechaNacimiento').value;
-    this.fecha = this.usuarioService.toFormato(this.fechaFormato);
+    // this.fechaFormato = this.registroForm.get('fechaNacimiento').value;
+    this.fecha = this.fechaServicio.toFormatoDateTime(this.registroForm.get('fechaNacimiento').value);
     this.addUsuario(this.registroForm.value);
   }
 
-  addUsuario(usDatos: UsuarioModelo): void {
+  addUsuario(usDatos: usuario_Modelo): void {
     this.loading = true;
     usDatos.fechaNacimiento = this.fecha;
     this.rol = new Rol();
     this.rol.rolId = 7;
     usDatos.rolrolid = this.rol;
 
-    this.usuarioService.addUsuario(usDatos)
+    this.usuarioServicio.addUsuario(usDatos)
       .subscribe(
         us => {
           this.loading = false;

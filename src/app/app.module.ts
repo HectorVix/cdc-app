@@ -14,7 +14,15 @@ import { NotFoundPageComponent } from './componentes/not-found-page/not-found-pa
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormularioResumenFuenteComponent } from './componentes/fuente/formulario-resumen-fuente/formulario-resumen-fuente.component';
 import { UsuarioService } from './servicios/usuario.service';
+import { FuenteService } from './servicios/fuente/fuente.service';
+import { ElementoService } from './servicios/elemento/elemento.service';
+import { JerarquizacionService } from './servicios/jerarquizacion/jerarquizacion.service';
+import { RastreoService } from './servicios/rastreo/rastreo.service';
+import { LocalizacionService } from './servicios/localizacion/localizacion.service';
+import { CaracterizacionService } from './servicios/caracterizacion/caracterizacion.service';
 import { SitioService } from './servicios/sitio/sitio.service';
+import { AreaService } from './servicios/area/area.service';
+import { ContactoService } from './servicios/contacto/contacto.service';
 import { FechaService } from './servicios/fecha/fecha.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
@@ -55,6 +63,7 @@ import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
+import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
 // import {FlexLayoutModule} from '@angular/flex-layout';
 
 
@@ -111,7 +120,15 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
     UsuarioService,
+    FuenteService,
+    ElementoService,
+    JerarquizacionService,
+    RastreoService,
+    LocalizacionService,
+    CaracterizacionService,
     SitioService,
+    AreaService,
+    ContactoService,
     DatePipe,
     AuthGuard,
     {

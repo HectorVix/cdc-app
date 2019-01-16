@@ -6,11 +6,13 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
 import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-formulario-jerarquizacion',
@@ -33,7 +35,10 @@ export class FormularioJerarquizacionComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private jerarquizacionServicio: JerarquizacionService,
+    private fechaServicio: FechaService,
+    private elementoServicio: ElementoService,
     private dialog: MatDialog) {
     this.createFormJerarquizacionNacional();
   }
@@ -92,19 +97,16 @@ export class FormularioJerarquizacionComponent implements OnInit {
   }
   //setear datos jerarquizacion nacional
   setDatosJerarquizacionNacional(datos: jerarquizacion_Nacional_Modelo): jerarquizacion_Nacional_Modelo {
-    var fecharn = this.usuarioService.toFormato(this.jerarquizacionForm.get('fecharn').value);
-    var edicion = this.usuarioService.toFormato(this.jerarquizacionForm.get('edicion').value);
-    var actualizar = this.usuarioService.toFormato(this.jerarquizacionForm.get('actualizar').value);
-    datos.fecharn = fecharn;
-    datos.edicion = edicion;
-    datos.actualizar = actualizar;
+    datos.fecharn = this.fechaServicio.toFormatoDateTime(this.jerarquizacionForm.get('fecharn').value);
+    datos.edicion = this.fechaServicio.toFormatoDateTime(this.jerarquizacionForm.get('edicion').value);
+    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.jerarquizacionForm.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global
 
   addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
     this.loading = true;
-    this.usuarioService.addJerarquizacionNacional(jerarquizacion)
+    this.jerarquizacionServicio.addJerarquizacionNacional(jerarquizacion)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -122,7 +124,7 @@ export class FormularioJerarquizacionComponent implements OnInit {
 
   ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
     var elemento: elemento_Modelo;
-    this.usuarioService.validarElementoCodigoe(codigoe)
+    this.elementoServicio.validarElementoCodigoe(codigoe)
       .subscribe(
         resElemento => {
           elemento = resElemento;
@@ -131,7 +133,6 @@ export class FormularioJerarquizacionComponent implements OnInit {
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
         });
-
     return elemento;
   }
 
@@ -151,8 +152,8 @@ export class FormularioJerarquizacionComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-    if(result)
-     this.guardarRegistroJerarquiazacionNacional();
+      if (result)
+        this.guardarRegistroJerarquiazacionNacional();
     });
   }
 }

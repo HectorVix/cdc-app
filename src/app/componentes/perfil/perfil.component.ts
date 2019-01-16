@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../servicios/usuario.service';
-import { UsuarioModelo } from '../../modelo/usuario/usuario-modelo';
+import { UsuarioService } from '../../servicios/usuario/usuario.service';
+import { usuario_Modelo } from '../../modelo/usuario/usuario-modelo';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  datosUsuario: UsuarioModelo;
+  datosUsuario: usuario_Modelo;
   model = {
     left: true,
     middle: false,
@@ -21,7 +21,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioService.getUsuarioDatos(this.decodedToken.jti)
-    .subscribe((data: UsuarioModelo) => this.datosUsuario = { ...data });
+      .subscribe((data: usuario_Modelo) => this.datosUsuario = { ...data });
   }
 
 }

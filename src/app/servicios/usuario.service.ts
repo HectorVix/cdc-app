@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable, of, Subject } from 'rxjs';
-import { UsuarioModelo } from '../modelo/usuario/usuario-modelo';
+
 import { elemento_Modelo } from '../modelo/jerarquizacion/elemento-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -35,15 +35,9 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {
   }
-  userAuthentication(userName, password) {
-    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'No-Auth': 'True' });
-    return this.http.post(this.rootUrl + '/us/token', data, { headers: reqHeader });
-  }
+  
   //-------------------------------------------Obtener Datos------------------------------------------------
-  getUsuarioDatos(jti: String) {
-    return this.http.get<UsuarioModelo>(this.rootUrl + '/us/' + jti);
-  }
+  
   getElementos(codigo: String, nombrecomun, nombrecientifico) {
     return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
   }
@@ -75,9 +69,7 @@ export class UsuarioService {
   }
   //-------------------------------------------------Agregar nuevos registros-------------------------------------------------------
   //agregar un nuevo usuario
-  addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
-    return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
-  }
+ 
   //agregar un nuevo elemento
   addElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);

@@ -1,4 +1,4 @@
-export class UsuarioModelo {
+export class usuario_Modelo {
     usuarioId: Number;
     nombre: String;
     apellido: String;
@@ -12,12 +12,9 @@ export class UsuarioModelo {
     elementoList = null;
     contactosList = null;
     rolrolid: Rol;
-
 }
-
 export class Rol {
     rolId: number;
     nombre: string;
     usuarioList = null;
-
 }
