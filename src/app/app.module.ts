@@ -14,6 +14,8 @@ import { NotFoundPageComponent } from './componentes/not-found-page/not-found-pa
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormularioResumenFuenteComponent } from './componentes/fuente/formulario-resumen-fuente/formulario-resumen-fuente.component';
 import { UsuarioService } from './servicios/usuario.service';
+import { SitioService } from './servicios/sitio/sitio.service';
+import { FechaService } from './servicios/fecha/fecha.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
@@ -107,12 +109,19 @@ import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confir
     ModalGalleryModule.forRoot(), MatMenuModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [UsuarioService, DatePipe, AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+  providers: [
+    UsuarioService,
+    SitioService,
+    DatePipe,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }
+    },
 
   ],
   entryComponents: [ConfirmacionComponent],

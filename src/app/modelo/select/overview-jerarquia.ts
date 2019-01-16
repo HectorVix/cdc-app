@@ -14,9 +14,9 @@ export class criterio_Jerarquizacion {
   ];
   lg_dist: Valor[] = [
     {value: 'A', viewValue: 'Endémica de un país, departamento grande o región; una área < 260 km²'},
-    {value: 'B', viewValue: 'Edémica regional; una área de 260 - 26,000 km²'},
-    {value: 'C', viewValue: 'Moderadamente ampia pero dispersa; una área de 26,000 - 2,600,000 km'},
-    {value: 'D', viewValue: 'Amplia; una área > 2,600,000 km²'}
+    {value: 'B', viewValue: 'Edémica regional; un área de 260 - 26,000 km²'},
+    {value: 'C', viewValue: 'Moderadamente amplia pero dispersa; un área de 26,000 - 2,600,000 km'},
+    {value: 'D', viewValue: 'Amplia; un área > 2,600,000 km²'}
   ];
   ln_dist: Valor[] = [
     {value: 'A', viewValue: 'Muy limitada; porcentaje de territorio nacional < 3%'},
@@ -56,7 +56,7 @@ export class criterio_Jerarquizacion {
    
   ];
   ln_rango: Valor[] = [
-    {value: 'N1', viewValue: 'G1'},
+    {value: 'N1', viewValue: 'N1'},
     {value: 'N2', viewValue: 'N2'},
     {value: 'N3', viewValue: 'N3'},
     {value: 'N4', viewValue: 'N4'},
@@ -71,8 +71,3 @@ export class criterio_Jerarquizacion {
     {value: 'NX', viewValue: 'NX'}
   ];
 }
-
-
-
-
-   

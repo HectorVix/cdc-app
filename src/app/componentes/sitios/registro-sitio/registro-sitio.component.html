@@ -589,8 +589,9 @@
                                     </div>
                                     <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                                     <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Atras</button>
-                                    <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                    <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                                     <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
+                                    <button class="btn color-green waves-light" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
                                 </div>
                             </mat-tab>
                         </mat-tab-group>
@@ -602,19 +603,32 @@
                     <b>Buscar</b>
                     <ng-template ngbTabContent>
                         <div class="modal-content mat-elevation-z4">
-                            <form class="base-form">
+                            <div class="modal-header color-green"></div>
+                            <form [formGroup]="buscarForm" class="base-form">
                                 <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Codigo del Sitio">
+                                    <input matInput placeholder="Código del Sitio" formControlName="codigoSitio">
                                 </mat-form-field>
                                 <mat-form-field class="base-full-width">
-                                    <input matInput placeholder="Nombre del Sitio">
+                                    <input matInput placeholder="Nombre del Sitio" formControlName="nombreSitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Sinónimo del Sitio" formControlName="sinonimoSitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Departamento" formControlName="depto">
                                 </mat-form-field>
                                 <div class="mat-elevation-z8" class="base-form">
-                                    <button mat-raised-button class="color-green">Buscar</button>
-                                    <button mat-raised-button class="color-green">Buscar Todos</button>
+                                    <button mat-raised-button class="color-green" (click)="buscarSitio()">Buscar</button>
                                 </div>
                             </form>
+                            <div class="text-center">
+                                <div *ngIf="loading">
+                                    <img src="assets/imagenes/load.gif">
+                                </div>
+                            </div>
+                            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                         </div>
+                        <!-- Fin modal-content -->
                     </ng-template>
                 </ng-template>
             </ngb-tab>

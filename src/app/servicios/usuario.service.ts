@@ -25,7 +25,6 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -35,47 +34,46 @@ export class UsuarioService {
   mensajeErrores: String;
 
   constructor(private http: HttpClient) {
-
   }
-
   userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'No-Auth': 'True' });
     return this.http.post(this.rootUrl + '/us/token', data, { headers: reqHeader });
-
   }
-
+  //-------------------------------------------Obtener Datos------------------------------------------------
   getUsuarioDatos(jti: String) {
     return this.http.get<UsuarioModelo>(this.rootUrl + '/us/' + jti);
-
   }
-  //------------------------------------------------------------------------------------------------------
-  //obtener elementos
   getElementos(codigo: String, nombrecomun, nombrecientifico) {
     return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
   }
-  //obtener foto por id
-  public getFoto(id: Number): Observable<Blob> {
+  getFoto(id: Number): Observable<Blob> {
     return this.http.get(this.rootUrl + '/elemento/imagen/' + id, { responseType: "blob" });
   }
   getDatosFotos(elementoId: String): Observable<foto_Modelo> {
     return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
   }
-  //obtener Rastreo del Elemento por codigoe, subnacion, nombreg, nombrecomunnn
+  //Obtener Rastreo del Elemento por codigoe, subnacion, nombreg, nombrecomunnn
   getRastreoElemento(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
-  //obtener Localización del Elemento por codigole, nombres, nomcomuns
+  //Obtener Localización del Elemento por codigole, nombres, nomcomuns
   getLocalizacionElemento(a: String): Observable<Localizacion_Modelo> {
     return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
   }
-  /*obtener Fuente por codigofuente, naturaleza del documento
-   cita, archivado o una clave
+  /*
+    Obtener Fuente por codigofuente, naturaleza del documento
+    cita, archivado o una clave
    */
   getFuente(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
     return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
-  //--------------------------------------------------------------------------------------------------------
+  /* Obtener Sitio por codigoSitio, nombreSitio, sinonimoSitio y departamento
+  */
+  getSitio(a: String, b: String, c: String, d: String): Observable<sitio_Modelo> {
+    return this.http.get<sitio_Modelo>(this.rootUrl + '/sitio/buscar/' + a + '/' + b + '/' + c + '/' + d);
+  }
+  //-------------------------------------------------Agregar nuevos registros-------------------------------------------------------
   //agregar un nuevo usuario
   addUsuario(us: UsuarioModelo): Observable<UsuarioModelo> {
     return this.http.post<UsuarioModelo>(this.rootUrl + '/us/reg', us, httpOptions);
@@ -84,10 +82,7 @@ export class UsuarioService {
   addElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
     return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
   }
-  //editar elemento
-  editarElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
-    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/editar/' + jti, elemento, httpOptions);
-  }
+  
   //agregar una nueva jerarquizacion Global
   addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<Jerarquizacion> {
     return this.http.post<Jerarquizacion>(this.rootUrl + '/jerarquizacion/registro/global', jerarquizacion, httpOptions);
@@ -104,33 +99,22 @@ export class UsuarioService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
     return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
-  //editar rastreo elemento
-  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
-    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
-
-  }
+  
   //agregar una nueva localización
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
-  editarLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
-    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions)
-      .pipe(
-        catchError(this.handleError<Localizacion_Modelo>('editarLocalizacionElemento'))
-      );
-  }
+ 
 
   //agregar nuevo protocolo LE
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
     return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
-    //.pipe(
-    //  catchError(this.handleError<protocolo_LE_Modelo>('addProtocoloLE'))
-    //  );
   }
   //agregar un nuevo sitio
   addSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
     return this.http.post<sitio_Modelo>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
   }
+ 
   //agregar  area
   addArea(area: area_Modelo): Observable<area_Modelo> {
     return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
@@ -151,14 +135,24 @@ export class UsuarioService {
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
   }
-  //editar fuente
-  editarFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
-    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions)
-      .pipe(
-        catchError(this.handleError<fuente_Modelo>('editarFuente'))
-      );
+  
+  //--------------------------------------------------Editar registros---------------------------------------------------------
+  editarElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/editar/' + jti, elemento, httpOptions);
   }
-  //------------------------------------------------------------------------------------------------------------------------
+  editarFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
+    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions);
+  }
+  editarSitio(sitio: sitio_Modelo): Observable<sitio_Modelo> {
+    return this.http.post<sitio_Modelo>(this.rootUrl + '/sitio/editar/', sitio, httpOptions);
+  }
+  editarLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
+  }
+  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
+    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
+  }
+ //-----------------------------------------------------------------------------------------------------------------------------
   //validar y obtener elemento id
   validarElementoCodigoe(codigoe: String) {
     return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/' + codigoe);
@@ -300,7 +294,7 @@ export class UsuarioService {
           formData.append('fecha', fechaCreacion);
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
-          if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId ,pueden ser nuevas que estan dentro del rango tamaño inicial
+          if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId, pueden ser nuevas que estan dentro del rango tamaño inicial
             var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
               reportProgress: true
             });
@@ -429,5 +423,7 @@ export class UsuarioService {
     }
     return dateElemento;
   }
-
+  //.pipe(
+  //  catchError(this.handleError<protocolo_LE_Modelo>('addProtocoloLE'))
+  //  );
 }
