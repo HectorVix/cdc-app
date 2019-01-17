@@ -11,6 +11,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CaracterizacionService {
+  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
+  }
+  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
+  }
 }

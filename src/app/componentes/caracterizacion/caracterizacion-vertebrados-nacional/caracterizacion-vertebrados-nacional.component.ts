@@ -6,7 +6,8 @@ import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo
 import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { CaracterizacionService } from '../../../servicios/caracterizacion/caracterizacion.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -18,9 +19,9 @@ import { debounceTime } from 'rxjs/operators';
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   caracterizacionVertebradosNacional: FormGroup;
   cVertebradoPruebas: FormGroup;
-  data_Distribucion1=[];
-  data_Distribucion2=[];
- 
+  data_Distribucion1 = [];
+  data_Distribucion2 = [];
+
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -56,7 +57,10 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private usuarioService: UsuarioService, ) {
+  constructor(private fb: FormBuilder,
+    private dialog: MatDialog,
+    private caracterizacionServicio: CaracterizacionService,
+    private fechaServicio: FechaService) {
     this.crearForm_caracterizacionVertebradosNacional();
   }
 
@@ -189,7 +193,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       distribucionBase.statsubnac = data_distribucion1.statsubnac;
       distribucion1.push(distribucionBase);
     });
-    
+
     this.data_Distribucion2.forEach(data_distribucion2 => {
       var distribucionBase2 = new distribucion2_Modelo();
       distribucionBase2.codecoregn = data_distribucion2.codecoregn;
@@ -205,17 +209,17 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
   }
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
-    datos.fechaaepeu = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('fechaaepeu').value);
-    datos.ediciong = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('ediciong').value);
-    datos.actualizag = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('actualizag').value);
-    datos.edicionn = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('edicionn').value);
-    datos.actualizan = this.usuarioService.toFormato(this.caracterizacionVertebradosNacional.get('actualizan').value);
+    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('fechaaepeu').value);
+    datos.ediciong = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('ediciong').value);
+    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('actualizag').value);
+    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('edicionn').value);
+    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('actualizan').value);
     return datos;
   }
   //agrega un nuevo registro de caracterizacion de vertebrado nacional
   addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): void {
     this.loading = true;
-    this.usuarioService.addCaracterizacionVertebrado(caracterizacion)
+    this.caracterizacionServicio.addCaracterizacionVertebrado(caracterizacion)
       .subscribe(
         resVertebrado => {
           this.loading = false;

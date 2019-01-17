@@ -13,10 +13,10 @@
       <img src="iconos/elemento.ico"> Elemento
     </a>
     <a [matMenuTriggerFor]="resumen">
-      <img src="iconos/resumen.ico"> Resumenes Espécimen
+      <img src="iconos/resumen.ico"> Resumenes caracterizar
     </a>
     <a [matMenuTriggerFor]="depto">
-      <img src="iconos/ruta.ico"> Sitios y Areas
+      <img src="iconos/ruta.ico"> Sitios y áreas
     </a>
     <a [routerLink]="['/perfil']">
       <img src="iconos/perfil.ico"> Perfil
@@ -45,7 +45,7 @@
 </mat-menu>
 <mat-menu #resumen="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="reportes">Reportes</button>
-  <button mat-menu-item [routerLink]="['/resumen']">Resumen</button>
+  <button mat-menu-item [routerLink]="['/caracterizacion']">Caracterización</button>
 </mat-menu>
 <mat-menu #reportes="matMenu">
   <button mat-menu-item>Fuente</button>

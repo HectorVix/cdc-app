@@ -6,7 +6,8 @@ import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo
 import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { CaracterizacionService } from '../../../servicios/caracterizacion/caracterizacion.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
 
@@ -55,7 +56,9 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
 
   data_distribucion = [];
   data_distribucion2 = [];
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private caracterizacionServicio: CaracterizacionService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional();
   }
@@ -275,7 +278,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       distribucionBase.statsubnac = data_distribucion1.statsubnac;
       distribucion.push(distribucionBase);
     });
-    
+
     this.data_distribucion2.forEach(data_distribucion2 => {
       var distribucionBase2 = new distribucion2_Modelo();
       distribucionBase2.codecoregn = data_distribucion2.codecoregn;
@@ -292,14 +295,14 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   }
 
   setPlanta(datos: planta_Modelo): planta_Modelo {
-    datos.edicionn = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('edicionn').value);
-    datos.actualizan = this.usuarioService.toFormato(this.caracterizacionPlantasNacionalForm.get('actualizan').value);
+    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionPlantasNacionalForm.get('edicionn').value);
+    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionPlantasNacionalForm.get('actualizan').value);
     return datos;
   }
   //agrega un nuevo registro de caracterizacion de planta
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): void {
     this.loading = true;
-    this.usuarioService.addCaracterizacionPlanta(caracterizacion)
+    this.caracterizacionServicio.addCaracterizacionPlanta(caracterizacion)
       .subscribe(
         resPlanta => {
           this.loading = false;

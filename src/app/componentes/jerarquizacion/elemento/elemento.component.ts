@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -57,7 +59,10 @@ export class ElementoComponent implements OnInit {
   data_resFoto: any;
   tam_Inicial_ListaFotos = 0;
   fotoId_Lista = [];
-  constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder, private fb2: FormBuilder,
+    private elementoServicio: ElementoService,
+    private galeriaServicio: GaleriaService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearForm_Elemento();
     this.crearForm_Buscar();
@@ -92,7 +97,7 @@ export class ElementoComponent implements OnInit {
       'nombrecomun': row.nombrecomun,
       'nombrecientifico': row.nombrecientifico,
       'comentario': row.comentario,
-      'fecha': this.usuarioService.getFecha(row.fecha),
+      'fecha': this.fechaServicio.getFecha(row.fecha),
     });
     this.selected.setValue(0);
     this.galeria.nuevo();
@@ -103,7 +108,7 @@ export class ElementoComponent implements OnInit {
 
   getFoto_Datos(elementoId: String) {
     const date = new Date().valueOf();
-    this.usuarioService.getDatosFotos(elementoId).subscribe(
+    this.galeriaServicio.getDatosFotos(elementoId).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inical de la lista de fotos guardadas
@@ -166,18 +171,18 @@ export class ElementoComponent implements OnInit {
       this.changeSuccessMessage('El código del elemento es obligatorio.', 'primary');
   }
   setElemento(elemento): elemento_Modelo {
-    elemento.fecha = this.usuarioService.toFormatoDateTime(elemento.fecha);
+    elemento.fecha = this.fechaServicio.toFormatoDateTime(elemento.fecha);
     return elemento;
   }
   updateElemento(elemento: elemento_Modelo): void {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    this.usuarioService.editarElemento(elemento, decodedToken.jti)
+    this.elementoServicio.editarElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
           if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
-            this.usuarioService.update_FotoId_Lista(
+            this.galeriaServicio.update_FotoId_Lista(
               this.galeria.archivos,
               this.galeria.datosFotografias,
               elemento.elementoId,
@@ -201,12 +206,12 @@ export class ElementoComponent implements OnInit {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    this.usuarioService.addElemento(elemento, decodedToken.jti)
+    this.elementoServicio.addElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
           if (this.galeria.archivos.size > 0) {
             var elemento_id = resElemento.elementoId;
-            this.usuarioService.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
           }
           else {
             this.loading = false;
@@ -240,7 +245,7 @@ export class ElementoComponent implements OnInit {
       nombrecomun = this.buscarForm.get('nombrecomun').value;
     if (this.buscarForm.get('nombrecientifico').value)
       nombrecientifico = this.buscarForm.get('nombrecientifico').value;
-    this.usuarioService.getElementos(codigo, nombrecomun, nombrecientifico)
+    this.elementoServicio.getElementos(codigo, nombrecomun, nombrecientifico)
       .subscribe(
         data => {
           this.dataElementos = data;

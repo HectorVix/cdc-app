@@ -15,11 +15,11 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-formulario-jerarquizacion',
-  templateUrl: './formulario-jerarquizacion.component.html',
-  styleUrls: ['./formulario-jerarquizacion.component.scss']
+  selector: 'app-formulario-jerarquizacion-elemento-nacional',
+  templateUrl: './formulario-jerarquizacion-elemento-nacional.component.html',
+  styleUrls: ['./formulario-jerarquizacion-elemento-nacional.component.scss']
 })
-export class FormularioJerarquizacionComponent implements OnInit {
+export class FormularioJerarquizacionElementoNacionalComponent implements OnInit {
 
   criterio_Jeraquizacion = new criterio_Jerarquizacion();
   criterio_nlestim = this.criterio_Jeraquizacion.lgn_lestim;

@@ -7,7 +7,9 @@ import { debounceTime } from 'rxjs/operators';
 import { DISABLED } from '@angular/forms/src/model';
 import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/select/overview-rastreo';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { RastreoService } from '../../../servicios/rastreo/rastreo.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
@@ -56,7 +58,10 @@ export class FormularioReComponent implements OnInit {
   guardar = false;
 
   constructor(
-    private fb: FormBuilder, private usuarioService: UsuarioService,
+    private fb: FormBuilder,
+    private rastreoServicio: RastreoService,
+    private fechaServicio: FechaService,
+    private elementoServicio: ElementoService,
     private dialog: MatDialog, private fb2: FormBuilder) {
     this.crearFormRastreoElemento();
     this.crearForm_Buscar();
@@ -92,20 +97,20 @@ export class FormularioReComponent implements OnInit {
       this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
   }
   setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
-    datos.fecharevrg = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrg').value);
-    datos.fechaaepeu = this.usuarioService.toFormatoDateTime(this.reForm.get('fechaaepeu').value);
-    datos.fecharevrn = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrn').value);
-    datos.fecharevrs = this.usuarioService.toFormatoDateTime(this.reForm.get('fecharevrs').value);
-    datos.actualizag = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizag').value);
-    datos.actualizan = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizan').value);
-    datos.actualizas = this.usuarioService.toFormatoDateTime(this.reForm.get('actualizas').value);
+    datos.fecharevrg = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrg').value);
+    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.reForm.get('fechaaepeu').value);
+    datos.fecharevrn = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrn').value);
+    datos.fecharevrs = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrs').value);
+    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizag').value);
+    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizan').value);
+    datos.actualizas = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizas').value);
     return datos;
   }
 
   //agrega un nuevo registro rastreo elemento
   addRastroeElemento(rastreoElemento: rastreo_Elemento_Modelo): void {
     this.loading = true;
-    this.usuarioService.addRastreoElemento(rastreoElemento)
+    this.rastreoServicio.addRastreoElemento(rastreoElemento)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -201,7 +206,7 @@ export class FormularioReComponent implements OnInit {
   }
   ValidarElementoCodigoe(codigoe: String): Boolean {
     var valido = false;
-    this.usuarioService.validarElementoCodigoe(codigoe)
+    this.elementoServicio.validarElementoCodigoe(codigoe)
       .subscribe(
         resElemento => {
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
@@ -273,7 +278,7 @@ export class FormularioReComponent implements OnInit {
       d = this.buscarForm.get('nombren').value;
     if (this.buscarForm.get('nombrecomunnn').value)
       e = this.buscarForm.get('nombrecomunnn').value;
-    this.usuarioService.getRastreoElemento(a, b, c, d, e)
+    this.rastreoServicio.getRastreoElemento(a, b, c, d, e)
       .subscribe(
         data => {
           this.dataRatreoElemento = data;
@@ -338,11 +343,11 @@ export class FormularioReComponent implements OnInit {
       'comtaxn': re.comtaxn,
       //status (global)
       'rangog': re.rangog,
-      'fecharevrg': this.usuarioService.getFecha(re.fecharevrg),
+      'fecharevrg': this.fechaServicio.getFecha(re.fecharevrg),
       'formularg': re.formularg,
       'resprg': re.resprg,
       'aepeu': re.aepeu,
-      'fechaaepeu': this.usuarioService.getFecha(re.fechaaepeu),
+      'fechaaepeu': this.fechaServicio.getFecha(re.fechaaepeu),
       'cites': re.cites,
       'iucn': re.iucn,
       'planscons': re.planscons,
@@ -354,7 +359,7 @@ export class FormularioReComponent implements OnInit {
       'endemismo': re.endemismo,
       //status (nacional)
       'rangon': re.rangon,
-      'fecharevrn': this.usuarioService.getFecha(re.fecharevrn),
+      'fecharevrn': this.fechaServicio.getFecha(re.fecharevrn),
       'formularn': re.formularn,
       'rastreolen': re.rastreolen,
       'lestimn': re.lestimn,
@@ -365,7 +370,7 @@ export class FormularioReComponent implements OnInit {
       'transparencian': "" + re.transparencian,
       //status (subnacional)
       'rangos': re.rangos,
-      'fecharevrs': this.usuarioService.getFecha(re.fecharevrs),
+      'fecharevrs': this.fechaServicio.getFecha(re.fecharevrs),
       'formulars': re.formulars,
       'rastreoles': re.rastreoles,
       'lestims': re.lestims,
@@ -383,9 +388,9 @@ export class FormularioReComponent implements OnInit {
       // manteniiento del registro
       'codfuenten': re.codfuenten,
       'codfuentes': re.codfuentes,
-      'actualizag': this.usuarioService.getFecha(re.actualizag),
-      'actualizan': this.usuarioService.getFecha(re.actualizan),
-      'actualizas': this.usuarioService.getFecha(re.actualizas)
+      'actualizag': this.fechaServicio.getFecha(re.actualizag),
+      'actualizan': this.fechaServicio.getFecha(re.actualizan),
+      'actualizas': this.fechaServicio.getFecha(re.actualizas)
     });
   }
   nuevo() {
@@ -397,7 +402,7 @@ export class FormularioReComponent implements OnInit {
   }
   updateRastreoElemento(re: rastreo_Elemento_Modelo): void {
     this.loading = true;
-    this.usuarioService.editarRastreoElemento(re)
+    this.rastreoServicio.editarRastreoElemento(re)
       .subscribe(
         resRe => {
           this.loading = false;

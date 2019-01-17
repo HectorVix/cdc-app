@@ -5,7 +5,9 @@ import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { LocalizacionService } from '../../../servicios/localizacion/localizacion.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service'; 
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
 import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
@@ -62,7 +64,10 @@ export class FormularioLeComponent implements OnInit {
   editar = true;
   guardar = false;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private localizacionServicio: LocalizacionService,
+    private elementoServicio: ElementoService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog, private fb2: FormBuilder) {
     this.crearFormLocalizacion_Elemento();
     this.crearForm_Buscar();
@@ -193,19 +198,19 @@ export class FormularioLeComponent implements OnInit {
     this.addLocalizacionElemento(localizacionElementoBase);
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
-    datos.fechaeva = this.usuarioService.toFormatoDateTime(this.leForm.get('fechaeva').value);
-    datos.ultobs = this.usuarioService.toFormatoDateTime(this.leForm.get('ultobs').value);
-    datos.fecharangole = this.usuarioService.toFormatoDateTime(this.leForm.get('fecharangole').value);
-    datos.transcrito = this.usuarioService.toFormatoDateTime(this.leForm.get('transcrito').value);
-    datos.cartografo = this.usuarioService.toFormatoDateTime(this.leForm.get('cartografo').value);
-    datos.actualizar = this.usuarioService.toFormatoDateTime(this.leForm.get('actualizar').value);
+    datos.fechaeva = this.fechaServicio.toFormatoDateTime(this.leForm.get('fechaeva').value);
+    datos.ultobs = this.fechaServicio.toFormatoDateTime(this.leForm.get('ultobs').value);
+    datos.fecharangole = this.fechaServicio.toFormatoDateTime(this.leForm.get('fecharangole').value);
+    datos.transcrito = this.fechaServicio.toFormatoDateTime(this.leForm.get('transcrito').value);
+    datos.cartografo = this.fechaServicio.toFormatoDateTime(this.leForm.get('cartografo').value);
+    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.leForm.get('actualizar').value);
     return datos;
   }
 
   //agrega un nuevo registro localización elemento
   addLocalizacionElemento(localizacion: Localizacion_Modelo): void {
     this.loading = true;
-    this.usuarioService.addLocalizacionElemento(localizacion)
+    this.localizacionServicio.addLocalizacionElemento(localizacion)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -265,7 +270,7 @@ export class FormularioLeComponent implements OnInit {
       nombres = this.buscarForm.get('nombres').value;
     if (this.buscarForm.get('nomcomuns').value)
       nomcomuns = this.buscarForm.get('nomcomuns').value;
-    this.usuarioService.getLocalizacionElemento(codigole)
+    this.localizacionServicio.getLocalizacionElemento(codigole)
       .subscribe(
         data => {
           this.dataLE = data;
@@ -329,11 +334,11 @@ export class FormularioLeComponent implements OnInit {
       'ecoregion': row.ecoregion,
       'cuenca': row.cuenca,
       //status
-      'fechaeva': this.usuarioService.getFecha(row.fechaeva),
-      'ultobs': this.usuarioService.getFecha(row.ultobs),
+      'fechaeva': this.fechaServicio.getFecha(row.fechaeva),
+      'ultobs': this.fechaServicio.getFecha(row.ultobs),
       'priobs': row.priobs,
       'rangole': row.rangole,
-      'fecharangole': this.usuarioService.getFecha(row.fecharangole),
+      'fecharangole': this.fechaServicio.getFecha(row.fecharangole),
       'comrangole': row.comrangole,
       //'resprg': '',
       'datosle': row.datosle,
@@ -376,11 +381,11 @@ export class FormularioLeComponent implements OnInit {
       'codfuente': row.codfuente,
 
       'mdrev': "" + row.mdrev,
-      'transcrito': this.usuarioService.getFecha(row.transcrito),
+      'transcrito': this.fechaServicio.getFecha(row.transcrito),
       'cc': "" + row.cc,
-      'cartografo': this.usuarioService.getFecha(row.cartografo),
+      'cartografo': this.fechaServicio.getFecha(row.cartografo),
       'respdatos': row.respdatos,
-      'actualizar': this.usuarioService.getFecha(row.actualizar)
+      'actualizar': this.fechaServicio.getFecha(row.actualizar)
 
     });
   }
@@ -404,7 +409,7 @@ export class FormularioLeComponent implements OnInit {
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): void {
     this.loading = true;
-    this.usuarioService.editarLocalizacionElemento(le)
+    this.localizacionServicio.editarLocalizacionElemento(le)
       .subscribe(
         resLe => {
           this.loading = false;

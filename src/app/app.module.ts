@@ -13,7 +13,7 @@ import { LoginPageComponent } from './componentes/login-page/login-page.componen
 import { NotFoundPageComponent } from './componentes/not-found-page/not-found-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormularioResumenFuenteComponent } from './componentes/fuente/formulario-resumen-fuente/formulario-resumen-fuente.component';
-import { UsuarioService } from './servicios/usuario.service';
+import { UsuarioService } from './servicios/usuario/usuario.service';
 import { FuenteService } from './servicios/fuente/fuente.service';
 import { ElementoService } from './servicios/elemento/elemento.service';
 import { JerarquizacionService } from './servicios/jerarquizacion/jerarquizacion.service';
@@ -25,7 +25,7 @@ import { AreaService } from './servicios/area/area.service';
 import { ContactoService } from './servicios/contacto/contacto.service';
 import { FechaService } from './servicios/fecha/fecha.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
-import { FormularioJerarquizacionComponent } from './componentes/jerarquizacion/formulario-jerarquizacion/formulario-jerarquizacion.component';
+import { FormularioJerarquizacionElementoNacionalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-nacional/formulario-jerarquizacion-elemento-nacional.component';
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
 import { FormularioReComponent } from './componentes/rastreo-elemento/formulario-re/formulario-re.component';
 import { LocalizacionElementoComponent } from './componentes/localizacion-elemento/localizacion-elemento.component';
@@ -38,9 +38,9 @@ import { RegistroSitioComponent } from './componentes/sitios/registro-sitio/regi
 import { FormularioAreasManejadasComponent } from './componentes/areas-manejadas/formulario-areas-manejadas/formulario-areas-manejadas.component';
 import { ContactosComponent } from './componentes/contactos/contactos.component';
 import { FormularioContactosComponent } from './componentes/contactos/formulario-contactos/formulario-contactos.component';
-import { ResumenComponent } from './componentes/resumen/resumen.component';
-import { CaracterizacionPlantasNacionalComponent } from './componentes/resumen/caracterizacion-plantas-nacional/caracterizacion-plantas-nacional.component';
-import { CaracterizacionVertebradosNacionalComponent } from './componentes/resumen/caracterizacion-vertebrados-nacional/caracterizacion-vertebrados-nacional.component';
+import { CaracterizacionComponent } from './componentes/caracterizacion/caracterizacion.component';
+import { CaracterizacionPlantasNacionalComponent } from './componentes/caracterizacion/caracterizacion-plantas-nacional/caracterizacion-plantas-nacional.component';
+import { CaracterizacionVertebradosNacionalComponent } from './componentes/caracterizacion/caracterizacion-vertebrados-nacional/caracterizacion-vertebrados-nacional.component';
 import { FormularioJerarquizacionElementoGlobalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-global/formulario-jerarquizacion-elemento-global.component';
 import { FormularioJerarquizacionElementoSubnacionalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-subnacional/formulario-jerarquizacion-elemento-subnacional.component';
 import { ProtocoloLeComponent } from './componentes/localizacion-elemento/protocolo-le/protocolo-le.component';
@@ -76,7 +76,7 @@ import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
     NotFoundPageComponent,
     FormularioResumenFuenteComponent,
     JerarquizacionComponent,
-    FormularioJerarquizacionComponent,
+    FormularioJerarquizacionElementoNacionalComponent,
     RastreoElementoComponent,
     FormularioReComponent,
     LocalizacionElementoComponent,
@@ -88,7 +88,7 @@ import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
     FormularioAreasManejadasComponent,
     ContactosComponent,
     FormularioContactosComponent,
-    ResumenComponent,
+    CaracterizacionComponent,
     CaracterizacionPlantasNacionalComponent,
     CaracterizacionVertebradosNacionalComponent,
     FormularioJerarquizacionElementoGlobalComponent,

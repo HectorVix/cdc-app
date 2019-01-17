@@ -5,7 +5,8 @@ import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { FuenteService } from '../../../servicios/fuente/fuente.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -58,7 +59,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   selected = new FormControl(0);
   editar = true;
   guardar = false;
-  constructor(private fb: FormBuilder, private usuarioServicio: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private fuenteServicio: FuenteService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog,
     private fb2: FormBuilder) {
     this.crearForm_ResumenesFuente();
@@ -128,7 +131,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   cargarArchivos(fuenteId: Number) {
     this.cargando = true;
-    this.progreso = this.usuarioServicio.cargarArchivos(this.archivos, fuenteId);
+    this.progreso = this.fuenteServicio.cargarArchivos(this.archivos, fuenteId);
     let allProgressObservables = [];
     for (let key in this.progreso) {
       allProgressObservables.push(this.progreso[key].progreso);
@@ -199,8 +202,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
       fuente.otros = true;
     else
       fuente.otros = false;
-    fuente.actualizar = this.usuarioServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
-    fuente.control = this.usuarioServicio.toFormatoDateTime(this.fuenteForm.get('control').value);
+    fuente.actualizar = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
+    fuente.control = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('control').value);
     return fuente;
   }
   //agrega una nueva fuente
@@ -208,7 +211,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    this.usuarioServicio.addFuente(fuente, decodedToken.jti)
+    this.fuenteServicio.addFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
           this.cargarArchivos(resFuente.fuenteId);
@@ -270,7 +273,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       e = this.buscarForm.get('clave').value;
     console.log('buscar:', a, b, c, d, e);
 
-    this.usuarioServicio.getFuente(b, a, c, d, e)
+    this.fuenteServicio.getFuente(b, a, c, d, e)
       .subscribe(
         data => {
           this.dataFuente = data;
@@ -325,8 +328,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'clave': row.clave,
       'comentario': row.comentario,
       'notadigest': row.notadigest,
-      'actualizar': this.usuarioServicio.getFecha(row.actualizar),
-      'control': this.usuarioServicio.getFecha(row.control),
+      'actualizar': this.fechaServicio.getFecha(row.actualizar),
+      'control': this.fechaServicio.getFecha(row.control),
       'bcd': row.bcd
     });
   }
@@ -363,7 +366,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    this.usuarioServicio.editarFuente(fuente, decodedToken.jti)
+    this.fuenteServicio.editarFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
           this.loading = false;

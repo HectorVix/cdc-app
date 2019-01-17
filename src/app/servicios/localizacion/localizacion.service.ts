@@ -12,6 +12,20 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LocalizacionService {
+  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  //Obtener Localización del Elemento por codigole, nombres, nomcomuns
+  getLocalizacionElemento(a: String): Observable<Localizacion_Modelo> {
+    return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
+  }
+  addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  }
+  addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
+    return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
+  }
+  editarLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
+    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
+  }
 }

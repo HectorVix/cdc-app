@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { LocalizacionService } from '../../../servicios/localizacion/localizacion.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 // import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -42,7 +43,9 @@ export class ProtocoloLeComponent implements OnInit {
 
     }
   };
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private localizacionServicio: LocalizacionService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearForm_ProtocoloLe();
   }
@@ -69,7 +72,7 @@ export class ProtocoloLeComponent implements OnInit {
   guardarProtocolo() {
     var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
     var dispersionLista: Array<dispersion_Modelo> = new Array();
-   this.data_dispersion.forEach(data_dispersion => {
+    this.data_dispersion.forEach(data_dispersion => {
       var dispersionBase = new dispersion_Modelo();
       dispersionBase.le = data_dispersion.le;
       dispersionBase.nommapanummarg = data_dispersion.nommapanummarg;
@@ -78,18 +81,18 @@ export class ProtocoloLeComponent implements OnInit {
       dispersionBase.ultobs = data_dispersion.ultobs;
       dispersionLista.push(dispersionBase);
     });
-    
+
     protocoloLE_Base.dispersionList = dispersionLista;
-    this.addLocalizacionElemento(protocoloLE_Base);
+    this.addProtocoloLocalizacionElemento(protocoloLE_Base);
   }
   setProtocoloLE(protocoloLe): protocolo_LE_Modelo {
-    protocoloLe.fecha = this.usuarioService.toFormatoDateTime(protocoloLe.fecha);
+    protocoloLe.fecha = this.fechaServicio.toFormatoDateTime(protocoloLe.fecha);
     return protocoloLe;
   }
   //agrega un nuevo registro localización elemento
-  addLocalizacionElemento(protocoloLE: protocolo_LE_Modelo): void {
+  addProtocoloLocalizacionElemento(protocoloLE: protocolo_LE_Modelo): void {
     this.loading = true;
-    this.usuarioService.addProtocoloLE(protocoloLE)
+    this.localizacionServicio.addProtocoloLE(protocoloLE)
       .subscribe(
         resProtocoloLE => {
           this.loading = false;

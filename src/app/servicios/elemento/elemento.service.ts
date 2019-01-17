@@ -18,4 +18,13 @@ export class ElementoService {
   validarElementoCodigoe(codigoe: String) {
     return this.http.get<elemento_Modelo>(this.rootUrl + '/elemento/validar/' + codigoe);
   }
+  getElementos(codigo: String, nombrecomun, nombrecientifico) {
+    return this.http.get(this.rootUrl + '/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);
+  }
+  addElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/registro/' + jti, elemento, httpOptions);
+  }
+  editarElemento(elemento: elemento_Modelo, jti: String): Observable<elemento_Modelo> {
+    return this.http.post<elemento_Modelo>(this.rootUrl + '/elemento/editar/' + jti, elemento, httpOptions);
+  }
 }

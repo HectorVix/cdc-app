@@ -11,6 +11,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContactoService {
+  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  addContacto(contacto: contacto_Modelo, jti: Number): Observable<contacto_Modelo> {
+    return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions);
+  }
 }

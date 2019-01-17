@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { ContactoService } from '../../../servicios/contacto/contacto.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
@@ -24,7 +25,9 @@ export class FormularioContactosComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
 
-  constructor(private fb: FormBuilder, private fb2: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder, private fb2: FormBuilder,
+    private contactoServicio: ContactoService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearForm_contactos();
   }
@@ -133,14 +136,14 @@ export class FormularioContactosComponent implements OnInit {
     this.addContacto(contactoBase);
   }
   setContacto(contacto: contacto_Modelo): contacto_Modelo {
-    contacto.actualizar = this.usuarioService.toFormatoDateTime(this.contactosForm.get('actualizar').value);
+    contacto.actualizar = this.fechaServicio.toFormatoDateTime(this.contactosForm.get('actualizar').value);
     return contacto;
   }
   addContacto(contacto: contacto_Modelo): void {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    this.usuarioService.addContacto(contacto, decodedToken.jti)
+    this.contactoServicio.addContacto(contacto, decodedToken.jti)
       .subscribe(
         resContacto => {
           this.loading = false;

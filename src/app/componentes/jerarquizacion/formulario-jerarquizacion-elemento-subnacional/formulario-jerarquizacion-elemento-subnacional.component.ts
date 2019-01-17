@@ -4,7 +4,9 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
 import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
@@ -29,7 +31,10 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private jerarquizacionServicio: JerarquizacionService,
+    private elementoServicio: ElementoService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crear_Jerarquizacion_Subnacional();
   }
@@ -91,15 +96,15 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   //setear datos jerarquizacion subnacioal
   setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo): jerarquizacion_Subnacional_Modelo {
-    datos.fecharevrs = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
-    datos.edicion = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('edicion').value);
-    datos.actualizar = this.usuarioService.toFormato(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
+    datos.fecharevrs = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
+    datos.edicion = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('edicion').value);
+    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion subnacional
   addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
     this.loading = true;
-    this.usuarioService.addJerarquizacionSubnacional(jerarquizacion)
+    this.jerarquizacionServicio.addJerarquizacionSubnacional(jerarquizacion)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -116,7 +121,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
     var elemento: elemento_Modelo;
-    this.usuarioService.validarElementoCodigoe(codigoe)
+    this.elementoServicio.validarElementoCodigoe(codigoe)
       .subscribe(
         resElemento => {
           elemento = resElemento;

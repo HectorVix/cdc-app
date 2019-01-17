@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
-import { UsuarioService } from '../../../servicios/usuario.service';
+import { AreaService } from '../../../servicios/area/area.service';
+import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { area_Modelo } from '../../../modelo/area/area-modelo';
 import { listaElemento_Modelo } from '../../../modelo/area/listaElemento-modelo';
@@ -14,7 +15,7 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./formulario-areas-manejadas.component.scss']
 })
 export class FormularioAreasManejadasComponent implements OnInit {
-  data_listaElemento=[];
+  data_listaElemento = [];
   areaManejoForm: FormGroup;
   criterio_areasManejadas = new criterio_areasManejadas();
   criterio_protasign = this.criterio_areasManejadas.protasign;
@@ -51,7 +52,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,
+  constructor(private fb: FormBuilder,
+    private areaServicio: AreaService,
+    private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crear_areaManejoForm();
   }
@@ -133,26 +136,26 @@ export class FormularioAreasManejadasComponent implements OnInit {
 
     this.data_listaElemento.forEach(data_listaElemento => {
       var listaElementoBase = new listaElemento_Modelo();
-      listaElementoBase.codigoe=data_listaElemento.codigoe;
-      listaElementoBase.nombres=data_listaElemento.nombres;
-      listaElementoBase.status=data_listaElemento.status;
-      listaElementoBase.codfuente=data_listaElemento.codfuente;
+      listaElementoBase.codigoe = data_listaElemento.codigoe;
+      listaElementoBase.nombres = data_listaElemento.nombres;
+      listaElementoBase.status = data_listaElemento.status;
+      listaElementoBase.codfuente = data_listaElemento.codfuente;
       listaElemento.push(listaElementoBase);
     });
 
-    areasManejadasBase.listaElementoList=listaElemento;
+    areasManejadasBase.listaElementoList = listaElemento;
     this.addArea(areasManejadasBase);
 
   }
   setAreasManejadas(datos: area_Modelo): area_Modelo {
-    datos.fechaesta = this.usuarioService.toFormato(this.areaManejoForm.get('fechaesta').value);
-    datos.actualizar = this.usuarioService.toFormato(this.areaManejoForm.get('actualizar').value);
+    datos.fechaesta = this.fechaServicio.toFormato(this.areaManejoForm.get('fechaesta').value);
+    datos.actualizar = this.fechaServicio.toFormato(this.areaManejoForm.get('actualizar').value);
     return datos;
   }
   //agrega una nueva area
   addArea(area: area_Modelo): void {
     this.loading = true;
-    this.usuarioService.addArea(area)
+    this.areaServicio.addArea(area)
       .subscribe(
         resElemento => {
           this.loading = false;

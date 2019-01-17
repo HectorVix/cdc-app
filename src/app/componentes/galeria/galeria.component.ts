@@ -23,7 +23,7 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
 import { FooterRowOutlet } from '@angular/cdk/table';
-import { UsuarioService } from '../../servicios/usuario.service';
+import { FechaService } from '../../servicios/fecha/fecha.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -58,7 +58,8 @@ export class GaleriaComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
-  constructor(private galleryService: GalleryService, private usuarioService: UsuarioService, ) {
+  constructor(private galleryService: GalleryService,
+    private fechaServicio: FechaService) {
   }
 
   ngOnInit() {
@@ -253,7 +254,7 @@ export class GaleriaComponent implements OnInit {
                 descripcion: baseFotoModelo.descripcion,
                 comentario: baseFotoModelo.comentario,
                 autor: baseFotoModelo.autor,
-                fecha: this.usuarioService.getFecha(baseFotoModelo.fecha),
+                fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
                 editado: true
               };
               ordenNuevo = ordenNuevo + 1;
@@ -284,7 +285,7 @@ export class GaleriaComponent implements OnInit {
       this.descripcion = datoFotoModeloActual.descripcion;
       this.comentario = datoFotoModeloActual.comentario;
       this.autor = datoFotoModeloActual.autor;
-      this.fecha = this.usuarioService.getFecha(datoFotoModeloActual.fecha);
+      this.fecha = this.fechaServicio.getFecha(datoFotoModeloActual.fecha);
     }
   }
 
@@ -389,7 +390,7 @@ export class GaleriaComponent implements OnInit {
       descripcion: fotoModelo.descripcion,
       comentario: fotoModelo.comentario,
       autor: fotoModelo.autor,
-      fecha: this.usuarioService.getFecha(fotoModelo.fecha),
+      fecha: this.fechaServicio.getFecha(fotoModelo.fecha),
       editado: true
     };
   }
@@ -463,7 +464,7 @@ export class GaleriaComponent implements OnInit {
     this.descripcion = descripcion;
     this.comentario = comentario;
     this.autor = autor;
-    this.fecha = this.usuarioService.getFecha(fecha);
+    this.fecha = this.fechaServicio.getFecha(fecha);
   }
   public nuevo() {
     this.archivo.nativeElement.value = "";

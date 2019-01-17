@@ -11,6 +11,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AreaService {
+  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  addArea(area: area_Modelo): Observable<area_Modelo> {
+    return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
+  }
 }
