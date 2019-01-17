@@ -11,6 +11,7 @@ import { macsitio_Modelo } from '../../../modelo/sitio/macsitio-modelo';
 import { subdivision_Modelo } from '../../../modelo/sitio/subdivision-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material';
+import { sitio_FormGroup } from '../../../modelo/formGroup/sitio';
 
 
 @Component({
@@ -77,7 +78,7 @@ export class RegistroSitioComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
   }
   crearFormSitio() {
-    this.sitioForm = this.fb.group({
+    /*this.sitioForm = this.fb.group({
       //página1
       //identificadores
       'codsitio': ['', Validators.required],
@@ -141,7 +142,10 @@ export class RegistroSitioComponent implements OnInit {
       //mantenimiento del registro
       'respdatos': '',
       'actualizar': ''
-    });
+    });*/
+    //var sitioFormAux = new sitio_FormGroup();
+    this.sitioForm = new sitio_FormGroup().getSitioFormGrup(new sitio_Modelo());
+
   }
   crearFormBuscar() {
     this.buscarForm = this.fb2.group({
