@@ -16,10 +16,14 @@ export class SitioService {
 
   constructor(private http: HttpClient) { }
 
-  getSitio(a: String, b: String, c: String, d: String): Observable<sitio_Modelo> {
-    return this.http.get<sitio_Modelo>(this.rootUrl + '/sitio/buscar/' + a + '/' + b + '/' + c + '/' + d);
+  //Obtener Sitio por codigoSitio, nombreSitio, sinonimoSitio, nación y departamento
+  getSitio(a: String, b: String, c: String, d: String, e: String): Observable<sitio_Modelo> {
+    return this.http.get<sitio_Modelo>(this.rootUrl + '/sitio/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   addSitio(sitio: sitio_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/sitio/registro', sitio, httpOptions);
+  }
+  updateSitio(sitio: sitio_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/sitio/editar', sitio, httpOptions);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
@@ -10,9 +10,10 @@ import { respuesta_cdc_Modelo } from '../../../modelo/respuestaServicio/respuest
 import { macsitio_Modelo } from '../../../modelo/sitio/macsitio-modelo';
 import { subdivision_Modelo } from '../../../modelo/sitio/subdivision-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
 import { sitio_FormGroup } from '../../../modelo/formGroup/sitio';
-
+//--------------tabla------------------------------------
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { sitio_Dato } from '../../../modelo/tabla/sitio-dato'
 
 @Component({
   selector: 'app-registro-sitio',
@@ -62,12 +63,28 @@ export class RegistroSitioComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-  constructor(private fb: FormBuilder, private fb2: FormBuilder,
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigoSitio', 'nombreSitio', 'sinonimoSitio', 'nacion', 'depto'];
+  dataSource: MatTableDataSource<sitio_Dato>;
+  lista_Sitio: Array<sitio_Dato> = new Array();
+  dataSitio: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  editar = true;
+  guardar = false;
+
+  constructor(private fb: FormBuilder,
     private sitioServicio: SitioService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crearFormSitio();
+    this.crearFormSitio(new sitio_Modelo());
     this.crearFormBuscar();
+    this.dataSource = new MatTableDataSource(this.lista_Sitio);
   }
 
   ngOnInit() {
@@ -77,81 +94,28 @@ export class RegistroSitioComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
   }
-  crearFormSitio() {
-    /*this.sitioForm = this.fb.group({
-      //página1
-      //identificadores
-      'codsitio': ['', Validators.required],
-      'nomsitio': '',
-      'sinsitio': '',
-      //localizadores
-      'nacion': '',
-      'subnacion': '',
-      'siteresp': '',
-      'lat': '',
-      'long1': '',
-      'coords': '',
-      'coordn': '',
-      'coorde': '',
-      'coordo': '',
-      'direccion': '',
-      //descripción del sitio/diseño
-      'descrito': '',
-      'mapasitio': '',
-      'fechamapa': '',
-      'dibujante': '',
-      'justlimite': '',
-      'areaprisec1': '',
-      'areaprisec2': '',
-      'areapri1': '',
-      'areapri2': '',
-      'areatotal1': '',
-      'areatotal2': '',
-      'comsitio': '',
-      //importancia del sitio
-      'rangoant': '',
-      'comrango': '',
-      'impdivbiol': '',
-      'comdivbiol': '',
-      'impnodivbiol': '',
-      'comnodivbiol': '',
-      'urgencia': '',
-      'comurgencia': '',
-      //bienes raíces y portección
-      'intenccons': '',
-      'numlotes': '',
-      'costestprot1': '',
-      'costestprot2': '',
-      'coddesig': '',
-      'designacion': '',
-      'comprot': '',
-      //administración
-      'comusotierra': '',
-      'compeligrnat': '',
-      'comexoticas': '',
-      'usotierraf': '',
-      'necinform': '',
-      'necmanejo': '',
-      'comam': '',
-      //campos opcionales
-      'rbsopc1': '',
-      'rbsopc2': '',
-      'rbsopc3': '',
-      'rbsopc4': '',
-      'rbsopc5': '',
-      //mantenimiento del registro
-      'respdatos': '',
-      'actualizar': ''
-    });*/
-    //var sitioFormAux = new sitio_FormGroup();
-    this.sitioForm = new sitio_FormGroup().getSitioFormGrup(new sitio_Modelo());
-
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  crearFormSitio(sitio: sitio_Modelo) {
+    this.sitioForm = new sitio_FormGroup().getSitioFormGrup(sitio);
   }
   crearFormBuscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigoSitio': '',
       'nombreSitio': '',
       'sinonimoSitio': '',
+      'nacion': '',
       'depto': ''
     });
   }
@@ -234,21 +198,93 @@ export class RegistroSitioComponent implements OnInit {
     });
   }
   editarSitio() {
-    console.log('Listo para editar');
+    if (this.sitioForm.get('codsitio').value)
+      this.updateSitio(this.setSitio(this.sitioForm.value));
+    else
+      this.changeSuccessMessage('El código de sitio es obligatorio para editar.', 'warning');
   }
   buscarSitio() {
+    this.lista_Sitio = new Array();
+    this.loading = true;
     var a = "~^ªº~†⑦→∞¬¬";
     var b = "~^ªº~†⑦→∞¬¬";
     var c = "~^ªº~†⑦→∞¬¬";
     var d = "~^ªº~†⑦→∞¬¬";
+    var e = "~^ªº~†⑦→∞¬¬";
     if (this.buscarForm.get('codigoSitio').value)
       a = this.buscarForm.get('codigoSitio').value;
     if (this.buscarForm.get('nombreSitio').value)
       b = this.buscarForm.get('nombreSitio').value;
     if (this.buscarForm.get('sinonimoSitio').value)
       c = this.buscarForm.get('sinonimoSitio').value;
+    if (this.buscarForm.get('nacion').value)
+      d = this.buscarForm.get('nacion').value;
     if (this.buscarForm.get('depto').value)
-      d = this.buscarForm.get('depto').value;
+      e = this.buscarForm.get('depto').value;
     console.log('buscar:', a, b, c, d);
+    this.sitioServicio.getSitio(a, b, c, d, e)
+      .subscribe(
+        data => {
+          this.dataSitio = data;
+          var k = 0;
+          for (let val of this.dataSitio) {
+            k = k + 1;
+            this.lista_Sitio.push(crearSitio(k, val.sitioId, val.codsitio, val.nomsitio, val.sinsitio, val.nacion, val.subnacion));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Sitio);
+          console.log(data);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
   }
+  mostrar_Sito_Busqueda(row: sitio_Dato) {
+    this.crearFormSitio(this.getSitio_id(row.sitioId));
+    this.tabPagina1();
+    this.editar = false;
+    this.guardar = true;
+  }
+  getSitio_id(id: Number): sitio_Modelo {
+    var base_sitioBusqueda = new sitio_Modelo();
+    this.dataSitio.forEach(dataSitio => {
+      var sitioBusqueda: sitio_Modelo = dataSitio;
+      if (id == sitioBusqueda.sitioId) {
+        base_sitioBusqueda = sitioBusqueda;
+      }
+    });
+    return base_sitioBusqueda;
+  }
+  updateSitio(sitio: sitio_Modelo): void {
+    this.loading = true;
+    this.sitioServicio.updateSitio(sitio)
+      .subscribe(
+        resSitio => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso, código del sitio:${resSitio.codsitio}.`, 'success');
+          this.lista_Sitio = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_Sitio);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error  no se pudo editar, el codigo sitio debe ser valido', 'primary');
+        });
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearFormSitio(new sitio_Modelo());
+    this.crearFormBuscar();
+    this.tabPagina1();
+  }
+}
+function crearSitio(k: Number, sitioId: Number, codigoSitio, nombreSitio, sinonimoSitio, nacion, depto): sitio_Dato {
+  return {
+    numero: k,
+    sitioId: sitioId,
+    codigoSitio: codigoSitio,
+    nombreSitio: nombreSitio,
+    sinonimoSitio: sinonimoSitio,
+    nacion: nacion,
+    depto: depto
+  };
 }

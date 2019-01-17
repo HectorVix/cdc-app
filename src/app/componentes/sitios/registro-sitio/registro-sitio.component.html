@@ -1,6 +1,6 @@
 <div class="card-content white">
     <div class="card-body">
-        <ngb-tabset #fRegistroSitio="ngbTabset">
+        <ngb-tabset #fSitio="ngbTabset">
             <ngb-tab id="tab-formulario">
                 <ng-template ngbTabTitle>
                     <b>Formulario</b>
@@ -590,8 +590,8 @@
                                     <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                                     <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Atras</button>
                                     <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
-                                    <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
-                                    <button class="btn color-green waves-light" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
+                                    <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
+                                    <button class="btn color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
                                 </div>
                             </mat-tab>
                         </mat-tab-group>
@@ -615,6 +615,9 @@
                                     <input matInput placeholder="Sinónimo del Sitio" formControlName="sinonimoSitio">
                                 </mat-form-field>
                                 <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nacion" formControlName="nacion">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
                                     <input matInput placeholder="Departamento" formControlName="depto">
                                 </mat-form-field>
                                 <div class="mat-elevation-z8" class="base-form">
@@ -629,6 +632,46 @@
                             <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                         </div>
                         <!-- Fin modal-content -->
+                        <!-- Tabla busqueda-->
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                        </mat-form-field>
+                        <div class="mat-elevation-z8" *ngIf="dataSource">
+                            <table mat-table [dataSource]="dataSource" matSort>
+                                <!-- No. Column -->
+                                <div class="col-md-1">
+                                    <ng-container matColumnDef="numero">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+                                        <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+                                    </ng-container>
+                                </div>
+                                <ng-container matColumnDef="codigoSitio">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGO/th>
+                                        <td mat-cell *matCellDef="let row"> {{row.codigoSitio}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="nombreSitio">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.nombreSitio}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="sinonimoSitio">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SINÓNIMO</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.sinonimoSitio}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="nacion">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>NACIÓN</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.nacion}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="depto">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>DEPTO</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.depto}} </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrar_Sito_Busqueda(row); fSitio.select('tab-formulario') ;">
+                                </tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        </div>
+                        <!-- Fin tabla busquedas -->
                     </ng-template>
                 </ng-template>
             </ngb-tab>

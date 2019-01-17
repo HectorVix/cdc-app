@@ -7,6 +7,7 @@ export class sitio_FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
         return fb.group({
+            'sitioId': row.sitioId,
             //página1
             //identificadores
             'codsitio': row.codsitio,
@@ -45,7 +46,7 @@ export class sitio_FormGroup {
             'comnodivbiol': row.comnodivbiol,
             'urgencia': row.urgencia,
             'comurgencia': row.comurgencia,
-            //bienes raíces y portección
+            //bienes raíces y protección
             'intenccons': row.intenccons,
             'numlotes': row.numlotes,
             'costestprot1': row.costestprot1,
