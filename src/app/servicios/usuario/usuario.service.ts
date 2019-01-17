@@ -5,7 +5,7 @@ import { usuario_Modelo } from '../../modelo/usuario/usuario-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True', "Access-Control-Allow-Origin": "*" })
 };
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UsuarioService {
   userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'No-Auth': 'True' });
-    return this.http.post(this.rootUrl + '/us/token', data, { headers: reqHeader });
+    return this.http.post(this.rootUrl + '/usuario/token', data, { headers: reqHeader });
   }
   addUsuario(us: usuario_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/usuario/registrar', us, httpOptions);
