@@ -273,7 +273,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       e = this.buscarForm.get('clave').value;
     console.log('buscar:', a, b, c, d, e);
 
-    this.fuenteServicio.getFuente(b, a, c, d, e)
+    this.fuenteServicio.getFuentes(b, a, c, d, e)
       .subscribe(
         data => {
           this.dataFuente = data;

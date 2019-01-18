@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { LocalizacionService } from '../../../servicios/localizacion/localizacion.service';
-import { ElementoService } from '../../../servicios/elemento/elemento.service'; 
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
 import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
@@ -270,7 +270,7 @@ export class FormularioLeComponent implements OnInit {
       nombres = this.buscarForm.get('nombres').value;
     if (this.buscarForm.get('nomcomuns').value)
       nomcomuns = this.buscarForm.get('nomcomuns').value;
-    this.localizacionServicio.getLocalizacionElemento(codigole)
+    this.localizacionServicio.getLocalizacionesElementos(codigole)
       .subscribe(
         data => {
           this.dataLE = data;

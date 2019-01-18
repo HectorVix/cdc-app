@@ -20,7 +20,7 @@ export class FuenteService {
     Obtener Fuente por codigofuente, naturaleza del documento
     cita, archivado o una clave
    */
-  getFuente(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
+  getFuentes(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
     return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {

@@ -278,7 +278,7 @@ export class FormularioReComponent implements OnInit {
       d = this.buscarForm.get('nombren').value;
     if (this.buscarForm.get('nombrecomunnn').value)
       e = this.buscarForm.get('nombrecomunnn').value;
-    this.rastreoServicio.getRastreoElemento(a, b, c, d, e)
+    this.rastreoServicio.getRastreosElementos(a, b, c, d, e)
       .subscribe(
         data => {
           this.dataRatreoElemento = data;

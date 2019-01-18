@@ -222,7 +222,7 @@ export class RegistroSitioComponent implements OnInit {
     if (this.buscarForm.get('depto').value)
       e = this.buscarForm.get('depto').value;
     console.log('buscar:', a, b, c, d);
-    this.sitioServicio.getSitio(a, b, c, d, e)
+    this.sitioServicio.getSitios(a, b, c, d, e)
       .subscribe(
         data => {
           this.dataSitio = data;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
@@ -8,7 +8,11 @@ import { debounceTime } from 'rxjs/operators';
 import { area_Modelo } from '../../../modelo/area/area-modelo';
 import { listaElemento_Modelo } from '../../../modelo/area/listaElemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
+//--------------tabla------------------------------------
+import { area_FormGroup } from '../../../modelo/formGroup/area';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { area_Dato } from '../../../modelo/tabla/area-dato'
+
 @Component({
   selector: 'app-formulario-areas-manejadas',
   templateUrl: './formulario-areas-manejadas.component.html',
@@ -17,6 +21,7 @@ import { MatDialog } from '@angular/material';
 export class FormularioAreasManejadasComponent implements OnInit {
   data_listaElemento = [];
   areaManejoForm: FormGroup;
+  areaManejoFormBuscar: FormGroup;
   criterio_areasManejadas = new criterio_areasManejadas();
   criterio_protasign = this.criterio_areasManejadas.protasign;
   criterio_accesopub = this.criterio_areasManejadas.accesopub;
@@ -52,11 +57,28 @@ export class FormularioAreasManejadasComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigoam', 'nombream', 'codsitio', 'nomsitio'];
+  dataSource: MatTableDataSource<area_Dato>;
+  lista_Area: Array<area_Dato> = new Array();
+  dataArea: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  editar = true;
+  guardar = false;
+
   constructor(private fb: FormBuilder,
     private areaServicio: AreaService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crear_areaManejoForm();
+    this.crear_areaManejoForm(new area_Modelo());
+    this.crear_areaManejoForm_Buscar();
+    this.dataSource = new MatTableDataSource(this.lista_Area);
   }
 
   ngOnInit() {
@@ -66,90 +88,43 @@ export class FormularioAreasManejadasComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
   }
-  crear_areaManejoForm() {
-    this.areaManejoForm = this.fb.group({
-      //página1
-      //identificadores
-      'codigoam': ['', Validators.required],
-      'nombream': '',
-      'sinam': '',
-      'ammayor': '',
-      'coddueno': '',
-      'codsitio': '',
-      'nomsitio': '',
-      //localizadores
-      'nacion': '',
-      'subnacion': '',
-      'subdivision': '',
-      'nommapa': '',
-      'codmapa': '',
-      'nummarg': '',
-      'lat': '',
-      'long1': '',
-      'coords': '',
-      'coordn': '',
-      'coorde': '',
-      'coordo': '',
-      //decriptores
-      'descripcion': '',
-      'areatot1': '', //number
-      'areatot2': '', //number
-      'areasubnac1': '',//number
-      'areasubnac2': '',//number
-      'multisubnac': null, //boolean
-      'limites': null,//boolean
-      'continua': null,//boolean
-      'involtnc': null, //boolean
-      'comentario': '',
-      //status
-      'fechaesta': '',
-      'protasign': '', //varchar(1)
-      //manejo
-      'administrador': '',
-      'instadmin': '',
-      'diradmin1': '',
-      'diradmin2': '',
-      'ciudadadmin': '',
-      'subnacadmin': '',
-      'codpostaladmin': '',
-      'telefadminist': '',
-      'accesopub': '', //varchar(1)
-      'instcoop': '',
-      'commanejo': '',
-      //elementos
-      // 'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
-      //campos opcionales
-      'amopc1': '',
-      'amopc2': '',
-      'amopc3': '',
-      'amopc4': '',
-      'amopc5': '',
-      //mantenimiento del registro
-      'respdatos': '',
-      'actualizar': ''
-    });
-
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  crear_areaManejoForm(area: area_Modelo) {
+    this.areaManejoForm = new area_FormGroup().getAreaFormGrup(area);
   }
   guardarArea() {
-    var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
-    var listaElemento: Array<listaElemento_Modelo> = new Array();
-
-    this.data_listaElemento.forEach(data_listaElemento => {
-      var listaElementoBase = new listaElemento_Modelo();
-      listaElementoBase.codigoe = data_listaElemento.codigoe;
-      listaElementoBase.nombres = data_listaElemento.nombres;
-      listaElementoBase.status = data_listaElemento.status;
-      listaElementoBase.codfuente = data_listaElemento.codfuente;
-      listaElemento.push(listaElementoBase);
-    });
-
-    areasManejadasBase.listaElementoList = listaElemento;
-    this.addArea(areasManejadasBase);
-
+    if (this.areaManejoForm.get('codigoam').value) {
+      var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
+      var listaElemento: Array<listaElemento_Modelo> = new Array();
+      this.data_listaElemento.forEach(data_listaElemento => {
+        var listaElementoBase = new listaElemento_Modelo();
+        listaElementoBase.codigoe = data_listaElemento.codigoe;
+        listaElementoBase.nombres = data_listaElemento.nombres;
+        listaElementoBase.status = data_listaElemento.status;
+        listaElementoBase.codfuente = data_listaElemento.codfuente;
+        listaElemento.push(listaElementoBase);
+      });
+      areasManejadasBase.listaElementoList = listaElemento;
+      this.addArea(areasManejadasBase);
+    }
+    else
+      this.changeSuccessMessage('El código del área es obligatorio.', 'primary');
   }
   setAreasManejadas(datos: area_Modelo): area_Modelo {
-    datos.fechaesta = this.fechaServicio.toFormato(this.areaManejoForm.get('fechaesta').value);
-    datos.actualizar = this.fechaServicio.toFormato(this.areaManejoForm.get('actualizar').value);
+    datos.fechaesta = this.fechaServicio.toFormatoDateTime(this.areaManejoForm.get('fechaesta').value);
+    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.areaManejoForm.get('actualizar').value);
     return datos;
   }
   //agrega una nueva area
@@ -157,9 +132,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.loading = true;
     this.areaServicio.addArea(area)
       .subscribe(
-        resElemento => {
+        resArea => {
           this.loading = false;
-          this.changeSuccessMessage(`Se registro el area  :${resElemento.codigoam}.`, 'success');
+          this.changeSuccessMessage(`Se registro el area  :${resArea.codigoam}.`, 'success');
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar el area.', 'primary');
@@ -186,4 +161,124 @@ export class FormularioAreasManejadasComponent implements OnInit {
         this.guardarArea();
     });
   }
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editarArea();
+    });
+  }
+  crear_areaManejoForm_Buscar() {
+    this.areaManejoFormBuscar = this.fb.group({
+      'codigoam': '',
+      'nombream': '',
+      'sinam': '',
+      'codsitio': '',
+      'nomsitio': '',
+      'nacion': '',
+      'subnacion': '',
+      'subdivision': ''
+    });
+  }
+  buscarArea() {
+    this.lista_Area = new Array();
+    this.loading = true;
+    var a = "~^ªº~†⑦→∞¬¬";
+    var b = "~^ªº~†⑦→∞¬¬";
+    var c = "~^ªº~†⑦→∞¬¬";
+    var d = "~^ªº~†⑦→∞¬¬";
+    var e = "~^ªº~†⑦→∞¬¬";
+    var f = "~^ªº~†⑦→∞¬¬";
+    var g = "~^ªº~†⑦→∞¬¬";
+    var h = "~^ªº~†⑦→∞¬¬";
+    if (this.areaManejoFormBuscar.get('codigoam').value)
+      a = this.areaManejoFormBuscar.get('codigoam').value;
+    if (this.areaManejoFormBuscar.get('nombream').value)
+      b = this.areaManejoFormBuscar.get('nombream').value;
+    if (this.areaManejoFormBuscar.get('sinam').value)
+      c = this.areaManejoFormBuscar.get('sinam').value;
+    if (this.areaManejoFormBuscar.get('codsitio').value)
+      d = this.areaManejoFormBuscar.get('codsitio').value;
+    if (this.areaManejoFormBuscar.get('nomsitio').value)
+      e = this.areaManejoFormBuscar.get('nomsitio').value;
+    if (this.areaManejoFormBuscar.get('nacion').value)
+      f = this.areaManejoFormBuscar.get('nacion').value;
+    if (this.areaManejoFormBuscar.get('subnacion').value)
+      g = this.areaManejoFormBuscar.get('subnacion').value;
+    if (this.areaManejoFormBuscar.get('subdivision').value)
+      h = this.areaManejoFormBuscar.get('subdivision').value;
+    console.log('buscar:', a, b, c, d, e, f, g, h);
+    this.areaServicio.getAreas(a, b, c, d, e, f, g, h)
+      .subscribe(
+        data => {
+          this.dataArea = data;
+          var k = 0;
+          for (let val of this.dataArea) {
+            k = k + 1;
+            this.lista_Area.push(crearArea(k, val.areaId, val.codigoam, val.nomsitio, val.codsitio, val.nomsitio));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Area);
+          console.log(data);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  getArea_id(id: Number): area_Modelo {
+    var base_areaBusqueda = new area_Modelo();
+    this.dataArea.forEach(dataArea => {
+      var areaBusqueda: area_Modelo = dataArea;
+      if (id == areaBusqueda.areaId) {
+        base_areaBusqueda = areaBusqueda;
+      }
+    });
+    return base_areaBusqueda;
+  }
+  mostrar_Area_Busqueda(row: area_Dato) {
+    this.crear_areaManejoForm(this.getArea_id(row.areaId));
+    this.tabPagina1();
+    this.editar = false;
+    this.guardar = true;
+  }
+  updateArea(area: area_Modelo): void {
+    this.loading = true;
+    this.areaServicio.updateArea(area)
+      .subscribe(
+        resSitio => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso, código del área:${resSitio.codigoam}.`, 'success');
+          this.lista_Area = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_Area);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error no se pudo editar, el codigo del área debe ser valido', 'primary');
+        });
+  }
+  editarArea() {
+    if (this.areaManejoForm.get('codigoam').value)
+      this.updateArea(this.setAreasManejadas(this.areaManejoForm.value));
+    else
+      this.changeSuccessMessage('El código de área es obligatorio para editar.', 'warning');
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crear_areaManejoForm(new area_Modelo());
+    this.crear_areaManejoForm_Buscar();
+    this.tabPagina1();
+  }
+}
+function crearArea(k: Number, areaId: Number, codigoam, nombream, codsitio, nomsitio): area_Dato {
+  return {
+    numero: k,
+    areaId: areaId,
+    codigoam: codigoam,
+    nombream: nombream,
+    codsitio: codsitio,
+    nomsitio: nomsitio
+  };
 }

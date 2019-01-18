@@ -16,7 +16,7 @@ export class LocalizacionService {
   constructor(private http: HttpClient) { }
 
   //Obtener Localización del Elemento por codigole, nombres, nomcomuns
-  getLocalizacionElemento(a: String): Observable<Localizacion_Modelo> {
+  getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
     return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
   }
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {

@@ -16,8 +16,8 @@ export class SitioService {
 
   constructor(private http: HttpClient) { }
 
-  //Obtener Sitio por codigoSitio, nombreSitio, sinonimoSitio, nación y departamento
-  getSitio(a: String, b: String, c: String, d: String, e: String): Observable<sitio_Modelo> {
+  //Obtener Sitios por codigoSitio, nombreSitio, sinonimoSitio, nación y departamento
+  getSitios(a: String, b: String, c: String, d: String, e: String): Observable<sitio_Modelo> {
     return this.http.get<sitio_Modelo>(this.rootUrl + '/sitio/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   addSitio(sitio: sitio_Modelo): Observable<respuesta_cdc_Modelo> {

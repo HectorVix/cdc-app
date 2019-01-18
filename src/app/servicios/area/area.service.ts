@@ -14,7 +14,14 @@ export class AreaService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   constructor(private http: HttpClient) { }
 
-  addArea(area: area_Modelo): Observable<area_Modelo> {
-    return this.http.post<area_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
+  addArea(area: area_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/area/registro', area, httpOptions);
+  }
+  //Obtener áreas por codigoam, nombream, sinam, codsitio, nomsitio, nación, subnación y subdivisión
+  getAreas(a: String, b: String, c: String, d: String, e: String, f: String, g: String, h: String): Observable<area_Modelo> {
+    return this.http.get<area_Modelo>(this.rootUrl + '/area/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f + '/' + g + '/' + h);
+  }
+  updateArea(area: area_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/area/editar', area, httpOptions);
   }
 }
