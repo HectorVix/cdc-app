@@ -138,7 +138,7 @@ export class planta_Modelo {
 
     //4 línea
     'nfebb1': String;
-    'nbebb2': String;
+    'nfebb2': String;
     'nfebb3': String;
     'nfebb4': String;
 
