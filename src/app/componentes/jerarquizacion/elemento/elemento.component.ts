@@ -55,6 +55,7 @@ export class ElementoComponent implements OnInit {
   //segun el caso
   editar = true;
   guardar = false;
+  codigoElemento = false;
   //lista fotos
   data_resFoto: any;
   tam_Inicial_ListaFotos = 0;
@@ -234,9 +235,9 @@ export class ElementoComponent implements OnInit {
     this.elementos = new Array();
     this.loading = true;
     //variables necesarias para recuperarse de errores 
-    var codigo = "~^ªº~†⑦→∞¬¬";
-    var nombrecomun = "~^ªº~†⑦→∞¬¬";
-    var nombrecientifico = "~^ªº~†⑦→∞¬¬";
+    var codigo = "¬";
+    var nombrecomun = "¬";
+    var nombrecientifico = "¬";
     this.elementos = new Array();
     this.k = 0;
     if (this.buscarForm.get('codigo').value)

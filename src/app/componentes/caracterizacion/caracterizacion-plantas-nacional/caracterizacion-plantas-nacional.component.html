@@ -1,13 +1,13 @@
 <div class="card-content white">
     <div class="card-body">
-        <form [formGroup]="caracterizacionPlantasNacionalForm">
-            <ngb-tabset #fCaracterizacionPlatasNacional="ngbTabset">
-                <!-- página 1 -->
-                <ngb-tab id="tab-formulario">
-                    <ng-template ngbTabTitle>
-                        <b>Formulario</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
+        <ngb-tabset #fCaracterizacionPlatasNacional="ngbTabset">
+            <!-- página 1 -->
+            <ngb-tab id="tab-formulario">
+                <ng-template ngbTabTitle>
+                    <b>Formulario</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <form [formGroup]="caracterizacionPlantasNacionalForm">
                         <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
                             <mat-tab label="1">
                                 <div class="modal-content mat-elevation-z4">
@@ -19,8 +19,7 @@
                                             <label for="">CODIGOE:</label>
                                         </div>
                                         <div class="md-form col-md-4 mt10">
-                                            <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Incorrecto"
-                                                data-success="Correcto">
+                                            <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" ">
                                             <label for="formCodigoe"></label>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
@@ -820,42 +819,42 @@
                                 </div>
                             </mat-tab>
                         </mat-tab-group>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab id="tab-buscar">
-                    <ng-template ngbTabTitle>
-                        <b>Buscar</b>
-                    </ng-template>
-                    <ng-template ngbTabContent>
-                        <div class="modal-content mat-elevation-z4">
-                            <div class="modal-header color-green"></div>
-                            <mat-card>
-                                <form class="base-form">
-                                    <mat-form-field class="base-full-width">
-                                        <input matInput placeholder="Codigo del Elemento">
-                                    </mat-form-field>
-                                    <mat-form-field class="base-full-width">
-                                        <input matInput placeholder="Nombre  Global">
-                                    </mat-form-field>
-                                    <mat-form-field class="base-full-width">
-                                        <input matInput placeholder="Nombre  Nacional">
-                                    </mat-form-field>
-                                    <mat-form-field class="base-full-width">
-                                        <input matInput placeholder="Nombre Común Nacional">
-                                    </mat-form-field>
-                                    <div class="mat-elevation-z8" class="base-form">
-                                        <button mat-raised-button class="color-green">Buscar</button>
-                                        <button mat-raised-button class="color-green">Buscar Todos</button>
-                                    </div>
-                                </form>
-                            </mat-card>
-                        </div>
-                    </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
-            <!-- fin ngb-tabset -->
-        </form>
-        <!-- fin form -->
+                    </form>
+                    <!-- fin form -->
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab-buscar">
+                <ng-template ngbTabTitle>
+                    <b>Buscar</b>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <div class="modal-content mat-elevation-z4">
+                        <div class="modal-header color-green"></div>
+                        <mat-card>
+                            <form class="base-form">
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Codigo del Elemento">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nombre  Global">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nombre  Nacional">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nombre Común Nacional">
+                                </mat-form-field>
+                                <div class="mat-elevation-z8" class="base-form">
+                                    <button mat-raised-button class="color-green">Buscar</button>
+                                    <button mat-raised-button class="color-green">Buscar Todos</button>
+                                </div>
+                            </form>
+                        </mat-card>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+        <!-- fin ngb-tabset -->
     </div>
     <!-- fin card-body -->
 </div>
