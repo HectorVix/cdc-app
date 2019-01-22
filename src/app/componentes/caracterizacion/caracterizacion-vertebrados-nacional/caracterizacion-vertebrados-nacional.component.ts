@@ -5,11 +5,14 @@ import { vertebrado_Modelo } from '../../../modelo/resumen/vertebrado-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
 import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
 import { CaracterizacionService } from '../../../servicios/caracterizacion/caracterizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+//--------------tabla------------------------------------
+import { vertebrado_FormGroup } from '../../../modelo/formGroup/vertebrado';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+//import { vertebrado_Dato } from '../../../modelo/tabla/planta-dato'
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -57,11 +60,12 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
+
   constructor(private fb: FormBuilder,
     private dialog: MatDialog,
     private caracterizacionServicio: CaracterizacionService,
     private fechaServicio: FechaService) {
-    this.crearForm_caracterizacionVertebradosNacional();
+    this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo);
   }
 
   ngOnInit() {
@@ -71,113 +75,8 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
-  crearForm_caracterizacionVertebradosNacional() {
-    this.caracterizacionVertebradosNacional = this.fb.group({
-      //identificadores
-      'codigoe': ['', Validators.required],
-      'nacion': '',
-      'nombreg': '',
-      'autor': '',
-      'nombren': '',
-      'nomcomunn': '',
-      //taxonomía
-      'clasetax': '',
-      'orden': '',
-      'familia': '',
-      'genero': '',
-      'comtaxg': '',
-      'comsubespn': '',
-      //status
-      'rangog': '',
-      'cites': '',
-      'uicn': '',
-      'aepeu': '',
-      'fechaaepeu': '',//date
-      'endemismo': '',
-      'comstatg': '',
-      'rangon': '',
-      'protnacion': '',
-      'rastreolen': '',
-      'espdeportn': '',
-      'espcomern': '',
-      'pezdeport': '',
-      'ndeportpro': '',
-      'cazapieln': '',
-      'pesten': '',
-      'comstatn': '',
-      //distribución
-      //'lista_distribucion1': '',
-      //'lista_distribucion2': '',
-      'elevminn': '',//Number 
-      'elevmaxn': '',//Number
-      'comdistg': '',
-      'comdistn': '',
-      //migración
-      'residente': '',
-      'miglocal': '',
-      'migdist': '',
-      'repn': '',
-      'norepn': '',
-      'transmign': '',
-      'aparirregn': '',
-      'mign': '',
-      'commigg': '',
-      'commign': '',
-      //habitat
-      'marino': '',
-      'estuarino': '',
-      'fluvial': '',
-      'lacustre': '',
-      'palustre': '',
-      'terrestre': '',
-      'subterran': '',
-      'factorespe': '',
-      'comhabg': '',
-      'comhabrep': '',
-      'comhabn': '',
-      //hábitos alimenticios
-      'habitosalim': '',
-      'comalimg': '',
-      'comalimn': '',
-      //ecología
-      'comecolg': '',
-      'comecoln': '',
-      //fenología-Estacionalidad
-      'fenologia': '',
-      'nenea': '', 'nabra': '', 'njula': '', 'nocta': '',
-      'neneb': '', 'nabrb': '', 'njulb': '', 'noctb': '',
-      'nfeba': '', 'nmaya': '', 'nagoa': '', 'nnova': '',
-      'nfebb': '', 'nmayb': '', 'nagob': '', 'nnovb': '',
-      'nmara': '', 'njuna': '', 'nseta': '', 'ndica': '',
-      'nmarb': '', 'njunb': '', 'nsetb': '', 'ndicb': '',
-      'comfenolg': '',
-      'comfenoln': '',
-      //reproducción
-      'colrep': '',
-      'comrepg': '',
-      'comrepn': '',
-      //manejo
-      'commanejog': '',
-      'commanejon': '',
-      //atributos misceláneos
-      'usoeconom': '',
-      'longitud': '',
-      'peso': '',
-      //campos opcionales
-      'rcvnopc1': '',
-      'rcvnopc2': '',
-      'rcvnopc3': '',
-      'rcvnopc4': '',
-      'rcvnopc5': '',
-      //referencias
-      'refg': '',
-      'refn': '',
-      //matenimiento del registro
-      'ediciong': '', //date
-      'actualizag': '', //date
-      'edicionn': '',  //date
-      'actualizan': ''//date
-    });
+  crearForm_caracterizacionVertebradosNacional(vertebrado: vertebrado_Modelo) {
+    this.caracterizacionVertebradosNacional = new vertebrado_FormGroup().getPVertebradoFormGrup(vertebrado);
   }
   guardar_Caracterizacion_Vertebrado() {
     var caracterizacion_Vertebrado = new caracterizacion_Modelo();
