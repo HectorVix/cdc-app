@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
@@ -13,7 +13,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { planta_FormGroup } from '../../../modelo/formGroup/planta';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-//import { area_Dato } from '../../../modelo/tabla/area-dato'
+import { planta_Dato } from '../../../modelo/tabla/planta-dato'
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -22,6 +22,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
 })
 export class CaracterizacionPlantasNacionalComponent implements OnInit {
   caracterizacionPlantasNacionalForm: FormGroup;
+  buscarForm: FormGroup;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -60,11 +61,27 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
 
   data_distribucion = [];
   data_distribucion2 = [];
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigoe', 'nacion', 'nombren', 'nombrecomunn'];
+  dataSource: MatTableDataSource<planta_Dato>;
+  lista_Planta: Array<planta_Dato> = new Array();
+  dataPlanta: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  editar = true;
+  guardar = false;
   constructor(private fb: FormBuilder,
     private caracterizacionServicio: CaracterizacionService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo);
+    this.crearForm_Buscar();
+    this.dataSource = new MatTableDataSource(this.lista_Planta);
   }
 
   ngOnInit() {
@@ -73,6 +90,19 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
+  }
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   crearForm_CaracterizacionPlantasNacional(planta: planta_Modelo) {
     this.caracterizacionPlantasNacionalForm = new planta_FormGroup().getPlantaFormGrup(planta);
@@ -156,8 +186,116 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         this.guardarCPlanta();
     });
   }
-  nuevoFormulario() {
-    this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo);
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editarPlanta();
+    });
+  }
+
+  crearForm_Buscar() {
+    this.buscarForm = this.fb.group({
+      'codigoe': '',
+      'nacion': '',
+      'nombren': '',
+      'nombrecomunn': '',
+
+    });
+  }
+  buscarPlanta() {
+    //this.lista_Area = new Array();
+    this.loading = true;
+    var a = "¬";
+    var b = "¬";
+    var c = "¬";
+    var d = "¬";
+    if (this.buscarForm.get('codigoe').value)
+      a = this.buscarForm.get('codigoe').value;
+    if (this.buscarForm.get('nacion').value)
+      b = this.buscarForm.get('nacion').value;
+    if (this.buscarForm.get('nombren').value)
+      c = this.buscarForm.get('nombren').value;
+    if (this.buscarForm.get('nombrecomunn').value)
+      d = this.buscarForm.get('nombrecomunn').value;
+    console.log('buscar:', a, b, c, d);
+    this.caracterizacionServicio.getPlantas(a, b, c, d)
+      .subscribe(
+        data => {
+          this.dataPlanta = data;
+          var k = 0;
+          for (let val of this.dataPlanta) {
+            k = k + 1;
+            this.lista_Planta.push(crearPlanta(k,
+              val.plantaId,
+              val.codigoe,
+              val.nacion,
+              val.nombren,
+              val.nombrecomunn));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Planta);
+          console.log(data);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  getPlanta_id(id: Number): planta_Modelo {
+    var base_plantaBusqueda = new planta_Modelo();
+    this.dataPlanta.forEach(dataPlanta => {
+      var plantaBusqueda: planta_Modelo = dataPlanta;
+      if (id == plantaBusqueda.plantaId) {
+        base_plantaBusqueda = plantaBusqueda;
+      }
+    });
+    return base_plantaBusqueda;
+  }
+  mostrar_Planta_Busqueda(row: planta_Dato) {
+    this.crearForm_CaracterizacionPlantasNacional(this.getPlanta_id(row.plantaId));
+    this.tabPagina1();
+    this.editar = false;
+    this.guardar = true;
+  }
+  updatePlanta(planta: planta_Modelo): void {
+    this.loading = true;
+    this.caracterizacionServicio.updatePlanta(planta)
+      .subscribe(
+        resPlanta => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso, código de la planta:${resPlanta.codigoe}.`, 'success');
+          this.lista_Planta = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_Planta);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error no se pudo editar, el codigo de la planta debe ser valido', 'primary');
+        });
+  }
+  editarPlanta() {
+    if (this.caracterizacionPlantasNacionalForm.get('codigoe').value)
+      this.updatePlanta(this.setPlanta(this.caracterizacionPlantasNacionalForm.value));
+    else
+      this.changeSuccessMessage('El código de la planta es obligatorio para editar.', 'warning');
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo());
+    this.crearForm_Buscar();
+    this.tabPagina1();
     this.data_distribucion = [];
   }
+}
+function crearPlanta(k: Number, plantaId: Number, codigoe, nacion, nombren, nombrecomunn): planta_Dato {
+  return {
+    numero: k,
+    plantaId: plantaId,
+    codigoe: codigoe,
+    nacion: nacion,
+    nombren: nombren,
+    nombrecomunn: nombrecomunn
+  };
 }

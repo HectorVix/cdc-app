@@ -3,4 +3,5 @@ export class respuesta_cdc_Modelo {
     nombre: String;
     apellido: String;
     codigoam: String;
+    codigoe: String;
 }

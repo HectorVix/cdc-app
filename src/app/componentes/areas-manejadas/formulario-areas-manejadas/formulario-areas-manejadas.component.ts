@@ -186,14 +186,14 @@ export class FormularioAreasManejadasComponent implements OnInit {
   buscarArea() {
     this.lista_Area = new Array();
     this.loading = true;
-    var a = "~^ªº~†⑦→∞¬¬";
-    var b = "~^ªº~†⑦→∞¬¬";
-    var c = "~^ªº~†⑦→∞¬¬";
-    var d = "~^ªº~†⑦→∞¬¬";
-    var e = "~^ªº~†⑦→∞¬¬";
-    var f = "~^ªº~†⑦→∞¬¬";
-    var g = "~^ªº~†⑦→∞¬¬";
-    var h = "~^ªº~†⑦→∞¬¬";
+    var a = "¬";
+    var b = "¬";
+    var c = "¬";
+    var d = "¬";
+    var e = "¬";
+    var f = "¬";
+    var g = "¬";
+    var h = "¬";
     if (this.areaManejoFormBuscar.get('codigoam').value)
       a = this.areaManejoFormBuscar.get('codigoam').value;
     if (this.areaManejoFormBuscar.get('nombream').value)
