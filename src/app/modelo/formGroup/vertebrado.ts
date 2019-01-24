@@ -3,7 +3,7 @@ import { vertebrado_Modelo } from '../../modelo/resumen/vertebrado-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 export class vertebrado_FormGroup {
     constructor() { }
-    getPVertebradoFormGrup(row: vertebrado_Modelo): FormGroup {
+    getVertebradoFormGrup(row: vertebrado_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
         return fb.group({

@@ -10,7 +10,10 @@ import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatDialog } from '@angular/material';
+//--------------tabla------------------------------------
+import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+//import { jerarquizacion_Global_Dato } from '../../../modelo/tabla/vertebrado-dato'
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',
@@ -36,7 +39,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     private elementoServicio: ElementoService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crear_Jerarquizacion_Subnacional();
+    this.crear_Jerarquizacion_Subnacional(new jerarquizacion_Subnacional_Modelo());
   }
 
   ngOnInit() {
@@ -51,35 +54,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
 
     }
   }
-  crear_Jerarquizacion_Subnacional() {
-    this.jerarquizacion_SubnacionalForm = this.fb.group({
-      'codigoe': ['', Validators.required],
-      'nacion': '',
-      'subnacion': '',
-      'nombres': '',
-      'loctips': '',
-      'lestims': '',
-      'comlestims': '',
-      'abunds': '',
-      'comabunds': '',
-      'dists': '',
-      'comdists': '',
-      'leprots': '',
-      'comleprots': '',
-      'amenazs': '',
-      'comamenazs': '',
-      'otraconsids': '',
-      'rangos': '',
-      'fecharevrs': '',
-      'razonrs': '',
-      'necprotecs': '',
-      'necinvents': '',
-      'necmanejos': '',
-      'autored': '',
-      'edicion': '',
-      'actualizar': '',
-    });
-
+  crear_Jerarquizacion_Subnacional(jerarquizacionSubnacional:jerarquizacion_Subnacional_Modelo) {
+    this.jerarquizacion_SubnacionalForm 
+    =new jerarquizacion_Subnacional_FormGroup().getJerarquizacion_Subnacional_FormGrup(jerarquizacionSubnacional);
   }
 
   //guardar registro jerarquizacion subnancional
@@ -109,7 +86,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
         resElemento => {
           this.loading = false;
           this.changeSuccessMessage(`Se registro la jerarquización subnacional del elemento :${resElemento.codigoe}.`, 'success');
-          this.crear_Jerarquizacion_Subnacional();
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');

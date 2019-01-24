@@ -6,7 +6,7 @@
           <b>Formulario</b>
         </ng-template>
         <ng-template ngbTabContent>
-          <form [formGroup]="jerarquizacionForm">
+          <form [formGroup]="jerarquizacion_Nacional_Form">
             <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
               <mat-tab label="1">
                 <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>

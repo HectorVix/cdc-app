@@ -104,7 +104,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   }
   crearForm_caracterizacionVertebradosNacional(vertebrado: vertebrado_Modelo) {
-    this.caracterizacionVertebradosNacionalForm = new vertebrado_FormGroup().getPVertebradoFormGrup(vertebrado);
+    this.caracterizacionVertebradosNacionalForm = new vertebrado_FormGroup().getVertebradoFormGrup(vertebrado);
   }
   guardar_Caracterizacion_Vertebrado() {
     var caracterizacion_Vertebrado = new caracterizacion_Modelo();
