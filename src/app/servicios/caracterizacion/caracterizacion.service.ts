@@ -19,19 +19,19 @@ export class CaracterizacionService {
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
     return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
   }
+  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
+    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
+  }
   //Obtener plantas por codigoe, nacion, nombren, nomcomunn
   getPlantas(a: String, b: String, c: String, d: String): Observable<planta_Modelo> {
     return this.http.get<planta_Modelo>(this.rootUrl + '/caracterizacion/buscar/planta/' + a + '/' + b + '/' + c + '/' + d);
   }
-  updatePlanta(planta: planta_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/editar/planta', planta, httpOptions);
-  }
-  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
-    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
-  }
   //Obtener vertebrados por codigoe, nacion, nombreg, autor, nombren, nomcomunn
   getVertebrados(a: String, b: String, c: String, d: String, e: String, f: String): Observable<vertebrado_Modelo> {
     return this.http.get<vertebrado_Modelo>(this.rootUrl + '/caracterizacion/buscar/vertebrado/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
+  }
+  updatePlanta(planta: planta_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/editar/planta', planta, httpOptions);
   }
   updateVertebrado(vertebrado: vertebrado_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/editar/vertebrado', vertebrado, httpOptions);

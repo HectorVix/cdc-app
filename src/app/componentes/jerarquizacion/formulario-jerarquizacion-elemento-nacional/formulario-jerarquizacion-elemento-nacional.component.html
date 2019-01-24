@@ -1,6 +1,6 @@
 <div class="card-content white">
   <div class="card-body">
-    <ngb-tabset #JerarquizacionElemento="ngbTabset">
+    <ngb-tabset #JerarquizacionNacional="ngbTabset">
       <ngb-tab id="tab-formulario">
         <ng-template ngbTabTitle>
           <b>Formulario</b>
@@ -379,8 +379,9 @@
                   </div>
                   <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
-                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
-                  <button class="btn color-green waves-light" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
+                  <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
+                  <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
+                  <button class="btn color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
                 </div>
               </mat-tab>
             </mat-tab-group>
@@ -395,27 +396,80 @@
         <ng-template ngbTabContent>
           <div class="modal-content mat-elevation-z4">
             <div class="modal-header color-green"></div>
-            <mat-card>
-              <form class="base-form">
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Codigo del Elemento">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Nombre Nacional">
-                </mat-form-field>
-                <div class="mat-elevation-z8" class="base-form">
-                  <button mat-raised-button class="color-green">Buscar</button>
-                  <button mat-raised-button class="color-green">Buscar Todos</button>
+            <!-- Inicio form -->
+            <form [formGroup]="buscar_Form ">
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" ">
+                  <label for="formCodigoe">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
                 </div>
-              </form>
-            </mat-card>
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
+                  <label for="formNacion">&nbsp;&nbsp;&nbsp;&nbsp;NACIÓN</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+            </form>
+            <!-- Fin form -->
+            <div>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarJerarquizacionNacional()">Buscar</button>
+            </div>
+            <div class="text-center">
+              <div *ngIf="loading">
+                <img src="assets/imagenes/load.gif">
+              </div>
+            </div>
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
           </div>
+          <!-- Fin modal-content -->
+          <!-- Tabla busqueda-->
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+          </mat-form-field>
+          <div class="mat-elevation-z8" *ngIf="dataSource">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <!-- No. Column -->
+              <div class="col-md-1">
+                <ng-container matColumnDef="numero">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+                  <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+                </ng-container>
+              </div>
+              <ng-container matColumnDef="codigoe">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CÓDIGO ELEMENTO</th>
+                <td mat-cell *matCellDef="let row"> {{row.codigoe}} </td>
+              </ng-container>
+              <ng-container matColumnDef="nombren">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
+              </ng-container>
+              <ng-container matColumnDef="nacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NACIÓN</th>
+                <td mat-cell *matCellDef="let row"> {{row.nacion}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrar_JerarquizacionNacional_Busqueda(row); JerarquizacionNacional.select('tab-formulario') ;">
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+          <!-- Fin tabla busquedas -->
         </ng-template>
+        <!-- Fin template -->
       </ngb-tab>
-      <!-- fin ngb-tab -->
+      <!-- Fin ngb-tab -->
     </ngb-tabset>
-    <!-- fin ngb-tabset -->
+    <!-- Fin ngb-tabset -->
   </div>
-  <!-- fin-card-body -->
+  <!-- Fin-card-body -->
 </div>
-<!-- fin card-content -->
+<!-- Fin card-content -->
