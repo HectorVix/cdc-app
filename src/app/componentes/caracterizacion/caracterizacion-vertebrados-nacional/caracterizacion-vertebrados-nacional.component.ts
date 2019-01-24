@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { vertebrado_Modelo } from '../../../modelo/resumen/vertebrado-modelo';
@@ -12,7 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 //--------------tabla------------------------------------
 import { vertebrado_FormGroup } from '../../../modelo/formGroup/vertebrado';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-//import { vertebrado_Dato } from '../../../modelo/tabla/planta-dato'
+import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato'
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -20,8 +20,8 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
   styleUrls: ['./caracterizacion-vertebrados-nacional.component.scss']
 })
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
-  caracterizacionVertebradosNacional: FormGroup;
-  cVertebradoPruebas: FormGroup;
+  caracterizacionVertebradosNacionalForm: FormGroup;
+  buscarForm: FormGroup;
   data_Distribucion1 = [];
   data_Distribucion2 = [];
 
@@ -60,12 +60,27 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   };
   selected = new FormControl(0);
-
+  //---------------------------------tabla
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombreg', 'nombren', 'nombrecomunn'];
+  dataSource: MatTableDataSource<vertebrado_Dato>;
+  lista_Vertebrado: Array<vertebrado_Dato> = new Array();
+  dataVertebrado: any;
+  private paginator: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  @ViewChild(MatSort) sort: MatSort;
+  //------------------------------------------
+  editar = true;
+  guardar = false;
   constructor(private fb: FormBuilder,
     private dialog: MatDialog,
     private caracterizacionServicio: CaracterizacionService,
     private fechaServicio: FechaService) {
     this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo);
+    this.crearForm_Buscar();
+    this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
   }
 
   ngOnInit() {
@@ -75,8 +90,21 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.applyFilter('');
+    }
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   crearForm_caracterizacionVertebradosNacional(vertebrado: vertebrado_Modelo) {
-    this.caracterizacionVertebradosNacional = new vertebrado_FormGroup().getPVertebradoFormGrup(vertebrado);
+    this.caracterizacionVertebradosNacionalForm = new vertebrado_FormGroup().getPVertebradoFormGrup(vertebrado);
   }
   guardar_Caracterizacion_Vertebrado() {
     var caracterizacion_Vertebrado = new caracterizacion_Modelo();
@@ -84,7 +112,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     var distribucion1: Array<distribucion_Modelo> = new Array();
     var distribucion2: Array<distribucion2_Modelo> = new Array();
 
-    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacional.value);
+    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value);
     this.data_Distribucion1.forEach(data_distribucion1 => {
       var distribucionBase = new distribucion_Modelo();
       distribucionBase.codsubnac = data_distribucion1.codsubnac;
@@ -108,11 +136,11 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
   }
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
-    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('fechaaepeu').value);
-    datos.ediciong = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('ediciong').value);
-    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('actualizag').value);
-    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('edicionn').value);
-    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacional.get('actualizan').value);
+    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('fechaaepeu').value);
+    datos.ediciong = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('ediciong').value);
+    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('actualizag').value);
+    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('edicionn').value);
+    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('actualizan').value);
     return datos;
   }
   //agrega un nuevo registro de caracterizacion de vertebrado nacional
@@ -155,8 +183,124 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
         this.guardar_Caracterizacion_Vertebrado();
     });
   }
+  openDialogoEditar(): void {
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.editarVertebrado();
+    });
+  }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
+  crearForm_Buscar() {
+    this.buscarForm = this.fb.group({
+      'codigoe': '',
+      'nacion': '',
+      'nombreg': '',
+      'autor': '',
+      'nombren': '',
+      'nombrecomunn': ''
+    });
+  }
+  buscarVertebrado() {
+    this.lista_Vertebrado = new Array();
+    this.loading = true;
+    var a = "¬";
+    var b = "¬";
+    var c = "¬";
+    var d = "¬";
+    var e = "¬";
+    var f = "¬";
+
+    if (this.buscarForm.get('codigoe').value)
+      a = this.buscarForm.get('codigoe').value;
+    if (this.buscarForm.get('nacion').value)
+      b = this.buscarForm.get('nacion').value;
+    if (this.buscarForm.get('nombreg').value)
+      c = this.buscarForm.get('nombreg').value;
+    if (this.buscarForm.get('autor').value)
+      d = this.buscarForm.get('autor').value;
+    if (this.buscarForm.get('nombren').value)
+      e = this.buscarForm.get('nombren').value;
+    if (this.buscarForm.get('nombrecomunn').value)
+      f = this.buscarForm.get('nombrecomunn').value;
+    this.caracterizacionServicio.getVertebrados(a, b, c, d, e, f)
+      .subscribe(
+        data => {
+          this.dataVertebrado = data;
+          var k = 0;
+          for (let val of this.dataVertebrado) {
+            k = k + 1;
+            this.lista_Vertebrado.push(crearVertebrado(k,
+              val.vertebradoId,
+              val.codigoe,
+              val.nombreg,
+              val.nombren,
+              val.nomcomunn));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  getVertebrado_id(id: Number): vertebrado_Modelo {
+    var base_vertebradoBusqueda = new vertebrado_Modelo();
+    this.dataVertebrado.forEach(dataVertebrado => {
+      var vertebradoBusqueda: vertebrado_Modelo = dataVertebrado;
+      if (id == vertebradoBusqueda.vertebradoId) {
+        base_vertebradoBusqueda = vertebradoBusqueda;
+      }
+    });
+    return base_vertebradoBusqueda;
+  }
+  mostrar_Vertebrado_Busqueda(row: vertebrado_Dato) {
+    this.crearForm_caracterizacionVertebradosNacional(this.getVertebrado_id(row.vertebradoId));
+    this.tabPagina1();
+    this.editar = false;
+    this.guardar = true;
+  }
+  updateVertebrado(vertebrado: vertebrado_Modelo): void {
+    this.loading = true;
+    this.caracterizacionServicio.updateVertebrado(vertebrado)
+      .subscribe(
+        resVertebrado => {
+          this.loading = false;
+          this.changeSuccessMessage(`Editado exitoso, código de la planta:${resVertebrado.codigoe}.`, 'success');
+          this.lista_Vertebrado = new Array();
+          this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('Error no se pudo editar, el codigo de la planta debe ser valido', 'primary');
+        });
+  }
+  editarVertebrado() {
+    if (this.caracterizacionVertebradosNacionalForm.get('codigoe').value)
+      this.updateVertebrado(this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value));
+    else
+      this.changeSuccessMessage('El código del vertebrado es obligatorio para editar.', 'warning');
+  }
+  nuevo() {
+    this.editar = true;
+    this.guardar = false;
+    this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo());
+    this.crearForm_Buscar();
+    this.tabPagina1();
+  }
+}
+function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {
+  return {
+    numero: k,
+    vertebradoId: vertebradoId,
+    codigoe: codigoe,
+    nombreg: nombreg,
+    nombren: nombren,
+    nombrecomunn: nombrecomunn
+  };
 }

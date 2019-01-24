@@ -207,7 +207,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     });
   }
   buscarPlanta() {
-    //this.lista_Area = new Array();
+    this.lista_Planta = new Array();
     this.loading = true;
     var a = "¬";
     var b = "¬";
@@ -221,7 +221,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       c = this.buscarForm.get('nombren').value;
     if (this.buscarForm.get('nombrecomunn').value)
       d = this.buscarForm.get('nombrecomunn').value;
-    console.log('buscar:', a, b, c, d);
     this.caracterizacionServicio.getPlantas(a, b, c, d)
       .subscribe(
         data => {
@@ -237,7 +236,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
               val.nombrecomunn));
           }
           this.dataSource = new MatTableDataSource(this.lista_Planta);
-          console.log(data);
           this.loading = false;
         }, err => {
           this.loading = false;
