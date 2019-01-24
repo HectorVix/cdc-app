@@ -5,9 +5,12 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { contacto_Modelo } from '../../../modelo/contacto/contacto-modelo';
+//--------------tabla------------------------------------
+import { contacto_FormGroup } from '../../../modelo/formGroup/contacto';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+//import { subnacional_Dato } from '../../../modelo/tabla/subnacional-dato';
 
 @Component({
   selector: 'app-formulario-contactos',
@@ -29,7 +32,7 @@ export class FormularioContactosComponent implements OnInit {
     private contactoServicio: ContactoService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crearForm_contactos();
+    this.crearForm_Contacto(new contacto_Modelo);
   }
 
   ngOnInit() {
@@ -41,78 +44,8 @@ export class FormularioContactosComponent implements OnInit {
     //this.dataSource.paginator = this.paginator;
     //this.dataSource.sort = this.sort;
   }
-  crearForm_contactos() {
-    this.contactosForm = this.fb.group({
-      //identificadores
-      'numident': ['', Validators.required],
-      'nombreident': '',
-      'titulo': '',
-      'nombre': '',
-      'apellido1': '',
-      'apellido2': '',
-      'sufijo': '',
-      'posicion': '',
-      'institucion': '',
-      //localizadores
-      'email': '',
-      'dir1': '',
-      'dir2': '',
-      'dir3': '',
-      'pais': '',
-      'ciudad': '',
-      'subnacion': '',
-      'codpostal': '',
-      'masident': '',
-      'smsa': '',
-      'teleftrabajo': '', //*number
-      'telefhogar': '',   //*number
-      //tipos de contactos
-      'tipocont': '',
-      //actividades con el contacto
-      'activcont': '',
-      //descripción
-      'resumen': '',
-      //documentación y mantenimiento
-      'coddirp': '',
-      'actualizar': ''//*date
-
-    });
-
-    this.contactosFormPruebas = this.fb.group({
-      //identificadores
-      'numident': 'pruebas3',
-      'nombreident': '',
-      'titulo': '',
-      'nombre': '',
-      'apellido1': '',
-      'apellido2': '',
-      'sufijo': '',
-      'posicion': '',
-      'institucion': '',
-      //localizadores
-      'email': '',
-      'dir1': '',
-      'dir2': '',
-      'dir3': '',
-      'pais': '',
-      'ciudad': '',
-      'subnacion': '',
-      'codpostal': '',
-      'masident': '',
-      'smsa': '',
-      'teleftrabajo': '', //*number
-      'telefhogar': '',   //*number
-      //tipos de contactos
-      'tipocont': '',
-      //actividades con el contacto
-      'activcont': '',
-      //descripción
-      'resumen': '',
-      //documentación y mantenimiento
-      'coddirp': '',
-      'actualizar': ''//*date
-    });
-
+  crearForm_Contacto(row: contacto_Modelo) {
+    this.contactosForm = new contacto_FormGroup().getContaco_FormGrup(row);
   }
   tabPagina1() {
     this.selected.setValue(0);

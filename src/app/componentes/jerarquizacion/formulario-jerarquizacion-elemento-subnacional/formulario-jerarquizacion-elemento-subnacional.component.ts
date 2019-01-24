@@ -13,7 +13,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { subnacional_Dato } from '../../../modelo/tabla/subnacional-dato'
+import { subnacional_Dato } from '../../../modelo/tabla/subnacional-dato';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',
