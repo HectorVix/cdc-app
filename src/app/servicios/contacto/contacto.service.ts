@@ -20,6 +20,13 @@ export class ContactoService {
         catchError(this.handleError<contacto_Modelo>('addContacto'))
       );
   }
+  //Obtener contacto por numident, nombreident, nombre, apellido1, apellido2, email
+  getContactos(a: String, b: String, c: String, d: String, e: String, f: String): Observable<contacto_Modelo> {
+    return this.http.get<contacto_Modelo>(this.rootUrl + '/contacto/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
+  }
+  updateContacto(contacto: contacto_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/contacto/editar/' + jti, contacto, httpOptions);
+  }
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
