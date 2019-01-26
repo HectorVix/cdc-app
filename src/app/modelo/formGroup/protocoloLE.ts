@@ -7,13 +7,14 @@ export class protocolo_LE_FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
         return fb.group({
-            'codigoe': '',
-            'rangog': '',
-            'rangon': '',
-            'rangos': '',
-            'nombre': '',
-            'nomcomun': '',
-            'fecha': '',
+            'protocoloId': row.protocoloId,
+            'codigoe': row.codigoe,
+            'rangog': row.rangog,
+            'rangon': row.rangon,
+            'rangos': row.rangos,
+            'nombre': row.nombre,
+            'nomcomun': row.nomcomun,
+            'fecha': fechaServicio.getFecha(row.fecha)
         });
     }
 }

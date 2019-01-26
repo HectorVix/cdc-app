@@ -409,7 +409,7 @@ export class FormularioLeComponent implements OnInit {
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): void {
     this.loading = true;
-    this.localizacionServicio.editarLocalizacionElemento(le)
+    this.localizacionServicio.updateLocalizacionElemento(le)
       .subscribe(
         resLe => {
           this.loading = false;

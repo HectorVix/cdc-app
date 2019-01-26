@@ -133,7 +133,7 @@ export class FormularioContactosComponent implements OnInit {
 
   crearForm_Buscar() {
     this.buscar_Form = this.fb.group({
-      'contactosId': '',
+    //  'contactosId': '',
       'numident': '',
       'nombreident': '',
       'nombre': '',
