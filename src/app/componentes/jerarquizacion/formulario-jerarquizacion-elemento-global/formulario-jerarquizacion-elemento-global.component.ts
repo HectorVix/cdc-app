@@ -33,6 +33,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
   jerarquizacion_Global_Form: FormGroup;
   buscar_Form: FormGroup;
+  jerarquizacionId: Jerarquizacion;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -89,8 +90,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.registrarJerarquizacionGlobal();
   }
   crear_Jerarquizacion_Global(jerarquizacionGlobal: jerarquizacion_Global_Modelo) {
-    this.jerarquizacion_Global_Form =
-      new jerarquizacion_Global_FormGroup().getJerarquizacion_Global_FormGrup(jerarquizacionGlobal);
+    var temporalJerarquizacionGlobalFormGroup = new jerarquizacion_Global_FormGroup()
+    this.jerarquizacion_Global_Form = temporalJerarquizacionGlobalFormGroup.getJerarquizacion_Global_FormGrup(jerarquizacionGlobal);
+    this.jerarquizacionId = temporalJerarquizacionGlobalFormGroup.getjERARQUIZACIONjerarquizacionid();//para editar
+
   }
   //validar codigoe 
   validarCodigoe() {
@@ -231,6 +234,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   updateJerarquizacionGlobal(global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
+    global.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
     this.jerarquizacionServicio.updateGlobal(global)
       .subscribe(
         resGlobal => {

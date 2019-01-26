@@ -35,7 +35,8 @@ export class jerarquizacion_Nacional_FormGroup {
             'resrn': row.resrn,
             'edautor': row.edautor,
             'edicion': fechaServicio.getFecha(row.edicion),
-            'actualizar': fechaServicio.getFecha(row.actualizar)
+            'actualizar': fechaServicio.getFecha(row.actualizar),
+            'jERARQUIZACIONjerarquizacionid': row.jERARQUIZACIONjerarquizacionid
         });
     }
 }
