@@ -6,9 +6,12 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 // import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
 import { protocolo_LE_Modelo } from '../../../modelo/localizacion/protocolo-le-modelo';
 import { dispersion_Modelo } from '../../../modelo/localizacion/dispersion-modelo';
+//--------------tabla------------------------------------
+import { protocolo_LE_FormGroup } from '../../../modelo/formGroup/protocoloLE';
+import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+//import { contacto_Dato } from '../../../modelo/tabla/contacto-dato';
 
 @Component({
   selector: 'app-protocolo-le',
@@ -47,7 +50,7 @@ export class ProtocoloLeComponent implements OnInit {
     private localizacionServicio: LocalizacionService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crearForm_ProtocoloLe();
+    this.crearForm_ProtocoloLe(new protocolo_LE_Modelo);
   }
 
   ngOnInit() {
@@ -58,16 +61,8 @@ export class ProtocoloLeComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
   }
 
-  crearForm_ProtocoloLe() {
-    this.protocoloLeForm = this.fb.group({
-      'codigoe': ['', Validators.required],
-      'rangog': '',
-      'rangon': '',
-      'rangos': '',
-      'nombre': '',
-      'nomcomun': '',
-      'fecha': '',
-    });
+  crearForm_ProtocoloLe(row: protocolo_LE_Modelo) {
+    this.protocoloLeForm = new protocolo_LE_FormGroup().getProtocolo_LE_FormGrup(row);
   }
   guardarProtocolo() {
     var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
