@@ -33,6 +33,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
+  jerarquizacionId: Jerarquizacion;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -85,8 +86,9 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     }
   }
   createFormJerarquizacionNacional(jerarquizacionNacional: jerarquizacion_Nacional_Modelo) {
-    this.jerarquizacion_Nacional_Form =
-      new jerarquizacion_Nacional_FormGroup().getJerarquizacion_Nacional_FormGrup(jerarquizacionNacional);
+    var temporalJerarquizacionNacionalFormGroup = new jerarquizacion_Nacional_FormGroup();
+    this.jerarquizacion_Nacional_Form = temporalJerarquizacionNacionalFormGroup.getJerarquizacion_Nacional_FormGrup(jerarquizacionNacional);
+    this.jerarquizacionId = temporalJerarquizacionNacionalFormGroup.getjERARQUIZACIONjerarquizacionid();// para editar
   }
   //guardar registro jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
@@ -228,6 +230,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   updateJerarquizacionNacional(nacional: jerarquizacion_Nacional_Modelo): void {
     this.loading = true;
+    nacional.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
     this.jerarquizacionServicio.updateNacional(nacional)
       .subscribe(
         resNacional => {

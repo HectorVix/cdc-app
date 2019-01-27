@@ -1,11 +1,14 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { jerarquizacion_Nacional_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
+import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 export class jerarquizacion_Nacional_FormGroup {
+    jerarquizacionEditar: Jerarquizacion;
     constructor() { }
     getJerarquizacion_Nacional_FormGrup(row: jerarquizacion_Nacional_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
+        this.setjERARQUIZACIONjerarquizacionid(row.jERARQUIZACIONjerarquizacionid);
         return fb.group({
             'nacionalId': row.nacionalId,
             //pagina1
@@ -36,7 +39,13 @@ export class jerarquizacion_Nacional_FormGroup {
             'edautor': row.edautor,
             'edicion': fechaServicio.getFecha(row.edicion),
             'actualizar': fechaServicio.getFecha(row.actualizar),
-            'jERARQUIZACIONjerarquizacionid': row.jERARQUIZACIONjerarquizacionid
+            'jERARQUIZACIONjerarquizacionid': Jerarquizacion
         });
+    }
+    getjERARQUIZACIONjerarquizacionid(): Jerarquizacion {
+        return this.jerarquizacionEditar;
+    }
+    setjERARQUIZACIONjerarquizacionid(jerarquizacion: Jerarquizacion) {
+        this.jerarquizacionEditar = jerarquizacion;
     }
 }
