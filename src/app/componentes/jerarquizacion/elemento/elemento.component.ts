@@ -182,18 +182,15 @@ export class ElementoComponent implements OnInit {
     this.elementoServicio.editarElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
-            this.galeriaServicio.update_FotoId_Lista(
-              this.galeria.archivos,
-              this.galeria.datosFotografias,
-              elemento.elementoId,
-              this.fotoId_Lista,
-              this.tam_Inicial_ListaFotos,
-              this.galeria.getTam_final_ListaFotos());
-          }
-          else {
-            this.loading = false;
-          }
+          //  if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
+
+          this.galeriaServicio.update_FotoId_Lista(
+            this.galeria.archivos,
+            this.galeria.datosFotografias,
+            elemento.elementoId,
+            this.fotoId_Lista,
+            this.tam_Inicial_ListaFotos,
+            this.galeria.getTam_final_ListaFotos());
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
           this.elementos = new Array();

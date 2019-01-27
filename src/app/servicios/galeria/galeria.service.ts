@@ -76,6 +76,9 @@ export class GaleriaService {
     if (tam_Final_ListaFotos == 0 && tam_Inicial_ListaFotos >= 1) {
       tipo = 4;
     }
+    if (tam_Inicial_ListaFotos == 0 && tam_Final_ListaFotos >= 1) {
+      tipo = 5;
+    }
     switch (tipo) {
       case 1: { //listas final igual a la inicial
         var posicion = 0;
@@ -205,6 +208,44 @@ export class GaleriaService {
           this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
         }
       } break;
+      case 5: {
+        console.log('tipo 5');
+        var posicion = 0;
+        const estado = {};
+        var fechaCreacion = null;
+        archivos.forEach(archivo => {
+          var formData: FormData = new FormData();
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = datosFotos[posicion];
+          if (baseFotoModelo.fecha) {
+            fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
+          }
+          formData.append('file', archivo, archivo.name);
+          formData.append('descripcion', baseFotoModelo.descripcion);
+          formData.append('comentario', baseFotoModelo.comentario);
+          formData.append('autor', baseFotoModelo.autor);
+          formData.append('fecha', fechaCreacion);
+          formData.append('posicion', '' + posicion);
+          var fotoId = fotoId_Lista[posicion];
+          var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
+            reportProgress: true
+          });
+          var progreso = new Subject<number>();
+          this.http.request(req).subscribe(event => {
+            if (event.type === HttpEventType.UploadProgress) {
+              const porcentajeCargado = Math.round(100 * event.loaded / event.total);
+              progreso.next(porcentajeCargado);
+            } else if (event instanceof HttpResponse) {
+              progreso.complete();
+            }
+          });
+          estado[archivo.name] = {
+            progreso: progreso.asObservable()
+          };
+          posicion = posicion + 1;
+        });
+      }
+        break;
       default: { break; }
     }
   }

@@ -272,7 +272,8 @@ export class GaleriaComponent implements OnInit {
             }
             cont = cont + 1;
           });
-        } break;
+        }
+          break;
       }
     }
   }
@@ -386,13 +387,15 @@ export class GaleriaComponent implements OnInit {
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
     }
-    this.datosFotografias[fotoModelo.posicion] = {
+    /*this.datosFotografias[fotoModelo.posicion] = {
       descripcion: fotoModelo.descripcion,
       comentario: fotoModelo.comentario,
       autor: fotoModelo.autor,
       fecha: this.fechaServicio.getFecha(fotoModelo.fecha),
       editado: true
-    };
+    };*/
+
+    this.datosFotografias.push(fotoModelo);
   }
   dataURItoBlob(dataURI) {
     const byteString = atob(dataURI);
