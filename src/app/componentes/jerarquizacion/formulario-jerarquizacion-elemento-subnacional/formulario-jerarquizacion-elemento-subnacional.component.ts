@@ -30,6 +30,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   criterio_rangos = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacion_SubnacionalForm: FormGroup;
   buscar_Form: FormGroup;
+  jerarquizacionId: Jerarquizacion;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -82,8 +83,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     }
   }
   crear_Jerarquizacion_Subnacional(jerarquizacionSubnacional: jerarquizacion_Subnacional_Modelo) {
-    this.jerarquizacion_SubnacionalForm
-      = new jerarquizacion_Subnacional_FormGroup().getJerarquizacion_Subnacional_FormGrup(jerarquizacionSubnacional);
+    var jerarquizacion_Subnacional_Form = new jerarquizacion_Subnacional_FormGroup();
+    this.jerarquizacion_SubnacionalForm = jerarquizacion_Subnacional_Form.getJerarquizacion_Subnacional_FormGrup(jerarquizacionSubnacional);
+    this.jerarquizacionId = jerarquizacion_Subnacional_Form.getjERARQUIZACIONjerarquizacionid();//para editar      
   }
 
   //guardar registro jerarquizacion subnancional
@@ -230,6 +232,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   updateJerarquizacionSubnacional(subnacional: jerarquizacion_Subnacional_Modelo): void {
     this.loading = true;
+    subnacional.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
     this.jerarquizacionServicio.updateSubnacional(subnacional)
       .subscribe(
         resSubnacional => {
