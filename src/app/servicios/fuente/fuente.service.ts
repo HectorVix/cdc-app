@@ -63,6 +63,7 @@ export class FuenteService {
           progreso.complete();
         }
       });
+      console.log('Progreso:', progreso.asObservable());
       estado[archivo.name] = {
         progreso: progreso.asObservable()
       };

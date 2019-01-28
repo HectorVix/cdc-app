@@ -14,6 +14,8 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { fuente_Dato } from '../../../modelo/tabla/fuente-dato'
 import { fuente_FormGroup } from '../../../modelo/formGroup/fuente';
+import { ArchivosDisponiblesComponent } from '../../fuente/archivos-disponibles/archivos-disponibles.component';
+
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -24,8 +26,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
   progreso: any;
-  cargando = false;
-  cargadoExitoso = false;
+  cargado = false;
   //mensajes
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -38,10 +39,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   criterio_codfuente = this.criterio_ResumenesFuente.codfuente;
   criterio_publicacion_cdc = this.criterio_ResumenesFuente.publicacion_cdc;
   criterio_valor = this.criterio_ResumenesFuente.valor;
-  variosList: string[] = ['Comunat', 'Comunterr', 'Bosque', 'Sabana', 'Prado', 'Chaparral', 'Alpino', 'Otroterr', 'Comunac', 'Palustre', 'Lacustre', 'Fluvial', 'Estuarino', 'Maritimo', 'Subterp'];
-  floraList: string[] = ['Flora', 'Floraac', 'Floraterp', 'Plnovasc', 'Microorg', 'Infositio'];
-  faunaList: string[] = ['Fauna', 'Faunaac', 'Faunaterr', 'Moluscos', 'Insectos', 'Crustaceos', 'Otroartrop', 'otroinvert', 'Peces', 'Anfibios', 'reptiles', 'Aves', 'Mamiferos', 'Cienfisic', 'Fisiotopo'];
-  otrosList: string[] = ['Hidrol', 'Geologia', 'Suelos', 'Clima', 'Biologia', 'Ecologia', 'Funecol', 'Diversnat', 'Inventario', 'Tecinvest', 'Am', 'Planmanejo', 'Tecmanejo', 'Estimpamb', 'Organprot', 'Herrprot'];
   //loading
   loading: boolean;
   //---------------------------------tabla
@@ -60,6 +57,11 @@ export class FormularioResumenFuenteComponent implements OnInit {
   editar = true;
   guardar = false;
   private codigoFuente: String;
+  //--------------------------
+  //componente archivos disponibles
+  @ViewChild(ArchivosDisponiblesComponent)
+  private archivos_Disponibles: ArchivosDisponiblesComponent;
+
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
     private fechaServicio: FechaService,
@@ -107,15 +109,13 @@ export class FormularioResumenFuenteComponent implements OnInit {
     }
   }
   cargarArchivos(fuenteId: Number) {
-    this.cargando = true;
     this.progreso = this.fuenteServicio.cargarArchivos(this.archivos, fuenteId);
     let allProgressObservables = [];
     for (let key in this.progreso) {
       allProgressObservables.push(this.progreso[key].progreso);
     }
     forkJoin(allProgressObservables).subscribe(end => {
-      this.cargadoExitoso = true;
-      this.cargando = false;
+      this.cargado = true;
     });
 
   }
@@ -152,7 +152,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   cancelar() {
     this.archivos = new Set();
     this.fuenteForm.reset;
-    this.cargando = false;
+    this.cargado = false;
     this.progreso = {};
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -230,6 +230,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivo.nativeElement.value = "";
     this.progreso = null;
     this.archivos = new Set();
+    this.archivos_Disponibles.buscarArchivos();
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -257,6 +258,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivo.nativeElement.value = "";
     this.progreso = null;
     this.codigoFuente = "";
+    this.cargado = false;
   }
   editar_Fuente() {
     if (this.fuenteForm.get('codfuente').value) {

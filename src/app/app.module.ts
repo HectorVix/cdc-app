@@ -64,6 +64,7 @@ import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
 import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
+import { ArchivosDisponiblesComponent } from './componentes/fuente/archivos-disponibles/archivos-disponibles.component';
 // import {FlexLayoutModule} from '@angular/flex-layout';
 
 
@@ -100,7 +101,8 @@ import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
     ElementoComponent,
     HomeCdcComponent,
     GaleriaComponent,
-    ConfirmacionComponent
+    ConfirmacionComponent,
+    ArchivosDisponiblesComponent
   ],
   imports: [
     BrowserModule,

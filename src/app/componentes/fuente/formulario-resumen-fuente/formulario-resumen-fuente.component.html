@@ -50,23 +50,32 @@
               <div class="form-group mt-15">
                 <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
                 <div>
-                  <button mat-raised-button class="add-files-btn color-green" (click)="agregarArchivos()">
+                  <button mat-raised-button [disabled]="cargado" class="add-files-btn color-green" (click)="agregarArchivos()">
                     Agregar Archivos
                   </button>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
-                <mat-dialog-content fxFlex>
-                  <mat-list>
-                    <mat-list-item *ngFor="let archivo of archivos">
-                      <h4 mat-line>{{archivo.name}}</h4>
-                      <mat-progress-bar *ngIf="progreso" mode="determinate" [value]="progreso[archivo.name].progreso | async"></mat-progress-bar>
-                    </mat-list-item>
-                  </mat-list>
-                </mat-dialog-content>
-              </div>
+            <div class="card-body">
+              <mat-tab-group dynamicHeight>
+                <mat-tab label="Nuevos Archivos">
+                  <div class="row">
+                    <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                      <mat-dialog-content fxFlex>
+                        <mat-list>
+                          <mat-list-item *ngFor="let archivo of archivos">
+                            <h4 mat-line>{{archivo.name}}</h4>
+                            <mat-progress-bar *ngIf="progreso" mode="determinate" [value]="progreso[archivo.name].progreso | async"></mat-progress-bar>
+                          </mat-list-item>
+                        </mat-list>
+                      </mat-dialog-content>
+                    </div>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Archivos disponibles">
+                  <app-archivos-disponibles></app-archivos-disponibles>
+                </mat-tab>
+              </mat-tab-group>
             </div>
             <!-- fin row -->
             <div class="row">
