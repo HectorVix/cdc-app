@@ -9,7 +9,7 @@
             </div>
             <div class="row">
               <div class="col-md-2">
-                <label for="">CODFUENTE:</label>
+                <label for="">DOCUMENTO:</label>
               </div>
               <div class=" col-md-4 mt10">
                 <mat-form-field>
@@ -22,9 +22,8 @@
                 </mat-form-field>
               </div>
               <div class="md-form col-md-4 mt10">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error="Error" data-success="Correcto" formControlName="codfuente"
-                  required>
-                <label for="form1" class="font-weight-light"></label>
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error=" " data-success=" " formControlName="codfuente">
+                <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
             </div>
             <!-- fin row -->
@@ -117,41 +116,46 @@
               </div>
             </div>
             <!-- fin row -->
-
+            <!-- Inicio row tema-->
             <div class="row">
               <div class="col-md-2">
                 <label for="">TEMA:</label>
               </div>
-              <div class="col-md-2">
-                <mat-form-field>
-                  <mat-select placeholder="Varios" panelClass="color-panel-green" multiple formControlName="varios">
-                    <mat-option *ngFor="let varios of variosList" [value]="varios">{{varios}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-2">
-                <mat-form-field>
-                  <mat-select placeholder="Flora" panelClass="color-panel-green" multiple formControlName="flora">
-                    <mat-option *ngFor="let flora of floraList" [value]="flora">{{flora}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-2">
-                <mat-form-field>
-                  <mat-select placeholder="Fauna" panelClass="color-panel-green" multiple formControlName="fauna">
-                    <mat-option *ngFor="let fauna of faunaList" [value]="fauna">{{fauna}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-2">
-                <mat-form-field>
-                  <mat-select placeholder="Otros" panelClass="color-panel-green" multiple formControlName="otros">
-                    <mat-option *ngFor="let otros of otrosList" [value]="otros">{{otros}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+              <section class="seccion-tema col-md-2 ">
+                <mat-checkbox formControlName="comunnat">COMUNNAT</mat-checkbox>
+              </section>
+              <section class="seccion-tema col-md-2 ">
+                <mat-checkbox>FLORA</mat-checkbox>
+              </section>
+
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>FAUNA</mat-checkbox>
+              </section>
+
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>HIDROL</mat-checkbox>
+              </section>
             </div>
-            <!-- fin row -->
+            <!-- Fin row  tema-->
+            <!-- Inicio row tema-->
+            <div class="row">
+              <div class="col-md-2">
+                <label for=""></label>
+              </div>
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>COMUNTERR</mat-checkbox>
+              </section>
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>FLORAAC</mat-checkbox>
+              </section>
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>FAUNAAAC</mat-checkbox>
+              </section>
+              <section class="seccion-tema col-md-2">
+                <mat-checkbox>GEOLOGIA</mat-checkbox>
+              </section>
+            </div>
+            <!-- Fin row  tema-->
             <div class="row">
               <div class="col-md-2">
                 <label for="">PUBLICACION.CDC:</label>

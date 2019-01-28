@@ -86,3 +86,9 @@ tr.base-element-row:active{
   overflow-y: scroll;
   white-space: nowrap;
 }
+.seccion-tema {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}

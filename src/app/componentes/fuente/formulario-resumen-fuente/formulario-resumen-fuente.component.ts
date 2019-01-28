@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
-import { tema_Modelo } from '../../../modelo/fuente/tema-modelo';
 import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -14,6 +13,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { fuente_Dato } from '../../../modelo/tabla/fuente-dato'
+import { fuente_FormGroup } from '../../../modelo/formGroup/fuente';
 @Component({
   selector: 'app-formulario-resumen-fuente',
   templateUrl: './formulario-resumen-fuente.component.html',
@@ -59,12 +59,13 @@ export class FormularioResumenFuenteComponent implements OnInit {
   selected = new FormControl(0);
   editar = true;
   guardar = false;
+  private codigoFuente: String;
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
     private fechaServicio: FechaService,
     private dialog: MatDialog,
     private fb2: FormBuilder) {
-    this.crearForm_ResumenesFuente();
+    this.crearForm_ResumenesFuente(new fuente_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Fuente);
   }
@@ -88,32 +89,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  crearForm_ResumenesFuente() {
-    this.fuenteForm = this.fb.group({
-      'naturalezadocumento': '',
-      'codfuente': '',
-      'cita': '',
-      'archivado': '',
-      'cobgeo': '',
-      'coords': '',
-      'coordn': '',
-      'coorde': '',
-      'coordo': '',
-      'resumen': '',
-      //tema
-      'varios': null,
-      'flora': null,
-      'fauna': null,
-      'otros': null,
-      'publicacioncdc': null,
-      'valor': '',
-      'clave': '',
-      'comentario': '',
-      'notadigest': '',
-      'actualizar': '', //date
-      'control': '',    //date
-      'bcd': ''
-    });
+  crearForm_ResumenesFuente(row: fuente_Modelo) {
+    this.fuenteForm = new fuente_FormGroup().getFuente_FormGrup(row);
   }
   resetForm() {
     this.fuenteForm.reset();
@@ -143,65 +120,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
   }
   guardarFuente() {
-    var temaList: Array<tema_Modelo> = new Array();
-    var varios = this.fuenteForm.get('varios').value;
-    var flora = this.fuenteForm.get('flora').value;
-    var fauna = this.fuenteForm.get('fauna').value;
-    var otros = this.fuenteForm.get('otros').value;
-    var fuenteBase = this.setFuente(this.fuenteForm.value);
-    if (varios) {
-      for (let tema of varios) {
-        var temaModelo = new tema_Modelo();
-        temaModelo.nombre = tema;
-        temaModelo.tipo = 1;
-        temaList.push(temaModelo);
-      }
+    if (this.fuenteForm.get('codfuente').value) {
+      var fuenteBase = this.setFuente(this.fuenteForm.value);
+      this.addFuente(fuenteBase);
     }
-    if (flora) {
-      for (let tema of flora) {
-        var temaModelo = new tema_Modelo();
-        temaModelo.nombre = tema;
-        temaModelo.tipo = 2;
-        temaList.push(temaModelo);
-      }
-    }
-    if (fauna) {
-      for (let tema of fauna) {
-        var temaModelo = new tema_Modelo();
-        temaModelo.nombre = tema;
-        temaModelo.tipo = 3;
-        temaList.push(temaModelo);
-      }
-    }
-    if (otros) {
-      for (let tema of otros) {
-        var temaModelo = new tema_Modelo();
-        temaModelo.nombre = tema;
-        temaModelo.tipo = 4;
-        temaList.push(temaModelo);
-      }
-    }
-    fuenteBase.temaList = temaList;
-    this.addFuente(fuenteBase);
+    else
+      this.changeSuccessMessage('No se pudo regitrar. El código de la fuente es obligatorio.', 'primary');
   }
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
-    if (fuente.varios)
-      fuente.varios = true;
-    else
-      fuente.varios = false;
-
-    if (fuente.flora)
-      fuente.flora = true;
-    else
-      fuente.flora = false;
-    if (fuente.fauna)
-      fuente.fauna = true;
-    else
-      fuente.fauna = false;
-    if (fuente.otros)
-      fuente.otros = true;
-    else
-      fuente.otros = false;
     fuente.actualizar = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
     fuente.control = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('control').value);
     return fuente;
@@ -256,11 +182,11 @@ export class FormularioResumenFuenteComponent implements OnInit {
   buscarFuente() {
     this.lista_Fuente = new Array();
     this.loading = true;
-    var a = "~^ªº~†⑦→∞¬¬";
-    var b = "~^ªº~†⑦→∞¬¬";
-    var c = "~^ªº~†⑦→∞¬¬";
-    var d = "~^ªº~†⑦→∞¬¬";
-    var e = "~^ªº~†⑦→∞¬¬";
+    var a = "¬";
+    var b = "¬";
+    var c = "¬";
+    var d = "¬";
+    var e = "¬";
     if (this.buscarForm.get('codigoFuente').value)
       a = this.buscarForm.get('codigoFuente').value;
     if (this.buscarForm.get('naturalezaDocumento').value)
@@ -300,38 +226,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
     });
   }
   mostrar_Fuente_Busqueda(row: fuente_Dato) {
-    this.crearForm_Fuente_Buscado(this.getFuente_id(row.fuenteId));
+    this.crearForm_ResumenesFuente(this.getFuente_id(row.fuenteId));
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
-  }
-  crearForm_Fuente_Buscado(row: fuente_Modelo) {
-    this.fuenteForm = this.fb.group({
-      'fuenteId': row.fuenteId,
-      'naturalezadocumento': row.naturalezadocumento,
-      'codfuente': row.codfuente,
-      'cita': row.cita,
-      'archivado': row.archivado,
-      'cobgeo': row.cobgeo,
-      'coords': row.coords,
-      'coordn': row.coordn,
-      'coorde': row.coorde,
-      'coordo': row.coordo,
-      'resumen': row.resumen,
-      //tema
-      'varios': "",
-      'flora': "",
-      'fauna': "",
-      'otros': "",
-      'publicacioncdc': row.publicacioncdc,
-      'valor': row.valor,
-      'clave': row.clave,
-      'comentario': row.comentario,
-      'notadigest': row.notadigest,
-      'actualizar': this.fechaServicio.getFecha(row.actualizar),
-      'control': this.fechaServicio.getFecha(row.control),
-      'bcd': row.bcd
-    });
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -339,6 +237,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       var fuente_Busqueda_Aux = new fuente_Modelo();// necesario dado que si reutiliza conserva la primera asignación
       fuente_Busqueda_Aux = dataFuente;
       if (id == fuente_Busqueda_Aux.fuenteId) {
+        this.codigoFuente = fuente_Busqueda_Aux.codfuente;
         fuenteBusqueda = fuente_Busqueda_Aux;
       }
     });
@@ -350,13 +249,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
   nuevo() {
     this.editar = true;
     this.guardar = false;
-    this.crearForm_ResumenesFuente();
+    this.crearForm_ResumenesFuente(new fuente_Modelo);
     this.crearForm_Buscar();
     this.tabPagina1();
     this.resetForm();
     this.archivos = new Set();
     this.archivo.nativeElement.value = "";
     this.progreso = null;
+    this.codigoFuente = "";
   }
   editar_Fuente() {
     console.log('listo para editar');
@@ -366,6 +266,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    fuente.codfuente = this.codigoFuente; // en caso de ser modificado el código inicial
     this.fuenteServicio.editarFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {
