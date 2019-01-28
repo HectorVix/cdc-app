@@ -197,8 +197,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
       d = this.buscarForm.get('archivado').value;
     if (this.buscarForm.get('clave').value)
       e = this.buscarForm.get('clave').value;
-    console.log('buscar:', a, b, c, d, e);
-
     this.fuenteServicio.getFuentes(b, a, c, d, e)
       .subscribe(
         data => {
@@ -206,7 +204,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
           var k = 0;
           for (let val of this.dataFuente) {
             k = k + 1;
-            console.log('data:', val);
             this.lista_Fuente.push(crearFuente(k, val.fuenteId, val.naturalezadocumento, val.codfuente, val.cita, val.clave));
           }
           this.dataSource = new MatTableDataSource(this.lista_Fuente);
@@ -230,6 +227,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.archivo.nativeElement.value = "";
+    this.progreso = null;
+    this.archivos = new Set();
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -259,8 +259,11 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.codigoFuente = "";
   }
   editar_Fuente() {
-    console.log('listo para editar');
-    this.updateFuente(this.setFuente(this.fuenteForm.value));
+    if (this.fuenteForm.get('codfuente').value) {
+      this.updateFuente(this.setFuente(this.fuenteForm.value));
+    }
+    else
+      this.changeSuccessMessage('Error  no se pudo editar. El código fuente es obligatorio', 'primary');
   }
   updateFuente(fuente: fuente_Modelo): void {
     this.loading = true;

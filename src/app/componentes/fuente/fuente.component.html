@@ -3,15 +3,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card tab-black mt-alinear ml-alinear">
-          <div class="card-tabs">
-            <ngb-tabset #t="ngbTabset">
-              <ngb-tab id="tab-selectbyid1" title="Resumenes de Fuente">
-                <ng-template ngbTabContent>
-                  <app-formulario-resumen-fuente></app-formulario-resumen-fuente>
-                </ng-template>
-              </ngb-tab>           
-            </ngb-tabset>
-          </div>
+          <ngb-tabset #t="ngbTabset">
+            <ngb-tab id="tab-selectbyid1" title="Resumenes de Fuente">
+              <ng-template ngbTabContent>
+                <app-formulario-resumen-fuente></app-formulario-resumen-fuente>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
         </div>
       </div>
     </div>
