@@ -276,7 +276,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_Fuente);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar, el codigo de la fuente debe ser valido', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar.', 'primary');
         });
   }
 

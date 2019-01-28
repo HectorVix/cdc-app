@@ -6,6 +6,13 @@ export class fuente_FormGroup {
     getFuente_FormGrup(row: fuente_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
+        var val_publicacioncdcAux = row.publicacioncdc;
+        var val_publicacioncdc = "";
+        //no deja asignar directamente el  valor por el 3 valor que es cuando se selecciona --Ninguna--
+        if (val_publicacioncdcAux == true)
+            val_publicacioncdc = "" + true;
+        if (val_publicacioncdcAux == false)
+            val_publicacioncdc = "" + false;
         return fb.group({
             'fuenteId': row.fuenteId,
             'naturalezadocumento': row.naturalezadocumento,
@@ -18,7 +25,7 @@ export class fuente_FormGroup {
             'coorde': row.coorde,
             'coordo': row.coordo,
             'resumen': row.resumen,
-            'publicacioncdc': row.publicacioncdc,
+            'publicacioncdc': val_publicacioncdc,
             'valor': row.valor,
             'clave': row.clave,
             'comentario': row.comentario,
