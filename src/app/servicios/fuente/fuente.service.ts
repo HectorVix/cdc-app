@@ -5,7 +5,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { fuente_Modelo } from '../../modelo/fuente/fuente-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { archivo_Modelo } from '../../modelo/archivoDatos/archivo-datos';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
 };
@@ -23,6 +23,16 @@ export class FuenteService {
    */
   getFuentes(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
     return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+  }
+  getDatosArchivos(fuenteId: Number): Observable<archivo_Modelo> {
+    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/buscarArchivos/' + fuenteId).pipe(
+      catchError(this.handleError<archivo_Modelo>('getDatosArchivos'))
+    );
+  }
+  descargarArchivo(nombre: String, archivoId: Number): Observable<archivo_Modelo> {
+    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/descargarArchivo/' + nombre + '/' + archivoId).pipe(
+      catchError(this.handleError<archivo_Modelo>('descargarArchivo'))
+    );
   }
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions)

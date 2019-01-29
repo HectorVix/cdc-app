@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="card-body">
-              <mat-tab-group dynamicHeight>
+              <mat-tab-group dynamicHeight [selectedIndex]="selectedArchivos.value" (selectedIndexChange)="selectedArchivos.setValue($event)">
                 <mat-tab label="Nuevos Archivos">
                   <div class="row">
                     <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">

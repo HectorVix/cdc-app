@@ -1,6 +1,6 @@
 export interface archivo_Dato {
-    archivoId:Number;
+    archivoId: Number;
     numero: Number;
     nombre: String;
-    codigoFuente: String;
+    archivocdc;
 }

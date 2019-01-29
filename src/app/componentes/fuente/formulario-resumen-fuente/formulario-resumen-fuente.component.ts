@@ -54,6 +54,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   //------------------------------------------
   selected = new FormControl(0);
+  selectedArchivos = new FormControl(0);
   editar = true;
   guardar = false;
   private codigoFuente: String;
@@ -230,7 +231,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivo.nativeElement.value = "";
     this.progreso = null;
     this.archivos = new Set();
-    this.archivos_Disponibles.buscarArchivos();
+    this.archivos_Disponibles.buscarArchivos(this.fuenteForm.get('fuenteId').value);
+    this.tabArchivos(1);
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -247,6 +249,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
   tabPagina1() {
     this.selected.setValue(0);
   }
+  tabArchivos(pag: Number) {
+    this.selectedArchivos.setValue(pag);
+  }
   nuevo() {
     this.editar = true;
     this.guardar = false;
@@ -259,6 +264,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.progreso = null;
     this.codigoFuente = "";
     this.cargado = false;
+    this.tabArchivos(0);
+    this.archivos_Disponibles.nuevo();
   }
   editar_Fuente() {
     if (this.fuenteForm.get('codfuente').value) {
