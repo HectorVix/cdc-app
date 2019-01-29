@@ -210,6 +210,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       g = this.areaManejoFormBuscar.get('subnacion').value;
     if (this.areaManejoFormBuscar.get('subdivision').value)
       h = this.areaManejoFormBuscar.get('subdivision').value;
+    console.log('buscar:', a, b, c, d, e, f, g, h);
     this.areaServicio.getAreas(a, b, c, d, e, f, g, h)
       .subscribe(
         data => {
@@ -220,6 +221,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
             this.lista_Area.push(crearArea(k, val.areaId, val.codigoam, val.nomsitio, val.codsitio, val.nomsitio));
           }
           this.dataSource = new MatTableDataSource(this.lista_Area);
+          console.log(data);
           this.loading = false;
         }, err => {
           this.loading = false;

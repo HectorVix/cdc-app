@@ -25,13 +25,20 @@ export class FuenteService {
     return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   getDatosArchivos(fuenteId: Number): Observable<archivo_Modelo> {
-    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/buscarArchivos/' + fuenteId);
+    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/buscarArchivos/' + fuenteId).pipe(
+      catchError(this.handleError<archivo_Modelo>('getDatosArchivos'))
+    );
   }
   descargarArchivo(nombre: String, archivoId: Number): Observable<archivo_Modelo> {
-    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/descargarArchivo/' + nombre + '/' + archivoId);
+    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/descargarArchivo/' + nombre + '/' + archivoId).pipe(
+      catchError(this.handleError<archivo_Modelo>('descargarArchivo'))
+    );
   }
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
-    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
+    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions)
+      .pipe(
+        catchError(this.handleError<fuente_Modelo>('addFuente'))
+      );
   }
   editarFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
     return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions);
@@ -39,13 +46,13 @@ export class FuenteService {
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      //console.error(error);
+      console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }
   private log(message: string) {
-    //console.log(`CDC Servicio: ${message}`);
+    console.log(`CDC Servicio: ${message}`);
 
   }
   //cargar archivos
@@ -66,6 +73,7 @@ export class FuenteService {
           progreso.complete();
         }
       });
+      console.log('Progreso:', progreso.asObservable());
       estado[archivo.name] = {
         progreso: progreso.asObservable()
       };

@@ -1,15 +1,17 @@
 <div class="fondo">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col s8 offset-s2">
         <div class="card tab-black mt-alinear ml-alinear">
-          <ngb-tabset #t="ngbTabset">
-            <ngb-tab id="tab-selectbyid1" title="Rastreo del Elemento">
-              <ng-template ngbTabContent>
-                <app-formulario-re></app-formulario-re>
-              </ng-template>
-            </ngb-tab>
-          </ngb-tabset>
+          <div class="card-tabs">
+            <ngb-tabset #t="ngbTabset">
+              <ngb-tab id="tab-selectbyid1" title="Rastreo del Elemento">
+                <ng-template ngbTabContent>
+                  <app-formulario-re></app-formulario-re>
+                </ng-template>
+              </ngb-tab>             
+            </ngb-tabset>
+          </div>    
         </div>
       </div>
     </div>

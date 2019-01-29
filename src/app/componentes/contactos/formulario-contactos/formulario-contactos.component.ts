@@ -102,10 +102,8 @@ export class FormularioContactosComponent implements OnInit {
     });
   }
   guardarContacto() {
-    if (this.contactosForm.get('numident').value) {
+    if (this.contactosForm.get('numident').value)
       var contactoBase = this.setContacto(this.contactosForm.value);
-      this.addContacto(contactoBase);
-    }
     else
       this.changeSuccessMessage('El número de identificación es obligatorio para guardar.', 'warning');
   }
@@ -135,7 +133,7 @@ export class FormularioContactosComponent implements OnInit {
 
   crearForm_Buscar() {
     this.buscar_Form = this.fb.group({
-      'contactosId': '',
+    //  'contactosId': '',
       'numident': '',
       'nombreident': '',
       'nombre': '',

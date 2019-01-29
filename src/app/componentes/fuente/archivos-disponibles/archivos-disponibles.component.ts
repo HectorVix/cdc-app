@@ -42,10 +42,12 @@ export class ArchivosDisponiblesComponent implements OnInit {
   }
   public buscarArchivos(fuenteId: Number) {
     this.lista_Archivos = new Array();
+    console.log('ok buscando archivos');
     this.fuenteServicio.getDatosArchivos(fuenteId)
       .subscribe(
         data => {
           this.dataArchivos = data;
+          console.log('archivos cdc:', data);
           var k = 0;
           for (let val of this.dataArchivos) {
             k = k + 1;
@@ -54,9 +56,13 @@ export class ArchivosDisponiblesComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_Archivos);
 
         }, err => {
+          console.log('Error archivos');
         });
   }
   descargarArchivo(row: archivo_Dato) {
+    console.log('arhivoId:', row.archivoId);
+    console.log('nombre:', row.nombre);
+    console.log('nombre:', row.archivocdc);
     const imageBlob = this.dataURItoBlob(row.archivocdc);
     // funciona tanto para imagenes como para pdfs o cualquier tipo de documento , la clave esta que el nombre del archivo tenga el tipo
     const imageFile = new File([imageBlob], "" + row.nombre, { type: 'application/pdf' });
