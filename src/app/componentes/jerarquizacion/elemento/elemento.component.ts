@@ -195,6 +195,7 @@ export class ElementoComponent implements OnInit {
           this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
           this.elementos = new Array();
           this.dataSource = new MatTableDataSource(this.elementos);
+          this.editar = true;
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar', 'primary');
