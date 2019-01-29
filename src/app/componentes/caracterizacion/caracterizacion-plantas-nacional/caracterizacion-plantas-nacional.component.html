@@ -18,9 +18,14 @@
                                         <div class="col-md-2">
                                             <label for="">CODIGOE:</label>
                                         </div>
-                                        <div class="md-form col-md-4 mt10">
+                                        <div class="md-form col-md-4 mt10" *ngIf="editar">
                                             <input [disabled]="false" mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" "
                                                 data-success=" ">
+                                            <label for="formCodigoe"></label>
+                                        </div>
+                                        <div class="md-form col-md-4 mt10" *ngIf="guardar">
+                                            <input [disabled]="false" mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" "
+                                                data-success=" " disabled>
                                             <label for="formCodigoe"></label>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
@@ -859,11 +864,11 @@
                                 </div>
                             </div>
                             <!-- Fin row -->
+                            <div>
+                                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarPlanta()">Buscar</button>
+                            </div>
                         </form>
                         <!-- Fin form -->
-                        <div>
-                            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarPlanta()">Buscar</button>
-                        </div>
                         <div class="text-center">
                             <div *ngIf="loading">
                                 <img src="assets/imagenes/load.gif">

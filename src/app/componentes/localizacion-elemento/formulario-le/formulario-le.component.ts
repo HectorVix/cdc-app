@@ -14,7 +14,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
-
+import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
 @Component({
   selector: 'app-formulario-le',
   templateUrl: './formulario-le.component.html',
@@ -69,7 +69,7 @@ export class FormularioLeComponent implements OnInit {
     private elementoServicio: ElementoService,
     private fechaServicio: FechaService,
     private dialog: MatDialog, private fb2: FormBuilder) {
-    this.crearFormLocalizacion_Elemento();
+    this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
   }
@@ -94,93 +94,8 @@ export class FormularioLeComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  crearFormLocalizacion_Elemento() {
-    this.leForm = this.fb.group({
-      //página1
-      //identificadores
-      'codigole': ['', Validators.required],
-      'ident': "",
-      //  'nombres': '',
-      //'nomcomuns': '',
-      //'rangog': '',
-      //'rangon': '',
-      //'rangos': '',
-      //localizadores
-      'subnacion': '',
-      'subdivision': '',
-      'codsitio': '',
-      'nomsitio': '',
-      'sitioeva': '',
-      'precisionl': '',
-      'nommapa': '',
-      'codmapa': '',
-      'nummarg': '',
-      'numpunto': '',
-      'diezdiez': '',
-      'latitud': '',
-      'longitud': '',
-      'coords': '',
-      'coordn': '',
-      'coorde': '',
-      'coordo': '',
-      'direccion': '',
-      'ecoregion': '',
-      'cuenca': '',
-      //status
-      'fechaeva': '',
-      'ultobs': '',
-      'priobs': '',
-      'rangole': '',
-      'fecharangole': '',
-      'comrangole': '',
-      //'resprg': '',
-      'datosle': '',
-      'contacto': '',
-      'numcontacto': '',
-      //descripción
-      'desgen': '',
-      'elev': '',
-      'area': '',
-      //protección
-      //'lista_proteccion': '',
-      'masterreno': "",
-      'masprotec': "",
-      'masmanejo': "",
-      'involtnc': "",
-      'commanejo': '',
-      'comprot': '',
-      //propietario
-      'prop': '',
-      'infprop': "",
-      'comprop': '',
-      //campos opcionales
-      'leopc1': '',
-      'leopc2': '',
-      'leopc3': '',
-      'leopc4': '',
-      'leopc5': '',
-      'leopc6': '',
-      'leopc7': '',
-      'leopc8': '',
-      'leopc9': '',
-      'leopc10': '',
-      //comentarios generales
-      'comentario': '',
-      //documentación y mantenimiento
-      'sensdatos': "",
-      'limites': "",
-      'fotos': "",
-      'mejorfuente': '',
-      'codfuente': '',
-
-      'mdrev': "",
-      'transcrito': '',
-      'cc': "",
-      'cartografo': '',
-      'respdatos': '',
-      'actualizar': ''
-
-    });
+  crearFormLocalizacion_Elemento(row: Localizacion_Modelo) {
+    this.leForm = new localizacion_FormGroup().getLocalizacion_FormGrup(row);
   }
 
   guardarLocalizacion() {
@@ -294,101 +209,13 @@ export class FormularioLeComponent implements OnInit {
     });
   }
   mostrar_LocalizacionElemento_Busqueda(row) {
-    this.crearFormLocalizacionElemento_Buscado(this.getRastreoElemento_id(row.LocalizacionId));
+    this.crearFormLocalizacion_Elemento(this.getRastreoElemento_id(row.LocalizacionId));
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
   }
 
-  crearFormLocalizacionElemento_Buscado(row: Localizacion_Modelo) {
-    this.leForm = this.fb.group({
-      'localizacionId': row.localizacionId,
-      //página1
-      //identificadores
-      'codigole': row.codigole,
-      'ident': "" + row.ident,
-      //  'nombres': '',
-      //'nomcomuns': '',
-      //'rangog': '',
-      //'rangon': '',
-      //'rangos': '',
-      //localizadores
-      'subnacion': row.subnacion,
-      'subdivision': row.subdivision,
-      'codsitio': row.codsitio,
-      'nomsitio': row.nomsitio,
-      'sitioeva': row.sitioeva,
-      'precisionl': row.precisionl,
-      'nommapa': row.nommapa,
-      'codmapa': row.codmapa,
-      'nummarg': row.nummarg,
-      'numpunto': row.numpunto,
-      'diezdiez': row.diezdiez,
-      'latitud': row.latitud,
-      'longitud': row.longitud,
-      'coords': row.coords,
-      'coordn': row.coordn,
-      'coorde': row.coorde,
-      'coordo': row.coordo,
-      'direccion': row.direccion,
-      'ecoregion': row.ecoregion,
-      'cuenca': row.cuenca,
-      //status
-      'fechaeva': this.fechaServicio.getFecha(row.fechaeva),
-      'ultobs': this.fechaServicio.getFecha(row.ultobs),
-      'priobs': row.priobs,
-      'rangole': row.rangole,
-      'fecharangole': this.fechaServicio.getFecha(row.fecharangole),
-      'comrangole': row.comrangole,
-      //'resprg': '',
-      'datosle': row.datosle,
-      'contacto': row.contacto,
-      'numcontacto': row.numcontacto,
-      //descripción
-      'desgen': row.desgen,
-      'elev': row.elev,
-      'area': row.area,
-      //protección
-      //'lista_proteccion': '',
-      'masterreno': "" + row.masterreno,
-      'masprotec': "" + row.masprotec,
-      'masmanejo': "" + row.masmanejo,
-      'involtnc': "" + row.involtnc,
-      'commanejo': row.commanejo,
-      'comprot': row.comprot,
-      //propietario
-      'prop': row.prop,
-      'infprop': "" + row.infprop,
-      'comprop': row.comprop,
-      //campos opcionales
-      'leopc1': row.leopc1,
-      'leopc2': row.leopc2,
-      'leopc3': row.leopc3,
-      'leopc4': row.leopc4,
-      'leopc5': row.leopc5,
-      'leopc6': row.leopc6,
-      'leopc7': row.leopc7,
-      'leopc8': row.leopc8,
-      'leopc9': row.leopc9,
-      'leopc10': row.leopc10,
-      //comentarios generales
-      'comentario': row.comentario,
-      //documentación y mantenimiento
-      'sensdatos': "" + row.sensdatos,
-      'limites': "" + row.limites,
-      'fotos': "" + row.fotos,
-      'mejorfuente': row.mejorfuente,
-      'codfuente': row.codfuente,
 
-      'mdrev': "" + row.mdrev,
-      'transcrito': this.fechaServicio.getFecha(row.transcrito),
-      'cc': "" + row.cc,
-      'cartografo': this.fechaServicio.getFecha(row.cartografo),
-      'respdatos': row.respdatos,
-      'actualizar': this.fechaServicio.getFecha(row.actualizar)
-
-    });
-  }
   getRastreoElemento_id(id: Number): Localizacion_Modelo {
     var localizacionElementoBusqueda = new Localizacion_Modelo();
     this.dataLE.forEach(dataLE => {
@@ -403,7 +230,7 @@ export class FormularioLeComponent implements OnInit {
   nuevo() {
     this.editar = true;
     this.guardar = false;
-    this.crearFormLocalizacion_Elemento();
+    this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.tabPagina1();
   }

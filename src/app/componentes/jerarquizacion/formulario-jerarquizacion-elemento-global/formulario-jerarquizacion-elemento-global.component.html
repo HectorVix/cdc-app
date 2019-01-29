@@ -18,9 +18,12 @@
                     <div class="col-md-2">
                       <label for="">CODIGOE:</label>
                     </div>
-                    <div class="md-form col-md-4 mt-1">
-                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="Valor requerido"
-                        data-success="Correcto" required>
+                    <div class="md-form col-md-4 mt-1" *ngIf="editar">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" ">
+                    </div>
+                    <div class="md-form col-md-4 mt-1" *ngIf="guardar">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" "
+                        disabled>
                     </div>
                     <div class="col-md-2">
                       <div class="mat-elevation-z8" class="base-form">
@@ -491,11 +494,11 @@
                 </div>
               </div>
               <!-- Fin row -->
+              <div>
+                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarJerarquizacionGlobal()">Buscar</button>
+              </div>
             </form>
             <!-- Fin form -->
-            <div>
-              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarJerarquizacionGlobal()">Buscar</button>
-            </div>
             <div class="text-center">
               <div *ngIf="loading">
                 <img src="assets/imagenes/load.gif">

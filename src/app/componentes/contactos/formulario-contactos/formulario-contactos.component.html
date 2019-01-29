@@ -18,9 +18,15 @@
                       <div class="col-md-2">
                         <label for="">NUMIDENT:</label>
                       </div>
-                      <div class="md-form col-md-5 mt10">
+                      <div class="md-form col-md-5 mt10" *ngIf="editar">
                         <i class="fa fa-id-card prefix"></i>
                         <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="numident" data-error=" " data-success=" ">
+                        <label for="formNumident"></label>
+                      </div>
+                      <div class="md-form col-md-5 mt10" *ngIf="guardar">
+                        <i class="fa fa-id-card prefix"></i>
+                        <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="numident" data-error=" " data-success=" "
+                          disabled>
                         <label for="formNumident"></label>
                       </div>
                     </div>
@@ -360,11 +366,11 @@
                   </div>
                 </div>
                 <!-- Fin row -->
+                <div>
+                  <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarContacto()">Buscar</button>
+                </div>
               </form>
               <!-- Fin form -->
-              <div>
-                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarContacto()">Buscar</button>
-              </div>
               <div class="text-center">
                 <div *ngIf="loading">
                   <img src="assets/imagenes/load.gif">
