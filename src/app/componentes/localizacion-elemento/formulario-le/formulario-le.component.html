@@ -17,9 +17,12 @@
                     <div class="col-md-2">
                       <label for="">CODIGOLE:</label>
                     </div>
-                    <div class="md-form col-md-4 mt-0">
-                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error="Incorrecto "
-                        data-success=" " required>
+                    <div class="md-form col-md-4 mt-0" *ngIf="editar">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error=" " data-success=" ">
+                    </div>
+                    <div class="md-form col-md-4 mt-0" *ngIf="guardar">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error=" " data-success=" "
+                        disabled>
                     </div>
                     <div class="col-md-2 mt-0">
                       <mat-form-field>
@@ -712,18 +715,30 @@
         <ng-template ngbTabContent>
           <div class="modal-content mat-elevation-z4">
             <div class="modal-header color-green "></div>
-            <form [formGroup]="buscarForm" class="base-form">
-              <mat-form-field class="base-full-width">
-                <input matInput placeholder="Codigo Localización Elemento" formControlName="codigole">
-              </mat-form-field>
-              <mat-form-field class="base-full-width">
-                <input matInput placeholder="Nombre Subnacional" formControlName="nombres">
-              </mat-form-field>
-              <mat-form-field class="base-full-width">
-                <input matInput placeholder="Nombre Común Subnacional" formControlName="nomcomuns">
-              </mat-form-field>
-              <div class="mat-elevation-z8" class="base-form">
-                <button mat-raised-button class="color-green" (click)="buscarLE()">Buscar</button>
+            <!-- Inicio form -->
+            <form [formGroup]="buscarForm">
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formCodigole" class="form-control" formControlName="codigole" data-error=" " data-success=" ">
+                  <label for="formCodigole">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO LOCALIZACIÓN ELEMENTO</label>
+                </div>
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formNombres" class="form-control" formControlName="nombres" data-error=" " data-success=" ">
+                  <label for="formNombres">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE SUBNACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNomcomuns" class="form-control" formControlName="nomcomuns" data-error=" " data-success=" ">
+                  <label for="formNomcomuns">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN SUBNACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div>
+                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarLE()">Buscar</button>
               </div>
             </form>
             <div class="text-center">

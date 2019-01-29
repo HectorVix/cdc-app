@@ -1,4 +1,4 @@
-import { Valor} from '../../modelo/select/overwiew-valor';
+import { Valor } from '../../modelo/select/overwiew-valor';
 export class criterio_le {
   si_no: Valor[] = [
     { value: 'true', viewValue: 'Sí' },
