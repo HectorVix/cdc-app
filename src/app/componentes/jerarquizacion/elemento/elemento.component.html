@@ -11,9 +11,13 @@
               <div class="col-md-2">
                 <label for="">CODIGO ELEMENTO:</label>
               </div>
-              <div class="md-form col-md-9 mt10">
+              <div class="md-form col-md-9 mt10" *ngIf="editar">
                 <input mdbInputDirective [disabled]="codigoElemento" type="text" id="formCodigoe" class="form-control" formControlName="codigo"
                   data-error=" " data-success=" ">
+              </div>
+              <div class="md-form col-md-9 mt10" *ngIf="guardar">
+                <input mdbInputDirective [disabled]="codigoElemento" type="text" id="formCodigoe" class="form-control" formControlName="codigo"
+                  data-error=" " data-success=" " disabled>
               </div>
             </div>
             <!-- fin row -->
