@@ -94,19 +94,36 @@
       <div class="card-body">
         <div class="modal-content mat-elevation-z4">
           <div class="modal-header color-green"></div>
-          <form [formGroup]="buscarForm" class="base-form">
-            <mat-form-field class="base-full-width">
-              <input matInput placeholder="Codigo del Elemento" formControlName="codigo" [errorStateMatcher]="matcher">
-            </mat-form-field>
-            <mat-form-field class="base-full-width">
-              <input matInput placeholder="Nombre Común" formControlName="nombrecomun" [errorStateMatcher]="matcher">
-            </mat-form-field>
-            <mat-form-field class="base-full-width">
-              <input matInput placeholder="Nombre Científico" formControlName="nombrecientifico" [errorStateMatcher]="matcher">
-            </mat-form-field>
-            <div class="mat-elevation-z8" class="base-form">
-              <button mat-raised-button class="color-green" (click)="buscarElemento()">Buscar</button>
+          <form [formGroup]="buscarForm ">
+            <!-- Inicio row -->
+            <div class="row">
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formCodigo" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                <label for="formCodigo">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
+              </div>
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control" formControlName="nombrecomun" data-error=" "
+                  data-success=" ">
+                <label for="formNombrecomun">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN</label>
+              </div>
             </div>
+            <!-- Fin row -->
+            <!-- Inicio row -->
+            <div class="row">
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formCodigo" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                <label for="formCodigo">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
+              </div>
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control" formControlName="nombrecientifico" data-error=" "
+                  data-success=" ">
+                <label for="formNombrecientifico">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE CIENTÍFICO</label>
+              </div>
+            </div>
+            <div>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarElemento()">Buscar</button>
+            </div>
+            <!-- Fin row -->
           </form>
           <div class="text-center">
             <div *ngIf="loading">
