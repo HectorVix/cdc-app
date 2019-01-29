@@ -17,13 +17,9 @@
                                         <div class="col-md-2">
                                             <label for="">CODSITIO:</label>
                                         </div>
-                                        <div class="md-form col-md-4 mt-5" *ngIf="editar">
+                                        <div class="md-form col-md-4 mt-5 ">
                                             <input mdbInputDirective type="text" id="formNomcomungs" class="form-control" formControlName="codsitio" data-error="Incorrecto"
                                                 data-success=" ">
-                                        </div>
-                                        <div class="md-form col-md-4 mt-5" *ngIf="guardar">
-                                            <input mdbInputDirective type="text" id="formNomcomungs" class="form-control" formControlName="codsitio" data-error="Incorrecto"
-                                                data-success=" " disabled>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -609,45 +605,24 @@
                     <ng-template ngbTabContent>
                         <div class="modal-content mat-elevation-z4">
                             <div class="modal-header color-green"></div>
-                            <!-- Inicio form -->
-                            <form [formGroup]="buscarForm">
-                                <!-- Inicio row -->
-                                <div class="row">
-                                    <div class="md-form col-md-5 mt10">
-                                        <input mdbInputDirective type="text" id="formCodigoSitio" class="form-control" formControlName="codigoSitio" data-error=" "
-                                            data-success=" ">
-                                        <label for="formCodigoSitio">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL SITIO</label>
-                                    </div>
-                                    <div class="md-form col-md-5 mt10">
-                                        <input mdbInputDirective type="text" id="formNombreSitio" class="form-control" formControlName="nombreSitio" data-error=" "
-                                            data-success=" ">
-                                        <label for="formNombreSitio">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE DEL SITIO</label>
-                                    </div>
-                                </div>
-                                <!-- Fin row -->
-                                <!-- Inicio row -->
-                                <div class="row">
-                                    <div class="md-form col-md-5 mt-10">
-                                        <input mdbInputDirective type="text" id="formSinonimoSitio" class="form-control" formControlName="sinonimoSitio" data-error=" "
-                                            data-success=" ">
-                                        <label for="formSinonimoSitio">&nbsp;&nbsp;&nbsp;&nbsp;SINÓNIMO DEL SITIO</label>
-                                    </div>
-                                    <div class="md-form col-md-5 mt-10">
-                                        <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
-                                        <label for="formNacion">&nbsp;&nbsp;&nbsp;&nbsp;NACIÓN</label>
-                                    </div>
-                                </div>
-                                <!-- Fin row -->
-                                <!-- Inicio row -->
-                                <div class="row">
-                                    <div class="md-form col-md-5 mt-10">
-                                        <input mdbInputDirective type="text" id="formDepto" class="form-control" formControlName="depto" data-error=" " data-success=" ">
-                                        <label for="formDepto">&nbsp;&nbsp;&nbsp;&nbsp;DEPARTAMENTO</label>
-                                    </div>
-                                </div>
-                                <!-- Fin row -->
-                                <div>
-                                    <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarSitio()">Buscar</button>
+                            <form [formGroup]="buscarForm" class="base-form">
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Código del Sitio" formControlName="codigoSitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nombre del Sitio" formControlName="nombreSitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Sinónimo del Sitio" formControlName="sinonimoSitio">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Nacion" formControlName="nacion">
+                                </mat-form-field>
+                                <mat-form-field class="base-full-width">
+                                    <input matInput placeholder="Departamento" formControlName="depto">
+                                </mat-form-field>
+                                <div class="mat-elevation-z8" class="base-form">
+                                    <button mat-raised-button class="color-green" (click)="buscarSitio()">Buscar</button>
                                 </div>
                             </form>
                             <div class="text-center">

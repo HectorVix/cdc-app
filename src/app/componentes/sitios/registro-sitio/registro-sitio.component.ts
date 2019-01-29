@@ -206,11 +206,11 @@ export class RegistroSitioComponent implements OnInit {
   buscarSitio() {
     this.lista_Sitio = new Array();
     this.loading = true;
-    var a = "¬";
-    var b = "¬";
-    var c = "¬";
-    var d = "¬";
-    var e = "¬";
+    var a = "~^ªº~†⑦→∞¬¬";
+    var b = "~^ªº~†⑦→∞¬¬";
+    var c = "~^ªº~†⑦→∞¬¬";
+    var d = "~^ªº~†⑦→∞¬¬";
+    var e = "~^ªº~†⑦→∞¬¬";
     if (this.buscarForm.get('codigoSitio').value)
       a = this.buscarForm.get('codigoSitio').value;
     if (this.buscarForm.get('nombreSitio').value)
@@ -221,6 +221,7 @@ export class RegistroSitioComponent implements OnInit {
       d = this.buscarForm.get('nacion').value;
     if (this.buscarForm.get('depto').value)
       e = this.buscarForm.get('depto').value;
+    console.log('buscar:', a, b, c, d);
     this.sitioServicio.getSitios(a, b, c, d, e)
       .subscribe(
         data => {
@@ -231,6 +232,7 @@ export class RegistroSitioComponent implements OnInit {
             this.lista_Sitio.push(crearSitio(k, val.sitioId, val.codsitio, val.nomsitio, val.sinsitio, val.nacion, val.subnacion));
           }
           this.dataSource = new MatTableDataSource(this.lista_Sitio);
+          console.log(data);
           this.loading = false;
         }, err => {
           this.loading = false;

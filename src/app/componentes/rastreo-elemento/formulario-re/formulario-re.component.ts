@@ -16,7 +16,6 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
-import { rastreo_Elemento_FormGroup } from '../../../modelo/formGroup/rastreo';
 
 @Component({
   selector: 'app-formulario-re',
@@ -64,7 +63,7 @@ export class FormularioReComponent implements OnInit {
     private fechaServicio: FechaService,
     private elementoServicio: ElementoService,
     private dialog: MatDialog, private fb2: FormBuilder) {
-    this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
+    this.crearFormRastreoElemento();
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
   }
@@ -123,8 +122,83 @@ export class FormularioReComponent implements OnInit {
         });
   }
   //crear formulario Rastreo Elemento
-  crearFormRastreoElemento(row: rastreo_Elemento_Modelo) {
-    this.reForm = new rastreo_Elemento_FormGroup().getRastreo_Elemento_FormGrup(row);
+  crearFormRastreoElemento() {
+    this.reForm = this.fb.group({
+      //pagina1
+      //identificadores
+      'codigoe': ['', Validators.required],
+      'tropicos': '',
+      'nacion': '',
+      'subnacion': '',
+      //taxonomia (global)
+      'clasetax': '',
+      'orden': '',
+      'familia': '',
+      'genero': '',
+      'nombreg': '',
+      'autor': '',
+      'fuentenom': '',
+      'refnombreg': '',
+      'disttax': '',
+      'dudatax': '',
+      'nomcomung': '',
+      'comtaxg': '',
+      //taxonomia (nacional)
+      'nombren': '',
+      'numsinn': '',
+      'nomcomunn': '',
+      'comtaxn': '',
+      //status (global)
+      'rangog': '',
+      'fecharevrg': null,
+      'formularg': '',
+      'resprg': '',
+      'aepeu': '',
+      'fechaaepeu': null,
+      'cites': '',
+      'iucn': '',
+      'planscons': '',
+      'resplan': '',
+      'resumenman': '',
+      'resresumen': '',
+      'exsitu': null,
+      'instexsitu': '',
+      'endemismo': '',
+      //status (nacional)
+      'rangon': '',
+      'fecharevrn': null,
+      'formularn': '',
+      'rastreolen': '',
+      'lestimn': '',
+      'leprotn': '',
+      'abundn': '',
+      'protnacion': '',
+      'refnombren': '',
+      'transparencian': null,
+      //status (subnacional)
+      'rangos': '',
+      'fecharevrs': null,
+      'formulars': '',
+      'rastreoles': '',
+      'lestims': '',
+      'leprots': '',
+      'abunds': '',
+      'protsubnac': '',
+      'refnombres': '',
+      'transparencias': null,
+      //campos opcionales
+      'reopc1': '',
+      'reopc2': '',
+      'reopc3': '',
+      'reopc4': '',
+      'reopc5': '',
+      // manteniiento del registro
+      'codfuenten': '',
+      'codfuentes': '',
+      'actualizag': null,
+      'actualizan': null,
+      'actualizas': null
+    });
   }
   //validar codigoe 
   validarCodigoe(): Boolean {
@@ -233,17 +307,96 @@ export class FormularioReComponent implements OnInit {
   }
 
   mostrar_RastreoElemento_Busqueda(row) {
-    //var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
-    this.crearFormRastreoElemento(this.getRastreoElemento_id(row.rastreoId));
+    var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
+    this.crearFormRastreoElementoo_Buscado(this.getRastreoElemento_id(row.rastreoId));
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
   }
-
+  //crear formulario Rastreo Ellemento busqueda para editarlo
+  crearFormRastreoElementoo_Buscado(re: rastreo_Elemento_Modelo) {
+    this.reForm = this.fb.group({
+      'rastreoId': re.rastreoId,
+      //pagina1
+      //identificadores
+      'codigoe': re.codigoe,
+      'tropicos': re.tropicos,
+      'nacion': re.nacion,
+      'subnacion': re.subnacion,
+      //taxonomia (global)
+      'clasetax': re.clasetax,
+      'orden': re.orden,
+      'familia': re.familia,
+      'genero': re.genero,
+      'nombreg': re.nombreg,
+      'autor': re.autor,
+      'fuentenom': re.fuentenom,
+      'refnombreg': re.refnombreg,
+      'disttax': re.disttax,
+      'dudatax': re.dudatax,
+      'nomcomung': re.nomcomung,
+      'comtaxg': re.comtaxg,
+      //taxonomia (nacional)
+      'nombren': re.nombren,
+      'numsinn': re.numsinn,
+      'nomcomunn': re.nomcomunn,
+      'comtaxn': re.comtaxn,
+      //status (global)
+      'rangog': re.rangog,
+      'fecharevrg': this.fechaServicio.getFecha(re.fecharevrg),
+      'formularg': re.formularg,
+      'resprg': re.resprg,
+      'aepeu': re.aepeu,
+      'fechaaepeu': this.fechaServicio.getFecha(re.fechaaepeu),
+      'cites': re.cites,
+      'iucn': re.iucn,
+      'planscons': re.planscons,
+      'resplan': re.resplan,
+      'resumenman': re.resumenman,
+      'resresumen': re.resresumen,
+      'exsitu': "" + re.exsitu,
+      'instexsitu': re.instexsitu,
+      'endemismo': re.endemismo,
+      //status (nacional)
+      'rangon': re.rangon,
+      'fecharevrn': this.fechaServicio.getFecha(re.fecharevrn),
+      'formularn': re.formularn,
+      'rastreolen': re.rastreolen,
+      'lestimn': re.lestimn,
+      'leprotn': re.leprotn,
+      'abundn': re.abundn,
+      'protnacion': re.protnacion,
+      'refnombren': re.refnombren,
+      'transparencian': "" + re.transparencian,
+      //status (subnacional)
+      'rangos': re.rangos,
+      'fecharevrs': this.fechaServicio.getFecha(re.fecharevrs),
+      'formulars': re.formulars,
+      'rastreoles': re.rastreoles,
+      'lestims': re.lestims,
+      'leprots': re.leprots,
+      'abunds': re.abunds,
+      'protsubnac': re.protsubnac,
+      'refnombres': re.refnombres,
+      'transparencias': "" + re.transparencias,
+      //campos opcionales
+      'reopc1': re.reopc1,
+      'reopc2': re.reopc2,
+      'reopc3': re.reopc3,
+      'reopc4': re.reopc4,
+      'reopc5': re.reopc5,
+      // manteniiento del registro
+      'codfuenten': re.codfuenten,
+      'codfuentes': re.codfuentes,
+      'actualizag': this.fechaServicio.getFecha(re.actualizag),
+      'actualizan': this.fechaServicio.getFecha(re.actualizan),
+      'actualizas': this.fechaServicio.getFecha(re.actualizas)
+    });
+  }
   nuevo() {
     this.editar = true;
     this.guardar = false;
-    this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
+    this.crearFormRastreoElemento();
     this.crearForm_Buscar();
     this.tabPagina1();
   }
@@ -258,7 +411,7 @@ export class FormularioReComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar.', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar, el codigoe debe ser valido', 'primary');
         });
   }
   editarRastreoElemento() {
