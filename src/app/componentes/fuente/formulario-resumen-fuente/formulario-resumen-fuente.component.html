@@ -21,8 +21,13 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="md-form col-md-4 mt10">
+              <div class="md-form col-md-4 mt10" *ngIf="editar">
                 <input mdbInputDirective type="text" id="form1" class="form-control" data-error=" " data-success=" " formControlName="codfuente">
+                <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
+              </div>
+              <div class="md-form col-md-4 mt10" *ngIf="guardar">
+                <input mdbInputDirective type="text" id="form1" class="form-control" data-error=" " data-success=" " formControlName="codfuente"
+                  disabled>
                 <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
             </div>

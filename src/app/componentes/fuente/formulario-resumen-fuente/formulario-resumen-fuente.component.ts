@@ -72,6 +72,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Fuente);
   }
+
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
@@ -106,6 +107,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     for (let key in archivos) {
       if (!isNaN(parseInt(key))) {
         this.archivos.add(archivos[key]);
+        this.tabArchivos(0);
       }
     }
   }
@@ -233,6 +235,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos = new Set();
     this.archivos_Disponibles.buscarArchivos(this.fuenteForm.get('fuenteId').value);
     this.tabArchivos(1);
+    this.cargado = false;
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -283,12 +286,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
       .subscribe(
         resFuente => {
           this.loading = false;
+          this.cargarArchivos(fuente.fuenteId);
           this.changeSuccessMessage(`Editado exitoso ,codigo de la fuente:${resFuente.codfuente}.`, 'success');
           this.lista_Fuente = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Fuente);
+          this.editar = true;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar.', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar.', 'primary');
         });
   }
 
