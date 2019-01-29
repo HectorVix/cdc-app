@@ -20,9 +20,12 @@
                       <div class="col-md-2">
                         <label for="">CODIGOAM:</label>
                       </div>
-                      <div class="md-form col-md-5 mt-3 ">
-                        <input mdbInputDirective type="text" id="formCodigoam" class="form-control" formControlName="codigoam" data-error="incorrecto"
-                          data-success=" ">
+                      <div class="md-form col-md-5 mt-3" *ngIf="editar">
+                        <input mdbInputDirective type="text" id="formCodigoam" class="form-control" formControlName="codigoam" data-error=" " data-success=" ">
+                      </div>
+                      <div class="md-form col-md-5 mt-3" *ngIf="guardar">
+                        <input mdbInputDirective type="text" id="formCodigoam" class="form-control" formControlName="codigoam" data-error=" " data-success=" "
+                          disabled>
                       </div>
                     </div>
                     <!-- fin row -->
@@ -505,7 +508,7 @@
                     <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
                     <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                     <button class="btn  color-green waves-light" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
-                    <button class="btn  color-green waves-light" [disabed]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
+                    <button class="btn  color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
                   </div>
                 </mat-tab>
               </mat-tab-group>
@@ -572,11 +575,11 @@
                   </div>
                 </div>
                 <!-- Fin row -->
+                <div>
+                  <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarArea()">Buscar</button>
+                </div>
               </form>
               <!-- Fin form -->
-              <div>
-                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarArea()">Buscar</button>
-              </div>
               <div class="text-center">
                 <div *ngIf="loading">
                   <img src="assets/imagenes/load.gif">
