@@ -17,9 +17,13 @@
                     <div class="col-md-2">
                       <label for="">CODIGOLE:</label>
                     </div>
-                    <div class="md-form col-md-4 mt-0">
+                    <div class="md-form col-md-4 mt-0" *ngIf="editar">
                       <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error="Incorrecto "
-                        data-success=" " required>
+                        data-success=" ">
+                    </div>
+                    <div class="md-form col-md-4 mt-0" *ngIf="guardar">
+                      <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigole" data-error="Incorrecto "
+                        data-success=" " disabled>
                     </div>
                     <div class="col-md-2 mt-0">
                       <mat-form-field>
