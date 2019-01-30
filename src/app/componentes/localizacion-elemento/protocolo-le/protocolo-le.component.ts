@@ -172,12 +172,10 @@ export class ProtocoloLeComponent implements OnInit {
       b = this.buscar_Form.get('nombre').value;
     if (this.buscar_Form.get('nomcomun').value)
       c = this.buscar_Form.get('nomcomun').value;
-    console.log('buscar:', a, b, c);
     this.localizacionServicio.getProtocoloLE(a, b, c)
       .subscribe(
         data => {
           this.dataProtocoloLE = data;
-          console.log(this.dataProtocoloLE);
           var k = 0;
           for (let val of this.dataProtocoloLE) {
             k = k + 1;
@@ -205,7 +203,6 @@ export class ProtocoloLeComponent implements OnInit {
     return base_protocoloLEBusqueda;
   }
   mostrar_ProtocoloLE_Busqueda(row: protocoloLE_Dato) {
-    console.log('protocoloId:', row.protocoloId);
     this.crearForm_ProtocoloLe(this.getProtocoloLE_id(row.protocoloId));
     this.tabPagina1();
     this.editar = false;

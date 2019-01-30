@@ -209,7 +209,6 @@ export class GaleriaService {
         }
       } break;
       case 5: {
-        console.log('tipo 5');
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;

@@ -101,7 +101,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   //registro nuevo formulario jerarquizacion global
   registrarJerarquizacionGlobal() {
-    console.log(this.jerarquizacion_Global_Form.value);
     var jerarquizacionModelo = new Jerarquizacion();
     jerarquizacionModelo.codigoe = this.jerarquizacion_Global_Form.get('codigoe').value;
     var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
@@ -134,7 +133,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       .subscribe(
         resElemento => {
           elemento = resElemento;
-          console.log("validado elemento ok:" + resElemento.elementoId);
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
@@ -194,12 +192,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       b = this.buscar_Form.get('nombreg').value;
     if (this.buscar_Form.get('descrielem').value)
       c = this.buscar_Form.get('descrielem').value;
-    console.log('buscar:', a, b, c);
     this.jerarquizacionServicio.getJerarquizacionesGlobal(a, b, c)
       .subscribe(
         data => {
           this.dataJerarquizacionGlobal = data;
-          console.log(this.dataJerarquizacionGlobal);
           var k = 0;
           for (let val of this.dataJerarquizacionGlobal) {
             k = k + 1;

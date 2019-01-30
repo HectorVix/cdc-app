@@ -133,7 +133,6 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       .subscribe(
         resElemento => {
           elemento = resElemento;
-          console.log("validado elemento ok:" + resElemento.elementoId);
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
@@ -190,12 +189,10 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       b = this.buscar_Form.get('nombren').value;
     if (this.buscar_Form.get('nacion').value)
       c = this.buscar_Form.get('nacion').value;
-    console.log('buscar:', a, b, c);
     this.jerarquizacionServicio.getJerarquizacionesNacional(a, b, c)
       .subscribe(
         data => {
           this.dataJerarquizacionNacional = data;
-          console.log(this.dataJerarquizacionNacional);
           var k = 0;
           for (let val of this.dataJerarquizacionNacional) {
             k = k + 1;

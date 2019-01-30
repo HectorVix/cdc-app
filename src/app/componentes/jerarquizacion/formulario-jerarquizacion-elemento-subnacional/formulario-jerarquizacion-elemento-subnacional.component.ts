@@ -90,7 +90,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
 
   //guardar registro jerarquizacion subnancional
   guardarRegistroJerarquizacionSubnacional() {
-    console.log(this.jerarquizacion_SubnacionalForm.value);
     var jerarquizacionBase = new Jerarquizacion();
     var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
     var subnacionalList: Array<jerarquizacion_Subnacional_Modelo> = new Array();
@@ -130,7 +129,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       .subscribe(
         resElemento => {
           elemento = resElemento;
-          console.log("validado elemento ok:" + resElemento.elementoId);
           this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
@@ -189,12 +187,10 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       d = this.buscar_Form.get('nombres').value;
     if (this.buscar_Form.get('loctips').value)
       e = this.buscar_Form.get('loctips').value;
-    console.log('buscar:', a, b, c, d, e);
     this.jerarquizacionServicio.getJerarquizacionesSubnacional(a, b, c, d, e)
       .subscribe(
         data => {
           this.dataJerarquizacionSubnacional = data;
-          console.log(this.dataJerarquizacionSubnacional);
           var k = 0;
           for (let val of this.dataJerarquizacionSubnacional) {
             k = k + 1;

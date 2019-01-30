@@ -133,7 +133,7 @@ export class FormularioContactosComponent implements OnInit {
 
   crearForm_Buscar() {
     this.buscar_Form = this.fb.group({
-    //  'contactosId': '',
+      //  'contactosId': '',
       'numident': '',
       'nombreident': '',
       'nombre': '',
@@ -163,12 +163,10 @@ export class FormularioContactosComponent implements OnInit {
       e = this.buscar_Form.get('apellido2').value;
     if (this.buscar_Form.get('email').value)
       f = this.buscar_Form.get('email').value;
-    console.log('buscar:', a, b, c, d, e, f);
     this.contactoServicio.getContactos(a, b, c, d, e, f)
       .subscribe(
         data => {
           this.dataContacto = data;
-          console.log(this.dataContacto);
           var k = 0;
           for (let val of this.dataContacto) {
             k = k + 1;
