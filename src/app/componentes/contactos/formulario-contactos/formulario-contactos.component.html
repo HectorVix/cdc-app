@@ -18,9 +18,15 @@
                       <div class="col-md-2">
                         <label for="">NUMIDENT:</label>
                       </div>
-                      <div class="md-form col-md-5 mt10">
+                      <div class="md-form col-md-5 mt10" *ngIf="editar">
                         <i class="fa fa-id-card prefix"></i>
                         <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="numident" data-error=" " data-success=" ">
+                        <label for="formNumident"></label>
+                      </div>
+                      <div class="md-form col-md-5 mt10" *ngIf="guardar">
+                        <i class="fa fa-id-card prefix"></i>
+                        <input mdbInputDirective type="text" id="formNumident" class="form-control" formControlName="numident" data-error=" " data-success=" "
+                          disabled>
                         <label for="formNumident"></label>
                       </div>
                     </div>
@@ -344,7 +350,7 @@
                   </div>
                   <div class="md-form col-md-5 mt-10">
                     <input mdbInputDirective type="text" id="formApellido1" class="form-control" formControlName="apellido1" data-error=" " data-success=" ">
-                    <label for="formApellido1">&nbsp;&nbsp;&nbsp;&nbsp;Apellido1</label>
+                    <label for="formApellido1">&nbsp;&nbsp;&nbsp;&nbsp;APELLIDO 1</label>
                   </div>
                 </div>
                 <!-- Fin row -->
@@ -352,19 +358,19 @@
                 <div class="row">
                   <div class="md-form col-md-5 mt-10">
                     <input mdbInputDirective type="text" id="formApellido2" class="form-control" formControlName="apellido2" data-error=" " data-success=" ">
-                    <label for="formApellido2">&nbsp;&nbsp;&nbsp;&nbsp;APELLIDO2</label>
+                    <label for="formApellido2">&nbsp;&nbsp;&nbsp;&nbsp;APELLIDO 2</label>
                   </div>
                   <div class="md-form col-md-5 mt-10">
                     <input mdbInputDirective type="text" id="formEmail" class="form-control" formControlName="email" data-error=" " data-success=" ">
-                    <label for="formEmail">&nbsp;&nbsp;&nbsp;&nbsp;Email</label>
+                    <label for="formEmail">&nbsp;&nbsp;&nbsp;&nbsp;EMAIL</label>
                   </div>
                 </div>
                 <!-- Fin row -->
+                <div>
+                  <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarContacto()">Buscar</button>
+                </div>
               </form>
               <!-- Fin form -->
-              <div>
-                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarContacto()">Buscar</button>
-              </div>
               <div class="text-center">
                 <div *ngIf="loading">
                   <img src="assets/imagenes/load.gif">
