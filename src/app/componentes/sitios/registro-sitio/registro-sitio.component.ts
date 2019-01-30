@@ -206,11 +206,11 @@ export class RegistroSitioComponent implements OnInit {
   buscarSitio() {
     this.lista_Sitio = new Array();
     this.loading = true;
-    var a = "~^ªº~†⑦→∞¬¬";
-    var b = "~^ªº~†⑦→∞¬¬";
-    var c = "~^ªº~†⑦→∞¬¬";
-    var d = "~^ªº~†⑦→∞¬¬";
-    var e = "~^ªº~†⑦→∞¬¬";
+    var a = "¬";
+    var b = "¬";
+    var c = "¬";
+    var d = "¬";
+    var e = "¬";
     if (this.buscarForm.get('codigoSitio').value)
       a = this.buscarForm.get('codigoSitio').value;
     if (this.buscarForm.get('nombreSitio').value)
