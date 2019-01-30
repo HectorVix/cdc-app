@@ -697,35 +697,51 @@
         <ng-template ngbTabContent>
           <div class="modal-content mat-elevation-z4">
             <div class="modal-header color-green"></div>
-            <mat-card>
-              <form [formGroup]="buscarForm" class="base-form">
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Código del Elemento" formControlName="codigo">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Departamento" formControlName="subnacion">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Nombre científico" formControlName="nombreg">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Nombre nacional" formControlName="nombren">
-                </mat-form-field>
-                <mat-form-field class="base-full-width">
-                  <input matInput placeholder="Nombre común nacional" formControlName="nombrecomunnn">
-                </mat-form-field>
-
-                <div class="mat-elevation-z8" class="base-form">
-                  <button mat-raised-button class="color-green" (click)="buscar_RatreoElemento()">Buscar</button>
+            <form [formGroup]="buscarForm ">
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formCodigo" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                  <label for="formCodigo">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
                 </div>
-              </form>
-              <div class="text-center">
-                <div *ngIf="loading">
-                  <img src="assets/imagenes/load.gif">
+                <div class="md-form col-md-5 mt10">
+                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
+                  <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;DEPARTAMENTO</label>
                 </div>
               </div>
-              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-            </mat-card>
+              <!-- Fin row -->
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg" data-error=" " data-success=" ">
+                  <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE GLOBAL</label>
+                </div>
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren" data-error=" " data-success=" ">
+                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <!-- Inicio row -->
+              <div class="row">
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNombrecomunnn" class="form-control" formControlName="nombrecomunnn" data-error=" "
+                    data-success=" ">
+                  <label for="formNombrecomunnn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div>
+                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscar_RatreoElemento()">Buscar</button>
+              </div>
+            </form>
+            <div class="text-center">
+              <div *ngIf="loading">
+                <img src="assets/imagenes/load.gif">
+              </div>
+            </div>
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+
           </div>
           <!-- Fin modal-content -->
           <!-- Tabla busqueda-->
