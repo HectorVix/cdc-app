@@ -90,12 +90,12 @@ export class localizacion_FormGroup {
             //página1
             //identificadores
             'codigole': row.codigole,
-            'ident': "" + row.ident,
-            //  'nombres': '',
-            //'nomcomuns': '',
-            //'rangog': '',
-            //'rangon': '',
-            //'rangos': '',
+            'ident': val_ident,
+            'nombres': row.nombres,
+            'nomcomuns': row.nomcomuns,
+            'rangog': row.rangog,
+            'rangon': row.rangon,
+            'rangos': row.rangos,
             //localizadores
             'subnacion': row.subnacion,
             'subdivision': row.subdivision,
