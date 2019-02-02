@@ -15,6 +15,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
 import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
+import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-formulario-le',
@@ -22,6 +23,7 @@ import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
   styleUrls: ['./formulario-le.component.scss']
 })
 export class FormularioLeComponent implements OnInit {
+  data_proteccion1: LocalDataSource = new LocalDataSource();
 
   data_proteccion = [];
   leForm: FormGroup;
@@ -37,6 +39,22 @@ export class FormularioLeComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   settings_proteccion = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codigoam: {
         title: 'CODIGOAM'
@@ -73,6 +91,7 @@ export class FormularioLeComponent implements OnInit {
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
+    this.data_proteccion = new Array();
   }
 
   ngOnInit() {
@@ -81,6 +100,7 @@ export class FormularioLeComponent implements OnInit {
     this._success.pipe(
       debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
+
   }
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
@@ -177,9 +197,9 @@ export class FormularioLeComponent implements OnInit {
     this.lista_LE = new Array();
     this.loading = true;
     //variables necesarias para recuperarse de errores
-    var codigole = "~^ªº~†⑦→∞¬¬";
-    var nombres = "~^ªº~†⑦→∞¬¬";
-    var nomcomuns = "~^ªº~†⑦→∞¬¬";
+    var codigole = "¬";
+    var nombres = "¬";
+    var nomcomuns = "¬";
     if (this.buscarForm.get('codigole').value)
       codigole = this.buscarForm.get('codigole').value;
     if (this.buscarForm.get('nombres').value)
@@ -214,6 +234,7 @@ export class FormularioLeComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.getProteccion(row.LocalizacionId);
   }
 
   getRastreoElemento_id(id: Number): Localizacion_Modelo {
@@ -246,6 +267,64 @@ export class FormularioLeComponent implements OnInit {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
         });
+  }
+  resProteccionLista: any;
+  getProteccion(LocalizacionId: Number) {
+
+    this.localizacionServicio.getProteccion(LocalizacionId)
+      .subscribe(
+        resProteccion => {
+          this.resProteccionLista = resProteccion;
+
+          // console.log(resProteccion);
+
+          for (let valProteccion of this.resProteccionLista) {
+            var proteccionBase = new proteccion_Modelo();
+            proteccionBase = valProteccion;
+            console.log('CODIGOAM:', proteccionBase.codigoam);
+            // this.data_proteccion.push(proteccionBase);
+            this.data_proteccion1.add(proteccionBase);
+            //console.log(proteccionBase);
+
+
+
+
+          }
+        }, err => {
+          //this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
+        });
+    this.data_proteccion1.refresh();
+
+
+  }
+
+  onCreateConfirm(event): void {
+    var data = {
+      "codigoam": event.newData.codigoam,
+      "nombream": event.newData.nombream,
+      "contenido": event.newData.contenido,
+    };
+    console.log('ok crear');
+    event.confirm.resolve(event.newData);
+
+  }
+
+  onUpdateConfirm(event): void {
+    var data = {
+      "codigoam": event.newData.codigoam,
+      "nombream": event.newData.nombream,
+      "contenido": event.newData.contenido,
+    };
+    console.log('ok actualizar');
+    event.confirm.resolve(event.newData);
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar la protección?')) {
+      event.confirm.resolve(event.newData);
+
+    } else {
+      event.confirm.reject();
+    }
   }
 }
 function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {

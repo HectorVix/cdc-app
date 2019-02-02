@@ -4,6 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { Localizacion_Modelo } from '../../modelo/localizacion/localizacion-modelo';
 import { protocolo_LE_Modelo } from '../../modelo/localizacion/protocolo-le-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
+import { proteccion_Modelo } from '../../modelo/localizacion/proteccion-modelo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -30,6 +31,11 @@ export class LocalizacionService {
   getProtocoloLE(a: String, b: String, c: String): Observable<protocolo_LE_Modelo> {
     return this.http.get<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/buscar/' + a + '/' + b + '/' + c);
   }
+  // Obtener protección 
+  getProteccion(localizacion_id: Number): Observable<proteccion_Modelo> {
+    return this.http.get<proteccion_Modelo>(this.rootUrl + '/localizacion/proteccion/' + localizacion_id);
+  }
+
   updateLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
   }
