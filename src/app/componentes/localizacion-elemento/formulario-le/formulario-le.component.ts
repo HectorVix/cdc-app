@@ -23,7 +23,7 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./formulario-le.component.scss']
 })
 export class FormularioLeComponent implements OnInit {
-  data_proteccion1: LocalDataSource = new LocalDataSource();
+  data_proteccion_DataSource: LocalDataSource = new LocalDataSource();
 
   data_proteccion = [];
   leForm: FormGroup;
@@ -91,7 +91,6 @@ export class FormularioLeComponent implements OnInit {
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
-    this.data_proteccion = new Array();
   }
 
   ngOnInit() {
@@ -122,16 +121,17 @@ export class FormularioLeComponent implements OnInit {
   guardarLocalizacion() {
     var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
     var proteccion: Array<proteccion_Modelo> = new Array();
-
-    this.data_proteccion.forEach(data_proteccion => {
-      var proteccionBase = new proteccion_Modelo();
-      proteccionBase.codigoam = data_proteccion.codigoam;
-      proteccionBase.nombream = data_proteccion.nombream;
-      proteccionBase.contenido = data_proteccion.contenido;
-      proteccion.push(proteccionBase);
+    this.data_proteccion_DataSource.getAll().then(value => {
+      value.forEach(elemento => {
+        var proteccionBase = new proteccion_Modelo();
+        proteccionBase.codigoam = elemento.codigoam;
+        proteccionBase.nombream = elemento.nombream;
+        proteccionBase.contenido = elemento.contenido;
+        proteccion.push(proteccionBase);
+      });
+      localizacionElementoBase.proteccionList = proteccion;
+      this.addLocalizacionElemento(localizacionElementoBase);
     });
-    localizacionElementoBase.proteccionList = proteccion;
-    this.addLocalizacionElemento(localizacionElementoBase);
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
     datos.fechaeva = this.fechaServicio.toFormatoDateTime(this.leForm.get('fechaeva').value);
@@ -195,6 +195,7 @@ export class FormularioLeComponent implements OnInit {
   }
   buscarLE() {
     this.lista_LE = new Array();
+    this.data_proteccion_DataSource = new LocalDataSource();
     this.loading = true;
     //variables necesarias para recuperarse de errores
     var codigole = "¬";
@@ -283,19 +284,16 @@ export class FormularioLeComponent implements OnInit {
             proteccionBase = valProteccion;
             console.log('CODIGOAM:', proteccionBase.codigoam);
             // this.data_proteccion.push(proteccionBase);
-            this.data_proteccion1.add(proteccionBase);
+            this.data_proteccion_DataSource.add(proteccionBase);
             //console.log(proteccionBase);
 
-
+            this.data_proteccion_DataSource.refresh();
 
 
           }
         }, err => {
           //this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
         });
-    this.data_proteccion1.refresh();
-
-
   }
 
   onCreateConfirm(event): void {
@@ -304,8 +302,15 @@ export class FormularioLeComponent implements OnInit {
       "nombream": event.newData.nombream,
       "contenido": event.newData.contenido,
     };
-    console.log('ok crear');
-    event.confirm.resolve(event.newData);
+    if (this.editar) { // se esta guardando un nuevo registro
+      console.log('ok guardar');
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+      console.log('ok editar');
+      event.confirm.resolve(event.newData);
+    }
 
   }
 
