@@ -24,8 +24,6 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 })
 export class FormularioLeComponent implements OnInit {
   data_proteccion_DataSource: LocalDataSource = new LocalDataSource();
-
-  data_proteccion = [];
   leForm: FormGroup;
   buscarForm: FormGroup;
   criterio_le = new criterio_le();
@@ -236,6 +234,8 @@ export class FormularioLeComponent implements OnInit {
     this.editar = false;
     this.guardar = true;
     this.getProteccion(row.LocalizacionId);
+    this.lista_LE = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_LE);
   }
 
   getRastreoElemento_id(id: Number): Localizacion_Modelo {
@@ -254,6 +254,7 @@ export class FormularioLeComponent implements OnInit {
     this.guardar = false;
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.tabPagina1();
+    this.data_proteccion_DataSource = new LocalDataSource();
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): void {
     this.loading = true;

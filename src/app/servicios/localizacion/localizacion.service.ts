@@ -5,6 +5,7 @@ import { Localizacion_Modelo } from '../../modelo/localizacion/localizacion-mode
 import { protocolo_LE_Modelo } from '../../modelo/localizacion/protocolo-le-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 import { proteccion_Modelo } from '../../modelo/localizacion/proteccion-modelo';
+import { dispersion_Modelo } from '../../modelo/localizacion/dispersion-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
@@ -27,6 +28,12 @@ export class LocalizacionService {
         catchError(this.handleError<proteccion_Modelo>('addProteccion'))
       );
   }
+  addDispersion(dispersion: dispersion_Modelo, id: Number): Observable<dispersion_Modelo> {
+    return this.http.post<dispersion_Modelo>(this.rootUrl + '/protocolo/registrar/dispersion/' + id, dispersion, httpOptions)
+      .pipe(
+        catchError(this.handleError<dispersion_Modelo>('addDispersion'))
+      );
+  }
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
     return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
   }
@@ -42,7 +49,9 @@ export class LocalizacionService {
   getProteccion(localizacion_id: Number): Observable<proteccion_Modelo> {
     return this.http.get<proteccion_Modelo>(this.rootUrl + '/localizacion/proteccion/' + localizacion_id);
   }
-
+  getDispersion(protocolo_id: Number): Observable<dispersion_Modelo> {
+    return this.http.get<dispersion_Modelo>(this.rootUrl + '/protocolo/dispersion/' + protocolo_id);
+  }
   updateLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
   }
@@ -52,8 +61,14 @@ export class LocalizacionService {
   updateProteccion(id: String, proteccion: proteccion_Modelo) {
     return this.http.post(this.rootUrl + '/localizacion/update/proteccion/' + id, proteccion, httpOptions);
   }
+  updateDispersion(id: String, dispersion: dispersion_Modelo) {
+    return this.http.post(this.rootUrl + '/protocolo/update/dispersion/' + id, dispersion, httpOptions);
+  }
   deleteProteccion(id: String) {
     return this.http.post(this.rootUrl + '/localizacion/delete/proteccion/' + id, httpOptions);
+  }
+  deleteDispersion(id: String) {
+    return this.http.post(this.rootUrl + '/protocolo/delete/dispersion/' + id, httpOptions);
   }
 
   //para capturar los errores con HttpClient

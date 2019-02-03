@@ -12,6 +12,7 @@ import { dispersion_Modelo } from '../../../modelo/localizacion/dispersion-model
 import { protocolo_LE_FormGroup } from '../../../modelo/formGroup/protocoloLE';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { protocoloLE_Dato } from '../../../modelo/tabla/protocoloLE-dato';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-protocolo-le',
@@ -26,8 +27,24 @@ export class ProtocoloLeComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-  data_dispersion = [];
+  data_dispersion_DataSource: LocalDataSource = new LocalDataSource();
   settings_Protocolo = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       le: {
         title: 'LE'
@@ -98,18 +115,19 @@ export class ProtocoloLeComponent implements OnInit {
   guardarProtocolo() {
     var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
     var dispersionLista: Array<dispersion_Modelo> = new Array();
-    this.data_dispersion.forEach(data_dispersion => {
-      var dispersionBase = new dispersion_Modelo();
-      dispersionBase.le = data_dispersion.le;
-      dispersionBase.nommapanummarg = data_dispersion.nommapanummarg;
-      dispersionBase.prov = data_dispersion.prov;
-      dispersionBase.direccion = data_dispersion.direccion;
-      dispersionBase.ultobs = data_dispersion.ultobs;
-      dispersionLista.push(dispersionBase);
+    this.data_dispersion_DataSource.getAll().then(value => {
+      value.forEach(elemento => {
+        var dispersionBase = new dispersion_Modelo();
+        dispersionBase.le = elemento.le;
+        dispersionBase.nommapanummarg = elemento.nommapanummarg;
+        dispersionBase.prov = elemento.prov;
+        dispersionBase.direccion = elemento.direccion;
+        dispersionBase.ultobs = elemento.ultobs;
+        dispersionLista.push(dispersionBase);
+      });
+      protocoloLE_Base.dispersionList = dispersionLista;
+      this.addProtocoloLocalizacionElemento(protocoloLE_Base);
     });
-
-    protocoloLE_Base.dispersionList = dispersionLista;
-    this.addProtocoloLocalizacionElemento(protocoloLE_Base);
   }
   setProtocoloLE(protocoloLe): protocolo_LE_Modelo {
     protocoloLe.fecha = this.fechaServicio.toFormatoDateTime(protocoloLe.fecha);
@@ -207,6 +225,9 @@ export class ProtocoloLeComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.getDispersion(row.protocoloId);
+    this.lista_ProtocoloLE = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_ProtocoloLE);
   }
   tabPagina1() {
     this.selected.setValue(0);
@@ -238,6 +259,88 @@ export class ProtocoloLeComponent implements OnInit {
     this.crearForm_ProtocoloLe(new protocolo_LE_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    this.data_dispersion_DataSource = new LocalDataSource();
+    this.lista_ProtocoloLE = new Array();
+  }
+  resDispersionLista: any;
+  getDispersion(protocoloId: Number) {
+    this.data_dispersion_DataSource = new LocalDataSource();
+    this.localizacionServicio.getDispersion(protocoloId)
+      .subscribe(
+        resDispersion => {
+          this.resDispersionLista = resDispersion;
+          for (let valDispersion of this.resDispersionLista) {
+            var dispersionBase = new dispersion_Modelo();
+            dispersionBase = valDispersion;
+            this.data_dispersion_DataSource.add(dispersionBase);
+            this.data_dispersion_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
+
+  onCreateConfirm(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+      var dispersion = new dispersion_Modelo();
+      dispersion.le = event.newData.le;
+      dispersion.nommapanummarg = event.newData.nommapanummarg;
+      dispersion.prov = event.newData.prov;
+      dispersion.direccion = event.newData.direccion;
+      dispersion.ultobs = event.newData.ultobs;
+      dispersion.dispersionId = event.newData.dispersionId;
+      this.localizacionServicio.addDispersion(dispersion, this.protocoloLeForm.get('protocoloId').value)
+        .subscribe(
+          resProteccion => {
+            event.confirm.resolve(event.newData);
+            this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+          }, err => {
+          });
+    }
+  }
+
+  onUpdateConfirm(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      var dispersion = new dispersion_Modelo();
+      dispersion.le = event.newData.le;
+      dispersion.nommapanummarg = event.newData.nommapanummarg;
+      dispersion.prov = event.newData.prov;
+      dispersion.direccion = event.newData.direccion;
+      dispersion.ultobs = event.newData.ultobs;
+      dispersion.dispersionId = event.newData.dispersionId;
+      this.localizacionServicio.updateDispersion(this.protocoloLeForm.get('protocoloId').value, dispersion)
+        .subscribe(
+          resDispersion => {
+            event.confirm.resolve(event.newData);
+            this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+          }, err => {
+          });
+
+    }
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar')) {
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+        this.localizacionServicio.deleteDispersion(event.data.dispersionId)
+          .subscribe(
+            resDispersion => {
+              event.confirm.resolve(event.newData);
+              this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+            }, err => {
+            });
+      }
+
+    } else {
+      event.confirm.reject();
+    }
   }
 }
 function crearProtocoloLE(k: Number, protocoloId: Number, codigoe, nombre, nomcomun): protocoloLE_Dato {
