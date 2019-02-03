@@ -231,6 +231,7 @@ export class ElementoComponent implements OnInit {
   //Buscar
   buscarElemento() {
     this.elementos = new Array();
+    this.galeria.nuevo();
     this.loading = true;
     //variables necesarias para recuperarse de errores 
     var codigo = "¬";
