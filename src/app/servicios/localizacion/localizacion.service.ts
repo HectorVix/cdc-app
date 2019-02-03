@@ -49,6 +49,12 @@ export class LocalizacionService {
   updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/editar', protocoloLE, httpOptions);
   }
+  updateProteccion(id: String, proteccion: proteccion_Modelo) {
+    return this.http.post(this.rootUrl + '/localizacion/update/proteccion/' + id, proteccion, httpOptions);
+  }
+  deleteProteccion(id: String) {
+    return this.http.post(this.rootUrl + '/localizacion/delete/proteccion/' + id, httpOptions);
+  }
 
   //para capturar los errores con HttpClient
   private handleError<T>(operation = 'operation', result?: T) {

@@ -271,6 +271,7 @@ export class FormularioLeComponent implements OnInit {
   }
   resProteccionLista: any;
   getProteccion(LocalizacionId: Number) {
+    this.data_proteccion_DataSource = new LocalDataSource();
     this.localizacionServicio.getProteccion(LocalizacionId)
       .subscribe(
         resProteccion => {
@@ -286,14 +287,11 @@ export class FormularioLeComponent implements OnInit {
   }
 
   onCreateConfirm(event): void {
-
     if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
-      console.log('ok guardar normal');
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
     {
-      console.log('ok guardar en editar');
       var proteccion = new proteccion_Modelo();
       proteccion.codigoam = event.newData.codigoam;
       proteccion.nombream = event.newData.nombream;
@@ -302,25 +300,44 @@ export class FormularioLeComponent implements OnInit {
         .subscribe(
           resProteccion => {
             event.confirm.resolve(event.newData);
+            this.getProteccion(this.leForm.get('localizacionId').value);
           }, err => {
           });
     }
-
   }
 
   onUpdateConfirm(event): void {
-    var data = {
-      "codigoam": event.newData.codigoam,
-      "nombream": event.newData.nombream,
-      "contenido": event.newData.contenido,
-    };
-    console.log('ok actualizar');
-    event.confirm.resolve(event.newData);
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      var proteccion = new proteccion_Modelo();
+      proteccion.codigoam = event.newData.codigoam;
+      proteccion.nombream = event.newData.nombream;
+      proteccion.contenido = event.newData.contenido;
+      proteccion.proteccionId = event.newData.proteccionId;
+      this.localizacionServicio.updateProteccion(this.leForm.get('localizacionId').value, proteccion)
+        .subscribe(
+          resProteccion => {
+            event.confirm.resolve(event.newData);
+            this.getProteccion(this.leForm.get('localizacionId').value);
+          }, err => {
+          });
+    }
   }
   onDeleteConfirm(event): void {
     if (window.confirm('¿Estás seguro de querer borrar la protección?')) {
-      event.confirm.resolve(event.newData);
-
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+        this.localizacionServicio.deleteProteccion(event.data.proteccionId)
+          .subscribe(
+            resProteccion => {
+              event.confirm.resolve(event.newData);
+              this.getProteccion(this.leForm.get('localizacionId').value);
+            }, err => {
+            });
+      }
     } else {
       event.confirm.reject();
     }
