@@ -5,6 +5,7 @@ import { Localizacion_Modelo } from '../../modelo/localizacion/localizacion-mode
 import { protocolo_LE_Modelo } from '../../modelo/localizacion/protocolo-le-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 import { proteccion_Modelo } from '../../modelo/localizacion/proteccion-modelo';
+import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -19,6 +20,12 @@ export class LocalizacionService {
 
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
     return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  }
+  addProteccion(proteccion: proteccion_Modelo, id: Number): Observable<proteccion_Modelo> {
+    return this.http.post<proteccion_Modelo>(this.rootUrl + '/localizacion/registrar/proteccion/' + id, proteccion, httpOptions)
+      .pipe(
+        catchError(this.handleError<proteccion_Modelo>('addProteccion'))
+      );
   }
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
     return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
@@ -41,5 +48,18 @@ export class LocalizacionService {
   }
   updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/editar', protocoloLE, httpOptions);
+  }
+
+  //para capturar los errores con HttpClient
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+  private log(message: string) {
+    console.log(`CDC Servicio: ${message}`);
+    //  this.mensajeErrores = (`CDC Servicio: ${message}`);
   }
 }

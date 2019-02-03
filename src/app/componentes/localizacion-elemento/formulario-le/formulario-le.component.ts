@@ -271,45 +271,39 @@ export class FormularioLeComponent implements OnInit {
   }
   resProteccionLista: any;
   getProteccion(LocalizacionId: Number) {
-
     this.localizacionServicio.getProteccion(LocalizacionId)
       .subscribe(
         resProteccion => {
           this.resProteccionLista = resProteccion;
-
-          // console.log(resProteccion);
-
           for (let valProteccion of this.resProteccionLista) {
             var proteccionBase = new proteccion_Modelo();
             proteccionBase = valProteccion;
-            console.log('CODIGOAM:', proteccionBase.codigoam);
-            // this.data_proteccion.push(proteccionBase);
             this.data_proteccion_DataSource.add(proteccionBase);
-            //console.log(proteccionBase);
-
             this.data_proteccion_DataSource.refresh();
-
-
           }
         }, err => {
-          //this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
         });
   }
 
   onCreateConfirm(event): void {
-    var data = {
-      "codigoam": event.newData.codigoam,
-      "nombream": event.newData.nombream,
-      "contenido": event.newData.contenido,
-    };
-    if (this.editar) { // se esta guardando un nuevo registro
-      console.log('ok guardar');
+
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      console.log('ok guardar normal');
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
     {
-      console.log('ok editar');
-      event.confirm.resolve(event.newData);
+      console.log('ok guardar en editar');
+      var proteccion = new proteccion_Modelo();
+      proteccion.codigoam = event.newData.codigoam;
+      proteccion.nombream = event.newData.nombream;
+      proteccion.contenido = event.newData.contenido;
+      this.localizacionServicio.addProteccion(proteccion, this.leForm.get('localizacionId').value)
+        .subscribe(
+          resProteccion => {
+            event.confirm.resolve(event.newData);
+          }, err => {
+          });
     }
 
   }
