@@ -11,7 +11,8 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { area_FormGroup } from '../../../modelo/formGroup/area';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { area_Dato } from '../../../modelo/tabla/area-dato'
+import { area_Dato } from '../../../modelo/tabla/area-dato';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-formulario-areas-manejadas',
@@ -19,7 +20,7 @@ import { area_Dato } from '../../../modelo/tabla/area-dato'
   styleUrls: ['./formulario-areas-manejadas.component.scss']
 })
 export class FormularioAreasManejadasComponent implements OnInit {
-  data_listaElemento = [];
+  data_listaElemento_DataSource: LocalDataSource = new LocalDataSource();
   areaManejoForm: FormGroup;
   areaManejoFormBuscar: FormGroup;
   criterio_areasManejadas = new criterio_areasManejadas();
@@ -34,6 +35,22 @@ export class FormularioAreasManejadasComponent implements OnInit {
   loading: boolean;
 
   settings_Elementos_AreasManejadas = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codigoe: {
         title: 'CODIGOE'
@@ -108,16 +125,18 @@ export class FormularioAreasManejadasComponent implements OnInit {
     if (this.areaManejoForm.get('codigoam').value) {
       var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
       var listaElemento: Array<listaElemento_Modelo> = new Array();
-      this.data_listaElemento.forEach(data_listaElemento => {
-        var listaElementoBase = new listaElemento_Modelo();
-        listaElementoBase.codigoe = data_listaElemento.codigoe;
-        listaElementoBase.nombres = data_listaElemento.nombres;
-        listaElementoBase.status = data_listaElemento.status;
-        listaElementoBase.codfuente = data_listaElemento.codfuente;
-        listaElemento.push(listaElementoBase);
+      this.data_listaElemento_DataSource.getAll().then(value => {
+        value.forEach(elemento => {
+          var listaElementoBase = new listaElemento_Modelo();
+          listaElementoBase.codigoe = elemento.codigoe;
+          listaElementoBase.nombres = elemento.nombres;
+          listaElementoBase.status = elemento.status;
+          listaElementoBase.codfuente = elemento.codfuente;
+          listaElemento.push(listaElementoBase);
+        });
+        areasManejadasBase.listaElementoList = listaElemento;
+        this.addArea(areasManejadasBase);
       });
-      areasManejadasBase.listaElementoList = listaElemento;
-      this.addArea(areasManejadasBase);
     }
     else
       this.changeSuccessMessage('El código del área es obligatorio.', 'primary');
@@ -241,6 +260,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.getListaElementos(this.areaManejoForm.get('areaId').value);
+    this.lista_Area = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Area);
   }
   updateArea(area: area_Modelo): void {
     this.loading = true;
@@ -268,7 +290,87 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.crear_areaManejoForm(new area_Modelo());
     this.crear_areaManejoForm_Buscar();
     this.tabPagina1();
+    this.data_listaElemento_DataSource = new LocalDataSource();
+    this.lista_Area = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Area);
   }
+  // -----------------Lista elementos---------
+  resListaElementos: any;
+  getListaElementos(areaId: Number) {
+    this.data_listaElemento_DataSource = new LocalDataSource();
+    this.areaServicio.getListaElemento(areaId)
+      .subscribe(
+        resListaElementos => {
+          this.resListaElementos = resListaElementos;
+          for (let valListaElemento of this.resListaElementos) {
+            var listaElementoBase = new listaElemento_Modelo();
+            listaElementoBase = valListaElemento;
+            this.data_listaElemento_DataSource.add(listaElementoBase);
+            this.data_listaElemento_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
+  onCreateConfirm(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta guardando en  un registro existente
+    {
+      var listaElementoBase = new listaElemento_Modelo();
+      listaElementoBase.codigoe = event.newData.codigoe;
+      listaElementoBase.nombres = event.newData.nombres;
+      listaElementoBase.status = event.newData.status;
+      listaElementoBase.codfuente = event.newData.codfuente;
+      listaElementoBase.listaElementoId = event.newData.listaElementoId;
+      this.areaServicio.addListaElemento(this.areaManejoForm.get('areaId').value, listaElementoBase)
+        .subscribe(
+          resListaElemento => {
+            event.confirm.resolve(event.newData);
+            this.getListaElementos(this.areaManejoForm.get('areaId').value);
+          }, err => {
+          });
+    }
+  }
+
+  onUpdateConfirm(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //actualizar uno existente
+      var listaElementoBase = new listaElemento_Modelo();
+      listaElementoBase.codigoe = event.newData.codigoe;
+      listaElementoBase.nombres = event.newData.nombres;
+      listaElementoBase.status = event.newData.status;
+      listaElementoBase.codfuente = event.newData.codfuente;
+      listaElementoBase.listaElementoId = event.newData.listaElementoId;
+      this.areaServicio.updateListaElemento(this.areaManejoForm.get('areaId').value, listaElementoBase)
+        .subscribe(
+          resListaElemento => {
+            event.confirm.resolve(event.newData);
+            this.getListaElementos(this.areaManejoForm.get('areaId').value);
+          }, err => {
+          });
+    }
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar el elemento?')) {
+      if (this.editar) { //eliminar nuevo
+        event.confirm.resolve(event.newData);
+      } else { //eliminar uno existente
+        this.areaServicio.deleteListaElemento(event.data.listaElementoId)
+          .subscribe(
+            resLitaElemento => {
+              event.confirm.resolve(event.newData);
+              this.getListaElementos(this.areaManejoForm.get('areaId').value);
+            }, err => {
+            });
+      }
+    } else {
+      event.confirm.reject();
+    }
+  }
+
 }
 function crearArea(k: Number, areaId: Number, codigoam, nombream, codsitio, nomsitio): area_Dato {
   return {

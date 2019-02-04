@@ -298,7 +298,7 @@
                   <div class="text-center ">
                     <p>
                       <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
-                      <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                      <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                     </p>
                   </div>
                 </mat-tab>
@@ -417,7 +417,8 @@
                       <h5 class="modal-title">Elementos</h5>
                     </div>
                     <div class="row  mx-auto color-green">
-                      <ng2-smart-table [settings]="settings_Elementos_AreasManejadas" [source]="data_listaElemento">
+                      <ng2-smart-table [settings]="settings_Elementos_AreasManejadas" [source]="data_listaElemento_DataSource" (deleteConfirm)="onDeleteConfirm($event)"
+                        (createConfirm)="onCreateConfirm($event)" (editConfirm)="onUpdateConfirm($event)">
                       </ng2-smart-table>
                     </div>
                   </div>
