@@ -325,7 +325,7 @@ export class ProtocoloLeComponent implements OnInit {
     }
   }
   onDeleteConfirm(event): void {
-    if (window.confirm('¿Estás seguro de querer borrar')) {
+    if (window.confirm('¿Estás seguro de querer borrar?')) {
       if (this.editar) { //nuevo
         event.confirm.resolve(event.newData);
       } else { //editar uno existente

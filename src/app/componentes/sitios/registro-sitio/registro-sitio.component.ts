@@ -300,6 +300,7 @@ export class RegistroSitioComponent implements OnInit {
     this.lista_Sitio = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Sitio);
     this.getMacsitio(this.sitioForm.get('sitioId').value);
+    this.getSubdivision(this.sitioForm.get('sitioId').value);
   }
   getSitio_id(id: Number): sitio_Modelo {
     var base_sitioBusqueda = new sitio_Modelo();
@@ -391,7 +392,7 @@ export class RegistroSitioComponent implements OnInit {
     }
   }
   onDeleteConfirm(event): void {
-    if (window.confirm('¿Estás seguro de querer borrar')) {
+    if (window.confirm('¿Estás seguro de querer borrar el Macsitio?')) {
       if (this.editar) { //nuevo
         event.confirm.resolve(event.newData);
       } else { //editar uno existente
@@ -408,13 +409,41 @@ export class RegistroSitioComponent implements OnInit {
     }
   }
   // ----------------SUBDIVISON------------------
+  resSubdivisionLista: any;
+  getSubdivision(sitioId: Number) {
+    this.data_subdivision_DataSource = new LocalDataSource();
+    this.sitioServicio.getSubdivision(sitioId)
+      .subscribe(
+        resSubdivisio => {
+          this.resSubdivisionLista = resSubdivisio;
+          for (let valSubdivision of this.resSubdivisionLista) {
+            var subdivisionBase = new subdivision_Modelo();
+            subdivisionBase = valSubdivision;
+            this.data_subdivision_DataSource.add(subdivisionBase);
+            this.data_subdivision_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
   onCreateConfirm2(event): void {
     if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
     {
-
+      var subdivisionBase = new subdivision_Modelo();
+      subdivisionBase.codsubdiv = event.newData.codsubdiv;
+      subdivisionBase.nomsubdiv = event.newData.nomsubdiv;
+      subdivisionBase.nommapa = event.newData.nommapa;
+      subdivisionBase.codmapa = event.newData.codmapa;
+      subdivisionBase.subdivisionId = event.newData.subdivisionId;
+      this.sitioServicio.addSubdivision(this.sitioForm.get('sitioId').value, subdivisionBase)
+        .subscribe(
+          resMacsitio => {
+            event.confirm.resolve(event.newData);
+            this.getSubdivision(this.sitioForm.get('sitioId').value);
+          }, err => {
+          });
     }
   }
 
@@ -423,19 +452,34 @@ export class RegistroSitioComponent implements OnInit {
       event.confirm.resolve(event.newData);
     }
     else { //editar uno existente
-
-
-
+      var subdivisionBase = new subdivision_Modelo();
+      subdivisionBase.codsubdiv = event.newData.codsubdiv;
+      subdivisionBase.nomsubdiv = event.newData.nomsubdiv;
+      subdivisionBase.nommapa = event.newData.nommapa;
+      subdivisionBase.codmapa = event.newData.codmapa;
+      subdivisionBase.subdivisionId = event.newData.subdivisionId;
+      this.sitioServicio.updateSubdivision(this.sitioForm.get('sitioId').value, subdivisionBase)
+        .subscribe(
+          resMacsitio => {
+            event.confirm.resolve(event.newData);
+            this.getSubdivision(this.sitioForm.get('sitioId').value);
+          }, err => {
+          });
     }
   }
   onDeleteConfirm2(event): void {
-    if (window.confirm('¿Estás seguro de querer borrar')) {
-      if (this.editar) { //nuevo
+    if (window.confirm('¿Estás seguro de querer borrar la subdivisión?')) {
+      if (this.editar) { //eliminar nuevo
         event.confirm.resolve(event.newData);
-      } else { //editar uno existente
-
+      } else { //eliminar uno existente
+        this.sitioServicio.deleteSubdivision(event.data.subdivisionId)
+          .subscribe(
+            reSubdivision => {
+              event.confirm.resolve(event.newData);
+              this.getMacsitio(this.sitioForm.get('sitioId').value);
+            }, err => {
+            });
       }
-
     } else {
       event.confirm.reject();
     }
