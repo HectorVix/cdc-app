@@ -13,7 +13,8 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { sitio_FormGroup } from '../../../modelo/formGroup/sitio';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { sitio_Dato } from '../../../modelo/tabla/sitio-dato'
+import { sitio_Dato } from '../../../modelo/tabla/sitio-dato';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-registro-sitio',
@@ -21,8 +22,8 @@ import { sitio_Dato } from '../../../modelo/tabla/sitio-dato'
   styleUrls: ['./registro-sitio.component.scss']
 })
 export class RegistroSitioComponent implements OnInit {
-  data_macsitio = [];
-  data_subdivision = [];
+  data_macsitio_DataSource: LocalDataSource = new LocalDataSource();
+  data_subdivision_DataSource: LocalDataSource = new LocalDataSource();
   sitioForm: FormGroup;   //formulario de sitio
   buscarForm: FormGroup;   //formulario de sitio
   criterio_Sitio = new criterio_Sitio();
@@ -37,6 +38,22 @@ export class RegistroSitioComponent implements OnInit {
   tipoAlert: string;
   loading: boolean;
   settings_Identificadores_Sitio = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codmacsitio: {
         title: 'CODMACSITIO'
@@ -47,6 +64,22 @@ export class RegistroSitioComponent implements OnInit {
     }
   };
   settings_Localizadores_Sitio = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codsubdiv: {
         title: 'CODSUBDIV'
@@ -124,23 +157,43 @@ export class RegistroSitioComponent implements OnInit {
       var sitioBase = this.setSitio(this.sitioForm.value);
       var macsitio: Array<macsitio_Modelo> = new Array();
       var subdivision: Array<subdivision_Modelo> = new Array();
-      this.data_macsitio.forEach(data_macsitio => {
-        var macsitioBase = new macsitio_Modelo();
-        macsitioBase.codmacsitio = data_macsitio.codmacsitio;
-        macsitioBase.nommacsitio = data_macsitio.nommacsitio;
-        macsitio.push(macsitioBase);
+      /* this.data_macsitio.forEach(data_macsitio => {
+         var macsitioBase = new macsitio_Modelo();
+         macsitioBase.codmacsitio = data_macsitio.codmacsitio;
+         macsitioBase.nommacsitio = data_macsitio.nommacsitio;
+         macsitio.push(macsitioBase);
+       });
+       this.data_subdivision.forEach(data_subdivision => {
+         var subdivisionBase = new subdivision_Modelo();
+         subdivisionBase.codsubdiv = data_subdivision.codsubdiv;
+         subdivisionBase.nomsubdiv = data_subdivision.nomsubdiv;
+         subdivisionBase.nommapa = data_subdivision.nommapa;
+         subdivisionBase.codmapa = data_subdivision.codmapa;
+         subdivision.push(subdivisionBase);
+       });*/
+      this.data_macsitio_DataSource.getAll().then(value => {
+        value.forEach(elemento => {
+          var macsitioBase = new macsitio_Modelo();
+          macsitioBase.codmacsitio = elemento.codmacsitio;
+          macsitioBase.nommacsitio = elemento.nommacsitio;
+          macsitio.push(macsitioBase);
+        });
+
+        this.data_subdivision_DataSource.getAll().then(value => {
+          value.forEach(elemento => {
+            var subdivisionBase = new subdivision_Modelo();
+            subdivisionBase.codsubdiv = elemento.codsubdiv;
+            subdivisionBase.nomsubdiv = elemento.nomsubdiv;
+            subdivisionBase.nommapa = elemento.nommapa;
+            subdivisionBase.codmapa = elemento.codmapa;
+            subdivision.push(subdivisionBase);
+          });
+          sitioBase.macsitioList = macsitio;
+          sitioBase.subdivisionList = subdivision;
+          this.addSitio(sitioBase);
+        });
+
       });
-      this.data_subdivision.forEach(data_subdivision => {
-        var subdivisionBase = new subdivision_Modelo();
-        subdivisionBase.codsubdiv = data_subdivision.codsubdiv;
-        subdivisionBase.nomsubdiv = data_subdivision.nomsubdiv;
-        subdivisionBase.nommapa = data_subdivision.nommapa;
-        subdivisionBase.codmapa = data_subdivision.codmapa;
-        subdivision.push(subdivisionBase);
-      });
-      sitioBase.macsitioList = macsitio;
-      sitioBase.subdivisionList = subdivision;
-      this.addSitio(sitioBase);
     }
     else
       this.changeSuccessMessage('No se pudo regitrar el Sitio. El codigo del sitio es obligatorio', 'warning');
@@ -242,6 +295,11 @@ export class RegistroSitioComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.data_macsitio_DataSource = new LocalDataSource();
+    this.data_subdivision_DataSource = new LocalDataSource();
+    this.lista_Sitio = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Sitio);
+    this.getMacsitio(this.sitioForm.get('sitioId').value);
   }
   getSitio_id(id: Number): sitio_Modelo {
     var base_sitioBusqueda = new sitio_Modelo();
@@ -273,6 +331,114 @@ export class RegistroSitioComponent implements OnInit {
     this.crearFormSitio(new sitio_Modelo());
     this.crearFormBuscar();
     this.tabPagina1();
+    this.data_macsitio_DataSource = new LocalDataSource();
+    this.data_subdivision_DataSource = new LocalDataSource();
+  }
+
+  // --------------MACSITIO------------------
+  resMacsitioLista: any;
+  getMacsitio(sitioId: Number) {
+    this.data_macsitio_DataSource = new LocalDataSource();
+    this.sitioServicio.getMacsitio(sitioId)
+      .subscribe(
+        resMacsitio => {
+          this.resMacsitioLista = resMacsitio;
+          for (let valMacsitio of this.resMacsitioLista) {
+            var macsitioBase = new macsitio_Modelo();
+            macsitioBase = valMacsitio;
+            this.data_macsitio_DataSource.add(macsitioBase);
+            this.data_macsitio_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
+  onCreateConfirm(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+      var macsitioBase = new macsitio_Modelo();
+      macsitioBase.codmacsitio = event.newData.codmacsitio;
+      macsitioBase.nommacsitio = event.newData.nommacsitio;
+      macsitioBase.macsitioId = event.newData.macsitioId;
+      this.sitioServicio.addMacsitio(this.sitioForm.get('sitioId').value, macsitioBase)
+        .subscribe(
+          resMacsitio => {
+            event.confirm.resolve(event.newData);
+            this.getMacsitio(this.sitioForm.get('sitioId').value);
+          }, err => {
+          });
+    }
+  }
+
+  onUpdateConfirm(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      var macsitioBase = new macsitio_Modelo();
+      macsitioBase.codmacsitio = event.newData.codmacsitio;
+      macsitioBase.nommacsitio = event.newData.nommacsitio;
+      macsitioBase.macsitioId = event.newData.macsitioId;
+      this.sitioServicio.updateMacsitio(this.sitioForm.get('sitioId').value, macsitioBase)
+        .subscribe(
+          resMacsitio => {
+            event.confirm.resolve(event.newData);
+            this.getMacsitio(this.sitioForm.get('sitioId').value);
+          }, err => {
+          });
+    }
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar')) {
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+        this.sitioServicio.deleteMacsitio(event.data.macsitioId)
+          .subscribe(
+            resMacsitio => {
+              event.confirm.resolve(event.newData);
+              this.getMacsitio(this.sitioForm.get('sitioId').value);
+            }, err => {
+            });
+      }
+    } else {
+      event.confirm.reject();
+    }
+  }
+  // ----------------SUBDIVISON------------------
+  onCreateConfirm2(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+
+    }
+  }
+
+  onUpdateConfirm2(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+
+
+
+    }
+  }
+  onDeleteConfirm2(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar')) {
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+
+      }
+
+    } else {
+      event.confirm.reject();
+    }
   }
 }
 function crearSitio(k: Number, sitioId: Number, codigoSitio, nombreSitio, sinonimoSitio, nacion, depto): sitio_Dato {
