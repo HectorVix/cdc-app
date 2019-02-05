@@ -274,11 +274,13 @@
                                     </div>
                                     <!-- fin modal-header -->
                                     <div class="row  mx-auto color-green">
-                                        <ng2-smart-table [settings]="settings_Distribucion1" [source]="data_Distribucion1">
+                                        <ng2-smart-table [settings]="settings_Distribucion1" [source]="data_distribucion1_DataSource" (deleteConfirm)="onDeleteConfirm($event)"
+                                            (createConfirm)="onCreateConfirm($event)" (editConfirm)="onUpdateConfirm($event)">
                                         </ng2-smart-table>
                                     </div>
                                     <div class="row  mx-auto color-green">
-                                        <ng2-smart-table [settings]="settings_Distribucion2" [source]="data_Distribucion2">
+                                        <ng2-smart-table [settings]="settings_Distribucion2" [source]="data_distribucion2_DataSource" (deleteConfirm)="onDeleteConfirm2($event)"
+                                            (createConfirm)="onCreateConfirm2($event)" (editConfirm)="onUpdateConfirm2($event)">
                                         </ng2-smart-table>
                                     </div>
                                     <div class="row">

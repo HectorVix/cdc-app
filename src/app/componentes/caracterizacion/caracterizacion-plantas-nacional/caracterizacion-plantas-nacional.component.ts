@@ -146,23 +146,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     var planta: Array<planta_Modelo> = new Array();
     var distribucion: Array<distribucion_Modelo> = new Array();
     var distribucion2: Array<distribucion2_Modelo> = new Array();
-
-    /*   this.data_distribucion.forEach(data_distribucion1 => {
-         var distribucionBase = new distribucion_Modelo();
-         distribucionBase.codsubnac = data_distribucion1.codsubnac;
-         distribucionBase.nomsubnac = data_distribucion1.nomsubnac;
-         distribucionBase.statsubnac = data_distribucion1.statsubnac;
-         distribucion.push(distribucionBase);
-       });*/
-
-    /*  this.data_distribucion2.forEach(data_distribucion2 => {
-        var distribucionBase2 = new distribucion2_Modelo();
-        distribucionBase2.codecoregn = data_distribucion2.codecoregn;
-        distribucionBase2.statecoregn = data_distribucion2.statecoregn;
-        distribucionBase2.codcuencan = data_distribucion2.codcuencan;
-        distribucionBase2.statcuencan = data_distribucion2.statcuencan;
-        distribucion2.push(distribucionBase2);
-      });*/
     this.data_distribucion1_DataSource.getAll().then(value => {
       value.forEach(elemento => {
         var distribucionBase = new distribucion_Modelo();

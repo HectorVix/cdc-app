@@ -12,7 +12,8 @@ import { debounceTime } from 'rxjs/operators';
 //--------------tabla------------------------------------
 import { vertebrado_FormGroup } from '../../../modelo/formGroup/vertebrado';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato'
+import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -22,15 +23,30 @@ import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato'
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   caracterizacionVertebradosNacionalForm: FormGroup;
   buscarForm: FormGroup;
-  data_Distribucion1 = [];
-  data_Distribucion2 = [];
-
+  data_distribucion1_DataSource: LocalDataSource = new LocalDataSource();
+  data_distribucion2_DataSource: LocalDataSource = new LocalDataSource();
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
   settings_Distribucion1 = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codsubnac: {
         title: 'CODSUBNAC'
@@ -44,6 +60,22 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     }
   };
   settings_Distribucion2 = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
     columns: {
       codecoregn: {
         title: 'CODECORGN'
@@ -108,33 +140,37 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   }
   guardar_Caracterizacion_Vertebrado() {
     var caracterizacion_Vertebrado = new caracterizacion_Modelo();
-    var vertebradoLista: Array<vertebrado_Modelo> = new Array();
+    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value);
+    var vertebrado: Array<vertebrado_Modelo> = new Array();
     var distribucion1: Array<distribucion_Modelo> = new Array();
     var distribucion2: Array<distribucion2_Modelo> = new Array();
 
-    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value);
-    this.data_Distribucion1.forEach(data_distribucion1 => {
-      var distribucionBase = new distribucion_Modelo();
-      distribucionBase.codsubnac = data_distribucion1.codsubnac;
-      distribucionBase.nomsubnac = data_distribucion1.nomsubnac;
-      distribucionBase.statsubnac = data_distribucion1.statsubnac;
-      distribucion1.push(distribucionBase);
+    this.data_distribucion1_DataSource.getAll().then(value => {
+      value.forEach(elemento => {
+        var distribucion1Base = new distribucion_Modelo();
+        distribucion1Base.codsubnac = elemento.codsubnac;
+        distribucion1Base.nomsubnac = elemento.nomsubnac;
+        distribucion1Base.statsubnac = elemento.statsubnac;
+        distribucion1.push(distribucion1Base);
+      });
+      this.data_distribucion2_DataSource.getAll().then(value => {
+        value.forEach(elemento => {
+          var distribucion2Base = new distribucion2_Modelo();
+          distribucion2Base.codecoregn = elemento.codecoregn;
+          distribucion2Base.statecoregn = elemento.statecoregn;
+          distribucion2Base.codcuencan = elemento.codcuencan;
+          distribucion2Base.statcuencan = elemento.statcuencan;
+          distribucion2.push(distribucion2Base);
+        });
+        vertebradoBase.distribucionList = distribucion1;
+        vertebradoBase.distribucion2List = distribucion2;
+        vertebrado.push(vertebradoBase);
+        caracterizacion_Vertebrado.vertebradoList = vertebrado;
+        this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
+      });
     });
-
-    this.data_Distribucion2.forEach(data_distribucion2 => {
-      var distribucionBase2 = new distribucion2_Modelo();
-      distribucionBase2.codecoregn = data_distribucion2.codecoregn;
-      distribucionBase2.statecoregn = data_distribucion2.statecoregn;
-      distribucionBase2.codcuencan = data_distribucion2.codcuencan;
-      distribucionBase2.statcuencan = data_distribucion2.statcuencan;
-      distribucion2.push(distribucionBase2);
-    });
-    vertebradoBase.distribucionList = distribucion1;
-    vertebradoBase.distribucion2List = distribucion2;
-    vertebradoLista.push(vertebradoBase);
-    caracterizacion_Vertebrado.vertebradoList = vertebradoLista;
-    this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
   }
+
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
     datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('fechaaepeu').value);
     datos.ediciong = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('ediciong').value);
@@ -265,6 +301,10 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
+    this.lista_Vertebrado = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+    this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+    this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
   }
   updateVertebrado(vertebrado: vertebrado_Modelo): void {
     this.loading = true;
@@ -272,12 +312,12 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       .subscribe(
         resVertebrado => {
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso, código de la planta:${resVertebrado.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso, código de la Vertebrado:${resVertebrado.codigoe}.`, 'success');
           this.lista_Vertebrado = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo de la planta debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, el codigo de la Vertebrado debe ser valido', 'primary');
         });
   }
   editarVertebrado() {
@@ -292,6 +332,158 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    this.lista_Vertebrado = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+  }
+  // --------------Distribucion1------------------
+  resDistribucion1: any;
+  getDistribucion1_Vertebrado(vertebradoId: Number) {
+    this.data_distribucion1_DataSource = new LocalDataSource();
+    this.caracterizacionServicio.getDistribucion1_Vertebrado(vertebradoId)
+      .subscribe(
+        resDistribucion1 => {
+          this.resDistribucion1 = resDistribucion1;
+          for (let valresDistribucion1 of this.resDistribucion1) {
+            var valresDistribucion1Base = new distribucion_Modelo();
+            valresDistribucion1Base = valresDistribucion1;
+            this.data_distribucion1_DataSource.add(valresDistribucion1Base);
+            this.data_distribucion1_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
+  onCreateConfirm(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+      var distribucion1Base = new distribucion_Modelo();
+      distribucion1Base.codsubnac = event.newData.codsubnac;
+      distribucion1Base.nomsubnac = event.newData.nomsubnac;
+      distribucion1Base.statsubnac = event.newDatastatsubnac;
+      distribucion1Base.distribucionId = event.newData.distribucionId;
+      this.caracterizacionServicio.addDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value, distribucion1Base)
+        .subscribe(
+          resMacsitio => {
+            event.confirm.resolve(event.newData);
+            this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+          }, err => {
+          });
+    }
+  }
+
+  onUpdateConfirm(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      var distribucion1Base = new distribucion_Modelo();
+      distribucion1Base.codsubnac = event.newData.codsubnac;
+      distribucion1Base.nomsubnac = event.newData.nomsubnac;
+      distribucion1Base.statsubnac = event.newDatastatsubnac;
+      distribucion1Base.distribucionId = event.newData.distribucionId;
+      this.caracterizacionServicio.updateDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value, distribucion1Base)
+        .subscribe(
+          resDistribucion1 => {
+            event.confirm.resolve(event.newData);
+            this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+          }, err => {
+          });
+    }
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar la distribución subnacional?')) {
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+        this.caracterizacionServicio.deleteDistribucion1(event.data.distribucionId)
+          .subscribe(
+            resDistribucion1 => {
+              event.confirm.resolve(event.newData);
+              this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+            }, err => {
+            });
+      }
+    } else {
+      event.confirm.reject();
+    }
+  }
+  // ----------------DISTRIBUCIÓN 2------------------
+  resDistribucion2: any;
+  getDistribucion2_Vertebrado(vertebradoId: Number) {
+    this.data_distribucion2_DataSource = new LocalDataSource();
+    this.caracterizacionServicio.getDistribucion2_Vertebrado(vertebradoId)
+      .subscribe(
+        resDistribucion2 => {
+          this.resDistribucion2 = resDistribucion2;
+          for (let valresDistribucion2 of this.resDistribucion2) {
+            var valresDistribucion2Base = new distribucion2_Modelo();
+            valresDistribucion2Base = valresDistribucion2;
+            this.data_distribucion2_DataSource.add(valresDistribucion2Base);
+            this.data_distribucion2_DataSource.refresh();
+          }
+        }, err => {
+        });
+  }
+  onCreateConfirm2(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+      event.confirm.resolve(event.newData);
+    }
+    else // se esta editando un registro
+    {
+      var distribucion2Base = new distribucion2_Modelo();
+      distribucion2Base.codecoregn = event.newData.codecoregn;
+      distribucion2Base.statecoregn = event.newData.statecoregn;
+      distribucion2Base.codcuencan = event.newData.codcuencan;
+      distribucion2Base.statcuencan = event.newData.statcuencan;
+      distribucion2Base.distribucion2Id = event.newData.distribucion2Id;
+      this.caracterizacionServicio.addDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value, distribucion2Base)
+        .subscribe(
+          resDistribucion2 => {
+            event.confirm.resolve(event.newData);
+            this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+          }, err => {
+          });
+    }
+  }
+
+  onUpdateConfirm2(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      var distribucion2Base = new distribucion2_Modelo();
+      distribucion2Base.codecoregn = event.newData.codecoregn;
+      distribucion2Base.statecoregn = event.newData.statecoregn;
+      distribucion2Base.codcuencan = event.newData.codcuencan;
+      distribucion2Base.statcuencan = event.newData.statcuencan;
+      distribucion2Base.distribucion2Id = event.newData.distribucion2Id;
+      this.caracterizacionServicio.updateDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value, distribucion2Base)
+        .subscribe(
+          resDistribucion2 => {
+            event.confirm.resolve(event.newData);
+            this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+          }, err => {
+          });
+    }
+  }
+  onDeleteConfirm2(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar la ecoregión?')) {
+      if (this.editar) { //eliminar nuevo
+        event.confirm.resolve(event.newData);
+      } else { //eliminar uno existente
+        this.caracterizacionServicio.deleteDistribucion2(event.data.distribucion2Id)
+          .subscribe(
+            reDistribucion2 => {
+              event.confirm.resolve(event.newData);
+              this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+            }, err => {
+            });
+      }
+    } else {
+      event.confirm.reject();
+    }
   }
 }
 function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {
