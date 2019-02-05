@@ -460,7 +460,7 @@ export class RegistroSitioComponent implements OnInit {
           .subscribe(
             reSubdivision => {
               event.confirm.resolve(event.newData);
-              this.getMacsitio(this.sitioForm.get('sitioId').value);
+              this.getSubdivision(this.sitioForm.get('sitioId').value);
             }, err => {
             });
       }

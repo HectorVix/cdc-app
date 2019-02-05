@@ -241,7 +241,7 @@
                                 <div class="text-center ">
                                     <p>
                                         <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
-                                        <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                                        <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                                     </p>
                                 </div>
                             </mat-tab>
@@ -251,12 +251,14 @@
                                         <h5 class="modal-title">Distribución:</h5>
                                     </div>
                                     <div class="row  mx-auto color-green ">
-                                        <ng2-smart-table [settings]="settings_distribucion1" [source]="data_distribucion">
+                                        <ng2-smart-table [settings]="settings_distribucion1" [source]="data_distribucion1_DataSource" (deleteConfirm)="onDeleteConfirm($event)"
+                                            (createConfirm)="onCreateConfirm($event)" (editConfirm)="onUpdateConfirm($event)">
                                         </ng2-smart-table>
                                     </div>
                                     <!-- fin row -->
                                     <div class="row  mx-auto color-green">
-                                        <ng2-smart-table [settings]="settings_distribucion2" [source]="data_distribucion2">
+                                        <ng2-smart-table [settings]="settings_distribucion2" [source]="data_distribucion2_DataSource" (deleteConfirm)="onDeleteConfirm2($event)"
+                                            (createConfirm)="onCreateConfirm2($event)" (editConfirm)="onUpdateConfirm2($event)">
                                         </ng2-smart-table>
                                     </div>
                                     <!-- fin row -->
