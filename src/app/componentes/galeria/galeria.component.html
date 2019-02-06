@@ -2,7 +2,7 @@
   <div class="modal-header color-green">
     <h5 class="modal-tittle">Fotos</h5>
   </div>
-  <mat-tab-group dynamicHeight>
+  <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
     <mat-tab label="Galeria">
       <div class="row">
         <div class="col-md-2">
@@ -31,7 +31,7 @@
         </button>
       </div>
       <div class="scrolling-wrapper base-tam-y ">
-        <ng-tempplate *ngIf="imagenes.length>=1">
+        <ng-tempplate *ngIf="imagenes.length>=1 && selected.value==1">
           <img *ngIf="imagenes[descripcionIndex].plain && imagenes[descripcionIndex].plain.img; else noThumb" [src]="imagenes[descripcionIndex].plain.img"
           />
           <ng-template #noThumb>

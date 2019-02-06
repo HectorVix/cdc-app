@@ -59,8 +59,11 @@ export class GaleriaComponent implements OnInit {
   staticAlertClosed = false;
   successMessage: string;
   tipoAlert: string;
+  selected = new FormControl(0);
+
   constructor(private galleryService: GalleryService,
     private fechaServicio: FechaService) {
+    this.selected.setValue(0);
   }
 
   ngOnInit() {
@@ -249,7 +252,7 @@ export class GaleriaComponent implements OnInit {
       var cont = 0;
       this.archivos.forEach(archivo => {
         if (cont == event.image.id) {
-         this.archivos.delete(archivo);
+          this.archivos.delete(archivo);
           console.log('Se elimino:', archivo.name);
         }
         cont = cont + 1;
@@ -272,6 +275,11 @@ export class GaleriaComponent implements OnInit {
         }
       }
       this.datosFotografias = datosFotos;
+      console.log('Estado editar:', this.selected.value);
+      if (this.imagenes.length >= 1)
+        this.mostrar_Datos_PosActual(event.image.id - 1);
+      else
+        this.nuevoDatosFotos();
     }
   }
 
@@ -367,11 +375,7 @@ export class GaleriaComponent implements OnInit {
       var imagen = new Image(0, {
         img: this.base64String,
         description: '',
-        title: file.name,
-        alt: '',
-        ariaLabel: '',
-        extUrl: '-1', //se usara como elementoId , la idea es poder gestionar ya que mdoalImagen solo permite  propiedades conocidas
-
+        title: file.name
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
@@ -389,10 +393,7 @@ export class GaleriaComponent implements OnInit {
       var imagen = new Image(0, {
         img: this.base64String,
         description: fotoModelo.descripcion,
-        title: fotoModelo.name,
-        alt: '',
-        ariaLabel: '',
-        extUrl: fotoModelo.fotoId, //se usara como elementoId , la idea es poder gestionar ya que mdoalImagen solo permite  propiedades conocidas
+        title: fotoModelo.name
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]

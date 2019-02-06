@@ -69,7 +69,7 @@ export class GaleriaService {
       tipo = 1;
       console.log('tipo1');
     }
-    if (tam_Final_ListaFotos > tam_Inicial_ListaFotos && tam_Inicial_ListaFotos >= 2) {
+    if (tam_Final_ListaFotos > tam_Inicial_ListaFotos && tam_Inicial_ListaFotos >= 1) {
       tipo = 2;
       console.log('tipo2');
     }
