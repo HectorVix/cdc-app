@@ -64,20 +64,26 @@ export class GaleriaService {
     tam_Inicial_ListaFotos,
     tam_Final_ListaFotos: number) {
     var tipo = -1;
+    console.log('actualizando fotos:');
     if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
       tipo = 1;
+      console.log('tipo1');
     }
     if (tam_Final_ListaFotos > tam_Inicial_ListaFotos) {
       tipo = 2;
+      console.log('tipo2');
     }
     if (tam_Final_ListaFotos < tam_Inicial_ListaFotos && tam_Final_ListaFotos >= 1) {
       tipo = 3;
+      console.log('tipo3');
     }
     if (tam_Final_ListaFotos == 0 && tam_Inicial_ListaFotos >= 1) {
       tipo = 4;
+      console.log('tipo4');
     }
     if (tam_Inicial_ListaFotos == 0 && tam_Final_ListaFotos >= 1) {
       tipo = 5;
+      console.log('tipo5');
     }
     switch (tipo) {
       case 1: { //listas final igual a la inicial
@@ -99,6 +105,7 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           posicion = posicion + 1;
+          console.log('fotoId:', fotoId);
           var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
             reportProgress: true
           });
@@ -179,10 +186,12 @@ export class GaleriaService {
           formData.append('fecha', fechaCreacion);
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
-          posicion = posicion + 1;
-          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
-            reportProgress: true
-          });
+          if (posicion <= tam_Inicial_ListaFotos - 1) {
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+              reportProgress: true
+            });
+          }
+
           var progreso = new Subject<number>();
           this.http.request(req).subscribe(event => {
             if (event.type === HttpEventType.UploadProgress) {
@@ -195,13 +204,11 @@ export class GaleriaService {
           estado[archivo.name] = {
             progreso: progreso.asObservable()
           };
+          posicion = posicion + 1;
         });
-        for (let i = tam_Final_ListaFotos; i < tam_Inicial_ListaFotos; i++) {
-          var fotoId = fotoId_Lista[i];
-          this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
-        }
-      }
         break;
+      }
+
       case 4: {
         for (let i = 0; i < fotoId_Lista.length; i++) {
           var fotoId = fotoId_Lista[i];

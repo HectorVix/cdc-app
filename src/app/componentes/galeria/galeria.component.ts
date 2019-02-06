@@ -240,15 +240,19 @@ export class GaleriaComponent implements OnInit {
   }
 
   onButtonBeforeHook(event: ButtonEvent, index: number) {
-    //si se eliminan varias seguidas o solo 1
-    //const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);
-
     if (!event || !event.button) {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       this.archivo.nativeElement.value = "";
+      var cont = 0;
+      this.archivos.forEach(archivo => {
+        if (archivo.name == event.image.modal.title) {
+          this.archivos.delete(archivo);
+        }
+        cont = cont + 1;
+      });
       var ordenNuevo = 0;
       var datosFotos = [];
       for (let i = 0; i < this.datosFotografias.length; i++) {
@@ -274,6 +278,7 @@ export class GaleriaComponent implements OnInit {
         // this.mostrar_Datos_PosActual(this.descripcionIndex);
         this.nuevoDatosFotos();
         console.log('tam datos fotos:', this.datosFotografias.length);
+        console.log('tam  archivos:', this.archivos.size);
       }
       else {
         this.mostrar_Datos_PosActual(this.descripcionIndex);
@@ -395,17 +400,21 @@ export class GaleriaComponent implements OnInit {
       this.nuevo_Editar_DatosFotos(this.imagenes.length - 1);
     }
   }
-  public agregarImagenBusqueda(file: File, fotoModelo) {
-    this.archivos.add(file);
+  public agregarImagenBusqueda(fotoModelo) {
+    const imageBlob = this.dataURItoBlob(fotoModelo.imagen);
+    const imageFile = new File([imageBlob], fotoModelo.nombre, { type: 'image/jpeg' });
+    this.archivos.add(imageFile);
     const reader: FileReader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(imageFile);
     reader.onload = (onLoadPhotoEvent: any) => {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: 'ok',
-
-
+        description: fotoModelo.descripcion,
+        title: fotoModelo.name,
+        alt: '',
+        ariaLabel: '',
+        extUrl: fotoModelo.fotoId, //se usara como elementoId , la idea es poder gestionar ya que mdoalImagen solo permite  propiedades conocidas
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]

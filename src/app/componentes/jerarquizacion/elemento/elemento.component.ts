@@ -114,15 +114,12 @@ export class ElementoComponent implements OnInit {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inical de la lista de fotos guardadas
         for (let fotoVal of this.data_resFoto) {
-          var foto = new foto_Modelo();
-          foto = fotoVal;
-          this.fotoId_Lista.push(foto.fotoId);
-          if (foto.posicion == 0)
-            this.galeria.mostrarDatosInicio(foto.descripcion, foto.comentario, foto.autor, foto.fecha);
-          //  const nombreImagen = date + '.' + foto.nombre;
-          const imageBlob = this.galeria.dataURItoBlob(foto.imagen);
-          const imageFile = new File([imageBlob], foto.nombre, { type: 'image/jpeg' });
-          this.galeria.agregarImagenBusqueda(imageFile, foto);
+          var fotoModelo = new foto_Modelo();
+          fotoModelo = fotoVal;
+          this.fotoId_Lista.push(fotoModelo.fotoId);
+          if (fotoModelo.posicion == 0)
+            this.galeria.mostrarDatosInicio(fotoModelo.descripcion, fotoModelo.comentario, fotoModelo.autor, this.fechaServicio.getFecha(fotoModelo.fecha));
+          this.galeria.agregarImagenBusqueda(fotoModelo);
         }
       });
   }
