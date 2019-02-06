@@ -197,6 +197,7 @@ export class ElementoComponent implements OnInit {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar', 'primary');
         });
+        this.loading = false;
   }
   addElemento(elemento: elemento_Modelo): void {
     this.loading = true;

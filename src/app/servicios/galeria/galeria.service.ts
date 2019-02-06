@@ -177,7 +177,7 @@ export class GaleriaService {
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
-            fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
+            //fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
           formData.append('file', archivo, archivo.name);
           formData.append('descripcion', baseFotoModelo.descripcion);

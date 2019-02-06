@@ -248,8 +248,9 @@ export class GaleriaComponent implements OnInit {
       this.archivo.nativeElement.value = "";
       var cont = 0;
       this.archivos.forEach(archivo => {
-        if (archivo.name == event.image.modal.title) {
-          this.archivos.delete(archivo);
+        if (cont == event.image.id) {
+         this.archivos.delete(archivo);
+          console.log('Se elimino:', archivo.name);
         }
         cont = cont + 1;
       });
@@ -271,29 +272,6 @@ export class GaleriaComponent implements OnInit {
         }
       }
       this.datosFotografias = datosFotos;
-
-      this.descripcionIndex = this.imagenes.length - 1;
-      if (this.descripcionIndex == -1) {
-        this.descripcionIndex = 0;
-        // this.mostrar_Datos_PosActual(this.descripcionIndex);
-        this.nuevoDatosFotos();
-        console.log('tam datos fotos:', this.datosFotografias.length);
-        console.log('tam  archivos:', this.archivos.size);
-      }
-      else {
-        this.mostrar_Datos_PosActual(this.descripcionIndex);
-      }
-      console.log('Id imagen:', event.image.id);
-      console.log('elementoId imagen:', event.image.modal.extUrl);
-      //event.image.modal.title
-      if (event.image.modal.extUrl != '-1') {
-        console.log('esta registrado  se llamara al servicio paa elminarlo');
-        console.log('listo eliminar datos posicion:', event.image.id);
-      }
-      else {
-        console.log('no esta registrado no se llamara al servicio');
-        console.log('listo eliminar datos posicion:', event.image.id);
-      }
     }
   }
 
@@ -306,7 +284,7 @@ export class GaleriaComponent implements OnInit {
       this.descripcion = datoFotoModeloActual.descripcion;
       this.comentario = datoFotoModeloActual.comentario;
       this.autor = datoFotoModeloActual.autor;
-      this.fecha = this.fechaServicio.getFecha(datoFotoModeloActual.fecha);
+      this.fecha = datoFotoModeloActual.fecha;
     }
   }
 
@@ -426,7 +404,7 @@ export class GaleriaComponent implements OnInit {
       fecha: this.fechaServicio.getFecha(fotoModelo.fecha),
       editado: true
     };*/
-
+    fotoModelo.fecha = this.fechaServicio.getFecha(fotoModelo.fecha);
     this.datosFotografias.push(fotoModelo);
   }
   dataURItoBlob(dataURI) {
