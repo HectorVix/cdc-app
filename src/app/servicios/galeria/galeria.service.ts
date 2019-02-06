@@ -69,7 +69,7 @@ export class GaleriaService {
       tipo = 1;
       console.log('tipo1');
     }
-    if (tam_Final_ListaFotos > tam_Inicial_ListaFotos) {
+    if (tam_Final_ListaFotos > tam_Inicial_ListaFotos && tam_Inicial_ListaFotos >= 2) {
       tipo = 2;
       console.log('tipo2');
     }
@@ -105,7 +105,7 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           posicion = posicion + 1;
-          console.log('fotoId:', fotoId);
+          console.log('1 actualizando fotoId:', fotoId);
           var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
             reportProgress: true
           });
@@ -143,6 +143,7 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId, pueden ser nuevas que estan dentro del rango tamaño inicial
+            console.log('2 actualizando fotoId:', fotoId);
             var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
               reportProgress: true
             });
@@ -177,7 +178,7 @@ export class GaleriaService {
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
-            //fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
+            fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
           formData.append('file', archivo, archivo.name);
           formData.append('descripcion', baseFotoModelo.descripcion);
@@ -187,9 +188,15 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {
+            console.log(' 3 actualizando fotoId:', fotoId);
             var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
               reportProgress: true
             });
+          }
+          for (let i = tam_Final_ListaFotos; i < tam_Inicial_ListaFotos; i++) {
+            var fotoId = fotoId_Lista[i];
+            console.log(' 3 eliminando fotoId:', fotoId);
+            this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
           }
 
           var progreso = new Subject<number>();
@@ -233,6 +240,7 @@ export class GaleriaService {
           formData.append('fecha', fechaCreacion);
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
+          console.log(' 5 actualizando fotoId:', fotoId);
           var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
             reportProgress: true
           });

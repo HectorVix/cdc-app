@@ -197,7 +197,6 @@ export class ElementoComponent implements OnInit {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar', 'primary');
         });
-        this.loading = false;
   }
   addElemento(elemento: elemento_Modelo): void {
     this.loading = true;
@@ -229,6 +228,7 @@ export class ElementoComponent implements OnInit {
   //Buscar
   buscarElemento() {
     this.elementos = new Array();
+    this.fotoId_Lista = [];
     this.galeria.nuevo();
     this.loading = true;
     //variables necesarias para recuperarse de errores 
@@ -289,6 +289,7 @@ export class ElementoComponent implements OnInit {
     this.dataElementos = [];
     this.tam_Inicial_ListaFotos = 0;
     this.loading = false;
+    this.fotoId_Lista = [];
   }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
