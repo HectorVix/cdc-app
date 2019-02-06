@@ -248,18 +248,46 @@ export class GaleriaComponent implements OnInit {
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
+      this.archivo.nativeElement.value = "";
+      var ordenNuevo = 0;
+      var datosFotos = [];
+      for (let i = 0; i < this.datosFotografias.length; i++) {
+        if (i != event.image.id) {//todos menos el que se elimino
+          console.log('Ordenado datos fotos de nuevo');
+          var baseFotoModelo = new foto_Modelo();
+          baseFotoModelo = this.datosFotografias[i];
+          datosFotos[ordenNuevo] = {
+            descripcion: baseFotoModelo.descripcion,
+            comentario: baseFotoModelo.comentario,
+            autor: baseFotoModelo.autor,
+            fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
+            editado: true
+          };
+          ordenNuevo = ordenNuevo + 1;
+        }
+      }
+      this.datosFotografias = datosFotos;
+
       this.descripcionIndex = this.imagenes.length - 1;
-      if (this.descripcionIndex == -1)
+      if (this.descripcionIndex == -1) {
         this.descripcionIndex = 0;
+        // this.mostrar_Datos_PosActual(this.descripcionIndex);
+        this.nuevoDatosFotos();
+        console.log('tam datos fotos:', this.datosFotografias.length);
+      }
+      else {
+        this.mostrar_Datos_PosActual(this.descripcionIndex);
+      }
       console.log('Id imagen:', event.image.id);
       console.log('elementoId imagen:', event.image.modal.extUrl);
       //event.image.modal.title
-      this.archivo.nativeElement.value = "";
       if (event.image.modal.extUrl != '-1') {
         console.log('esta registrado  se llamara al servicio paa elminarlo');
+        console.log('listo eliminar datos posicion:', event.image.id);
       }
       else {
         console.log('no esta registrado no se llamara al servicio');
+        console.log('listo eliminar datos posicion:', event.image.id);
       }
     }
   }
@@ -425,6 +453,7 @@ export class GaleriaComponent implements OnInit {
     }
   }
   inicio() {
+    this.nuevoDatosFotos();
     this.mostrar_Datos_PosActual(0);
   }
   fin() {
