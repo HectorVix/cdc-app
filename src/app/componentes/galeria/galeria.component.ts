@@ -37,6 +37,7 @@ export class GaleriaComponent implements OnInit {
   //archivos
   @ViewChild('file') archivo;
   public archivos: Set<File> = new Set();
+  archivosCDC: File[] = [];
   public baseFotoModelo: Array<foto_Modelo> = new Array();
   private tam_inicial = 0;
   //Galeria
@@ -176,6 +177,12 @@ export class GaleriaComponent implements OnInit {
         type: ButtonType.CLOSE,
         title: 'Cerrar',
         fontSize: '30px'
+      },
+      {
+        className: 'exturl-image',
+        type: ButtonType.EXTURL,
+        title: 'Editar',
+        fontSize: '30px'
       }
     ]
   };
@@ -234,49 +241,29 @@ export class GaleriaComponent implements OnInit {
 
   onButtonBeforeHook(event: ButtonEvent, index: number) {
     //si se eliminan varias seguidas o solo 1
-    const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);
+    //const posActual: number = this.getCurrentIndexCustomLayout(event.image, this.imagenes);
+
     if (!event || !event.button) {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
-      var cont = 0;
-      var datosFotos = [];
-      var ordenNuevo = 0;
-      switch (posActual) {
-        case -1: break; // cuando se buguea la posActual es -1
-        default: {
-          for (let i = 0; i < this.datosFotografias.length; i++) {
-            if (i != posActual) {//todos menos el que se elimino
-              var baseFotoModelo = new foto_Modelo();
-              baseFotoModelo = this.datosFotografias[i];
-              datosFotos[ordenNuevo] = {
-                descripcion: baseFotoModelo.descripcion,
-                comentario: baseFotoModelo.comentario,
-                autor: baseFotoModelo.autor,
-                fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
-                editado: true
-              };
-              ordenNuevo = ordenNuevo + 1;
-            }
-          }
-          this.descripcionIndex = 0;
-          this.datosFotografias = datosFotos;
-          if (this.datosFotografias.length == 0) {
-            this.nuevoDatosFotos();
-          }
-          this.archivos.forEach(archivo => {
-            if (cont == posActual) {
-              this.archivos.delete(archivo);
-              this.archivo.nativeElement.value = "";
-            }
-            cont = cont + 1;
-          });
-        }
-          break;
+      this.descripcionIndex = this.imagenes.length - 1;
+      if (this.descripcionIndex == -1)
+        this.descripcionIndex = 0;
+      console.log('Id imagen:', event.image.id);
+      console.log('elementoId imagen:', event.image.modal.extUrl);
+      //event.image.modal.title
+      this.archivo.nativeElement.value = "";
+      if (event.image.modal.extUrl != '-1') {
+        console.log('esta registrado  se llamara al servicio paa elminarlo');
+      }
+      else {
+        console.log('no esta registrado no se llamara al servicio');
       }
     }
   }
+
   mostrar_Datos_PosActual(posActual) {
     if (this.datosFotografias.length > 0) {
       this.descripcionIndex = posActual;
@@ -355,6 +342,7 @@ export class GaleriaComponent implements OnInit {
       if (!isNaN(parseInt(key))) {
         this.archivos.add(archivos[key]);
         this.agregarImagen(archivos[key]);
+        console.log('key:', archivos[key].name);
       }
     }
 
@@ -367,7 +355,12 @@ export class GaleriaComponent implements OnInit {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: ''
+        description: '',
+        title: file.name,
+        alt: '',
+        ariaLabel: '',
+        extUrl: '-1', //se usara como elementoId , la idea es poder gestionar ya que mdoalImagen solo permite  propiedades conocidas
+
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
@@ -382,7 +375,9 @@ export class GaleriaComponent implements OnInit {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: ''
+        description: 'ok',
+
+
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
