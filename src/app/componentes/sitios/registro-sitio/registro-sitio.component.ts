@@ -16,6 +16,10 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
 import { sitio_Dato } from '../../../modelo/tabla/sitio-dato';
 import { LocalDataSource } from 'ng2-smart-table';
 
+import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
+import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
+import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+
 @Component({
   selector: 'app-registro-sitio',
   templateUrl: './registro-sitio.component.html',
@@ -110,14 +114,22 @@ export class RegistroSitioComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  //---------Galeria
+  @ViewChild(GaleriaComponent)
+  private galeria: GaleriaComponent;
+  data_resFoto: any;
+  tam_Inicial_ListaFotos = 0;
+  fotoId_Lista = [];
 
   constructor(private fb: FormBuilder,
     private sitioServicio: SitioService,
+    private galeriaServicio: GaleriaService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearFormSitio(new sitio_Modelo());
     this.crearFormBuscar();
     this.dataSource = new MatTableDataSource(this.lista_Sitio);
+
   }
 
   ngOnInit() {
@@ -274,13 +286,14 @@ export class RegistroSitioComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
-  mostrar_Sito_Busqueda(row: sitio_Dato) {
+  mostrar_Sito_Busqueda(row) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
     this.getMacsitio(this.sitioForm.get('sitioId').value);
     this.getSubdivision(this.sitioForm.get('sitioId').value);
+    this.getFoto_Datos(row.sitioId);
   }
   getSitio_id(id: Number): sitio_Modelo {
     var base_sitioBusqueda = new sitio_Modelo();
@@ -297,6 +310,13 @@ export class RegistroSitioComponent implements OnInit {
     this.sitioServicio.updateSitio(sitio)
       .subscribe(
         resSitio => {
+          this.galeriaServicio.update_FotoId_Lista(
+            this.galeria.archivos,
+            this.galeria.datosFotografias,
+            sitio.sitioId,
+            this.fotoId_Lista,
+            this.tam_Inicial_ListaFotos,
+            this.galeria.getTam_final_ListaFotos(), 2);
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso, código del sitio:${resSitio.codsitio}.`, 'success');
           this.lista_Sitio = new Array();
@@ -463,6 +483,22 @@ export class RegistroSitioComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+  getFoto_Datos(elementoId: String) {
+    const date = new Date().valueOf();
+    this.galeriaServicio.getDatosFotos(elementoId, 2).subscribe(
+      resFoto => {
+        this.data_resFoto = resFoto;
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
+        for (let fotoVal of this.data_resFoto) {
+          var fotoModelo = new foto_Modelo();
+          fotoModelo = fotoVal;
+          this.fotoId_Lista.push(fotoModelo.fotoId);
+          if (fotoModelo.posicion == 0)
+            this.galeria.mostrarDatosInicio(fotoModelo.descripcion, fotoModelo.comentario, fotoModelo.autor, this.fechaServicio.getFecha(fotoModelo.fecha));
+          this.galeria.agregarImagenBusqueda(fotoModelo);
+        }
+      });
   }
 }
 function crearSitio(k: Number, sitioId: Number, codigoSitio, nombreSitio, sinonimoSitio, nacion, depto): sitio_Dato {

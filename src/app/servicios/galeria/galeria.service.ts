@@ -17,8 +17,8 @@ export class GaleriaService {
 
   constructor(private http: HttpClient, private fechaServicio: FechaService) { }
 
-  getDatosFotos(elementoId: String): Observable<foto_Modelo> {
-    return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
+  getDatosFotos(elementoId: String, tipo: Number): Observable<foto_Modelo> {
+    return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId + '/' + tipo);
   }
   cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number, tipos: Number) {
     var posicion = 0;
@@ -197,7 +197,7 @@ export class GaleriaService {
           for (let i = tam_Final_ListaFotos; i < tam_Inicial_ListaFotos; i++) {
             var fotoId = fotoId_Lista[i];
             console.log(' 3 eliminando fotoId:', fotoId);
-            this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
+            this.http.delete(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
           }
 
           var progreso = new Subject<number>();
@@ -220,7 +220,7 @@ export class GaleriaService {
       case 4: {
         for (let i = 0; i < fotoId_Lista.length; i++) {
           var fotoId = fotoId_Lista[i];
-          this.http.post(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
+          this.http.delete(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
         }
       } break;
       case 5: {

@@ -109,7 +109,7 @@ export class ElementoComponent implements OnInit {
 
   getFoto_Datos(elementoId: String) {
     const date = new Date().valueOf();
-    this.galeriaServicio.getDatosFotos(elementoId).subscribe(
+    this.galeriaServicio.getDatosFotos(elementoId, 1).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
