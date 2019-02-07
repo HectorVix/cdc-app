@@ -16,6 +16,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog }
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
 import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
+import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato';
 
 @Component({
   selector: 'app-formulario-le',
@@ -228,14 +229,12 @@ export class FormularioLeComponent implements OnInit {
       'nomcomuns': ''
     });
   }
-  mostrar_LocalizacionElemento_Busqueda(row) {
+  mostrar_LocalizacionElemento_Busqueda(row:localizacionElemento_Dato) {
     this.crearFormLocalizacion_Elemento(this.getRastreoElemento_id(row.LocalizacionId));
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
     this.getProteccion(row.LocalizacionId);
-    this.lista_LE = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_LE);
   }
 
   getRastreoElemento_id(id: Number): Localizacion_Modelo {

@@ -18,10 +18,10 @@ export class RastreoService {
   getRastreosElementos(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
-  addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
-    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
+  addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
   }
-  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<rastreo_Elemento_Modelo> {
-    return this.http.post<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
+  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
   }
 }

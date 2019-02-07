@@ -30,11 +30,11 @@ export class FuenteService {
   descargarArchivo(nombre: String, archivoId: Number): Observable<archivo_Modelo> {
     return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/descargarArchivo/' + nombre + '/' + archivoId);
   }
-  addFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
-    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
+  addFuente(fuente: fuente_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
   }
-  editarFuente(fuente: fuente_Modelo, jti: Number): Observable<fuente_Modelo> {
-    return this.http.post<fuente_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions);
+  editarFuente(fuente: fuente_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions);
   }
 
   //cargar archivos

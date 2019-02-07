@@ -231,7 +231,7 @@ export class FormularioReComponent implements OnInit {
     return rastreoElementoBusqueda;
   }
 
-  mostrar_RastreoElemento_Busqueda(row) {
+  mostrar_RastreoElemento_Busqueda(row: ratreoElemento_Dato) {
     var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
     this.crearFormRastreoElemento(this.getRastreoElemento_id(row.rastreoId));
     this.tabPagina1();

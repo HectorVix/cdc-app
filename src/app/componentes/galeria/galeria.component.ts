@@ -247,7 +247,6 @@ export class GaleriaComponent implements OnInit {
       this.archivos.forEach(archivo => {
         if (cont == event.image.id) {
           this.archivos.delete(archivo);
-          console.log('Se elimino:', archivo.name);
         }
         cont = cont + 1;
       });
@@ -255,7 +254,6 @@ export class GaleriaComponent implements OnInit {
       var datosFotos = [];
       for (let i = 0; i < this.datosFotografias.length; i++) {
         if (i != event.image.id) {//todos menos el que se elimino
-          console.log('Ordenado datos fotos de nuevo');
           var baseFotoModelo = new foto_Modelo();
           baseFotoModelo = this.datosFotografias[i];
           datosFotos[ordenNuevo] = {
@@ -269,7 +267,6 @@ export class GaleriaComponent implements OnInit {
         }
       }
       this.datosFotografias = datosFotos;
-      console.log('Estado editar:', this.selected.value);
       if (this.imagenes.length >= 1)
         this.mostrar_Datos_PosActual(event.image.id - 1);
       else
@@ -355,7 +352,6 @@ export class GaleriaComponent implements OnInit {
       if (!isNaN(parseInt(key))) {
         this.archivos.add(archivos[key]);
         this.agregarImagen(archivos[key]);
-        console.log('key:', archivos[key].name);
       }
     }
 

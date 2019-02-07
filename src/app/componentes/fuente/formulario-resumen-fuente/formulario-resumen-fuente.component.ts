@@ -57,7 +57,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   selectedArchivos = new FormControl(0);
   editar = true;
   guardar = false;
-  private codigoFuente: String;
   //--------------------------
   //componente archivos disponibles
   @ViewChild(ArchivosDisponiblesComponent)
@@ -146,7 +145,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.cargarArchivos(resFuente.fuenteId);
           this.loading = false;
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
-          //  this.crearFormFuente();
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
@@ -243,7 +241,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
       var fuente_Busqueda_Aux = new fuente_Modelo();// necesario dado que si reutiliza conserva la primera asignación
       fuente_Busqueda_Aux = dataFuente;
       if (id == fuente_Busqueda_Aux.fuenteId) {
-        this.codigoFuente = fuente_Busqueda_Aux.codfuente;
         fuenteBusqueda = fuente_Busqueda_Aux;
       }
     });
@@ -265,7 +262,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos = new Set();
     this.archivo.nativeElement.value = "";
     this.progreso = null;
-    this.codigoFuente = "";
     this.cargado = false;
     this.tabArchivos(0);
     this.archivos_Disponibles.nuevo();
@@ -281,7 +277,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.loading = true;
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    fuente.codfuente = this.codigoFuente; // en caso de ser modificado el código inicial
     this.fuenteServicio.editarFuente(fuente, decodedToken.jti)
       .subscribe(
         resFuente => {

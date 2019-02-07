@@ -9,4 +9,8 @@ export class respuesta_cdc_Modelo {
     areaId: Number;
     plantaId: Number;
     vertebradoId: Number;
+    codfuente: String;
+    fuenteId: Number;
+    codigo: String;
+    elementoId: Number;
 }
