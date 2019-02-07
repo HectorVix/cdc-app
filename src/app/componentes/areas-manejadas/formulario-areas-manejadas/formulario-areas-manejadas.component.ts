@@ -261,8 +261,6 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.editar = false;
     this.guardar = true;
     this.getListaElementos(this.areaManejoForm.get('areaId').value);
-    this.lista_Area = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_Area);
   }
   updateArea(area: area_Modelo): void {
     this.loading = true;

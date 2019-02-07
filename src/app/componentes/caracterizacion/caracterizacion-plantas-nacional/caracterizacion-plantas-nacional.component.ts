@@ -292,8 +292,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
-    this.lista_Planta = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_Planta);
     this.getDistribucion1_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
     this.getDistribucion2_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
   }

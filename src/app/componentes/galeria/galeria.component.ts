@@ -180,12 +180,6 @@ export class GaleriaComponent implements OnInit {
         type: ButtonType.CLOSE,
         title: 'Cerrar',
         fontSize: '30px'
-      },
-      {
-        className: 'exturl-image',
-        type: ButtonType.EXTURL,
-        title: 'Editar',
-        fontSize: '30px'
       }
     ]
   };

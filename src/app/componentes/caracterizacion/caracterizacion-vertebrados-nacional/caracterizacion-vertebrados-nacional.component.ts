@@ -301,8 +301,6 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
-    this.lista_Vertebrado = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
     this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
     this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
   }

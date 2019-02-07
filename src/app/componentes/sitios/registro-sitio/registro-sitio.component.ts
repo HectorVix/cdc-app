@@ -279,10 +279,6 @@ export class RegistroSitioComponent implements OnInit {
     this.tabPagina1();
     this.editar = false;
     this.guardar = true;
-    this.data_macsitio_DataSource = new LocalDataSource();
-    this.data_subdivision_DataSource = new LocalDataSource();
-    this.lista_Sitio = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_Sitio);
     this.getMacsitio(this.sitioForm.get('sitioId').value);
     this.getSubdivision(this.sitioForm.get('sitioId').value);
   }
