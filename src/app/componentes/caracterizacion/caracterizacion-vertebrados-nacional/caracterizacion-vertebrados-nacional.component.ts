@@ -9,11 +9,13 @@ import { CaracterizacionService } from '../../../servicios/caracterizacion/carac
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-//--------------tabla------------------------------------
 import { vertebrado_FormGroup } from '../../../modelo/formGroup/vertebrado';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato';
 import { LocalDataSource } from 'ng2-smart-table';
+import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
+import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
+import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -106,9 +108,17 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  //---------Galeria
+  @ViewChild(GaleriaComponent)
+  private galeria: GaleriaComponent;
+  data_resFoto: any;
+  tam_Inicial_ListaFotos = 0;
+  fotoId_Lista = [];
+
   constructor(private fb: FormBuilder,
     private dialog: MatDialog,
     private caracterizacionServicio: CaracterizacionService,
+    private galeriaServicio: GaleriaService,
     private fechaServicio: FechaService) {
     this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo);
     this.crearForm_Buscar();
@@ -185,6 +195,10 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.caracterizacionServicio.addCaracterizacionVertebrado(caracterizacion)
       .subscribe(
         resVertebrado => {
+          if (this.galeria.archivos.size > 0) {
+            var vertebrado_id = resVertebrado.vertebradoId;
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, vertebrado_id, 5);
+          }
           this.loading = false;
           this.changeSuccessMessage(`Se registro la caracterizacion del vertebrado :${resVertebrado.codigoe}.`, 'success');
         }, err => {
@@ -303,12 +317,20 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.guardar = true;
     this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
     this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
+    this.getFoto_Datos(row.vertebradoId);
   }
   updateVertebrado(vertebrado: vertebrado_Modelo): void {
     this.loading = true;
     this.caracterizacionServicio.updateVertebrado(vertebrado)
       .subscribe(
         resVertebrado => {
+          this.galeriaServicio.update_FotoId_Lista(
+            this.galeria.archivos,
+            this.galeria.datosFotografias,
+            vertebrado.vertebradoId,
+            this.fotoId_Lista,
+            this.tam_Inicial_ListaFotos,
+            this.galeria.getTam_final_ListaFotos(), 5);
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso, código de la Vertebrado:${resVertebrado.codigoe}.`, 'success');
           this.lista_Vertebrado = new Array();
@@ -482,6 +504,22 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+  getFoto_Datos(vertebradoId: Number) {
+    const date = new Date().valueOf();
+    this.galeriaServicio.getDatosFotos(vertebradoId, 5).subscribe(
+      resFoto => {
+        this.data_resFoto = resFoto;
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
+        for (let fotoVal of this.data_resFoto) {
+          var fotoModelo = new foto_Modelo();
+          fotoModelo = fotoVal;
+          this.fotoId_Lista.push(fotoModelo.fotoId);
+          if (fotoModelo.posicion == 0)
+            this.galeria.mostrarDatosInicio(fotoModelo.descripcion, fotoModelo.comentario, fotoModelo.autor, this.fechaServicio.getFecha(fotoModelo.fecha));
+          this.galeria.agregarImagenBusqueda(fotoModelo);
+        }
+      });
   }
 }
 function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {
