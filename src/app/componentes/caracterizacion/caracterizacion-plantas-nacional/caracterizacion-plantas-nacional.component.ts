@@ -10,11 +10,12 @@ import { CaracterizacionService } from '../../../servicios/caracterizacion/carac
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { LocalDataSource } from 'ng2-smart-table';
-
-//--------------tabla------------------------------------
 import { planta_FormGroup } from '../../../modelo/formGroup/planta';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { planta_Dato } from '../../../modelo/tabla/planta-dato'
+import { planta_Dato } from '../../../modelo/tabla/planta-dato';
+import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
+import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
+import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -108,9 +109,17 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  //---------Galeria
+  @ViewChild(GaleriaComponent)
+  private galeria: GaleriaComponent;
+  data_resFoto: any;
+  tam_Inicial_ListaFotos = 0;
+  fotoId_Lista = [];
+
   constructor(private fb: FormBuilder,
     private caracterizacionServicio: CaracterizacionService,
     private fechaServicio: FechaService,
+    private galeriaServicio: GaleriaService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo);
     this.crearForm_Buscar();
@@ -183,6 +192,10 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.caracterizacionServicio.addCaracterizacionPlanta(caracterizacion)
       .subscribe(
         resPlanta => {
+          if (this.galeria.archivos.size > 0) {
+            var planta_id = resPlanta.plantaId;
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, planta_id, 4);
+          }
           this.loading = false;
           this.changeSuccessMessage(`Se registro la caracterizacion de la planta :${resPlanta.codigoe}.`, 'success');
         }, err => {
@@ -294,12 +307,20 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.guardar = true;
     this.getDistribucion1_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
     this.getDistribucion2_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
+    this.getFoto_Datos(row.plantaId);
   }
   updatePlanta(planta: planta_Modelo): void {
     this.loading = true;
     this.caracterizacionServicio.updatePlanta(planta)
       .subscribe(
         resPlanta => {
+          this.galeriaServicio.update_FotoId_Lista(
+            this.galeria.archivos,
+            this.galeria.datosFotografias,
+            planta.plantaId,
+            this.fotoId_Lista,
+            this.tam_Inicial_ListaFotos,
+            this.galeria.getTam_final_ListaFotos(), 4);
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso, código de la planta:${resPlanta.codigoe}.`, 'success');
           this.lista_Planta = new Array();
@@ -475,6 +496,22 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+  getFoto_Datos(plantaId: Number) {
+    const date = new Date().valueOf();
+    this.galeriaServicio.getDatosFotos(plantaId, 4).subscribe(
+      resFoto => {
+        this.data_resFoto = resFoto;
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
+        for (let fotoVal of this.data_resFoto) {
+          var fotoModelo = new foto_Modelo();
+          fotoModelo = fotoVal;
+          this.fotoId_Lista.push(fotoModelo.fotoId);
+          if (fotoModelo.posicion == 0)
+            this.galeria.mostrarDatosInicio(fotoModelo.descripcion, fotoModelo.comentario, fotoModelo.autor, this.fechaServicio.getFecha(fotoModelo.fecha));
+          this.galeria.agregarImagenBusqueda(fotoModelo);
+        }
+      });
   }
 }
 function crearPlanta(k: Number, plantaId: Number, codigoe, nacion, nombren, nombrecomunn): planta_Dato {

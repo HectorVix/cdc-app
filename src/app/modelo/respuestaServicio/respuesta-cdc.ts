@@ -7,4 +7,6 @@ export class respuesta_cdc_Modelo {
     numident: String;
     sitioId: Number;
     areaId: Number;
+    plantaId: Number;
+    vertebradoId: Number;
 }

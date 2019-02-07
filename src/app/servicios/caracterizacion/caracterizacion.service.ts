@@ -18,11 +18,11 @@ export class CaracterizacionService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   constructor(private http: HttpClient) { }
   //Registrar
-  addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
-    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
+  addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
   }
-  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<caracterizacion_Modelo> {
-    return this.http.post<caracterizacion_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
+  addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
   }
   addDistribucion1_Planta(plantaId: Number, distribucion1: distribucion_Modelo) {
     return this.http.post(this.rootUrl + '/caracterizacion/planta/registrar/distribucion1/' + plantaId, distribucion1, httpOptions);
