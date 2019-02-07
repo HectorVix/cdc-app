@@ -112,7 +112,7 @@ export class ElementoComponent implements OnInit {
     this.galeriaServicio.getDatosFotos(elementoId).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
-        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inical de la lista de fotos guardadas
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
         for (let fotoVal of this.data_resFoto) {
           var fotoModelo = new foto_Modelo();
           fotoModelo = fotoVal;
@@ -187,7 +187,7 @@ export class ElementoComponent implements OnInit {
             elemento.elementoId,
             this.fotoId_Lista,
             this.tam_Inicial_ListaFotos,
-            this.galeria.getTam_final_ListaFotos());
+            this.galeria.getTam_final_ListaFotos(), 1);
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
           this.elementos = new Array();
@@ -207,7 +207,7 @@ export class ElementoComponent implements OnInit {
         resElemento => {
           if (this.galeria.archivos.size > 0) {
             var elemento_id = resElemento.elementoId;
-            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id);
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, elemento_id, 1);
           }
           else {
             this.loading = false;

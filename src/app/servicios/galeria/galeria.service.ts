@@ -20,7 +20,7 @@ export class GaleriaService {
   getDatosFotos(elementoId: String): Observable<foto_Modelo> {
     return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId);
   }
-  cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number) {
+  cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number, tipos: Number) {
     var posicion = 0;
     const estado = {};
     var fechaCreacion = null;
@@ -38,7 +38,7 @@ export class GaleriaService {
       formData.append('fecha', fechaCreacion);
       formData.append('posicion', '' + posicion);
       posicion = posicion + 1;
-      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
+      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
         reportProgress: true
       });
       var progreso = new Subject<number>();
@@ -62,7 +62,8 @@ export class GaleriaService {
     elemento_id: Number,
     fotoId_Lista,
     tam_Inicial_ListaFotos,
-    tam_Final_ListaFotos: number) {
+    tam_Final_ListaFotos: number,
+    tipos: Number) {
     var tipo = -1;
     console.log('actualizando fotos:');
     if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
@@ -106,7 +107,7 @@ export class GaleriaService {
           var fotoId = fotoId_Lista[posicion];
           posicion = posicion + 1;
           console.log('1 actualizando fotoId:', fotoId);
-          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
             reportProgress: true
           });
           var progreso = new Subject<number>();
@@ -144,12 +145,12 @@ export class GaleriaService {
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId, pueden ser nuevas que estan dentro del rango tamaño inicial
             console.log('2 actualizando fotoId:', fotoId);
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
               reportProgress: true
             });
           }
           else {//se cargan las nuevas fotos que están fuera del tamaño inicial
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
               reportProgress: true
             });
           }
@@ -189,7 +190,7 @@ export class GaleriaService {
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {
             console.log(' 3 actualizando fotoId:', fotoId);
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId, formData, {
+            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
               reportProgress: true
             });
           }
@@ -241,7 +242,7 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           console.log(' 5 actualizando fotoId:', fotoId);
-          var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id, formData, {
+          var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
             reportProgress: true
           });
           var progreso = new Subject<number>();
