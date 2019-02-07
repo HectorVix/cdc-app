@@ -91,7 +91,7 @@ export class ElementoComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  setElementoBuscado(row) {
+  setElementoBuscado(row: ElementoDato) {
     this.elementoForm = this.fb.group({
       'elementoId': row.elmendoId,
       'codigo': row.codigo,
@@ -107,7 +107,7 @@ export class ElementoComponent implements OnInit {
     this.guardar = true;
   }
 
-  getFoto_Datos(elementoId: String) {
+  getFoto_Datos(elementoId: Number) {
     const date = new Date().valueOf();
     this.galeriaServicio.getDatosFotos(elementoId, 1).subscribe(
       resFoto => {

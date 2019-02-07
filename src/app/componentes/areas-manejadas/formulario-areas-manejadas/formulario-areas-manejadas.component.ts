@@ -8,11 +8,13 @@ import { debounceTime } from 'rxjs/operators';
 import { area_Modelo } from '../../../modelo/area/area-modelo';
 import { listaElemento_Modelo } from '../../../modelo/area/listaElemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
-//--------------tabla------------------------------------
 import { area_FormGroup } from '../../../modelo/formGroup/area';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { area_Dato } from '../../../modelo/tabla/area-dato';
 import { LocalDataSource } from 'ng2-smart-table';
+import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
+import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
+import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 
 @Component({
   selector: 'app-formulario-areas-manejadas',
@@ -88,10 +90,18 @@ export class FormularioAreasManejadasComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  //---------Galeria
+  @ViewChild(GaleriaComponent)
+  private galeria: GaleriaComponent;
+  data_resFoto: any;
+  tam_Inicial_ListaFotos = 0;
+  fotoId_Lista = [];
+
 
   constructor(private fb: FormBuilder,
     private areaServicio: AreaService,
     private fechaServicio: FechaService,
+    private galeriaServicio: GaleriaService,
     private dialog: MatDialog) {
     this.crear_areaManejoForm(new area_Modelo());
     this.crear_areaManejoForm_Buscar();
@@ -267,6 +277,13 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.areaServicio.updateArea(area)
       .subscribe(
         resSitio => {
+          this.galeriaServicio.update_FotoId_Lista(
+            this.galeria.archivos,
+            this.galeria.datosFotografias,
+            area.areaId,
+            this.fotoId_Lista,
+            this.tam_Inicial_ListaFotos,
+            this.galeria.getTam_final_ListaFotos(), 3);
           this.loading = false;
           this.changeSuccessMessage(`Editado exitoso, código del área:${resSitio.codigoam}.`, 'success');
           this.lista_Area = new Array();
@@ -367,6 +384,22 @@ export class FormularioAreasManejadasComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+  getFoto_Datos(sitioId: Number) {
+    const date = new Date().valueOf();
+    this.galeriaServicio.getDatosFotos(sitioId, 3).subscribe(
+      resFoto => {
+        this.data_resFoto = resFoto;
+        this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
+        for (let fotoVal of this.data_resFoto) {
+          var fotoModelo = new foto_Modelo();
+          fotoModelo = fotoVal;
+          this.fotoId_Lista.push(fotoModelo.fotoId);
+          if (fotoModelo.posicion == 0)
+            this.galeria.mostrarDatosInicio(fotoModelo.descripcion, fotoModelo.comentario, fotoModelo.autor, this.fechaServicio.getFecha(fotoModelo.fecha));
+          this.galeria.agregarImagenBusqueda(fotoModelo);
+        }
+      });
   }
 
 }

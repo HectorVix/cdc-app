@@ -11,11 +11,9 @@ import { macsitio_Modelo } from '../../../modelo/sitio/macsitio-modelo';
 import { subdivision_Modelo } from '../../../modelo/sitio/subdivision-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { sitio_FormGroup } from '../../../modelo/formGroup/sitio';
-//--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { sitio_Dato } from '../../../modelo/tabla/sitio-dato';
 import { LocalDataSource } from 'ng2-smart-table';
-
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
@@ -205,6 +203,10 @@ export class RegistroSitioComponent implements OnInit {
     this.sitioServicio.addSitio(sitio)
       .subscribe(
         resSitio => {
+          if (this.galeria.archivos.size > 0) {
+            var sitio_id = resSitio.sitioId;
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, sitio_id, 2);
+          }
           this.loading = false;
           this.changeSuccessMessage(`Se registro el sitio  :${resSitio.codsitio}.`, 'success');
         }, err => {
@@ -286,7 +288,7 @@ export class RegistroSitioComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
-  mostrar_Sito_Busqueda(row) {
+  mostrar_Sito_Busqueda(row:sitio_Dato) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();
     this.editar = false;
@@ -484,9 +486,9 @@ export class RegistroSitioComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  getFoto_Datos(elementoId: String) {
+  getFoto_Datos(sitioId: Number) {
     const date = new Date().valueOf();
-    this.galeriaServicio.getDatosFotos(elementoId, 2).subscribe(
+    this.galeriaServicio.getDatosFotos(sitioId, 2).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
