@@ -162,6 +162,10 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.areaServicio.addArea(area)
       .subscribe(
         resArea => {
+          if (this.galeria.archivos.size > 0) {
+            var area_id = resArea.areaId;
+            this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, area_id, 3);
+          }
           this.loading = false;
           this.changeSuccessMessage(`Se registro el area  :${resArea.codigoam}.`, 'success');
         }, err => {
@@ -271,6 +275,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.editar = false;
     this.guardar = true;
     this.getListaElementos(this.areaManejoForm.get('areaId').value);
+    this.getFoto_Datos(row.areaId);
   }
   updateArea(area: area_Modelo): void {
     this.loading = true;
@@ -385,9 +390,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  getFoto_Datos(sitioId: Number) {
+  getFoto_Datos(areaId: Number) {
     const date = new Date().valueOf();
-    this.galeriaServicio.getDatosFotos(sitioId, 3).subscribe(
+    this.galeriaServicio.getDatosFotos(areaId, 3).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas

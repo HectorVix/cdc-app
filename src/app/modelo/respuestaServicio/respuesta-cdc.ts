@@ -6,4 +6,5 @@ export class respuesta_cdc_Modelo {
     codigoe: String;
     numident: String;
     sitioId: Number;
+    areaId: Number;
 }
