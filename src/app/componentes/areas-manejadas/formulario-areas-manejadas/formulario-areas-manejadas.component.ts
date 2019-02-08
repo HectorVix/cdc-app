@@ -217,6 +217,8 @@ export class FormularioAreasManejadasComponent implements OnInit {
     });
   }
   buscarArea() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
     this.lista_Area = new Array();
     this.loading = true;
     var a = "¬";
@@ -313,6 +315,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.data_listaElemento_DataSource = new LocalDataSource();
     this.lista_Area = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Area);
+    this.fotoId_Lista = [];
+    this.galeria.nuevo();
+    this.tam_Inicial_ListaFotos = 0;
   }
   // -----------------Lista elementos---------
   resListaElementos: any;

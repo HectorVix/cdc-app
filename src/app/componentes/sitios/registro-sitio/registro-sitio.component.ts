@@ -255,6 +255,8 @@ export class RegistroSitioComponent implements OnInit {
       this.changeSuccessMessage('El código de sitio es obligatorio para editar.', 'warning');
   }
   buscarSitio() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
     this.lista_Sitio = new Array();
     this.loading = true;
     var a = "¬";
@@ -288,7 +290,7 @@ export class RegistroSitioComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
-  mostrar_Sito_Busqueda(row:sitio_Dato) {
+  mostrar_Sito_Busqueda(row: sitio_Dato) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();
     this.editar = false;
@@ -336,6 +338,9 @@ export class RegistroSitioComponent implements OnInit {
     this.tabPagina1();
     this.data_macsitio_DataSource = new LocalDataSource();
     this.data_subdivision_DataSource = new LocalDataSource();
+    this.fotoId_Lista = [];
+    this.galeria.nuevo();
+    this.tam_Inicial_ListaFotos = 0;
   }
 
   // --------------MACSITIO------------------

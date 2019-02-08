@@ -229,7 +229,7 @@ export class ElementoComponent implements OnInit {
   buscarElemento() {
     this.elementos = new Array();
     this.fotoId_Lista = [];
-    this.galeria.nuevo();
+    this.tam_Inicial_ListaFotos = 0;
     this.loading = true;
     //variables necesarias para recuperarse de errores 
     var codigo = "¬";

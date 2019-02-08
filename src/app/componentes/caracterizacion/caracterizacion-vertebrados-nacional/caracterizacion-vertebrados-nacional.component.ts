@@ -258,6 +258,8 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     });
   }
   buscarVertebrado() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
     this.lista_Vertebrado = new Array();
     this.loading = true;
     var a = "¬";
@@ -266,7 +268,6 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     var d = "¬";
     var e = "¬";
     var f = "¬";
-
     if (this.buscarForm.get('codigoe').value)
       a = this.buscarForm.get('codigoe').value;
     if (this.buscarForm.get('nacion').value)
@@ -354,6 +355,9 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.tabPagina1();
     this.lista_Vertebrado = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+    this.fotoId_Lista = [];
+    this.galeria.nuevo();
+    this.tam_Inicial_ListaFotos = 0;
   }
   // --------------Distribucion1------------------
   resDistribucion1: any;

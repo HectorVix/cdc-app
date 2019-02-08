@@ -313,7 +313,7 @@
                 </div>
                 <div class="text-center ">
                   <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Siguiente</button>
-                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                  <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                 </div>
               </mat-tab>
               <mat-tab label="2">
@@ -354,8 +354,8 @@
                     <h5 class="modal-title">Protección</h5>
                   </div>
                   <div class="row  mx-auto color-green">
-                    <ng2-smart-table [settings]="settings_proteccion" [source]="data_proteccion_DataSource" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)"
-                      (editConfirm)="onUpdateConfirm($event)">
+                    <ng2-smart-table [settings]="settings_proteccion" [source]="data_proteccion_DataSource" (deleteConfirm)="onDeleteConfirm($event)"
+                      (createConfirm)="onCreateConfirm($event)" (editConfirm)="onUpdateConfirm($event)">
                     </ng2-smart-table>
                   </div>
                   <div class="row">
@@ -555,7 +555,7 @@
                 <div class="text-center">
                   <button class="btn color-green waves-light" (click)="tabPagina1()" mdbWavesEffect>Atras</button>
                   <button class="btn color-green waves-light" (click)="tabPagina3()" mdbWavesEffect>Siguiente</button>
-                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
+                  <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                 </div>
               </mat-tab>
               <mat-tab label="3">
@@ -701,7 +701,6 @@
                   <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                   <button class="btn color-green waves-light" (click)="tabPagina2()" mdbWavesEffect>Atras</button>
                   <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
-                  <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                   <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
                   <button class="btn color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
                 </div>

@@ -226,8 +226,6 @@ export class ProtocoloLeComponent implements OnInit {
     this.editar = false;
     this.guardar = true;
     this.getDispersion(row.protocoloId);
-    this.lista_ProtocoloLE = new Array();
-    this.dataSource = new MatTableDataSource(this.lista_ProtocoloLE);
   }
   tabPagina1() {
     this.selected.setValue(0);

@@ -255,6 +255,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     });
   }
   buscarPlanta() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
     this.lista_Planta = new Array();
     this.loading = true;
     var a = "¬";
@@ -346,6 +348,9 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.lista_Planta);
     this.data_distribucion1_DataSource = new LocalDataSource();
     this.data_distribucion2_DataSource = new LocalDataSource();
+    this.fotoId_Lista = [];
+    this.galeria.nuevo();
+    this.tam_Inicial_ListaFotos = 0;
   }
   // --------------Distribucion1------------------
   resDistribucion1: any;

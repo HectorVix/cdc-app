@@ -19,23 +19,17 @@ export class LocalizacionService {
   constructor(private http: HttpClient) { }
 
 
-  addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<Localizacion_Modelo> {
-    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+  addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
   }
-  addProteccion(proteccion: proteccion_Modelo, id: Number): Observable<proteccion_Modelo> {
-    return this.http.post<proteccion_Modelo>(this.rootUrl + '/localizacion/registrar/proteccion/' + id, proteccion, httpOptions)
-      .pipe(
-        catchError(this.handleError<proteccion_Modelo>('addProteccion'))
-      );
+  addProteccion(proteccion: proteccion_Modelo, id: Number) {
+    return this.http.post(this.rootUrl + '/localizacion/registrar/proteccion/' + id, proteccion, httpOptions);
   }
-  addDispersion(dispersion: dispersion_Modelo, id: Number): Observable<dispersion_Modelo> {
-    return this.http.post<dispersion_Modelo>(this.rootUrl + '/protocolo/registrar/dispersion/' + id, dispersion, httpOptions)
-      .pipe(
-        catchError(this.handleError<dispersion_Modelo>('addDispersion'))
-      );
+  addDispersion(dispersion: dispersion_Modelo, id: Number) {
+    return this.http.post(this.rootUrl + '/protocolo/registrar/dispersion/' + id, dispersion, httpOptions);
   }
-  addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<protocolo_LE_Modelo> {
-    return this.http.post<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
+  addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
   }
   //Obtener Localización del Elemento por codigole, nombres, nomcomuns
   getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
@@ -52,8 +46,8 @@ export class LocalizacionService {
   getDispersion(protocolo_id: Number): Observable<dispersion_Modelo> {
     return this.http.get<dispersion_Modelo>(this.rootUrl + '/protocolo/dispersion/' + protocolo_id);
   }
-  updateLocalizacionElemento(le: Localizacion_Modelo): Observable<Localizacion_Modelo> {
-    return this.http.post<Localizacion_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
+  updateLocalizacionElemento(le: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
   }
   updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/editar', protocoloLE, httpOptions);
