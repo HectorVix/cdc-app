@@ -14,8 +14,8 @@ export class ContactoService {
   readonly rootUrl = 'http://localhost:8080/cdc/rs';
   constructor(private http: HttpClient) { }
 
-  addContacto(contacto: contacto_Modelo, jti: Number): Observable<contacto_Modelo> {
-    return this.http.post<contacto_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions);
+  addContacto(contacto: contacto_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions);
   }
   //Obtener contacto por numident, nombreident, nombre, apellido1, apellido2, email
   getContactos(a: String, b: String, c: String, d: String, e: String, f: String): Observable<contacto_Modelo> {
