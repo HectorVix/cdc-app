@@ -82,7 +82,7 @@
                 <img src="assets/imagenes/load.gif">
               </div>
               <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-              <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo </button>
+              <button class="btn color-green waves-light" type="button"  (click)="nuevo()" mdbWavesEffect>Nuevo </button>
               <button class="btn color-green waves-light" type="button" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar </button>
               <button class="btn color-green waves-light" type="button" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar </button>
             </div>

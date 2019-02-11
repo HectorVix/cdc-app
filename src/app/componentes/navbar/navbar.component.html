@@ -12,14 +12,14 @@
     <a [matMenuTriggerFor]="elemento">
       <img src="iconos/elemento.ico"> Elemento
     </a>
-    <a [matMenuTriggerFor]="resumen">
+    <a [routerLink]="['/caracterizacion']">
       <img src="iconos/resumen.ico"> Resumenes caracterizar
     </a>
     <a [matMenuTriggerFor]="depto">
       <img src="iconos/ruta.ico"> Sitios y áreas
     </a>
-    <a [routerLink]="['/perfil']">
-      <img src="iconos/perfil.ico"> Perfil
+    <a [matMenuTriggerFor]="info">
+      <img src="iconos/ayuda.ico"> Ayuda
     </a>
     <a (click)="Logout()">
       <img src="iconos/lock.ico"> Cerar sesión
@@ -43,18 +43,14 @@
   <button mat-menu-item [routerLink]="['/contactos']">
     <img src="iconos/contacto.ico">Contactos</button>
 </mat-menu>
-<mat-menu #resumen="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="reportes">Reportes</button>
-  <button mat-menu-item [routerLink]="['/caracterizacion']">Caracterización</button>
+<mat-menu #info="matMenu">
+  <button mat-menu-item [routerLink]="['/perfil']">
+    <img src="iconos/perfil.ico"> Perfil</button>
+
+  <button mat-menu-item [routerLink]="['/acerca']">
+    <img src="iconos/informacion.ico"> Acerca del sistema de datos</button>
 </mat-menu>
-<mat-menu #reportes="matMenu">
-  <button mat-menu-item>Fuente</button>
-  <button mat-menu-item [matMenuTriggerFor]="elementoReporte">Elemento</button>
-  <button mat-menu-item>Plantas</button>
-  <button mat-menu-item>Vertebrados</button>
-  <button mat-menu-item>Insectos</button>
-  <button mat-menu-item [matMenuTriggerFor]="deptoReporte">Departamento</button>
-</mat-menu>
+
 <mat-menu #elementoReporte="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="jerarquizacion">Jerarquización</button>
   <button mat-menu-item>Rastreo</button>

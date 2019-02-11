@@ -46,7 +46,6 @@ import { FormularioJerarquizacionElementoSubnacionalComponent } from './componen
 import { ProtocoloLeComponent } from './componentes/localizacion-elemento/protocolo-le/protocolo-le.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
-import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 import { ElementoComponent } from './componentes/jerarquizacion/elemento/elemento.component';
 import { HomeCdcComponent } from './componentes/home-page/home-cdc/home-cdc.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -65,6 +64,7 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
 import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
 import { ArchivosDisponiblesComponent } from './componentes/fuente/archivos-disponibles/archivos-disponibles.component';
+import { AcercaComponent } from './componentes/acerca/acerca.component';
 // import {FlexLayoutModule} from '@angular/flex-layout';
 
 
@@ -97,12 +97,12 @@ import { ArchivosDisponiblesComponent } from './componentes/fuente/archivos-disp
     ProtocoloLeComponent,
     PerfilComponent,
     EstadisticaComponent,
-    AyudaComponent,
     ElementoComponent,
     HomeCdcComponent,
     GaleriaComponent,
     ConfirmacionComponent,
-    ArchivosDisponiblesComponent
+    ArchivosDisponiblesComponent,
+    AcercaComponent
   ],
   imports: [
     BrowserModule,

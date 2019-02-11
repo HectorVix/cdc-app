@@ -13,8 +13,8 @@ import { ContactosComponent } from './componentes/contactos/contactos.component'
 import { CaracterizacionComponent } from './componentes/caracterizacion/caracterizacion.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
-import { AyudaComponent } from './componentes/ayuda/ayuda.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AcercaComponent } from './componentes/acerca/acerca.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },
@@ -29,7 +29,7 @@ export const routes: Routes = [
   { path: 'contactos', component: ContactosComponent, canActivate: [AuthGuard] },
   { path: 'estadistica', component: EstadisticaComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
-  { path: 'ayuda', component: AyudaComponent, canActivate: [AuthGuard] },
+  { path: 'acerca', component: AcercaComponent, canActivate: [AuthGuard] },
   //{path: '**', component: NotFoundPageComponent},
 
   { path: '', redirectTo: '/login', pathMatch: 'full' }

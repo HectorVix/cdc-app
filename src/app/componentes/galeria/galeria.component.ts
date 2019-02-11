@@ -276,14 +276,16 @@ export class GaleriaComponent implements OnInit {
 
   mostrar_Datos_PosActual(posActual) {
     if (this.datosFotografias.length > 0) {
-      this.descripcionIndex = posActual;
-      this.posicionarse = this.descripcionIndex + 1;
       var datoFotoModeloActual = new foto_Modelo();
       datoFotoModeloActual = this.datosFotografias[posActual];
-      this.descripcion = datoFotoModeloActual.descripcion;
-      this.comentario = datoFotoModeloActual.comentario;
-      this.autor = datoFotoModeloActual.autor;
-      this.fecha = datoFotoModeloActual.fecha;
+      if (datoFotoModeloActual) {
+        this.descripcionIndex = posActual;
+        this.posicionarse = this.descripcionIndex + 1;
+        this.descripcion = datoFotoModeloActual.descripcion;
+        this.comentario = datoFotoModeloActual.comentario;
+        this.autor = datoFotoModeloActual.autor;
+        this.fecha = datoFotoModeloActual.fecha;
+      }
     }
   }
 
@@ -439,15 +441,6 @@ export class GaleriaComponent implements OnInit {
       this.mostrar_Datos_PosActual(this.datosFotografias.length - 1);
   }
   onChanges() {
-    if (this.imagenes.length > 0) {
-      this.datosFotografias[this.descripcionIndex] = {
-        descripcion: this.descripcion,
-        comentario: this.comentario,
-        autor: this.autor,
-        fecha: this.fecha,
-        editado: true
-      };
-    }
 
   }
   nuevo_Editar_DatosFotos(index: number) {

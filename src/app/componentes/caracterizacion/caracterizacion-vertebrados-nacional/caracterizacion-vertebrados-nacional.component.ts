@@ -333,12 +333,12 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
             this.tam_Inicial_ListaFotos,
             this.galeria.getTam_final_ListaFotos(), 5);
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso, código de la Vertebrado:${resVertebrado.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso, código del Vertebrado:${resVertebrado.codigoe}.`, 'success');
           this.lista_Vertebrado = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo de la Vertebrado debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, el codigo del Vertebrado debe ser valido', 'primary');
         });
   }
   editarVertebrado() {
