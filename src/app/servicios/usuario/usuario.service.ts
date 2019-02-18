@@ -18,10 +18,10 @@ export class UsuarioService {
   userAuthentication(userName, password) {
     var data = "username=" + userName + "&password=" + password + "&grant_type=password";
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'No-Auth': 'True' });
-    return this.http.post(this.rootUrl + '/usuario/token', data, { headers: reqHeader });
+    return this.http.post('/usuario/token', data, { headers: reqHeader });
   }
   addUsuario(us: usuario_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/usuario/registrar', us, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/usuario/registrar', us, httpOptions);
   }
   getUsuarioDatos(jti: String): Observable<usuario_Modelo> {
     return this.http.get<usuario_Modelo>(this.rootUrl + '/usuario/' + jti);
