@@ -11,7 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UsuarioService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +23,7 @@ export class UsuarioService {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/usuario/registrar', us, httpOptions);
   }
   getUsuarioDatos(jti: String): Observable<usuario_Modelo> {
-    return this.http.get<usuario_Modelo>(this.rootUrl + '/cecon/usuario/' + jti);
+    return this.http.get<usuario_Modelo>('/cecon/usuario/' + jti);
   }
 
 }

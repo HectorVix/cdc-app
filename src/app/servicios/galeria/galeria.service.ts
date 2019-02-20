@@ -13,12 +13,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GaleriaService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
 
   constructor(private http: HttpClient, private fechaServicio: FechaService) { }
 
   getDatosFotos(elementoId: Number, tipo: Number): Observable<foto_Modelo> {
-    return this.http.get<foto_Modelo>(this.rootUrl + '/elemento/buscarFotos/' + elementoId + '/' + tipo);
+    return this.http.get<foto_Modelo>('/cecon/elemento/buscarFotos/' + elementoId + '/' + tipo);
   }
   cargarFotos(archivos: Set<File>, datosFotos: any, elemento_id: Number, tipos: Number) {
     var posicion = 0;
@@ -38,7 +37,7 @@ export class GaleriaService {
       formData.append('fecha', fechaCreacion);
       formData.append('posicion', '' + posicion);
       posicion = posicion + 1;
-      var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
+      var req = new HttpRequest('POST', '/cecon/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
         reportProgress: true
       });
       var progreso = new Subject<number>();
@@ -100,7 +99,7 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           posicion = posicion + 1;
-          var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
+          var req = new HttpRequest('POST', '/cecon/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
             reportProgress: true
           });
           var progreso = new Subject<number>();
@@ -137,12 +136,12 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {//se actualizan las fotosId, pueden ser nuevas que estan dentro del rango tamaño inicial
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
+            var req = new HttpRequest('POST', '/cecon/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
               reportProgress: true
             });
           }
           else {//se cargan las nuevas fotos que están fuera del tamaño inicial
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
+            var req = new HttpRequest('POST', '/cecon/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
               reportProgress: true
             });
           }
@@ -181,13 +180,13 @@ export class GaleriaService {
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
           if (posicion <= tam_Inicial_ListaFotos - 1) {
-            var req = new HttpRequest('POST', this.rootUrl + '/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
+            var req = new HttpRequest('POST', '/cecon/elemento/updateFoto/' + elemento_id + '/' + fotoId + '/' + tipos, formData, {
               reportProgress: true
             });
           }
           for (let i = tam_Final_ListaFotos; i < tam_Inicial_ListaFotos; i++) {
             var fotoId = fotoId_Lista[i];
-            this.http.delete(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
+            this.http.delete('/cecon/elemento/delete/' + fotoId, httpOptions).subscribe();
           }
 
           var progreso = new Subject<number>();
@@ -210,7 +209,7 @@ export class GaleriaService {
       case 4: {
         for (let i = 0; i < fotoId_Lista.length; i++) {
           var fotoId = fotoId_Lista[i];
-          this.http.delete(this.rootUrl + '/elemento/delete/' + fotoId, httpOptions).subscribe();
+          this.http.delete('/cecon/elemento/delete/' + fotoId, httpOptions).subscribe();
         }
       } break;
       case 5: {
@@ -231,7 +230,7 @@ export class GaleriaService {
           formData.append('fecha', fechaCreacion);
           formData.append('posicion', '' + posicion);
           var fotoId = fotoId_Lista[posicion];
-          var req = new HttpRequest('POST', this.rootUrl + '/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
+          var req = new HttpRequest('POST', '/cecon/elemento/cargarFoto/' + elemento_id + '/' + tipos, formData, {
             reportProgress: true
           });
           var progreso = new Subject<number>();

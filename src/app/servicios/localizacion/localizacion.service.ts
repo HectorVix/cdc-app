@@ -15,66 +15,54 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LocalizacionService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+
   constructor(private http: HttpClient) { }
 
 
   addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/localizacion/registro', localizacion, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/registro', localizacion, httpOptions);
   }
   addProteccion(proteccion: proteccion_Modelo, id: Number) {
-    return this.http.post(this.rootUrl + '/localizacion/registrar/proteccion/' + id, proteccion, httpOptions);
+    return this.http.post('/cecon/localizacion/registrar/proteccion/' + id, proteccion, httpOptions);
   }
   addDispersion(dispersion: dispersion_Modelo, id: Number) {
-    return this.http.post(this.rootUrl + '/protocolo/registrar/dispersion/' + id, dispersion, httpOptions);
+    return this.http.post('/cecon/protocolo/registrar/dispersion/' + id, dispersion, httpOptions);
   }
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/registro', protocoloLE, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/registro', protocoloLE, httpOptions);
   }
   //Obtener Localización del Elemento por codigole, nombres, nomcomuns
   getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
-    return this.http.get<Localizacion_Modelo>(this.rootUrl + '/localizacion/buscar/' + a);
+    return this.http.get<Localizacion_Modelo>('/cecon/localizacion/buscar/' + a);
   }
   //Obtener Protocolo Localización del Elemento por codigoe, nombre, nomcomun
   getProtocoloLE(a: String, b: String, c: String): Observable<protocolo_LE_Modelo> {
-    return this.http.get<protocolo_LE_Modelo>(this.rootUrl + '/protocolo/buscar/' + a + '/' + b + '/' + c);
+    return this.http.get<protocolo_LE_Modelo>('/cecon/protocolo/buscar/' + a + '/' + b + '/' + c);
   }
   // Obtener protección 
   getProteccion(localizacion_id: Number): Observable<proteccion_Modelo> {
-    return this.http.get<proteccion_Modelo>(this.rootUrl + '/localizacion/proteccion/' + localizacion_id);
+    return this.http.get<proteccion_Modelo>('/cecon/localizacion/proteccion/' + localizacion_id);
   }
   getDispersion(protocolo_id: Number): Observable<dispersion_Modelo> {
-    return this.http.get<dispersion_Modelo>(this.rootUrl + '/protocolo/dispersion/' + protocolo_id);
+    return this.http.get<dispersion_Modelo>('/cecon/protocolo/dispersion/' + protocolo_id);
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/localizacion/editar', le, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/editar', le, httpOptions);
   }
   updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/protocolo/editar', protocoloLE, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/editar', protocoloLE, httpOptions);
   }
   updateProteccion(id: String, proteccion: proteccion_Modelo) {
-    return this.http.post(this.rootUrl + '/localizacion/update/proteccion/' + id, proteccion, httpOptions);
+    return this.http.post('/cecon/localizacion/update/proteccion/' + id, proteccion, httpOptions);
   }
   updateDispersion(id: String, dispersion: dispersion_Modelo) {
-    return this.http.post(this.rootUrl + '/protocolo/update/dispersion/' + id, dispersion, httpOptions);
+    return this.http.post('/cecon/protocolo/update/dispersion/' + id, dispersion, httpOptions);
   }
   deleteProteccion(id: String) {
-    return this.http.post(this.rootUrl + '/localizacion/delete/proteccion/' + id, httpOptions);
+    return this.http.post('/cecon/localizacion/delete/proteccion/' + id, httpOptions);
   }
   deleteDispersion(id: String) {
-    return this.http.post(this.rootUrl + '/protocolo/delete/dispersion/' + id, httpOptions);
+    return this.http.post('/cecon/protocolo/delete/dispersion/' + id, httpOptions);
   }
 
-  //para capturar los errores con HttpClient
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    console.log(`CDC Servicio: ${message}`);
-    //  this.mensajeErrores = (`CDC Servicio: ${message}`);
-  }
 }

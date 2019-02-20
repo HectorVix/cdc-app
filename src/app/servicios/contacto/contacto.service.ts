@@ -11,17 +11,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContactoService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+
   constructor(private http: HttpClient) { }
 
   addContacto(contacto: contacto_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/contacto/registro/' + jti, contacto, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/contacto/registro/' + jti, contacto, httpOptions);
   }
   //Obtener contacto por numident, nombreident, nombre, apellido1, apellido2, email
   getContactos(a: String, b: String, c: String, d: String, e: String, f: String): Observable<contacto_Modelo> {
-    return this.http.get<contacto_Modelo>(this.rootUrl + '/contacto/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
+    return this.http.get<contacto_Modelo>('/cecon/contacto/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
   }
   updateContacto(contacto: contacto_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/contacto/editar/' + jti, contacto, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/contacto/editar/' + jti, contacto, httpOptions);
   }
 }

@@ -13,7 +13,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FuenteService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
 
   constructor(private http: HttpClient) { }
 
@@ -22,19 +21,19 @@ export class FuenteService {
     cita, archivado o una clave
    */
   getFuentes(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
-    return this.http.get<fuente_Modelo>(this.rootUrl + '/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+    return this.http.get<fuente_Modelo>('/cecon/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   getDatosArchivos(fuenteId: Number): Observable<archivo_Modelo> {
-    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/buscarArchivos/' + fuenteId);
+    return this.http.get<archivo_Modelo>('/cecon/fuente/buscarArchivos/' + fuenteId);
   }
   descargarArchivo(nombre: String, archivoId: Number): Observable<archivo_Modelo> {
-    return this.http.get<archivo_Modelo>(this.rootUrl + '/fuente/descargarArchivo/' + nombre + '/' + archivoId);
+    return this.http.get<archivo_Modelo>('/cecon/fuente/descargarArchivo/' + nombre + '/' + archivoId);
   }
   addFuente(fuente: fuente_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/fuente/registro/' + jti, fuente, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/fuente/registro/' + jti, fuente, httpOptions);
   }
   editarFuente(fuente: fuente_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/fuente/editar/' + jti, fuente, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/fuente/editar/' + jti, fuente, httpOptions);
   }
 
   //cargar archivos
@@ -43,7 +42,7 @@ export class FuenteService {
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       formData.append('file', archivo, archivo.name);
-      var req = new HttpRequest('POST', this.rootUrl + '/fuente/cargarArchivos/' + fuenteid, formData, {
+      var req = new HttpRequest('POST', '/cecon/fuente/cargarArchivos/' + fuenteid, formData, {
         reportProgress: true
       });
       var progreso = new Subject<number>();

@@ -11,17 +11,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RastreoService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+
   constructor(private http: HttpClient) { }
 
   //Obtener Rastreo del Elemento por codigoe, subnacion, nombreg, nombrecomunnn
   getRastreosElementos(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
-    return this.http.get<rastreo_Elemento_Modelo>(this.rootUrl + '/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+    return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/rastreo/registro', rastreoElemento, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/registro', rastreoElemento, httpOptions);
   }
   editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/rastreo/editar', re, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/editar', re, httpOptions);
   }
 }

@@ -15,72 +15,72 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CaracterizacionService {
-  readonly rootUrl = 'http://localhost:8080/cdc/rs';
+
   constructor(private http: HttpClient) { }
   //Registrar
   addCaracterizacionPlanta(caracterizacion: caracterizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/registro/planta', caracterizacion, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/registro/planta', caracterizacion, httpOptions);
   }
   addCaracterizacionVertebrado(caracterizacion: caracterizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/registro/vertebrado', caracterizacion, httpOptions);
   }
   addDistribucion1_Planta(plantaId: Number, distribucion1: distribucion_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/planta/registrar/distribucion1/' + plantaId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/planta/registrar/distribucion1/' + plantaId, distribucion1, httpOptions);
   }
   addDistribucion2_Planta(plantaId: Number, distribucion1: distribucion2_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/planta/registrar/distribucion2/' + plantaId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/planta/registrar/distribucion2/' + plantaId, distribucion1, httpOptions);
   }
   addDistribucion1_Vertebrado(vertebradoId: Number, distribucion1: distribucion_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/vertebrado/registrar/distribucion1/' + vertebradoId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/vertebrado/registrar/distribucion1/' + vertebradoId, distribucion1, httpOptions);
   }
   addDistribucion2_Vertebrado(vertebradoId: Number, distribucion1: distribucion2_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/vertebrado/registrar/distribucion2/' + vertebradoId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/vertebrado/registrar/distribucion2/' + vertebradoId, distribucion1, httpOptions);
   }
   //Get
   //Obtener plantas por codigoe, nacion, nombren, nomcomunn
   getPlantas(a: String, b: String, c: String, d: String): Observable<planta_Modelo> {
-    return this.http.get<planta_Modelo>(this.rootUrl + '/caracterizacion/buscar/planta/' + a + '/' + b + '/' + c + '/' + d);
+    return this.http.get<planta_Modelo>('/cecon/caracterizacion/buscar/planta/' + a + '/' + b + '/' + c + '/' + d);
   }
   getDistribucion1_Planta(plantaId: Number): Observable<distribucion_Modelo> {
-    return this.http.get<distribucion_Modelo>(this.rootUrl + '/caracterizacion/planta/distribucion1/' + plantaId);
+    return this.http.get<distribucion_Modelo>('/cecon/caracterizacion/planta/distribucion1/' + plantaId);
   }
   getDistribucion2_Planta(plantaId: Number): Observable<distribucion2_Modelo> {
-    return this.http.get<distribucion2_Modelo>(this.rootUrl + '/caracterizacion/planta/distribucion2/' + plantaId);
+    return this.http.get<distribucion2_Modelo>('/cecon/caracterizacion/planta/distribucion2/' + plantaId);
   }
   getDistribucion1_Vertebrado(plantaId: Number): Observable<distribucion_Modelo> {
-    return this.http.get<distribucion_Modelo>(this.rootUrl + '/caracterizacion/vertebrado/distribucion1/' + plantaId);
+    return this.http.get<distribucion_Modelo>('/cecon/caracterizacion/vertebrado/distribucion1/' + plantaId);
   }
   getDistribucion2_Vertebrado(plantaId: Number): Observable<distribucion2_Modelo> {
-    return this.http.get<distribucion2_Modelo>(this.rootUrl + '/caracterizacion/vertebrado/distribucion2/' + plantaId);
+    return this.http.get<distribucion2_Modelo>('/cecon/caracterizacion/vertebrado/distribucion2/' + plantaId);
   }
   //Obtener vertebrados por codigoe, nacion, nombreg, autor, nombren, nomcomunn
   getVertebrados(a: String, b: String, c: String, d: String, e: String, f: String): Observable<vertebrado_Modelo> {
-    return this.http.get<vertebrado_Modelo>(this.rootUrl + '/caracterizacion/buscar/vertebrado/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
+    return this.http.get<vertebrado_Modelo>('/cecon/caracterizacion/buscar/vertebrado/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
   }
   //Actualizar
   updatePlanta(planta: planta_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/editar/planta', planta, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/planta', planta, httpOptions);
   }
   updateVertebrado(vertebrado: vertebrado_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>(this.rootUrl + '/caracterizacion/editar/vertebrado', vertebrado, httpOptions);
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/vertebrado', vertebrado, httpOptions);
   }
   updateDistribucion1_Planta(plantaId: Number, distribucion1: distribucion_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/planta/update/distribucion1/' + plantaId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/planta/update/distribucion1/' + plantaId, distribucion1, httpOptions);
   }
   updateDistribucion2_Planta(plantaId: Number, distribucion2: distribucion2_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/planta/update/distribucion2/' + plantaId, distribucion2, httpOptions);
+    return this.http.post('/cecon/caracterizacion/planta/update/distribucion2/' + plantaId, distribucion2, httpOptions);
   }
   updateDistribucion1_Vertebrado(vertebradoId: Number, distribucion1: distribucion_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/vertebrado/update/distribucion1/' + vertebradoId, distribucion1, httpOptions);
+    return this.http.post('/cecon/caracterizacion/vertebrado/update/distribucion1/' + vertebradoId, distribucion1, httpOptions);
   }
   updateDistribucion2_Vertebrado(vertebradoId: Number, distribucion2: distribucion2_Modelo) {
-    return this.http.post(this.rootUrl + '/caracterizacion/vertebrado/update/distribucion2/' + vertebradoId, distribucion2, httpOptions);
+    return this.http.post('/cecon/caracterizacion/vertebrado/update/distribucion2/' + vertebradoId, distribucion2, httpOptions);
   }
   //Delete
   deleteDistribucion1(distribucion1_Id: Number) {
-    return this.http.post(this.rootUrl + '/caracterizacion/delete/distribucion1/' + distribucion1_Id, httpOptions);
+    return this.http.post('/cecon/caracterizacion/delete/distribucion1/' + distribucion1_Id, httpOptions);
   }
   deleteDistribucion2(distribucion2_Id: Number) {
-    return this.http.post(this.rootUrl + '/caracterizacion/delete/distribucion2/' + distribucion2_Id, httpOptions);
+    return this.http.post('/cecon/caracterizacion/delete/distribucion2/' + distribucion2_Id, httpOptions);
   }
 }
