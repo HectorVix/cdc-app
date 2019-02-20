@@ -1,10 +1,7 @@
 {
-    "/usuario": {
+    "/cecon": {
         "target": "http://localhost:8080/cdc/rs",
         "secure": false,
-        "pathRewrite": {
-            "^/api": ""
-        },
         "changeOrigin": true
     }
 }
