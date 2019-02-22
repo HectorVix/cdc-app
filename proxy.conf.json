@@ -1,7 +1,8 @@
 {
-    "/cecon": {
+    "/cecon/*": {
         "target": "http://localhost:8080/cdc/rs",
         "secure": false,
+        "logLevel": "debug",
         "changeOrigin": true
     }
 }
