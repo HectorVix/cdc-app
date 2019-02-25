@@ -33,7 +33,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
   jerarquizacion_Global_Form: FormGroup;
   buscar_Form: FormGroup;
-  jerarquizacionId: Jerarquizacion;
+  jerarquizacionId = new Jerarquizacion;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -92,7 +92,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   crear_Jerarquizacion_Global(jerarquizacionGlobal: jerarquizacion_Global_Modelo) {
     var temporalJerarquizacionGlobalFormGroup = new jerarquizacion_Global_FormGroup()
     this.jerarquizacion_Global_Form = temporalJerarquizacionGlobalFormGroup.getJerarquizacion_Global_FormGrup(jerarquizacionGlobal);
-    this.jerarquizacionId = temporalJerarquizacionGlobalFormGroup.getjERARQUIZACIONjerarquizacionid();//para editar
+    // this.jerarquizacionId = temporalJerarquizacionGlobalFormGroup.getjERARQUIZACIONjerarquizacionid();//para editar
 
   }
   //validar codigoe 
@@ -212,13 +212,24 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  aux: any;
   getJerarquizacionGlobal_id(id: Number): jerarquizacion_Global_Modelo {
     var base_jerarquizacioGlobalBusqueda = new jerarquizacion_Global_Modelo();
     this.dataJerarquizacionGlobal.forEach(dataJerarquizacionGlobal => {
-      var jerarquizacionGlobalBusqueda: jerarquizacion_Global_Modelo = dataJerarquizacionGlobal;
-      if (id == dataJerarquizacionGlobal.globalId) {
+      var jerarquizacionGlobalBusqueda = new jerarquizacion_Global_Modelo();
+      jerarquizacionGlobalBusqueda = dataJerarquizacionGlobal;
+      if (id == jerarquizacionGlobalBusqueda.globalId) {
         base_jerarquizacioGlobalBusqueda = jerarquizacionGlobalBusqueda;
+        this.aux = base_jerarquizacioGlobalBusqueda;
+        var jer = new Jerarquizacion();
+        jer = this.aux.jerarquizacionjerarquizacionid;// al obtener lo pasa todo a minisculas
+        this.jerarquizacionId.jerarquizacionId = jer.jerarquizacionId;
+        console.log('jer id:', jer.jerarquizacionId);
+
+
       }
+      else
+        console.log('no se econtro:', id);
     });
     return base_jerarquizacioGlobalBusqueda;
   }
@@ -230,7 +241,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   updateJerarquizacionGlobal(global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
-    global.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
+    // global.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
     this.jerarquizacionServicio.updateGlobal(global)
       .subscribe(
         resGlobal => {
@@ -255,6 +266,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.crear_Jerarquizacion_Global(new jerarquizacion_Global_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    this.jerarquizacionId = new Jerarquizacion();
   }
 }
 function crearGlobal(k: Number, globalId: Number, codigoe, nombreg, descrielem): global_Dato {

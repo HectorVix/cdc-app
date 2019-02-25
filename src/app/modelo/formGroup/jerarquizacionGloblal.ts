@@ -8,9 +8,8 @@ export class jerarquizacion_Global_FormGroup {
     getJerarquizacion_Global_FormGrup(row: jerarquizacion_Global_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
-        this.setjERARQUIZACIONjerarquizacionid(row.jERARQUIZACIONjerarquizacionid);
         return fb.group({
-            'globlalId': row.globlalId,
+            'globalId': row.globalId,
             //página1
             'codigoe': row.codigoe,
             'nombreg': row.nombreg,
@@ -51,12 +50,5 @@ export class jerarquizacion_Global_FormGroup {
             'actualizar': fechaServicio.getFecha(row.actualizar),
             'jERARQUIZACIONjerarquizacionid': Jerarquizacion
         });
-    }
-
-    getjERARQUIZACIONjerarquizacionid(): Jerarquizacion {
-        return this.jerarquizacionEditar;
-    }
-    setjERARQUIZACIONjerarquizacionid(jerarquizacion: Jerarquizacion) {
-        this.jerarquizacionEditar = jerarquizacion;
     }
 }

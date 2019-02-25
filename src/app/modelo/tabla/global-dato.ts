@@ -4,5 +4,5 @@ export interface global_Dato {
     codigoe: String;
     nombreg: String;
     descrielem: String;
-    
+
 }
