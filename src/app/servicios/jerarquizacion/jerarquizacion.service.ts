@@ -46,10 +46,10 @@ export class JerarquizacionService {
   updateGlobal(global: jerarquizacion_Global_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/global/' + jerarquia_id, global, httpOptions);
   }
-  updateNacional(nacional: jerarquizacion_Nacional_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/nacional', nacional, httpOptions);
+  updateNacional(nacional: jerarquizacion_Nacional_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/nacional/' + jerarquia_id, nacional, httpOptions);
   }
-  updateSubnacional(subnacional: jerarquizacion_Subnacional_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/subnacional', subnacional, httpOptions);
+  updateSubnacional(subnacional: jerarquizacion_Subnacional_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/subnacional/' + jerarquia_id, subnacional, httpOptions);
   }
 }

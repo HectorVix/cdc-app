@@ -33,7 +33,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
-  jerarquizacionId: Jerarquizacion;
+  jerarquizacionId: Number;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -54,6 +54,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   //------------------------------------------
   editar = true;
   guardar = false;
+  jerarquia_Aux: any;
 
   constructor(private fb: FormBuilder,
     private jerarquizacionServicio: JerarquizacionService,
@@ -88,7 +89,6 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   createFormJerarquizacionNacional(jerarquizacionNacional: jerarquizacion_Nacional_Modelo) {
     var temporalJerarquizacionNacionalFormGroup = new jerarquizacion_Nacional_FormGroup();
     this.jerarquizacion_Nacional_Form = temporalJerarquizacionNacionalFormGroup.getJerarquizacion_Nacional_FormGrup(jerarquizacionNacional);
-    this.jerarquizacionId = temporalJerarquizacionNacionalFormGroup.getjERARQUIZACIONjerarquizacionid();// para editar
   }
   //guardar registro jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
@@ -215,20 +215,23 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       var jerarquizacionNacionalBusqueda: jerarquizacion_Nacional_Modelo = dataJerarquizacionNacional;
       if (id == dataJerarquizacionNacional.nacionalId) {
         base_jerarquizacionNacionallBusqueda = jerarquizacionNacionalBusqueda;
+        this.jerarquia_Aux = base_jerarquizacionNacionallBusqueda;
+        this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
+        this.editar = false;
       }
+      else
+        this.editar = true;
     });
     return base_jerarquizacionNacionallBusqueda;
   }
   mostrar_JerarquizacionNacional_Busqueda(row: nacional_Dato) {
     this.createFormJerarquizacionNacional(this.getJerarquizacionNacional_id(row.nacionalId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
   }
   updateJerarquizacionNacional(nacional: jerarquizacion_Nacional_Modelo): void {
     this.loading = true;
-    nacional.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
-    this.jerarquizacionServicio.updateNacional(nacional)
+    this.jerarquizacionServicio.updateNacional(nacional, this.jerarquizacionId)
       .subscribe(
         resNacional => {
           this.loading = false;
