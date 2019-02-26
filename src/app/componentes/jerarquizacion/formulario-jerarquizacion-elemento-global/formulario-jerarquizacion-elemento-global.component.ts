@@ -54,6 +54,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  jerarquia_Aux: any;
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe,
     private jerarquizacionServicio: JerarquizacionService,
@@ -92,8 +93,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   crear_Jerarquizacion_Global(jerarquizacionGlobal: jerarquizacion_Global_Modelo) {
     var temporalJerarquizacionGlobalFormGroup = new jerarquizacion_Global_FormGroup()
     this.jerarquizacion_Global_Form = temporalJerarquizacionGlobalFormGroup.getJerarquizacion_Global_FormGrup(jerarquizacionGlobal);
-    // this.jerarquizacionId = temporalJerarquizacionGlobalFormGroup.getjERARQUIZACIONjerarquizacionid();//para editar
-
   }
   //validar codigoe 
   validarCodigoe() {
@@ -212,7 +211,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
-  aux: any;
+
   getJerarquizacionGlobal_id(id: Number): jerarquizacion_Global_Modelo {
     var base_jerarquizacioGlobalBusqueda = new jerarquizacion_Global_Modelo();
     this.dataJerarquizacionGlobal.forEach(dataJerarquizacionGlobal => {
@@ -220,29 +219,23 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       jerarquizacionGlobalBusqueda = dataJerarquizacionGlobal;
       if (id == jerarquizacionGlobalBusqueda.globalId) {
         base_jerarquizacioGlobalBusqueda = jerarquizacionGlobalBusqueda;
-        this.aux = base_jerarquizacioGlobalBusqueda;
-        var jer = new Jerarquizacion();
-        jer = this.aux.jerarquizacionjerarquizacionid;// al obtener lo pasa todo a minisculas
-        this.jerarquizacionId.jerarquizacionId = jer.jerarquizacionId;
-        console.log('jer id:', jer.jerarquizacionId);
-
-
+        this.jerarquia_Aux = base_jerarquizacioGlobalBusqueda;
+        this.jerarquizacionId.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
+        this.editar = false;
       }
       else
-        console.log('no se econtro:', id);
+        this.editar = true;// por si se llega a colar un nulo
     });
     return base_jerarquizacioGlobalBusqueda;
   }
   mostrar_JerarquizacionGlobal_Busqueda(row: global_Dato) {
     this.crear_Jerarquizacion_Global(this.getJerarquizacionGlobal_id(row.globalId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
   }
   updateJerarquizacionGlobal(global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
-    // global.jERARQUIZACIONjerarquizacionid = this.jerarquizacionId;
-    this.jerarquizacionServicio.updateGlobal(global)
+    this.jerarquizacionServicio.updateGlobal(global, this.jerarquizacionId.jerarquizacionId)
       .subscribe(
         resGlobal => {
           this.loading = false;
