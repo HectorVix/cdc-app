@@ -16,6 +16,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -108,6 +109,8 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  caracterizacionId: Number;
+  caracterizacion_Aux: any;
   //---------Galeria
   @ViewChild(GaleriaComponent)
   private galeria: GaleriaComponent;
@@ -119,6 +122,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     private dialog: MatDialog,
     private caracterizacionServicio: CaracterizacionService,
     private galeriaServicio: GaleriaService,
+    private elementoServicio: ElementoService,
     private fechaServicio: FechaService) {
     this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo);
     this.crearForm_Buscar();
@@ -307,14 +311,18 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       var vertebradoBusqueda: vertebrado_Modelo = dataVertebrado;
       if (id == vertebradoBusqueda.vertebradoId) {
         base_vertebradoBusqueda = vertebradoBusqueda;
+        this.caracterizacion_Aux = base_vertebradoBusqueda;
+        this.caracterizacionId = this.caracterizacion_Aux.caracterizacioncaracterizacionid.caracterizacionId;//al obtener lo pasa todo a minisculas
+        this.editar = false;
       }
+      else
+        this.editar = true;
     });
     return base_vertebradoBusqueda;
   }
   mostrar_Vertebrado_Busqueda(row: vertebrado_Dato) {
     this.crearForm_caracterizacionVertebradosNacional(this.getVertebrado_id(row.vertebradoId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
     this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
@@ -322,7 +330,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   }
   updateVertebrado(vertebrado: vertebrado_Modelo): void {
     this.loading = true;
-    this.caracterizacionServicio.updateVertebrado(vertebrado)
+    this.caracterizacionServicio.updateVertebrado(vertebrado, this.caracterizacionId)
       .subscribe(
         resVertebrado => {
           this.galeriaServicio.update_FotoId_Lista(
@@ -524,6 +532,15 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
           this.galeria.agregarImagenBusqueda(fotoModelo);
         }
       });
+  }
+  validarCodigoe() {
+    this.elementoServicio.validarElementoCodigoe(this.caracterizacionVertebradosNacionalForm.get('codigoe').value)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
+        });
   }
 }
 function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {

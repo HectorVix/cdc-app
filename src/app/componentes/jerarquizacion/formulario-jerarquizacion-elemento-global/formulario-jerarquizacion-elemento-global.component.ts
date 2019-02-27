@@ -96,7 +96,13 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   //validar codigoe 
   validarCodigoe() {
-    this.ValidarElementoCodigoe(this.jerarquizacion_Global_Form.get('codigoe').value);
+    this.elementoServicio.validarElementoCodigoe(this.jerarquizacion_Global_Form.get('codigoe').value)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
+        });
   }
   //registro nuevo formulario jerarquizacion global
   registrarJerarquizacionGlobal() {
@@ -126,20 +132,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           this.changeSuccessMessage('No se pudo regitrar.', 'primary');
         });
   }
-  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
-    var elemento: elemento_Modelo;
-    this.elementoServicio.validarElementoCodigoe(codigoe)
-      .subscribe(
-        resElemento => {
-          elemento = resElemento;
-          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
-        }, err => {
-          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
-        });
-
-    return elemento;
-  }
-
 
   //mensajes
   public changeSuccessMessage(mensaje: string, tipo: string) {

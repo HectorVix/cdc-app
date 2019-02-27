@@ -16,6 +16,7 @@ import { planta_Dato } from '../../../modelo/tabla/planta-dato';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -109,6 +110,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  caracterizacionId: Number;
+  caracterizacion_Aux: any;
   //---------Galeria
   @ViewChild(GaleriaComponent)
   private galeria: GaleriaComponent;
@@ -116,10 +119,12 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   tam_Inicial_ListaFotos = 0;
   fotoId_Lista = [];
 
+
   constructor(private fb: FormBuilder,
     private caracterizacionServicio: CaracterizacionService,
     private fechaServicio: FechaService,
     private galeriaServicio: GaleriaService,
+    private elementoServicio: ElementoService,
     private dialog: MatDialog) {
     this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo);
     this.crearForm_Buscar();
@@ -298,14 +303,18 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       var plantaBusqueda: planta_Modelo = dataPlanta;
       if (id == plantaBusqueda.plantaId) {
         base_plantaBusqueda = plantaBusqueda;
+        this.caracterizacion_Aux = base_plantaBusqueda;
+        this.caracterizacionId = this.caracterizacion_Aux.caracterizacioncaracterizacionid.caracterizacionId;//al obtener lo pasa todo a minisculas
+        this.editar = false;
       }
+      else
+        this.editar = true;
     });
     return base_plantaBusqueda;
   }
   mostrar_Planta_Busqueda(row: planta_Dato) {
     this.crearForm_CaracterizacionPlantasNacional(this.getPlanta_id(row.plantaId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getDistribucion1_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
     this.getDistribucion2_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
@@ -313,7 +322,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   }
   updatePlanta(planta: planta_Modelo): void {
     this.loading = true;
-    this.caracterizacionServicio.updatePlanta(planta)
+    this.caracterizacionServicio.updatePlanta(planta, this.caracterizacionId)
       .subscribe(
         resPlanta => {
           this.galeriaServicio.update_FotoId_Lista(
@@ -517,6 +526,15 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
           this.galeria.agregarImagenBusqueda(fotoModelo);
         }
       });
+  }
+  validarCodigoe() {
+    this.elementoServicio.validarElementoCodigoe(this.caracterizacionPlantasNacionalForm.get('codigoe').value)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+        }, err => {
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
+        });
   }
 }
 function crearPlanta(k: Number, plantaId: Number, codigoe, nacion, nombren, nombrecomunn): planta_Dato {

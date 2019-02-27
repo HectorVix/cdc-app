@@ -10,6 +10,7 @@
                     <form [formGroup]="caracterizacionVertebradosNacionalForm">
                         <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
                             <mat-tab label="1">
+                                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
                                         <h5 class="modal-title">Identificadores:</h5>
@@ -27,6 +28,11 @@
                                             <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" "
                                                 disabled>
                                             <label for="formCodigoe"></label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="mat-elevation-z8" class="base-form">
+                                                <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                                            </div>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
                                             <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">

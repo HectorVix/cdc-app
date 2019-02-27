@@ -15,8 +15,8 @@ export class ElementoService {
 
   constructor(private http: HttpClient) { }
 
-  validarElementoCodigoe(codigoe: String) {
-    return this.http.get<elemento_Modelo>('/cecon/elemento/validar/' + codigoe);
+  validarElementoCodigoe(codigoe: String): Observable<respuesta_cdc_Modelo>  {
+    return this.http.get<respuesta_cdc_Modelo>('/cecon/elemento/validar/' + codigoe);
   }
   getElementos(codigo: String, nombrecomun, nombrecientifico): Observable<elemento_Modelo> {
     return this.http.get<elemento_Modelo>('/cecon/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico);

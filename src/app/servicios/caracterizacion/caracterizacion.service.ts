@@ -58,11 +58,11 @@ export class CaracterizacionService {
     return this.http.get<vertebrado_Modelo>('/cecon/caracterizacion/buscar/vertebrado/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f);
   }
   //Actualizar
-  updatePlanta(planta: planta_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/planta', planta, httpOptions);
+  updatePlanta(planta: planta_Modelo, caracterizacion_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/planta/' + caracterizacion_id, planta, httpOptions);
   }
-  updateVertebrado(vertebrado: vertebrado_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/vertebrado', vertebrado, httpOptions);
+  updateVertebrado(vertebrado: vertebrado_Modelo, caracterizacion_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/caracterizacion/editar/vertebrado/' + caracterizacion_id, vertebrado, httpOptions);
   }
   updateDistribucion1_Planta(plantaId: Number, distribucion1: distribucion_Modelo) {
     return this.http.post('/cecon/caracterizacion/planta/update/distribucion1/' + plantaId, distribucion1, httpOptions);

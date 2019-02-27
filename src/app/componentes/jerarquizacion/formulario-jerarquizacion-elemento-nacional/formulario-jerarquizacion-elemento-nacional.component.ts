@@ -124,22 +124,14 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   //validar codigoe 
   validarCodigoe() {
-    this.ValidarElementoCodigoe(this.jerarquizacion_Nacional_Form.get('codigoe').value);
-  }
-
-  ValidarElementoCodigoe(codigoe: String): elemento_Modelo {
-    var elemento: elemento_Modelo;
-    this.elementoServicio.validarElementoCodigoe(codigoe)
+    this.elementoServicio.validarElementoCodigoe(this.jerarquizacion_Nacional_Form.get('codigoe').value)
       .subscribe(
         resElemento => {
-          elemento = resElemento;
-          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
-          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigo valido.', 'primary');
+          this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
         });
-    return elemento;
   }
-
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
