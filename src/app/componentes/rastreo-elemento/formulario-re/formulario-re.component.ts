@@ -57,6 +57,8 @@ export class FormularioReComponent implements OnInit {
   //-----------------------------------
   editar = true;
   guardar = false;
+  elementoId_Aux: any;
+  elementoId: Number;
 
   constructor(
     private fb: FormBuilder,
@@ -126,22 +128,15 @@ export class FormularioReComponent implements OnInit {
     this.reForm = new rastreo_Elemento_FormGroup().getRastreo_Elemento_FormGrup(re);
   }
   //validar codigoe 
-  validarCodigoe(): Boolean {
-    return this.ValidarElementoCodigoe(this.reForm.get('codigoe').value);
-  }
-  ValidarElementoCodigoe(codigoe: String): Boolean {
-    var valido = false;
-    this.elementoServicio.validarElementoCodigoe(codigoe)
+  validarCodigoe() {
+    this.elementoServicio.validarElementoCodigoe(this.reForm.get('codigoe').value)
       .subscribe(
         resElemento => {
-          this.changeSuccessMessage(`Si existe el elemento:${codigoe}.`, 'success');
-          valido = true;
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigoe valido.', 'primary');
         });
-    return valido;
   }
-
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
@@ -225,17 +220,19 @@ export class FormularioReComponent implements OnInit {
     this.dataRatreoElemento.forEach(dataRatreoElemento => {
       var ratreoElemento_Busqueda = new rastreo_Elemento_Modelo();// necesario dado que si reutiliza conserva la primera asignación
       ratreoElemento_Busqueda = dataRatreoElemento;
-      if (id == ratreoElemento_Busqueda.rastreoId)
+      if (id == ratreoElemento_Busqueda.rastreoId) {
         rastreoElementoBusqueda = ratreoElemento_Busqueda;
+        this.elementoId_Aux = rastreoElementoBusqueda;
+        this.elementoId = this.elementoId_Aux.elementoelementoid.elementoId;
+        this.editar = false;
+      }
     });
     return rastreoElementoBusqueda;
   }
 
   mostrar_RastreoElemento_Busqueda(row: ratreoElemento_Dato) {
-    var rastreoElemento_Busqueda = this.getRastreoElemento_id(row.rastreoId);
     this.crearFormRastreoElemento(this.getRastreoElemento_id(row.rastreoId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
   }
 
@@ -247,11 +244,11 @@ export class FormularioReComponent implements OnInit {
   }
   updateRastreoElemento(re: rastreo_Elemento_Modelo): void {
     this.loading = true;
-    this.rastreoServicio.editarRastreoElemento(re)
+    this.rastreoServicio.editarRastreoElemento(re, this.elementoId)
       .subscribe(
         resRe => {
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso ,codigo del rastreo elemento:${resRe.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso ,código del rastreo elemento:${resRe.codigoe}.`, 'success');
           this.listaRatreoElementos = new Array();
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {

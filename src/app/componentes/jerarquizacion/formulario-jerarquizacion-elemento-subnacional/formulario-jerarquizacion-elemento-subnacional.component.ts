@@ -210,8 +210,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
         this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
-      else
-        this.editar = true;
     });
     return base_jerarquizacionSubnacionallBusqueda;
   }

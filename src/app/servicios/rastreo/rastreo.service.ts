@@ -21,7 +21,7 @@ export class RastreoService {
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/registro', rastreoElemento, httpOptions);
   }
-  editarRastreoElemento(re: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/editar', re, httpOptions);
+  editarRastreoElemento(re: rastreo_Elemento_Modelo, elemento_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/editar/' + elemento_id, re, httpOptions);
   }
 }

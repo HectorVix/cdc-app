@@ -307,8 +307,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         this.caracterizacionId = this.caracterizacion_Aux.caracterizacioncaracterizacionid.caracterizacionId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
-      else
-        this.editar = true;
     });
     return base_plantaBusqueda;
   }

@@ -215,8 +215,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
         this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
-      else
-        this.editar = true;// por si se llega a colar un nulo
     });
     return base_jerarquizacioGlobalBusqueda;
   }
