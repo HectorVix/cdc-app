@@ -120,7 +120,10 @@ export class FormularioReComponent implements OnInit {
           this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar.El codigoe debe ser valido', 'primary');
+
+          this.changeSuccessMessage(`error 404:${err}`, 'primary');
+
+          //            this.changeSuccessMessage('No se pudo regitrar, el codigoe ya tiene un registro de rastreo de elemento, el codigoe no existe ó comprueba que este diponible el servidor.', 'primary');
         });
   }
   //crear formulario Rastreo Elemento
@@ -134,7 +137,10 @@ export class FormularioReComponent implements OnInit {
         resElemento => {
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
-          this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigoe valido.', 'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage('Error 404.', 'primary');
+          else
+            this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigoe valido.', 'primary');
         });
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
