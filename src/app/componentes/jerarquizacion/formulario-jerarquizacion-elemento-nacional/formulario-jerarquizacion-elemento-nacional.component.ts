@@ -119,7 +119,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           this.changeSuccessMessage(`Se registro la jerarquización nacional del elemento :${resElemento.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar. Comprueba que  esté disponible el servicio.', 'primary');
         });
   }
   //validar codigoe 
@@ -129,7 +129,10 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
         resElemento => {
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
-          this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo validar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -230,14 +233,12 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           this.dataSource = new MatTableDataSource(this.lista_Nacional);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo del elemento debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarJerarquizacionNacional() {
     if (this.jerarquizacion_Nacional_Form.get('codigoe').value)
       this.updateJerarquizacionNacional(this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value));
-    else
-      this.changeSuccessMessage('El código del elemento es obligatorio para editar.', 'warning');
   }
   nuevo() {
     this.editar = true;

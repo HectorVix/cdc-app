@@ -120,10 +120,10 @@ export class FormularioReComponent implements OnInit {
           this.changeSuccessMessage(`Se registro el ratreo del elemento :${resElemento.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-
-          this.changeSuccessMessage(`error 404:${err}`, 'primary');
-
-          //            this.changeSuccessMessage('No se pudo regitrar, el codigoe ya tiene un registro de rastreo de elemento, el codigoe no existe ó comprueba que este diponible el servidor.', 'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
+          else
+            this.changeSuccessMessage('No se pudo regitrar, el CODIGOE del elemento  ya tiene un registro de rastreo de elemento, solo puede haber un registro de rastreo por elemento ó el servicio no esta disponible.', 'primary');
         });
   }
   //crear formulario Rastreo Elemento
@@ -138,9 +138,9 @@ export class FormularioReComponent implements OnInit {
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
           if (err.status === 404)
-            this.changeSuccessMessage('Error 404.', 'primary');
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
           else
-            this.changeSuccessMessage('No existe el elemento, por favor ingresa un codigoe valido.', 'primary');
+            this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
         });
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -217,7 +217,7 @@ export class FormularioReComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se encontro información. Comprueba que este activo CORB.', 'warning ');
+          this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }
 
@@ -254,20 +254,17 @@ export class FormularioReComponent implements OnInit {
       .subscribe(
         resRe => {
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso ,código del rastreo elemento:${resRe.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso, código del rastreo elemento:${resRe.codigoe}.`, 'success');
           this.listaRatreoElementos = new Array();
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar, el codigoe debe ser valido', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar, comprueba que este disponible el servicio', 'primary');
         });
   }
   editarRastreoElemento() {
-    if (this.reForm.get('codigoe').value) {
+    if (this.reForm.get('codigoe').value)
       this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
-    }
-    else
-      this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
   }
 }
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {

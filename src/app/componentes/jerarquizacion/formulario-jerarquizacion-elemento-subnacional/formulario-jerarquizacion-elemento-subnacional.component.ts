@@ -116,18 +116,21 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
           this.changeSuccessMessage(`Se registro la jerarquización subnacional del elemento :${resElemento.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar. Comprueba que esté disponible el servicio.', 'primary');
         });
   }
   //validar codigoe 
   validarCodigoe() {
     this.elementoServicio.validarElementoCodigoe(this.jerarquizacion_SubnacionalForm.get('codigoe').value)
-    .subscribe(
-      resElemento => {
-        this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
-      }, err => {
-        this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
-      })
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+        }, err => {
+          if (err.status === 404)
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo validar, comprueba que esté disponible el servicio.', 'primary');
+        })
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
@@ -232,14 +235,12 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
           this.dataSource = new MatTableDataSource(this.lista_Subnacional);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo de elemento debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarJerarquizacionSubnacional() {
     if (this.jerarquizacion_SubnacionalForm.get('codigoe').value)
       this.updateJerarquizacionSubnacional(this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value));
-    else
-      this.changeSuccessMessage('El código del elemento es obligatorio para editar.', 'warning');
   }
   nuevo() {
     this.editar = true;

@@ -154,7 +154,7 @@ export class ElementoComponent implements OnInit {
         this.changeSuccessMessage('La fecha es obligatoria', 'primary');
     }
     else
-      this.changeSuccessMessage('El código del elemento es obligatorio', 'primary');
+      this.changeSuccessMessage('El CODIGOE del elemento es obligatorio', 'primary');
 
   }
   editarElemento() {
@@ -165,8 +165,6 @@ export class ElementoComponent implements OnInit {
       } else
         this.changeSuccessMessage('La fecha es obligatoria.', 'primary');
     }
-    else
-      this.changeSuccessMessage('El código del elemento es obligatorio.', 'primary');
   }
   setElemento(elemento): elemento_Modelo {
     elemento.fecha = this.fechaServicio.toFormatoDateTime(elemento.fecha);
@@ -179,8 +177,6 @@ export class ElementoComponent implements OnInit {
     this.elementoServicio.editarElemento(elemento, decodedToken.jti)
       .subscribe(
         resElemento => {
-          //  if (this.galeria.archivos.size > 0 && this.tam_Inicial_ListaFotos >= 1 || this.galeria.archivos.size == 0 && this.tam_Inicial_ListaFotos >= 1) {
-
           this.galeriaServicio.update_FotoId_Lista(
             this.galeria.archivos,
             this.galeria.datosFotografias,
@@ -189,13 +185,13 @@ export class ElementoComponent implements OnInit {
             this.tam_Inicial_ListaFotos,
             this.galeria.getTam_final_ListaFotos(), 1);
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso ,código del elemento:${resElemento.codigo}.`, 'success');
           this.elementos = new Array();
           this.dataSource = new MatTableDataSource(this.elementos);
           this.editar = true;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar, comprueba que este disponible el servicio.', 'primary');
         });
   }
   addElemento(elemento: elemento_Modelo): void {
@@ -217,7 +213,7 @@ export class ElementoComponent implements OnInit {
 
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo guardar, los codigos de elementos son únicos no se pueden repetir', 'primary');
+          this.changeSuccessMessage('Error  no se pudo guardar, los CODIGOE de elementos son únicos no se pueden repetir ó comprueba que este disponible el servicio.', 'primary');
         });
   }
   //mensajes
