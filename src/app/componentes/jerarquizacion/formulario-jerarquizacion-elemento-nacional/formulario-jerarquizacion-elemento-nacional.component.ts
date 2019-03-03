@@ -119,7 +119,10 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           this.changeSuccessMessage(`Se registro la jerarquización nacional del elemento :${resElemento.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar. Comprueba que  esté disponible el servicio.', 'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
+          else
+            this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   //validar codigoe 

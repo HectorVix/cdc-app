@@ -108,7 +108,6 @@ export class ElementoComponent implements OnInit {
   }
 
   getFoto_Datos(elementoId: Number) {
-    const date = new Date().valueOf();
     this.galeriaServicio.getDatosFotos(elementoId, 1).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
@@ -191,7 +190,7 @@ export class ElementoComponent implements OnInit {
           this.editar = true;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar, comprueba que este disponible el servicio.', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   addElemento(elemento: elemento_Modelo): void {
@@ -213,7 +212,7 @@ export class ElementoComponent implements OnInit {
 
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo guardar, los CODIGOE de elementos son únicos no se pueden repetir ó comprueba que este disponible el servicio.', 'primary');
+          this.changeSuccessMessage('Error  no se pudo guardar, los CODIGOE de elementos son únicos no se pueden repetir ó comprueba que esté disponible el servicio.', 'primary');
         });
   }
   //mensajes
