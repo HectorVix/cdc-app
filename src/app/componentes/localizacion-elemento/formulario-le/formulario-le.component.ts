@@ -81,6 +81,8 @@ export class FormularioLeComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  rastreo_Aux: any;
+  rastreoId: Number;
 
   constructor(private fb: FormBuilder,
     private localizacionServicio: LocalizacionService,
@@ -152,7 +154,12 @@ export class FormularioLeComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la localización del elemento :${resElemento.codigole}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar.', 'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
+          else if (err.status === 406)
+            this.changeSuccessMessage('No se pudo regitrar, no existe un registro de Rastreo para este elemento, porfavor registra un Ratreo con el CODIGOE de este elemento. ', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
 
@@ -229,21 +236,23 @@ export class FormularioLeComponent implements OnInit {
       'nomcomuns': ''
     });
   }
-  mostrar_LocalizacionElemento_Busqueda(row:localizacionElemento_Dato) {
-    this.crearFormLocalizacion_Elemento(this.getRastreoElemento_id(row.LocalizacionId));
+  mostrar_LocalizacionElemento_Busqueda(row: localizacionElemento_Dato) {
+    this.crearFormLocalizacion_Elemento(this.getLocalizacionElemento_id(row.LocalizacionId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getProteccion(row.LocalizacionId);
   }
 
-  getRastreoElemento_id(id: Number): Localizacion_Modelo {
+  getLocalizacionElemento_id(id: Number): Localizacion_Modelo {
     var localizacionElementoBusqueda = new Localizacion_Modelo();
     this.dataLE.forEach(dataLE => {
       var localizacionElemento_Busqueda = new Localizacion_Modelo();// necesario dado que si reutiliza conserva la primera asignación
       localizacionElemento_Busqueda = dataLE;
       if (id == localizacionElemento_Busqueda.localizacionId) {
         localizacionElementoBusqueda = localizacionElemento_Busqueda;
+        this.rastreo_Aux = localizacionElementoBusqueda;
+        this.rastreoId = this.rastreo_Aux.rastreorastreoid.rastreoId;
+        this.editar = false;
       }
     });
     return localizacionElementoBusqueda;
@@ -257,7 +266,7 @@ export class FormularioLeComponent implements OnInit {
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): void {
     this.loading = true;
-    this.localizacionServicio.updateLocalizacionElemento(le)
+    this.localizacionServicio.updateLocalizacionElemento(le, this.rastreoId)
       .subscribe(
         resLe => {
           this.loading = false;
@@ -266,7 +275,7 @@ export class FormularioLeComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_LE);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar, el codigole debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio', 'primary');
         });
   }
   resProteccionLista: any;

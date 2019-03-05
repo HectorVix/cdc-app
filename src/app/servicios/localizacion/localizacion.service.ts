@@ -46,8 +46,8 @@ export class LocalizacionService {
   getDispersion(protocolo_id: Number): Observable<dispersion_Modelo> {
     return this.http.get<dispersion_Modelo>('/cecon/protocolo/dispersion/' + protocolo_id);
   }
-  updateLocalizacionElemento(le: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/editar', le, httpOptions);
+  updateLocalizacionElemento(le: Localizacion_Modelo, rastreoId: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/editar/' + rastreoId, le, httpOptions);
   }
   updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/editar', protocoloLE, httpOptions);
