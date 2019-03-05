@@ -76,7 +76,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(30000)
     ).subscribe(() => this.successMessage = null);
   }
   setDataSourceAttributes() {
@@ -147,7 +147,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar la fuente.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar la fuente, el código de la fuente es único no se puede repetir por favor ingresa un código valido ó el servicio  no esta diponible.', 'primary');
         });
   }
   cancelar() {
@@ -226,7 +226,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   mostrar_Fuente_Busqueda(row: fuente_Dato) {
     this.crearForm_ResumenesFuente(this.getFuente_id(row.fuenteId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.archivo.nativeElement.value = "";
     this.progreso = null;
@@ -242,6 +241,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       fuente_Busqueda_Aux = dataFuente;
       if (id == fuente_Busqueda_Aux.fuenteId) {
         fuenteBusqueda = fuente_Busqueda_Aux;
+        this.editar = false;
       }
     });
     return fuenteBusqueda;
@@ -267,11 +267,8 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos_Disponibles.nuevo();
   }
   editar_Fuente() {
-    if (this.fuenteForm.get('codfuente').value) {
+    if (this.fuenteForm.get('codfuente').value)
       this.updateFuente(this.setFuente(this.fuenteForm.value));
-    }
-    else
-      this.changeSuccessMessage('Error  no se pudo editar. El código fuente es obligatorio', 'primary');
   }
   updateFuente(fuente: fuente_Modelo): void {
     this.loading = true;
@@ -282,13 +279,13 @@ export class FormularioResumenFuenteComponent implements OnInit {
         resFuente => {
           this.loading = false;
           this.cargarArchivos(fuente.fuenteId);
-          this.changeSuccessMessage(`Editado exitoso ,codigo de la fuente:${resFuente.codfuente}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso ,código de la fuente:${resFuente.codfuente}.`, 'success');
           this.lista_Fuente = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Fuente);
           this.editar = true;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar.', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
 
