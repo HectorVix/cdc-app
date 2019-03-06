@@ -3,6 +3,7 @@
         <mat-tab label="Formulario">
             <div class="card-body">
                 <form [formGroup]="protocoloLeForm">
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
                     <div class="modal-content mat-elevation-z8">
                         <div class="modal-header  color-green">
                             <h5 class="modal-title">Protocolo LE</h5>
@@ -20,15 +21,24 @@
                                     disabled>
                                 <label for="formCodigoe"></label>
                             </div>
-                            <div class="md-form col-md-2 mt10">
+                            <div class="col-md-1">
+                                <div class="mat-elevation-z8" class="base-form">
+                                    <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="md-form col-md-2 mt-20">
                                 <input mdbInputDirective type="text" id="formRangoG" class="form-control" formControlName="rangog" data-error=" " data-success=" ">
                                 <label for="formRangoG">&nbsp;&nbsp;&nbsp;&nbsp;RANGOG</label>
                             </div>
-                            <div class="md-form col-md-2 mt10">
+                            <div class="md-form col-md-2 mt-20">
                                 <input mdbInputDirective type="text" id="formRangoN" class="form-control" formControlName="rangon" data-error=" " data-success=" ">
                                 <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;RANGON</label>
                             </div>
-                            <div class="md-form col-md-2 mt10">
+                            <div class="md-form col-md-2 mt-20">
                                 <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="rangos" data-error=" " data-success=" ">
                                 <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;RANGOS</label>
                             </div>

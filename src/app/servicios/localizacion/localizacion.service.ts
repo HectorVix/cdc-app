@@ -49,8 +49,8 @@ export class LocalizacionService {
   updateLocalizacionElemento(le: Localizacion_Modelo, rastreoId: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/editar/' + rastreoId, le, httpOptions);
   }
-  updateProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/editar', protocoloLE, httpOptions);
+  updateProtocoloLE(protocoloLE: protocolo_LE_Modelo, elementoId: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/editar/' + elementoId, protocoloLE, httpOptions);
   }
   updateProteccion(id: String, proteccion: proteccion_Modelo) {
     return this.http.post('/cecon/localizacion/update/proteccion/' + id, proteccion, httpOptions);

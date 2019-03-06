@@ -13,6 +13,7 @@ import { protocolo_LE_FormGroup } from '../../../modelo/formGroup/protocoloLE';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { protocoloLE_Dato } from '../../../modelo/tabla/protocoloLE-dato';
 import { LocalDataSource } from 'ng2-smart-table';
+import { ElementoService } from '../../../servicios/elemento/elemento.service';
 
 @Component({
   selector: 'app-protocolo-le',
@@ -79,10 +80,13 @@ export class ProtocoloLeComponent implements OnInit {
   editar = true;
   guardar = false;
   selected = new FormControl(0);
+  elementoId: Number;
+  elemento_Aux: any;
 
   constructor(private fb: FormBuilder,
     private localizacionServicio: LocalizacionService,
     private fechaServicio: FechaService,
+    private elementoServicio: ElementoService,
     private dialog: MatDialog) {
     this.crearForm_ProtocoloLe(new protocolo_LE_Modelo);
     this.crearForm_Buscar();
@@ -140,11 +144,14 @@ export class ProtocoloLeComponent implements OnInit {
       .subscribe(
         resProtocoloLE => {
           this.loading = false;
-          this.changeSuccessMessage(`Se registro la localización del elemento :${resProtocoloLE.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Se registro el protocolo localización del elemento :${resProtocoloLE.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage(`No se pudo regitrar el protocolo de localización del elemento. Comprueba que exista CODIGOE:${protocoloLE.codigoe}.`,
-            'primary');
+          if (err.status === 404)
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
+
         });
   }
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -180,6 +187,7 @@ export class ProtocoloLeComponent implements OnInit {
   }
   buscarProtocolo_LE() {
     this.lista_ProtocoloLE = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_ProtocoloLE);
     this.loading = true;
     var a = "¬";
     var b = "¬";
@@ -216,6 +224,9 @@ export class ProtocoloLeComponent implements OnInit {
       var protocoloLEBusqueda: protocolo_LE_Modelo = dataProtocoloLE;
       if (id == protocoloLEBusqueda.protocoloId) {
         base_protocoloLEBusqueda = protocoloLEBusqueda;
+        this.elemento_Aux = base_protocoloLEBusqueda;
+        this.elementoId = this.elemento_Aux.elementoelementoid.elementoId;
+        this.editar = false;
       }
     });
     return base_protocoloLEBusqueda;
@@ -223,7 +234,6 @@ export class ProtocoloLeComponent implements OnInit {
   mostrar_ProtocoloLE_Busqueda(row: protocoloLE_Dato) {
     this.crearForm_ProtocoloLe(this.getProtocoloLE_id(row.protocoloId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getDispersion(row.protocoloId);
   }
@@ -233,7 +243,7 @@ export class ProtocoloLeComponent implements OnInit {
   updatePrtocoloLE(protocoloLE: protocolo_LE_Modelo): void {
     this.loading = true;
 
-    this.localizacionServicio.updateProtocoloLE(protocoloLE)
+    this.localizacionServicio.updateProtocoloLE(protocoloLE, this.elementoId)
       .subscribe(
         resPrtocoLE => {
           this.loading = false;
@@ -242,14 +252,12 @@ export class ProtocoloLeComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_ProtocoloLE);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el código del elemento debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarProtocoloLE() {
     if (this.protocoloLeForm.get('codigoe').value)
       this.updatePrtocoloLE(this.setProtocoloLE(this.protocoloLeForm.value));
-    else
-      this.changeSuccessMessage('El código del elemento  es obligatorio para editar.', 'warning');
   }
   nuevo() {
     this.editar = true;
@@ -259,6 +267,7 @@ export class ProtocoloLeComponent implements OnInit {
     this.tabPagina1();
     this.data_dispersion_DataSource = new LocalDataSource();
     this.lista_ProtocoloLE = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_ProtocoloLE);
   }
   resDispersionLista: any;
   getDispersion(protocoloId: Number) {
@@ -339,6 +348,18 @@ export class ProtocoloLeComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+  validarCodigoe() {
+    this.elementoServicio.validarElementoCodigoe(this.protocoloLeForm.get('codigoe').value)
+      .subscribe(
+        resElemento => {
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+        }, err => {
+          if (err.status === 404)
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
+        });
   }
 }
 function crearProtocoloLE(k: Number, protocoloId: Number, codigoe, nombre, nomcomun): protocoloLE_Dato {
