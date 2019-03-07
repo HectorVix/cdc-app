@@ -1,6 +1,6 @@
 export interface contacto_Dato {
     numero: Number;
-    contactosId: Number;
+    contactoId: Number;
     numident: String;
     nombre: String;
     apellido1: String;

@@ -1,5 +1,5 @@
 export class contacto_Modelo {
-    contactosId: Number;
+    contactoId: Number;
     //identificadores
     numident: String;
     nombreident: String;
@@ -32,6 +32,10 @@ export class contacto_Modelo {
     //documentación y mantenimiento
     coddirp: String;
     actualizar: Date;//*date
-    //relacion
+    //relaciones
     uSUARIOusuarioid: any;
+    contactoHasAreaList: any;
+    contactoHasSitioList: any;
+    contactoHasLoteList: any;
+    contactosHasFuenteList: any;
 }

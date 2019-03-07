@@ -10,7 +10,7 @@ export class usuario_Modelo {
     accionList = null;
     fuenteList = null;
     elementoList = null;
-    contactosList = null;
+    contactoList = null;
     rolrolid: Rol;
 }
 export class Rol {

@@ -71,5 +71,6 @@ export class sitio_Modelo {
     macsitioList: any;
     subdivisionList: any;
     uSUARIOusuarioid: usuario_Modelo
-
+    contactoHasSitioList: any;
+    sitioHasLoteList: any;
 }

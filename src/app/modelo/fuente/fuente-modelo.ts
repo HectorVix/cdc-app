@@ -77,5 +77,6 @@ export class fuente_Modelo {
 
     rASTREOrastreoid: Number;
     uSUARIOusuarioid: Number
-    archivoList: null;
+    archivoList: any;
+    contactoHasFuenteList: any;
 }

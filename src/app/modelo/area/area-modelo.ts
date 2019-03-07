@@ -63,4 +63,6 @@ export class area_Modelo {
     oberservacionesList: any;
     listaElementoList: any;
     uSUARIOusuarioid: usuario_Modelo;
+    contactoHasAreaList: any;
+    areaHasLoteList: any;
 }

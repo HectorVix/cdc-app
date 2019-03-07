@@ -173,7 +173,7 @@ export class FormularioContactosComponent implements OnInit {
           for (let val of this.dataContacto) {
             k = k + 1;
             this.lista_Contacto.push(crearContacto(k,
-              val.contactosId,
+              val.contactoId,
               val.numident,
               val.nombre,
               val.apellido1,
@@ -190,14 +190,14 @@ export class FormularioContactosComponent implements OnInit {
     var base_contactoBusqueda = new contacto_Modelo();
     this.dataContacto.forEach(dataContacto => {
       var contactoBusqueda: contacto_Modelo = dataContacto;
-      if (id == contactoBusqueda.contactosId) {
+      if (id == contactoBusqueda.contactoId) {
         base_contactoBusqueda = contactoBusqueda;
       }
     });
     return base_contactoBusqueda;
   }
   mostrar_Contacto_Busqueda(row: contacto_Dato) {
-    this.crearForm_Contacto(this.getContacto_id(row.contactosId));
+    this.crearForm_Contacto(this.getContacto_id(row.contactoId));
     this.tabPagina1();
     this.editar = false;
 
@@ -233,10 +233,10 @@ export class FormularioContactosComponent implements OnInit {
     this.tabPagina1();
   }
 }
-function crearContacto(k: Number, contactosId: Number, numident, nombre, apellido1, apellido2): contacto_Dato {
+function crearContacto(k: Number, contactoId: Number, numident, nombre, apellido1, apellido2): contacto_Dato {
   return {
     numero: k,
-    contactosId: contactosId,
+    contactoId: contactoId,
     numident: numident,
     nombre: nombre,
     apellido1: apellido1,

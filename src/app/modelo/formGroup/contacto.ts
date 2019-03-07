@@ -7,7 +7,7 @@ export class contacto_FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
         return fb.group({
-            'contactosId': row.contactosId,
+            'contactoId': row.contactoId,
             //identificadores
             'numident': row.numident,
             'nombreident': row.nombreident,
