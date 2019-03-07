@@ -14,8 +14,8 @@ export class AreaService {
 
   constructor(private http: HttpClient) { }
 
-  addArea(area: area_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/area/registro', area, httpOptions);
+  addArea(area: area_Modelo, usuario_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/area/registro/' + usuario_id, area, httpOptions);
   }
   addListaElemento(areaId: Number, listaElemento: listaElemento_Modelo) {
     return this.http.post('/cecon/area/registrar/listaElemento/' + areaId, listaElemento, httpOptions);
@@ -27,8 +27,8 @@ export class AreaService {
   getListaElemento(areaId: Number): Observable<listaElemento_Modelo> {
     return this.http.get<listaElemento_Modelo>('/cecon/area/listaElemento/' + areaId);
   }
-  updateArea(area: area_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/area/editar', area, httpOptions);
+  updateArea(area: area_Modelo, usuario_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/area/editar/' + usuario_id, area, httpOptions);
   }
   updateListaElemento(areaId: Number, listaElemento: listaElemento_Modelo) {
     return this.http.post('/cecon/area/update/listaElemento/' + areaId, listaElemento, httpOptions);

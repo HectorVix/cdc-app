@@ -1,3 +1,4 @@
+import { usuario_Modelo } from '../../modelo/usuario/usuario-modelo';
 export class area_Modelo {
     areaId: Number;
     //identificadores
@@ -61,6 +62,5 @@ export class area_Modelo {
     fotoList: any;
     oberservacionesList: any;
     listaElementoList: any;
-
-
+    uSUARIOusuarioid: usuario_Modelo;
 }

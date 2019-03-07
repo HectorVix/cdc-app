@@ -15,6 +15,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-formulario-areas-manejadas',
@@ -159,7 +160,9 @@ export class FormularioAreasManejadasComponent implements OnInit {
   //agrega una nueva area
   addArea(area: area_Modelo): void {
     this.loading = true;
-    this.areaServicio.addArea(area)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.areaServicio.addArea(area, decodedToken.jti)
       .subscribe(
         resArea => {
           if (this.galeria.archivos.size > 0) {
@@ -170,7 +173,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
           this.changeSuccessMessage(`Se registro el area  :${resArea.codigoam}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar el area.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar el área, el CODIGOAM es único no se puede repetir ó comprueba que esté disponible el servicio.', 'primary');
         });
   }
 
@@ -267,6 +270,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       var areaBusqueda: area_Modelo = dataArea;
       if (id == areaBusqueda.areaId) {
         base_areaBusqueda = areaBusqueda;
+        this.editar = false;
       }
     });
     return base_areaBusqueda;
@@ -274,14 +278,15 @@ export class FormularioAreasManejadasComponent implements OnInit {
   mostrar_Area_Busqueda(row: area_Dato) {
     this.crear_areaManejoForm(this.getArea_id(row.areaId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getListaElementos(this.areaManejoForm.get('areaId').value);
     this.getFoto_Datos(row.areaId);
   }
   updateArea(area: area_Modelo): void {
     this.loading = true;
-    this.areaServicio.updateArea(area)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.areaServicio.updateArea(area, decodedToken.jti)
       .subscribe(
         resSitio => {
           this.galeriaServicio.update_FotoId_Lista(
@@ -292,19 +297,17 @@ export class FormularioAreasManejadasComponent implements OnInit {
             this.tam_Inicial_ListaFotos,
             this.galeria.getTam_final_ListaFotos(), 3);
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso, código del área:${resSitio.codigoam}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso, código del área: ${resSitio.codigoam}.`, 'success');
           this.lista_Area = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Area);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo del área debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarArea() {
     if (this.areaManejoForm.get('codigoam').value)
       this.updateArea(this.setAreasManejadas(this.areaManejoForm.value));
-    else
-      this.changeSuccessMessage('El código de área es obligatorio para editar.', 'warning');
   }
   nuevo() {
     this.editar = true;

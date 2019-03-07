@@ -17,6 +17,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-registro-sitio',
@@ -190,7 +191,7 @@ export class RegistroSitioComponent implements OnInit {
       });
     }
     else
-      this.changeSuccessMessage('No se pudo regitrar el Sitio. El codigo del sitio es obligatorio', 'warning');
+      this.changeSuccessMessage('No se pudo regitrar el Sitio. El código del sitio es obligatorio', 'warning');
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {
     datos.fechamapa = this.fechaServicio.toFormatoDateTime(this.sitioForm.get('fechamapa').value);
@@ -200,7 +201,9 @@ export class RegistroSitioComponent implements OnInit {
   //agrega un nuevo registro de sitio 
   addSitio(sitio: sitio_Modelo): void {
     this.loading = true;
-    this.sitioServicio.addSitio(sitio)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.sitioServicio.addSitio(sitio, decodedToken.jti)
       .subscribe(
         resSitio => {
           if (this.galeria.archivos.size > 0) {
@@ -211,7 +214,7 @@ export class RegistroSitioComponent implements OnInit {
           this.changeSuccessMessage(`Se registro el sitio  :${resSitio.codsitio}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar el Sitio.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar el sitio, el CODSITIO es único no se puede repetir ó comprueba que esté disponible el servicio.', 'primary');
         });
   }
 
@@ -251,13 +254,12 @@ export class RegistroSitioComponent implements OnInit {
   editarSitio() {
     if (this.sitioForm.get('codsitio').value)
       this.updateSitio(this.setSitio(this.sitioForm.value));
-    else
-      this.changeSuccessMessage('El código de sitio es obligatorio para editar.', 'warning');
   }
   buscarSitio() {
     this.fotoId_Lista = [];
     this.tam_Inicial_ListaFotos = 0;
     this.lista_Sitio = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Sitio);
     this.loading = true;
     var a = "¬";
     var b = "¬";
@@ -293,7 +295,6 @@ export class RegistroSitioComponent implements OnInit {
   mostrar_Sito_Busqueda(row: sitio_Dato) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();
-    this.editar = false;
     this.guardar = true;
     this.getMacsitio(this.sitioForm.get('sitioId').value);
     this.getSubdivision(this.sitioForm.get('sitioId').value);
@@ -305,13 +306,16 @@ export class RegistroSitioComponent implements OnInit {
       var sitioBusqueda: sitio_Modelo = dataSitio;
       if (id == sitioBusqueda.sitioId) {
         base_sitioBusqueda = sitioBusqueda;
+        this.editar = false;
       }
     });
     return base_sitioBusqueda;
   }
   updateSitio(sitio: sitio_Modelo): void {
     this.loading = true;
-    this.sitioServicio.updateSitio(sitio)
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.sitioServicio.updateSitio(sitio, decodedToken.jti)
       .subscribe(
         resSitio => {
           this.galeriaServicio.update_FotoId_Lista(
@@ -327,7 +331,7 @@ export class RegistroSitioComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_Sitio);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error  no se pudo editar, el codigo sitio debe ser valido', 'primary');
+          this.changeSuccessMessage('Error  no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   nuevo() {

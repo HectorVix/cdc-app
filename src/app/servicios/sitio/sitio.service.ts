@@ -27,8 +27,8 @@ export class SitioService {
   getSubdivision(sitio_id: Number): Observable<subdivision_Modelo> {
     return this.http.get<subdivision_Modelo>('/cecon/sitio/subdivision/' + sitio_id);
   }
-  addSitio(sitio: sitio_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/sitio/registro', sitio, httpOptions);
+  addSitio(sitio: sitio_Modelo, usuario_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/sitio/registro/' + usuario_id, sitio, httpOptions);
   }
   addMacsitio(sitio_id: Number, macsitio: macsitio_Modelo) {
     return this.http.post('/cecon/sitio/registrar/macsitio/' + sitio_id, macsitio, httpOptions);
@@ -36,8 +36,8 @@ export class SitioService {
   addSubdivision(sitio_id: Number, subdivision: subdivision_Modelo) {
     return this.http.post('/cecon/sitio/registrar/subdivision/' + sitio_id, subdivision, httpOptions);
   }
-  updateSitio(sitio: sitio_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/sitio/editar', sitio, httpOptions);
+  updateSitio(sitio: sitio_Modelo, usuario_id: Number): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/sitio/editar/' + usuario_id, sitio, httpOptions);
   }
   updateMacsitio(sitio_id: Number, macsitio: macsitio_Modelo) {
     return this.http.post('/cecon/sitio/update/macsitio/' + sitio_id, macsitio, httpOptions);
