@@ -24,4 +24,13 @@ export class ContactoService {
   updateContacto(contacto: contacto_Modelo, jti: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/contacto/editar/' + jti, contacto, httpOptions);
   }
+  validarCodfuente(codfuente: String): Observable<respuesta_cdc_Modelo> {
+    return this.http.get<respuesta_cdc_Modelo>('/cecon/contacto/validar/fuente/' + codfuente);
+  }
+  validarCodigoAM(codigoam: String): Observable<respuesta_cdc_Modelo> {
+    return this.http.get<respuesta_cdc_Modelo>('/cecon/contacto/validar/area/' + codigoam);
+  }
+  validarCodSitio(codsitio: String): Observable<respuesta_cdc_Modelo> {
+    return this.http.get<respuesta_cdc_Modelo>('/cecon/contacto/validar/sitio/' + codsitio);
+  }
 }

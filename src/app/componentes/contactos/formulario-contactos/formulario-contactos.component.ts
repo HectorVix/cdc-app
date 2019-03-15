@@ -11,6 +11,7 @@ import { contacto_Modelo } from '../../../modelo/contacto/contacto-modelo';
 import { contacto_FormGroup } from '../../../modelo/formGroup/contacto';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
 import { contacto_Dato } from '../../../modelo/tabla/contacto-dato';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-formulario-contactos',
@@ -42,6 +43,50 @@ export class FormularioContactosComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
+  data_contacto_DataSource: LocalDataSource = new LocalDataSource();
+  settings_contacto = {
+    add: {
+      addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
+      createButtonContent: '<i class="fa fa-check"></i> Crear',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="fa fa-pencil"></i> Editar',
+      saveButtonContent: '<i class="fa fa-check"></i> Guardar',
+      cancelButtonContent: ' <i class="fa fa-times"></i> Cancelar',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="fa fa-trash"></i> Borrar',
+      confirmDelete: true,
+    },
+    columns: {
+      codfuente: {
+        title: 'CÓDIGO FUENTE',
+        type: 'text',
+        filter: true
+      },
+      codigoam: {
+        title: 'CÓDIGO AREA',
+        type: 'text',
+        filter: true
+      },
+      codsitio: {
+        title: 'CÓDIGO SITIO',
+        type: 'text',
+        filter: true
+      },
+      lote: {
+        title: 'CÓDIGO LOTE',
+        type: 'text',
+        filter: true
+      }
+    }
+  };
+  validaFuente = false;
+  validaSitio = false;
+  validaArea = false;
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder,
     private contactoServicio: ContactoService,
@@ -192,6 +237,7 @@ export class FormularioContactosComponent implements OnInit {
       var contactoBusqueda: contacto_Modelo = dataContacto;
       if (id == contactoBusqueda.contactoId) {
         base_contactoBusqueda = contactoBusqueda;
+        this.editar = false;
       }
     });
     return base_contactoBusqueda;
@@ -199,8 +245,6 @@ export class FormularioContactosComponent implements OnInit {
   mostrar_Contacto_Busqueda(row: contacto_Dato) {
     this.crearForm_Contacto(this.getContacto_id(row.contactoId));
     this.tabPagina1();
-    this.editar = false;
-
     this.guardar = true;
   }
   updateContacto(contacto: contacto_Modelo): void {
@@ -231,6 +275,146 @@ export class FormularioContactosComponent implements OnInit {
     this.crearForm_Contacto(new contacto_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+  }
+  onCreateConfirm(event): void {
+    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+
+      console.log('codfuente:', event.newData);
+
+      this.validarCodFuente(event);
+    }
+    else // se esta editando un registro
+    {
+      /* var dispersion = new dispersion_Modelo();
+       dispersion.le = event.newData.le;
+       dispersion.nommapanummarg = event.newData.nommapanummarg;
+       dispersion.prov = event.newData.prov;
+       dispersion.direccion = event.newData.direccion;
+       dispersion.ultobs = event.newData.ultobs;
+       dispersion.dispersionId = event.newData.dispersionId;
+       this.localizacionServicio.addDispersion(dispersion, this.protocoloLeForm.get('protocoloId').value)
+         .subscribe(
+           resProteccion => {
+             event.confirm.resolve(event.newData);
+             this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+           }, err => {
+           });
+           */
+    }
+  }
+  onUpdateConfirm(event): void {
+    if (this.editar) { //nuevo
+      event.confirm.resolve(event.newData);
+    }
+    else { //editar uno existente
+      /*  var dispersion = new dispersion_Modelo()
+        dispersion.le = event.newData.le;
+        dispersion.nommapanummarg = event.newData.nommapanummarg;
+        dispersion.prov = event.newData.prov;
+        dispersion.direccion = event.newData.direccion;
+        dispersion.ultobs = event.newData.ultobs;
+        dispersion.dispersionId = event.newData.dispersionId;
+        this.localizacionServicio.updateDispersion(this.protocoloLeForm.get('protocoloId').value, dispersion)
+          .subscribe(
+            resDispersion => {
+              event.confirm.resolve(event.newData);
+              this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+            }, err => {
+            });
+        */
+    }
+  }
+  onDeleteConfirm(event): void {
+    if (window.confirm('¿Estás seguro de querer borrar?')) {
+      if (this.editar) { //nuevo
+        event.confirm.resolve(event.newData);
+      } else { //editar uno existente
+        /* this.localizacionServicio.deleteDispersion(event.data.dispersionId)
+           .subscribe(
+             resDispersion => {
+               event.confirm.resolve(event.newData);
+               this.getDispersion(this.protocoloLeForm.get('protocoloId').value);
+             }, err => {
+             });*/
+      }
+
+    } else {
+      event.confirm.reject();
+    }
+  }
+  validarCodFuente(event) {
+    if (event.newData.codfuente) {
+      this.contactoServicio.validarCodfuente(event.newData.codfuente)
+        .subscribe(
+          resContacto => {
+            this.validaFuente = true;
+            console.log(`Si existe codfuente:${resContacto.codfuente}.`);
+            this.validarCodigoAreaManejada(event);
+          }, err => {
+            if (err.status === 404)
+              this.changeSuccessMessage('No existe el CODFUENTE, por favor ingresa un código valido.', 'primary');
+            else
+              this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
+            this.validaFuente = false;
+          });
+    }
+    else {
+      console.log('listo validar area');
+      this.validaFuente = true;
+      this.validarCodigoAreaManejada(event);
+    }
+
+
+  }
+  validarCodigoAreaManejada(event) {
+    if (event.newData.codigoam) {
+      this.contactoServicio.validarCodigoAM(event.newData.codigoam)
+        .subscribe(
+          resContacto => {
+            console.log(`Si existe codigoam:${resContacto.codigoam}.`);
+            this.validaArea = true;
+            this.validarCodSitio(event);
+          }, err => {
+            if (err.status === 404)
+              this.changeSuccessMessage('No existe el CODIGO DE ÁREA, por favor ingresa un código valido.', 'primary');
+            else
+              this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
+            this.validaArea = false;
+          });
+    }
+    else {
+      console.log('listo validar sitio');
+      this.validaArea = true;
+      this.validarCodSitio(event);
+    }
+  }
+  validarCodSitio(event) {
+    if (event.newData.codsitio) {
+      this.contactoServicio.validarCodSitio(event.newData.codsitio)
+        .subscribe(
+          resContacto => {
+            console.log(`Si existe codsitio:${resContacto.codsitio}.`);
+            this.validaSitio = true;
+            if (this.validaFuente && this.validaArea && this.validaSitio)
+              event.confirm.resolve(event.newData);
+            this.validaFuente = false;
+            this.validaArea = false;
+            this.validaSitio = false;
+          }, err => {
+            if (err.status === 404)
+              this.changeSuccessMessage('No existe el CODIGO DE SITIO, por favor ingresa un código valido.', 'primary');
+            else
+              this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
+          });
+    }
+    else {
+      console.log('listo fin');
+      if (this.validaFuente && this.validaArea)
+        event.confirm.resolve(event.newData);
+      this.validaFuente = false;
+      this.validaArea = false;
+      this.validaSitio = false;
+    }
   }
 }
 function crearContacto(k: Number, contactoId: Number, numident, nombre, apellido1, apellido2): contacto_Dato {
