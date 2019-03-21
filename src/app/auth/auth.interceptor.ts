@@ -1,6 +1,8 @@
+
+import {tap} from 'rxjs/operators';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/do';
+import { Observable } from "rxjs";
+
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -17,14 +19,14 @@ export class AuthInterceptor implements HttpInterceptor {
             const clonedreq = req.clone({
                 headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
             });
-            return next.handle(clonedreq)
-                .do(
+            return next.handle(clonedreq).pipe(
+                tap(
                 succ => { },
                 err => {
                     if (err.status === 401)
                         this.router.navigateByUrl('/login');
                 }
-                );
+                ));
         }
         else {
             this.router.navigateByUrl('/login');
