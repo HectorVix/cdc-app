@@ -23,7 +23,7 @@ import { CaracterizacionService } from './servicios/caracterizacion/caracterizac
 import { SitioService } from './servicios/sitio/sitio.service';
 import { AreaService } from './servicios/area/area.service';
 import { ContactoService } from './servicios/contacto/contacto.service';
-import { FechaService } from './servicios/fecha/fecha.service';
+// import { FechaService } from './servicios/fecha/fecha.service';
 import { JerarquizacionComponent } from './componentes/jerarquizacion/jerarquizacion.component';
 import { FormularioJerarquizacionElementoNacionalComponent } from './componentes/jerarquizacion/formulario-jerarquizacion-elemento-nacional/formulario-jerarquizacion-elemento-nacional.component';
 import { RastreoElementoComponent } from './componentes/rastreo-elemento/rastreo-elemento.component';
@@ -62,10 +62,12 @@ import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from './componentes/dialogo/confirmacion/confirmacion.component';
-import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
+// import { Jerarquizacion } from './modelo/jerarquizacion/jerarquizacion-modelo';
 import { ArchivosDisponiblesComponent } from './componentes/fuente/archivos-disponibles/archivos-disponibles.component';
 import { AcercaComponent } from './componentes/acerca/acerca.component';
 // import {FlexLayoutModule} from '@angular/flex-layout';
+import { AgmCoreModule } from '@agm/core';
+import { MapaComponent } from './componentes/mapa/mapa.component';
 
 
 @NgModule({
@@ -102,7 +104,8 @@ import { AcercaComponent } from './componentes/acerca/acerca.component';
     GaleriaComponent,
     ConfirmacionComponent,
     ArchivosDisponiblesComponent,
-    AcercaComponent
+    AcercaComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,10 @@ import { AcercaComponent } from './componentes/acerca/acerca.component';
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatFormFieldModule, MatInputModule,
     MatTableModule, MatPaginatorModule, MatDialogModule, MatListModule, MatProgressBarModule,
     MatGridListModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule,
-    ModalGalleryModule.forRoot(), MatMenuModule
+    ModalGalleryModule.forRoot(), MatMenuModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
