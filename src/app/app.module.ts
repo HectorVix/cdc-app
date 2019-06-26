@@ -8,7 +8,6 @@ import { DatePipe } from '@angular/common'
 import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './componentes/home-page/home-page.component';
-import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { LoginPageComponent } from './componentes/login-page/login-page.component';
 import { NotFoundPageComponent } from './componentes/not-found-page/not-found-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -55,7 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule
+  MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule, MatToolbarModule, MatSidenavModule, MatIconModule
 } from '@angular/material';
 import 'hammerjs';
 import 'mousetrap';
@@ -68,13 +67,14 @@ import { AcercaComponent } from './componentes/acerca/acerca.component';
 // import {FlexLayoutModule} from '@angular/flex-layout';
 import { AgmCoreModule } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
+import { SideNavComponent } from './componentes/side-nav/side-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    NavbarComponent,
     LoginPageComponent,
     NotFoundPageComponent,
     FormularioResumenFuenteComponent,
@@ -105,7 +105,8 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
     ConfirmacionComponent,
     ArchivosDisponiblesComponent,
     AcercaComponent,
-    MapaComponent
+    MapaComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +124,11 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
     ModalGalleryModule.forRoot(), MatMenuModule,
     AgmCoreModule.forRoot({
       apiKey: ''
-    })
+    }),
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [

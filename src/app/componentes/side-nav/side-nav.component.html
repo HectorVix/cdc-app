@@ -1,0 +1,37 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar class="color-green"><img src="iconos/logo.ico">CDC</mat-toolbar>
+    <mat-nav-list class="color-green">
+      <a mat-list-item [routerLink]="['/home']"><img src="iconos/home.ico">Home</a>
+      <a mat-list-item [routerLink]="['/fuente']"><img src="iconos/fuente.ico"> Fuentes</a>
+      <a mat-list-item [routerLink]="['/jerarquizacion']"><img src="iconos/jerarquizacion.ico"> Jerarquización</a>
+      <a mat-list-item [routerLink]="['/rastreoElemento']"><img src="iconos/rastreo.ico"> Rastreo</a>
+      <a mat-list-item [routerLink]="['/localizacionElemento']"><img src="iconos/localizacion.ico"> Localización</a>
+      <a mat-list-item [routerLink]="['/sitios']"><img src="iconos/sitios.ico"> Sitios</a>
+      <a mat-list-item [routerLink]="['/areasManejadas']"><img src="iconos/area.ico"> Áreas</a>
+      <a mat-list-item [routerLink]="['/contactos']"><img src="iconos/contacto.ico"> Contactos</a>
+      <a mat-list-item [routerLink]="['/perfil']"><img src="iconos/perfil.ico"> Perfil</a>
+      <a mat-list-item [routerLink]="['/acerca']"><img src="iconos/info.ico"> Acerca del CDC</a>
+      <a mat-list-item (click)="Logout()"><img src="iconos/lock.ico"> Cerar sesión</a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+
+<mat-menu #elementoReporte="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="jerarquizacion">Jerarquización</button>
+  <button mat-menu-item>Rastreo</button>
+  <button mat-menu-item>Localización</button>
+</mat-menu>
+<mat-menu #jerarquizacion="matMenu">
+  <button mat-menu-item>Elemento</button>
+  <button mat-menu-item>Global</button>
+  <button mat-menu-item>Nacional</button>
+  <button mat-menu-item>Subnacional</button>
+</mat-menu>
+<mat-menu #deptoReporte="matMenu">
+  <button mat-menu-item>Sitios</button>
+  <button mat-menu-item>Áreas</button>
+  <button mat-menu-item>Contactos</button>
+</mat-menu>
