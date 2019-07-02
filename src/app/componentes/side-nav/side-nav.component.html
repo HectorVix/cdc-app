@@ -2,19 +2,45 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar class="color-green"><img src="iconos/logo.ico">CDC</mat-toolbar>
-    <mat-nav-list class="color-green">
-      <a mat-list-item [routerLink]="['/home']"><img src="iconos/home.ico">Home</a>
-      <a mat-list-item [routerLink]="['/fuente']"><img src="iconos/fuente.ico"> Fuentes</a>
-      <a mat-list-item [routerLink]="['/jerarquizacion']"><img src="iconos/jerarquizacion.ico"> Jerarquización</a>
-      <a mat-list-item [routerLink]="['/rastreoElemento']"><img src="iconos/rastreo.ico"> Rastreo</a>
-      <a mat-list-item [routerLink]="['/localizacionElemento']"><img src="iconos/localizacion.ico"> Localización</a>
-      <a mat-list-item [routerLink]="['/sitios']"><img src="iconos/sitios.ico"> Sitios</a>
-      <a mat-list-item [routerLink]="['/areasManejadas']"><img src="iconos/area.ico"> Áreas</a>
-      <a mat-list-item [routerLink]="['/contactos']"><img src="iconos/contacto.ico"> Contactos</a>
-      <a mat-list-item [routerLink]="['/perfil']"><img src="iconos/perfil.ico"> Perfil</a>
-      <a mat-list-item [routerLink]="['/acerca']"><img src="iconos/info.ico"> Acerca del CDC</a>
-      <a mat-list-item (click)="Logout()"><img src="iconos/lock.ico"> Cerar sesión</a>
+    <mat-toolbar class="color-green"><img src="iconos/logo.ico">
+      <font size=4 color="white">CDC</font>
+    </mat-toolbar>
+    <mat-nav-list class="color-gris">
+      <a mat-list-item [routerLink]="['/home']"><img src="iconos/home.ico">
+        <font size=4 color="white">Home</font>
+      </a>
+      <a mat-list-item [routerLink]="['/fuente']"><img src="iconos/fuente.ico">
+        <font size=4 color="white">Fuentes</font>
+      </a>
+      <a mat-list-item [routerLink]="['/jerarquizacion']"><img src="iconos/jerarquizacion.ico">
+        <font size=4 color="white">Jerarquización</font>
+      </a>
+      <a mat-list-item [routerLink]="['/rastreoElemento']"><img src="iconos/rastreo.ico">
+        <font size=4 color="white">Rastreo</font>
+      </a>
+      <a mat-list-item [routerLink]="['/localizacionElemento']"><img src="iconos/localizacion.ico">
+        <font size=4 color="white">Localización</font>
+      </a>
+      <a mat-list-item [routerLink]="['/sitios']"><img src="iconos/sitios.ico">
+        <font size=4 color="white">Sitios</font>
+      </a>
+      <a mat-list-item [routerLink]="['/areasManejadas']"><img src="iconos/area.ico">
+        <font size=4 color="white">Áreas</font>
+      </a>
+      <a mat-list-item [routerLink]="['/contactos']"><img src="iconos/contacto.ico">
+        <font size=4 color="white">Contactos</font>
+      </a>
+      <a mat-list-item [routerLink]="['/perfil']"><img src="iconos/perfil.ico">
+        <font size=4 color="white">Perfil</font>
+      </a>
+      <a mat-list-item [routerLink]="['/acerca']"><img src="iconos/info.ico">
+        <font size=4 color="white">Acerca del CDC</font>
+      </a>
+      <a mat-list-item> </a>
+      <p></p>
+      <a mat-list-item (click)="Logout()"><img src="iconos/lock.ico">
+        <font size=4 color="white">Cerrar sesión</font>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>
