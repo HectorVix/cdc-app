@@ -5,7 +5,9 @@
         <form [formGroup]="fuenteForm">
           <div class="modal-content mat-elevation-z4">
             <div class="modal-header color-green">
-              <h5 class="modal-title">Formulario De Resumen Fuente</h5>
+              <h5 class="modal-title">
+                <font size=4 color="white">FORMULARIO DE RESUMEN DE FUENTE</font>
+              </h5>
             </div>
             <div class="row">
               <div class="col-md-2">
@@ -23,8 +25,8 @@
                 </mat-form-field>
               </div>
               <div class="md-form col-md-4 mt10" *ngIf="editar">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error=" " data-success=" "
-                  formControlName="codfuente">
+                <input mdbInputDirective type="text" id="form1" class="form-control"
+                  data-error="Error, máximo 10 caracteres." data-success=" " formControlName="codfuente">
                 <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
               <div class="md-form col-md-4 mt10" *ngIf="guardar">
@@ -40,8 +42,8 @@
               </div>
               <div class="md-form  col-md-9 mt-20">
                 <i class="fa fa-pencil prefix"></i>
-                <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="1"
-                  data-error=" " data-success=" " formControlName="cita"></textarea>
+                <textarea mdbInputDirective type="text" id="formCita" class="md-textarea form-control" rows="4"
+                  data-error="Error, máximo 240 caracteres." data-success=" " formControlName="cita"></textarea>
                 <label for="formCita">Cita Bibliográfica</label>
               </div>
             </div>
@@ -50,25 +52,25 @@
               <div class=" col-md-2">
                 <label for="">ARCHIVADO:</label>
               </div>
-              <div class="md-form col-md-4 mt-20">
-                <input mdbInputDirective type="text" id="formArchivado" class="form-control" data-error=" "
-                  data-success=" " formControlName="archivado">
+              <div class="md-form col-md-9 mt-5">
+                <input mdbInputDirective type="text" id="formArchivado" class="form-control"
+                  data-error="Error, máximo 60 caracteres." data-success=" " formControlName="archivado">
                 <label for="formArchivado">&nbsp;&nbsp;&nbsp;&nbsp;Indica el lugar donde está el documento.</label>
-              </div>
-              <div class="form-group mt-15">
-                <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
-                <div>
-                  <button mat-raised-button [disabled]="cargado" class="add-files-btn color-green"
-                    (click)="agregarArchivos()">
-                    Agregar Archivos
-                  </button>
-                </div>
               </div>
             </div>
             <div class="card-body">
               <mat-tab-group dynamicHeight [selectedIndex]="selectedArchivos.value"
                 (selectedIndexChange)="selectedArchivos.setValue($event)">
                 <mat-tab label="Nuevos Archivos">
+                  <div class="form-group">
+                    <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+                    <div>
+                      <button mat-raised-button [disabled]="cargado" class="add-files-btn color-green"
+                        (click)="agregarArchivos()">
+                        Agregar Archivos
+                      </button>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
                       <mat-dialog-content fxFlex>
@@ -93,9 +95,9 @@
               <div class="col-md-2">
                 <label for="">COBGEO:</label>
               </div>
-              <div class="md-form col-md-9 mt-20">
-                <input mdbInputDirective type="text" id="formCOBGEO" class="form-control" data-error=" "
-                  data-success=" " formControlName="cobgeo">
+              <div class="md-form col-md-9">
+                <input mdbInputDirective type="text" id="formCOBGEO" class="form-control"
+                  data-error="Error, máximo 50 caracteres." data-success=" " formControlName="cobgeo">
                 <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del
                   Documento.</label>
               </div>
@@ -106,24 +108,24 @@
                 <label for="">S:</label>
               </div>
 
-              <div class="md-form  col-md-2 mt-20">
+              <div class="md-form  col-md-2 mt-5">
                 <input mdbInputDirective type="text" id="formRangoG" class="form-control" formControlName="coords"
-                  data-error=" " data-success=" ">
+                  data-error="Error, máximo 6 caracteres." data-success=" ">
                 <label for="formRangoG"></label>
               </div>
-              <div class="md-form col-md-2 mt-20">
+              <div class="md-form col-md-2 mt-5">
                 <input mdbInputDirective type="text" id="formRangoN" class="form-control" formControlName="coordn"
-                  data-error=" " data-success=" ">
+                  data-error="Error, máximo 6 caracteres." data-success=" ">
                 <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
               </div>
-              <div class="md-form col-md-2 mt-20">
+              <div class="md-form col-md-2 mt-5">
                 <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coorde"
-                  data-error=" " data-success=" ">
+                  data-error="Error, máximo 7 caracteres." data-success=" ">
                 <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
               </div>
-              <div class="md-form col-md-2 mt-20">
+              <div class="md-form col-md-2 mt-5">
                 <input mdbInputDirective type="text" id="formRangos" class="form-control" formControlName="coordo"
-                  data-error=" " data-success=" ">
+                  data-error="Error, máximo 7 caracteres." data-success=" ">
                 <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
               </div>
 
@@ -134,10 +136,10 @@
               <div class="col-md-2">
                 <label for="">RESUMEN:</label>
               </div>
-              <div class="md-form  col-md-9 mt-20">
+              <div class="md-form  col-md-9 mt-5">
                 <i class="fa fa-pencil prefix"></i>
-                <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="1"
-                  data-error=" " data-success=" " formControlName="resumen"></textarea>
+                <textarea mdbInputDirective type="text" id="formResumen" class="md-textarea form-control" rows="4"
+                  data-error="Error, máximo 240 caracteres." data-success=" " formControlName="resumen"></textarea>
                 <label for="formResumen">Escriba un texto corto pero representativo del contenido general del
                   documento.</label>
               </div>
@@ -365,7 +367,8 @@
               <div class="md-form  col-md-9 mt10">
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective type="text" id="formClave" class="md-textarea form-control"
-                  formControlName="clave" rows="1" data-error=" " data-success=" "></textarea>
+                  formControlName="clave" rows="1" data-error="Error, máximo 120 caracteres."
+                  data-success=" "></textarea>
                 <label for="formClave">Complemento del campo TEMA.</label>
               </div>
             </div>
@@ -374,10 +377,11 @@
               <div class="col-md-2">
                 <label for="">COMENTARIO:</label>
               </div>
-              <div class="md-form  col-md-9 mt-20">
+              <div class="md-form  col-md-9 mt-5">
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control"
-                  formControlName="comentario" rows="1" data-error=" " data-success=" "></textarea>
+                  formControlName="comentario" rows="1" data-error="Error, máximo 120 caracteres"
+                  data-success=" "></textarea>
                 <label for="formComentario"> Describe de acuerdo al Valor, el tipo de información contenida.</label>
               </div>
             </div>
@@ -386,47 +390,55 @@
               <div class="col-md-2">
                 <label for="">NOTA DIGESTIVA:</label>
               </div>
-              <div class="md-form  col-md-9 mt-20">
+              <div class="md-form  col-md-9 mt-5">
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective type="text" id="formNotadigest" class="md-textarea form-control"
-                  formControlName="notadigest" rows="1" data-error=" " data-success=" "></textarea>
+                  formControlName="notadigest" rows="1" data-error="Error, máximo 120 caracteres."
+                  data-success=" "></textarea>
                 <label for="formNotadigest">Anotar en este campo hasta qué punto se ha extraído la fuente toda la
                   información .</label>
               </div>
             </div>
             <!-- fin row -->
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-2">
               </div>
-              <div class="md-form col-md-2 input-group-append mt-20">
-                <input mdbInputDirective type="text" id="formActualizar" class="form-control"
-                  formControlName="actualizar" data-error=" " data-success=" " ngbDatepicker
-                  #dActualizar="ngbDatepicker">
+              <div class="md-form  col-md-3 mt-5">
+                <input mdbInputDirective mdbValidate type="text" id="formActualizar" class="form-control"
+                  formControlName="actualizar" ngbDatepicker #dActualizar="ngbDatepicker">
                 <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                <div (click)="dActualizar.toggle()">
-                  <i class="fa fa-calendar prefix"></i>
-                </div>
+                <mdb-error *ngIf="input_Actualizar.invalid && (input_Actualizar.dirty || input_Actualizar.touched)">
+                  <font size=2 color="red">Error, el formato debe ser
+                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+                </mdb-error>
+              </div>
+              <div class="md-form mt-5" (click)="dActualizar.toggle()">
+                <i class="fa fa-calendar prefix"></i>
               </div>
             </div>
             <!-- fin row -->
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-2">
               </div>
-              <div class="md-form col-md-2 input-group-append mt-20">
-                <input mdbInputDirective type="text" id="formControl" class="form-control" formControlName="control"
-                  data-error=" " data-success=" " ngbDatepicker #dControl="ngbDatepicker">
+              <div class="md-form col-md-3 mt-5">
+                <input mdbInputDirective mdbValidate type="text" id="formControl" class="form-control"
+                  formControlName="control" ngbDatepicker #dControl="ngbDatepicker">
                 <label for="formControl">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL</label>
-                <div (click)="dControl.toggle()">
-                  <i class="fa fa-calendar prefix"></i>
-                </div>
+                <mdb-error *ngIf="input_Control.invalid && (input_Control.dirty || input_Control.touched)">
+                  <font size=2 color="red">Error, el formato debe ser
+                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+                </mdb-error>
+              </div>
+              <div class="md-form mt-5" (click)="dControl.toggle()">
+                <i class="fa fa-calendar prefix"></i>
               </div>
             </div>
             <!-- fin row -->
             <div class="row">
-              <div class="col-md-8"></div>
-              <div class="md-form col-md-2  mt-20">
+              <div class="col-md-2"></div>
+              <div class="md-form col-md-3  mt-5">
                 <input mdbInputDirective type="text" id="formbcd" class="form-control" formControlName="bcd"
-                  data-error=" " data-success=" ">
+                  data-error="Error, máximo 3 caracteres" data-success=" ">
                 <label for="formbcd">&nbsp;&nbsp;&nbsp;BCD</label>
               </div>
             </div>

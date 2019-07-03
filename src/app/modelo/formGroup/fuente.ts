@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { fuente_Modelo } from '../../modelo/fuente/fuente-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 export class fuente_FormGroup {
@@ -16,23 +16,23 @@ export class fuente_FormGroup {
         return fb.group({
             'fuenteId': row.fuenteId,
             'naturalezadocumento': row.naturalezadocumento,
-            'codfuente': row.codfuente,
-            'cita': row.cita,
-            'archivado': row.archivado,
-            'cobgeo': row.cobgeo,
-            'coords': row.coords,
-            'coordn': row.coordn,
-            'coorde': row.coorde,
-            'coordo': row.coordo,
-            'resumen': row.resumen,
+            'codfuente': new FormControl(row.codfuente, Validators.maxLength(10)),
+            'cita': new FormControl(row.cita, Validators.maxLength(240)),
+            'archivado': new FormControl(row.archivado, Validators.maxLength(60)),
+            'cobgeo': new FormControl(row.cobgeo, Validators.maxLength(50)),
+            'coords': new FormControl(row.coords, Validators.maxLength(6)),
+            'coordn': new FormControl(row.coordn, Validators.maxLength(6)),
+            'coorde': new FormControl(row.coorde, Validators.maxLength(7)),
+            'coordo': new FormControl(row.coordo, Validators.maxLength(7)),
+            'resumen': new FormControl(row.resumen, Validators.maxLength(240)),
             'publicacioncdc': val_publicacioncdc,
             'valor': row.valor,
-            'clave': row.clave,
-            'comentario': row.comentario,
-            'notadigest': row.notadigest,
+            'clave': new FormControl(row.clave, Validators.maxLength(120)),
+            'comentario': new FormControl(row.comentario, Validators.maxLength(120)),
+            'notadigest': new FormControl(row.notadigest, Validators.maxLength(120)),
             'actualizar': fechaServicio.getFecha(row.actualizar), //date
             'control': fechaServicio.getFecha(row.control),    //date
-            'bcd': row.bcd,
+            'bcd': new FormControl(row.bcd, Validators.maxLength(3)),
             //tema columna 1
             'comunnat': row.comunnat,
             'comunterr': row.comunterr,

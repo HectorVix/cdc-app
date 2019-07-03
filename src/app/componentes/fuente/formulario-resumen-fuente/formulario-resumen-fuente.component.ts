@@ -3,7 +3,7 @@ import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { forkJoin ,  Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { FuenteService } from '../../../servicios/fuente/fuente.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
@@ -60,7 +60,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
   //componente archivos disponibles
   @ViewChild(ArchivosDisponiblesComponent)
   private archivos_Disponibles: ArchivosDisponiblesComponent;
-
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
     private fechaServicio: FechaService,
@@ -121,7 +120,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
   }
   guardarFuente() {
-    if (this.fuenteForm.get('codfuente').value) {
+    if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid) {
       var fuenteBase = this.setFuente(this.fuenteForm.value);
       this.addFuente(fuenteBase);
     }
@@ -146,7 +145,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar la fuente, el código de la fuente es único no se puede repetir por favor ingresa un código valido ó el servicio  no esta diponible.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar la fuente, comprueba que el servicio  esté diponible.', 'primary');
         });
   }
   cancelar() {
@@ -266,8 +265,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos_Disponibles.nuevo();
   }
   editar_Fuente() {
-    if (this.fuenteForm.get('codfuente').value)
+    if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid)
       this.updateFuente(this.setFuente(this.fuenteForm.value));
+    else
+      this.changeSuccessMessage('No se pudo editar, comprueba que los campos estén correctos , donde se te indica.', 'primary');
   }
   updateFuente(fuente: fuente_Modelo): void {
     this.loading = true;
@@ -288,6 +289,10 @@ export class FormularioResumenFuenteComponent implements OnInit {
         });
   }
 
+
+
+  get input_Actualizar() { return this.fuenteForm.get('actualizar'); }
+  get input_Control() { return this.fuenteForm.get('control'); }
 }
 function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
   if (naturalezaDocumento == "A")
