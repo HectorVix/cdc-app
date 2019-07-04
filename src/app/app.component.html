@@ -1,4 +1,6 @@
-<div *ngIf="auth();">
+<div *ngIf="auth(); else loggedOut">
     <app-side-nav> </app-side-nav>
 </div>
-<router-outlet></router-outlet>
+<ng-template #loggedOut>
+    <app-login-page> </app-login-page>
+</ng-template>

@@ -1,7 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+<mat-sidenav-container>
+  <mat-sidenav #drawer class="sidenav" mode="side" opened role="navigation" fixedInViewport="true">
     <mat-toolbar class="color-green"><img src="iconos/logo.ico">
       <font size=4 color="white">CDC</font>
     </mat-toolbar>
@@ -36,13 +34,14 @@
       <a mat-list-item [routerLink]="['/acerca']"><img src="iconos/info.ico">
         <font size=4 color="white">Acerca del CDC</font>
       </a>
-      <a mat-list-item> </a>
-      <p></p>
       <a mat-list-item (click)="Logout()"><img src="iconos/lock.ico">
         <font size=4 color="white">Cerrar sesión</font>
       </a>
     </mat-nav-list>
   </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 
 <mat-menu #elementoReporte="matMenu">

@@ -282,15 +282,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage(`Editado exitoso ,código de la fuente:${resFuente.codfuente}.`, 'success');
           this.lista_Fuente = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Fuente);
-          this.editar = true;
+          this.editar = false;
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
 
-
-
+  get input_CodFuente() { return this.fuenteForm.get('codfuente'); }
   get input_Actualizar() { return this.fuenteForm.get('actualizar'); }
   get input_Control() { return this.fuenteForm.get('control'); }
 }

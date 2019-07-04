@@ -25,13 +25,16 @@
                 </mat-form-field>
               </div>
               <div class="md-form col-md-4 mt10" *ngIf="editar">
-                <input mdbInputDirective type="text" id="form1" class="form-control"
-                  data-error="Error, máximo 10 caracteres." data-success=" " formControlName="codfuente">
-                <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
+                <input mdbInputDirective mdbValidate type="text" id="formCodFuente" class="form-control"
+                  formControlName="codfuente">
+                <label for="formCodFuente">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
+                <mdb-error *ngIf="input_CodFuente.invalid && (input_CodFuente.dirty || input_CodFuente.touched)">
+                  <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                </mdb-error>
               </div>
               <div class="md-form col-md-4 mt10" *ngIf="guardar">
-                <input mdbInputDirective type="text" id="form1" class="form-control" data-error=" " data-success=" "
-                  formControlName="codfuente" disabled>
+                <input mdbInputDirective type="text" id="form1" class="form-control" formControlName="codfuente"
+                  disabled>
                 <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
             </div>
