@@ -1,78 +1,78 @@
-<div class="container fondo">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card tab-black">
-        <div class="card-tabs">
-          <ngb-tabset #t="ngbTabset">
-            <ngb-tab id="tab-selectbyid1" title="Perfil">
-              <ng-template ngbTabContent>
-                <div class="class-modal-content">
-                  <div class="modal-header color-green">
-                    <h5 class="modal-tittle" *ngIf="datosUsuario">{{datosUsuario.nombre}} {{datosUsuario.apellido}}</h5>
-                  </div>
-                  <div class="row" *ngIf="datosUsuario">
-                    <div class="col s12 m7">
-                      <div class="card">
-                        <div class="card-content">
-                          <div class="row">
-                            <div class="col-md-2">
-                              <label for="">Email:</label>
-                            </div>
-                            <div class="col-md-7">
-                              <span>{{datosUsuario.email}}</span>
-                            </div>
-                          </div>
-                          <!-- fin  row -->
-                          <div class="row">
-                            <div class="col-md-2">
-                              <label for="">Nombre completo</label>
-                            </div>
-                            <div class="col-md-7">
-                              <span>{{datosUsuario.nombre}} {{datosUsuario.apellido}}</span>
-                            </div>
-                          </div>
-                          <!-- fin row -->
-                          <div class="row">
-                            <div class="col-md-2">
-                              <label for="">Cumpleaños:</label>
-                            </div>
-                            <div class="col-md-7">
-                              <span>{{datosUsuario.fechaNacimiento | date}}</span>
-                            </div>
-                          </div>
-                          <!-- fin row -->
-
-                          <br>
-                          <button class="btn color-green waves-light" type="button" mdbWavesEffect>
-                            <i class="fa fa-pencil prefix"></i>
-                          </button>
-
+<div class="fondo">
+  <div class="container">
+    <!-- <div class="col-md-12"> -->
+    <div class="card tab-black">
+      <!-- <div class="card-tabs"> -->
+      <ngb-tabset #t="ngbTabset">
+        <ngb-tab id="tab-selectbyid1" title="Perfil">
+          <ng-template ngbTabContent>
+            <div class="class-modal-content">
+              <div class="modal-header color-green">
+                <h5 class="modal-tittle" *ngIf="datosUsuario">{{datosUsuario.nombre}} {{datosUsuario.apellido}}</h5>
+              </div>
+              <div class="row" *ngIf="datosUsuario">
+                <div class="col s12 m7">
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">Email:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <span>{{datosUsuario.email}}</span>
                         </div>
                       </div>
+                      <!-- fin  row -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">Nombre completo</label>
+                        </div>
+                        <div class="col-md-7">
+                          <span>{{datosUsuario.nombre}} {{datosUsuario.apellido}}</span>
+                        </div>
+                      </div>
+                      <!-- fin row -->
+                      <div class="row">
+                        <div class="col-md-2">
+                          <label for="">Cumpleaños:</label>
+                        </div>
+                        <div class="col-md-7">
+                          <span>{{datosUsuario.fechaNacimiento | date}}</span>
+                        </div>
+                      </div>
+                      <!-- fin row -->
+
+                      <br>
+                      <button class="btn color-green waves-light" type="button" mdbWavesEffect>
+                        <i class="fa fa-pencil prefix"></i>
+                      </button>
+
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
 
 
 
 
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab id="tab-selectbyid2" title="Actividad">
-              <ng-template ngbTabContent>
-                <div class="row col-md-7 text-center">
-                  <h5>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-selectbyid2" title="Actividad">
+          <ng-template ngbTabContent>
+            <div class="row col-md-7 text-center">
+              <h5>
 
 
-                  </h5>
+              </h5>
 
-                </div>
-              </ng-template>
-            </ngb-tab>
+            </div>
+          </ng-template>
+        </ngb-tab>
 
-          </ngb-tabset>
-        </div>
-      </div>
+      </ngb-tabset>
+      <!-- </div> -->
     </div>
+    <!-- </div> -->
   </div>
 </div>

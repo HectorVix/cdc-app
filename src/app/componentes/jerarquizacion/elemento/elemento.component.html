@@ -12,11 +12,12 @@
                 <label for="">CODIGO ELEMENTO:</label>
               </div>
               <div class="md-form col-md-9 mt10" *ngIf="editar">
-                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo"
+                  data-error=" " data-success=" ">
               </div>
               <div class="md-form col-md-9 mt10" *ngIf="guardar">
-                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo" data-error=" " data-success=" "
-                  disabled>
+                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo"
+                  data-error=" " data-success=" " disabled>
               </div>
             </div>
             <!-- fin row -->
@@ -25,8 +26,8 @@
                 <label for="">NOMBRE COMÚN:</label>
               </div>
               <div class="md-form col-md-9 mt-20">
-                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control" formControlName="nombrecomun" data-error=" "
-                  data-success=" ">
+                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control"
+                  formControlName="nombrecomun" data-error=" " data-success=" ">
               </div>
             </div>
             <!-- fin row -->
@@ -37,8 +38,8 @@
                     <label for="">NOMBRE CIENTÍFICO:</label>
                   </div>
                   <div class="md-form col-md-9 mt5">
-                    <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control" formControlName="nombrecientifico" data-error=" "
-                      data-success=" ">
+                    <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control"
+                      formControlName="nombrecientifico" data-error=" " data-success=" ">
                   </div>
                 </div>
               </mat-tab>
@@ -56,8 +57,8 @@
               </div>
               <div class="md-form  col-md-9 mt10">
                 <i class="fa fa-pencil prefix"></i>
-                <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control" formControlName="comentario"
-                  rows="1" data-error=" " data-success=" "></textarea>
+                <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control"
+                  formControlName="comentario" rows="1" data-error=" " data-success=" "></textarea>
                 <label for="formComentario">Anote</label>
               </div>
             </div>
@@ -65,8 +66,8 @@
             <div class="row">
               <div class="col-md-8"></div>
               <div class="md-form col-md-2 input-group-append mt-20">
-                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha" data-error=" " data-success=" "
-                  ngbDatepicker #dFecha="ngbDatepicker">
+                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha"
+                  data-error=" " data-success=" " ngbDatepicker #dFecha="ngbDatepicker">
                 <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
                 <div (click)="dFecha.toggle()">
                   <i class="fa fa-calendar prefix"></i>
@@ -80,29 +81,33 @@
               <div *ngIf="loading">
                 <img src="assets/imagenes/load.gif">
               </div>
-              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+              </ngb-alert>
               <button class="btn color-green waves-light" type="button" (click)="nuevo()" mdbWavesEffect>Nuevo </button>
-              <button class="btn color-green waves-light" type="button" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar </button>
-              <button class="btn color-green waves-light" type="button" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar </button>
+              <button class="btn color-green waves-light" type="button" [disabled]="guardar" (click)="openDialogo()"
+                mdbWavesEffect>Guardar </button>
+              <button class="btn color-green waves-light" type="button" [disabled]="editar"
+                (click)="openDialogoEditar()" mdbWavesEffect>Editar </button>
             </div>
           </form>
         </div>
       </div>
     </mat-tab>
     <mat-tab label="Buscar">
-      <div class="card-body">
+      <div class="card-body form-row">
         <div class="modal-content mat-elevation-z4">
           <div class="modal-header color-green"></div>
           <form [formGroup]="buscarForm ">
             <!-- Inicio row -->
             <div class="row">
               <div class="md-form col-md-5 mt10">
-                <input mdbInputDirective type="text" id="formCodigo" class="form-control" formControlName="codigo" data-error=" " data-success=" ">
+                <input mdbInputDirective type="text" id="formCodigo" class="form-control" formControlName="codigo"
+                  data-error=" " data-success=" ">
                 <label for="formCodigo">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
               </div>
               <div class="md-form col-md-5 mt10">
-                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control" formControlName="nombrecomun" data-error=" "
-                  data-success=" ">
+                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control"
+                  formControlName="nombrecomun" data-error=" " data-success=" ">
                 <label for="formNombrecomun">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN</label>
               </div>
             </div>
@@ -110,8 +115,8 @@
             <!-- Inicio row -->
             <div class="row">
               <div class="md-form col-md-5 mt-10">
-                <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control" formControlName="nombrecientifico" data-error=" "
-                  data-success=" ">
+                <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control"
+                  formControlName="nombrecientifico" data-error=" " data-success=" ">
                 <label for="formNombrecientifico">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE CIENTÍFICO</label>
               </div>
             </div>
@@ -125,7 +130,8 @@
               <img src="assets/imagenes/load.gif">
             </div>
           </div>
-          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+          </ngb-alert>
         </div>
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
@@ -154,7 +160,8 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="setElementoBuscado(row);">
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
+              (click)="setElementoBuscado(row);">
             </tr>
           </table>
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
