@@ -7,7 +7,7 @@ export class elemento_Modelo {
     nombrecientifico: String;
     comentario: String;
     fecha: any;
-    fotoList = null;
+    fotoList: any;
     uSUARIOusuarioid: usuario_Modelo;
 }
 

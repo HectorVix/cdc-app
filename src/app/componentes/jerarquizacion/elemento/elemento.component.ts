@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ControlErrorStateMatcher } from '../../../modelo/error/error-state-matcher';
 import { Subject } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
-import { DISABLED } from '@angular/forms/src/model';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+// import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { ElementoDato } from '../../../modelo/tabla/elemento-dato';
-
+import { elemento_FormGroup } from '../../../modelo/formGroup/elemento';
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -65,7 +65,7 @@ export class ElementoComponent implements OnInit {
     private galeriaServicio: GaleriaService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
-    this.crearForm_Elemento();
+    this.crearForm_Elemento(new elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
   }
@@ -91,20 +91,26 @@ export class ElementoComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  setElementoBuscado(row: ElementoDato) {
-    this.elementoForm = this.fb.group({
-      'elementoId': row.elmendoId,
-      'codigo': row.codigo,
-      'nombrecomun': row.nombrecomun,
-      'nombrecientifico': row.nombrecientifico,
-      'comentario': row.comentario,
-      'fecha': this.fechaServicio.getFecha(row.fecha),
-    });
+  mostrar_Elemento_Buscado(row: ElementoDato) {
+    this.crearForm_Elemento(this.getElemento_id(row.elementoId));
     this.selected.setValue(0);
     this.galeria.nuevo();
-    this.getFoto_Datos(row.elmendoId);
+    this.getFoto_Datos(row.elementoId);
     this.editar = false;
     this.guardar = true;
+  }
+  getElemento_id(id: Number): elemento_Modelo {
+    var elementoBusqueda = new elemento_Modelo();
+    this.dataElementos.forEach(dataElemento => {
+      var elemento_Busqueda_Aux = new elemento_Modelo();// necesario dado que si reutiliza conserva la primera asignación
+      elemento_Busqueda_Aux = dataElemento;
+      if (id == elemento_Busqueda_Aux.elementoId) {
+        elementoBusqueda = elemento_Busqueda_Aux;
+        this.editar = false;
+      }
+    });
+    return elementoBusqueda;
+
   }
 
   getFoto_Datos(elementoId: Number) {
@@ -122,14 +128,8 @@ export class ElementoComponent implements OnInit {
         }
       });
   }
-  crearForm_Elemento() {
-    this.elementoForm = this.fb.group({
-      'codigo': ['', Validators.required],
-      'nombrecomun': '',
-      'nombrecientifico': '',
-      'comentario': '',
-      'fecha': null,
-    });
+  crearForm_Elemento(row: elemento_Modelo) {
+    this.elementoForm = new elemento_FormGroup().getElemento_FormGrup(row);
   }
   crearForm_Buscar() {
     this.buscarForm = this.fb2.group({
@@ -147,7 +147,7 @@ export class ElementoComponent implements OnInit {
     if (this.elementoForm.get('codigo').value) {
       if (this.elementoForm.get('fecha').value) {
         var elementoBase = this.setElemento(this.elementoForm.value);
-        this.addElemento(this.elementoForm.value);
+        this.addElemento(elementoBase);
       }
       else
         this.changeSuccessMessage('La fecha es obligatoria', 'primary');
@@ -160,13 +160,13 @@ export class ElementoComponent implements OnInit {
     if (this.elementoForm.get('codigo').value) {
       if (this.elementoForm.get('fecha').value) {
         var elementoBase = this.setElemento(this.elementoForm.value);
-        this.updateElemento(this.elementoForm.value);
+        this.updateElemento(elementoBase);
       } else
         this.changeSuccessMessage('La fecha es obligatoria.', 'primary');
     }
   }
   setElemento(elemento): elemento_Modelo {
-    elemento.fecha = this.fechaServicio.toFormatoDateTime(elemento.fecha);
+    elemento.fecha = this.fechaServicio.toFormatoDateTime(this.elementoForm.get('fecha').value);
     return elemento;
   }
   updateElemento(elemento: elemento_Modelo): void {
@@ -187,7 +187,7 @@ export class ElementoComponent implements OnInit {
           this.changeSuccessMessage(`Editado exitoso ,código del elemento:${resElemento.codigo}.`, 'success');
           this.elementos = new Array();
           this.dataSource = new MatTableDataSource(this.elementos);
-          this.editar = true;
+          this.editar = false;
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error  no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
@@ -277,7 +277,7 @@ export class ElementoComponent implements OnInit {
   nuevo() {
     this.editar = true;
     this.guardar = false;
-    this.crearForm_Elemento();
+    this.crearForm_Elemento(new elemento_Modelo);
     this.crearForm_Buscar();
     this.galeria.nuevo();
     this.elementos = new Array();
@@ -286,15 +286,14 @@ export class ElementoComponent implements OnInit {
     this.loading = false;
     this.fotoId_Lista = [];
   }
+
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
   return {
     numero: k,
-    elmendoId: elemento.elementoId,
+    elementoId: elemento.elementoId,
     codigo: elemento.codigo,
     nombrecomun: elemento.nombrecomun,
-    nombrecientifico: elemento.nombrecientifico,
-    comentario: elemento.comentario,
-    fecha: elemento.fecha
+    nombrecientifico: elemento.nombrecientifico
   };
 }

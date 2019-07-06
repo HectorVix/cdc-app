@@ -161,7 +161,7 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
-              (click)="setElementoBuscado(row);">
+              (click)="mostrar_Elemento_Buscado(row);">
             </tr>
           </table>
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
