@@ -1,24 +1,24 @@
 <div class="fondo">
   <div class="container">
-    <div class="row">
-      <div class="">
-        <div class="card tab-black mt-alinear ml-alinear">
-          <div class="card-tabs">
-            <ngb-tabset #t="ngbTabset">
-              <ngb-tab id="tab-selectbyid1" title="Caracterización Plantas Nacional">
-                <ng-template ngbTabContent>
-                  <app-caracterizacion-plantas-nacional></app-caracterizacion-plantas-nacional>
-                </ng-template>
-              </ngb-tab>
-              <ngb-tab id="tab-selectbyid3" title="Caracterización Vertebrado Nacional">
-                <ng-template ngbTabContent>
-                  <app-caracterizacion-vertebrados-nacional></app-caracterizacion-vertebrados-nacional>
-                </ng-template>
-              </ngb-tab>
-            </ngb-tabset>
-          </div>
-        </div>
+    <!-- <div class="row"> -->
+    <!-- <div class=""> -->
+    <div class="tab-black">
+      <div class="card-tabs">
+        <ngb-tabset #t="ngbTabset">
+          <ngb-tab id="tab-selectbyid1" title="Caracterización Plantas Nacional">
+            <ng-template ngbTabContent>
+              <app-caracterizacion-plantas-nacional></app-caracterizacion-plantas-nacional>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="tab-selectbyid3" title="Caracterización Vertebrado Nacional">
+            <ng-template ngbTabContent>
+              <app-caracterizacion-vertebrados-nacional></app-caracterizacion-vertebrados-nacional>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
       </div>
     </div>
+    <!-- </div> -->
+    <!-- </div> -->
   </div>
 </div>
