@@ -125,7 +125,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       this.addFuente(fuenteBase);
     }
     else
-      this.changeSuccessMessage('No se pudo regitrar. El código de la fuente es obligatorio.', 'primary');
+      this.changeSuccessMessage('No se pudo regitrar, comprueba que estén bien los campos donde se te indica.', 'primary');
   }
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
     fuente.actualizar = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
@@ -145,7 +145,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la fuente  :${resFuente.codfuente}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar la fuente, comprueba que el servicio  esté diponible.', 'primary');
+          this.changeSuccessMessage('No se pudo regitrar la fuente, el CÓDIGO DE LA FUENTE debe ser único ó comprueba que esté disponible el servicio.', 'primary');
         });
   }
   cancelar() {
@@ -268,7 +268,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid)
       this.updateFuente(this.setFuente(this.fuenteForm.value));
     else
-      this.changeSuccessMessage('No se pudo editar, comprueba que los campos estén correctos , donde se te indica.', 'primary');
+      this.changeSuccessMessage('No se pudo editar, comprueba que los campos estén correctos donde se te indica.', 'primary');
   }
   updateFuente(fuente: fuente_Modelo): void {
     this.loading = true;
@@ -288,10 +288,22 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
-
-  get input_CodFuente() { return this.fuenteForm.get('codfuente'); }
-  get input_Actualizar() { return this.fuenteForm.get('actualizar'); }
-  get input_Control() { return this.fuenteForm.get('control'); }
+  //Lleva el control de los errores
+  get input_codfuente() { return this.fuenteForm.get('codfuente'); }
+  get input_cita() { return this.fuenteForm.get('cita'); }
+  get input_archivado() { return this.fuenteForm.get('archivado'); }
+  get input_cobgeo() { return this.fuenteForm.get('cobgeo'); }
+  get input_coords() { return this.fuenteForm.get('coords'); }
+  get input_coordn() { return this.fuenteForm.get('coordn'); }
+  get input_coorde() { return this.fuenteForm.get('coorde'); }
+  get input_coordo() { return this.fuenteForm.get('coordo'); }
+  get input_resumen() { return this.fuenteForm.get('resumen'); }
+  get input_clave() { return this.fuenteForm.get('clave'); }
+  get input_comentario() { return this.fuenteForm.get('comentario'); }
+  get input_notadigest() { return this.fuenteForm.get('notadigest'); }
+  get input_bcd() { return this.fuenteForm.get('bcd'); }
+  get input_actualizar() { return this.fuenteForm.get('actualizar'); }
+  get input_control() { return this.fuenteForm.get('control'); }
 }
 function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
   if (naturalezaDocumento == "A")
