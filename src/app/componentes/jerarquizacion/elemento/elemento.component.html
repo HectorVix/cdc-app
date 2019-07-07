@@ -12,12 +12,15 @@
                 <label for="">CODIGO ELEMENTO:</label>
               </div>
               <div class="md-form col-md-9 mt10" *ngIf="editar">
-                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo"
-                  data-error=" " data-success=" ">
+                <input mdbInputDirective mdbValidate type="text" id="formCodigoe" class="form-control"
+                  formControlName="codigo">
+                <mdb-error *ngIf="input_codigo.invalid && (input_codigo.dirty || input_codigo.touched)">
+                  <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                </mdb-error>
               </div>
               <div class="md-form col-md-9 mt10" *ngIf="guardar">
                 <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigo"
-                  data-error=" " data-success=" " disabled>
+                  disabled>
               </div>
             </div>
             <!-- fin row -->
@@ -26,8 +29,11 @@
                 <label for="">NOMBRE COMÚN:</label>
               </div>
               <div class="md-form col-md-9 mt-20">
-                <input mdbInputDirective type="text" id="formNombrecomun" class="form-control"
-                  formControlName="nombrecomun" data-error=" " data-success=" ">
+                <input mdbInputDirective mdbValidate type="text" id="formNombrecomun" class="form-control"
+                  formControlName="nombrecomun">
+                <mdb-error *ngIf="input_nombrecomun.invalid && (input_nombrecomun.dirty || input_nombrecomun.touched)">
+                  <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                </mdb-error>
               </div>
             </div>
             <!-- fin row -->
@@ -38,8 +44,12 @@
                     <label for="">NOMBRE CIENTÍFICO:</label>
                   </div>
                   <div class="md-form col-md-9 mt5">
-                    <input mdbInputDirective type="text" id="formNombrecientifico" class="form-control"
-                      formControlName="nombrecientifico" data-error=" " data-success=" ">
+                    <input mdbInputDirective mdbValidate type="text" id="formNombrecientifico" class="form-control"
+                      formControlName="nombrecientifico">
+                    <mdb-error
+                      *ngIf="input_nombrecientifico.invalid && (input_nombrecientifico.dirty || input_nombrecientifico.touched)">
+                      <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                    </mdb-error>
                   </div>
                 </div>
               </mat-tab>
@@ -57,21 +67,28 @@
               </div>
               <div class="md-form  col-md-9 mt10">
                 <i class="fa fa-pencil prefix"></i>
-                <textarea mdbInputDirective type="text" id="formComentario" class="md-textarea form-control"
-                  formControlName="comentario" rows="1" data-error=" " data-success=" "></textarea>
+                <textarea mdbInputDirective mdbValidate type="text" id="formComentario" class="md-textarea form-control"
+                  formControlName="comentario" rows="1"></textarea>
                 <label for="formComentario">Anote</label>
+                <mdb-error *ngIf="input_comentario.invalid && (input_comentario.dirty || input_comentario.touched)">
+                  <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                </mdb-error>
               </div>
             </div>
             <!-- fin row -->
             <div class="row">
-              <div class="col-md-8"></div>
-              <div class="md-form col-md-2 input-group-append mt-20">
-                <input mdbInputDirective type="text" id="formFecha" class="form-control" formControlName="fecha"
-                  data-error=" " data-success=" " ngbDatepicker #dFecha="ngbDatepicker">
+              <div class="col-md-2"></div>
+              <div class="md-form col-md-3  mt-5">
+                <input mdbInputDirective mdbValidate type="text" id="formFecha" class="form-control"
+                  formControlName="fecha" ngbDatepicker #dFecha="ngbDatepicker">
                 <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
-                <div (click)="dFecha.toggle()">
-                  <i class="fa fa-calendar prefix"></i>
-                </div>
+                <mdb-error *ngIf="input_fecha.invalid && (input_fecha.dirty || input_fecha.touched)">
+                  <font size=2 color="red">Error, el formato debe ser
+                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+                </mdb-error>
+              </div>
+              <div class="md-form mt-5" (click)="dFecha.toggle()">
+                <i class="fa fa-calendar prefix"></i>
               </div>
             </div>
             <!-- fin row -->

@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import {
   AccessibilityConfig,
-  Action,
+  // Action,
   AdvancedLayout,
   ButtonEvent,
   ButtonsConfig,
@@ -19,15 +19,16 @@ import {
   PlainGalleryStrategy,
   PreviewConfig
 } from 'angular-modal-gallery';
-import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { FormControl } from '@angular/forms';
+// import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { FormControl, FormGroup } from '@angular/forms';
 import { foto_Modelo } from '../../modelo/fotoDatos/foto-datos';
-import { FooterRowOutlet } from '@angular/cdk/table';
+// import { FooterRowOutlet } from '@angular/cdk/table';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-
+import { fotoBase_FormGroup } from '../../modelo/formGroup/foto';
+import { fotoBase_Modelo } from '../../modelo/foto/foto-modelo';
 @Component({
   selector: 'app-galeria',
   templateUrl: './galeria.component.html',
@@ -60,10 +61,12 @@ export class GaleriaComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   selected = new FormControl(0);
+  fotoBase_Form: FormGroup;
 
   constructor(private galleryService: GalleryService,
     private fechaServicio: FechaService) {
     this.selected.setValue(0);
+    this.crearForm_FotoBase(new fotoBase_Modelo);
   }
 
   ngOnInit() {
@@ -261,35 +264,60 @@ export class GaleriaComponent implements OnInit {
               descripcion: baseFotoModelo.descripcion,
               comentario: baseFotoModelo.comentario,
               autor: baseFotoModelo.autor,
-              fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
+              //fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
               editado: true
             };
           } catch (error) {
-            this.posicionarse = 1;
-            ordenNuevo = ordenNuevo - 1;//se queda en la posición
+            //this.posicionarse = 1;
+            // ordenNuevo = ordenNuevo - 1;//se queda en la posición
           }
           ordenNuevo = ordenNuevo + 1;
         }
       }
       this.datosFotografias = datosFotos;
-      if (this.imagenes.length >= 1)
-        this.mostrar_Datos_PosActual(event.image.id - 1);
+      if (this.imagenes.length >= 1) {
+        console.log("index:", event.image.id);
+        console.log("contador tam:", this.imagenes.length);
+
+      }
+      //this.mostrar_Datos_PosActual(event.image.id - 1);
       else
         this.nuevoDatosFotos();
     }
+    if (event.button.type === ButtonType.CLOSE) {
+      console.log("hola cerrar");
+      this.descripcionIndex = 0;
+      this.posicionarse = 1;
+      this.crearForm_FotoBase(new fotoBase_Modelo);
+      console.log("tam imagenes:", this.imagenes.length);
+      if (this.imagenes.length >= 1) {
+        this.mostrar_Datos_PosActual(this.descripcionIndex);
+      }
+
+    }
+
   }
 
   mostrar_Datos_PosActual(posActual) {
     if (this.datosFotografias.length > 0) {
       var datoFotoModeloActual = new foto_Modelo();
+      var fotoBaseModelo = new fotoBase_Modelo();
       try {
         datoFotoModeloActual = this.datosFotografias[posActual];
         this.descripcionIndex = posActual;
         this.posicionarse = this.descripcionIndex + 1;
-        this.descripcion = datoFotoModeloActual.descripcion;
-        this.comentario = datoFotoModeloActual.comentario;
-        this.autor = datoFotoModeloActual.autor;
-        this.fecha = datoFotoModeloActual.fecha;
+        /*
+          this.descripcion = datoFotoModeloActual.descripcion;
+          this.comentario = datoFotoModeloActual.comentario;
+          this.autor = datoFotoModeloActual.autor;
+          this.fecha = datoFotoModeloActual.fecha;
+        */
+        fotoBaseModelo.descripcion = datoFotoModeloActual.descripcion;
+        fotoBaseModelo.comentario = datoFotoModeloActual.comentario;
+        fotoBaseModelo.autor = datoFotoModeloActual.autor;
+        fotoBaseModelo.fecha = datoFotoModeloActual.fecha;
+        console.log("fecha:", fotoBaseModelo.fecha);
+        this.crearForm_FotoBase(fotoBaseModelo);
       } catch (error) {
         this.posicionarse = 1;
       }
@@ -331,12 +359,14 @@ export class GaleriaComponent implements OnInit {
     this.customPlainGalleryRowConfig = Object.assign({}, this.customPlainGalleryRowConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryColumnConfig = Object.assign({}, this.customPlainGalleryColumnConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(-1, true) });
+    console.log("cerrando 1");
   }
 
   onShowAutoCloseExample(event: ImageModalEvent, galleryId: number) {
     setTimeout(() => {
       this.galleryService.navigate.closed;
     }, 3000);
+    console.log("cerrando 2");
   }
 
 
@@ -451,12 +481,13 @@ export class GaleriaComponent implements OnInit {
     if (this.imagenes.length > 0) {
       try {
         this.datosFotografias[this.descripcionIndex] = {
-          descripcion: this.descripcion,
-          comentario: this.comentario,
-          autor: this.autor,
-          fecha: this.fecha,
+          descripcion: this.fotoBase_Form.get("descripcion").value,
+          comentario: this.fotoBase_Form.get("comentario").value,
+          autor: this.fotoBase_Form.get("autor").value,
+          fecha: this.fotoBase_Form.get("fecha").value,
           editado: true
         };
+        console.log("val datos foto;", this.fotoBase_Form.value);
       } catch (error) {
         this.posicionarse = 1;
       }
@@ -482,6 +513,13 @@ export class GaleriaComponent implements OnInit {
     this.comentario = comentario;
     this.autor = autor;
     this.fecha = this.fechaServicio.getFecha(fecha);
+
+    var fotoBaseModelo = new fotoBase_Modelo();
+    fotoBaseModelo.descripcion = descripcion;
+    fotoBaseModelo.comentario = comentario;
+    fotoBaseModelo.autor = autor;
+    fotoBaseModelo.fecha = this.fechaServicio.getFecha(fecha);
+    this.crearForm_FotoBase(fotoBaseModelo);
   }
   public nuevo() {
     this.archivo.nativeElement.value = "";
@@ -500,6 +538,7 @@ export class GaleriaComponent implements OnInit {
     this.fecha = null;
     this.imagenes = [];
     this.posicionarse = 1;
+    this.crearForm_FotoBase(new fotoBase_Modelo);
   }
 
   public getTam_final_ListaFotos() {
@@ -514,6 +553,11 @@ export class GaleriaComponent implements OnInit {
   public changeSuccessMessage(mensaje: string, tipo: string) {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
+  }
+  //lleva el control de los errores
+  get input_descripcion() { return this.descripcion; }
+  crearForm_FotoBase(row: fotoBase_Modelo) {
+    this.fotoBase_Form = new fotoBase_FormGroup().getFotoBase_FormGrup(row);
   }
 }
 function validarEntero(x) {

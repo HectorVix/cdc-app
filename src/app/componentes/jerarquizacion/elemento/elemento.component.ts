@@ -286,7 +286,12 @@ export class ElementoComponent implements OnInit {
     this.loading = false;
     this.fotoId_Lista = [];
   }
-
+  //lleva el control de los errores
+  get input_codigo() { return this.elementoForm.get('codigo'); }
+  get input_nombrecomun() { return this.elementoForm.get('nombrecomun'); }
+  get input_nombrecientifico() { return this.elementoForm.get('nombrecientifico'); }
+  get input_comentario() { return this.elementoForm.get('comentario'); }
+  get input_fecha() { return this.elementoForm.get('fecha'); }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
   return {
