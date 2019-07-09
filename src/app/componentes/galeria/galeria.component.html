@@ -76,31 +76,38 @@
 
           <div class="row">
             <div class="col-md-1"></div>
-            <div class="md-form col-md-7">
+            <div class="md-form col-md-9">
               <input mdbInputDirective mdbValidate type="text" id="formFotoDescripcion" class="form-control"
                 (ngModelChange)="onChanges()" formControlName="descripcion">
               <label for="formFotoDescripcion">&nbsp;&nbsp;&nbsp;&nbsp;DESCRIPCIÓN</label>
-
+              <mdb-error *ngIf="input_descripcion.invalid && (input_descripcion.dirty || input_descripcion.touched)">
+                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+              </mdb-error>
             </div>
 
           </div>
           <div class="row">
             <div class="col-md-1"></div>
-            <div class="md-form  col-md-7 mt-5">
+            <div class="md-form  col-md-9 mt-5">
               <textarea mdbInputDirective mdbValidate type="text" id="formFotoComentario"
                 class="md-textarea form-control" rows="1" (ngModelChange)="onChanges()"
                 formControlName="comentario"></textarea>
               <label for="formFotoComentario">&nbsp;&nbsp;&nbsp;&nbsp;COMENTARIO</label>
+              <mdb-error *ngIf="input_comentario.invalid && (input_comentario.dirty || input_comentario.touched)">
+                <font size=2 color="red">Error,máximo 120 caracteres.</font>
+              </mdb-error>
             </div>
           </div>
           <div class="row">
             <div class="col-md-1"></div>
-            <div class="md-form  col-md-7 mt-5">
+            <div class="md-form  col-md-9 mt-5">
               <input mdbInputDirective mdbValidate type="text" id="formFotoAutor" class="form-control"
                 (ngModelChange)="onChanges()" formControlName="autor">
               <label for="formFotoAutor">&nbsp;&nbsp;&nbsp;&nbsp;Autor</label>
+              <mdb-error *ngIf="input_autor.invalid && (input_autor.dirty || input_autor.touched)">
+                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+              </mdb-error>
             </div>
-
           </div>
           <div class="row">
             <div class="col-md-1"></div>
@@ -108,7 +115,10 @@
               <input mdbInputDirective mdbValidate type="text" id="formFotoFecha" class="form-control"
                 (ngModelChange)="onChanges()" formControlName="fecha" ngbDatepicker #dFechaFoto="ngbDatepicker">
               <label for="formFotoFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
-
+              <mdb-error *ngIf="input_fecha.invalid && (input_fecha.dirty || input_fecha.touched)">
+                <font size=2 color="red">Error, el formato debe ser
+                  aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+              </mdb-error>
             </div>
             <div class="md-form mt-5" (click)="dFechaFoto.toggle()">
               <i class="fa fa-calendar prefix"></i>

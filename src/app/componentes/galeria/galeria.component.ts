@@ -509,9 +509,6 @@ export class GaleriaComponent implements OnInit {
     this.tipoAlert = tipo;
     this._success.next(mensaje);
   }
-  //lleva el control de los errores
-  get input_descripcion() { return this.descripcion; }
-
 
   crearForm_FotoBase(row: fotoBase_Modelo) {
     this.fotoBase_Form = new fotoBase_FormGroup().getFotoBase_FormGrup(row);
@@ -602,6 +599,13 @@ export class GaleriaComponent implements OnInit {
     }
     this.datosFotografias = datosFotos;
   }
+
+  //lleva el control de los errores
+  get input_descripcion() { return this.fotoBase_Form.get("descripcion"); }
+  get input_comentario() { return this.fotoBase_Form.get("comentario"); }
+  get input_autor() { return this.fotoBase_Form.get("autor"); }
+  get input_fecha() { return this.fotoBase_Form.get("fecha"); }
+
 }
 function validarEntero(x) {
   if (Number.isInteger(x))
