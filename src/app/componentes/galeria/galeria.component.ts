@@ -62,6 +62,7 @@ export class GaleriaComponent implements OnInit {
   tipoAlert: string;
   selected = new FormControl(0);
   fotoBase_Form: FormGroup;
+  activoGaleria = true;
 
   constructor(private galleryService: GalleryService,
     private fechaServicio: FechaService) {
@@ -244,85 +245,39 @@ export class GaleriaComponent implements OnInit {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
+      this.activoGaleria = false;
+      this.ligar_Id_Imagen_DatoFoto();
+      this.ligar_Id_Archivo_Nombre_DatoFoto();
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       this.archivo.nativeElement.value = "";
-      var cont = 0;
       this.archivos.forEach(archivo => {
-        if (cont == event.image.id) {
+        if (this.getArchivoNombre_Id(event.image.id) == archivo.name) {
           this.archivos.delete(archivo);
         }
-        cont = cont + 1;
       });
-      var ordenNuevo = 0;
-      var datosFotos = [];
-      for (let i = 0; i < this.datosFotografias.length; i++) {
-        if (i != event.image.id) {//todos menos el que se elimino
-          var baseFotoModelo = new foto_Modelo();
-          try {
-            baseFotoModelo = this.datosFotografias[i];
-            datosFotos[ordenNuevo] = {
-              descripcion: baseFotoModelo.descripcion,
-              comentario: baseFotoModelo.comentario,
-              autor: baseFotoModelo.autor,
-              //fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
-              editado: true
-            };
-          } catch (error) {
-            //this.posicionarse = 1;
-            // ordenNuevo = ordenNuevo - 1;//se queda en la posición
-          }
-          ordenNuevo = ordenNuevo + 1;
-        }
-      }
-      this.datosFotografias = datosFotos;
-      if (this.imagenes.length >= 1) {
-        console.log("index:", event.image.id);
-        console.log("contador tam:", this.imagenes.length);
-
-      }
-      //this.mostrar_Datos_PosActual(event.image.id - 1);
-      else
-        this.nuevoDatosFotos();
+      this.ordenar_DatosFotos(event.image.id);
     }
     if (event.button.type === ButtonType.CLOSE) {
-      console.log("hola cerrar");
-      this.descripcionIndex = 0;
-      this.posicionarse = 1;
-      this.crearForm_FotoBase(new fotoBase_Modelo);
-      console.log("tam imagenes:", this.imagenes.length);
-      if (this.imagenes.length >= 1) {
-        this.mostrar_Datos_PosActual(this.descripcionIndex);
-      }
-
+      this.activoGaleria = true;
+      this.mostrar_Datos_PosActual(0);
     }
 
   }
 
   mostrar_Datos_PosActual(posActual) {
-    if (this.datosFotografias.length > 0) {
-      var datoFotoModeloActual = new foto_Modelo();
-      var fotoBaseModelo = new fotoBase_Modelo();
-      try {
-        datoFotoModeloActual = this.datosFotografias[posActual];
-        this.descripcionIndex = posActual;
-        this.posicionarse = this.descripcionIndex + 1;
-        /*
-          this.descripcion = datoFotoModeloActual.descripcion;
-          this.comentario = datoFotoModeloActual.comentario;
-          this.autor = datoFotoModeloActual.autor;
-          this.fecha = datoFotoModeloActual.fecha;
-        */
-        fotoBaseModelo.descripcion = datoFotoModeloActual.descripcion;
-        fotoBaseModelo.comentario = datoFotoModeloActual.comentario;
-        fotoBaseModelo.autor = datoFotoModeloActual.autor;
-        fotoBaseModelo.fecha = datoFotoModeloActual.fecha;
-        console.log("fecha:", fotoBaseModelo.fecha);
+    this.descripcionIndex = posActual;
+    this.posicionarse = posActual + 1;
+    var cont = 0;
+    this.datosFotografias.forEach(element => {
+      if (cont == posActual) {
+        var fotoBaseModelo = new fotoBase_Modelo();
+        fotoBaseModelo.descripcion = element.descripcion;
         this.crearForm_FotoBase(fotoBaseModelo);
-      } catch (error) {
-        this.posicionarse = 1;
       }
-    }
+      cont = cont + 1;
+    });
   }
+
 
   onButtonAfterHook(event: ButtonEvent) {
     if (!event || !event.button) {
@@ -359,14 +314,12 @@ export class GaleriaComponent implements OnInit {
     this.customPlainGalleryRowConfig = Object.assign({}, this.customPlainGalleryRowConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryColumnConfig = Object.assign({}, this.customPlainGalleryColumnConfig, { layout: new AdvancedLayout(-1, true) });
     this.customPlainGalleryRowDescConfig = Object.assign({}, this.customPlainGalleryRowDescConfig, { layout: new AdvancedLayout(-1, true) });
-    console.log("cerrando 1");
   }
 
   onShowAutoCloseExample(event: ImageModalEvent, galleryId: number) {
     setTimeout(() => {
       this.galleryService.navigate.closed;
     }, 3000);
-    console.log("cerrando 2");
   }
 
 
@@ -478,16 +431,17 @@ export class GaleriaComponent implements OnInit {
       this.mostrar_Datos_PosActual(this.datosFotografias.length - 1);
   }
   onChanges() {
-    if (this.imagenes.length > 0) {
+    if (this.imagenes.length > 0 && this.activoGaleria) {
+
       try {
         this.datosFotografias[this.descripcionIndex] = {
+
           descripcion: this.fotoBase_Form.get("descripcion").value,
           comentario: this.fotoBase_Form.get("comentario").value,
           autor: this.fotoBase_Form.get("autor").value,
           fecha: this.fotoBase_Form.get("fecha").value,
           editado: true
         };
-        console.log("val datos foto;", this.fotoBase_Form.value);
       } catch (error) {
         this.posicionarse = 1;
       }
@@ -539,6 +493,7 @@ export class GaleriaComponent implements OnInit {
     this.imagenes = [];
     this.posicionarse = 1;
     this.crearForm_FotoBase(new fotoBase_Modelo);
+    this.selected = new FormControl(0);
   }
 
   public getTam_final_ListaFotos() {
@@ -556,13 +511,100 @@ export class GaleriaComponent implements OnInit {
   }
   //lleva el control de los errores
   get input_descripcion() { return this.descripcion; }
+
+
   crearForm_FotoBase(row: fotoBase_Modelo) {
     this.fotoBase_Form = new fotoBase_FormGroup().getFotoBase_FormGrup(row);
   }
+
+  ligar_Id_Imagen_DatoFoto() {
+    var cont = 0;
+    this.imagenes.forEach(val => {
+      try {
+        var baseFotoModelo = new foto_Modelo();
+        baseFotoModelo = this.datosFotografias[cont];
+        this.datosFotografias[cont] = {
+          id: val.id,
+          descripcion: baseFotoModelo.descripcion,
+          comentario: baseFotoModelo.comentario,
+          autor: baseFotoModelo.autor,
+          fecha: baseFotoModelo.fecha,
+          editado: true
+        };
+      }
+      catch (error) {
+        this.posicionarse = 1;
+      }
+      cont = cont + 1;
+    });
+  }
+
+  ligar_Id_Archivo_Nombre_DatoFoto() {
+    var cont = 0;
+    this.archivos.forEach(val => {
+      try {
+        var baseFotoModelo = new foto_Modelo();
+        baseFotoModelo = this.datosFotografias[cont];
+        this.datosFotografias[cont] = {
+          id: baseFotoModelo.id,
+          descripcion: baseFotoModelo.descripcion,
+          comentario: baseFotoModelo.comentario,
+          autor: baseFotoModelo.autor,
+          fecha: baseFotoModelo.fecha,
+          nombre: val.name,
+          editado: true
+        };
+      }
+      catch (error) {
+        this.posicionarse = 1;
+      }
+      cont = cont + 1;
+    });
+
+  }
+  getArchivoNombre_Id(id: Number): String {
+    var val = "";
+    for (let i = 0; i < this.datosFotografias.length; i++) {
+      var baseFotoModelo = new foto_Modelo();
+      try {
+        baseFotoModelo = this.datosFotografias[i];
+        if (baseFotoModelo.id == id)
+          return val = baseFotoModelo.nombre;
+      }
+      catch{
+      }
+    }
+    return val;
+  }
+  ordenar_DatosFotos(id: Number) {
+    var ordenNuevo = 0;
+    var datosFotos = [];
+    for (let i = 0; i < this.datosFotografias.length; i++) {
+      var baseFotoModelo = new foto_Modelo();
+      try {
+        baseFotoModelo = this.datosFotografias[i];
+        if (baseFotoModelo.id != id) {//todos menos el que se elimino
+          datosFotos[ordenNuevo] = {
+            id: baseFotoModelo.id,
+            descripcion: baseFotoModelo.descripcion,
+            comentario: baseFotoModelo.comentario,
+            autor: baseFotoModelo.autor,
+            //fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
+            editado: true,
+            nombre: baseFotoModelo.nombre
+          };
+        }
+      } catch (error) {
+        this.posicionarse = 1;
+      }
+      ordenNuevo = ordenNuevo + 1;
+
+    }
+    this.datosFotografias = datosFotos;
+  }
 }
 function validarEntero(x) {
-  if (Number.isInteger(x)) {
+  if (Number.isInteger(x))
     return true;
-  }
   return false;
 }
