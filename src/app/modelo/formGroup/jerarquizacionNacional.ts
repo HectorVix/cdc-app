@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { jerarquizacion_Nacional_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
@@ -12,31 +12,31 @@ export class jerarquizacion_Nacional_FormGroup {
         return fb.group({
             'nacionalId': row.nacionalId,
             //pagina1
-            'codigoe': row.codigoe,
-            'nombren': row.nombren,
-            'nacion': row.nacion,
-            'nloctip': row.nloctip,
+            'codigoe': new FormControl(row.codigoe, Validators.maxLength(10)),
+            'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
+            'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
+            'nloctip': new FormControl(row.nloctip, Validators.maxLength(120)),
             'nlestim': row.nlestim,
-            'nlestimcom': row.nlestimcom,
+            'nlestimcom': new FormControl(row.nlestimcom, Validators.maxLength(120)),
             'nabund': row.nabund,
-            'nabundcom': row.nabundcom,
+            'nabundcom': new FormControl(row.nabundcom, Validators.maxLength(120)),
             'ndist': row.ndist,
-            'ndistcom': row.ndistcom,
+            'ndistcom': new FormControl(row.ndistcom, Validators.maxLength(120)),
             'nleprot': row.nleprot,
-            'nleprotcom': row.nleprotcom,
+            'nleprotcom': new FormControl(row.nleprotcom, Validators.maxLength(120)),
             'namenaz': row.namenaz,
-            'namenazcom': row.namenazcom,
+            'namenazcom': new FormControl(row.namenazcom, Validators.maxLength(120)),
             //pagina2
-            'notroconsi': row.notroconsi,
+            'notroconsi': new FormControl(row.notroconsi, Validators.maxLength(120)),
             'rangon': row.rangon,
             'fecharn': fechaServicio.getFecha(row.fecharn),
-            'nranrzon': row.nranrzon,
-            'nnecprotec': row.nnecprotec,
-            'nnecinvent': row.nnecinvent,
-            'nnecestudi': row.nnecestudi,
-            'nnecmaejo': row.nnecmaejo,
-            'resrn': row.resrn,
-            'edautor': row.edautor,
+            'nranrzon': new FormControl(row.nranrzon, Validators.maxLength(120)),
+            'nnecprotec': new FormControl(row.nnecprotec, Validators.maxLength(120)),
+            'nnecinvent': new FormControl(row.nnecinvent, Validators.maxLength(120)),
+            'nnecestudi': new FormControl(row.nnecestudi, Validators.maxLength(120)),
+            'nnecmaejo': new FormControl(row.nnecmaejo, Validators.maxLength(120)),
+            'resrn': new FormControl(row.resrn, Validators.maxLength(60)),
+            'edautor': new FormControl(row.edautor, Validators.maxLength(60)),
             'edicion': fechaServicio.getFecha(row.edicion),
             'actualizar': fechaServicio.getFecha(row.actualizar),
             'jERARQUIZACIONjerarquizacionid': Jerarquizacion

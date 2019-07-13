@@ -92,14 +92,18 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   //guardar registro jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
-    var jerarquizacionBase = new Jerarquizacion();
-    var jerarquizacionNacional = new jerarquizacion_Nacional_Modelo();
-    var nacionalList: Array<jerarquizacion_Nacional_Modelo> = new Array();
-    jerarquizacionBase.codigoe = this.jerarquizacion_Nacional_Form.get('codigoe').value;
-    jerarquizacionNacional = this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value);
-    nacionalList.push(jerarquizacionNacional);
-    jerarquizacionBase.nacionalList = nacionalList;
-    this.addJerarquizacionNacional(jerarquizacionBase)
+    if (this.jerarquizacion_Nacional_Form.get('codigoe').value && this.jerarquizacion_Nacional_Form.valid) {
+      var jerarquizacionBase = new Jerarquizacion();
+      var jerarquizacionNacional = new jerarquizacion_Nacional_Modelo();
+      var nacionalList: Array<jerarquizacion_Nacional_Modelo> = new Array();
+      jerarquizacionBase.codigoe = this.jerarquizacion_Nacional_Form.get('codigoe').value;
+      jerarquizacionNacional = this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value);
+      nacionalList.push(jerarquizacionNacional);
+      jerarquizacionBase.nacionalList = nacionalList;
+      this.addJerarquizacionNacional(jerarquizacionBase)
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   //setear datos jerarquizacion nacional
   setDatosJerarquizacionNacional(datos: jerarquizacion_Nacional_Modelo): jerarquizacion_Nacional_Modelo {
@@ -234,14 +238,17 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           this.changeSuccessMessage(`Editado exitoso, código del elemento:${resNacional.codigoe}.`, 'success');
           this.lista_Nacional = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Nacional);
+          this.editar = false;
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarJerarquizacionNacional() {
-    if (this.jerarquizacion_Nacional_Form.get('codigoe').value)
+    if (this.jerarquizacion_Nacional_Form.get('codigoe').value && this.jerarquizacion_Nacional_Form.valid)
       this.updateJerarquizacionNacional(this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -250,6 +257,30 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.crearForm_Buscar();
     this.tabPagina1();
   }
+
+  //lleva el control de los errores
+  //página 1
+  get input_codigoe() { return this.jerarquizacion_Nacional_Form.get('codigoe'); }
+  get input_nombren() { return this.jerarquizacion_Nacional_Form.get('nombren'); }
+  get input_nacion() { return this.jerarquizacion_Nacional_Form.get('nacion'); }
+  get input_nloctip() { return this.jerarquizacion_Nacional_Form.get('nloctip'); }
+  get input_nlestimcom() { return this.jerarquizacion_Nacional_Form.get('nlestimcom'); }
+  get input_nabundcom() { return this.jerarquizacion_Nacional_Form.get('nabundcom'); }
+  get input_ndistcom() { return this.jerarquizacion_Nacional_Form.get('ndistcom'); }
+  get input_nleprotcom() { return this.jerarquizacion_Nacional_Form.get('nleprotcom'); }
+  get input_namenazcom() { return this.jerarquizacion_Nacional_Form.get('namenazcom'); }
+  //página 2
+  get input_notroconsi() { return this.jerarquizacion_Nacional_Form.get('notroconsi'); }
+  get input_fecharn() { return this.jerarquizacion_Nacional_Form.get('fecharn'); }
+  get input_nranrzon() { return this.jerarquizacion_Nacional_Form.get('nranrzon'); }
+  get input_nnecprotec() { return this.jerarquizacion_Nacional_Form.get('nnecprotec'); }
+  get input_nnecinvent() { return this.jerarquizacion_Nacional_Form.get('nnecinvent'); }
+  get input_nnecestudi() { return this.jerarquizacion_Nacional_Form.get('nnecestudi'); }
+  get input_nnecmaejo() { return this.jerarquizacion_Nacional_Form.get('nnecmaejo'); }
+  get input_resrn() { return this.jerarquizacion_Nacional_Form.get('resrn'); }
+  get input_edautor() { return this.jerarquizacion_Nacional_Form.get('edautor'); }
+  get input_actualizar() { return this.jerarquizacion_Nacional_Form.get('actualizar'); }
+  get input_edicion() { return this.jerarquizacion_Nacional_Form.get('edicion'); }
 }
 function crearNacional(k: Number, nacionalId: Number, codigoe, nombren, nacion): nacional_Dato {
   return {

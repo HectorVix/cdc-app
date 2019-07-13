@@ -11,7 +11,7 @@
               <div class="col-md-2">
                 <label for="">CODIGO ELEMENTO:</label>
               </div>
-              <div class="md-form col-md-9 mt10" *ngIf="editar">
+              <div class="md-form col-md-4 mt10" *ngIf="editar">
                 <input mdbInputDirective mdbValidate type="text" id="formCodigoe" class="form-control"
                   formControlName="codigo">
                 <mdb-error *ngIf="input_codigo.invalid && (input_codigo.dirty || input_codigo.touched)">

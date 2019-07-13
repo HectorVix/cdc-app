@@ -2,32 +2,61 @@
     <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
         <mat-tab label="Formulario">
             <div class="card-body">
-                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+                    {{ successMessage }}</ngb-alert>
                 <form [formGroup]="jerarquizacion_SubnacionalForm">
                     <div class="modal-content mat-elevation-z4">
                         <div class="modal-header color-green">
-                            <h5 class="modal-title">JERARQUIZACIÓN DEL ELEMENTO (SUBNACIONAL)</h5>
+                            <h5 class="modal-title">
+                                <font size=4 color="white">JERARQUIZACIÓN DEL ELEMENTO SUBNACIONAL</font>
+                            </h5>
                         </div>
                         <div class="row">
                             <div class="col-md-2">
                                 <label for="">CODIGOE:</label>
                             </div>
-                            <div class="md-form col-md-4 mt10">
-                                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error="incorrecto"
-                                    data-success=" " required>
+                            <div class="md-form col-md-4 mt10" *ngIf="editar">
+                                <input mdbInputDirective mdbValidate type="text" id="formCodigoe" class="form-control"
+                                    formControlName="codigoe" required>
+                                <mdb-error
+                                    *ngIf="input_codigoe.invalid && (input_codigoe.dirty || input_codigoe.touched)">
+                                    <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                </mdb-error>
+                            </div>
+                            <div class="md-form col-md-4 mt10" *ngIf="guardar">
+                                <input mdbInputDirective mdbValidate type="text" id="formCodigoe" class="form-control"
+                                    formControlName="codigoe" disabled>
                             </div>
                             <div class="col-md-2">
                                 <div class="mat-elevation-z8" class="base-form">
-                                    <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                                    <button mat-raised-button class="color-green"
+                                        (click)="validarCodigoe()">Validar</button>
                                 </div>
                             </div>
-                            <div class="md-form col-md-2 mt10">
-                                <input mdbInputDirective type="text" id="formNacion" class="form-control" data-error=" " formControlName="nacion" data-success=" ">
-                                <label for="formNacion">&nbsp;&nbsp;&nbsp;&nbsp;NACIÓN</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">NACIÓN:</label>
                             </div>
-                            <div class="md-form col-md-2 mt10">
-                                <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
-                                <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACIÓN</label>
+                            <div class="md-form col-md-9 mt-20">
+                                <input mdbInputDirective mdbValidate type="text" id="formNacion" class="form-control"
+                                    formControlName="nacion">
+                                <mdb-error *ngIf="input_nacion.invalid && (input_nacion.dirty || input_nacion.touched)">
+                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                </mdb-error>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">SUBNACIÓN:</label>
+                            </div>
+                            <div class="md-form col-md-9 mt-20">
+                                <input mdbInputDirective mdbValidate type="text" id="formSubnacion" class="form-control"
+                                    formControlName="subnacion">
+                                <mdb-error
+                                    *ngIf="input_subnacion.invalid && (input_subnacion.dirty || input_subnacion.touched)">
+                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -36,8 +65,12 @@
                                 <label for="">NOMBRES:</label>
                             </div>
                             <div class="md-form col-md-9 mt-20 ">
-                                <input mdbInputDirective type="text" id="formNombres" class="form-control" formControlName="nombres" data-error=" " data-success=" ">
-                                <label for="formNombres"></label>
+                                <input mdbInputDirective mdbValiate type="text" id="formNombres" class="form-control"
+                                    formControlName="nombres">
+                                <mdb-error
+                                    *ngIf="input_nombres.invalid && (input_nombres.dirty || input_nombres.touched)">
+                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -46,8 +79,12 @@
                                 <label for="">LOCTIPS:</label>
                             </div>
                             <div class="md-form col-md-9 mt-20 ">
-                                <input mdbInputDirective type="text" id="formLoctips" class="form-control" formControlName="loctips" data-error=" " data-success=" ">
-                                <label for="formLoctips"></label>
+                                <input mdbInputDirective mdbValidate type="text" id="formLoctips" class="form-control"
+                                    formControlName="loctips">
+                                <mdb-error
+                                    *ngIf="input_loctips.invalid && (input_loctips.dirty || input_loctips.touched)">
+                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -57,7 +94,8 @@
                             </div>
                             <div class="col-md-3 mt-15">
                                 <mat-form-field>
-                                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="lestims">
+                                    <mat-select placeholder=" " panelClass="color-panel-green"
+                                        formControlName="lestims">
                                         <mat-option>-- Ninguna --</mat-option>
                                         <mat-option *ngFor="let sLestims of criterio_lestims" [value]="sLestims.value">
                                             {{sLestims.viewValue}}
@@ -73,9 +111,14 @@
                             </div>
                             <div class="md-form  col-md-7 mt10">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formComlesims" class="md-textarea form-control" formControlName="comlestims"
-                                    rows="1" data-error=" " data-success=" "></textarea>
-                                <label for="formComlesims">De ser posible anote el número exacto de localizaciones existentes conocidas</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formComlesims"
+                                    class="md-textarea form-control" formControlName="comlestims" rows="2"></textarea>
+                                <label for="formComlesims">De ser posible anote el número exacto de localizaciones
+                                    existentes conocidas</label>
+                                <mdb-error
+                                    *ngIf="input_comlestims.invalid && (input_comlestims.dirty || input_comlestims.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -101,9 +144,14 @@
                             </div>
                             <div class="md-form  col-md-9 mt10">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formComaabunds" class="md-textarea form-control" formControlName="comabunds"
-                                    rows="3" data-error=" " data-success=" "></textarea>
-                                <label for="formComaabunds">A menudo resulta complicado estimar la abundancia de un elemento. Comente sobre esto.</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formComaabunds"
+                                    class="md-textarea form-control" formControlName="comabunds" rows="3"></textarea>
+                                <label for="formComaabunds">A menudo resulta complicado estimar la abundancia de un
+                                    elemento. Comente sobre esto.</label>
+                                <mdb-error
+                                    *ngIf="input_comabunds.invalid && (input_comabunds.dirty || input_comabunds.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -129,10 +177,15 @@
                             </div>
                             <div class="md-form  col-md-9 mt10">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formComdists" class="md-textarea form-control" formControlName="comdists" rows="1"
-                                    data-error=" " data-success=" "></textarea>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formComdists"
+                                    class="md-textarea form-control" formControlName="comdists" rows="2"></textarea>
                                 <label for="formComdists">
-                                    Se especifica los países o regiones ecológicas donde se encuentra el elemento actualmente</label>
+                                    Se especifica los países o regiones ecológicas donde se encuentra el elemento
+                                    actualmente</label>
+                                <mdb-error
+                                    *ngIf="input_comdists.invalid && (input_comdists.dirty || input_comdists.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -142,7 +195,8 @@
                             </div>
                             <div class="col-md-4 mt-15">
                                 <mat-form-field>
-                                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="leprots">
+                                    <mat-select placeholder=" " panelClass="color-panel-green"
+                                        formControlName="leprots">
                                         <mat-option>-- Ninguna --</mat-option>
                                         <mat-option *ngFor="let sLeprots of criterio_leprots" [value]="sLeprots.value">
                                             {{sLeprots.viewValue}}
@@ -158,9 +212,14 @@
                             </div>
                             <div class="md-form  col-md-7 mt10">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formComleprots" class="md-textarea form-control" formControlName="comleprots"
-                                    rows="1" data-error=" " data-success=" "></textarea>
-                                <label for="formComleprots">En qué país o países están protegidas y qué tipo de protección tienen.</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formComleprots"
+                                    class="md-textarea form-control" formControlName="comleprots" rows="2"></textarea>
+                                <label for="formComleprots">En qué país o países están protegidas y qué tipo de
+                                    protección tienen.</label>
+                                <mdb-error
+                                    *ngIf="input_comleprots.invalid && (input_comleprots.dirty || input_comleprots.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -170,7 +229,8 @@
                             </div>
                             <div class="col-md-9 mt-15">
                                 <mat-form-field>
-                                    <mat-select placeholder=" " panelClass="color-panel-green" formControlName="amenazs">
+                                    <mat-select placeholder=" " panelClass="color-panel-green"
+                                        formControlName="amenazs">
                                         <mat-option>-- Ninguna --</mat-option>
                                         <mat-option *ngFor="let sAmenazs of criterio_amenazs" [value]="sAmenazs.value">
                                             {{sAmenazs.viewValue}}
@@ -186,10 +246,14 @@
                             </div>
                             <div class="md-form  col-md-9 mt10">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formComamenazs" class="md-textarea form-control" formControlName="comamenazs"
-                                    rows="1" data-error=" " data-success=" "></textarea>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formComamenazs"
+                                    class="md-textarea form-control" formControlName="comamenazs" rows="2"></textarea>
                                 <label for="formComamenazs">
                                     Indique la amenaza, por ejemplo: "tierras primarias para cultivos"</label>
+                                <mdb-error
+                                    *ngIf="input_comamenazs.invalid && (input_comamenazs.dirty || input_comamenazs.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -199,9 +263,14 @@
                             </div>
                             <div class="md-form  col-md-9 mt-15">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formOtraconsids" class="md-textarea form-control" formControlName="otraconsids"
-                                    rows="1" data-error=" " data-success=" "></textarea>
-                                <label for="formOtraconsids">Otro criterios. Anote cualiesquiera otros factores que considere importantes</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formOtraconsids"
+                                    class="md-textarea form-control" formControlName="otraconsids" rows="2"></textarea>
+                                <label for="formOtraconsids">Otro criterios. Anote cualiesquiera otros factores que
+                                    considere importantes</label>
+                                <mdb-error
+                                    *ngIf="input_otraconsids.invalid && (input_otraconsids.dirty || input_otraconsids.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -220,8 +289,9 @@
                                 </mat-form-field>
                             </div>
                             <div class="md-form form-sm  input-group-append mt-10">
-                                <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control" formControlName="fecharevrs" data-error=" "
-                                    data-success=" " ngbDatepicker #dFechaRevrs="ngbDatepicker">
+                                <input mdbInputDirective type="text" id="formFechaRevrs" class="form-control"
+                                    formControlName="fecharevrs" data-error=" " data-success=" " ngbDatepicker
+                                    #dFechaRevrs="ngbDatepicker">
                                 <label for="formFechaRevrs">FECHA.REVRS</label>
                                 <div (click)="dFechaRevrs.toggle()">
                                     <i class="fa fa-calendar prefix"></i>
@@ -235,11 +305,16 @@
                             </div>
                             <div class="md-form  col-md-9 mt-20">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formRazonRs" class="md-textarea form-control" formControlName="razonrs" rows="1"
-                                    data-error=" " data-success=" "></textarea>
-                                <label for="formRazonRs">Dar las razones para este rango, mencionando los mejores factores de jerarquización y otras
+                                <textarea mdbInputDirective mdbValidate type="text" id="formRazonRs"
+                                    class="md-textarea form-control" formControlName="razonrs" rows="2"></textarea>
+                                <label for="formRazonRs">Dar las razones para este rango, mencionando los mejores
+                                    factores de jerarquización y otras
                                     consideraciones.
                                 </label>
+                                <mdb-error
+                                    *ngIf="input_razonrs.invalid && (input_razonrs.dirty || input_razonrs.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -249,9 +324,14 @@
                             </div>
                             <div class="md-form  col-md-9 mt-20">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formNecProtecs" class="md-textarea form-control" formControlName="necprotecs"
-                                    rows="1" data-error=" " data-success=" "></textarea>
-                                <label for="formNecProtecs">Dar el número estimado de LE adecuados para sostener el elemento a través de su distribución.</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formNecProtecs"
+                                    class="md-textarea form-control" formControlName="necprotecs" rows="2"></textarea>
+                                <label for="formNecProtecs">Dar el número estimado de LE adecuados para sostener el
+                                    elemento a través de su distribución.</label>
+                                <mdb-error
+                                    *ngIf="input_necprotecs.invalid && (input_necprotecs.dirty || input_necprotecs.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
@@ -261,11 +341,15 @@
                             </div>
                             <div class="md-form  col-md-9 mt-20">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formNecInvents" class="md-textarea form-control" formControlName="necinvents"
-                                    rows="1" data-error=" " data-success=" "></textarea>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formNecInvents"
+                                    class="md-textarea form-control" formControlName="necinvents" rows="1"></textarea>
                                 <label for="formNecInvents">
                                     Escriba las necesidades de investigacion de la biología del elemento.</label>
                             </div>
+                            <mdb-error
+                                *ngIf="input_necinvents.invalid && (input_necinvents.dirty || input_necinvents.touched)">
+                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                            </mdb-error>
                         </div>
                         <!-- fin row -->
                         <div class="row">
@@ -274,45 +358,67 @@
                             </div>
                             <div class="md-form  col-md-9 mt-20">
                                 <i class="fa fa-pencil prefix"></i>
-                                <textarea mdbInputDirective type="text" id="formNecManejos" class="md-textarea form-control" formControlName="necmanejos"
-                                    rows="1" data-error=" " data-success=" "></textarea>
-                                <label for="formNecManejos">Discutir las estrategias que deberían utilizarse para proteger el elemento.</label>
+                                <textarea mdbInputDirective mdbValidate type="text" id="formNecManejos"
+                                    class="md-textarea form-control" formControlName="necmanejos" rows="1"></textarea>
+                                <label for="formNecManejos">Discutir las estrategias que deberían utilizarse para
+                                    proteger el elemento.</label>
+                                <mdb-error
+                                    *ngIf="input_necmanejos.invalid && (input_necmanejos.dirty || input_necmanejos.touched)">
+                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                </mdb-error>
+                            </div>
+                        </div>
+                        <!-- fin row -->
+                        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+                            {{ successMessage }}</ngb-alert>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="">AUTOR.ED:</label>
+                            </div>
+                            <div class="md-form col-md-9 mt-20">
+                                <input mdbInputDirective mdbValidate type="text" id="formAutorEd" class="form-control"
+                                    formControlName="autored">
+                                <label for="formAutorEd">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
+                                <mdb-error
+                                    *ngIf="input_autored.invalid && (input_autored.dirty || input_autored.touched)">
+                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                </mdb-error>
                             </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
                             <div class="col-md-2">
-                                <label for="">AUTOR.ED:</label>
                             </div>
-                            <div class="md-form col-md-5 mt-20">
-                                <input mdbInputDirective type="text" id="formAutorEd" class="form-control" formControlName="autored" data-error=" " data-success=" ">
-                                <label for="formAutorEd">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
-                            </div>
-                        </div>
-                        <!-- fin row -->
-                        <div class="row">
-                            <div class="col-md-8">
-                            </div>
-                            <div class="md-form form-sm  input-group-append mt-10">
-                                <input mdbInputDirective type="text" id="formEdicion" class="form-control" formControlName="edicion" data-error="Incorrecto"
-                                    data-success=" " ngbDatepicker #dEdicion="ngbDatepicker">
+                            <div class="md-form col-md-3 mt-5">
+                                <input mdbInputDirective mdbValidate type="text" id="formEdicion" class="form-control"
+                                    formControlName="edicion" ngbDatepicker #dEdicion="ngbDatepicker">
                                 <label for="formEdicion">&nbsp;&nbsp;&nbsp;&nbsp;EDICION</label>
-                                <div (click)="dEdicion.toggle()">
-                                    <i class="fa fa-calendar prefix"></i>
-                                </div>
+                                <mdb-error
+                                    *ngIf="input_edicion.invalid && (input_edicion.dirty || input_edicion.touched)">
+                                    <font size=2 color="red">Error, el formato debe ser
+                                        aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+                                </mdb-error>
+                            </div>
+                            <div class="md-form mt-5" (click)="dEdicion.toggle()">
+                                <i class="fa fa-calendar prefix"></i>
                             </div>
                         </div>
                         <!-- fin row -->
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-2">
                             </div>
-                            <div class="md-form form-sm  input-group-append mt-10">
-                                <input mdbInputDirective type="text" id="formActualizar" class="form-control" formControlName="actualizar" data-error="Incorrecto"
-                                    data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
+                            <div class="md-form col-md-3 mt-5">
+                                <input mdbInputDirective type="text" id="formActualizar" class="form-control"
+                                    formControlName="actualizar" ngbDatepicker #dActualizar="ngbDatepicker">
                                 <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                                <div (click)="dActualizar.toggle()">
-                                    <i class="fa fa-calendar prefix"></i>
-                                </div>
+                                <mdb-error
+                                    *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
+                                    <font size=2 color="red">Error, el formato debe ser
+                                        aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
+                                </mdb-error>
+                            </div>
+                            <div class="md-form mt-5" (click)="dActualizar.toggle()">
+                                <i class="fa fa-calendar prefix"></i>
                             </div>
                         </div>
 
@@ -322,10 +428,13 @@
                         <div *ngIf="loading">
                             <img src="assets/imagenes/load.gif">
                         </div>
-                        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+                            {{ successMessage }}</ngb-alert>
                         <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
-                        <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()" mdbWavesEffect>Guardar</button>
-                        <button class="btn color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()" mdbWavesEffect>Editar</button>
+                        <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()"
+                            mdbWavesEffect>Guardar</button>
+                        <button class="btn color-green waves-light" [disabled]="editar" (click)="openDialogoEditar()"
+                            mdbWavesEffect>Editar</button>
                     </div>
                 </form>
                 <!-- Fim form -->
@@ -340,11 +449,13 @@
                         <!-- Inicio row -->
                         <div class="row">
                             <div class="md-form col-md-5 mt10">
-                                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe" data-error=" " data-success=" ">
+                                <input mdbInputDirective type="text" id="formCodigoe" class="form-control"
+                                    formControlName="codigoe" data-error=" " data-success=" ">
                                 <label for="formCodigoe">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO ELEMENTO</label>
                             </div>
                             <div class="md-form col-md-5 mt10">
-                                <input mdbInputDirective type="text" id="formNacion" class="form-control" formControlName="nacion" data-error=" " data-success=" ">
+                                <input mdbInputDirective type="text" id="formNacion" class="form-control"
+                                    formControlName="nacion" data-error=" " data-success=" ">
                                 <label for="formNacion">&nbsp;&nbsp;&nbsp;&nbsp;NACIÓN</label>
                             </div>
                         </div>
@@ -352,11 +463,13 @@
                         <!-- Inicio row -->
                         <div class="row">
                             <div class="md-form col-md-5 mt-10">
-                                <input mdbInputDirective type="text" id="formSubnacion" class="form-control" formControlName="subnacion" data-error=" " data-success=" ">
+                                <input mdbInputDirective type="text" id="formSubnacion" class="form-control"
+                                    formControlName="subnacion" data-error=" " data-success=" ">
                                 <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;DEPARTAMENTO</label>
                             </div>
                             <div class="md-form col-md-5 mt-10">
-                                <input mdbInputDirective type="text" id="formNombres" class="form-control" formControlName="nombres" data-error=" " data-success=" ">
+                                <input mdbInputDirective type="text" id="formNombres" class="form-control"
+                                    formControlName="nombres" data-error=" " data-success=" ">
                                 <label for="formNombres">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE SUBNACIONAL</label>
                             </div>
                         </div>
@@ -364,12 +477,14 @@
                         <!-- Inicio row -->
                         <div class="row">
                             <div class="md-form col-md-5 mt-10">
-                                <input mdbInputDirective type="text" id="formLoctips" class="form-control" formControlName="loctips" data-error=" " data-success=" ">
+                                <input mdbInputDirective type="text" id="formLoctips" class="form-control"
+                                    formControlName="loctips" data-error=" " data-success=" ">
                                 <label for="formLoctips">&nbsp;&nbsp;&nbsp;&nbsp;LOCTIPS</label>
                             </div>
                         </div>
                         <div>
-                            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarJerarquizacionSubnacional()">Buscar</button>
+                            <button class="btn color-green waves-light" mdbWavesEffect
+                                (click)="buscarJerarquizacionSubnacional()">Buscar</button>
                         </div>
                     </form>
                     <!-- Fin form -->
@@ -378,7 +493,8 @@
                             <img src="assets/imagenes/load.gif">
                         </div>
                     </div>
-                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+                        {{ successMessage }}</ngb-alert>
 
                 </div>
                 <!-- Fin modal-content -->
@@ -408,7 +524,8 @@
                             <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row" (click)="mostrar_JerarquizacionSubnacional_Busqueda(row)">
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
+                            (click)="mostrar_JerarquizacionSubnacional_Busqueda(row)">
                         </tr>
                     </table>
                     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

@@ -109,12 +109,16 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   //registro nuevo formulario jerarquizacion global
   registrarJerarquizacionGlobal() {
-    var jerarquizacionModelo = new Jerarquizacion();
-    jerarquizacionModelo.codigoe = this.jerarquizacion_Global_Form.get('codigoe').value;
-    var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
-    globalist.push(this.setDatosJerarquizacionGlobal(this.jerarquizacion_Global_Form.value));
-    jerarquizacionModelo.globalList = globalist;
-    this.addJerarquizacionGlobal(jerarquizacionModelo);
+    if (this.jerarquizacion_Global_Form.get('codigoe').value && this.jerarquizacion_Global_Form.valid) {
+      var jerarquizacionModelo = new Jerarquizacion();
+      jerarquizacionModelo.codigoe = this.jerarquizacion_Global_Form.get('codigoe').value;
+      var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
+      globalist.push(this.setDatosJerarquizacionGlobal(this.jerarquizacion_Global_Form.value));
+      jerarquizacionModelo.globalList = globalist;
+      this.addJerarquizacionGlobal(jerarquizacionModelo);
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setDatosJerarquizacionGlobal(datos: jerarquizacion_Global_Modelo): jerarquizacion_Global_Modelo {
     datos.fecharg = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Global_Form.get('fecharg').value);
@@ -244,8 +248,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
         });
   }
   editarJerarquizacionGlobal() {
-    if (this.jerarquizacion_Global_Form.get('codigoe').value)
+    if (this.jerarquizacion_Global_Form.get('codigoe').value && this.jerarquizacion_Global_Form.valid)
       this.updateJerarquizacionGlobal(this.setDatosJerarquizacionGlobal(this.jerarquizacion_Global_Form.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -254,6 +260,39 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.crearForm_Buscar();
     this.tabPagina1();
   }
+  // lleva el control de los errores
+  //página 1
+  get input_codigoe() { return this.jerarquizacion_Global_Form.get('codigoe'); }
+  get input_nombreg() { return this.jerarquizacion_Global_Form.get('nombreg'); }
+  get input_descrielem() { return this.jerarquizacion_Global_Form.get('descrielem'); }
+  get input_especle() { return this.jerarquizacion_Global_Form.get('especle'); }
+  get input_especranga() { return this.jerarquizacion_Global_Form.get('especranga'); }
+  get input_especrangb() { return this.jerarquizacion_Global_Form.get('especrangb'); }
+  get input_especrangc() { return this.jerarquizacion_Global_Form.get('especrangc'); }
+  get input_especrangd() { return this.jerarquizacion_Global_Form.get('especrangd'); }
+  get input_habitat() { return this.jerarquizacion_Global_Form.get('habitat'); }
+  get input_permanencia() { return this.jerarquizacion_Global_Form.get('permanencia'); }
+  get input_gloctip() { return this.jerarquizacion_Global_Form.get('gloctip'); }
+  get input_comtax() { return this.jerarquizacion_Global_Form.get('comtax'); }
+  get input_glestimcom() { return this.jerarquizacion_Global_Form.get('glestimcom'); }
+  get input_gabundcom() { return this.jerarquizacion_Global_Form.get('gabundcom'); }
+  get input_gdistcom() { return this.jerarquizacion_Global_Form.get('gdistcom'); }
+  //página 2
+  get input_gleprotcom() { return this.jerarquizacion_Global_Form.get('gleprotcom'); }
+  get input_gfragilcom() { return this.jerarquizacion_Global_Form.get('gfragilcom'); }
+  get input_gotroconsi() { return this.jerarquizacion_Global_Form.get('gotroconsi'); }
+  get input_fecharg() { return this.jerarquizacion_Global_Form.get('fecharg'); }
+  get input_granrazon() { return this.jerarquizacion_Global_Form.get('granrazon'); }
+  get input_gnecprotec() { return this.jerarquizacion_Global_Form.get('gnecprotec'); }
+  get input_gamenazcom() { return this.jerarquizacion_Global_Form.get('gamenazcom'); }
+  get input_gnecinvent() { return this.jerarquizacion_Global_Form.get('gnecinvent'); }
+  get input_gnecestudi() { return this.jerarquizacion_Global_Form.get('gnecestudi'); }
+  get input_gnecmanejo() { return this.jerarquizacion_Global_Form.get('gnecmanejo'); }
+  get input_resrg() { return this.jerarquizacion_Global_Form.get('resrg'); }
+  get input_edautor() { return this.jerarquizacion_Global_Form.get('edautor'); }
+  get input_edicion() { return this.jerarquizacion_Global_Form.get('edicion'); }
+  get input_actualizar() { return this.jerarquizacion_Global_Form.get('actualizar'); }
+
 }
 function crearGlobal(k: Number, globalId: Number, codigoe, nombreg, descrielem): global_Dato {
   return {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
@@ -7,12 +7,12 @@ import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-mo
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
-import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { subnacional_Dato } from '../../../modelo/tabla/subnacional-dato';
 
 @Component({
@@ -90,14 +90,18 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
 
   //guardar registro jerarquizacion subnancional
   guardarRegistroJerarquizacionSubnacional() {
-    var jerarquizacionBase = new Jerarquizacion();
-    var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
-    var subnacionalList: Array<jerarquizacion_Subnacional_Modelo> = new Array();
-    jerarquizacionBase.codigoe = this.jerarquizacion_SubnacionalForm.get('codigoe').value;
-    jerarquizacionSubnacional = this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value);
-    subnacionalList.push(jerarquizacionSubnacional);
-    jerarquizacionBase.subnacionalList = subnacionalList;
-    this.addJerarquizacionNacional(jerarquizacionBase)
+    if (this.jerarquizacion_SubnacionalForm.get('codigoe').value && this.jerarquizacion_SubnacionalForm.valid) {
+      var jerarquizacionBase = new Jerarquizacion();
+      var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
+      var subnacionalList: Array<jerarquizacion_Subnacional_Modelo> = new Array();
+      jerarquizacionBase.codigoe = this.jerarquizacion_SubnacionalForm.get('codigoe').value;
+      jerarquizacionSubnacional = this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value);
+      subnacionalList.push(jerarquizacionSubnacional);
+      jerarquizacionBase.subnacionalList = subnacionalList;
+      this.addJerarquizacionNacional(jerarquizacionBase)
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   //setear datos jerarquizacion subnacioal
   setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo): jerarquizacion_Subnacional_Modelo {
@@ -236,14 +240,17 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
           this.changeSuccessMessage(`Editado exitoso, código del elemento:${resSubnacional.codigoe}.`, 'success');
           this.lista_Subnacional = new Array();
           this.dataSource = new MatTableDataSource(this.lista_Subnacional);
+          this.editar = false;
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio.', 'primary');
         });
   }
   editarJerarquizacionSubnacional() {
-    if (this.jerarquizacion_SubnacionalForm.get('codigoe').value)
+    if (this.jerarquizacion_SubnacionalForm.get('codigoe').value && this.jerarquizacion_SubnacionalForm.valid)
       this.updateJerarquizacionSubnacional(this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -252,6 +259,27 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     this.crearForm_Buscar();
     this.tabPagina1();
   }
+
+  //lleva el control de los errores
+  get input_codigoe() { return this.jerarquizacion_SubnacionalForm.get('codigoe'); }
+  get input_nacion() { return this.jerarquizacion_SubnacionalForm.get('nacion'); }
+  get input_subnacion() { return this.jerarquizacion_SubnacionalForm.get('subnacion'); }
+  get input_nombres() { return this.jerarquizacion_SubnacionalForm.get('nombres'); }
+  get input_loctips() { return this.jerarquizacion_SubnacionalForm.get('loctips'); }
+  get input_comlestims() { return this.jerarquizacion_SubnacionalForm.get('comlestims'); }
+  get input_comabunds() { return this.jerarquizacion_SubnacionalForm.get('comabunds'); }
+  get input_comdists() { return this.jerarquizacion_SubnacionalForm.get('comdists'); }
+  get input_comleprots() { return this.jerarquizacion_SubnacionalForm.get('comleprots'); }
+  get input_comamenazs() { return this.jerarquizacion_SubnacionalForm.get('comamenazs'); }
+  get input_otraconsids() { return this.jerarquizacion_SubnacionalForm.get('otraconsids'); }
+  get input_razonrs() { return this.jerarquizacion_SubnacionalForm.get('razonrs'); }
+  get input_necprotecs() { return this.jerarquizacion_SubnacionalForm.get('necprotecs'); }
+  get input_necinvents() { return this.jerarquizacion_SubnacionalForm.get('necinvents'); }
+  get input_necmanejos() { return this.jerarquizacion_SubnacionalForm.get('necmanejos'); }
+  get input_autored() { return this.jerarquizacion_SubnacionalForm.get('autored'); }
+  get input_edicion() { return this.jerarquizacion_SubnacionalForm.get('edicion'); }
+  get input_actualizar() { return this.jerarquizacion_SubnacionalForm.get('actualizar'); }
+
 }
 function crearSubnacional(k: Number, subnacionalId: Number, codigoe, subnacion, nombres): subnacional_Dato {
   return {
