@@ -41,8 +41,6 @@ export class vertebrado_FormGroup {
             'pesten': row.pesten,
             'comstatn': row.comstatn,
             //distribución
-            //'lista_distribucion1': '',
-            //'lista_distribucion2': '',
             'elevminn': row.elevminn,//Number 
             'elevmaxn': row.elevmaxn,//Number
             'comdistg': row.comdistg,

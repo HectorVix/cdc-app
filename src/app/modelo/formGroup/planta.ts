@@ -35,8 +35,6 @@ export class planta_FormGroup {
             'cominventn': row.cominventn,
             'respropn': row.respropn,
             //ditribucion
-            //'lista_distribucion1': '',
-            //'lista_distribucion2': '',
             'elevminn': row.elevminn, //number
             'elevmaxn': row.elevmaxn, //number
             'disyuntn': row.disyuntn,

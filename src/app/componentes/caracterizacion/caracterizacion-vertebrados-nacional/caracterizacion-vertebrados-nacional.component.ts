@@ -540,6 +540,145 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
         });
   }
+
+  /*** Lleva el control de los errores
+   *  Página 1
+   *  Identificadores
+   */
+  get input_codigoe() { return this.caracterizacionVertebradosNacionalForm.get('codigoe'); }
+  get input_nacion() { return this.caracterizacionVertebradosNacionalForm.get('nacion'); }
+  get input_nombreg() { return this.caracterizacionVertebradosNacionalForm.get('nombreg'); }
+  get input_autor() { return this.caracterizacionVertebradosNacionalForm.get('autor'); }
+  get input_nombren() { return this.caracterizacionVertebradosNacionalForm.get('nombren'); }
+  get input_nomcomunn() { return this.caracterizacionVertebradosNacionalForm.get('nomcomunn'); }
+  //taxonomía
+  get input_clasetax() { return this.caracterizacionVertebradosNacionalForm.get('clasetax'); }
+  get input_orden() { return this.caracterizacionVertebradosNacionalForm.get('orden'); }
+  get input_familia() { return this.caracterizacionVertebradosNacionalForm.get('familia'); }
+  get input_genero() { return this.caracterizacionVertebradosNacionalForm.get('genero'); }
+  get input_comtaxg() { return this.caracterizacionVertebradosNacionalForm.get('comtaxg'); }
+  get input_comsubespn() { return this.caracterizacionVertebradosNacionalForm.get('comsubespn'); }
+  //status
+  get input_rangog() { return this.caracterizacionVertebradosNacionalForm.get('rangog'); }
+  get input_cites() { return this.caracterizacionVertebradosNacionalForm.get('cites'); }
+  get input_uicn() { return this.caracterizacionVertebradosNacionalForm.get('uicn'); }
+  get input_aepeu() { return this.caracterizacionVertebradosNacionalForm.get('aepeu'); }
+  get input_fechaaepeu() { return this.caracterizacionVertebradosNacionalForm.get('fechaaepeu'); }
+  get input_endemismo() { return this.caracterizacionVertebradosNacionalForm.get('endemismo'); }
+  get input_comstatg() { return this.caracterizacionVertebradosNacionalForm.get('comstatg'); }
+  get input_rangon() { return this.caracterizacionVertebradosNacionalForm.get('rangon'); }
+  get input_protnacion() { return this.caracterizacionVertebradosNacionalForm.get('protnacion'); }
+  get input_rastreolen() { return this.caracterizacionVertebradosNacionalForm.get('rastreolen'); }
+  get input_espdeportn() { return this.caracterizacionVertebradosNacionalForm.get('espdeportn'); }
+  get input_espcomern() { return this.caracterizacionVertebradosNacionalForm.get('espcomern'); }
+  get input_pezdeport() { return this.caracterizacionVertebradosNacionalForm.get('pezdeport'); }
+  get input_ndeportpro() { return this.caracterizacionVertebradosNacionalForm.get('ndeportpro'); }
+  get input_cazapieln() { return this.caracterizacionVertebradosNacionalForm.get('cazapieln'); }
+  get input_pesten() { return this.caracterizacionVertebradosNacionalForm.get('pesten'); }
+  get input_comstatn() { return this.caracterizacionVertebradosNacionalForm.get('comstatn'); }
+  //distribución
+  get input_elevminn() { return this.caracterizacionVertebradosNacionalForm.get('elevminn'); }
+  get input_elevmaxn() { return this.caracterizacionVertebradosNacionalForm.get('elevmaxn'); }
+  get input_comdistg() { return this.caracterizacionVertebradosNacionalForm.get('comdistg'); }
+  get input_comdistn() { return this.caracterizacionVertebradosNacionalForm.get('comdistn'); }
+  /* Página 2
+   * migración */
+  get input_residente() { return this.caracterizacionVertebradosNacionalForm.get('residente'); }
+  get input_miglocal() { return this.caracterizacionVertebradosNacionalForm.get('miglocal'); }
+  get input_migdist() { return this.caracterizacionVertebradosNacionalForm.get('migdist'); }
+  get input_repn() { return this.caracterizacionVertebradosNacionalForm.get('repn'); }
+  get input_norepn() { return this.caracterizacionVertebradosNacionalForm.get('norepn'); }
+  get input_transmign() { return this.caracterizacionVertebradosNacionalForm.get('transmign'); }
+  get input_aparirregn() { return this.caracterizacionVertebradosNacionalForm.get('aparirregn'); }
+  get input_mign() { return this.caracterizacionVertebradosNacionalForm.get('mign'); }
+  get input_commigg() { return this.caracterizacionVertebradosNacionalForm.get('commigg'); }
+  get input_commign() { return this.caracterizacionVertebradosNacionalForm.get('commign'); }
+  //habitat 
+  get input_marino() { return this.caracterizacionVertebradosNacionalForm.get('marino'); }
+  get input_estuarino() { return this.caracterizacionVertebradosNacionalForm.get('estuarino'); }
+  get input_fluvial() { return this.caracterizacionVertebradosNacionalForm.get('fluvial'); }
+  get input_lacustre() { return this.caracterizacionVertebradosNacionalForm.get('lacustre'); }
+  get input_palustre() { return this.caracterizacionVertebradosNacionalForm.get('palustre'); }
+  get input_terrestre() { return this.caracterizacionVertebradosNacionalForm.get('terrestre'); }
+  get input_subterran() { return this.caracterizacionVertebradosNacionalForm.get('subterran'); }
+  get input_factorespe() { return this.caracterizacionVertebradosNacionalForm.get('factorespe'); }
+  get input_comhabrep() { return this.caracterizacionVertebradosNacionalForm.get('comhabrep'); }
+  get input_comhabn() { return this.caracterizacionVertebradosNacionalForm.get('comhabn'); }
+  /* Página 3
+    *hábitos alimenticios
+  */
+  get input_habitosalim() { return this.caracterizacionVertebradosNacionalForm.get('habitosalim'); }
+  get input_comalimg() { return this.caracterizacionVertebradosNacionalForm.get('comalimg'); }
+  get input_comalimn() { return this.caracterizacionVertebradosNacionalForm.get('comalimn'); }
+  //ecología
+  get input_comecolg() { return this.caracterizacionVertebradosNacionalForm.get('comecolg'); }
+  get input_comecoln() { return this.caracterizacionVertebradosNacionalForm.get('comecoln'); }
+  /* Página 4 
+   *fenología-Estacionalidad
+    */
+  get input_fenologia() { return this.caracterizacionVertebradosNacionalForm.get('fenologia'); }
+  get input_nenea() { return this.caracterizacionVertebradosNacionalForm.get('nenea'); }
+  get input_nabra() { return this.caracterizacionVertebradosNacionalForm.get('nabra'); }
+  get input_njula() { return this.caracterizacionVertebradosNacionalForm.get('njula'); }
+  get input_nocta() { return this.caracterizacionVertebradosNacionalForm.get('nocta'); }
+
+  get input_neneb() { return this.caracterizacionVertebradosNacionalForm.get('neneb'); }
+  get input_nabrb() { return this.caracterizacionVertebradosNacionalForm.get('nabrb'); }
+  get input_njulb() { return this.caracterizacionVertebradosNacionalForm.get('njulb'); }
+  get input_noctb() { return this.caracterizacionVertebradosNacionalForm.get('noctb'); }
+
+  get input_nfeba() { return this.caracterizacionVertebradosNacionalForm.get('nfeba'); }
+  get input_nmaya() { return this.caracterizacionVertebradosNacionalForm.get('nmaya'); }
+  get input_nagoa() { return this.caracterizacionVertebradosNacionalForm.get('nagoa'); }
+  get input_nnova() { return this.caracterizacionVertebradosNacionalForm.get('nnova'); }
+
+  get input_nfebb() { return this.caracterizacionVertebradosNacionalForm.get('nfebb'); }
+  get input_nmayb() { return this.caracterizacionVertebradosNacionalForm.get('nmayb'); }
+  get input_nagob() { return this.caracterizacionVertebradosNacionalForm.get('nagob'); }
+  get input_nnovb() { return this.caracterizacionVertebradosNacionalForm.get('nnovb'); }
+
+  get input_nmara() { return this.caracterizacionVertebradosNacionalForm.get('nmara'); }
+  get input_njuna() { return this.caracterizacionVertebradosNacionalForm.get('njuna'); }
+  get input_nseta() { return this.caracterizacionVertebradosNacionalForm.get('nseta'); }
+  get input_ndica() { return this.caracterizacionVertebradosNacionalForm.get('ndica'); }
+
+  get input_nmarb() { return this.caracterizacionVertebradosNacionalForm.get('nmarb'); }
+  get input_njunb() { return this.caracterizacionVertebradosNacionalForm.get('njunb'); }
+  get input_nsetb() { return this.caracterizacionVertebradosNacionalForm.get('nsetb'); }
+  get input_ndicb() { return this.caracterizacionVertebradosNacionalForm.get('ndicb'); }
+
+  get input_comfenolg() { return this.caracterizacionVertebradosNacionalForm.get('comfenolg'); }
+  get input_comfenoln() { return this.caracterizacionVertebradosNacionalForm.get('comfenoln'); }
+
+  //Reproducción
+  get input_colrep() { return this.caracterizacionVertebradosNacionalForm.get('colrep'); }
+  get input_comrepg() { return this.caracterizacionVertebradosNacionalForm.get('comrepg'); }
+  get input_comrepn() { return this.caracterizacionVertebradosNacionalForm.get('comrepn'); }
+
+  /*  Página 5
+   *  Manejo
+   */
+  get input_commanejog() { return this.caracterizacionVertebradosNacionalForm.get('commanejog'); }
+  get input_commanejon() { return this.caracterizacionVertebradosNacionalForm.get('commanejon'); }
+  //atributos misceláneos
+  get input_usoeconom() { return this.caracterizacionVertebradosNacionalForm.get('usoeconom'); }
+  get input_longitud() { return this.caracterizacionVertebradosNacionalForm.get('longitud'); }
+  get input_peso() { return this.caracterizacionVertebradosNacionalForm.get('peso'); }
+  //campos opcionales
+  get input_rcvnopc1() { return this.caracterizacionVertebradosNacionalForm.get('rcvnopc1'); }
+  get input_rcvnopc2() { return this.caracterizacionVertebradosNacionalForm.get('rcvnopc2'); }
+  get input_rcvnopc3() { return this.caracterizacionVertebradosNacionalForm.get('rcvnopc3'); }
+  get input_rcvnopc4() { return this.caracterizacionVertebradosNacionalForm.get('rcvnopc4'); }
+  get input_rcvnopc5() { return this.caracterizacionVertebradosNacionalForm.get('rcvnopc5'); }
+  //referencias
+  get input_refg() { return this.caracterizacionVertebradosNacionalForm.get('refg'); }
+  get input_refn() { return this.caracterizacionVertebradosNacionalForm.get('refn'); }
+  //matenimiento del registro
+  get input_ediciong() { return this.caracterizacionVertebradosNacionalForm.get('ediciong'); }
+  get input_actualizag() { return this.caracterizacionVertebradosNacionalForm.get('actualizag'); }
+  get input_edicionn() { return this.caracterizacionVertebradosNacionalForm.get('edicionn'); }
+  get input_actualizan() { return this.caracterizacionVertebradosNacionalForm.get('actualizan'); }
+
 }
 function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {
   return {
