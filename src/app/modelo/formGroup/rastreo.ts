@@ -27,11 +27,16 @@ export class rastreo_Elemento_FormGroup {
             val_transparencias = "" + true;
         if (val_transparencias_Aux == false)
             val_transparencias = "" + false;
-
+            
+        /**
+         * Los ♦ representan los mat-select el resto salvo rastreoId se valida su tamaño  
+         */
         return fb.group({
             'rastreoId': re.rastreoId,
-            //pagina1
-            //identificadores
+            /**
+             * identificadores
+             * Página1
+             */
             'codigoe': re.codigoe,
             'tropicos': re.tropicos,
             'nacion': re.nacion,
@@ -45,53 +50,56 @@ export class rastreo_Elemento_FormGroup {
             'autor': re.autor,
             'fuentenom': re.fuentenom,
             'refnombreg': re.refnombreg,
-            'disttax': re.disttax,
-            'dudatax': re.dudatax,
+            'disttax': re.disttax,//♦
+            'dudatax': re.dudatax,//♦
             'nomcomung': re.nomcomung,
             'comtaxg': re.comtaxg,
             //taxonomia (nacional)
             'nombren': re.nombren,
-            'numsinn': re.numsinn,
+            'numsinn': re.numsinn,//Number
             'nomcomunn': re.nomcomunn,
             'comtaxn': re.comtaxn,
-            //status (global)
-            'rangog': re.rangog,
+            /**
+             * Status (global)
+             * Página 2
+             */
+            'rangog': re.rangog,//♦
             'fecharevrg': fechaServicio.getFecha(re.fecharevrg),
-            'formularg': re.formularg,
+            'formularg': re.formularg,//♦
             'resprg': re.resprg,
             'aepeu': re.aepeu,
             'fechaaepeu': fechaServicio.getFecha(re.fechaaepeu),
-            'cites': re.cites,
-            'iucn': re.iucn,
-            'planscons': re.planscons,
+            'cites': re.cites,//♦
+            'iucn': re.iucn,//♦
+            'planscons': re.planscons,//♦
             'resplan': re.resplan,
-            'resumenman': re.resumenman,
+            'resumenman': re.resumenman,//♦
             'resresumen': re.resresumen,
-            'exsitu': val_exsitu,
+            'exsitu': val_exsitu,//♦
             'instexsitu': re.instexsitu,
-            'endemismo': re.endemismo,
+            'endemismo': re.endemismo,//♦
             //status (nacional)
-            'rangon': re.rangon,
+            'rangon': re.rangon,//♦
             'fecharevrn': fechaServicio.getFecha(re.fecharevrn),
-            'formularn': re.formularn,
+            'formularn': re.formularn,//♦
             'rastreolen': re.rastreolen,
             'lestimn': re.lestimn,
             'leprotn': re.leprotn,
             'abundn': re.abundn,
             'protnacion': re.protnacion,
             'refnombren': re.refnombren,
-            'transparencian': val_transparencian,
+            'transparencian': val_transparencian,//♦
             //status (subnacional)
-            'rangos': re.rangos,
+            'rangos': re.rangos,//♦
             'fecharevrs': fechaServicio.getFecha(re.fecharevrs),
-            'formulars': re.formulars,
+            'formulars': re.formulars,//♦
             'rastreoles': re.rastreoles,
             'lestims': re.lestims,
             'leprots': re.leprots,
             'abunds': re.abunds,
             'protsubnac': re.protsubnac,
             'refnombres': re.refnombres,
-            'transparencias': val_transparencias,
+            'transparencias': val_transparencias,//♦
             //campos opcionales
             'reopc1': re.reopc1,
             'reopc2': re.reopc2,

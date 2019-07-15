@@ -85,12 +85,18 @@ export class localizacion_FormGroup {
             val_fotos = "" + true;
         if (val_fotos_Aux == false)
             val_fotos = "" + false;
+
+        /**
+         * Los ♦ representan los mat-select el resto salvo localizacionId se valida su tamaño  
+         */
         return fb.group({
             'localizacionId': row.localizacionId,
-            //página1
-            //identificadores
+            /**
+             * Identificadores
+             * Página1
+             */
             'codigole': row.codigole,
-            'ident': val_ident,
+            'ident': val_ident,//♦
             'nombres': row.nombres,
             'nomcomuns': row.nomcomuns,
             'rangog': row.rangog,
@@ -102,7 +108,7 @@ export class localizacion_FormGroup {
             'codsitio': row.codsitio,
             'nomsitio': row.nomsitio,
             'sitioeva': row.sitioeva,
-            'precisionl': row.precisionl,
+            'precisionl': row.precisionl,//palabra reservada en java
             'nommapa': row.nommapa,
             'codmapa': row.codmapa,
             'nummarg': row.nummarg,
@@ -121,28 +127,30 @@ export class localizacion_FormGroup {
             'fechaeva': fechaServicio.getFecha(row.fechaeva),
             'ultobs': fechaServicio.getFecha(row.ultobs),
             'priobs': row.priobs,
-            'rangole': row.rangole,
+            'rangole': row.rangole,//♦
             'fecharangole': fechaServicio.getFecha(row.fecharangole),
             'comrangole': row.comrangole,
             //'resprg': '',
             'datosle': row.datosle,
             'contacto': row.contacto,
             'numcontacto': row.numcontacto,
-            //descripción
+            /**
+             * Página 2
+             * Descripción
+             */
             'desgen': row.desgen,
-            'elev': row.elev,
-            'area': row.area,
-            //protección
-            //'lista_proteccion': '',
-            'masterreno': val_masterreno,
-            'masprotec': val_masprotec,
-            'masmanejo': val_masmanejo,
-            'involtnc': val_involtnc,
+            'elev': row.elev,//Number
+            'area': row.area,//Number
+            //Protección
+            'masterreno': val_masterreno,//♦
+            'masprotec': val_masprotec,//♦
+            'masmanejo': val_masmanejo,//♦
+            'involtnc': val_involtnc,//♦
             'commanejo': row.commanejo,
             'comprot': row.comprot,
-            //propietario
+            //Propietario
             'prop': row.prop,
-            'infprop': val_infprop,
+            'infprop': val_infprop,//♦
             'comprop': row.comprop,
             //campos opcionales
             'leopc1': row.leopc1,
@@ -155,18 +163,20 @@ export class localizacion_FormGroup {
             'leopc8': row.leopc8,
             'leopc9': row.leopc9,
             'leopc10': row.leopc10,
-            //comentarios generales
+            /**
+             * Página 3
+             * Comentarios generales
+             */
             'comentario': row.comentario,
             //documentación y mantenimiento
-            'sensdatos': val_sensdatos,
-            'limites': val_limites,
-            'fotos': val_fotos,
+            'sensdatos': val_sensdatos,//♦
+            'limites': val_limites,//♦
+            'fotos': val_fotos,//♦
             'mejorfuente': row.mejorfuente,
             'codfuente': row.codfuente,
-
-            'mdrev': val_mdrev,
+            'mdrev': val_mdrev,//♦
             'transcrito': fechaServicio.getFecha(row.transcrito),
-            'cc': val_cc,
+            'cc': val_cc,//♦
             'cartografo': fechaServicio.getFecha(row.cartografo),
             'respdatos': row.respdatos,
             'actualizar': fechaServicio.getFecha(row.actualizar)

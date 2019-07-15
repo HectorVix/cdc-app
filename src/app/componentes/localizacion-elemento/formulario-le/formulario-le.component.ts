@@ -351,6 +351,83 @@ export class FormularioLeComponent implements OnInit {
       event.confirm.reject();
     }
   }
+  /**
+   * Lleva el control de los errores al validar los 56 campos
+   */
+  get input_codigole() { return this.leForm.get('codigole'); }
+  get input_nombres() { return this.leForm.get('nombres'); }
+  get input_nomcomuns() { return this.leForm.get('nomcomuns'); }
+  get input_rangog() { return this.leForm.get('rangog'); }
+  get input_rangon() { return this.leForm.get('rangon'); }
+  get input_rangos() { return this.leForm.get('rangos'); }
+  //localizadores
+  get input_subnacion() { return this.leForm.get('subnacion'); }
+  get input_subdivision() { return this.leForm.get('subdivision'); }
+  get input_codsitio() { return this.leForm.get('codsitio'); }
+  get input_nomsitio() { return this.leForm.get('nomsitio'); }
+  get input_sitioeva() { return this.leForm.get('sitioeva'); }
+  get input_precisionl() { return this.leForm.get('precisionl'); }
+  get input_nommapa() { return this.leForm.get('nommapa'); }
+  get input_codmapa() { return this.leForm.get('codmapa'); }
+  get input_nummarg() { return this.leForm.get('nummarg'); }
+  get input_numpunto() { return this.leForm.get('numpunto'); }
+  get input_diezdiez() { return this.leForm.get('diezdiez'); }
+  /**
+   * Campos para integrar con el mapa
+   */
+  get input_latitud() { return this.leForm.get('latitud'); }
+  get input_longitud() { return this.leForm.get('longitud'); }
+  get input_coords() { return this.leForm.get('coords'); }
+  get input_coordn() { return this.leForm.get('coordn'); }
+  get input_coorde() { return this.leForm.get('coorde'); }
+  get input_coordo() { return this.leForm.get('coordo'); }
+
+  get input_direccion() { return this.leForm.get('direccion'); }
+  get input_ecoregion() { return this.leForm.get('ecoregion'); }
+  get input_cuenca() { return this.leForm.get('cuenca'); }
+  // Status
+  get input_fechaeva() { return this.leForm.get('fechaeva'); }
+  get input_ultobs() { return this.leForm.get('ultobs'); }
+  get input_priobs() { return this.leForm.get('priobs'); }
+  get input_fecharangole() { return this.leForm.get('fecharangole'); }
+  get input_comrangole() { return this.leForm.get('comrangole'); }
+  get input_datosle() { return this.leForm.get('datosle'); }
+  get input_contacto() { return this.leForm.get('contacto'); }
+  get input_numcontacto() { return this.leForm.get('numcontacto'); }
+  /**
+   * Página 2
+   * Descripción
+   */
+  get input_desgen() { return this.leForm.get('desgen'); }
+  //Protección
+  get input_commanejo() { return this.leForm.get('commanejo'); }
+  get input_comprot() { return this.leForm.get('comprot'); }
+  //Propietario
+  get input_prop() { return this.leForm.get('prop'); }
+  get input_comprop() { return this.leForm.get('comprop'); }
+  //Campos opcionales
+  get input_leopc1() { return this.leForm.get('leopc1'); }
+  get input_leopc2() { return this.leForm.get('leopc2'); }
+  get input_leopc3() { return this.leForm.get('leopc3'); }
+  get input_leopc4() { return this.leForm.get('leopc4'); }
+  get input_leopc5() { return this.leForm.get('leopc5'); }
+  get input_leopc6() { return this.leForm.get('leopc6'); }
+  get input_leopc7() { return this.leForm.get('leopc7'); }
+  get input_leopc8() { return this.leForm.get('leopc8'); }
+  get input_leopc9() { return this.leForm.get('leopc9'); }
+  get input_leopc10() { return this.leForm.get('leopc10'); }
+  /**
+   * Página 3
+   * Comentarios generales
+   */
+  get input_comentario() { return this.leForm.get('comentario'); }
+  //Documentación y mantenimiento
+  get input_mejorfuente() { return this.leForm.get('mejorfuente'); }
+  get input_codfuente() { return this.leForm.get('codfuente'); }
+  get input_transcrito() { return this.leForm.get('transcrito'); }
+  get input_cartografo() { return this.leForm.get('cartografo'); }
+  get input_respdatos() { return this.leForm.get('respdatos'); }
+  get input_actualizar() { return this.leForm.get('actualizar'); }
 }
 function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {
   return {

@@ -137,7 +137,7 @@ export class ProtocoloLeComponent implements OnInit {
     protocoloLe.fecha = this.fechaServicio.toFormatoDateTime(protocoloLe.fecha);
     return protocoloLe;
   }
-  //agrega un nuevo registro localización elemento
+  //agrega un nuevo registro protocolo localización elemento
   addProtocoloLocalizacionElemento(protocoloLE: protocolo_LE_Modelo): void {
     this.loading = true;
     this.localizacionServicio.addProtocoloLE(protocoloLE)
@@ -361,6 +361,16 @@ export class ProtocoloLeComponent implements OnInit {
             this.changeSuccessMessage('No se pudo validar, comprueba que este disponible el servicio.', 'primary');
         });
   }
+  /**
+    * Lleva el control de los errores al validar los 7 campos
+    */
+  get input_codigoe() { return this.protocoloLeForm.get('codigoe'); }
+  get input_rangog() { return this.protocoloLeForm.get('rangog'); }
+  get input_rangon() { return this.protocoloLeForm.get('rangon'); }
+  get input_rangos() { return this.protocoloLeForm.get('rangos'); }
+  get input_nombre() { return this.protocoloLeForm.get('nombre'); }
+  get input_nomcomun() { return this.protocoloLeForm.get('nomcomun'); }
+  get input_fecha() { return this.protocoloLeForm.get('fecha'); }
 }
 function crearProtocoloLE(k: Number, protocoloId: Number, codigoe, nombre, nomcomun): protocoloLE_Dato {
   return {

@@ -266,6 +266,68 @@ export class FormularioReComponent implements OnInit {
     if (this.reForm.get('codigoe').value)
       this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
   }
+  /** 
+   *  Lleva el control de los errores (47 campos se validan)
+   *  Página 1 
+   *  Identificadores
+   */
+  get input_codigoe() { return this.reForm.get('codigoe'); }
+  get input_tropicos() { return this.reForm.get('tropicos'); }
+  get input_nacion() { return this.reForm.get('nacion'); }
+  get input_subnacion() { return this.reForm.get('subnacion'); }
+  //taxonomia (global)
+  get input_clasetax() { return this.reForm.get('clasetax'); }
+  get input_orden() { return this.reForm.get('orden'); }
+  get input_familia() { return this.reForm.get('familia'); }
+  get input_genero() { return this.reForm.get('genero'); }
+  get input_nombreg() { return this.reForm.get('nombreg'); }
+  get input_autor() { return this.reForm.get('autor'); }
+  get input_fuentenom() { return this.reForm.get('fuentenom'); }
+  get input_refnombreg() { return this.reForm.get('refnombreg'); }
+  get input_comtaxg() { return this.reForm.get('comtaxg'); }
+  //taxonomia (nacional)
+  get input_nombren() { return this.reForm.get('nombren'); }
+  get input_numsinn() { return this.reForm.get('numsinn'); }
+  get input_nomcomunn() { return this.reForm.get('nomcomunn'); }
+  get input_comtaxn() { return this.reForm.get('comtaxn'); }
+  /**
+   * status (global)
+   * Página 2
+   */
+  get input_fecharevrg() { return this.reForm.get('fecharevrg'); }
+  get input_resprg() { return this.reForm.get('resprg'); }
+  get input_aepeu() { return this.reForm.get('aepeu'); }
+  get input_fechaaepeu() { return this.reForm.get('fechaaepeu'); }
+  get input_resresumen() { return this.reForm.get('resresumen'); }
+  get input_instexsitu() { return this.reForm.get('instexsitu'); }
+  //status (nacional)
+  get input_fecharevrn() { return this.reForm.get('fecharevrn'); }
+  get input_rastreolen() { return this.reForm.get('rastreolen'); }
+  get input_lestimn() { return this.reForm.get('lestimn'); }
+  get input_leprotn() { return this.reForm.get('leprotn'); }
+  get input_abundn() { return this.reForm.get('abundn'); }
+  get input_protnacion() { return this.reForm.get('protnacion'); }
+  get input_refnombren() { return this.reForm.get('refnombren'); }
+  //status (subnacional)
+  get input_fecharevrs() { return this.reForm.get('fecharevrs'); }
+  get input_rastreoles() { return this.reForm.get('rastreoles'); }
+  get input_lestims() { return this.reForm.get('lestims'); }
+  get input_leprots() { return this.reForm.get('leprots'); }
+  get input_abunds() { return this.reForm.get('abunds'); }
+  get input_protsubnac() { return this.reForm.get('protsubnac'); }
+  get input_refnombres() { return this.reForm.get('refnombres'); }
+  //campos opcionales
+  get input_reopc1() { return this.reForm.get('reopc1'); }
+  get input_reopc2() { return this.reForm.get('reopc2'); }
+  get input_reopc3() { return this.reForm.get('reopc3'); }
+  get input_reopc4() { return this.reForm.get('reopc4'); }
+  get input_reopc5() { return this.reForm.get('reopc5'); }
+  // manteniiento del registro
+  get input_codfuenten() { return this.reForm.get('codfuenten'); }
+  get input_codfuentes() { return this.reForm.get('codfuentes'); }
+  get input_actualizag() { return this.reForm.get('actualizag'); }
+  get input_actualizan() { return this.reForm.get('actualizan'); }
+  get input_actualizas() { return this.reForm.get('actualizas'); }
 }
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   return {
