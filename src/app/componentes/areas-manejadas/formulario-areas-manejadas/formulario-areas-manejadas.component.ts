@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_areasManejadas } from '../../../modelo/select/overview-area';
 import { AreaService } from '../../../servicios/area/area.service';
@@ -9,7 +9,7 @@ import { area_Modelo } from '../../../modelo/area/area-modelo';
 import { listaElemento_Modelo } from '../../../modelo/area/listaElemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { area_FormGroup } from '../../../modelo/formGroup/area';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { area_Dato } from '../../../modelo/tabla/area-dato';
 import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
@@ -399,7 +399,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
     }
   }
   getFoto_Datos(areaId: Number) {
-    const date = new Date().valueOf();
+    // const date = new Date().valueOf();
     this.galeriaServicio.getDatosFotos(areaId, 3).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
@@ -414,6 +414,59 @@ export class FormularioAreasManejadasComponent implements OnInit {
         }
       });
   }
+  /**
+   * Lleva el control de los errores al validar los 39 campos
+   * Página 1
+   * Identificadores
+   */
+  get input_codigoam() { return this.areaManejoForm.get('codigoam'); }
+  get input_nombream() { return this.areaManejoForm.get('nombream'); }
+  get input_sinam() { return this.areaManejoForm.get('sinam'); }
+  get input_ammayor() { return this.areaManejoForm.get('ammayor'); }
+  get input_coddueno() { return this.areaManejoForm.get('coddueno'); }
+  get input_codsitio() { return this.areaManejoForm.get('codsitio'); }
+  get input_nomsitio() { return this.areaManejoForm.get('nomsitio'); }
+  // Localizadores
+  get input_nacion() { return this.areaManejoForm.get('nacion'); }
+  get input_subnacion() { return this.areaManejoForm.get('subnacion'); }
+  get input_subdivision() { return this.areaManejoForm.get('subdivision'); }
+  get input_nommapa() { return this.areaManejoForm.get('nommapa'); }
+  get input_codmapa() { return this.areaManejoForm.get('codmapa'); }
+  get input_nummarg() { return this.areaManejoForm.get('nummarg'); }
+  get input_lat() { return this.areaManejoForm.get('lat'); }
+  get input_long1() { return this.areaManejoForm.get('long1'); }
+  get input_coords() { return this.areaManejoForm.get('coords'); }
+  get input_coordn() { return this.areaManejoForm.get('coordn'); }
+  get input_coorde() { return this.areaManejoForm.get('coorde'); }
+  get input_coordo() { return this.areaManejoForm.get('coordo'); }
+  // Descriptores
+  get input_descripcion() { return this.areaManejoForm.get('descripcion'); }
+  get input_comentario() { return this.areaManejoForm.get('comentario'); }
+  // Status
+  get input_fechaesta() { return this.areaManejoForm.get('fechaesta'); }
+  /**
+   * Página 2
+   * Manejo
+   */
+  get input_administrador() { return this.areaManejoForm.get('administrador'); }
+  get input_instadmin() { return this.areaManejoForm.get('instadmin'); }
+  get input_diradmin1() { return this.areaManejoForm.get('diradmin1'); }
+  get input_diradmin2() { return this.areaManejoForm.get('diradmin2'); }
+  get input_ciudadadmin() { return this.areaManejoForm.get('ciudadadmin'); }
+  get input_subnacadmin() { return this.areaManejoForm.get('subnacadmin'); }
+  get input_codpostaladmin() { return this.areaManejoForm.get('codpostaladmin'); }
+  get input_telefadminist() { return this.areaManejoForm.get('telefadminist'); }
+  get input_instcoop() { return this.areaManejoForm.get('instcoop'); }
+  get input_commanejo() { return this.areaManejoForm.get('commanejo'); }
+  // Campos Opcionales
+  get input_amopc1() { return this.areaManejoForm.get('amopc1'); }
+  get input_amopc2() { return this.areaManejoForm.get('amopc2'); }
+  get input_amopc3() { return this.areaManejoForm.get('amopc3'); }
+  get input_amopc4() { return this.areaManejoForm.get('amopc4'); }
+  get input_amopc5() { return this.areaManejoForm.get('amopc5'); }
+  // Mantenimiento del Registro
+  get input_respdatos() { return this.areaManejoForm.get('respdatos'); }
+  get input_actualizar() { return this.areaManejoForm.get('actualizar'); }
 
 }
 function crearArea(k: Number, areaId: Number, codigoam, nombream, codsitio, nomsitio): area_Dato {

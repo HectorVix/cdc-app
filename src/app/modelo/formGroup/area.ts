@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { area_Modelo } from '../../modelo/area/area-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
-import { retryWhen } from 'rxjs/operators';
+// import { retryWhen } from 'rxjs/operators';
 export class area_FormGroup {
     constructor() { }
     getAreaFormGrup(row: area_Modelo): FormGroup {
@@ -15,6 +15,9 @@ export class area_FormGroup {
             row.involtnc = null;
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
+        /**
+         * Los ♦ representan los mat-select el resto salvo localizacionId se valida su tamaño  
+         */
         return fb.group({
             'areaId': row.areaId,
             //página1
@@ -34,7 +37,7 @@ export class area_FormGroup {
             'codmapa': row.codmapa,
             'nummarg': row.nummarg,
             'lat': row.lat,
-            'long1': row.long1,
+            'long1': row.long1,//palabra reservada en Java (long)
             'coords': row.coords,
             'coordn': row.coordn,
             'coorde': row.coorde,
@@ -45,15 +48,18 @@ export class area_FormGroup {
             'areatot2': row.areatot2, //number
             'areasubnac1': row.areasubnac1,//number
             'areasubnac2': row.areasubnac2,//number
-            'multisubnac': row.multisubnac, //boolean
-            'limites': row.limites,//boolean
-            'continua': row.continua,//boolean
-            'involtnc': row.involtnc, //boolean
+            'multisubnac': row.multisubnac, //boolean ♦
+            'limites': row.limites,//boolean ♦
+            'continua': row.continua,//boolean ♦
+            'involtnc': row.involtnc, //boolean ♦
             'comentario': row.comentario,
             //status
             'fechaesta': fechaServicio.getFecha(row.fechaesta),
-            'protasign': row.protasign, //varchar(1)
-            //manejo
+            'protasign': row.protasign, //varchar(1) ♦
+            /**
+             * Página 2 
+             * Manejo
+             */
             'administrador': row.administrador,
             'instadmin': row.instadmin,
             'diradmin1': row.diradmin1,
@@ -62,11 +68,10 @@ export class area_FormGroup {
             'subnacadmin': row.subnacadmin,
             'codpostaladmin': row.codpostaladmin,
             'telefadminist': row.telefadminist,
-            'accesopub': row.accesopub, //varchar(1)
+            'accesopub': row.accesopub, //varchar(1) ♦
             'instcoop': row.instcoop,
             'commanejo': row.commanejo,
-            //elementos
-            // 'lista_elementos': '',// lista de codigoe,nombres, status y codfuente
+            //elementos               
             //campos opcionales
             'amopc1': row.amopc1,
             'amopc2': row.amopc2,

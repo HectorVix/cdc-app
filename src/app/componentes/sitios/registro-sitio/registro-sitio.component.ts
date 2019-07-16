@@ -511,6 +511,60 @@ export class RegistroSitioComponent implements OnInit {
         }
       });
   }
+  /**
+  * Lleva el control de los errores al validar los 40 campos
+  * Página 1
+  * Identificadores
+  */
+  get input_codsitio() { return this.sitioForm.get('codsitio'); }
+  get input_nomsitio() { return this.sitioForm.get('nomsitio'); }
+  get input_sinsitio() { return this.sitioForm.get('sinsitio'); }
+  // Localizadores
+  get input_nacion() { return this.sitioForm.get('nacion'); }
+  get input_subnacion() { return this.sitioForm.get('subnacion'); }
+  get input_siteresp() { return this.sitioForm.get('siteresp'); }
+  get input_lat() { return this.sitioForm.get('lat'); }
+  get input_long1() { return this.sitioForm.get('long1'); }
+  get input_coords() { return this.sitioForm.get('coords'); }
+  get input_coordn() { return this.sitioForm.get('coordn'); }
+  get input_coorde() { return this.sitioForm.get('coorde'); }
+  get input_coordo() { return this.sitioForm.get('coordo'); }
+  get input_direccion() { return this.sitioForm.get('direccion'); }
+  // Descripción del Sitio y su Diseño
+  get input_descrito() { return this.sitioForm.get('descrito'); }
+  get input_fechamapa() { return this.sitioForm.get('fechamapa'); }
+  get input_dibujante() { return this.sitioForm.get('dibujante'); }
+  get input_justlimite() { return this.sitioForm.get('justlimite'); }
+  get input_comsitio() { return this.sitioForm.get('comsitio'); }
+  /**
+    * Página 2
+    * Importancia del sitio 
+    */
+  get input_comrango() { return this.sitioForm.get('comrango'); }
+  get input_comdivbiol() { return this.sitioForm.get('comdivbiol'); }
+  get input_comnodivbiol() { return this.sitioForm.get('comnodivbiol'); }
+  get input_comurgencia() { return this.sitioForm.get('comurgencia'); }
+  get input_intenccons() { return this.sitioForm.get('intenccons'); }
+  get input_coddesig() { return this.sitioForm.get('coddesig'); }
+  get input_designacion() { return this.sitioForm.get('designacion'); }
+  get input_comprot() { return this.sitioForm.get('comprot'); }
+  // Administración
+  get input_comusotierra() { return this.sitioForm.get('comusotierra'); }
+  get input_compeligrnat() { return this.sitioForm.get('compeligrnat'); }
+  get input_comexoticas() { return this.sitioForm.get('comexoticas'); }
+  get input_usotierraf() { return this.sitioForm.get('usotierraf'); }
+  get input_necinform() { return this.sitioForm.get('necinform'); }
+  get input_necmanejo() { return this.sitioForm.get('necmanejo'); }
+  get input_comam() { return this.sitioForm.get('comam'); }
+  // Campos Opcionales
+  get input_rbsopc1() { return this.sitioForm.get('rbsopc1'); }
+  get input_rbsopc2() { return this.sitioForm.get('rbsopc2'); }
+  get input_rbsopc3() { return this.sitioForm.get('rbsopc3'); }
+  get input_rbsopc4() { return this.sitioForm.get('rbsopc4'); }
+  get input_rbsopc5() { return this.sitioForm.get('rbsopc5'); }
+  // Mantenimiento del Registro
+  get input_respdatos() { return this.sitioForm.get('respdatos'); }
+  get input_actualizar() { return this.sitioForm.get('actualizar'); }
 }
 function crearSitio(k: Number, sitioId: Number, codigoSitio, nombreSitio, sinonimoSitio, nacion, depto): sitio_Dato {
   return {

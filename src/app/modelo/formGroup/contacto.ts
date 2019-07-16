@@ -29,8 +29,8 @@ export class contacto_FormGroup {
             'codpostal': row.codpostal,
             'masident': row.masident,
             'smsa': row.smsa,
-            'teleftrabajo': row.teleftrabajo, //*number
-            'telefhogar': row.telefhogar,   //*number
+            'teleftrabajo': row.teleftrabajo, //number
+            'telefhogar': row.telefhogar,   //number
             //tipos de contactos
             'tipocont': row.tipocont,
             //actividades con el contacto
@@ -39,7 +39,7 @@ export class contacto_FormGroup {
             'resumen': row.resumen,
             //documentación y mantenimiento
             'coddirp': row.coddirp,
-            'actualizar': fechaServicio.getFecha(row.actualizar)//*date
+            'actualizar': fechaServicio.getFecha(row.actualizar)//date
         });
     }
 }

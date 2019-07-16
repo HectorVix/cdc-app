@@ -6,6 +6,9 @@ export class sitio_FormGroup {
     getSitioFormGrup(row: sitio_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
         var fb: FormBuilder = new FormBuilder();
+        /**
+         * Los ♦ representan los mat-select el resto salvo localizacionId se valida su tamaño  
+         */
         return fb.group({
             'sitioId': row.sitioId,
             //página1
@@ -18,7 +21,7 @@ export class sitio_FormGroup {
             'subnacion': row.subnacion,
             'siteresp': row.siteresp,
             'lat': row.lat,
-            'long1': row.long1,
+            'long1': row.long1,//palabra reservada en Java
             'coords': row.coords,
             'coordn': row.coordn,
             'coorde': row.coorde,
@@ -26,31 +29,34 @@ export class sitio_FormGroup {
             'direccion': row.direccion,
             //descripción del sitio/diseño
             'descrito': row.descrito,
-            'mapasitio': row.mapasitio,
+            'mapasitio': row.mapasitio,//♦
             'fechamapa': fechaServicio.getFecha(row.fechamapa),
             'dibujante': row.dibujante,
             'justlimite': row.justlimite,
-            'areaprisec1': row.areaprisec1,
-            'areaprisec2': row.areaprisec2,
-            'areapri1': row.areapri1,
-            'areapri2': row.areapri2,
-            'areatotal1': row.areatotal1,
-            'areatotal2': row.areatotal2,
+            'areaprisec1': row.areaprisec1,//Number
+            'areaprisec2': row.areaprisec2,//Number
+            'areapri1': row.areapri1,//Number
+            'areapri2': row.areapri2,//Number
+            'areatotal1': row.areatotal1,//Number
+            'areatotal2': row.areatotal2,//Number
             'comsitio': row.comsitio,
-            //importancia del sitio
-            'rangoant': row.rangoant,
+            /**
+             * Página 2
+             * Importancia del sitio 
+             */
+            'rangoant': row.rangoant,//♦
             'comrango': row.comrango,
-            'impdivbiol': row.impdivbiol,
+            'impdivbiol': row.impdivbiol,//♦
             'comdivbiol': row.comdivbiol,
-            'impnodivbiol': row.impnodivbiol,
+            'impnodivbiol': row.impnodivbiol,//♦
             'comnodivbiol': row.comnodivbiol,
-            'urgencia': row.urgencia,
+            'urgencia': row.urgencia,//♦
             'comurgencia': row.comurgencia,
             //bienes raíces y protección
             'intenccons': row.intenccons,
-            'numlotes': row.numlotes,
-            'costestprot1': row.costestprot1,
-            'costestprot2': row.costestprot2,
+            'numlotes': row.numlotes,//Number
+            'costestprot1': row.costestprot1,//Number
+            'costestprot2': row.costestprot2,//Number
             'coddesig': row.coddesig,
             'designacion': row.designacion,
             'comprot': row.comprot,

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ContactoService } from '../../../servicios/contacto/contacto.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 import { contacto_Modelo } from '../../../modelo/contacto/contacto-modelo';
 //--------------tabla------------------------------------
 import { contacto_FormGroup } from '../../../modelo/formGroup/contacto';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { contacto_Dato } from '../../../modelo/tabla/contacto-dato';
 import { LocalDataSource } from 'ng2-smart-table';
 
@@ -305,7 +305,40 @@ export class FormularioContactosComponent implements OnInit {
       this.changeSuccessMessage('No se ha ingredado un  CÓDIGO DE LA FUENTE, por favor ingresa uno.', 'warning');
     }
   }
-
+  /**
+   * Lleva el control de los errores al validar los 24 campos
+   * Página 1
+   * Identificadores
+   */
+  get input_numident() { return this.contactosForm.get('numident'); }
+  get input_nombreident() { return this.contactosForm.get('nombreident'); }
+  get input_titulo() { return this.contactosForm.get('titulo'); }
+  get input_nombre() { return this.contactosForm.get('nombre'); }
+  get input_apellido1() { return this.contactosForm.get('apellido1'); }
+  get input_apellido2() { return this.contactosForm.get('apellido2'); }
+  get input_sufijo() { return this.contactosForm.get('sufijo'); }
+  get input_posicion() { return this.contactosForm.get('posicion'); }
+  get input_institucion() { return this.contactosForm.get('institucion'); }
+  // Localizadores
+  get input_email() { return this.contactosForm.get('email'); }
+  get input_dir1() { return this.contactosForm.get('dir1'); }
+  get input_dir2() { return this.contactosForm.get('dir2'); }
+  get input_dir3() { return this.contactosForm.get('dir3'); }
+  get input_pais() { return this.contactosForm.get('pais'); }
+  get input_ciudad() { return this.contactosForm.get('ciudad'); }
+  get input_subnacion() { return this.contactosForm.get('subnacion'); }
+  get input_codpostal() { return this.contactosForm.get('codpostal'); }
+  get input_masident() { return this.contactosForm.get('masident'); }
+  get input_smsa() { return this.contactosForm.get('smsa'); }
+  // Tipos de Contacto
+  get input_tipocont() { return this.contactosForm.get('tipocont'); }
+  // Actividades con el Contacto
+  get input_activcont() { return this.contactosForm.get('activcont'); }
+  // Descripción
+  get input_resumen() { return this.contactosForm.get('resumen'); }
+  // Documentación y Mantenimiento
+  get input_coddirp() { return this.contactosForm.get('coddirp'); }
+  get input_actualizar() { return this.contactosForm.get('actualizar'); }
 }
 function crearContacto(k: Number, contactoId: Number, numident, nombre, apellido1, apellido2): contacto_Dato {
   return {
