@@ -544,6 +544,7 @@ export class RegistroSitioComponent implements OnInit {
   get input_comdivbiol() { return this.sitioForm.get('comdivbiol'); }
   get input_comnodivbiol() { return this.sitioForm.get('comnodivbiol'); }
   get input_comurgencia() { return this.sitioForm.get('comurgencia'); }
+  // Biene raices y protección
   get input_intenccons() { return this.sitioForm.get('intenccons'); }
   get input_coddesig() { return this.sitioForm.get('coddesig'); }
   get input_designacion() { return this.sitioForm.get('designacion'); }
