@@ -353,6 +353,7 @@ export class FormularioLeComponent implements OnInit {
   }
   /**
    * Lleva el control de los errores al validar los 56 campos
+   * Identificadores
    */
   get input_codigole() { return this.leForm.get('codigole'); }
   get input_nombres() { return this.leForm.get('nombres'); }
@@ -386,9 +387,9 @@ export class FormularioLeComponent implements OnInit {
   get input_ecoregion() { return this.leForm.get('ecoregion'); }
   get input_cuenca() { return this.leForm.get('cuenca'); }
   // Status
+  get input_priobs() { return this.leForm.get('priobs'); }
   get input_fechaeva() { return this.leForm.get('fechaeva'); }
   get input_ultobs() { return this.leForm.get('ultobs'); }
-  get input_priobs() { return this.leForm.get('priobs'); }
   get input_fecharangole() { return this.leForm.get('fecharangole'); }
   get input_comrangole() { return this.leForm.get('comrangole'); }
   get input_datosle() { return this.leForm.get('datosle'); }

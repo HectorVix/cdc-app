@@ -284,6 +284,7 @@ export class FormularioReComponent implements OnInit {
   get input_autor() { return this.reForm.get('autor'); }
   get input_fuentenom() { return this.reForm.get('fuentenom'); }
   get input_refnombreg() { return this.reForm.get('refnombreg'); }
+  get input_nomcomung() { return this.reForm.get('nomcomung'); }
   get input_comtaxg() { return this.reForm.get('comtaxg'); }
   //taxonomia (nacional)
   get input_nombren() { return this.reForm.get('nombren'); }

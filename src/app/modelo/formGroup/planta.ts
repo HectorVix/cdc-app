@@ -9,15 +9,15 @@ export class planta_FormGroup {
         return fb.group({
             'plantaId': row.plantaId,
             //identificadores
-            'codigoe': new FormControl(row.codigoe, Validators.maxLength(10)),
-            'nacion': new FormControl(row.nacion, Validators.maxLength(10)),
-            'nombren': new FormControl(row.nombren, Validators.maxLength(10)),
-            'nomcomunn': new FormControl(row.nomcomunn, Validators.maxLength(10)),
+            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10),Validators.required]),
+            'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
+            'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
+            'nomcomunn': new FormControl(row.nomcomunn, Validators.maxLength(60)),
             //taxonomía
-            'comsubespn': new FormControl(row.comsubespn, Validators.maxLength(10)),
-            'taxasimiln': new FormControl(row.taxasimiln, Validators.maxLength(10)),
-            'comidentn': new FormControl(row.comidentn, Validators.maxLength(10)),
-            'comtaxn': new FormControl(row.comtaxn, Validators.maxLength(10)),
+            'comsubespn': new FormControl(row.comsubespn, Validators.maxLength(120)),
+            'taxasimiln': new FormControl(row.taxasimiln, Validators.maxLength(120)),
+            'comidentn': new FormControl(row.comidentn, Validators.maxLength(120)),
+            'comtaxn': new FormControl(row.comtaxn, Validators.maxLength(120)),
             //status
             'rangog': new FormControl(row.rangog, Validators.maxLength(10)),
             'rangon': new FormControl(row.rangon, Validators.maxLength(10)),
@@ -26,20 +26,20 @@ export class planta_FormGroup {
             'uicn': new FormControl(row.uicn, Validators.maxLength(10)),
             'rastreolen': new FormControl(row.rastreolen, Validators.maxLength(10)),
             'protnacion': new FormControl(row.protnacion, Validators.maxLength(10)),
-            'malezan': new FormControl(row.clasifinstn, Validators.maxLength(10)),
-            'clasifinstn': new FormControl(row.clasifinstn, Validators.maxLength(10)),
-            'comstatn': new FormControl(row.comstatn, Validators.maxLength(10)),
+            'malezan': new FormControl(row.clasifinstn, Validators.maxLength(60)),
+            'clasifinstn': new FormControl(row.clasifinstn, Validators.maxLength(60)),
+            'comstatn': new FormControl(row.comstatn, Validators.maxLength(120)),
             //inventario
             'priinventn': new FormControl(row.priinventn, Validators.maxLength(10)),
-            'necinventn': new FormControl(row.necinventn, Validators.maxLength(10)),
-            'cominventn': new FormControl(row.cominventn, Validators.maxLength(10)),
-            'respropn': new FormControl(row.respropn, Validators.maxLength(10)),
+            'necinventn': new FormControl(row.necinventn, Validators.maxLength(120)),
+            'cominventn': new FormControl(row.cominventn, Validators.maxLength(120)),
+            'respropn': new FormControl(row.respropn, Validators.maxLength(60)),
             //ditribucion
             'elevminn': row.elevminn, //number
             'elevmaxn': row.elevmaxn, //number
             'disyuntn': new FormControl(row.disyuntn, Validators.maxLength(10)),
             'periferican': new FormControl(row.periferican, Validators.maxLength(10)),
-            'comdistn': new FormControl(row.comdistn, Validators.maxLength(10)),
+            'comdistn': new FormControl(row.comdistn, Validators.maxLength(120)),
             //habitat
             'marinon': new FormControl(row.marinon, Validators.maxLength(10)),
             'estuarinon': new FormControl(row.estuarinon, Validators.maxLength(10)),
@@ -47,9 +47,9 @@ export class planta_FormGroup {
             'lacustren': new FormControl(row.lacustren, Validators.maxLength(10)),
             'palustren': new FormControl(row.palustren, Validators.maxLength(10)),
             'terrestren': new FormControl(row.terrestren, Validators.maxLength(10)),
-            'comhabn': new FormControl(row.comhabn, Validators.maxLength(10)),
+            'comhabn': new FormControl(row.comhabn, Validators.maxLength(120)),
             //ecología
-            'comecoln': new FormControl(row.comecoln, Validators.maxLength(10)),
+            'comecoln': new FormControl(row.comecoln, Validators.maxLength(120)),
             /**
              *  Las posibles soluciones para hacer mas eficiente estos campos son:
              * 1: Crear una matriz de 6x16 y validar sobre ella
@@ -183,23 +183,23 @@ export class planta_FormGroup {
             'ndicb3': new FormControl(row.ndicb3, Validators.maxLength(2)),
             'ndicb4': new FormControl(row.ndicb4, Validators.maxLength(2)),
 
-            'comfenoln': new FormControl(row.comfenoln, Validators.maxLength(160)),
+            'comfenoln': new FormControl(row.comfenoln, Validators.maxLength(120)),
             //reproducción
-            'comrepn': new FormControl(row.comrepn, Validators.maxLength(10)),
+            'comrepn': new FormControl(row.comrepn, Validators.maxLength(120)),
             //manejo
-            'commanejon': new FormControl(row.commanejon, Validators.maxLength(10)),
+            'commanejon': new FormControl(row.commanejon, Validators.maxLength(120)),
             //campos opcionales
-            'rcpnopc1': new FormControl(row.rcpnopc1, Validators.maxLength(10)),
-            'rcpnopc2': new FormControl(row.rcpnopc2, Validators.maxLength(10)),
-            'rcpnopc3': new FormControl(row.rcpnopc3, Validators.maxLength(10)),
-            'rcpnopc4': new FormControl(row.rcpnopc4, Validators.maxLength(10)),
-            'rcpnopc5': new FormControl(row.rcpnopc5, Validators.maxLength(10)),
+            'rcpnopc1': new FormControl(row.rcpnopc1, Validators.maxLength(60)),
+            'rcpnopc2': new FormControl(row.rcpnopc2, Validators.maxLength(60)),
+            'rcpnopc3': new FormControl(row.rcpnopc3, Validators.maxLength(60)),
+            'rcpnopc4': new FormControl(row.rcpnopc4, Validators.maxLength(60)),
+            'rcpnopc5': new FormControl(row.rcpnopc5, Validators.maxLength(120)),
             //mantenimiento del registro
             'codfuente': new FormControl(row.codfuente, Validators.maxLength(10)),
-            'cita': new FormControl(row.cita, Validators.maxLength(10)),
+            'cita': new FormControl(row.cita, Validators.maxLength(60)),
             'transparen': new FormControl(row.transparen, Validators.maxLength(10)),
-            'refg': new FormControl(row.refg, Validators.maxLength(10)),
-            'refn': new FormControl(row.refn, Validators.maxLength(10)),
+            'refg': new FormControl(row.refg, Validators.maxLength(120)),
+            'refn': new FormControl(row.refn, Validators.maxLength(120)),
             'edicionn': fechaServicio.getFecha(row.edicionn), //date
             'autoredn': new FormControl(row.autoredn, Validators.maxLength(10)),
             'actualizan': fechaServicio.getFecha(row.actualizan), //date
