@@ -33,7 +33,7 @@ export class planta_FormGroup {
             'priinventn': new FormControl(row.priinventn, Validators.maxLength(10)),
             'necinventn': new FormControl(row.necinventn, Validators.maxLength(120)),
             'cominventn': new FormControl(row.cominventn, Validators.maxLength(120)),
-            'respropn': new FormControl(row.respropn, Validators.maxLength(60)),
+            'respropn': new FormControl(row.respropn, Validators.maxLength(10)),
             //ditribucion
             'elevminn': row.elevminn, //number
             'elevmaxn': row.elevmaxn, //number

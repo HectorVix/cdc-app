@@ -155,35 +155,39 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.caracterizacionPlantasNacionalForm = new planta_FormGroup().getPlantaFormGrup(planta);
   }
   guardarCPlanta() {
-    var cplanta = new caracterizacion_Modelo();
-    var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
-    var planta: Array<planta_Modelo> = new Array();
-    var distribucion: Array<distribucion_Modelo> = new Array();
-    var distribucion2: Array<distribucion2_Modelo> = new Array();
-    this.data_distribucion1_DataSource.getAll().then(value => {
-      value.forEach(elemento => {
-        var distribucionBase = new distribucion_Modelo();
-        distribucionBase.codsubnac = elemento.codsubnac;
-        distribucionBase.nomsubnac = elemento.nomsubnac;
-        distribucionBase.statsubnac = elemento.statsubnac;
-        distribucion.push(distribucionBase);
-      });
-      this.data_distribucion2_DataSource.getAll().then(value => {
+    if (this.caracterizacionPlantasNacionalForm.get('codigoe').value && this.caracterizacionPlantasNacionalForm.valid) {
+      var cplanta = new caracterizacion_Modelo();
+      var plantaBase = this.setPlanta(this.caracterizacionPlantasNacionalForm.value);
+      var planta: Array<planta_Modelo> = new Array();
+      var distribucion: Array<distribucion_Modelo> = new Array();
+      var distribucion2: Array<distribucion2_Modelo> = new Array();
+      this.data_distribucion1_DataSource.getAll().then(value => {
         value.forEach(elemento => {
-          var distribucion2Base = new distribucion2_Modelo();
-          distribucion2Base.codecoregn = elemento.codecoregn;
-          distribucion2Base.statecoregn = elemento.statecoregn;
-          distribucion2Base.codcuencan = elemento.codcuencan;
-          distribucion2Base.statcuencan = elemento.statcuencan;
-          distribucion2.push(distribucion2Base);
+          var distribucionBase = new distribucion_Modelo();
+          distribucionBase.codsubnac = elemento.codsubnac;
+          distribucionBase.nomsubnac = elemento.nomsubnac;
+          distribucionBase.statsubnac = elemento.statsubnac;
+          distribucion.push(distribucionBase);
         });
-        plantaBase.distribucionList = distribucion;
-        plantaBase.distribucion2List = distribucion2;
-        planta.push(plantaBase);
-        cplanta.plantaList = planta;
-        this.addCaracterizacionPlanta(cplanta);
+        this.data_distribucion2_DataSource.getAll().then(value => {
+          value.forEach(elemento => {
+            var distribucion2Base = new distribucion2_Modelo();
+            distribucion2Base.codecoregn = elemento.codecoregn;
+            distribucion2Base.statecoregn = elemento.statecoregn;
+            distribucion2Base.codcuencan = elemento.codcuencan;
+            distribucion2Base.statcuencan = elemento.statcuencan;
+            distribucion2.push(distribucion2Base);
+          });
+          plantaBase.distribucionList = distribucion;
+          plantaBase.distribucion2List = distribucion2;
+          planta.push(plantaBase);
+          cplanta.plantaList = planta;
+          this.addCaracterizacionPlanta(cplanta);
+        });
       });
-    });
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
 
   setPlanta(datos: planta_Modelo): planta_Modelo {
@@ -205,7 +209,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la caracterizacion de la planta :${resPlanta.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar la caracterizacion de la planta.', 'primary');
+          this.changeSuccessMessage('Error no se pudo registrar, el códigoe de la planta debe ser valido', 'primary');
         });
   }
 
@@ -340,10 +344,10 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         });
   }
   editarPlanta() {
-    if (this.caracterizacionPlantasNacionalForm.get('codigoe').value)
+    if (this.caracterizacionPlantasNacionalForm.get('codigoe').value && this.caracterizacionPlantasNacionalForm.valid)
       this.updatePlanta(this.setPlanta(this.caracterizacionPlantasNacionalForm.value));
     else
-      this.changeSuccessMessage('El código de la planta es obligatorio para editar.', 'warning');
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -651,7 +655,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
 
   get input_nabra1() { return this.caracterizacionPlantasNacionalForm.get('nabra1'); }
   get input_nabra2() { return this.caracterizacionPlantasNacionalForm.get('nabra2'); }
-  get input_nabra3() { return this.caracterizacionPlantasNacionalForm.get('nabra3 '); }
+  get input_nabra3() { return this.caracterizacionPlantasNacionalForm.get('nabra3'); }
   get input_nabra4() { return this.caracterizacionPlantasNacionalForm.get('nabra4'); }
 
   get input_njuna1() { return this.caracterizacionPlantasNacionalForm.get('njuna1'); }
