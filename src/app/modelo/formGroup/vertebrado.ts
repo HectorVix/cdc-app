@@ -63,7 +63,7 @@ export class vertebrado_FormGroup {
             'lacustre': new FormControl(row.lacustre, Validators.maxLength(120)),
             'palustre': new FormControl(row.palustre, Validators.maxLength(120)),
             'terrestre': new FormControl(row.terrestre, Validators.maxLength(120)),
-            'subterran': new FormControl(row.subterran, Validators.maxLength(60)),
+            'subterran': new FormControl(row.subterran, Validators.maxLength(10)),
             'factorespe': new FormControl(row.factorespe, Validators.maxLength(120)),
             'comhabg': new FormControl(row.comhabg, Validators.maxLength(120)),
             'comhabrep': new FormControl(row.comhabrep, Validators.maxLength(120)),
@@ -111,7 +111,7 @@ export class vertebrado_FormGroup {
             'comfenolg': new FormControl(row.comfenolg, Validators.maxLength(120)),
             'comfenoln': new FormControl(row.comfenoln, Validators.maxLength(120)),
             //reproducción
-            'colrep': new FormControl(row.colrep, Validators.maxLength(60)),
+            'colrep': new FormControl(row.colrep, Validators.maxLength(10)),
             'comrepg': new FormControl(row.comrepg, Validators.maxLength(120)),
             'comrepn': new FormControl(row.comrepn, Validators.maxLength(120)),
             //manejo
@@ -130,7 +130,7 @@ export class vertebrado_FormGroup {
             //referencias
             'refg': new FormControl(row.refg, Validators.maxLength(120)),
             'refn': new FormControl(row.refn, Validators.maxLength(120)),
-            //matenimiento del registro
+            //mantenimiento del registro
             'ediciong': fechaServicio.getFecha(row.ediciong), //date
             'actualizag': fechaServicio.getFecha(row.actualizag), //date
             'edicionn': fechaServicio.getFecha(row.edicionn),  //date

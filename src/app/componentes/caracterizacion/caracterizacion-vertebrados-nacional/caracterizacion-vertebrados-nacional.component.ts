@@ -153,36 +153,40 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.caracterizacionVertebradosNacionalForm = new vertebrado_FormGroup().getVertebradoFormGrup(vertebrado);
   }
   guardar_Caracterizacion_Vertebrado() {
-    var caracterizacion_Vertebrado = new caracterizacion_Modelo();
-    var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value);
-    var vertebrado: Array<vertebrado_Modelo> = new Array();
-    var distribucion1: Array<distribucion_Modelo> = new Array();
-    var distribucion2: Array<distribucion2_Modelo> = new Array();
+    if (this.caracterizacionVertebradosNacionalForm.get('codigoe').value && this.caracterizacionVertebradosNacionalForm.valid) {
+      var caracterizacion_Vertebrado = new caracterizacion_Modelo();
+      var vertebradoBase = this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value);
+      var vertebrado: Array<vertebrado_Modelo> = new Array();
+      var distribucion1: Array<distribucion_Modelo> = new Array();
+      var distribucion2: Array<distribucion2_Modelo> = new Array();
 
-    this.data_distribucion1_DataSource.getAll().then(value => {
-      value.forEach(elemento => {
-        var distribucion1Base = new distribucion_Modelo();
-        distribucion1Base.codsubnac = elemento.codsubnac;
-        distribucion1Base.nomsubnac = elemento.nomsubnac;
-        distribucion1Base.statsubnac = elemento.statsubnac;
-        distribucion1.push(distribucion1Base);
-      });
-      this.data_distribucion2_DataSource.getAll().then(value => {
+      this.data_distribucion1_DataSource.getAll().then(value => {
         value.forEach(elemento => {
-          var distribucion2Base = new distribucion2_Modelo();
-          distribucion2Base.codecoregn = elemento.codecoregn;
-          distribucion2Base.statecoregn = elemento.statecoregn;
-          distribucion2Base.codcuencan = elemento.codcuencan;
-          distribucion2Base.statcuencan = elemento.statcuencan;
-          distribucion2.push(distribucion2Base);
+          var distribucion1Base = new distribucion_Modelo();
+          distribucion1Base.codsubnac = elemento.codsubnac;
+          distribucion1Base.nomsubnac = elemento.nomsubnac;
+          distribucion1Base.statsubnac = elemento.statsubnac;
+          distribucion1.push(distribucion1Base);
         });
-        vertebradoBase.distribucionList = distribucion1;
-        vertebradoBase.distribucion2List = distribucion2;
-        vertebrado.push(vertebradoBase);
-        caracterizacion_Vertebrado.vertebradoList = vertebrado;
-        this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
+        this.data_distribucion2_DataSource.getAll().then(value => {
+          value.forEach(elemento => {
+            var distribucion2Base = new distribucion2_Modelo();
+            distribucion2Base.codecoregn = elemento.codecoregn;
+            distribucion2Base.statecoregn = elemento.statecoregn;
+            distribucion2Base.codcuencan = elemento.codcuencan;
+            distribucion2Base.statcuencan = elemento.statcuencan;
+            distribucion2.push(distribucion2Base);
+          });
+          vertebradoBase.distribucionList = distribucion1;
+          vertebradoBase.distribucion2List = distribucion2;
+          vertebrado.push(vertebradoBase);
+          caracterizacion_Vertebrado.vertebradoList = vertebrado;
+          this.addCaracterizacionVertebrado(caracterizacion_Vertebrado);
+        });
       });
-    });
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
 
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
@@ -207,7 +211,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la caracterizacion del vertebrado :${resVertebrado.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se pudo regitrar la caracterizacion del vertebrado. Comprueba que exista el elemento, verifica que el servidor este disponible , tiene que estar activo CORS Toggle',
+          this.changeSuccessMessage('No se pudo regitrar la caracterizacion del vertebrado. Comprueba que exista el codigoe del elemento ó comprueba que esté disponible el servicio.',
             'primary');
         });
   }
@@ -344,14 +348,14 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, el codigo del Vertebrado debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio', 'primary');
         });
   }
   editarVertebrado() {
-    if (this.caracterizacionVertebradosNacionalForm.get('codigoe').value)
+    if (this.caracterizacionVertebradosNacionalForm.get('codigoe').value && this.caracterizacionVertebradosNacionalForm.valid)
       this.updateVertebrado(this.setVertebrado(this.caracterizacionVertebradosNacionalForm.value));
     else
-      this.changeSuccessMessage('El código del vertebrado es obligatorio para editar.', 'warning');
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -602,6 +606,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   get input_terrestre() { return this.caracterizacionVertebradosNacionalForm.get('terrestre'); }
   get input_subterran() { return this.caracterizacionVertebradosNacionalForm.get('subterran'); }
   get input_factorespe() { return this.caracterizacionVertebradosNacionalForm.get('factorespe'); }
+  get input_comhabg() { return this.caracterizacionVertebradosNacionalForm.get('comhabg'); }
   get input_comhabrep() { return this.caracterizacionVertebradosNacionalForm.get('comhabrep'); }
   get input_comhabn() { return this.caracterizacionVertebradosNacionalForm.get('comhabn'); }
   /* Página 3

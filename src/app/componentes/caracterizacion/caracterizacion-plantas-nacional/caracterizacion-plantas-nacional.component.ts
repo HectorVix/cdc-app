@@ -209,7 +209,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
           this.changeSuccessMessage(`Se registro la caracterizacion de la planta :${resPlanta.codigoe}.`, 'success');
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo registrar, el códigoe de la planta debe ser valido', 'primary');
+          this.changeSuccessMessage('Error no se pudo registrar, el códigoe de la planta debe ser valido ó comprueba que el servicio esté disponible.', 'primary');
         });
   }
 
