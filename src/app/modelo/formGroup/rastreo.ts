@@ -37,8 +37,8 @@ export class rastreo_Elemento_FormGroup {
              * identificadores
              * Página1
              */
-            'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10),Validators.required]),
-            'tropicos': new FormControl(re.tropicos, Validators.maxLength(10)),
+            'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10), Validators.required]),
+            'tropicos': new FormControl(re.tropicos, Validators.maxLength(60)),
             'nacion': new FormControl(re.nacion, Validators.maxLength(60)),
             'subnacion': new FormControl(re.subnacion, Validators.maxLength(60)),
             //taxonomia (global)

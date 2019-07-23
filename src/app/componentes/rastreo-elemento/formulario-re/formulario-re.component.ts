@@ -1,22 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common'
+//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DISABLED } from '@angular/forms/src/model';
-import { disableDebugTools } from '@angular/platform-browser';
+//import { DISABLED } from '@angular/forms/src/model';
+//import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/select/overview-rastreo';
 import { RastreoService } from '../../../servicios/rastreo/rastreo.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
-import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
 import { rastreo_Elemento_FormGroup } from '../../../modelo/formGroup/rastreo';
+//----------Base información---------------
+import { rastreo_Elemento_Identificadores_Modelo } from '../../../modelo/formGroup/base-Informacion/rastreo-Elemento/modelo';
+import { rastreo_Elemento_Informacion_FormGroup } from '../../../modelo/formGroup/base-Informacion/rastreo-Elemento/rastreo-Elemento';
+
 
 @Component({
   selector: 'app-formulario-re',
@@ -59,7 +63,10 @@ export class FormularioReComponent implements OnInit {
   guardar = false;
   elementoId_Aux: any;
   elementoId: Number;
-
+  //------------base información
+  nacion: string;
+  base_Informacion_Form: FormGroup;
+  
   constructor(
     private fb: FormBuilder,
     private rastreoServicio: RastreoService,
@@ -69,6 +76,9 @@ export class FormularioReComponent implements OnInit {
     this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+    this.crearForm_Base_Informacion();
+    //Información base
+    this.crearForm_Base_Informacion();
   }
 
   ngOnInit() {
@@ -174,7 +184,7 @@ export class FormularioReComponent implements OnInit {
     });
   }
   crearForm_Buscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigo': '',
       'subnacion': '',
       'nombreg': '',
@@ -329,6 +339,12 @@ export class FormularioReComponent implements OnInit {
   get input_actualizag() { return this.reForm.get('actualizag'); }
   get input_actualizan() { return this.reForm.get('actualizan'); }
   get input_actualizas() { return this.reForm.get('actualizas'); }
+
+  crearForm_Base_Informacion() {
+    var re = new rastreo_Elemento_Identificadores_Modelo();
+    re.nacion = 'hola';
+    this.base_Informacion_Form = new rastreo_Elemento_Informacion_FormGroup().valores_Identificadores(re);
+  }
 }
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   return {
