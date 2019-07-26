@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common'
+//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DISABLED } from '@angular/forms/src/model';
-import { disableDebugTools } from '@angular/platform-browser';
+//import { DISABLED } from '@angular/forms/src/model';
+//import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/select/overview-rastreo';
 import { RastreoService } from '../../../servicios/rastreo/rastreo.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
-import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
 import { rastreo_Elemento_FormGroup } from '../../../modelo/formGroup/rastreo';
 
@@ -93,11 +93,11 @@ export class FormularioReComponent implements OnInit {
   }
 
   guardarRastreoElemento() {
-    if (this.reForm.get('codigoe').value) {
+    if (this.reForm.get('codigoe').value && this.reForm.valid) {
       this.addRastroeElemento(this.setRastreoElemento(this.reForm.value));
     }
     else
-      this.changeSuccessMessage('El codigoe es obligatorio', 'primary');
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
     datos.fecharevrg = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrg').value);
@@ -263,8 +263,10 @@ export class FormularioReComponent implements OnInit {
         });
   }
   editarRastreoElemento() {
-    if (this.reForm.get('codigoe').value)
+    if (this.reForm.get('codigoe').value && this.reForm.valid)
       this.updateRastreoElemento(this.setRastreoElemento(this.reForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica..', 'primary');
   }
   /** 
    *  Lleva el control de los errores (47 campos se validan)
@@ -299,6 +301,7 @@ export class FormularioReComponent implements OnInit {
   get input_resprg() { return this.reForm.get('resprg'); }
   get input_aepeu() { return this.reForm.get('aepeu'); }
   get input_fechaaepeu() { return this.reForm.get('fechaaepeu'); }
+  get input_resplan() { return this.reForm.get('resplan'); }
   get input_resresumen() { return this.reForm.get('resresumen'); }
   get input_instexsitu() { return this.reForm.get('instexsitu'); }
   //status (nacional)

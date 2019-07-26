@@ -38,7 +38,7 @@ export class rastreo_Elemento_FormGroup {
              * Página1
              */
             'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10),Validators.required]),
-            'tropicos': new FormControl(re.tropicos, Validators.maxLength(10)),
+            'tropicos': new FormControl(re.tropicos, Validators.maxLength(60)),
             'nacion': new FormControl(re.nacion, Validators.maxLength(60)),
             'subnacion': new FormControl(re.subnacion, Validators.maxLength(60)),
             //taxonomia (global)
@@ -49,7 +49,7 @@ export class rastreo_Elemento_FormGroup {
             'nombreg': new FormControl(re.nombreg, Validators.maxLength(60)),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
             'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(10)),
-            'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(10)),
+            'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(60)),
             'disttax': re.disttax,//♦
             'dudatax': re.dudatax,//♦
             'nomcomung': new FormControl(re.nomcomung, Validators.maxLength(60)),
@@ -65,16 +65,16 @@ export class rastreo_Elemento_FormGroup {
              */
             'rangog': re.rangog,//♦
             'formularg': re.formularg,//♦
-            'resprg': new FormControl(re.resprg, Validators.maxLength(20)),
+            'resprg': new FormControl(re.resprg, Validators.maxLength(10)),
             'fecharevrg': fechaServicio.getFecha(re.fecharevrg),
-            'aepeu': new FormControl(re.aepeu, Validators.maxLength(20)),
+            'aepeu': new FormControl(re.aepeu, Validators.maxLength(10)),
             'cites': re.cites,//♦
             'iucn': re.iucn,//♦
             'fechaaepeu': fechaServicio.getFecha(re.fechaaepeu),
             'planscons': re.planscons,//♦
-            'resplan': new FormControl(re.resplan, Validators.maxLength(20)),
+            'resplan': new FormControl(re.resplan, Validators.maxLength(10)),
             'resumenman': re.resumenman,//♦
-            'resresumen': new FormControl(re.resresumen, Validators.maxLength(20)),
+            'resresumen': new FormControl(re.resresumen, Validators.maxLength(10)),
             'exsitu': val_exsitu,//♦
             'instexsitu': new FormControl(re.instexsitu, Validators.maxLength(10)),
             'endemismo': re.endemismo,//♦
@@ -83,21 +83,21 @@ export class rastreo_Elemento_FormGroup {
             'formularn': re.formularn,//♦
             'rastreolen': new FormControl(re.rastreolen, Validators.maxLength(10)),
             'fecharevrn': fechaServicio.getFecha(re.fecharevrn),
-            'lestimn': new FormControl(re.lestimn, Validators.maxLength(20)),
-            'leprotn': new FormControl(re.leprotn, Validators.maxLength(20)),
-            'abundn': new FormControl(re.abundn, Validators.maxLength(20)),
-            'protnacion': new FormControl(re.protnacion, Validators.maxLength(20)),
-            'refnombren': new FormControl(re.refnombren, Validators.maxLength(10)),
+            'lestimn': new FormControl(re.lestimn, Validators.maxLength(10)),
+            'leprotn': new FormControl(re.leprotn, Validators.maxLength(10)),
+            'abundn': new FormControl(re.abundn, Validators.maxLength(10)),
+            'protnacion': new FormControl(re.protnacion, Validators.maxLength(10)),
+            'refnombren': new FormControl(re.refnombren, Validators.maxLength(60)),
             'transparencian': val_transparencian,//♦
             //status (subnacional)
             'rangos': re.rangos,//♦
             'formulars': re.formulars,//♦
-            'rastreoles': new FormControl(re.rastreoles, Validators.maxLength(20)),
+            'rastreoles': new FormControl(re.rastreoles, Validators.maxLength(10)),
             'fecharevrs': fechaServicio.getFecha(re.fecharevrs),
-            'lestims': new FormControl(re.lestims, Validators.maxLength(20)),
-            'leprots': new FormControl(re.leprots, Validators.maxLength(20)),
-            'abunds': new FormControl(re.abunds, Validators.maxLength(20)),
-            'protsubnac': new FormControl(re.protsubnac, Validators.maxLength(20)),
+            'lestims': new FormControl(re.lestims, Validators.maxLength(10)),
+            'leprots': new FormControl(re.leprots, Validators.maxLength(10)),
+            'abunds': new FormControl(re.abunds, Validators.maxLength(10)),
+            'protsubnac': new FormControl(re.protsubnac, Validators.maxLength(10)),
             'refnombres': new FormControl(re.refnombres, Validators.maxLength(60)),
             'transparencias': val_transparencias,//♦
             //campos opcionales
