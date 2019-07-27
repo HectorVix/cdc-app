@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common'
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
@@ -12,11 +12,11 @@ import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-m
 import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
 import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
-import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
-import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato';
+import { LocalDataSource } from 'ng2-smart-table';
+//import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato';
 
 @Component({
   selector: 'app-formulario-le',
@@ -120,19 +120,23 @@ export class FormularioLeComponent implements OnInit {
   }
 
   guardarLocalizacion() {
-    var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
-    var proteccion: Array<proteccion_Modelo> = new Array();
-    this.data_proteccion_DataSource.getAll().then(value => {
-      value.forEach(elemento => {
-        var proteccionBase = new proteccion_Modelo();
-        proteccionBase.codigoam = elemento.codigoam;
-        proteccionBase.nombream = elemento.nombream;
-        proteccionBase.contenido = elemento.contenido;
-        proteccion.push(proteccionBase);
+    if (this.leForm.get('codigole').value && this.leForm.valid) {
+      var localizacionElementoBase = this.setLocalizacionElemento(this.leForm.value);
+      var proteccion: Array<proteccion_Modelo> = new Array();
+      this.data_proteccion_DataSource.getAll().then(value => {
+        value.forEach(elemento => {
+          var proteccionBase = new proteccion_Modelo();
+          proteccionBase.codigoam = elemento.codigoam;
+          proteccionBase.nombream = elemento.nombream;
+          proteccionBase.contenido = elemento.contenido;
+          proteccion.push(proteccionBase);
+        });
+        localizacionElementoBase.proteccionList = proteccion;
+        this.addLocalizacionElemento(localizacionElementoBase);
       });
-      localizacionElementoBase.proteccionList = proteccion;
-      this.addLocalizacionElemento(localizacionElementoBase);
-    });
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigole es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
     datos.fechaeva = this.fechaServicio.toFormatoDateTime(this.leForm.get('fechaeva').value);
@@ -197,7 +201,10 @@ export class FormularioLeComponent implements OnInit {
     });
   }
   editar_LocalizacionElemento() {
-    this.updateLocalizacionElemento(this.setLocalizacionElemento(this.leForm.value));
+    if (this.leForm.get('codigole').value && this.leForm.valid)
+      this.updateLocalizacionElemento(this.setLocalizacionElemento(this.leForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica.', 'primary');
   }
   buscarLE() {
     this.lista_LE = new Array();
@@ -275,7 +282,7 @@ export class FormularioLeComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.lista_LE);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('Error no se pudo editar, comprueba que esté disponible el servicio', 'primary');
+          this.changeSuccessMessage('Error no se pudo editar, el codigole no se puede repetir ó comprueba que esté disponible el servicio', 'primary');
         });
   }
   resProteccionLista: any;
