@@ -117,21 +117,25 @@ export class ProtocoloLeComponent implements OnInit {
     this.protocoloLeForm = new protocolo_LE_FormGroup().getProtocolo_LE_FormGrup(row);
   }
   guardarProtocolo() {
-    var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
-    var dispersionLista: Array<dispersion_Modelo> = new Array();
-    this.data_dispersion_DataSource.getAll().then(value => {
-      value.forEach(elemento => {
-        var dispersionBase = new dispersion_Modelo();
-        dispersionBase.le = elemento.le;
-        dispersionBase.nommapanummarg = elemento.nommapanummarg;
-        dispersionBase.prov = elemento.prov;
-        dispersionBase.direccion = elemento.direccion;
-        dispersionBase.ultobs = elemento.ultobs;
-        dispersionLista.push(dispersionBase);
+    if (this.protocoloLeForm.get('codigoe').value && this.protocoloLeForm.valid) {
+      var protocoloLE_Base = this.setProtocoloLE(this.protocoloLeForm.value);
+      var dispersionLista: Array<dispersion_Modelo> = new Array();
+      this.data_dispersion_DataSource.getAll().then(value => {
+        value.forEach(elemento => {
+          var dispersionBase = new dispersion_Modelo();
+          dispersionBase.le = elemento.le;
+          dispersionBase.nommapanummarg = elemento.nommapanummarg;
+          dispersionBase.prov = elemento.prov;
+          dispersionBase.direccion = elemento.direccion;
+          dispersionBase.ultobs = elemento.ultobs;
+          dispersionLista.push(dispersionBase);
+        });
+        protocoloLE_Base.dispersionList = dispersionLista;
+        this.addProtocoloLocalizacionElemento(protocoloLE_Base);
       });
-      protocoloLE_Base.dispersionList = dispersionLista;
-      this.addProtocoloLocalizacionElemento(protocoloLE_Base);
-    });
+    }
+    else
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos estén correctos donde se te indica.', 'primary');
   }
   setProtocoloLE(protocoloLe): protocolo_LE_Modelo {
     protocoloLe.fecha = this.fechaServicio.toFormatoDateTime(protocoloLe.fecha);
@@ -256,8 +260,10 @@ export class ProtocoloLeComponent implements OnInit {
         });
   }
   editarProtocoloLE() {
-    if (this.protocoloLeForm.get('codigoe').value)
+    if (this.protocoloLeForm.get('codigoe').value && this.protocoloLeForm.valid)
       this.updatePrtocoloLE(this.setProtocoloLE(this.protocoloLeForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica.', 'primary');
   }
   nuevo() {
     this.editar = true;

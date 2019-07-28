@@ -57,8 +57,8 @@ export class sitio_FormGroup {
             'numlotes': row.numlotes,//Number
             'costestprot1': row.costestprot1,//Number
             'costestprot2': row.costestprot2,//Number
-            'coddesig': new FormControl(row.coddesig, Validators.maxLength(20)),
-            'designacion': new FormControl(row.designacion, Validators.maxLength(20)),
+            'coddesig': new FormControl(row.coddesig, Validators.maxLength(10)),
+            'designacion': new FormControl(row.designacion, Validators.maxLength(10)),
             'comprot': new FormControl(row.comprot, Validators.maxLength(120)),
             //administración
             'comusotierra': new FormControl(row.comusotierra, Validators.maxLength(120)),
@@ -75,7 +75,7 @@ export class sitio_FormGroup {
             'rbsopc4': new FormControl(row.rbsopc4, Validators.maxLength(60)),
             'rbsopc5': new FormControl(row.rbsopc5, Validators.maxLength(120)),
             //mantenimiento del registro
-            'respdatos': new FormControl(row.respdatos, Validators.maxLength(20)),
+            'respdatos': new FormControl(row.respdatos, Validators.maxLength(10)),
             'actualizar': fechaServicio.getFecha(row.actualizar)
         });
     }

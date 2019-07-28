@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup ,FormControl,Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Localizacion_Modelo } from '../../modelo/localizacion/localizacion-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 export class localizacion_FormGroup {
@@ -95,7 +95,7 @@ export class localizacion_FormGroup {
              * Identificadores
              * Página1
              */
-            'codigole': new FormControl(row.codigole, Validators.maxLength(10)),
+            'codigole': new FormControl(row.codigole, [Validators.maxLength(10), Validators.required]),
             'ident': val_ident,//♦
             'nombres': new FormControl(row.nombres, Validators.maxLength(60)),
             'nomcomuns': new FormControl(row.nomcomuns, Validators.maxLength(60)),

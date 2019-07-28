@@ -12,18 +12,23 @@
                             <mat-tab label="1">
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Identificadores</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Identificadores</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="">CODSITIO:</label>
                                         </div>
-                                        <div class="md-form col-md-4 mt-5 " *ngIf="editar">
-                                            <input mdbInputDirective type="text" id="formNomcomungs"
-                                                class="form-control" formControlName="codsitio" data-error=" "
-                                                data-success=" ">
+                                        <div class="md-form col-md-4 mt10 " *ngIf="editar">
+                                            <input mdbInputDirective mdbValidate type="text" id="formNomcomungs"
+                                                class="form-control" formControlName="codsitio">
+                                            <mdb-error
+                                                *ngIf="input_codsitio.invalid && (input_codsitio.dirty || input_codsitio.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
-                                        <div class="md-form col-md-4 mt-5 " *ngIf="guardar">
+                                        <div class="md-form col-md-4 mt10 " *ngIf="guardar">
                                             <input mdbInputDirective type="text" id="formNomcomungs"
                                                 class="form-control" formControlName="codsitio" data-error=" "
                                                 data-success=" " disabled>
@@ -34,9 +39,12 @@
                                             <label for="">NOMSITIO:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-20">
-                                            <input mdbInputDirective type="text" id="formNomsitio" class="form-control"
-                                                formControlName="nomsitio" data-error=" " data-success=" ">
-                                            <label for="formNomsitio"></label>
+                                            <input mdbInputDirective mdbValidate type="text" id="formNomsitio"
+                                                class="form-control" formControlName="nomsitio">
+                                            <mdb-error
+                                                *ngIf="input_nomsitio.invalid && (input_nomsitio.dirty || input_nomsitio.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -45,10 +53,14 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-20">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formSinsitio"
-                                                class="md-textarea form-control" formControlName="sinsitio" rows="2"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formSinsitio"
+                                                class="md-textarea form-control" formControlName="sinsitio"
+                                                rows="2"></textarea>
                                             <label for="formSinsitio">Anote</label>
+                                            <mdb-error
+                                                *ngIf="input_sinsitio.invalid && (input_sinsitio.dirty || input_sinsitio.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row  mx-auto color-green">
@@ -62,27 +74,52 @@
                                 </div>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Localizadores</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Localizadores</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="">NACION:</label>
                                         </div>
-                                        <div class="md-form col-md-2 mt10">
-                                            <input mdbInputDirective type="text" id="formNacion" class="form-control"
-                                                formControlName="nacion" data-error=" " data-success=" ">
-                                        </div>
-                                        <div class="md-form col-md-2 mt10">
-                                            <input mdbInputDirective type="text" id="formSubnacion" class="form-control"
-                                                formControlName="subnacion" data-error=" " data-success=" ">
-                                            <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;SUBNACION</label>
-                                        </div>
-                                        <div class="md-form col-md-2 mt10">
-                                            <input mdbInputDirective type="text" id="formSiteresp" class="form-control"
-                                                formControlName="siteresp" data-error=" " data-success=" ">
-                                            <label for="formSiteresp">&nbsp;&nbsp;&nbsp;&nbsp;SITERESP</label>
+                                        <div class="md-form col-md-9 mt10">
+                                            <input mdbInputDirective mdbValidate type="text" id="formNacion"
+                                                class="form-control" formControlName="nacion">
+                                            <mdb-error
+                                                *ngIf="input_nacion.invalid && (input_nacion.dirty || input_nacion.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
+                                    <!-- fin row -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">SUBNACION:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20">
+                                            <input mdbInputDirective mdbValidate type="text" id="formSubnacion"
+                                                class="form-control" formControlName="subnacion">
+                                            <mdb-error
+                                                *ngIf="input_subnacion.invalid && (input_subnacion.dirty || input_subnacion.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
+                                        </div>
+                                    </div>
+                                    <!-- fin row -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">SITERESP:</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20">
+                                            <input mdbInputDirective mdbValidate type="text" id="formSiteresp"
+                                                class="form-control" formControlName="siteresp">
+                                            <mdb-error
+                                                *ngIf="input_siteresp.invalid && (input_siteresp.dirty || input_siteresp.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
+                                        </div>
+                                    </div>
+                                    <!-- fin row -->
                                     <div class="row  mx-auto color-green">
                                         <ng2-smart-table [settings]="settings_Localizadores_Sitio"
                                             [source]="data_subdivision_DataSource"
@@ -96,14 +133,21 @@
                                             <label for="">LAT:</label>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
-                                            <input mdbInputDirective type="text" id="formLat" class="form-control"
-                                                formControlName="lat" data-error=" " data-success=" ">
-                                            <label for="formLat"></label>
+                                            <input mdbInputDirective mdbValidate type="text" id="formLat"
+                                                class="form-control" formControlName="lat">
+                                            <mdb-error
+                                                *ngIf="input_lat.invalid && (input_lat.dirty || input_lat.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
-                                            <input mdbInputDirective type="text" id="formLong" class="form-control"
-                                                formControlName="long1" data-error=" " data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formLong"
+                                                class="form-control" formControlName="long1">
                                             <label for="formLong">&nbsp;&nbsp;&nbsp;&nbsp;LONG</label>
+                                            <mdb-error
+                                                *ngIf="input_long1.invalid && (input_long1.dirty || input_long1.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -111,24 +155,39 @@
                                             <label for="">S:</label>
                                         </div>
                                         <div class="md-form  col-md-2 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formS" class="form-control"
-                                                formControlName="coords" data-error=" " data-success=" ">
-                                            <label for="formS"></label>
+                                            <input mdbInputDirective mdbValidate type="text" id="formS"
+                                                class="form-control" formControlName="coords">
+                                            <mdb-error
+                                                *ngIf="input_coords.invalid && (input_coords.dirty || input_coords.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formN" class="form-control"
-                                                formControlName="coordn" data-error=" " data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formN"
+                                                class="form-control" formControlName="coordn">
                                             <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
+                                            <mdb-error
+                                                *ngIf="input_coordn.invalid && (input_coordn.dirty || input_coordn.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formE" class="form-control"
-                                                formControlName="coorde" data-error=" " data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formE"
+                                                class="form-control" formControlName="coorde">
                                             <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
+                                            <mdb-error
+                                                *ngIf="input_coorde.invalid && (input_coorde.dirty || input_coorde.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formO" class="form-control"
-                                                formControlName="coordo" data-error=" " data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formO"
+                                                class="form-control" formControlName="coordo">
                                             <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
+                                            <mdb-error
+                                                *ngIf="input_coordo.invalid && (input_coordo.dirty || input_coordo.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -137,18 +196,24 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formDireccion"
-                                                class="md-textarea form-control" formControlName="direccion" rows="3"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formDireccion"
+                                                class="md-textarea form-control" formControlName="direccion"
+                                                rows="2"></textarea>
                                             <label for="formDireccion">Anote la dirección exacta al Sitio. Utilice una
                                                 marca ubicable y que sea relativamente
                                                 permanente en o cerca del sitio, como punto de partida.</label>
+                                            <mdb-error
+                                                *ngIf="input_direccion.invalid && (input_direccion.dirty || input_direccion.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Descriptores del Sitio/Diseño</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Descriptores del Sitio/Diseño</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
@@ -156,11 +221,15 @@
                                         </div>
                                         <div class="md-form  col-md-9">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formDescrito"
-                                                class="md-textarea form-control" formControlName="descrito" rows="3"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formDescrito"
+                                                class="md-textarea form-control" formControlName="descrito"
+                                                rows="2"></textarea>
                                             <label for="formDescrito">Escriba una descripción visual, general, del
                                                 Sitio.</label>
+                                            <mdb-error
+                                                *ngIf="input_descrito.invalid && (input_descrito.dirty || input_descrito.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -179,27 +248,37 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
-                                        <div class="md-form col-md-2  input-group-append mt-20">
-                                            <input mdbInputDirective type="text" id="formFechamapa" class="form-control"
-                                                formControlName="fechamapa" data-error=" " data-success=" "
-                                                ngbDatepicker #dFechamapa="ngbDatepicker">
+                                        <div class="md-form col-md-2 mt-20">
+                                            <input mdbInputDirective mdbValidate type="text" id="formFechamapa"
+                                                class="form-control" formControlName="fechamapa" ngbDatepicker
+                                                #dFechamapa="ngbDatepicker">
                                             <label for="formFechamapa">&nbsp;&nbsp;&nbsp;&nbsp;FECHAMAPA</label>
-                                            <div (click)="dFechamapa.toggle()">
-                                                <i class="fa fa-calendar prefix"></i>
-                                            </div>
+                                            <mdb-error
+                                                *ngIf="input_fechamapa.invalid && (input_fechamapa.dirty || input_fechamapa.touched)">
+                                                <font size=2 color="red">Error, el formato debe ser
+                                                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como
+                                                    ejemplo.</font>
+                                            </mdb-error>
+                                        </div>
+                                        <div class="md-form mt-20" (click)="dFechamapa.toggle()">
+                                            <i class="fa fa-calendar prefix"></i>
                                         </div>
                                     </div>
+                                    <!-- fin row -->
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="">DIBUJANTE:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formDibujantes"
-                                                class="form-control" formControlName="dibujante" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formDibujantes"
+                                                class="form-control" formControlName="dibujante">
                                             <label for="formDibujantes">&nbsp;&nbsp;&nbsp;&nbsp;Escriba el nombre de la
                                                 persona , quien diseño el Sitio
                                                 y determino sus limites.</label>
+                                            <mdb-error
+                                                *ngIf="input_dibujante.invalid && (input_dibujante.dirty || input_dibujante.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -208,12 +287,16 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formJustlimite"
-                                                class="md-textarea form-control" formControlName="justlimite" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formJustlimite"
+                                                class="md-textarea form-control" formControlName="justlimite"
+                                                rows="2"></textarea>
                                             <label for="formJustlimite">Explique los argumentos biológicos utilizados
                                                 para determinar la ubicación de
                                                 los limites primarios y secundarios del Sitio.</label>
+                                            <mdb-error
+                                                *ngIf="input_justlimite.invalid && (input_justlimite.dirty || input_justlimite.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -274,11 +357,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComsitio"
-                                                class="md-textarea form-control" formControlName="comsitio" rows="2"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComsitio"
+                                                class="md-textarea form-control" formControlName="comsitio"
+                                                rows="2"></textarea>
                                             <label for="formComsitio">Comentarios generales con respecto al
                                                 sitio.</label>
+                                            <mdb-error
+                                                *ngIf="input_comsitio.invalid && (input_comsitio.dirty || input_comsitio.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +379,9 @@
                             <mat-tab label="2">
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Importancia del Sitio</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Importancia del Sitio</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
@@ -317,11 +406,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComrango"
-                                                class="md-textarea form-control" formControlName="comrango" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComrango"
+                                                class="md-textarea form-control" formControlName="comrango"
+                                                rows="2"></textarea>
                                             <label for="formComrango">Escriba el comentario que justifique la jeraquía
                                                 ecológica del sitio que se indicó.</label>
+                                            <mdb-error
+                                                *ngIf="input_comrango.invalid && (input_comrango.dirty || input_comrango.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -347,13 +440,17 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComdivbiol"
-                                                class="md-textarea form-control" formControlName="comdivbiol" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComdivbiol"
+                                                class="md-textarea form-control" formControlName="comdivbiol"
+                                                rows="2"></textarea>
                                             <label for="formComdivbiol">Escriba un comentario que justifique la jeraquía
                                                 sobre significado para la diversidad
                                                 biológica.
                                             </label>
+                                            <mdb-error
+                                                *ngIf="input_comdivbiol.invalid && (input_comdivbiol.dirty || input_comdivbiol.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -379,13 +476,17 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComnodivbiol"
-                                                class="md-textarea form-control" formControlName="comnodivbiol" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComnodivbiol"
+                                                class="md-textarea form-control" formControlName="comnodivbiol"
+                                                rows="2"></textarea>
                                             <label for="formComnodivbiol">Escriba comentrios que justifiquen el
                                                 significado, no relacionado con la diversidad
                                                 biológica.
                                             </label>
+                                            <mdb-error
+                                                *ngIf="input_comnodivbiol.invalid && (input_comnodivbiol.dirty || input_comnodivbiol.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -411,19 +512,25 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComurgencia"
-                                                class="md-textarea form-control" formControlName="comurgencia" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComurgencia"
+                                                class="md-textarea form-control" formControlName="comurgencia"
+                                                rows="2"></textarea>
                                             <label for="formComurgencia">Escriba un comentario que justifique la
                                                 jerarquía de urgencia que se asigna al
                                                 Sitio.
                                             </label>
+                                            <mdb-error
+                                                *ngIf="input_comurgencia.invalid && (input_comurgencia.dirty || input_comurgencia.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Bienes Raíces y Protección</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Bienes Raíces y Protección</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
@@ -431,11 +538,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formIntenccons"
-                                                class="md-textarea form-control" formControlName="intenccons" rows="1"
-                                                data-error=" " data-success=" "></textarea>
-                                            <label for="formIntenccons">Resuma la intenciones de conservacion generales
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formIntenccons"
+                                                class="md-textarea form-control" formControlName="intenccons"
+                                                rows="2"></textarea>
+                                            <label for="formIntenccons">Resuma la intenciones de conservación generales
                                                 para el Sitio.</label>
+                                            <mdb-error
+                                                *ngIf="input_intenccons.invalid && (input_intenccons.dirty || input_intenccons.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -468,14 +579,21 @@
                                             <label for="">CODDESIG:</label>
                                         </div>
                                         <div class="md-form col-md-3 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formCoddesig" class="form-control"
-                                                formControlName="coddesig" data-error=" " data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formCoddesig"
+                                                class="form-control" formControlName="coddesig">
+                                            <mdb-error
+                                                *ngIf="input_coddesig.invalid && (input_coddesig.dirty || input_coddesig.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                         <div class="md-form col-md-3 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formDesignacion"
-                                                class="form-control" formControlName="designacion" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formDesignacion"
+                                                class="form-control" formControlName="designacion">
                                             <label for="formDesignacion">&nbsp;&nbsp;&nbsp;&nbsp;DESIGNACION</label>
+                                            <mdb-error
+                                                *ngIf="input_designacion.invalid && (input_designacion.dirty || input_designacion.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -484,17 +602,23 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-20">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComprot"
-                                                class="md-textarea form-control" formControlName="comprot" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComprot"
+                                                class="md-textarea form-control" formControlName="comprot"
+                                                rows="2"></textarea>
                                             <label for="formComprot">Resuma el nivel general de la protección
                                                 actualmente dada al sitio.</label>
+                                            <mdb-error
+                                                *ngIf="input_comprot.invalid && (input_comprot.dirty || input_comprot.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Administracción</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Administracción</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
@@ -502,11 +626,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComusotierra"
-                                                class="md-textarea form-control" formControlName="comusotierra" rows="1"
-                                                data-error=" " data-success=" " required></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComusotierra"
+                                                class="md-textarea form-control" formControlName="comusotierra"
+                                                rows="2"></textarea>
                                             <label for="formComusotierra">Describa el uso actual y pasado del terreno,
                                                 las mejoras y estructuras existentes.</label>
+                                            <mdb-error
+                                                *ngIf="input_comusotierra.invalid && (input_comusotierra.dirty || input_comusotierra.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -515,13 +643,17 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formCompeligrnat"
-                                                class="md-textarea form-control" formControlName="compeligrnat" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formCompeligrnat"
+                                                class="md-textarea form-control" formControlName="compeligrnat"
+                                                rows="2"></textarea>
                                             <label for="formCompeligrnat">Describa los peligros o riesgos naturales
                                                 potenciales (p.ej.: riscos, cavernas,
                                                 cascadas, etc.).
                                             </label>
+                                            <mdb-error
+                                                *ngIf="input_compeligrnat.invalid && (input_compeligrnat.dirty || input_compeligrnat.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -530,11 +662,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComexoticas"
-                                                class="md-textarea form-control" formControlName="comexoticas" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComexoticas"
+                                                class="md-textarea form-control" formControlName="comexoticas"
+                                                rows="2"></textarea>
                                             <label for="formComexoticas">Describa la flora y fauna exótica potencialente
                                                 dañina.</label>
+                                            <mdb-error
+                                                *ngIf="input_comexoticas.invalid && (input_comexoticas.dirty || input_comexoticas.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -543,12 +679,16 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formUsotierraf"
-                                                class="md-textarea form-control" formControlName="usotierraf" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formUsotierraf"
+                                                class="md-textarea form-control" formControlName="usotierraf"
+                                                rows="2"></textarea>
                                             <label for="formUsotierraf">Describa los usos de la tierra, fuera del Sitio
                                                 (p.ej.: cultivos, tala de madera,
                                                 pastoreo, basurero o botadero, etc.).</label>
+                                            <mdb-error
+                                                *ngIf="input_usotierraf.invalid && (input_usotierraf.dirty || input_usotierraf.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -557,12 +697,16 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-0">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formNecinform"
-                                                class="md-textarea form-control" formControlName="necinform" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formNecinform"
+                                                class="md-textarea form-control" formControlName="necinform"
+                                                rows="2"></textarea>
                                             <label for="formNecinform">Indique en forma resumida, el tipo de información
                                                 que se necesita con el fin
                                                 de manejar adecuadamente el Sitio y los elementos que contiene.</label>
+                                            <mdb-error
+                                                *ngIf="input_necinform.invalid && (input_necinform.dirty || input_necinform.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -571,13 +715,17 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formNecmanejo"
-                                                class="md-textarea form-control" formControlName="necmanejo" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formNecmanejo"
+                                                class="md-textarea form-control" formControlName="necmanejo"
+                                                rows="2"></textarea>
                                             <label for="formNecmanejo">Resuma la necesidades de manejo esperadas para el
                                                 Sitio y para los elementos
                                                 dentro de este.
                                             </label>
+                                            <mdb-error
+                                                *ngIf="input_necmanejo.invalid && (input_necmanejo.dirty || input_necmanejo.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -586,11 +734,15 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formComam"
-                                                class="md-textarea form-control" formControlName="comam" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formComam"
+                                                class="md-textarea form-control" formControlName="comam"
+                                                rows="2"></textarea>
                                             <label for="formComam">Explique la relación entre el Sitio y el Area de
                                                 Manejo.</label>
+                                            <mdb-error
+                                                *ngIf="input_comam.invalid && (input_comam.dirty || input_comam.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                 </div>
@@ -606,16 +758,21 @@
                             <mat-tab label="3">
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Campos Opcionales</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Campos Opcionales</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="">RBS.OPC1:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-3 ">
-                                            <input mdbInputDirective type="text" id="formRbsopc1"
-                                                formControlName="rbsopc1" class="form-control" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formRbsopc1"
+                                                formControlName="rbsopc1" class="form-control">
+                                            <mdb-error
+                                                *ngIf="input_rbsopc1.invalid && (input_rbsopc1.dirty || input_rbsopc1.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -623,9 +780,12 @@
                                             <label for="">RBS.OPC2:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formRbsopc2"
-                                                formControlName="rbsopc2" class="form-control" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formRbsopc2"
+                                                formControlName="rbsopc2" class="form-control">
+                                            <mdb-error
+                                                *ngIf="input_rbsopc2.invalid && (input_rbsopc2.dirty || input_rbsopc2.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -633,9 +793,12 @@
                                             <label for="">RBS.OPC3:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formRbsopc3"
-                                                formControlName="rbsopc3" class="form-control" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formRbsopc3"
+                                                formControlName="rbsopc3" class="form-control">
+                                            <mdb-error
+                                                *ngIf="input_rbsopc3.invalid && (input_rbsopc3.dirty || input_rbsopc3.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -643,9 +806,13 @@
                                             <label for="">RBS.OPC4:</label>
                                         </div>
                                         <div class="md-form col-md-9 mt-20 ">
-                                            <input mdbInputDirective type="text" id="formRbsopc4"
-                                                formControlName="rbsopc4" class="form-control" data-error=" "
-                                                data-success=" ">
+                                            <input mdbInputDirective mdbValidate type="text" id="formRbsopc4"
+                                                formControlName="rbsopc4" class="form-control">
+                                            <mdb-error
+                                                *ngIf="input_rbsopc4.invalid && (input_rbsopc4.dirty || input_rbsopc4.touched)">
+                                                <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                            </mdb-error>
+
                                         </div>
                                     </div>
                                     <div class="row">
@@ -654,35 +821,53 @@
                                         </div>
                                         <div class="md-form  col-md-9 mt-20">
                                             <i class="fa fa-pencil prefix"></i>
-                                            <textarea mdbInputDirective type="text" id="formRbsopc5"
-                                                class="md-textarea form-control" formControlName="rbsopc5" rows="1"
-                                                data-error=" " data-success=" "></textarea>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formRbsopc5"
+                                                class="md-textarea form-control" formControlName="rbsopc5"
+                                                rows="2"></textarea>
                                             <label for="formRbsopc5">Anote</label>
+                                            <mdb-error
+                                                *ngIf="input_rbsopc5.invalid && (input_rbsopc5.dirty || input_rbsopc5.touched)">
+                                                <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                            </mdb-error>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-content mat-elevation-z4">
                                     <div class="modal-header color-green">
-                                        <h5 class="modal-title">Mantenimiento del Registro</h5>
+                                        <h5 class="modal-title">
+                                            <font size=4 color="white">Mantenimiento del Registro</font>
+                                        </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="">RESPDATOS:</label>
                                         </div>
-                                        <div class="md-form col-md-4 mt1">
-                                            <input mdbInputDirective type="text" id="formRespdatos" class="form-control"
-                                                formControlName="respdatos" data-error=" " data-success=" ">
+                                        <div class="md-form col-md-4 mt10">
+                                            <input mdbInputDirective mdbValidate type="text" id="formRespdatos"
+                                                class="form-control" formControlName="respdatos">
+                                            <mdb-error
+                                                *ngIf="input_respdatos.invalid && (input_respdatos.dirty || input_respdatos.touched)">
+                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                            </mdb-error>
                                         </div>
-                                        <div class="md-form form-md-2  input-group-append mt10">
-                                            <input mdbInputDirective type="text" id="formActualizar"
-                                                class="form-control" formControlName="actualizar" data-error=" "
-                                                data-success=" " ngbDatepicker #dActualizar="ngbDatepicker">
-                                            <label for="formActualizar">ACTUALIZAR</label>
-                                            <div (click)="dActualizar.toggle()">
-                                                <i class="fa fa-calendar prefix"></i>
-                                            </div>
+                                        <div class="md-form col-md-3 mt10">
+                                            <input mdbInputDirective mdbValidate type="text" id="formActualizar"
+                                                class="form-control" formControlName="actualizar" ngbDatepicker
+                                                #dActualizar="ngbDatepicker">
+                                            <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
+                                            <mdb-error
+                                                *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
+                                                <font size=2 color="red">Error, el formato debe ser
+                                                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como
+                                                    ejemplo.</font>
+                                            </mdb-error>
+                                        </div>
+                                        <div class="md-form mt10" (click)="dActualizar.toggle()">
+                                            <i class="fa fa-calendar prefix"></i>
                                         </div>
                                     </div>
+                                    <!-- fin row -->
                                 </div>
                                 <app-galeria></app-galeria>
                                 <div class="text-center ">

@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { criterio_Sitio } from '../../../modelo/select/overview-sitio';
 import { debounceTime } from 'rxjs/operators';
 import { SitioService } from '../../../servicios/sitio/sitio.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { sitio_Modelo } from '../../../modelo/sitio/sitio-modelo';
-import { respuesta_cdc_Modelo } from '../../../modelo/respuestaServicio/respuesta-cdc';
+//import { respuesta_cdc_Modelo } from '../../../modelo/respuestaServicio/respuesta-cdc';
 import { macsitio_Modelo } from '../../../modelo/sitio/macsitio-modelo';
 import { subdivision_Modelo } from '../../../modelo/sitio/subdivision-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { sitio_FormGroup } from '../../../modelo/formGroup/sitio';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { sitio_Dato } from '../../../modelo/tabla/sitio-dato';
 import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
@@ -164,7 +164,7 @@ export class RegistroSitioComponent implements OnInit {
     });
   }
   guardarSitio() {
-    if (this.sitioForm.get('codsitio').value) {
+    if (this.sitioForm.get('codsitio').value && this.sitioForm.valid) {
       var sitioBase = this.setSitio(this.sitioForm.value);
       var macsitio: Array<macsitio_Modelo> = new Array();
       var subdivision: Array<subdivision_Modelo> = new Array();
@@ -191,7 +191,7 @@ export class RegistroSitioComponent implements OnInit {
       });
     }
     else
-      this.changeSuccessMessage('No se pudo regitrar el Sitio. El código del sitio es obligatorio', 'warning');
+      this.changeSuccessMessage('No se pudo registrar el código del sitio es obligatorio ó valida que los campos estén correctos donde se te indica.', 'warning');
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {
     datos.fechamapa = this.fechaServicio.toFormatoDateTime(this.sitioForm.get('fechamapa').value);
@@ -252,8 +252,10 @@ export class RegistroSitioComponent implements OnInit {
     });
   }
   editarSitio() {
-    if (this.sitioForm.get('codsitio').value)
+    if (this.sitioForm.get('codsitio').value && this.sitioForm.valid)
       this.updateSitio(this.setSitio(this.sitioForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica.', 'primary');
   }
   buscarSitio() {
     this.fotoId_Lista = [];
@@ -365,7 +367,7 @@ export class RegistroSitioComponent implements OnInit {
         });
   }
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
@@ -437,7 +439,7 @@ export class RegistroSitioComponent implements OnInit {
         });
   }
   onCreateConfirm2(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
