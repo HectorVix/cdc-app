@@ -133,7 +133,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.areaManejoForm = new area_FormGroup().getAreaFormGrup(area);
   }
   guardarArea() {
-    if (this.areaManejoForm.get('codigoam').value) {
+    if (this.areaManejoForm.get('codigoam').value && this.areaManejoForm.valid) {
       var areasManejadasBase = this.setAreasManejadas(this.areaManejoForm.value);
       var listaElemento: Array<listaElemento_Modelo> = new Array();
       this.data_listaElemento_DataSource.getAll().then(value => {
@@ -150,7 +150,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
       });
     }
     else
-      this.changeSuccessMessage('El código del área es obligatorio.', 'primary');
+      this.changeSuccessMessage('No se pudo registrar el código del área es obligatorio ó valida que los campos estén correctos donde se te indica.', 'primary');
   }
   setAreasManejadas(datos: area_Modelo): area_Modelo {
     datos.fechaesta = this.fechaServicio.toFormatoDateTime(this.areaManejoForm.get('fechaesta').value);
@@ -170,7 +170,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
             this.galeriaServicio.cargarFotos(this.galeria.archivos, this.galeria.datosFotografias, area_id, 3);
           }
           this.loading = false;
-          this.changeSuccessMessage(`Se registro el area  :${resArea.codigoam}.`, 'success');
+          this.changeSuccessMessage(`Se registro el área  :${resArea.codigoam}.`, 'success');
         }, err => {
           this.loading = false;
           this.changeSuccessMessage('No se pudo regitrar el área, el CODIGOAM es único no se puede repetir ó comprueba que esté disponible el servicio.', 'primary');
@@ -306,8 +306,10 @@ export class FormularioAreasManejadasComponent implements OnInit {
         });
   }
   editarArea() {
-    if (this.areaManejoForm.get('codigoam').value)
+    if (this.areaManejoForm.get('codigoam').value && this.areaManejoForm.valid)
       this.updateArea(this.setAreasManejadas(this.areaManejoForm.value));
+    else
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica.', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -340,7 +342,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
         });
   }
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta guardando en  un registro existente
