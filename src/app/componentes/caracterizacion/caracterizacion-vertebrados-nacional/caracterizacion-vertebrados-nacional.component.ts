@@ -387,7 +387,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
         });
   }
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
@@ -461,7 +461,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
         });
   }
   onCreateConfirm2(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
@@ -536,11 +536,14 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       });
   }
   validarCodigoe() {
+    this.loading = true;
     this.elementoServicio.validarElementoCodigoe(this.caracterizacionVertebradosNacionalForm.get('codigoe').value)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
         });
   }

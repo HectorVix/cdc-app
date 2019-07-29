@@ -10,11 +10,18 @@
             <mat-tab-group dynamicHeight [selectedIndex]="selected.value"
               (selectedIndexChange)="selected.setValue($event)">
               <mat-tab label="1">
+                <div class="text-center">
+                  <div *ngIf="loading">
+                    <img src="assets/imagenes/load.gif">
+                  </div>
+                </div>
                 <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
                   {{ successMessage }}</ngb-alert>
                 <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
-                    <h5 class="modal-title">JERARQUIZACION DEL ELEMENTO (GLOBAL)</h5>
+                    <h5 class="modal-title">
+                      <font size=4 color="white">JERARQUIZACION DEL ELEMENTO (GLOBAL)</font>
+                    </h5>
                   </div>
                   <div class="row">
                     <div class="col-md-2">
@@ -33,7 +40,9 @@
                     </div>
                     <div class="col-md-2">
                       <div class="mat-elevation-z8" class="base-form">
-                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">Validar</button>
+                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">
+                          <font size=2 color="white">Validar</font>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -299,7 +308,7 @@
                 <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">
-                      <font size=2 color="white">JERARQUIZACIÓN DEL ELEMENTO GLOBAL.</font>
+                      <font size=4 color="white">JERARQUIZACIÓN DEL ELEMENTO (GLOBAL)</font>
                     </h5>
                   </div>
                   <div class="row">

@@ -128,11 +128,14 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   //validar codigoe 
   validarCodigoe() {
+    this.loading = true;
     this.elementoServicio.validarElementoCodigoe(this.jerarquizacion_SubnacionalForm.get('codigoe').value)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
+          this.loading = false;
           if (err.status === 404)
             this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
           else

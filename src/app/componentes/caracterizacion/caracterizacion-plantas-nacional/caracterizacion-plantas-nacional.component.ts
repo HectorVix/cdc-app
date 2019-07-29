@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
@@ -11,7 +11,7 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { LocalDataSource } from 'ng2-smart-table';
 import { planta_FormGroup } from '../../../modelo/formGroup/planta';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { planta_Dato } from '../../../modelo/tabla/planta-dato';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
@@ -530,11 +530,14 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       });
   }
   validarCodigoe() {
+    this.loading = true;
     this.elementoServicio.validarElementoCodigoe(this.caracterizacionPlantasNacionalForm.get('codigoe').value)
       .subscribe(
         resElemento => {
+          this.loading = false;
           this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
         }, err => {
+          this.loading = false;
           this.changeSuccessMessage('No existe el elemento, por favor ingresa un código valido.', 'primary');
         });
   }

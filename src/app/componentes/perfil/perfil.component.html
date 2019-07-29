@@ -8,7 +8,9 @@
           <ng-template ngbTabContent>
             <div class="class-modal-content">
               <div class="modal-header color-green">
-                <h5 class="modal-tittle" *ngIf="datosUsuario">{{datosUsuario.nombre}} {{datosUsuario.apellido}}</h5>
+                <h5 class="modal-tittle" *ngIf="datosUsuario">
+                  <font size=4 color="white">{{datosUsuario.nombre}} {{datosUsuario.apellido}}</font>
+                </h5>
               </div>
               <div class="row" *ngIf="datosUsuario">
                 <div class="col s12 m7">
@@ -41,31 +43,22 @@
                         </div>
                       </div>
                       <!-- fin row -->
-
                       <br>
                       <button class="btn color-green waves-light" type="button" mdbWavesEffect>
                         <i class="fa fa-pencil prefix"></i>
                       </button>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-
           </ng-template>
         </ngb-tab>
         <ngb-tab id="tab-selectbyid2" title="Actividad">
           <ng-template ngbTabContent>
             <div class="row col-md-7 text-center">
               <h5>
-
-
               </h5>
-
             </div>
           </ng-template>
         </ngb-tab>

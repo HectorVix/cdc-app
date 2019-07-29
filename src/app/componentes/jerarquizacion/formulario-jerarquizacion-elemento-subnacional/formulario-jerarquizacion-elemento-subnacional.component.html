@@ -2,13 +2,18 @@
     <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
         <mat-tab label="Formulario">
             <div class="card-body">
+                <div class="text-center">
+                    <div *ngIf="loading">
+                        <img src="assets/imagenes/load.gif">
+                    </div>
+                </div>
                 <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
                     {{ successMessage }}</ngb-alert>
                 <form [formGroup]="jerarquizacion_SubnacionalForm">
                     <div class="modal-content mat-elevation-z4">
                         <div class="modal-header color-green">
                             <h5 class="modal-title">
-                                <font size=4 color="white">JERARQUIZACIÓN DEL ELEMENTO SUBNACIONAL</font>
+                                <font size=4 color="white">JERARQUIZACIÓN DEL ELEMENTO (SUBNACIONAL)</font>
                             </h5>
                         </div>
                         <div class="row">
@@ -29,8 +34,9 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="mat-elevation-z8" class="base-form">
-                                    <button mat-raised-button class="color-green"
-                                        (click)="validarCodigoe()">Validar</button>
+                                    <button mat-raised-button class="color-green" (click)="validarCodigoe()">
+                                        <font size=2 color="white">Validar</font>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -428,8 +434,6 @@
                         <div *ngIf="loading">
                             <img src="assets/imagenes/load.gif">
                         </div>
-                        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
-                            {{ successMessage }}</ngb-alert>
                         <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                         <button class="btn color-green waves-light" [disabled]="guardar" (click)="openDialogo()"
                             mdbWavesEffect>Guardar</button>
