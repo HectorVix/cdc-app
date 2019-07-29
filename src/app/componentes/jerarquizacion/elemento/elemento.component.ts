@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 // import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';

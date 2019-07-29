@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { vertebrado_Modelo } from '../../../modelo/resumen/vertebrado-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
@@ -10,7 +10,7 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { vertebrado_FormGroup } from '../../../modelo/formGroup/vertebrado';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { vertebrado_Dato } from '../../../modelo/tabla/vertebrado-dato';
 import { LocalDataSource } from 'ng2-smart-table';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';

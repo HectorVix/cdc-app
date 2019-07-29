@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { LocalizacionService } from '../../../servicios/localizacion/localizacion.service';
-import { ElementoService } from '../../../servicios/elemento/elemento.service';
+//import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
 import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
@@ -86,9 +86,9 @@ export class FormularioLeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private localizacionServicio: LocalizacionService,
-    private elementoServicio: ElementoService,
+    //private elementoServicio: ElementoService,
     private fechaServicio: FechaService,
-    private dialog: MatDialog, private fb2: FormBuilder) {
+    private dialog: MatDialog) {
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
@@ -237,7 +237,7 @@ export class FormularioLeComponent implements OnInit {
         });
   }
   crearForm_Buscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigole': '',
       'nombres': '',
       'nomcomuns': ''

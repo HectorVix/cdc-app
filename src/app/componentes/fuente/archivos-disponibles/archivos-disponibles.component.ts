@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { archivo_Dato } from '../../../modelo/tabla/archivo-dato';
 import { FuenteService } from '../../../servicios/fuente/fuente.service';
 

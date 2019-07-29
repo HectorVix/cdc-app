@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
-import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
+//import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { forkJoin, Subject } from 'rxjs';
 import { FuenteService } from '../../../servicios/fuente/fuente.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
@@ -10,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectModule, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { fuente_Dato } from '../../../modelo/tabla/fuente-dato'
 import { fuente_FormGroup } from '../../../modelo/formGroup/fuente';
 import { ArchivosDisponiblesComponent } from '../../fuente/archivos-disponibles/archivos-disponibles.component';
@@ -63,8 +63,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
     private fechaServicio: FechaService,
-    private dialog: MatDialog,
-    private fb2: FormBuilder) {
+    private dialog: MatDialog) {
     this.crearForm_ResumenesFuente(new fuente_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Fuente);
@@ -213,7 +212,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
         });
   }
   crearForm_Buscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigoFuente': '',
       'naturalezaDocumento': '',
       'cita': '',

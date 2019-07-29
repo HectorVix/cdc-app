@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 //import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 //import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
@@ -65,7 +65,7 @@ export class FormularioReComponent implements OnInit {
     private rastreoServicio: RastreoService,
     private fechaServicio: FechaService,
     private elementoServicio: ElementoService,
-    private dialog: MatDialog, private fb2: FormBuilder) {
+    private dialog: MatDialog) {
     this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
@@ -177,7 +177,7 @@ export class FormularioReComponent implements OnInit {
     });
   }
   crearForm_Buscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigo': '',
       'subnacion': '',
       'nombreg': '',
