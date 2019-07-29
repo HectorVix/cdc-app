@@ -15,7 +15,7 @@ export class contacto_FormGroup {
             'nombre': new FormControl(row.nombre, Validators.maxLength(60)),
             'apellido1': new FormControl(row.apellido1, Validators.maxLength(60)),
             'apellido2': new FormControl(row.apellido2, Validators.maxLength(60)),
-            'sufijo': new FormControl(row.sufijo, Validators.maxLength(60)),
+            'sufijo': new FormControl(row.sufijo, Validators.maxLength(20)),
             'posicion': new FormControl(row.posicion, Validators.maxLength(60)),
             'institucion': new FormControl(row.institucion, Validators.maxLength(60)),
             //localizadores
@@ -26,7 +26,7 @@ export class contacto_FormGroup {
             'pais': new FormControl(row.pais, Validators.maxLength(60)),
             'ciudad': new FormControl(row.ciudad, Validators.maxLength(60)),
             'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
-            'codpostal': new FormControl(row.codpostal, Validators.maxLength(5)),
+            'codpostal': new FormControl(row.codpostal, Validators.maxLength(32)),
             'masident': new FormControl(row.masident, Validators.maxLength(120)),
             'smsa': new FormControl(row.smsa, Validators.maxLength(60)),
             'teleftrabajo': row.teleftrabajo, //number

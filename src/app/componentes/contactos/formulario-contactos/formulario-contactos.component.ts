@@ -129,12 +129,12 @@ export class FormularioContactosComponent implements OnInit {
     });
   }
   guardarContacto() {
-    if (this.contactosForm.get('numident').value) {
+    if (this.contactosForm.get('numident').value && this.contactosForm.valid) {
       var contactoBase = this.setContacto(this.contactosForm.value);
       this.addContacto(contactoBase)
     }
     else
-      this.changeSuccessMessage('El número de identificación es obligatorio para guardar.', 'warning');
+      this.changeSuccessMessage('No se pudo registrar el número de identificación es obligatorio ó valida que los campos estén correctos donde se te indica.', 'warning');
   }
   setContacto(contacto: contacto_Modelo): contacto_Modelo {
     contacto.actualizar = this.fechaServicio.toFormatoDateTime(this.contactosForm.get('actualizar').value);
@@ -246,10 +246,10 @@ export class FormularioContactosComponent implements OnInit {
         });
   }
   editarContacto() {
-    if (this.contactosForm.get('numident').value)
+    if (this.contactosForm.get('numident').value && this.contactosForm.valid)
       this.updateContacto(this.setContacto(this.contactosForm.value));
     else
-      this.changeSuccessMessage('El número de identificación es obligatorio para editar.', 'warning');
+      this.changeSuccessMessage('Valida que los campos estén correctos donde se te indica.', 'primary');
   }
   nuevo() {
     this.editar = true;
@@ -259,7 +259,7 @@ export class FormularioContactosComponent implements OnInit {
     this.tabPagina1();
   }
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       this.validarCodFuente(event);
     }
     else // se esta editando un registro
@@ -302,7 +302,7 @@ export class FormularioContactosComponent implements OnInit {
           });
     }
     else {
-      this.changeSuccessMessage('No se ha ingredado un  CÓDIGO DE LA FUENTE, por favor ingresa uno.', 'warning');
+      this.changeSuccessMessage('No se ha ingresado un  CÓDIGO DE LA FUENTE, por favor ingresa uno valido.', 'warning');
     }
   }
   /**
