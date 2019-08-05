@@ -13,19 +13,19 @@ export class sitio_FormGroup {
             'sitioId': row.sitioId,
             //página1
             //identificadores
-            'codsitio': new FormControl(row.codsitio, [Validators.maxLength(10), Validators.required]),
+            'codsitio': new FormControl(row.codsitio, [Validators.maxLength(12), Validators.required]),
             'nomsitio': new FormControl(row.nomsitio, Validators.maxLength(60)),
             'sinsitio': new FormControl(row.sinsitio, Validators.maxLength(120)),
             //localizadores
             'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
             'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
             'siteresp': new FormControl(row.siteresp, Validators.maxLength(60)),
-            'lat': new FormControl(row.lat, Validators.maxLength(10)),
-            'long1': new FormControl(row.long1, Validators.maxLength(10)),//palabra reservada en Java
-            'coords': new FormControl(row.coords, Validators.maxLength(10)),
-            'coordn': new FormControl(row.coordn, Validators.maxLength(10)),
-            'coorde': new FormControl(row.coorde, Validators.maxLength(10)),
-            'coordo': new FormControl(row.coordo, Validators.maxLength(10)),
+            'lat': new FormControl(row.lat, Validators.maxLength(6)),
+            'long1': new FormControl(row.long1, Validators.maxLength(7)),//palabra reservada en Java
+            'coords': new FormControl(row.coords, Validators.maxLength(6)),
+            'coordn': new FormControl(row.coordn, Validators.maxLength(6)),
+            'coorde': new FormControl(row.coorde, Validators.maxLength(7)),
+            'coordo': new FormControl(row.coordo, Validators.maxLength(7)),
             'direccion': new FormControl(row.direccion, Validators.maxLength(120)),
             //descripción del sitio/diseño
             'descrito': new FormControl(row.descrito, Validators.maxLength(120)),
@@ -57,8 +57,8 @@ export class sitio_FormGroup {
             'numlotes': row.numlotes,//Number
             'costestprot1': row.costestprot1,//Number
             'costestprot2': row.costestprot2,//Number
-            'coddesig': new FormControl(row.coddesig, Validators.maxLength(10)),
-            'designacion': new FormControl(row.designacion, Validators.maxLength(10)),
+            'coddesig': new FormControl(row.coddesig, Validators.maxLength(12)),
+            'designacion': new FormControl(row.designacion, Validators.maxLength(30)),
             'comprot': new FormControl(row.comprot, Validators.maxLength(120)),
             //administración
             'comusotierra': new FormControl(row.comusotierra, Validators.maxLength(120)),

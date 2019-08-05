@@ -95,63 +95,63 @@ export class localizacion_FormGroup {
              * Identificadores
              * Página1
              */
-            'codigole': new FormControl(row.codigole, [Validators.maxLength(10), Validators.required]),
+            'codigole': new FormControl(row.codigole, [Validators.maxLength(14), Validators.required]),
             'ident': val_ident,//♦
             'nombres': new FormControl(row.nombres, Validators.maxLength(60)),
             'nomcomuns': new FormControl(row.nomcomuns, Validators.maxLength(60)),
-            'rangog': new FormControl(row.rangog, Validators.maxLength(10)),
-            'rangon': new FormControl(row.rangon, Validators.maxLength(10)),
-            'rangos': new FormControl(row.rangos, Validators.maxLength(10)),
+            'rangog': new FormControl(row.rangog, Validators.maxLength(6)),
+            'rangon': new FormControl(row.rangon, Validators.maxLength(6)),
+            'rangos': new FormControl(row.rangos, Validators.maxLength(6)),
             //localizadores
             'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
             'subdivision': new FormControl(row.subdivision, Validators.maxLength(60)),
-            'codsitio': new FormControl(row.codsitio, Validators.maxLength(10)),
-            'nomsitio': new FormControl(row.nomsitio, Validators.maxLength(60)),
+            'codsitio': new FormControl(row.codsitio, Validators.maxLength(14)),
+            'nomsitio': new FormControl(row.nomsitio, Validators.maxLength(50)),
             'sitioeva': new FormControl(row.sitioeva, Validators.maxLength(120)),
-            'precisionl': new FormControl(row.precisionl, Validators.maxLength(10)),//palabra reservada en java
-            'nommapa': new FormControl(row.nommapa, Validators.maxLength(10)),
-            'codmapa': new FormControl(row.codmapa, Validators.maxLength(10)),
-            'nummarg': new FormControl(row.nummarg, Validators.maxLength(10)),
+            'precisionl': new FormControl(row.precisionl, Validators.maxLength(2)),//palabra reservada en java
+            'nommapa': new FormControl(row.nommapa, Validators.maxLength(40)),
+            'codmapa': new FormControl(row.codmapa, Validators.maxLength(32)),
+            'nummarg': new FormControl(row.nummarg, Validators.maxLength(4)),
             'numpunto': new FormControl(row.numpunto, Validators.maxLength(10)),
-            'diezdiez': new FormControl(row.diezdiez, Validators.maxLength(10)),
-            'latitud': new FormControl(row.latitud, Validators.maxLength(10)),
-            'longitud': new FormControl(row.longitud, Validators.maxLength(10)),
-            'coords': new FormControl(row.coords, Validators.maxLength(10)),
-            'coordn': new FormControl(row.coordn, Validators.maxLength(10)),
-            'coorde': new FormControl(row.coorde, Validators.maxLength(10)),
-            'coordo': new FormControl(row.coordo, Validators.maxLength(10)),
-            'direccion': new FormControl(row.direccion, Validators.maxLength(120)),
+            'diezdiez': new FormControl(row.diezdiez, Validators.maxLength(5)),
+            'latitud': new FormControl(row.latitud, Validators.maxLength(6)),
+            'longitud': new FormControl(row.longitud, Validators.maxLength(7)),
+            'coords': new FormControl(row.coords, Validators.maxLength(6)),
+            'coordn': new FormControl(row.coordn, Validators.maxLength(6)),
+            'coorde': new FormControl(row.coorde, Validators.maxLength(7)),
+            'coordo': new FormControl(row.coordo, Validators.maxLength(7)),
+            'direccion': new FormControl(row.direccion, Validators.maxLength(180)),
             'ecoregion': new FormControl(row.ecoregion, Validators.maxLength(60)),
-            'cuenca': new FormControl(row.cuenca, Validators.maxLength(60)),
+            'cuenca': new FormControl(row.cuenca, Validators.maxLength(10)),
             //status
-            'priobs': new FormControl(row.priobs, Validators.maxLength(10)),
+            'priobs': new FormControl(row.priobs, Validators.maxLength(4)),//año
             'fechaeva': fechaServicio.getFecha(row.fechaeva),
             'rangole': row.rangole,//♦
             'ultobs': fechaServicio.getFecha(row.ultobs),
             'fecharangole': fechaServicio.getFecha(row.fecharangole),
-            'comrangole': new FormControl(row.comrangole, Validators.maxLength(120)),
+            'comrangole': new FormControl(row.comrangole, Validators.maxLength(60)),
             //'resprg': '',
-            'datosle': new FormControl(row.datosle, Validators.maxLength(120)),
+            'datosle': new FormControl(row.datosle, Validators.maxLength(240)),
             'contacto': new FormControl(row.contacto, Validators.maxLength(60)),
-            'numcontacto': new FormControl(row.numcontacto, Validators.maxLength(10)),
+            'numcontacto': new FormControl(row.numcontacto, Validators.maxLength(15)),
             /**
              * Página 2
              * Descripción
              */
-            'desgen': new FormControl(row.desgen, Validators.maxLength(120)),
-            'elev': row.elev,//Number
-            'area': row.area,//Number
+            'desgen': new FormControl(row.desgen, Validators.maxLength(180)),
+            'elev': row.elev,//Number 4
+            'area': row.area,//Number 6
             //Protección
             'masterreno': val_masterreno,//♦
             'masprotec': val_masprotec,//♦
             'masmanejo': val_masmanejo,//♦
             'involtnc': val_involtnc,//♦
-            'commanejo': new FormControl(row.commanejo, Validators.maxLength(120)),
-            'comprot': new FormControl(row.comprot, Validators.maxLength(120)),
+            'commanejo': new FormControl(row.commanejo, Validators.maxLength(60)),
+            'comprot': new FormControl(row.comprot, Validators.maxLength(60)),
             //Propietario
-            'prop': new FormControl(row.prop, Validators.maxLength(60)),
+            'prop': new FormControl(row.prop, Validators.maxLength(30)),
             'infprop': val_infprop,//♦
-            'comprop': new FormControl(row.comprop, Validators.maxLength(120)),
+            'comprop': new FormControl(row.comprop, Validators.maxLength(60)),
             //campos opcionales
             'leopc1': new FormControl(row.leopc1, Validators.maxLength(60)),
             'leopc2': new FormControl(row.leopc2, Validators.maxLength(60)),
@@ -173,7 +173,7 @@ export class localizacion_FormGroup {
             'limites': val_limites,//♦
             'fotos': val_fotos,//♦
             'mejorfuente': new FormControl(row.mejorfuente, Validators.maxLength(120)),
-            'codfuente': new FormControl(row.codfuente, Validators.maxLength(10)),
+            'codfuente': new FormControl(row.codfuente, Validators.maxLength(99)),
             'mdrev': val_mdrev,//♦
             'transcrito': fechaServicio.getFecha(row.transcrito),
             'cc': val_cc,//♦

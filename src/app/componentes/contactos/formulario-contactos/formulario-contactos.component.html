@@ -25,6 +25,7 @@
                         <i class="fa fa-id-card prefix"></i>
                         <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
                           formControlName="numident">
+                        <label for="formNumident"></label>
                         <mdb-error *ngIf="input_numident.invalid && (input_numident.dirty || input_numident.touched)">
                           <font size=2 color="red">Error, máximo 20 caracteres.</font>
                         </mdb-error>
@@ -43,8 +44,9 @@
                       </div>
                       <div class="md-form col-md-9 mt-20">
                         <i class="fa fa-id-badge prefix"></i>
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formNombreident" class="form-control"
                           formControlName="nombreident">
+                        <label for="formNombreident"></label>
                         <mdb-error
                           *ngIf="input_nombreident.invalid && (input_nombreident.dirty || input_nombreident.touched)">
                           <font size=2 color="red">Error, máximo 60 caracteres.</font>
@@ -71,8 +73,9 @@
                       </div>
                       <div class="md-form col-md-9 mt-20">
                         <i class="fa fa-user prefix"></i>
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formNombre" class="form-control"
                           formControlName="nombre">
+                        <label for="formNombre"></label>
                         <mdb-error *ngIf="input_nombre.invalid && (input_nombre.dirty || input_nombre.touched)">
                           <font size=2 color="red">Error, máximo 60 caracteres.</font>
                         </mdb-error>
@@ -128,6 +131,7 @@
                         <i class="fa fa-map-pin prefix"></i>
                         <input mdbInputDirective mdbValidate type="text" id="formPosicion" class="form-control"
                           formControlName="posicion">
+                        <label for="formPosicion"></label>
                         <mdb-error *ngIf="input_posicion.invalid && (input_posicion.dirty || input_posicion.touched)">
                           <font size=2 color="red">Error, máximo 60 caracteres.</font>
                         </mdb-error>
@@ -180,6 +184,7 @@
                         <i class="fa fa-envelope prefix"></i>
                         <input mdbInputDirective mdbValidate type="text" id="formEmail" class="form-control"
                           formControlName="email">
+                        <label for="formEmail"></label>
                         <mdb-error *ngIf="input_email.invalid && (input_email.dirty || input_email.touched)">
                           <font size=2 color="red">Error, ingresa un correo válido.</font>
                         </mdb-error>

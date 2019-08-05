@@ -79,11 +79,11 @@
                     <div class="md-form  col-md-9 mt-10">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective mdbValidate type="text" id="formEspecle"
-                        class="md-textarea form-control" formControlName="especle" rows="2"></textarea>
+                        class="md-textarea form-control" formControlName="especle" rows="4"></textarea>
                       <label for="formEspecle">Especificaciones LE. Describa como aparece el elemento en su
                         región.</label>
                       <mdb-error *ngIf="input_especle.invalid && (input_especle.dirty || input_especle.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -174,7 +174,7 @@
                         de la LE.</label>
                       <mdb-error
                         *ngIf="input_permanencia.invalid && (input_permanencia.dirty || input_permanencia.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -188,7 +188,7 @@
                       <label for="formLoctipg">&nbsp;&nbsp;&nbsp;&nbsp;Indentificar el mejor sitio conocido en el
                         país.</label>
                       <mdb-error *ngIf="input_gloctip.invalid && (input_gloctip.dirty || input_gloctip.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 50 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -199,10 +199,10 @@
                     <div class="md-form  col-md-9 mt-10">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective mdbValidate type="text" id="formComtaxg"
-                        class="md-textarea form-control" formControlName="comtax" rows="2"></textarea>
+                        class="md-textarea form-control" formControlName="comtax" rows="4"></textarea>
                       <label for="formComtaxg">Indique la distinción taxonómica del elemento.</label>
                       <mdb-error *ngIf="input_comtax.invalid && (input_comtax.dirty || input_comtax.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -290,11 +290,11 @@
                     <div class="md-form  col-md-9 mt-0">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective mdbValidate type="text" id="formGdistcom"
-                        class="md-textarea form-control" formControlName="gdistcom" rows="2"></textarea>
+                        class="md-textarea form-control" formControlName="gdistcom" rows="4"></textarea>
                       <label for="formGdistcom">Se especifica los países o regiones ecológicas donde se encuentra el
                         elemento actualmente.</label>
                       <mdb-error *ngIf="input_gdistcom.invalid && (input_gdistcom.dirty || input_gdistcom.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -459,7 +459,7 @@
                       <label for="formGranranzon">Dar las razones para este rango, mencionando los mejores factores de
                         jerarquización y otras consideraciones.</label>
                       <mdb-error *ngIf="input_granrazon.invalid && (input_granrazon.dirty || input_granrazon.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -536,7 +536,7 @@
                       <label for="formResrg">&nbsp;&nbsp;&nbsp;&nbsp;Responsable de preparar y mantener el
                         formulario.</label>
                       <mdb-error *ngIf="input_resrg.invalid && (input_resrg.dirty || input_resrg.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 10 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -549,7 +549,7 @@
                         formControlName="edautor">
                       <label for="formEdautor">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
                       <mdb-error *ngIf="input_edautor.invalid && (input_edautor.dirty || input_edautor.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 30 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>

@@ -381,7 +381,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         });
   }
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
@@ -455,7 +455,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
         });
   }
   onCreateConfirm2(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro

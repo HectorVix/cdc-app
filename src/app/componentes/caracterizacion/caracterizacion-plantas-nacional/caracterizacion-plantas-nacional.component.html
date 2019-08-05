@@ -184,7 +184,7 @@
                                                 class="form-control" formControlName="rangog">
                                             <mdb-error
                                                 *ngIf="input_rangog.invalid && (input_rangog.dirty || input_rangog.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 6 caracteres.</font>
                                             </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
@@ -193,7 +193,7 @@
                                             <label for="formRangon">&nbsp;&nbsp;&nbsp;&nbsp;RANGON</label>
                                             <mdb-error
                                                 *ngIf="input_rangon.invalid && (input_rangon.dirty || input_rangon.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 6 caracteres.</font>
                                             </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt10">
@@ -216,7 +216,7 @@
                                                 class="form-control" formControlName="cites">
                                             <mdb-error
                                                 *ngIf="input_cites.invalid && (input_cites.dirty || input_cites.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 3 caracteres.</font>
                                             </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt-10">
@@ -225,7 +225,7 @@
                                             <label for="formUicn">&nbsp;&nbsp;&nbsp;&nbsp;UICN</label>
                                             <mdb-error
                                                 *ngIf="input_uicn.invalid && (input_uicn.dirty || input_uicn.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 2 caracteres.</font>
                                             </mdb-error>
                                         </div>
                                         <div class="md-form col-md-2 mt-10">
@@ -243,7 +243,7 @@
                                             <label for="formProtnacion">&nbsp;&nbsp;&nbsp;&nbsp;PROTNACION</label>
                                             <mdb-error
                                                 *ngIf="input_protnacion.invalid && (input_protnacion.dirty || input_protnacion.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 4 caracteres.</font>
                                             </mdb-error>
                                         </div>
                                     </div>
@@ -1469,17 +1469,29 @@
                                         <div class="col-md-2">
                                             <label for="">CODFUENTE:</label>
                                         </div>
-                                        <div class="md-form col-md-4 mt10 ">
-                                            <input mdbInputDirective mdbValidate type="text" id="formCodfuente"
-                                                class="form-control" formControlName="codfuente">
+                                        <div class="md-form col-md-9 mt10 ">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formCodfuente"
+                                                class="md-textarea form-control" formControlName="codfuente"
+                                                rows="2"></textarea>
+                                            <label for="formCodfuente">&nbsp;&nbsp;&nbsp;&nbsp;Anote</label>
                                             <mdb-error
                                                 *ngIf="input_codfuente.invalid && (input_codfuente.dirty || input_codfuente.touched)">
-                                                <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                                                <font size=2 color="red">Error, máximo 99 caracteres.</font>
                                             </mdb-error>
                                         </div>
-                                        <div class="md-form col-md-4 mt10 ">
-                                            <input mdbInputDirective type="text" id="formCita" class="form-control">
-                                            <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;CITA</label>
+                                    </div>
+                                    <!-- fin row -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="">CITA</label>
+                                        </div>
+                                        <div class="md-form col-md-9 mt-20">
+                                            <i class="fa fa-pencil prefix"></i>
+                                            <textarea mdbInputDirective mdbValidate type="text" id="formCita"
+                                                class="md-textarea form-control" formControlName="cita"
+                                                rows="4"></textarea>
+                                            <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;Anote</label>
                                         </div>
                                     </div>
                                     <!-- fin row -->

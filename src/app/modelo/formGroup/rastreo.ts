@@ -37,18 +37,18 @@ export class rastreo_Elemento_FormGroup {
              * identificadores
              * Página1
              */
-            'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10),Validators.required]),
+            'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10), Validators.required]),
             'tropicos': new FormControl(re.tropicos, Validators.maxLength(60)),
             'nacion': new FormControl(re.nacion, Validators.maxLength(60)),
             'subnacion': new FormControl(re.subnacion, Validators.maxLength(60)),
             //taxonomia (global)
-            'clasetax': new FormControl(re.clasetax, Validators.maxLength(60)),
-            'orden': new FormControl(re.orden, Validators.maxLength(60)),
-            'familia': new FormControl(re.familia, Validators.maxLength(60)),
-            'genero': new FormControl(re.genero, Validators.maxLength(60)),
+            'clasetax': new FormControl(re.clasetax, Validators.maxLength(20)),
+            'orden': new FormControl(re.orden, Validators.maxLength(20)),
+            'familia': new FormControl(re.familia, Validators.maxLength(20)),
+            'genero': new FormControl(re.genero, Validators.maxLength(20)),
             'nombreg': new FormControl(re.nombreg, Validators.maxLength(60)),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
-            'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(10)),
+            'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(2)),
             'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(60)),
             'disttax': re.disttax,//♦
             'dudatax': re.dudatax,//♦
@@ -56,14 +56,14 @@ export class rastreo_Elemento_FormGroup {
             'comtaxg': new FormControl(re.comtaxg, Validators.maxLength(120)),
             //taxonomia (nacional)
             'nombren': new FormControl(re.nombren, Validators.maxLength(60)),
-            'numsinn': re.numsinn,//Number
+            'numsinn': re.numsinn,//Number (2)
             'nomcomunn': new FormControl(re.nomcomunn, Validators.maxLength(60)),
             'comtaxn': new FormControl(re.comtaxn, Validators.maxLength(120)),
             /**
              * Status (global)
              * Página 2
              */
-            'rangog': re.rangog,//♦
+            'rangog': re.rangog,//♦ (6)
             'formularg': re.formularg,//♦
             'resprg': new FormControl(re.resprg, Validators.maxLength(10)),
             'fecharevrg': fechaServicio.getFecha(re.fecharevrg),
@@ -75,18 +75,18 @@ export class rastreo_Elemento_FormGroup {
             'resplan': new FormControl(re.resplan, Validators.maxLength(10)),
             'resumenman': re.resumenman,//♦
             'resresumen': new FormControl(re.resresumen, Validators.maxLength(10)),
-            'exsitu': val_exsitu,//♦
-            'instexsitu': new FormControl(re.instexsitu, Validators.maxLength(10)),
+            'exsitu': val_exsitu,//♦ (6)
+            'instexsitu': new FormControl(re.instexsitu, Validators.maxLength(6)),
             'endemismo': re.endemismo,//♦
             //status (nacional)
-            'rangon': re.rangon,//♦
+            'rangon': re.rangon,//♦ (6)
             'formularn': re.formularn,//♦
             'rastreolen': new FormControl(re.rastreolen, Validators.maxLength(10)),
             'fecharevrn': fechaServicio.getFecha(re.fecharevrn),
-            'lestimn': new FormControl(re.lestimn, Validators.maxLength(10)),
-            'leprotn': new FormControl(re.leprotn, Validators.maxLength(10)),
-            'abundn': new FormControl(re.abundn, Validators.maxLength(10)),
-            'protnacion': new FormControl(re.protnacion, Validators.maxLength(10)),
+            'lestimn': new FormControl(re.lestimn, Validators.maxLength(1)),
+            'leprotn': new FormControl(re.leprotn, Validators.maxLength(1)),
+            'abundn': new FormControl(re.abundn, Validators.maxLength(1)),
+            'protnacion': new FormControl(re.protnacion, Validators.maxLength(4)),
             'refnombren': new FormControl(re.refnombren, Validators.maxLength(60)),
             'transparencian': val_transparencian,//♦
             //status (subnacional)
@@ -94,10 +94,10 @@ export class rastreo_Elemento_FormGroup {
             'formulars': re.formulars,//♦
             'rastreoles': new FormControl(re.rastreoles, Validators.maxLength(10)),
             'fecharevrs': fechaServicio.getFecha(re.fecharevrs),
-            'lestims': new FormControl(re.lestims, Validators.maxLength(10)),
-            'leprots': new FormControl(re.leprots, Validators.maxLength(10)),
-            'abunds': new FormControl(re.abunds, Validators.maxLength(10)),
-            'protsubnac': new FormControl(re.protsubnac, Validators.maxLength(10)),
+            'lestims': new FormControl(re.lestims, Validators.maxLength(1)),
+            'leprots': new FormControl(re.leprots, Validators.maxLength(1)),
+            'abunds': new FormControl(re.abunds, Validators.maxLength(1)),
+            'protsubnac': new FormControl(re.protsubnac, Validators.maxLength(4)),
             'refnombres': new FormControl(re.refnombres, Validators.maxLength(60)),
             'transparencias': val_transparencias,//♦
             //campos opcionales
@@ -107,8 +107,8 @@ export class rastreo_Elemento_FormGroup {
             'reopc4': new FormControl(re.reopc4, Validators.maxLength(60)),
             'reopc5': new FormControl(re.reopc5, Validators.maxLength(120)),
             // manteniiento del registro
-            'codfuenten': new FormControl(re.codfuenten, Validators.maxLength(10)),
-            'codfuentes': new FormControl(re.codfuentes, Validators.maxLength(10)),
+            'codfuenten': new FormControl(re.codfuenten, Validators.maxLength(99)),
+            'codfuentes': new FormControl(re.codfuentes, Validators.maxLength(99)),
             'actualizag': fechaServicio.getFecha(re.actualizag),
             'actualizan': fechaServicio.getFecha(re.actualizan),
             'actualizas': fechaServicio.getFecha(re.actualizas)

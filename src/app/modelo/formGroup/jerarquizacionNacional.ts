@@ -12,31 +12,31 @@ export class jerarquizacion_Nacional_FormGroup {
         return fb.group({
             'nacionalId': row.nacionalId,
             //pagina1
-            'codigoe': new FormControl(row.codigoe, Validators.maxLength(10)),
+            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
             'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
             'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
-            'nloctip': new FormControl(row.nloctip, Validators.maxLength(120)),
-            'nlestim': row.nlestim,
+            'nloctip': new FormControl(row.nloctip, Validators.maxLength(50)),
+            'nlestim': row.nlestim,//(2)
             'nlestimcom': new FormControl(row.nlestimcom, Validators.maxLength(120)),
-            'nabund': row.nabund,
+            'nabund': row.nabund,//(2)
             'nabundcom': new FormControl(row.nabundcom, Validators.maxLength(120)),
-            'ndist': row.ndist,
-            'ndistcom': new FormControl(row.ndistcom, Validators.maxLength(120)),
-            'nleprot': row.nleprot,
+            'ndist': row.ndist,//(2)
+            'ndistcom': new FormControl(row.ndistcom, Validators.maxLength(240)),
+            'nleprot': row.nleprot,//(2)
             'nleprotcom': new FormControl(row.nleprotcom, Validators.maxLength(120)),
-            'namenaz': row.namenaz,
+            'namenaz': row.namenaz,//(2)
             'namenazcom': new FormControl(row.namenazcom, Validators.maxLength(120)),
             //pagina2
             'notroconsi': new FormControl(row.notroconsi, Validators.maxLength(120)),
             'rangon': row.rangon,
             'fecharn': fechaServicio.getFecha(row.fecharn),
-            'nranrzon': new FormControl(row.nranrzon, Validators.maxLength(120)),
+            'nranrzon': new FormControl(row.nranrzon, Validators.maxLength(240)),
             'nnecprotec': new FormControl(row.nnecprotec, Validators.maxLength(120)),
             'nnecinvent': new FormControl(row.nnecinvent, Validators.maxLength(120)),
             'nnecestudi': new FormControl(row.nnecestudi, Validators.maxLength(120)),
             'nnecmaejo': new FormControl(row.nnecmaejo, Validators.maxLength(120)),
-            'resrn': new FormControl(row.resrn, Validators.maxLength(60)),
-            'edautor': new FormControl(row.edautor, Validators.maxLength(60)),
+            'resrn': new FormControl(row.resrn, Validators.maxLength(10)),
+            'edautor': new FormControl(row.edautor, Validators.maxLength(30)),
             'edicion': fechaServicio.getFecha(row.edicion),
             'actualizar': fechaServicio.getFecha(row.actualizar),
             'jERARQUIZACIONjerarquizacionid': Jerarquizacion

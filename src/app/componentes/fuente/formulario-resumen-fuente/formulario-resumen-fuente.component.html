@@ -104,7 +104,7 @@
               <div class="col-md-2">
                 <label for="">COBGEO:</label>
               </div>
-              <div class="md-form col-md-9">
+              <div class="md-form col-md-9 mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formCOBGEO" class="form-control"
                   formControlName="cobgeo">
                 <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del
@@ -469,12 +469,12 @@
             <!-- fin row -->
             <div class="row">
               <div class="col-md-2"></div>
-              <div class="md-form col-md-3  mt-5">
+              <div class="md-form col-md-9  mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formbcd" class="form-control"
                   formControlName="bcd">
-                <label for="formbcd">&nbsp;&nbsp;&nbsp;BCD</label>
+                <label for="formbcd">&nbsp;&nbsp;&nbsp;Nombre de la persona que preparo el resúmen de fuente</label>
                 <mdb-error *ngIf="input_bcd.invalid && (input_bcd.dirty || input_bcd.touched)">
-                  <font size=2 color="red">Error, máximo 3 caracteres.</font>
+                  <font size=2 color="red">Error, máximo 50 caracteres.</font>
                 </mdb-error>
 
               </div>

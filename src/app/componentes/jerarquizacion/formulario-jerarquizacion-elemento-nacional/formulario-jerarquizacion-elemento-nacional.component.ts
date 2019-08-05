@@ -90,7 +90,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     var temporalJerarquizacionNacionalFormGroup = new jerarquizacion_Nacional_FormGroup();
     this.jerarquizacion_Nacional_Form = temporalJerarquizacionNacionalFormGroup.getJerarquizacion_Nacional_FormGrup(jerarquizacionNacional);
   }
-  //guardar registro jerarquizacion nacional
+  //guarda un registro de jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
     if (this.jerarquizacion_Nacional_Form.get('codigoe').value && this.jerarquizacion_Nacional_Form.valid) {
       var jerarquizacionBase = new Jerarquizacion();
@@ -103,7 +103,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       this.addJerarquizacionNacional(jerarquizacionBase)
     }
     else
-      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
+      this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos estén correctos donde se te indica..', 'primary');
   }
   //setear datos jerarquizacion nacional
   setDatosJerarquizacionNacional(datos: jerarquizacion_Nacional_Modelo): jerarquizacion_Nacional_Modelo {
@@ -113,7 +113,6 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global
-
   addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
     this.loading = true;
     this.jerarquizacionServicio.addJerarquizacionNacional(jerarquizacion)
@@ -124,7 +123,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
         }, err => {
           this.loading = false;
           if (err.status === 404)
-            this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
+            this.changeSuccessMessage(`Error no se pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else
             this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
         });

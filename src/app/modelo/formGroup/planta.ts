@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, FormControl,  Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { planta_Modelo } from '../../modelo/resumen/planta-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
 export class planta_FormGroup {
@@ -9,7 +9,7 @@ export class planta_FormGroup {
         return fb.group({
             'plantaId': row.plantaId,
             //identificadores
-            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10),Validators.required]),
+            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
             'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
             'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
             'nomcomunn': new FormControl(row.nomcomunn, Validators.maxLength(60)),
@@ -19,13 +19,13 @@ export class planta_FormGroup {
             'comidentn': new FormControl(row.comidentn, Validators.maxLength(120)),
             'comtaxn': new FormControl(row.comtaxn, Validators.maxLength(120)),
             //status
-            'rangog': new FormControl(row.rangog, Validators.maxLength(10)),
-            'rangon': new FormControl(row.rangon, Validators.maxLength(10)),
+            'rangog': new FormControl(row.rangog, Validators.maxLength(6)),
+            'rangon': new FormControl(row.rangon, Validators.maxLength(6)),
             'aepeu': new FormControl(row.aepeu, Validators.maxLength(10)),
-            'cites': new FormControl(row.cites, Validators.maxLength(10)),
-            'uicn': new FormControl(row.uicn, Validators.maxLength(10)),
+            'cites': new FormControl(row.cites, Validators.maxLength(3)),
+            'uicn': new FormControl(row.uicn, Validators.maxLength(2)),
             'rastreolen': new FormControl(row.rastreolen, Validators.maxLength(10)),
-            'protnacion': new FormControl(row.protnacion, Validators.maxLength(10)),
+            'protnacion': new FormControl(row.protnacion, Validators.maxLength(4)),
             'malezan': new FormControl(row.clasifinstn, Validators.maxLength(60)),
             'clasifinstn': new FormControl(row.clasifinstn, Validators.maxLength(60)),
             'comstatn': new FormControl(row.comstatn, Validators.maxLength(120)),
@@ -195,8 +195,8 @@ export class planta_FormGroup {
             'rcpnopc4': new FormControl(row.rcpnopc4, Validators.maxLength(60)),
             'rcpnopc5': new FormControl(row.rcpnopc5, Validators.maxLength(120)),
             //mantenimiento del registro
-            'codfuente': new FormControl(row.codfuente, Validators.maxLength(10)),
-            'cita': new FormControl(row.cita, Validators.maxLength(60)),
+            'codfuente': new FormControl(row.codfuente, Validators.maxLength(99)),
+            'cita': new FormControl(row.cita, Validators.maxLength(1)),//representativo
             'transparen': new FormControl(row.transparen, Validators.maxLength(10)),
             'refg': new FormControl(row.refg, Validators.maxLength(120)),
             'refn': new FormControl(row.refn, Validators.maxLength(120)),

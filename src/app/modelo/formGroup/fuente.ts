@@ -16,7 +16,7 @@ export class fuente_FormGroup {
         return fb.group({
             'fuenteId': row.fuenteId,
             'naturalezadocumento': row.naturalezadocumento,
-            'codfuente': new FormControl(row.codfuente, Validators.maxLength(10)),
+            'codfuente': new FormControl(row.codfuente, [Validators.maxLength(10), Validators.required]),
             'cita': new FormControl(row.cita, Validators.maxLength(240)),
             'archivado': new FormControl(row.archivado, Validators.maxLength(60)),
             'cobgeo': new FormControl(row.cobgeo, Validators.maxLength(50)),
@@ -32,7 +32,7 @@ export class fuente_FormGroup {
             'notadigest': new FormControl(row.notadigest, Validators.maxLength(120)),
             'actualizar': fechaServicio.getFecha(row.actualizar), //date
             'control': fechaServicio.getFecha(row.control),    //date
-            'bcd': new FormControl(row.bcd, Validators.maxLength(3)),
+            'bcd': new FormControl(row.bcd, Validators.maxLength(50)),
             //tema columna 1
             'comunnat': row.comunnat,
             'comunterr': row.comunterr,

@@ -80,12 +80,12 @@
                       <label>NLOCTIP:</label>
                     </div>
                     <div class="md-form  col-md-9 mt-20">
-                      <i class="fa fa-pencil prefix"></i>
-                      <textarea mdbInputDirective mdbValidate type="text" id="formNloctip"
-                        class="md-textarea form-control" rows="2" formControlName="nloctip"></textarea>
-                      <label for="formNloctip">Identificar el mejor sitio conocido en el pais.</label>
+                      <input mdbInputDirective mdbValidate type="text" id="formNloctip" class="form-control"
+                        formControlName="nloctip">
+                      <label for="formNloctip">&nbsp;&nbsp;&nbsp;&nbsp;Identificar el mejor sitio conocido en el
+                        país.</label>
                       <mdb-error *ngIf="input_nloctip.invalid && (input_nloctip.dirty || input_nloctip.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 50 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -181,11 +181,11 @@
                     <div class="md-form  col-md-9 mt10">
                       <i class="fa fa-pencil prefix"></i>
                       <textarea mdbInputDirective mdbValidate type="text" id="formNdistcom"
-                        class="md-textarea form-control" rows="2" formControlName="ndistcom"></textarea>
+                        class="md-textarea form-control" rows="4" formControlName="ndistcom"></textarea>
                       <label for="formNdistcom">Describa en forma general la distribución, presente e hihistórica dentro
                         de su región.</label>
                       <mdb-error *ngIf="input_ndistcom.invalid && (input_ndistcom.dirty || input_ndistcom.touched)">
-                        <font size=2 color="red">Error, máximo caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -333,7 +333,7 @@
                       <label for="formNranrzon">Dar las razones para este rango, mencionando los mejores factores de
                         jerarquización y otras consideraciones.</label>
                       <mdb-error *ngIf="input_nranrzon.invalid && (input_nranrzon.dirty || input_nranrzon.touched)">
-                        <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 240 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -419,7 +419,7 @@
                         mantener el formulário de jerarquización
                         globa o local.</label>
                       <mdb-error *ngIf="input_resrn.invalid && (input_resrn.dirty || input_resrn.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 10 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -433,7 +433,7 @@
                         formControlName="edautor">
                       <label for="">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
                       <mdb-error *ngIf="input_edautor.invalid && (input_edautor.dirty || input_edautor.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                        <font size=2 color="red">Error, máximo 30 caracteres.</font>
                       </mdb-error>
                     </div>
                   </div>
@@ -444,7 +444,7 @@
                     <div class="md-form col-md-3 mt-5">
                       <input mdbInputDirective mdbValidate type="text" id="formEdicion" class="form-control"
                         formControlName="edicion" ngbDatepicker #dEdicion="ngbDatepicker">
-                      <label for="formEdicion">EDICIÓN</label>
+                      <label for="formEdicion">&nbsp;&nbsp;&nbsp;&nbsp;EDICIÓN</label>
                       <mdb-error *ngIf="input_edicion.invalid && (input_edicion.dirty || input_edicion.touched)">
                         <font size=2 color="red">Error, el formato debe ser
                           aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
@@ -461,7 +461,7 @@
                     <div class="md-form  col-md-3 mt-5">
                       <input mdbInputDirective mdbValidate type="text" id="formActualizar" class="form-control"
                         formControlName="actualizar" ngbDatepicker #dActualizar="ngbDatepicker">
-                      <label for="formActualizar">ACTUALIZAR</label>
+                      <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
                       <mdb-error
                         *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
                         <font size=2 color="red">Error, el formato debe ser

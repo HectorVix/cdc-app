@@ -27,7 +27,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formCodigoam" class="form-control"
                           formControlName="codigoam">
                         <mdb-error *ngIf="input_codigoam.invalid && (input_codigoam.dirty || input_codigoam.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 12 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-5 mt10" *ngIf="guardar">
@@ -44,7 +44,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formNombream" class="form-control"
                           formControlName="nombream">
                         <mdb-error *ngIf="input_nombream.invalid && (input_nombream.dirty || input_nombream.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 50 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -70,7 +70,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formAmmayor" class="form-control"
                           formControlName="ammayor">
                         <mdb-error *ngIf="input_ammayor.invalid && (input_ammayor.dirty || input_ammayor.touched)">
-                          <font size=2 color="red">Error, máximo 20 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 14 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-3 mt-20">
@@ -78,7 +78,7 @@
                           formControlName="coddueno">
                         <label for="formCoddueno">&nbsp;&nbsp;&nbsp;&nbsp;CODDUEÑO</label>
                         <mdb-error *ngIf="input_coddueno.invalid && (input_coddueno.dirty || input_coddueno.touched)">
-                          <font size=2 color="red">Error, máximo 20 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 3 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -91,7 +91,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formCodsitio" class="form-control"
                           formControlName="codsitio">
                         <mdb-error *ngIf="input_codsitio.invalid && (input_codsitio.dirty || input_codsitio.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 12 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -162,14 +162,14 @@
                       <div class="col-md-2">
                         <label for="">NOMMAPA:</label>
                       </div>
-                      <div class="md-form col-md-4 mt-20 ">
+                      <div class="md-form col-md-5 mt-20 ">
                         <input mdbInputDirective mdbValidate type="text" id="formNommapa" class="form-control"
                           formControlName="nommapa">
                         <mdb-error *ngIf="input_nommapa.invalid && (input_nommapa.dirty || input_nommapa.touched)">
-                          <font size=2 color="red">Error, máximo 20 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
-                      <div class="md-form col-md-3 mt-20">
+                      <div class="md-form col-md-4 mt-20">
                         <input mdbInputDirective mdbValidate type="text" id="formCodmapa" class="form-control"
                           formControlName="codmapa">
                         <label for="formCodmapa">&nbsp;&nbsp;&nbsp;&nbsp;CODMAPA</label>
@@ -177,11 +177,15 @@
                           <font size=2 color="red">Error, máximo 20 caracteres.</font>
                         </mdb-error>
                       </div>
-
-                      <div class="md-form col-md-2 mt-20">
+                    </div>
+                    <!-- fin row -->
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label for="">NUMMARG</label>
+                      </div>
+                      <div class="md-form col-md-4 mt-20">
                         <input mdbInputDirective mdbValidate type="text" id="formnNummarg" class="form-control"
                           formControlName="nummarg">
-                        <label for="formnNummarg">&nbsp;&nbsp;&nbsp;&nbsp;NUMMARG</label>
                         <mdb-error *ngIf="input_nummarg.invalid && (input_nummarg.dirty || input_nummarg.touched)">
                           <font size=2 color="red">Error, máximo 10 caracteres.</font>
                         </mdb-error>
@@ -196,7 +200,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formLat" class="form-control"
                           formControlName="lat">
                         <mdb-error *ngIf="input_lat.invalid && (input_lat.dirty || input_lat.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 6 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-2 mt-20">
@@ -204,7 +208,7 @@
                           formControlName="long1">
                         <label for="formnLong">&nbsp;&nbsp;&nbsp;&nbsp;LONG</label>
                         <mdb-error *ngIf="input_long1.invalid && (input_long1.dirty || input_long1.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 7 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -217,7 +221,7 @@
                         <input mdbInputDirective mdbValidate type="text" id="formS" class="form-control"
                           formControlName="coords">
                         <mdb-error *ngIf="input_coords.invalid && (input_coords.dirty || input_coords.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 6 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-2 mt-20 ">
@@ -225,7 +229,7 @@
                           formControlName="coordn">
                         <label for="formN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
                         <mdb-error *ngIf="input_coordn.invalid && (input_coordn.dirty || input_coordn.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 6 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-2 mt-20 ">
@@ -233,7 +237,7 @@
                           formControlName="coorde">
                         <label for="formE">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
                         <mdb-error *ngIf="input_coorde.invalid && (input_coorde.dirty || input_coorde.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 7 caracteres.</font>
                         </mdb-error>
                       </div>
                       <div class="md-form col-md-2 mt-20 ">
@@ -241,7 +245,7 @@
                           formControlName="coordo">
                         <label for="formO">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
                         <mdb-error *ngIf="input_coordo.invalid && (input_coordo.dirty || input_coordo.touched)">
-                          <font size=2 color="red">Error, máximo 10 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 7 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -427,7 +431,7 @@
                           formControlName="administrador">
                         <mdb-error
                           *ngIf="input_administrador.invalid && (input_administrador.dirty || input_administrador.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -441,7 +445,7 @@
                           formControlName="instadmin">
                         <mdb-error
                           *ngIf="input_instadmin.invalid && (input_instadmin.dirty || input_instadmin.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -455,7 +459,7 @@
                           formControlName="diradmin1">
                         <mdb-error
                           *ngIf="input_diradmin1.invalid && (input_diradmin1.dirty || input_diradmin1.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -469,7 +473,7 @@
                           formControlName="diradmin2">
                         <mdb-error
                           *ngIf="input_diradmin2.invalid && (input_diradmin2.dirty || input_diradmin2.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -483,7 +487,7 @@
                           formControlName="ciudadadmin">
                         <mdb-error
                           *ngIf="input_ciudadadmin.invalid && (input_ciudadadmin.dirty || input_ciudadadmin.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>
@@ -497,7 +501,7 @@
                           formControlName="subnacadmin">
                         <mdb-error
                           *ngIf="input_subnacadmin.invalid && (input_subnacadmin.dirty || input_subnacadmin.touched)">
-                          <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                          <font size=2 color="red">Error, máximo 30 caracteres.</font>
                         </mdb-error>
                       </div>
                     </div>

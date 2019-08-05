@@ -27,8 +27,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class RegistroSitioComponent implements OnInit {
   data_macsitio_DataSource: LocalDataSource = new LocalDataSource();
   data_subdivision_DataSource: LocalDataSource = new LocalDataSource();
-  sitioForm: FormGroup;   //formulario de sitio
-  buscarForm: FormGroup;   //formulario de sitio
+  sitioForm: FormGroup;
+  buscarForm: FormGroup;
   criterio_Sitio = new criterio_Sitio();
   criterio_mapasitio = this.criterio_Sitio.mapasitio;
   criterio_rangoant = this.criterio_Sitio.rangoant;
@@ -498,7 +498,7 @@ export class RegistroSitioComponent implements OnInit {
     }
   }
   getFoto_Datos(sitioId: Number) {
-    const date = new Date().valueOf();
+    //  const date = new Date().valueOf();
     this.galeriaServicio.getDatosFotos(sitioId, 2).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;

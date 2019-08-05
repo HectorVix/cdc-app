@@ -140,7 +140,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
         }, err => {
           this.loading = false;
           if (err.status === 404)
-            this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
+            this.changeSuccessMessage(`Error no se pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else
             this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
         });

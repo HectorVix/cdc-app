@@ -22,31 +22,31 @@ export class area_FormGroup {
             'areaId': row.areaId,
             //página1
             //identificadores
-            'codigoam': new FormControl(row.codigoam, [Validators.maxLength(10), Validators.required]),
-            'nombream': new FormControl(row.nombream, Validators.maxLength(60)),
+            'codigoam': new FormControl(row.codigoam, [Validators.maxLength(12), Validators.required]),
+            'nombream': new FormControl(row.nombream, Validators.maxLength(50)),
             'sinam': new FormControl(row.sinam, Validators.maxLength(60)),
-            'ammayor': new FormControl(row.ammayor, Validators.maxLength(20)),
-            'coddueno': new FormControl(row.coddueno, Validators.maxLength(20)),
-            'codsitio': new FormControl(row.codsitio, Validators.maxLength(10)),
+            'ammayor': new FormControl(row.ammayor, Validators.maxLength(14)),
+            'coddueno': new FormControl(row.coddueno, Validators.maxLength(3)),
+            'codsitio': new FormControl(row.codsitio, Validators.maxLength(12)),
             'nomsitio': new FormControl(row.nomsitio, Validators.maxLength(60)),
             //localizadores
             'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
             'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
             'subdivision': new FormControl(row.subdivision, Validators.maxLength(60)),
-            'nommapa': new FormControl(row.nommapa, Validators.maxLength(20)),
+            'nommapa': new FormControl(row.nommapa, Validators.maxLength(30)),
             'codmapa': new FormControl(row.codmapa, Validators.maxLength(20)),
             'nummarg': new FormControl(row.nummarg, Validators.maxLength(10)),
-            'lat': new FormControl(row.lat, Validators.maxLength(10)),
-            'long1': new FormControl(row.long1, Validators.maxLength(10)),//palabra reservada en Java (long)
-            'coords': new FormControl(row.coords, Validators.maxLength(10)),
-            'coordn': new FormControl(row.coordn, Validators.maxLength(10)),
-            'coorde': new FormControl(row.coorde, Validators.maxLength(10)),
-            'coordo': new FormControl(row.coordo, Validators.maxLength(10)),
+            'lat': new FormControl(row.lat, Validators.maxLength(6)),
+            'long1': new FormControl(row.long1, Validators.maxLength(7)),//palabra reservada en Java (long)
+            'coords': new FormControl(row.coords, Validators.maxLength(6)),
+            'coordn': new FormControl(row.coordn, Validators.maxLength(6)),
+            'coorde': new FormControl(row.coorde, Validators.maxLength(7)),
+            'coordo': new FormControl(row.coordo, Validators.maxLength(7)),
             //decriptores
             'descripcion': new FormControl(row.descripcion, Validators.maxLength(120)),
-            'areatot1': row.areatot1, //number
-            'areatot2': row.areatot2, //number
-            'areasubnac1': row.areasubnac1,//number
+            'areatot1': row.areatot1, //number (11)
+            'areatot2': row.areatot2, //number 
+            'areasubnac1': row.areasubnac1,//number (11)
             'areasubnac2': row.areasubnac2,//number
             'multisubnac': row.multisubnac, //boolean ♦
             'limites': row.limites,//boolean ♦
@@ -60,12 +60,12 @@ export class area_FormGroup {
              * Página 2 
              * Manejo
              */
-            'administrador': new FormControl(row.administrador, Validators.maxLength(60)),
-            'instadmin': new FormControl(row.instadmin, Validators.maxLength(60)),
-            'diradmin1': new FormControl(row.diradmin1, Validators.maxLength(60)),
-            'diradmin2': new FormControl(row.diradmin2, Validators.maxLength(60)),
-            'ciudadadmin': new FormControl(row.ciudadadmin, Validators.maxLength(60)),
-            'subnacadmin': new FormControl(row.subnacadmin, Validators.maxLength(60)),
+            'administrador': new FormControl(row.administrador, Validators.maxLength(30)),
+            'instadmin': new FormControl(row.instadmin, Validators.maxLength(30)),
+            'diradmin1': new FormControl(row.diradmin1, Validators.maxLength(30)),
+            'diradmin2': new FormControl(row.diradmin2, Validators.maxLength(30)),
+            'ciudadadmin': new FormControl(row.ciudadadmin, Validators.maxLength(30)),
+            'subnacadmin': new FormControl(row.subnacadmin, Validators.maxLength(30)),
             'codpostaladmin': new FormControl(row.codpostaladmin, Validators.maxLength(32)), // se toma como base el mas eficaz (Portugal)
             'telefadminist': new FormControl(row.telefadminist, Validators.maxLength(15)), //prefijos télefonicos internacionales
             'accesopub': row.accesopub, //varchar(1) ♦

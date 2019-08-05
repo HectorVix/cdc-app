@@ -85,11 +85,13 @@
                                 <label for="">LOCTIPS:</label>
                             </div>
                             <div class="md-form col-md-9 mt-20 ">
-                                <input mdbInputDirective mdbValidate type="text" id="formLoctips" class="form-control"
+                                <input mdbInputDirective mdbValidate type="text" id="formSLoctips" class="form-control"
                                     formControlName="loctips">
+                                <label for="formSLoctips">&nbsp;&nbsp;&nbsp;&nbsp;Identificar el mejor sitio conocido en
+                                    el país.</label>
                                 <mdb-error
                                     *ngIf="input_loctips.invalid && (input_loctips.dirty || input_loctips.touched)">
-                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                    <font size=2 color="red">Error, máximo 50 caracteres.</font>
                                 </mdb-error>
                             </div>
                         </div>
@@ -184,13 +186,13 @@
                             <div class="md-form  col-md-9 mt10">
                                 <i class="fa fa-pencil prefix"></i>
                                 <textarea mdbInputDirective mdbValidate type="text" id="formComdists"
-                                    class="md-textarea form-control" formControlName="comdists" rows="2"></textarea>
+                                    class="md-textarea form-control" formControlName="comdists" rows="4"></textarea>
                                 <label for="formComdists">
                                     Se especifica los países o regiones ecológicas donde se encuentra el elemento
                                     actualmente</label>
                                 <mdb-error
                                     *ngIf="input_comdists.invalid && (input_comdists.dirty || input_comdists.touched)">
-                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                    <font size=2 color="red">Error, máximo 240 caracteres.</font>
                                 </mdb-error>
                             </div>
                         </div>
@@ -312,14 +314,14 @@
                             <div class="md-form  col-md-9 mt-20">
                                 <i class="fa fa-pencil prefix"></i>
                                 <textarea mdbInputDirective mdbValidate type="text" id="formRazonRs"
-                                    class="md-textarea form-control" formControlName="razonrs" rows="2"></textarea>
+                                    class="md-textarea form-control" formControlName="razonrs" rows="4"></textarea>
                                 <label for="formRazonRs">Dar las razones para este rango, mencionando los mejores
                                     factores de jerarquización y otras
                                     consideraciones.
                                 </label>
                                 <mdb-error
                                     *ngIf="input_razonrs.invalid && (input_razonrs.dirty || input_razonrs.touched)">
-                                    <font size=2 color="red">Error, máximo 120 caracteres.</font>
+                                    <font size=2 color="red">Error, máximo 240 caracteres.</font>
                                 </mdb-error>
                             </div>
                         </div>
@@ -387,7 +389,7 @@
                                 <label for="formAutorEd">&nbsp;&nbsp;&nbsp;&nbsp;Escriba su nombre.</label>
                                 <mdb-error
                                     *ngIf="input_autored.invalid && (input_autored.dirty || input_autored.touched)">
-                                    <font size=2 color="red">Error, máximo 60 caracteres.</font>
+                                    <font size=2 color="red">Error, máximo 30 caracteres.</font>
                                 </mdb-error>
                             </div>
                         </div>

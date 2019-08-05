@@ -9,9 +9,9 @@ export class protocolo_LE_FormGroup {
         return fb.group({
             'protocoloId': row.protocoloId,
             'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
-            'rangog': new FormControl(row.rangog, Validators.maxLength(10)),
-            'rangon': new FormControl(row.rangon, Validators.maxLength(10)),
-            'rangos': new FormControl(row.rangos, Validators.maxLength(10)),
+            'rangog': new FormControl(row.rangog, Validators.maxLength(6)),
+            'rangon': new FormControl(row.rangon, Validators.maxLength(6)),
+            'rangos': new FormControl(row.rangos, Validators.maxLength(6)),
             'nombre': new FormControl(row.nombre, Validators.maxLength(60)),
             'nomcomun': new FormControl(row.nomcomun, Validators.maxLength(60)),
             'fecha': fechaServicio.getFecha(row.fecha)
