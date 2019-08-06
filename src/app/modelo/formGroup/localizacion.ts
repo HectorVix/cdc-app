@@ -142,10 +142,10 @@ export class localizacion_FormGroup {
             'elev': row.elev,//Number 4
             'area': row.area,//Number 6
             //Protección
-            'masterreno': val_masterreno,//♦
-            'masprotec': val_masprotec,//♦
-            'masmanejo': val_masmanejo,//♦
-            'involtnc': val_involtnc,//♦
+            'masterreno': val_masterreno,//♦ Boolean
+            'masprotec': val_masprotec,//♦   Boolean
+            'masmanejo': val_masmanejo,//♦   Boolean
+            'involtnc': val_involtnc,//♦     Boblean
             'commanejo': new FormControl(row.commanejo, Validators.maxLength(60)),
             'comprot': new FormControl(row.comprot, Validators.maxLength(60)),
             //Propietario

@@ -9,7 +9,7 @@ export class vertebrado_FormGroup {
         return fb.group({
             'vertebradoId': row.vertebradoId,
             //identificadores
-            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10),Validators.required]),
+            'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
             'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
             'nombreg': new FormControl(row.nombreg, Validators.maxLength(60)),
             'autor': new FormControl(row.autor, Validators.maxLength(60)),
@@ -23,16 +23,16 @@ export class vertebrado_FormGroup {
             'comtaxg': new FormControl(row.comtaxg, Validators.maxLength(120)),
             'comsubespn': new FormControl(row.comsubespn, Validators.maxLength(120)),
             //status
-            'rangog': new FormControl(row.rangog, Validators.maxLength(10)),
-            'cites': new FormControl(row.cites, Validators.maxLength(10)),
-            'uicn': new FormControl(row.uicn, Validators.maxLength(10)),
-            'aepeu': new FormControl(row.aepeu, Validators.maxLength(10)),
-            'fechaaepeu': fechaServicio.getFecha(row.fechaaepeu),//date
-            'endemismo': new FormControl(row.endemismo, Validators.maxLength(10)),
+            'rangog': new FormControl({ value: row.rangog, disabled: true }), //representativo
+            'cites': new FormControl({ value: row.cites, disabled: true }),//representativo
+            'uicn': new FormControl({ value: row.uicn, disabled: true }),//representativo
+            'aepeu': new FormControl({ value: row.aepeu, disabled: true }),//representativo
+            'fechaaepeu': fechaServicio.getFecha(row.fechaaepeu),//date representativo 
+            'endemismo': new FormControl({ value: row.endemismo, disabled: true }),//representativo
             'comstatg': new FormControl(row.comstatg, Validators.maxLength(120)),
-            'rangon': new FormControl(row.rangon, Validators.maxLength(10)),
-            'protnacion': new FormControl(row.protnacion, Validators.maxLength(10)),
-            'rastreolen': new FormControl(row.rastreolen, Validators.maxLength(10)),
+            'rangon': new FormControl({ value: row.rangon, disabled: true }),//representativo
+            'protnacion': new FormControl({ value: row.protnacion, disabled: true }),//representativo
+            'rastreolen': new FormControl({ value: row.rastreolen, disabled: true }),//representativo
             'espdeportn': new FormControl(row.espdeportn, Validators.maxLength(10)),
             'espcomern': new FormControl(row.espcomern, Validators.maxLength(10)),
             'pezdeport': new FormControl(row.pezdeport, Validators.maxLength(10)),

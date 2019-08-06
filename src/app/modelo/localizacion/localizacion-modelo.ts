@@ -79,7 +79,7 @@ export class Localizacion_Modelo {
     transcrito: Date;
     cc: Boolean;
     cartografo: Date;
-    respdatos: Date;
+    respdatos: String;
     actualizar: Date;
 
     //relaciones
