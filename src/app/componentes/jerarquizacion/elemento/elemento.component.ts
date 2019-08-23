@@ -17,6 +17,8 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { ElementoDato } from '../../../modelo/tabla/elemento-dato';
 import { elemento_FormGroup } from '../../../modelo/formGroup/elemento';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -60,7 +62,14 @@ export class ElementoComponent implements OnInit {
   data_resFoto: any;
   tam_Inicial_ListaFotos = 0;
   fotoId_Lista = [];
-  constructor(private fb: FormBuilder, private fb2: FormBuilder,
+  //select 
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
+
+
+
+  constructor(private fb: FormBuilder,
     private elementoServicio: ElementoService,
     private galeriaServicio: GaleriaService,
     private fechaServicio: FechaService,
@@ -132,7 +141,7 @@ export class ElementoComponent implements OnInit {
     this.elementoForm = new elemento_FormGroup().getElemento_FormGrup(row);
   }
   crearForm_Buscar() {
-    this.buscarForm = this.fb2.group({
+    this.buscarForm = this.fb.group({
       'codigo': '',
       'nombrecomun': '',
       'nombrecientifico': ''
@@ -165,7 +174,7 @@ export class ElementoComponent implements OnInit {
         this.changeSuccessMessage('La fecha es obligatoria.', 'primary');
     }
     else
-    this.changeSuccessMessage('Valida que los campos esten correctos donde se te indica..', 'primary');
+      this.changeSuccessMessage('Valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setElemento(elemento): elemento_Modelo {
     elemento.fecha = this.fechaServicio.toFormatoDateTime(this.elementoForm.get('fecha').value);
@@ -294,6 +303,16 @@ export class ElementoComponent implements OnInit {
   get input_nombrecientifico() { return this.elementoForm.get('nombrecientifico'); }
   get input_comentario() { return this.elementoForm.get('comentario'); }
   get input_fecha() { return this.elementoForm.get('fecha'); }
+
+  //clasificación de comunidades
+  get clasificacion_comunidad() {
+    var val = false;
+    if (this.elementoForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
   return {

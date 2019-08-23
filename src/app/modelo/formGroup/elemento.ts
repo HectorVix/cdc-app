@@ -9,6 +9,8 @@ export class elemento_FormGroup {
         return fb.group({
             'elementoId': row.elementoId,
             'codigo': new FormControl(row.codigo, Validators.maxLength(10)),
+            'clase': row.clase,
+            'comunidad': row.comunidad,
             'nombrecomun': new FormControl(row.nombrecomun, Validators.maxLength(60)),
             'nombrecientifico': new FormControl(row.nombrecientifico, Validators.maxLength(60)),
             'comentario': new FormControl(row.nombrecientifico, Validators.maxLength(120)),

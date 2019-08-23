@@ -1,5 +1,5 @@
-export interface Valor {
+export class Valor {
     disabled?: boolean;
-    value: string;
+    value: String;
     viewValue: string;
 }

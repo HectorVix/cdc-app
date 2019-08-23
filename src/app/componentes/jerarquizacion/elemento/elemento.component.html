@@ -28,6 +28,38 @@
             <!-- fin row -->
             <div class="row">
               <div class="col-md-2">
+                <label for="">CLASE:</label>
+              </div>
+              <div class="col-md-3 mt-15">
+                <mat-form-field>
+                  <mat-select placeholder=" " panelClass="color-panel-green" formControlName="clase">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                      {{sClase.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">TIPO COMUNIDAD NATURAL:</label>
+              </div>
+              <div class="col-md-3 mt-15" *ngIf="clasificacion_comunidad">
+                <mat-form-field>
+                  <mat-select placeholder=" " panelClass="color-panel-green" formControlName="comunidad">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                      {{sTipo.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
                 <label for="">NOMBRE COMÚN:</label>
               </div>
               <div class="md-form col-md-9 mt-20">
