@@ -43,6 +43,28 @@ export class JerarquizacionService {
   getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String): Observable<jerarquizacion_Nacional_Modelo> {
     return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+
+  //Obtener catalogos de los rangos globaln, nacional y subnacional
+  get rangog() {
+    return this.http.get('/cecon/jerarquizacion/rangog');
+  }
+  get rangon() {
+    return this.http.get('/cecon/jerarquizacion/rangon');
+  }
+  get rangos() {
+    return this.http.get('/cecon/jerarquizacion/rangos');
+  }
+
+  //Obtener catalogos de nación, subnación(depto.) y municipio
+  get nacion() {
+    return this.http.get('/cecon/jerarquizacion/nacion');
+  }
+  get subnacion() {
+    return this.http.get('/cecon/jerarquizacion/subnacion');
+  }
+  get municipio() {
+    return this.http.get('/cecon/jerarquizacion/municipio');
+  }
   updateGlobal(global: jerarquizacion_Global_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/global/' + jerarquia_id, global, httpOptions);
   }

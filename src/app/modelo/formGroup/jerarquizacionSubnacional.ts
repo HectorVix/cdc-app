@@ -12,8 +12,8 @@ export class jerarquizacion_Subnacional_FormGroup {
         return fb.group({
             'subnacionalId': row.subnacionalId,
             'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
-            'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
-            'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
+            'nacion': 'GT',
+            'subnacion': row.subnacion,
             'nombres': new FormControl(row.nombres, Validators.maxLength(60)),
             'loctips': new FormControl(row.loctips, Validators.maxLength(50)),
             'lestims': row.lestims,//(2)

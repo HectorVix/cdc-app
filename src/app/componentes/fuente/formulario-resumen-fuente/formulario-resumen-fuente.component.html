@@ -16,7 +16,7 @@
               <div class=" col-md-4 mt10">
                 <mat-form-field>
                   <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezadocumento">
-                    <mat-option>-- Ninguna --</mat-option>
+                    <mat-option>-- Ningún valor --</mat-option>
                     <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente"
                       [value]="naturalezaDocumento.value">
                       {{naturalezaDocumento.viewValue}}
@@ -509,10 +509,16 @@
                   formControlName="codigoFuente" data-error=" " data-success=" ">
                 <label for="formCodigoFuente">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
-              <div class="md-form col-md-5 mt10">
-                <input mdbInputDirective type="text" id="formNaturalezaDocumento" class="form-control"
-                  formControlName="naturalezaDocumento" data-error=" " data-success=" ">
-                <label for="formNaturalezaDocumento">&nbsp;&nbsp;&nbsp;&nbsp;TIPO DE DOCUMENTO</label>
+              <div class=" col-md-4 mt10">
+                <mat-form-field>
+                  <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezaDocumento">
+                    <mat-option>-- Ningún valor --</mat-option>
+                    <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente"
+                      [value]="naturalezaDocumento.value">
+                      {{naturalezaDocumento.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
             <!-- Fin row -->

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { fuente_Modelo } from '../../../modelo/fuente/fuente-modelo';
 //import { archivo_Modelo } from '../../../modelo/fuente/archivo-modelo';
+import { documento_Naturaleza } from '../../../modelo/fuente/documento-modelo';
 import { criterio_ResumenesFuente } from '../../../modelo/select/overview-fuente';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { forkJoin, Subject } from 'rxjs';
@@ -305,28 +306,14 @@ export class FormularioResumenFuenteComponent implements OnInit {
   get input_control() { return this.fuenteForm.get('control'); }
 }
 function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
-  if (naturalezaDocumento == "A")
-    naturalezaDocumento = "Articulo";
-  if (naturalezaDocumento == "C")
-    naturalezaDocumento = "Trabajo de campo";
-  if (naturalezaDocumento == "F")
-    naturalezaDocumento = "Fotos o ilustraciones";
-  if (naturalezaDocumento == "I")
-    naturalezaDocumento = "Inédito";
-  if (naturalezaDocumento == "L")
-    naturalezaDocumento = "Libro";
-  if (naturalezaDocumento == "M")
-    naturalezaDocumento = "Mapas e imágenes";
-  if (naturalezaDocumento == "O")
-    naturalezaDocumento = "Organizaciones";
-  if (naturalezaDocumento == "P")
-    naturalezaDocumento = "Comunicaciones personales";
-  if (naturalezaDocumento == "R")
-    naturalezaDocumento = "Revistas, periódicos y publicaciones";
+  var documento = new documento_Naturaleza();
+  var documento_Aux: String;
+  documento.naturaleza_Documento(naturalezaDocumento);
+  documento_Aux = documento.valor_NaturalezaDocumento;
   return {
     numero: k,
     fuenteId: fuenteId,
-    naturalezaDocumento: naturalezaDocumento,
+    naturalezaDocumento: documento_Aux,
     codigoFuente: codigoFuente,
     cita: cita,
     clave: clave

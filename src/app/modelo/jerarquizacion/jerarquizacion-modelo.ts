@@ -7,5 +7,5 @@ import { elemento_Modelo } from '../../modelo/jerarquizacion/elemento-modelo';
     subnacionalList:any;
     rastreoList:any;
     eLEMENTOelementoid:elemento_Modelo;
-    estado:Number;
+    estado:String;
 }

@@ -14,7 +14,7 @@ export class jerarquizacion_Nacional_FormGroup {
             //pagina1
             'codigoe': new FormControl(row.codigoe, [Validators.maxLength(10), Validators.required]),
             'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
-            'nacion': new FormControl(row.nacion, Validators.maxLength(60)),
+            'nacion': 'GT',
             'nloctip': new FormControl(row.nloctip, Validators.maxLength(50)),
             'nlestim': row.nlestim,//(2)
             'nlestimcom': new FormControl(row.nlestimcom, Validators.maxLength(120)),

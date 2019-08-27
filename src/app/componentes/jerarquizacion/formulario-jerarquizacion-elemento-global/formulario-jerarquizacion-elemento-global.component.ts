@@ -16,6 +16,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { jerarquizacion_Global_FormGroup } from '../../../modelo/formGroup/jerarquizacionGloblal';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { global_Dato } from '../../../modelo/tabla/global-dato'
+import { Valor } from '../../../modelo/select/overwiew-valor';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-global',
@@ -64,13 +65,14 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.crear_Jerarquizacion_Global(new jerarquizacion_Global_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Global);
+    this.obtener_rangog();
   }
 
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
   setDataSourceAttributes() {
@@ -142,7 +144,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           if (err.status === 404)
             this.changeSuccessMessage(`Error no se pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else
-            this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
+            this.changeSuccessMessage(`No se pudo regitrar, el elemento con CODIGOE:${this.jerarquizacion_Global_Form.get('codigoe').value} ya está jerarquizado globalmente ó comprueba que esté disponible el servicio.`, 'primary');
         });
   }
 
@@ -296,6 +298,20 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   get input_edicion() { return this.jerarquizacion_Global_Form.get('edicion'); }
   get input_actualizar() { return this.jerarquizacion_Global_Form.get('actualizar'); }
 
+  //Catalogo de rango global
+  obtener_rangog() {
+    this.jerarquizacionServicio.rangog.subscribe(
+      (resRangog: any[]) => {
+        resRangog.forEach(rangog => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = rangog.rangog;
+          modelo_Valor.viewValue = rangog.rangog;
+          this.criterio_rangog.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener los rangos globales, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
 }
 function crearGlobal(k: Number, globalId: Number, codigoe, nombreg, descrielem): global_Dato {
   return {

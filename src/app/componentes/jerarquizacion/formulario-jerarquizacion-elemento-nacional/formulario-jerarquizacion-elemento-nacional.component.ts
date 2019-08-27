@@ -15,7 +15,8 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 //--------------tabla------------------------------------
 import { jerarquizacion_Nacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionNacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { nacional_Dato } from '../../../modelo/tabla/nacional-dato'
+import { nacional_Dato } from '../../../modelo/tabla/nacional-dato';
+import { Valor } from '../../../modelo/select/overwiew-valor';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-nacional',
@@ -31,6 +32,8 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   criterio_nleprot = this.criterio_Jeraquizacion.lgn_leprot;
   criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
+  criterio_Nacion = this.criterio_Jeraquizacion.ln_Nacion;
+
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
   jerarquizacionId: Number;
@@ -64,13 +67,15 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.createFormJerarquizacionNacional(new jerarquizacion_Nacional_Modelo());
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Nacional);
+    this.obtener_rangon();
+    this.obtener_nacion();
   }
 
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(10000)
     ).subscribe(() => this.successMessage = null);
   }
   setDataSourceAttributes() {
@@ -125,7 +130,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           if (err.status === 404)
             this.changeSuccessMessage(`Error no se pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else
-            this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
+            this.changeSuccessMessage(`No se pudo regitrar, el elemento con CODIGOE:${this.jerarquizacion_Nacional_Form.get('codigoe').value} ya está jerarquizado nacionalmente ó comprueba que esté disponible el servicio.`, 'primary');
         });
   }
   //validar codigoe 
@@ -178,7 +183,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.buscar_Form = this.fb.group({
       'codigoe': '',
       'nombren': '',
-      'nacion': ''
+      'nacion': 'GT'
     });
   }
   buscarJerarquizacionNacional() {
@@ -283,6 +288,35 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   get input_edautor() { return this.jerarquizacion_Nacional_Form.get('edautor'); }
   get input_actualizar() { return this.jerarquizacion_Nacional_Form.get('actualizar'); }
   get input_edicion() { return this.jerarquizacion_Nacional_Form.get('edicion'); }
+
+  //Catalogo de rango nacional
+  obtener_rangon() {
+    this.jerarquizacionServicio.rangon.subscribe(
+      (resRangon: any[]) => {
+        resRangon.forEach(rangon => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = rangon.rangon;
+          modelo_Valor.viewValue = rangon.rangon;
+          this.criterio_rangon.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener los rangos nacionales, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
+  //Catalogo de nación
+  obtener_nacion() {
+    this.jerarquizacionServicio.nacion.subscribe(
+      (resNacion: any[]) => {
+        resNacion.forEach(nacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = nacion.nacionPK.codigo;
+          modelo_Valor.viewValue = nacion.nombre;
+          this.criterio_Nacion.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener las naciones, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
 }
 function crearNacional(k: Number, nacionalId: Number, codigoe, nombren, nacion): nacional_Dato {
   return {
