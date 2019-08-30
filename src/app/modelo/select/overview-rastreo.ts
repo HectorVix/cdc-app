@@ -71,4 +71,11 @@ export class criterio_re {
     { value: 'P', viewValue: 'Propuesta para la lista pero no está siendo activamente inventariado' },
     { value: 'N', viewValue: 'No está siendo activamente inventariado, no concierne, locamente abundante, exótica, etc.' }
   ];
+  tropico: Valor[] = [
+    { value: 'C', viewValue: 'Cáncer' },
+    { value: 'CP', viewValue: 'Capricornio' },
+
+  ];
+  ln_Nacion: Valor[] = [];
+  ls_Subnacion: Valor[] = [];
 }

@@ -39,26 +39,21 @@
                       <input mdbInputDirective type="text" id="formCodigoe" class="form-control"
                         formControlName="codigoe" data-error=" " data-success=" " disabled>
                     </div>
-                    <div class="col-md-2">
-                      <div class="mat-elevation-z8" class="base-form">
-                        <button mat-raised-button class="color-green" (click)="validarCodigoe()">
-                          <font size=2 color="white">Validar</font>
-                        </button>
-                      </div>
-                    </div>
-
                   </div>
                   <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">TROPICOS</label>
+                      <label for="">TROPICOS:</label>
                     </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formTropicos" class="form-control"
-                        formControlName="tropicos">
-                      <mdb-error *ngIf="input_tropicos.invalid && (input_tropicos.dirty || input_tropicos.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="tropicos">
+                          <mat-option>-- Ningún valor --</mat-option>
+                          <mat-option *ngFor="let sTropico of criterio_Tropico" [value]="sTropico.value">
+                            {{sTropico.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
@@ -66,28 +61,36 @@
                     <div class="col-md-2">
                       <label for="">NACION:</label>
                     </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formNacion" class="form-control"
-                        formControlName="nacion">
-                      <mdb-error *ngIf="input_nacion.invalid && (input_nacion.dirty || input_nacion.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="nacion">
+                          <mat-option *ngFor="let sNacion of criterio_Nacion" [value]="sNacion.value">
+                            {{sNacion.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">SUBNACIÓN</label>
+                      <label for="">SUBNACIÓN:</label>
                     </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formSubnacion" class="form-control"
-                        formControlName="subnacion">
-                      <mdb-error *ngIf="input_subnacion.invalid && (input_subnacion.dirty || input_subnacion.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="subnacion">
+                          <mat-option *ngFor="let sSubnacion of criterio_Subnacion" [value]="sSubnacion.value">
+                            {{sSubnacion.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
+                  <div>
+                    <button class="btn color-green waves-light" mdbWavesEffect
+                      (click)="validarCodigoe()">Validar</button>
+                  </div>
                 </div>
                 <!-- fin modal-content -->
                 <!-- Taxonomia (Global) -->
@@ -343,15 +346,9 @@
                     <div class="col-md-2">
                       <label for="">RANGOG:</label>
                     </div>
-                    <div class="col-md-2 mt10">
-                      <mat-form-field>
-                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangog">
-                          <mat-option>-- Ninguna --</mat-option>
-                          <mat-option *ngFor="let sRangog of criterio_rangog" [value]="sRangog.value">
-                            {{sRangog.viewValue}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="text" id="formRangog" class="form-control"
+                        formControlName="rangog">
                     </div>
                     <div class="col-md-2 mt10">
                       <mat-form-field>
@@ -529,15 +526,9 @@
                     <div class="col-md-2">
                       <label for="">RANGON:</label>
                     </div>
-                    <div class="col-md-2 mt10">
-                      <mat-form-field>
-                        <mat-select placeholder=" " panelClass="color-panel-green" formControlName="rangon">
-                          <mat-option>-- Ninguna --</mat-option>
-                          <mat-option *ngFor="let sRangon of criterio_rangon" [value]="sRangon.value">
-                            {{sRangon.viewValue}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="text" id="formRangon" class="form-control"
+                        formControlName="rangon">
                     </div>
                     <div class="col-md-2 mt10">
                       <mat-form-field>
@@ -654,15 +645,9 @@
                     <div class="col-md-2">
                       <label for="">RANGOS:</label>
                     </div>
-                    <div class="col-md-2 mt10">
-                      <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="rangos">
-                          <mat-option>-- Ninguna --</mat-option>
-                          <mat-option *ngFor="let sRangos of criterio_rangon" [value]="sRangos.value">
-                            {{sRangos.viewValue}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div class="md-form col-md-2 mt10">
+                      <input mdbInputDirective type="text" id="formRangon" class="form-control"
+                        formControlName="rangos">
                     </div>
                     <div class="col-md-2 mt10">
                       <mat-form-field>
@@ -706,25 +691,15 @@
                     <div class="md-form col-md-2 mt-20">
                       <input mdbInputDirective mdbValidate type="text" id="formLestims" class="form-control"
                         formControlName="lestims">
-                      <mdb-error *ngIf="input_lestims.invalid && (input_lestims.dirty || input_lestims.touched)">
-                        <font size=2 color="red">Error, máximo 1 caracteres.</font>
-                      </mdb-error>
                     </div>
                     <div class="md-form col-md-2 mt-20">
                       <input mdbInputDirective mdbValidate type="text" id="formLeprots" class="form-control"
                         formControlName="leprots">
-                      <label for="formLeprots">&nbsp;&nbsp;&nbsp;&nbsp;LEPROTS</label>
-                      <mdb-error *ngIf="input_leprots.invalid && (input_leprots.dirty || input_leprots.touched)">
-                        <font size=2 color="red">Error, máximo 1 caracteres.</font>
-                      </mdb-error>
                     </div>
                     <div class="md-form col-md-2 mt-20">
                       <input mdbInputDirective mdbValidate type="text" id="formAbunds" class="form-control"
                         formControlName="abunds">
                       <label for="formAbunds">&nbsp;&nbsp;&nbsp;&nbsp;ABUNDS</label>
-                      <mdb-error *ngIf="input_abunds.invalid && (input_abunds.dirty || input_abunds.touched)">
-                        <font size=2 color="red">Error, máximo 1 caracteres.</font>
-                      </mdb-error>
                     </div>
                     <div class="md-form col-md-2 mt-20">
                       <input mdbInputDirective mdbValidate type="text" id="formProtsubnac" class="form-control"

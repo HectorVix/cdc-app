@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-//import { DISABLED } from '@angular/forms/src/model';
-//import { disableDebugTools } from '@angular/platform-browser';
 import { criterio_re } from '../../../modelo/select/overview-rastreo';
 import { RastreoService } from '../../../servicios/rastreo/rastreo.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
+import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
-//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
+import { Valor } from '../../../modelo/select/overwiew-valor';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
@@ -36,6 +33,10 @@ export class FormularioReComponent implements OnInit {
   criterio_iucn = this.criterio_re.iucn;
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
   criterio_listacdc = this.criterio_re.listacdc;
+  criterio_Tropico = this.criterio_re.tropico;
+  criterio_Nacion = this.criterio_re.ln_Nacion;
+  criterio_Subnacion = this.criterio_re.ls_Subnacion;
+
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -63,12 +64,15 @@ export class FormularioReComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rastreoServicio: RastreoService,
+    private jerarquizacionServicio: JerarquizacionService,
     private fechaServicio: FechaService,
     private elementoServicio: ElementoService,
     private dialog: MatDialog) {
     this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+    this.obtener_nacion();
+    this.obtener_subnacion();
   }
 
   ngOnInit() {
@@ -137,7 +141,12 @@ export class FormularioReComponent implements OnInit {
       .subscribe(
         resElemento => {
           this.loading = false;
-          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.`, 'success');
+          this.changeSuccessMessage(`Si existe el elemento:${resElemento.codigoe}.
+          `, 'success');
+          this.get_Status_Global(resElemento.codigoe);
+          this.get_Status_Nacional(resElemento.codigoe);
+          if (this.reForm.get('subnacion').value)
+            this.get_Status_Subnacional(resElemento.codigoe, this.reForm.get('subnacion').value);
         }, err => {
           this.loading = false;
           if (err.status === 404)
@@ -243,6 +252,7 @@ export class FormularioReComponent implements OnInit {
     this.crearFormRastreoElemento(this.getRastreoElemento_id(row.rastreoId));
     this.tabPagina1();
     this.guardar = true;
+    this.validarCodigoe();
   }
 
   nuevo() {
@@ -329,12 +339,90 @@ export class FormularioReComponent implements OnInit {
   get input_reopc3() { return this.reForm.get('reopc3'); }
   get input_reopc4() { return this.reForm.get('reopc4'); }
   get input_reopc5() { return this.reForm.get('reopc5'); }
-  // manteniiento del registro
+  // manteniento del registro
   get input_codfuenten() { return this.reForm.get('codfuenten'); }
   get input_codfuentes() { return this.reForm.get('codfuentes'); }
   get input_actualizag() { return this.reForm.get('actualizag'); }
   get input_actualizan() { return this.reForm.get('actualizan'); }
   get input_actualizas() { return this.reForm.get('actualizas'); }
+
+  //Obtener Status Global
+  get_Status_Global(codigoe: String) {
+    this.rastreoServicio.get_Status_Global(codigoe).subscribe(
+      (resStatusGlobal: any[]) => {
+        this.reForm.get('nombreg').setValue(resStatusGlobal[0]);
+        this.reForm.get('rangog').setValue(resStatusGlobal[1]);
+        this.reForm.get('resprg').setValue(resStatusGlobal[2]);
+        this.reForm.get('fecharevrg').setValue(this.fechaServicio.getFecha(resStatusGlobal[3]));
+      }, err => {
+        this.reForm.get('nombreg').setValue('');
+        this.reForm.get('rangog').setValue('');
+        this.reForm.get('resprg').setValue('');
+        this.reForm.get('fecharevrg').setValue('');
+      });
+  }
+  //Obtener Status Nacional
+  get_Status_Nacional(codigoe: String) {
+    this.rastreoServicio.get_Status_Nacional(codigoe).subscribe(
+      (resStatusNacional: any[]) => {
+        this.reForm.get('rangon').setValue(resStatusNacional[0]);
+        this.reForm.get('fecharevrn').setValue(this.fechaServicio.getFecha(resStatusNacional[1]));
+        this.reForm.get('lestimn').setValue(resStatusNacional[2]);
+        this.reForm.get('leprotn').setValue(resStatusNacional[3]);
+        this.reForm.get('abundn').setValue(resStatusNacional[3]);
+      }, err => {
+        this.reForm.get('rangon').setValue('');
+        this.reForm.get('fecharevrn').setValue('');
+        this.reForm.get('lestimn').setValue('');
+        this.reForm.get('leprotn').setValue('');
+        this.reForm.get('abundn').setValue('');
+      });
+  }
+  //Obtener Status Nacional
+  get_Status_Subnacional(codigoe: String, subnacion: String) {
+    this.rastreoServicio.get_Status_Subnacional(codigoe, subnacion).subscribe(
+      (resStatusSubnacional: any[]) => {
+        this.reForm.get('rangos').setValue(resStatusSubnacional[0]);
+        this.reForm.get('fecharevrs').setValue(this.fechaServicio.getFecha(resStatusSubnacional[1]));
+        this.reForm.get('lestims').setValue(resStatusSubnacional[2]);
+        this.reForm.get('leprots').setValue(resStatusSubnacional[3]);
+        this.reForm.get('abunds').setValue(resStatusSubnacional[4]);
+      }, err => {
+        this.reForm.get('rangos').setValue('');
+        this.reForm.get('fecharevrs').setValue('');
+        this.reForm.get('lestims').setValue('');
+        this.reForm.get('leprots').setValue('');
+        this.reForm.get('abunds').setValue('');
+      });
+  }
+  //Catalogo de nación
+  obtener_nacion() {
+    this.jerarquizacionServicio.nacion.subscribe(
+      (resNacion: any[]) => {
+        resNacion.forEach(nacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = nacion.nacionPK.codigo;
+          modelo_Valor.viewValue = nacion.nombre;
+          this.criterio_Nacion.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener las naciones, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
+  //Catalogo de subnación (Depto)
+  obtener_subnacion() {
+    this.jerarquizacionServicio.subnacion.subscribe(
+      (resSubnacion: any[]) => {
+        resSubnacion.forEach(subnacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = "" + subnacion.subnacionPK.codigo;
+          modelo_Valor.viewValue = subnacion.nombre;
+          this.criterio_Subnacion.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener los departamentos, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
 }
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   return {

@@ -38,15 +38,15 @@ export class rastreo_Elemento_FormGroup {
              * Página1
              */
             'codigoe': new FormControl(re.codigoe, [Validators.maxLength(10), Validators.required]),
-            'tropicos': new FormControl(re.tropicos, Validators.maxLength(60)),
-            'nacion': new FormControl(re.nacion, Validators.maxLength(60)),
-            'subnacion': new FormControl(re.subnacion, Validators.maxLength(60)),
+            'tropicos': re.tropicos,
+            'nacion': 'GT',
+            'subnacion': '1',
             //taxonomia (global)
             'clasetax': new FormControl(re.clasetax, Validators.maxLength(20)),
             'orden': new FormControl(re.orden, Validators.maxLength(20)),
             'familia': new FormControl(re.familia, Validators.maxLength(20)),
             'genero': new FormControl(re.genero, Validators.maxLength(20)),
-            'nombreg': new FormControl(re.nombreg, Validators.maxLength(60)),
+            'nombreg': new FormControl({ value: '', disabled: true }),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
             'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(2)),
             'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(60)),
@@ -63,10 +63,10 @@ export class rastreo_Elemento_FormGroup {
              * Status (global)
              * Página 2
              */
-            'rangog': re.rangog,//♦ (6)
+            'rangog': new FormControl({ value: '', disabled: true }),
             'formularg': re.formularg,//♦
-            'resprg': new FormControl(re.resprg, Validators.maxLength(10)),
-            'fecharevrg': fechaServicio.getFecha(re.fecharevrg),
+            'resprg': new FormControl({ value: '', disabled: true }),
+            'fecharevrg': new FormControl({ value: '', disabled: true }),
             'aepeu': new FormControl(re.aepeu, Validators.maxLength(10)),
             'cites': re.cites,//♦
             'iucn': re.iucn,//♦
@@ -79,24 +79,24 @@ export class rastreo_Elemento_FormGroup {
             'instexsitu': new FormControl(re.instexsitu, Validators.maxLength(6)),
             'endemismo': re.endemismo,//♦
             //status (nacional)
-            'rangon': re.rangon,//♦ (6)
+            'rangon': new FormControl({ value: '', disabled: true }),//♦ (6)
             'formularn': re.formularn,//♦
             'rastreolen': new FormControl(re.rastreolen, Validators.maxLength(10)),
-            'fecharevrn': fechaServicio.getFecha(re.fecharevrn),
-            'lestimn': new FormControl(re.lestimn, Validators.maxLength(1)),//representativo ?
-            'leprotn': new FormControl(re.leprotn, Validators.maxLength(1)),//representativo ?
-            'abundn': new FormControl(re.abundn, Validators.maxLength(1)),//representativo ?
+            'fecharevrn': new FormControl({ value: '', disabled: true }),
+            'lestimn': new FormControl({ value: '', disabled: true }),
+            'leprotn': new FormControl({ value: '', disabled: true }),
+            'abundn': new FormControl({ value: '', disabled: true }),
             'protnacion': new FormControl(re.protnacion, Validators.maxLength(4)),
             'refnombren': new FormControl(re.refnombren, Validators.maxLength(60)),
             'transparencian': val_transparencian,//♦
             //status (subnacional)
-            'rangos': re.rangos,//♦ (6)
+            'rangos': new FormControl({ value: '', disabled: true }),//♦ (6)
             'formulars': re.formulars,//♦
             'rastreoles': new FormControl(re.rastreoles, Validators.maxLength(10)),
-            'fecharevrs': fechaServicio.getFecha(re.fecharevrs),
-            'lestims': new FormControl(re.lestims, Validators.maxLength(1)),//representativo ?
-            'leprots': new FormControl(re.leprots, Validators.maxLength(1)),//representativo ?
-            'abunds': new FormControl(re.abunds, Validators.maxLength(1)),//representativo ?
+            'fecharevrs': new FormControl({ value: '', disabled: true }),
+            'lestims': new FormControl({ value: '', disabled: true }),
+            'leprots': new FormControl({ value: '', disabled: true }),
+            'abunds': new FormControl({ value: '', disabled: true }),
             'protsubnac': new FormControl(re.protsubnac, Validators.maxLength(4)),
             'refnombres': new FormControl(re.refnombres, Validators.maxLength(60)),
             'transparencias': val_transparencias,//♦

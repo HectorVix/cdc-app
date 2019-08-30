@@ -18,6 +18,18 @@ export class RastreoService {
   getRastreosElementos(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+  //Obtener Status Global
+  get_Status_Global(codigoe: String) {
+    return this.http.get('/cecon/rastreo/status/global/' + codigoe);
+  }
+  //Obtener Status Nacional
+  get_Status_Nacional(codigoe: String) {
+    return this.http.get('/cecon/rastreo/status/nacional/' + codigoe);
+  }
+  //Obtener Status Subnacional
+  get_Status_Subnacional(codigoe: String, subnacion: String) {
+    return this.http.get('/cecon/rastreo/status/subnacional/' + codigoe + '/' + subnacion);
+  }
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/registro', rastreoElemento, httpOptions);
   }
