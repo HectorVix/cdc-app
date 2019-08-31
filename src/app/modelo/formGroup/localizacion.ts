@@ -103,7 +103,7 @@ export class localizacion_FormGroup {
             'rangon': new FormControl(row.rangon, Validators.maxLength(6)),
             'rangos': new FormControl(row.rangos, Validators.maxLength(6)),
             //localizadores
-            'subnacion': new FormControl(row.subnacion, Validators.maxLength(60)),
+            'subnacion': '1',
             'subdivision': new FormControl(row.subdivision, Validators.maxLength(60)),
             'codsitio': new FormControl(row.codsitio, Validators.maxLength(14)),
             'nomsitio': new FormControl(row.nomsitio, Validators.maxLength(50)),

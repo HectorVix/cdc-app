@@ -309,7 +309,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       (resNacion: any[]) => {
         resNacion.forEach(nacion => {
           var modelo_Valor = new Valor();
-          modelo_Valor.value = nacion.nacionPK.codigo;
+          modelo_Valor.value = nacion.codigo;
           modelo_Valor.viewValue = nacion.nombre;
           this.criterio_Nacion.push(modelo_Valor);
         });

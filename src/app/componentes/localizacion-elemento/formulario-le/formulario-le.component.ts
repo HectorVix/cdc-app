@@ -1,22 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_le } from '../../../modelo/select/overview-localizacion';
 import { LocalizacionService } from '../../../servicios/localizacion/localizacion.service';
-//import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Localizacion_Modelo } from '../../../modelo/localizacion/localizacion-modelo';
 import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { Valor } from '../../../modelo/select/overwiew-valor';
+import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
 import { localizacion_FormGroup } from '../../../modelo/formGroup/localizacion';
 import { LocalDataSource } from 'ng2-smart-table';
-//import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato';
 
 @Component({
   selector: 'app-formulario-le',
@@ -30,8 +28,8 @@ export class FormularioLeComponent implements OnInit {
   criterio_le = new criterio_le();
   criterio_si_no = this.criterio_le.si_no;
   criterio_rango_le = this.criterio_le.rango_le;
-  // criterio_rangog = this.criterio_le.rangog;
-  //criterio_rangon = this.criterio_le.rangon;
+  criterio_Subnacion = this.criterio_le.subnacion;
+  criterio_Municipio = this.criterio_le.municipio;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -86,12 +84,13 @@ export class FormularioLeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private localizacionServicio: LocalizacionService,
-    //private elementoServicio: ElementoService,
+    private jerarquizacionServicio: JerarquizacionService,
     private fechaServicio: FechaService,
     private dialog: MatDialog) {
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
+    this.obtener_Subnacion();
   }
 
   ngOnInit() {
@@ -303,7 +302,7 @@ export class FormularioLeComponent implements OnInit {
   }
 
   onCreateConfirm(event): void {
-    if (this.editar) { // se esta guardando un nuevo registro, aqui es verdadero por que se usa como disabled
+    if (this.editar) { // se esta guardando un nuevo registro
       event.confirm.resolve(event.newData);
     }
     else // se esta editando un registro
@@ -436,6 +435,107 @@ export class FormularioLeComponent implements OnInit {
   get input_cartografo() { return this.leForm.get('cartografo'); }
   get input_respdatos() { return this.leForm.get('respdatos'); }
   get input_actualizar() { return this.leForm.get('actualizar'); }
+  //Catalogo de subnación (Depto)
+  obtener_Subnacion() {
+    this.jerarquizacionServicio.subnacion.subscribe(
+      (resSubnacion: any[]) => {
+        resSubnacion.forEach(subnacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = "" + subnacion.codigo;
+          modelo_Valor.viewValue = subnacion.nombre;
+          this.criterio_Subnacion.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener los departamentos, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
+  //Catalogo de Municipios
+  obtener_Municipios(departamento: Number) {
+    this.criterio_Municipio = [];
+    this.jerarquizacionServicio.getMunicipio(departamento).subscribe(
+      (resMunicipio: any[]) => {
+        resMunicipio.forEach(municipio => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = "" + municipio.codigo;
+          modelo_Valor.viewValue = municipio.nombre;
+          this.criterio_Municipio.push(modelo_Valor);
+        });
+      }, err => {
+        this.changeSuccessMessage('Error no se pudo obtener los municipios, comprueba que esté disponible el servicio.', 'primary');
+      });
+  }
+  onChange() {
+    switch (this.leForm.get('subnacion').value) {
+      case '1':
+        this.obtener_Municipios(1);
+        break;
+      case '2':
+        this.obtener_Municipios(2);
+        break;
+      case '3':
+        this.obtener_Municipios(3);
+        break;
+      case '4':
+        this.obtener_Municipios(4);
+        break;
+      case '5':
+        this.obtener_Municipios(5);
+        break;
+      case '6':
+        this.obtener_Municipios(6);
+        break;
+      case '7':
+        this.obtener_Municipios(7);
+        break;
+      case '8':
+        this.obtener_Municipios(8);
+        break;
+      case '9':
+        this.obtener_Municipios(9);
+        break;
+      case '10':
+        this.obtener_Municipios(10);
+        break;
+      case '11':
+        this.obtener_Municipios(11);
+        break;
+      case '12':
+        this.obtener_Municipios(12);
+        break;
+      case '13':
+        this.obtener_Municipios(13);
+        break;
+      case '14':
+        this.obtener_Municipios(14);
+        break;
+      case '15':
+        this.obtener_Municipios(15);
+        break;
+      case '16':
+        this.obtener_Municipios(16);
+        break;
+      case '17':
+        this.obtener_Municipios(17);
+        break;
+      case '18':
+        this.obtener_Municipios(18);
+        break;
+      case '19':
+        this.obtener_Municipios(19);
+        break;
+      case '20':
+        this.obtener_Municipios(20);
+        break;
+      case '21':
+        this.obtener_Municipios(21);
+        break;
+      case '22':
+        this.obtener_Municipios(22);
+        break;
+      default:
+        break;
+    }
+  }
 }
 function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {
   return {

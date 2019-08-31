@@ -25,10 +25,8 @@ export class FormularioReComponent implements OnInit {
   criterio_re = new criterio_re();
   criterio_disttax = this.criterio_re.disttax;
   criterio_dudatax = this.criterio_re.dudatax;
-  criterio_rangog = this.criterio_re.rangog;
   criterio_compu_manual = this.criterio_re.compu_manual;//formularg, plancons, resplan, resumenman, formularn, formulars
   criterio_endemismo = this.criterio_re.endemismo;
-  criterio_rangon = this.criterio_re.rangon;
   criterio_cites = this.criterio_re.cites;
   criterio_iucn = this.criterio_re.iucn;
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
@@ -401,7 +399,7 @@ export class FormularioReComponent implements OnInit {
       (resNacion: any[]) => {
         resNacion.forEach(nacion => {
           var modelo_Valor = new Valor();
-          modelo_Valor.value = nacion.nacionPK.codigo;
+          modelo_Valor.value = nacion.codigo;
           modelo_Valor.viewValue = nacion.nombre;
           this.criterio_Nacion.push(modelo_Valor);
         });
@@ -415,7 +413,7 @@ export class FormularioReComponent implements OnInit {
       (resSubnacion: any[]) => {
         resSubnacion.forEach(subnacion => {
           var modelo_Valor = new Valor();
-          modelo_Valor.value = "" + subnacion.subnacionPK.codigo;
+          modelo_Valor.value = "" + subnacion.codigo;
           modelo_Valor.viewValue = subnacion.nombre;
           this.criterio_Subnacion.push(modelo_Valor);
         });

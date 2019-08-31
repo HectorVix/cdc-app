@@ -95,6 +95,33 @@
                       </mdb-error>
                     </div>
                   </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">SUBNACION:</label>
+                    </div>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder="Departamento" panelClass="color-panel-green"
+                          formControlName="subnacion" (ngModelChange)="onChange()">
+                          <mat-option *ngFor="let sSubnacion of criterio_Subnacion" [value]="sSubnacion.value">
+                            {{sSubnacion.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt-15">
+                      <mat-form-field>
+                        <mat-select placeholder="Municipio" panelClass="color-panel-green"
+                          formControlName="subdivision">
+                          <mat-option *ngFor="let sMunicipio of criterio_Municipio" [value]="sMunicipio.value">
+                            {{sMunicipio.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
                 </div>
                 <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
@@ -104,38 +131,9 @@
                   </div>
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">SUBNACION:</label>
-                    </div>
-                    <div class="md-form col-md-9 mt10 ">
-                      <input mdbInputDirective mdbValidate type="text" id="formSubnacion" class="form-control"
-                        formControlName="subnacion">
-                      <mdb-error *ngIf="input_subnacion.invalid && (input_subnacion.dirty || input_subnacion.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
-                    </div>
-
-                  </div>
-                  <!-- fin row -->
-                  <div class="row">
-                    <div class="col-md-2">
-                      <label for="">SUBDIVISIÓN</label>
-                    </div>
-                    <div class="md-form col-md-9 mt-20 ">
-                      <input mdbInputDirective mdbValidate type="text" id="formSubdivision" class="form-control"
-                        formControlName="subdivision">
-                      <label for="formSubdivision">&nbsp;&nbsp;&nbsp;&nbsp;SUBDIVISION</label>
-                      <mdb-error
-                        *ngIf="input_subdivision.invalid && (input_subdivision.dirty || input_subdivision.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
-                    </div>
-                  </div>
-                  <!-- fin row -->
-                  <div class="row">
-                    <div class="col-md-2">
                       <label for="">CODSITIO:</label>
                     </div>
-                    <div class="md-form col-md-4 mt-20">
+                    <div class="md-form col-md-4 mt10">
                       <input mdbInputDirective mdbValidate type="text" id="formCodsitio" class="form-control"
                         formControlName="codsitio">
                       <mdb-error *ngIf="input_codsitio.invalid && (input_codsitio.dirty || input_codsitio.touched)">

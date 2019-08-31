@@ -62,8 +62,8 @@ export class JerarquizacionService {
   get subnacion() {
     return this.http.get('/cecon/jerarquizacion/subnacion');
   }
-  get municipio() {
-    return this.http.get('/cecon/jerarquizacion/municipio');
+  getMunicipio(departamento: Number) {
+    return this.http.get('/cecon/jerarquizacion/municipio/' + departamento);
   }
   updateGlobal(global: jerarquizacion_Global_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/global/' + jerarquia_id, global, httpOptions);
