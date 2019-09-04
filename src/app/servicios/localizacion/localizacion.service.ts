@@ -7,6 +7,7 @@ import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-c
 import { proteccion_Modelo } from '../../modelo/localizacion/proteccion-modelo';
 import { dispersion_Modelo } from '../../modelo/localizacion/dispersion-modelo';
 import { catchError, map, tap } from 'rxjs/operators';
+import { identificadores_Modelo } from '../../modelo/respuestaServicio/identificadores-le';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -19,8 +20,8 @@ export class LocalizacionService {
   constructor(private http: HttpClient) { }
 
 
-  addLocalizacionElemento(localizacion: Localizacion_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/registro', localizacion, httpOptions);
+  addLocalizacionElemento(localizacion: Localizacion_Modelo) {
+    return this.http.post<identificadores_Modelo>('/cecon/localizacion/registro', localizacion, httpOptions);
   }
   addProteccion(proteccion: proteccion_Modelo, id: Number) {
     return this.http.post('/cecon/localizacion/registrar/proteccion/' + id, proteccion, httpOptions);
@@ -28,8 +29,8 @@ export class LocalizacionService {
   addDispersion(dispersion: dispersion_Modelo, id: Number) {
     return this.http.post('/cecon/protocolo/registrar/dispersion/' + id, dispersion, httpOptions);
   }
-  addProtocoloLE(protocoloLE: protocolo_LE_Modelo): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/registro', protocoloLE, httpOptions);
+  addProtocoloLE(protocoloLE: protocolo_LE_Modelo) {
+    return this.http.post<identificadores_Modelo>('/cecon/protocolo/registro', protocoloLE, httpOptions);
   }
   //Obtener Localización del Elemento por codigole, nombres, nomcomuns
   getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
@@ -46,11 +47,24 @@ export class LocalizacionService {
   getDispersion(protocolo_id: Number): Observable<dispersion_Modelo> {
     return this.http.get<dispersion_Modelo>('/cecon/protocolo/dispersion/' + protocolo_id);
   }
-  updateLocalizacionElemento(le: Localizacion_Modelo, rastreoId: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/localizacion/editar/' + rastreoId, le, httpOptions);
+  // Validar CodigoLE
+  get_ValidarCodigoLE(codigoLE: String) {
+    return this.http.get<identificadores_Modelo>('/cecon/localizacion/validar/' + codigoLE);
   }
-  updateProtocoloLE(protocoloLE: protocolo_LE_Modelo, elementoId: Number): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/protocolo/editar/' + elementoId, protocoloLE, httpOptions);
+  get_Identificadores_NombreS_RangoS(codigoe: String, departamento: String) {
+    return this.http.get<identificadores_Modelo>('/cecon/localizacion/identificadores/NombreS/RangoS/' + codigoe + '/' + departamento);
+  }
+  get_Identificadores_RangoN(codigoe: String) {
+    return this.http.get<identificadores_Modelo>('/cecon/localizacion/identificadores/RangoN/' + codigoe);
+  }
+  get_Identificadores_RangoG(codigoe: String) {
+    return this.http.get<identificadores_Modelo>('/cecon/localizacion/identificadores/RangoG/' + codigoe);
+  }
+  updateLocalizacionElemento(le: Localizacion_Modelo, rastreoId: Number) {
+    return this.http.post<identificadores_Modelo>('/cecon/localizacion/editar/' + rastreoId, le, httpOptions);
+  }
+  updateProtocoloLE(protocoloLE: protocolo_LE_Modelo, elementoId: Number) {
+    return this.http.post<identificadores_Modelo>('/cecon/protocolo/editar/' + elementoId, protocoloLE, httpOptions);
   }
   updateProteccion(id: String, proteccion: proteccion_Modelo) {
     return this.http.post('/cecon/localizacion/update/proteccion/' + id, proteccion, httpOptions);

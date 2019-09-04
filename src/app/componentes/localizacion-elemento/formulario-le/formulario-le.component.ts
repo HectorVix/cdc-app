@@ -91,6 +91,7 @@ export class FormularioLeComponent implements OnInit {
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
     this.obtener_Subnacion();
+    this.relacionar_Depto_Municipio();
   }
 
   ngOnInit() {
@@ -160,7 +161,7 @@ export class FormularioLeComponent implements OnInit {
           if (err.status === 404)
             this.changeSuccessMessage(`Error no pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else if (err.status === 406)
-            this.changeSuccessMessage('No se pudo regitrar, no existe un registro de Rastreo para este elemento, porfavor registra un Ratreo con el CODIGOE de este elemento. ', 'primary');
+            this.changeSuccessMessage('No se pudo regitrar, no existe un registro de Rastreo para este elemento, porfavor registra un Rastreo con el CODIGOE de este elemento. ', 'primary');
           else
             this.changeSuccessMessage('No se pudo regitrar, comprueba que esté disponible el servicio.', 'primary');
         });
@@ -247,6 +248,8 @@ export class FormularioLeComponent implements OnInit {
     this.tabPagina1();
     this.guardar = true;
     this.getProteccion(row.LocalizacionId);
+    this.relacionar_Depto_Municipio();
+    this.validarCodigole(2);
   }
 
   getLocalizacionElemento_id(id: Number): Localizacion_Modelo {
@@ -465,6 +468,9 @@ export class FormularioLeComponent implements OnInit {
       });
   }
   onChange() {
+    this.relacionar_Depto_Municipio();
+  }
+  relacionar_Depto_Municipio() {
     switch (this.leForm.get('subnacion').value) {
       case '1':
         this.obtener_Municipios(1);
@@ -535,6 +541,51 @@ export class FormularioLeComponent implements OnInit {
       default:
         break;
     }
+  }
+  validarCodigole(estado: Number) {
+    this.localizacionServicio.get_ValidarCodigoLE(this.leForm.get('codigole').value)
+      .subscribe(
+        resValidarCodigole => {
+          if (estado == 1)
+            this.changeSuccessMessage(`Si existe el elemento con el CODIGOE:${resValidarCodigole.codigoe}.`, 'success');
+          this.get_Identificadores_NombreS_RangoS(resValidarCodigole.codigoe);
+          this.get_Identificadores_RangoN(resValidarCodigole.codigoe);
+          this.get_Identificadores_RangoG(resValidarCodigole.codigoe);
+        }, err => {
+          if (err.status === 404)
+            this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
+          else
+            this.changeSuccessMessage('No se pudo validar, comprueba que esté disponible el servicio.', 'primary');
+        });
+  }
+  get_Identificadores_NombreS_RangoS(codigoe: String) {
+    this.localizacionServicio.get_Identificadores_NombreS_RangoS(codigoe, this.leForm.get("subnacion").value)
+      .subscribe(
+        reIdentificadores => {
+          this.leForm.get('nombres').setValue(reIdentificadores.nombres);
+          this.leForm.get('rangos').setValue(reIdentificadores.rangos);
+        }, err => {
+          this.leForm.get('nombres').setValue('');
+          this.leForm.get('rangos').setValue('');
+        });
+  }
+  get_Identificadores_RangoN(codigoe: String) {
+    this.localizacionServicio.get_Identificadores_RangoN(codigoe)
+      .subscribe(
+        reIdentificadores => {
+          this.leForm.get('rangon').setValue(reIdentificadores.rangon);
+        }, err => {
+          this.leForm.get('rangon').setValue('');
+        });
+  }
+  get_Identificadores_RangoG(codigoe: String) {
+    this.localizacionServicio.get_Identificadores_RangoG(codigoe)
+      .subscribe(
+        reIdentificadores => {
+          this.leForm.get('rangog').setValue(reIdentificadores.rangog);
+        }, err => {
+          this.leForm.get('rangog').setValue('');
+        });
   }
 }
 function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {

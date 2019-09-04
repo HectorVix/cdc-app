@@ -13,5 +13,4 @@ export class respuesta_cdc_Modelo {
     fuenteId: Number;
     codigo: String;
     elementoId: Number;
-    codigole:String;
 }

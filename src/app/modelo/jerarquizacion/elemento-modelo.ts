@@ -2,10 +2,10 @@ import { usuario_Modelo } from '../../modelo/usuario/usuario-modelo';
 
 export class elemento_Modelo {
     elementoId: Number;
-    codigo: String;
+    codigoe: String;
     clase: String;
     comunidad: String;
-    nombrecomun: String;
+    nombrecomunn: String;
     nombrecientifico: String;
     comentario: String;
     fecha: Date;

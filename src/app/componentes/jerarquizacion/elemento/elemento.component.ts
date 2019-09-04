@@ -38,7 +38,7 @@ export class ElementoComponent implements OnInit {
   matcher = new ControlErrorStateMatcher();
   //---------------------------------tabla
   k: number;
-  displayedColumns: string[] = ['numero', 'codigo', 'nombrecomun', 'nombrecientifico'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombrecomunn', 'nombrecientifico'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -142,8 +142,8 @@ export class ElementoComponent implements OnInit {
   }
   crearForm_Buscar() {
     this.buscarForm = this.fb.group({
-      'codigo': '',
-      'nombrecomun': '',
+      'codigoe': '',
+      'nombrecomunn': '',
       'nombrecientifico': ''
     });
   }
@@ -153,7 +153,7 @@ export class ElementoComponent implements OnInit {
   guardarElemento() {
     this.elementos = new Array();
     this.dataSource = new MatTableDataSource(this.elementos);
-    if (this.elementoForm.get('codigo').value && this.elementoForm.valid) {
+    if (this.elementoForm.get('codigoe').value && this.elementoForm.valid) {
       if (this.elementoForm.get('fecha').value) {
         var elementoBase = this.setElemento(this.elementoForm.value);
         this.addElemento(elementoBase);
@@ -166,7 +166,7 @@ export class ElementoComponent implements OnInit {
 
   }
   editarElemento() {
-    if (this.elementoForm.get('codigo').value && this.elementoForm.valid) {
+    if (this.elementoForm.get('codigoe').value && this.elementoForm.valid) {
       if (this.elementoForm.get('fecha').value) {
         var elementoBase = this.setElemento(this.elementoForm.value);
         this.updateElemento(elementoBase);
@@ -195,7 +195,7 @@ export class ElementoComponent implements OnInit {
             this.tam_Inicial_ListaFotos,
             this.galeria.getTam_final_ListaFotos(), 1);
           this.loading = false;
-          this.changeSuccessMessage(`Editado exitoso ,código del elemento:${resElemento.codigo}.`, 'success');
+          this.changeSuccessMessage(`Editado exitoso ,códigoe del elemento:${resElemento.codigoe}.`, 'success');
           this.elementos = new Array();
           this.dataSource = new MatTableDataSource(this.elementos);
           this.editar = false;
@@ -219,7 +219,7 @@ export class ElementoComponent implements OnInit {
             this.loading = false;
           }
           this.loading = false;
-          this.changeSuccessMessage(`Registro exitoso ,codigo del elemento:${resElemento.codigo}.`, 'success');
+          this.changeSuccessMessage(`Registro exitoso ,codigoe del elemento:${resElemento.codigoe}.`, 'success');
 
         }, err => {
           this.loading = false;
@@ -238,18 +238,18 @@ export class ElementoComponent implements OnInit {
     this.tam_Inicial_ListaFotos = 0;
     this.loading = true;
     //variables necesarias para recuperarse de errores 
-    var codigo = "¬";
-    var nombrecomun = "¬";
+    var codigoe = "¬";
+    var nombrecomunn = "¬";
     var nombrecientifico = "¬";
     this.elementos = new Array();
     this.k = 0;
-    if (this.buscarForm.get('codigo').value)
-      codigo = this.buscarForm.get('codigo').value;
-    if (this.buscarForm.get('nombrecomun').value)
-      nombrecomun = this.buscarForm.get('nombrecomun').value;
+    if (this.buscarForm.get('codigoe').value)
+      codigoe = this.buscarForm.get('codigoe').value;
+    if (this.buscarForm.get('nombrecomunn').value)
+      nombrecomunn = this.buscarForm.get('nombrecomunn').value;
     if (this.buscarForm.get('nombrecientifico').value)
       nombrecientifico = this.buscarForm.get('nombrecientifico').value;
-    this.elementoServicio.getElementos(codigo, nombrecomun, nombrecientifico)
+    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombrecientifico)
       .subscribe(
         data => {
           this.dataElementos = data;
@@ -298,8 +298,8 @@ export class ElementoComponent implements OnInit {
     this.fotoId_Lista = [];
   }
   //lleva el control de los errores
-  get input_codigo() { return this.elementoForm.get('codigo'); }
-  get input_nombrecomun() { return this.elementoForm.get('nombrecomun'); }
+  get input_codigoe() { return this.elementoForm.get('codigoe'); }
+  get input_nombrecomunn() { return this.elementoForm.get('nombrecomunn'); }
   get input_nombrecientifico() { return this.elementoForm.get('nombrecientifico'); }
   get input_comentario() { return this.elementoForm.get('comentario'); }
   get input_fecha() { return this.elementoForm.get('fecha'); }
@@ -318,8 +318,8 @@ function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
   return {
     numero: k,
     elementoId: elemento.elementoId,
-    codigo: elemento.codigo,
-    nombrecomun: elemento.nombrecomun,
+    codigoe: elemento.codigoe,
+    nombrecomunn: elemento.nombrecomunn,
     nombrecientifico: elemento.nombrecientifico
   };
 }

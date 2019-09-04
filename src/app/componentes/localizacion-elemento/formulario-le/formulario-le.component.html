@@ -10,6 +10,13 @@
             <mat-tab-group dynamicHeight [selectedIndex]="selected.value"
               (selectedIndexChange)="selected.setValue($event)">
               <mat-tab label="1">
+                <div class="text-center">
+                  <div *ngIf="loading">
+                    <img src="assets/imagenes/load.gif">
+                  </div>
+                </div>
+                <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+                  {{ successMessage }}</ngb-alert>
                 <div class="modal-content mat-elevation-z4">
                   <div class="modal-header color-green">
                     <h5 class="modal-title">
@@ -18,16 +25,16 @@
                   </div>
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">CODIGOLE:</label>
+                      <label for="">CODIGOE:</label>
                     </div>
-                    <div class="md-form col-md-4 mt-0" *ngIf="editar">
+                    <div class="md-form col-md-4 mt10" *ngIf="editar">
                       <input mdbInputDirective mdbValidate type="text" id="formCodigoe" class="form-control"
                         formControlName="codigole">
                       <mdb-error *ngIf="input_codigole.invalid && (input_codigole.dirty || input_codigole.touched)">
                         <font size=2 color="red">Error, máximo 14 caracteres.</font>
                       </mdb-error>
                     </div>
-                    <div class="md-form col-md-4 mt-0" *ngIf="guardar">
+                    <div class="md-form col-md-4 mt10" *ngIf="guardar">
                       <input mdbInputDirective type="text" id="formCodigoe" class="form-control"
                         formControlName="codigole" data-error="  " data-success=" " disabled>
                     </div>
@@ -44,9 +51,9 @@
                   </div>
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">NOMBRES:</label>
+                      <label for="">NOMBRE SUBNACIONAL:</label>
                     </div>
-                    <div class="md-form col-sm-9 mt-20 ">
+                    <div class="md-form col-md-9 mt-5 ">
                       <input mdbInputDirective mdbValidate type="text" id="formNombres" class="form-control"
                         formControlName="nombres">
                       <mdb-error *ngIf="input_nombres.invalid && (input_nombres.dirty || input_nombres.touched)">
@@ -56,9 +63,9 @@
                   </div>
                   <div class="row">
                     <div class="col-md-2">
-                      <label for="">NOMCOMUNS:</label>
+                      <label for="">NOMBRE COMÚN NACIONAL:</label>
                     </div>
-                    <div class="md-form col-sm-9 mt-20 ">
+                    <div class="md-form col-md-9 mt-5 ">
                       <input mdbInputDirective mdbValidate type="text" id="forNomcomuns" class="form-control"
                         formControlName="nomcomuns">
                       <mdb-error *ngIf="input_nomcomuns.invalid && (input_nomcomuns.dirty || input_nomcomuns.touched)">
@@ -70,7 +77,7 @@
                     <div class="col-md-2">
                       <label for="">RANGOS LE:</label>
                     </div>
-                    <div class="md-form col-md-2 mt-20">
+                    <div class="md-form col-md-2 mt-15">
                       <input mdbInputDirective mdbValidate type="text" id="formRangoG" class="form-control"
                         formControlName="rangog">
                       <label for="formRangoG">&nbsp;&nbsp;&nbsp;&nbsp;RANGOG</label>
@@ -78,7 +85,7 @@
                         <font size=2 color="red">Error, máximo 6 caracteres.</font>
                       </mdb-error>
                     </div>
-                    <div class="md-form col-md-2 mt-20">
+                    <div class="md-form col-md-2 mt-15">
                       <input mdbInputDirective mdbValidate type="text" id="formRangoN" class="form-control"
                         formControlName="rangon">
                       <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;RANGON</label>
@@ -86,7 +93,7 @@
                         <font size=2 color="red">Error, máximo 6 caracteres.</font>
                       </mdb-error>
                     </div>
-                    <div class="md-form col-md-2 mt-20 ">
+                    <div class="md-form col-md-2 mt-15">
                       <input mdbInputDirective mdbValidate type="text" id="formRangos" class="form-control"
                         formControlName="rangos">
                       <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;RANGOS</label>
@@ -110,7 +117,29 @@
                         </mat-select>
                       </mat-form-field>
                     </div>
-                    <div class="col-md-3 mt-15">
+                  </div>
+                  <!-- fin row -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="mat-elevation-z8" class="base-form">
+                        <button mat-raised-button class="color-green" (click)="validarCodigole(1)">
+                          <font size=2 color="white">Validar</font>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-content mat-elevation-z4">
+                  <div class="modal-header color-green">
+                    <h5 class="modal-title">
+                      <font size=4 color="white">Localizadores</font>
+                    </h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">SUBDIVISIÓN:</label>
+                    </div>
+                    <div class="col-md-3 mt10">
                       <mat-form-field>
                         <mat-select placeholder="Municipio" panelClass="color-panel-green"
                           formControlName="subdivision">
@@ -120,14 +149,6 @@
                         </mat-select>
                       </mat-form-field>
                     </div>
-                  </div>
-                  <!-- fin row -->
-                </div>
-                <div class="modal-content mat-elevation-z4">
-                  <div class="modal-header color-green">
-                    <h5 class="modal-title">
-                      <font size=4 color="white">Localizadores</font>
-                    </h5>
                   </div>
                   <div class="row">
                     <div class="col-md-2">

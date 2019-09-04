@@ -1,7 +1,7 @@
 export interface ElementoDato {
     numero: Number;
     elementoId: Number;
-    codigo: String;
-    nombrecomun: String;
+    codigoe: String;
+    nombrecomunn: String;
     nombrecientifico: String;
 }

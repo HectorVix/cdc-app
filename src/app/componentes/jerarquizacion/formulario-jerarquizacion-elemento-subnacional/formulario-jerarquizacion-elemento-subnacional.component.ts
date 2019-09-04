@@ -339,7 +339,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       (resSubnacion: any[]) => {
         resSubnacion.forEach(subnacion => {
           var modelo_Valor = new Valor();
-          modelo_Valor.value = subnacion.codigo;
+          modelo_Valor.value = "" + subnacion.codigo;
           modelo_Valor.viewValue = subnacion.nombre;
           this.criterio_Subnacion.push(modelo_Valor);
         });
