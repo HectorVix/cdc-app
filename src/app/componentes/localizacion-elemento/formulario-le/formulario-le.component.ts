@@ -551,6 +551,7 @@ export class FormularioLeComponent implements OnInit {
           this.get_Identificadores_NombreS_RangoS(resValidarCodigole.codigoe);
           this.get_Identificadores_RangoN(resValidarCodigole.codigoe);
           this.get_Identificadores_RangoG(resValidarCodigole.codigoe);
+          this.get_Identificadores_NombreComunN(resValidarCodigole.codigoe);
         }, err => {
           if (err.status === 404)
             this.changeSuccessMessage('No existe el CODIGOE del elemento, por favor ingresa un código valido.', 'primary');
@@ -585,6 +586,15 @@ export class FormularioLeComponent implements OnInit {
           this.leForm.get('rangog').setValue(reIdentificadores.rangog);
         }, err => {
           this.leForm.get('rangog').setValue('');
+        });
+  }
+  get_Identificadores_NombreComunN(codigoe: String) {
+    this.localizacionServicio.get_Identificadores_NombreComunN(codigoe)
+      .subscribe(
+        reIdentificadores => {
+          this.leForm.get('nomcomuns').setValue(reIdentificadores.nombrecomunn);
+        }, err => {
+          this.leForm.get('nomcomuns').setValue('');
         });
   }
 }

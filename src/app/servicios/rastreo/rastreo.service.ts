@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { rastreo_Elemento_Modelo } from '../../modelo/rastreo/rastreo-elemento-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
+import { statusGlobal_Modelo } from '../../modelo/respuestaServicio/re-status-global';
+import { statusNacional_Modelo } from '../../modelo/respuestaServicio/re-status-nacional';
+import { statusSubnacional_Modelo } from '../../modelo/respuestaServicio/re-status-subnacional';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -20,15 +23,15 @@ export class RastreoService {
   }
   //Obtener Status Global
   get_Status_Global(codigoe: String) {
-    return this.http.get('/cecon/rastreo/status/global/' + codigoe);
+    return this.http.get<statusGlobal_Modelo>('/cecon/rastreo/status/global/' + codigoe);
   }
   //Obtener Status Nacional
   get_Status_Nacional(codigoe: String) {
-    return this.http.get('/cecon/rastreo/status/nacional/' + codigoe);
+    return this.http.get<statusNacional_Modelo>('/cecon/rastreo/status/nacional/' + codigoe);
   }
   //Obtener Status Subnacional
   get_Status_Subnacional(codigoe: String, subnacion: String) {
-    return this.http.get('/cecon/rastreo/status/subnacional/' + codigoe + '/' + subnacion);
+    return this.http.get<statusSubnacional_Modelo>('/cecon/rastreo/status/subnacional/' + codigoe + '/' + subnacion);
   }
   addRastreoElemento(rastreoElemento: rastreo_Elemento_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/rastreo/registro', rastreoElemento, httpOptions);

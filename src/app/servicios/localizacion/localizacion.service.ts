@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Localizacion_Modelo } from '../../modelo/localizacion/localizacion-modelo';
 import { protocolo_LE_Modelo } from '../../modelo/localizacion/protocolo-le-modelo';
-import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 import { proteccion_Modelo } from '../../modelo/localizacion/proteccion-modelo';
 import { dispersion_Modelo } from '../../modelo/localizacion/dispersion-modelo';
-import { catchError, map, tap } from 'rxjs/operators';
 import { identificadores_Modelo } from '../../modelo/respuestaServicio/identificadores-le';
 
 const httpOptions = {
@@ -59,6 +57,9 @@ export class LocalizacionService {
   }
   get_Identificadores_RangoG(codigoe: String) {
     return this.http.get<identificadores_Modelo>('/cecon/localizacion/identificadores/RangoG/' + codigoe);
+  }
+  get_Identificadores_NombreComunN(codigoe: String) {
+    return this.http.get<identificadores_Modelo>('/cecon/localizacion/identificadores/NombreComunN/' + codigoe);
   }
   updateLocalizacionElemento(le: Localizacion_Modelo, rastreoId: Number) {
     return this.http.post<identificadores_Modelo>('/cecon/localizacion/editar/' + rastreoId, le, httpOptions);

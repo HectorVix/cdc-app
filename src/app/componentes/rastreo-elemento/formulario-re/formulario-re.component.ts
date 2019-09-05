@@ -347,11 +347,11 @@ export class FormularioReComponent implements OnInit {
   //Obtener Status Global
   get_Status_Global(codigoe: String) {
     this.rastreoServicio.get_Status_Global(codigoe).subscribe(
-      (resStatusGlobal: any[]) => {
-        this.reForm.get('nombreg').setValue(resStatusGlobal[0]);
-        this.reForm.get('rangog').setValue(resStatusGlobal[1]);
-        this.reForm.get('resprg').setValue(resStatusGlobal[2]);
-        this.reForm.get('fecharevrg').setValue(this.fechaServicio.getFecha(resStatusGlobal[3]));
+      resStatusGlobal => {
+        this.reForm.get('nombreg').setValue(resStatusGlobal.nombreg);
+        this.reForm.get('rangog').setValue(resStatusGlobal.rangog);
+        this.reForm.get('resprg').setValue(resStatusGlobal.resrg);
+        this.reForm.get('fecharevrg').setValue(this.fechaServicio.getFecha(resStatusGlobal.fecharg));
       }, err => {
         this.reForm.get('nombreg').setValue('');
         this.reForm.get('rangog').setValue('');
@@ -362,12 +362,12 @@ export class FormularioReComponent implements OnInit {
   //Obtener Status Nacional
   get_Status_Nacional(codigoe: String) {
     this.rastreoServicio.get_Status_Nacional(codigoe).subscribe(
-      (resStatusNacional: any[]) => {
-        this.reForm.get('rangon').setValue(resStatusNacional[0]);
-        this.reForm.get('fecharevrn').setValue(this.fechaServicio.getFecha(resStatusNacional[1]));
-        this.reForm.get('lestimn').setValue(resStatusNacional[2]);
-        this.reForm.get('leprotn').setValue(resStatusNacional[3]);
-        this.reForm.get('abundn').setValue(resStatusNacional[3]);
+      resStatusNacional => {
+        this.reForm.get('rangon').setValue(resStatusNacional.rangon);
+        this.reForm.get('fecharevrn').setValue(this.fechaServicio.getFecha(resStatusNacional.fecharn));
+        this.reForm.get('lestimn').setValue(resStatusNacional.nlestim);
+        this.reForm.get('leprotn').setValue(resStatusNacional.nleprot);
+        this.reForm.get('abundn').setValue(resStatusNacional.nabund);
       }, err => {
         this.reForm.get('rangon').setValue('');
         this.reForm.get('fecharevrn').setValue('');
@@ -379,12 +379,12 @@ export class FormularioReComponent implements OnInit {
   //Obtener Status Nacional
   get_Status_Subnacional(codigoe: String, subnacion: String) {
     this.rastreoServicio.get_Status_Subnacional(codigoe, subnacion).subscribe(
-      (resStatusSubnacional: any[]) => {
-        this.reForm.get('rangos').setValue(resStatusSubnacional[0]);
-        this.reForm.get('fecharevrs').setValue(this.fechaServicio.getFecha(resStatusSubnacional[1]));
-        this.reForm.get('lestims').setValue(resStatusSubnacional[2]);
-        this.reForm.get('leprots').setValue(resStatusSubnacional[3]);
-        this.reForm.get('abunds').setValue(resStatusSubnacional[4]);
+      resStatusSubnacional => {
+        this.reForm.get('rangos').setValue(resStatusSubnacional.rangos);
+        this.reForm.get('fecharevrs').setValue(this.fechaServicio.getFecha(resStatusSubnacional.fecharevrs));
+        this.reForm.get('lestims').setValue(resStatusSubnacional.lestims);
+        this.reForm.get('leprots').setValue(resStatusSubnacional.leprots);
+        this.reForm.get('abunds').setValue(resStatusSubnacional.abunds);
       }, err => {
         this.reForm.get('rangos').setValue('');
         this.reForm.get('fecharevrs').setValue('');
