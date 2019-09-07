@@ -511,7 +511,7 @@
               </div>
               <div class=" col-md-4 mt10">
                 <mat-form-field>
-                  <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezaDocumento">
+                  <mat-select placeholder="DOCUMENTO" panelClass="color-panel-green" formControlName="naturalezaDocumento">
                     <mat-option>-- Ningún valor --</mat-option>
                     <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente"
                       [value]="naturalezaDocumento.value">
@@ -547,6 +547,7 @@
             <!-- Fin row -->
             <div>
               <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarFuente()">Buscar</button>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarTodos()">Buscar Todos</button>
             </div>
           </form>
           <!-- Fin form -->

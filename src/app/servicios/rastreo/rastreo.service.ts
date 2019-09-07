@@ -21,6 +21,9 @@ export class RastreoService {
   getRastreosElementos(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
     return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+
+  get all_Rastreo() { return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/all'); 
+}
   //Obtener Status Global
   get_Status_Global(codigoe: String) {
     return this.http.get<statusGlobal_Modelo>('/cecon/rastreo/status/global/' + codigoe);

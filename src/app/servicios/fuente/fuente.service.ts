@@ -23,6 +23,7 @@ export class FuenteService {
   getFuentes(a: String, b: String, c: String, d: String, e: String): Observable<fuente_Modelo> {
     return this.http.get<fuente_Modelo>('/cecon/fuente/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+  get All() { return this.http.get<fuente_Modelo>('/cecon/fuente/all'); }
   getDatosArchivos(fuenteId: Number): Observable<archivo_Modelo> {
     return this.http.get<archivo_Modelo>('/cecon/fuente/buscarArchivos/' + fuenteId);
   }

@@ -12,11 +12,12 @@ import { ElementoService } from '../../../servicios/elemento/elemento.service';
 //import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { Valor } from '../../../modelo/select/overwiew-valor';
 //--------------tabla------------------------------------
 import { jerarquizacion_Nacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionNacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { nacional_Dato } from '../../../modelo/tabla/nacional-dato';
-import { Valor } from '../../../modelo/select/overwiew-valor';
+
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-nacional',
@@ -32,7 +33,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   criterio_nleprot = this.criterio_Jeraquizacion.lgn_leprot;
   criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
-  criterio_Nacion = this.criterio_Jeraquizacion.ln_Nacion;
+  criterio_Nacion = [];
 
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
@@ -218,6 +219,29 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.lista_Nacional = new Array();
+    this.loading = true;
+    this.jerarquizacionServicio.all_Nacional
+      .subscribe(
+        data => {
+          this.dataJerarquizacionNacional = data;
+          var k = 0;
+          for (let val of this.dataJerarquizacionNacional) {
+            k = k + 1;
+            this.lista_Nacional.push(crearNacional(k,
+              val.nacionalId,
+              val.codigoe,
+              val.nombren,
+              val.nacion));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Nacional);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   getJerarquizacionNacional_id(id: Number): jerarquizacion_Nacional_Modelo {
     var base_jerarquizacionNacionallBusqueda = new jerarquizacion_Nacional_Modelo();
     this.dataJerarquizacionNacional.forEach(dataJerarquizacionNacional => {
@@ -305,17 +329,8 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   //Catalogo de nación
   obtener_nacion() {
-    this.jerarquizacionServicio.nacion.subscribe(
-      (resNacion: any[]) => {
-        resNacion.forEach(nacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = nacion.codigo;
-          modelo_Valor.viewValue = nacion.nombre;
-          this.criterio_Nacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener las naciones, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_nacion();
+    this.criterio_Nacion = this.jerarquizacionServicio.nacion_Valor;
   }
 }
 function crearNacional(k: Number, nacionalId: Number, codigoe, nombren, nacion): nacional_Dato {

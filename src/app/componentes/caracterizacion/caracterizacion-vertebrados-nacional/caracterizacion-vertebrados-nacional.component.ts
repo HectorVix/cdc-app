@@ -309,6 +309,32 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
+    this.lista_Vertebrado = new Array();
+    this.loading = true;
+    this.caracterizacionServicio.all_Vertebrado
+      .subscribe(
+        data => {
+          this.dataVertebrado = data;
+          var k = 0;
+          for (let val of this.dataVertebrado) {
+            k = k + 1;
+            this.lista_Vertebrado.push(crearVertebrado(k,
+              val.vertebradoId,
+              val.codigoe,
+              val.nombreg,
+              val.nombren,
+              val.nomcomunn));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   getVertebrado_id(id: Number): vertebrado_Modelo {
     var base_vertebradoBusqueda = new vertebrado_Modelo();
     this.dataVertebrado.forEach(dataVertebrado => {

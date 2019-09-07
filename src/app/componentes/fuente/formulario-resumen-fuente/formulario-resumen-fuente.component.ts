@@ -212,6 +212,25 @@ export class FormularioResumenFuenteComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.lista_Fuente = new Array();
+    this.loading = true;
+    this.fuenteServicio.All
+      .subscribe(
+        data => {
+          this.dataFuente = data;
+          var k = 0;
+          for (let val of this.dataFuente) {
+            k = k + 1;
+            this.lista_Fuente.push(crearFuente(k, val.fuenteId, val.naturalezadocumento, val.codfuente, val.cita, val.clave));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Fuente);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   crearForm_Buscar() {
     this.buscarForm = this.fb.group({
       'codigoFuente': '',

@@ -301,6 +301,32 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
+    this.lista_Planta = new Array();
+    this.loading = true;
+    this.caracterizacionServicio.all_Planta
+      .subscribe(
+        data => {
+          this.dataPlanta = data;
+          var k = 0;
+          for (let val of this.dataPlanta) {
+            k = k + 1;
+            this.lista_Planta.push(crearPlanta(k,
+              val.plantaId,
+              val.codigoe,
+              val.nacion,
+              val.nombren,
+              val.nombrecomunn));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Planta);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   getPlanta_id(id: Number): planta_Modelo {
     var base_plantaBusqueda = new planta_Modelo();
     this.dataPlanta.forEach(dataPlanta => {

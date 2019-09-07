@@ -28,8 +28,8 @@ export class FormularioLeComponent implements OnInit {
   criterio_le = new criterio_le();
   criterio_si_no = this.criterio_le.si_no;
   criterio_rango_le = this.criterio_le.rango_le;
-  criterio_Subnacion = this.criterio_le.subnacion;
-  criterio_Municipio = this.criterio_le.municipio;
+  criterio_Subnacion = [];
+  criterio_Municipio = [];
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -91,7 +91,7 @@ export class FormularioLeComponent implements OnInit {
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_LE);
     this.obtener_Subnacion();
-    this.relacionar_Depto_Municipio();
+    this.obtener_Municipios(this.leForm.get('subnacion').value);
   }
 
   ngOnInit() {
@@ -236,6 +236,26 @@ export class FormularioLeComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.lista_LE = new Array();
+    this.data_proteccion_DataSource = new LocalDataSource();
+    this.loading = true;
+    this.localizacionServicio.all_Localizacion
+      .subscribe(
+        data => {
+          this.dataLE = data;
+          var k = 0;
+          for (let elementoVal of this.dataLE) {
+            k = k + 1;
+            this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_LE);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   crearForm_Buscar() {
     this.buscarForm = this.fb.group({
       'codigole': '',
@@ -248,7 +268,7 @@ export class FormularioLeComponent implements OnInit {
     this.tabPagina1();
     this.guardar = true;
     this.getProteccion(row.LocalizacionId);
-    this.relacionar_Depto_Municipio();
+    this.obtener_Municipios(this.leForm.get('subnacion').value);
     this.validarCodigole(2);
   }
 
@@ -440,107 +460,17 @@ export class FormularioLeComponent implements OnInit {
   get input_actualizar() { return this.leForm.get('actualizar'); }
   //Catalogo de subnación (Depto)
   obtener_Subnacion() {
-    this.jerarquizacionServicio.subnacion.subscribe(
-      (resSubnacion: any[]) => {
-        resSubnacion.forEach(subnacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = "" + subnacion.codigo;
-          modelo_Valor.viewValue = subnacion.nombre;
-          this.criterio_Subnacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener los departamentos, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_subnacion();
+    this.criterio_Subnacion = this.jerarquizacionServicio.subnacion_Valor;
   }
   //Catalogo de Municipios
   obtener_Municipios(departamento: Number) {
-    this.criterio_Municipio = [];
-    this.jerarquizacionServicio.getMunicipio(departamento).subscribe(
-      (resMunicipio: any[]) => {
-        resMunicipio.forEach(municipio => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = "" + municipio.codigo;
-          modelo_Valor.viewValue = municipio.nombre;
-          this.criterio_Municipio.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener los municipios, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_Municipios(departamento);
+    this.criterio_Municipio = this.jerarquizacionServicio.municipio_Valor;
+
   }
   onChange() {
-    this.relacionar_Depto_Municipio();
-  }
-  relacionar_Depto_Municipio() {
-    switch (this.leForm.get('subnacion').value) {
-      case '1':
-        this.obtener_Municipios(1);
-        break;
-      case '2':
-        this.obtener_Municipios(2);
-        break;
-      case '3':
-        this.obtener_Municipios(3);
-        break;
-      case '4':
-        this.obtener_Municipios(4);
-        break;
-      case '5':
-        this.obtener_Municipios(5);
-        break;
-      case '6':
-        this.obtener_Municipios(6);
-        break;
-      case '7':
-        this.obtener_Municipios(7);
-        break;
-      case '8':
-        this.obtener_Municipios(8);
-        break;
-      case '9':
-        this.obtener_Municipios(9);
-        break;
-      case '10':
-        this.obtener_Municipios(10);
-        break;
-      case '11':
-        this.obtener_Municipios(11);
-        break;
-      case '12':
-        this.obtener_Municipios(12);
-        break;
-      case '13':
-        this.obtener_Municipios(13);
-        break;
-      case '14':
-        this.obtener_Municipios(14);
-        break;
-      case '15':
-        this.obtener_Municipios(15);
-        break;
-      case '16':
-        this.obtener_Municipios(16);
-        break;
-      case '17':
-        this.obtener_Municipios(17);
-        break;
-      case '18':
-        this.obtener_Municipios(18);
-        break;
-      case '19':
-        this.obtener_Municipios(19);
-        break;
-      case '20':
-        this.obtener_Municipios(20);
-        break;
-      case '21':
-        this.obtener_Municipios(21);
-        break;
-      case '22':
-        this.obtener_Municipios(22);
-        break;
-      default:
-        break;
-    }
+    this.obtener_Municipios(this.leForm.get('subnacion').value);
   }
   validarCodigole(estado: Number) {
     this.localizacionServicio.get_ValidarCodigoLE(this.leForm.get('codigole').value)

@@ -1,6 +1,6 @@
-export class departamento_Guatemala {
+export class departamento_Nombre {
     subnacion: String;
-    departamentoGuatemala(val): void {
+    departamentoNombre(val): void {
         switch (val) {
             case "1": { this.subnacion = 'Guatemala'; } break;
             case "2": { this.subnacion = 'El Progreso'; } break;
@@ -26,5 +26,5 @@ export class departamento_Guatemala {
             case "22": { this.subnacion = 'Jutiapa'; } break;
         }
     }
-    get valor_DepartamentoGuatemala() { return this.subnacion; }
+    get valor_Depto() { return this.subnacion; }
 }

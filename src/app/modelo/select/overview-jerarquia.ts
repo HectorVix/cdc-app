@@ -50,7 +50,8 @@ export class criterio_Jerarquizacion {
   lg_rango: Valor[] = [];
   ln_rango: Valor[] = [];
   ls_rango: Valor[] = [];
-  ln_Nacion: Valor[] = [];
+
+  //ln_Nacion: Valor[] = [];
   ls_Subnacion: Valor[] = [];
   ls_Municipio: Valor[] = [];
 

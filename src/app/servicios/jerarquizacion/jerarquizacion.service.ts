@@ -6,6 +6,7 @@ import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-c
 import { jerarquizacion_Global_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-global-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { jerarquizacion_Subnacional_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
+import { Valor } from '../../modelo/select/overwiew-valor';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
@@ -14,7 +15,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class JerarquizacionService {
-
+  criterio_Nacion = [];
+  criterio_Subnacion = [];
+  criterio_Municipio = [];
 
   constructor(private http: HttpClient) { }
 
@@ -40,9 +43,13 @@ export class JerarquizacionService {
   }
 
   //Obtener jerarquización subnacional por codigoe, nacion, subnacion, nombres, loctips
-  getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String): Observable<jerarquizacion_Nacional_Modelo> {
-    return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+  getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String): Observable<jerarquizacion_Subnacional_Modelo> {
+    return this.http.get<jerarquizacion_Subnacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+
+  get all_Global() { return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/global/all'); }
+  get all_Nacional() { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/nacional/all'); }
+  get all_Subnacional() { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/subnacional/all'); }
 
   //Obtener catalogos de los rangos globaln, nacional y subnacional
   get rangog() {
@@ -74,4 +81,51 @@ export class JerarquizacionService {
   updateSubnacional(subnacional: jerarquizacion_Subnacional_Modelo, jerarquia_id: Number): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/editar/subnacional/' + jerarquia_id, subnacional, httpOptions);
   }
+  //Catalogo de nación
+  obtener_nacion() {
+    this.criterio_Nacion = [];
+    this.nacion.subscribe(
+      (resNacion: any[]) => {
+        resNacion.forEach(nacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = nacion.codigo;
+          modelo_Valor.viewValue = nacion.nombre;
+          this.criterio_Nacion.push(modelo_Valor);
+        });
+      }, err => {
+
+      });
+  }
+  //Catalogo de subnación (Depto)
+  obtener_subnacion() {
+    this.criterio_Subnacion = [];
+    this.subnacion.subscribe(
+      (resSubnacion: any[]) => {
+        resSubnacion.forEach(subnacion => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = "" + subnacion.codigo;
+          modelo_Valor.viewValue = subnacion.nombre;
+          this.criterio_Subnacion.push(modelo_Valor);
+        });
+      }, err => {
+
+      });
+  }
+  obtener_Municipios(departamento: Number) {
+    this.criterio_Municipio = [];
+    this.getMunicipio(departamento).subscribe(
+      (resMunicipio: any[]) => {
+        resMunicipio.forEach(municipio => {
+          var modelo_Valor = new Valor();
+          modelo_Valor.value = "" + municipio.codigo;
+          modelo_Valor.viewValue = municipio.nombre;
+          this.criterio_Municipio.push(modelo_Valor);
+        });
+      }, err => {
+
+      });
+  }
+  get nacion_Valor() { return this.criterio_Nacion; }
+  get subnacion_Valor() { return this.criterio_Subnacion; }
+  get municipio_Valor() { return this.criterio_Municipio; }
 }

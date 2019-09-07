@@ -218,6 +218,29 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.lista_Global = new Array();
+    this.loading = true;
+    this.jerarquizacionServicio.all_Global
+      .subscribe(
+        data => {
+          this.dataJerarquizacionGlobal = data;
+          var k = 0;
+          for (let val of this.dataJerarquizacionGlobal) {
+            k = k + 1;
+            this.lista_Global.push(crearGlobal(k,
+              val.globalId,
+              val.codigoe,
+              val.nombreg,
+              val.descrielem));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Global);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
 
   getJerarquizacionGlobal_id(id: Number): jerarquizacion_Global_Modelo {
     var base_jerarquizacioGlobalBusqueda = new jerarquizacion_Global_Modelo();

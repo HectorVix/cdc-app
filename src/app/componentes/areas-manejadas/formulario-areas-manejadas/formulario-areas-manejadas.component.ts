@@ -264,6 +264,27 @@ export class FormularioAreasManejadasComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
+    this.lista_Area = new Array();
+    this.loading = true;
+    this.areaServicio.all_Area
+      .subscribe(
+        data => {
+          this.dataArea = data;
+          var k = 0;
+          for (let val of this.dataArea) {
+            k = k + 1;
+            this.lista_Area.push(crearArea(k, val.areaId, val.codigoam, val.nomsitio, val.codsitio, val.nomsitio));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Area);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   getArea_id(id: Number): area_Modelo {
     var base_areaBusqueda = new area_Modelo();
     this.dataArea.forEach(dataArea => {

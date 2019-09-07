@@ -21,6 +21,9 @@ export class SitioService {
   getSitios(a: String, b: String, c: String, d: String, e: String): Observable<sitio_Modelo> {
     return this.http.get<sitio_Modelo>('/cecon/sitio/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
   }
+
+  get all_Sitio() { return this.http.get<sitio_Modelo>('/cecon/sitio/all'); }
+
   getMacsitio(sitio_id: Number): Observable<macsitio_Modelo> {
     return this.http.get<macsitio_Modelo>('/cecon/sitio/macsitio/' + sitio_id);
   }

@@ -10,6 +10,7 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { departamento_Nombre } from '../../../modelo/jerarquizacion/departamento-nombre';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
@@ -32,8 +33,8 @@ export class FormularioReComponent implements OnInit {
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
   criterio_listacdc = this.criterio_re.listacdc;
   criterio_Tropico = this.criterio_re.tropico;
-  criterio_Nacion = this.criterio_re.ln_Nacion;
-  criterio_Subnacion = this.criterio_re.ls_Subnacion;
+  criterio_Nacion = [];
+  criterio_Subnacion = [];
 
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -230,7 +231,25 @@ export class FormularioReComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning ');
         });
   }
-
+  buscarTodos() {
+    this.listaRatreoElementos = new Array();
+    this.loading = true;
+    this.rastreoServicio.all_Rastreo
+      .subscribe(
+        data => {
+          this.dataRatreoElemento = data;
+          this.loading = false;
+          var k = 0;
+          for (let reVal of this.dataRatreoElemento) {
+            k = k + 1;
+            this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+          }
+          this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning ');
+        });
+  }
   getRastreoElemento_id(id: Number): rastreo_Elemento_Modelo {
     var rastreoElementoBusqueda = new rastreo_Elemento_Modelo();
     this.dataRatreoElemento.forEach(dataRatreoElemento => {
@@ -395,39 +414,23 @@ export class FormularioReComponent implements OnInit {
   }
   //Catalogo de nación
   obtener_nacion() {
-    this.jerarquizacionServicio.nacion.subscribe(
-      (resNacion: any[]) => {
-        resNacion.forEach(nacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = nacion.codigo;
-          modelo_Valor.viewValue = nacion.nombre;
-          this.criterio_Nacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener las naciones, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_nacion();
+    this.criterio_Nacion = this.jerarquizacionServicio.nacion_Valor;
   }
   //Catalogo de subnación (Depto)
   obtener_subnacion() {
-    this.jerarquizacionServicio.subnacion.subscribe(
-      (resSubnacion: any[]) => {
-        resSubnacion.forEach(subnacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = "" + subnacion.codigo;
-          modelo_Valor.viewValue = subnacion.nombre;
-          this.criterio_Subnacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener los departamentos, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_subnacion();
+    this.criterio_Subnacion = this.jerarquizacionServicio.subnacion_Valor;
   }
 }
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
+  var depto = new departamento_Nombre();
+  depto.departamentoNombre(re.subnacion);
   return {
     numero: k,
     rastreoId: re.rastreoId,
     codigoe: re.codigoe,
-    departamento: re.subnacion,
+    departamento: depto.valor_Depto,
     nombreg: re.nombreg,
     nombren: re.nombren,
     nombrecomunn: re.nomcomunn

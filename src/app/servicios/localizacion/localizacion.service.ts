@@ -34,6 +34,8 @@ export class LocalizacionService {
   getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
     return this.http.get<Localizacion_Modelo>('/cecon/localizacion/buscar/' + a);
   }
+  get all_Localizacion() { return this.http.get<Localizacion_Modelo>('/cecon/localizacion/all'); }
+  
   //Obtener Protocolo Localización del Elemento por codigoe, nombre, nomcomun
   getProtocoloLE(a: String, b: String, c: String): Observable<protocolo_LE_Modelo> {
     return this.http.get<protocolo_LE_Modelo>('/cecon/protocolo/buscar/' + a + '/' + b + '/' + c);

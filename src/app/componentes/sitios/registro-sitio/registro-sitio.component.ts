@@ -294,6 +294,28 @@ export class RegistroSitioComponent implements OnInit {
           this.changeSuccessMessage('No se encontro información.', 'warning');
         });
   }
+  buscarTodos() {
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
+    this.lista_Sitio = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Sitio);
+    this.loading = true;
+    this.sitioServicio.all_Sitio
+      .subscribe(
+        data => {
+          this.dataSitio = data;
+          var k = 0;
+          for (let val of this.dataSitio) {
+            k = k + 1;
+            this.lista_Sitio.push(crearSitio(k, val.sitioId, val.codsitio, val.nomsitio, val.sinsitio, val.nacion, val.subnacion));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Sitio);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
   mostrar_Sito_Busqueda(row: sitio_Dato) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();

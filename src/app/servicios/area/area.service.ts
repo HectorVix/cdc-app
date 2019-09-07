@@ -24,6 +24,9 @@ export class AreaService {
   getAreas(a: String, b: String, c: String, d: String, e: String, f: String, g: String, h: String): Observable<area_Modelo> {
     return this.http.get<area_Modelo>('/cecon/area/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f + '/' + g + '/' + h);
   }
+
+  get all_Area() { return this.http.get<area_Modelo>('/cecon/area/all'); }
+
   getListaElemento(areaId: Number): Observable<listaElemento_Modelo> {
     return this.http.get<listaElemento_Modelo>('/cecon/area/listaElemento/' + areaId);
   }

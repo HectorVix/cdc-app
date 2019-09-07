@@ -144,7 +144,9 @@ export class ElementoComponent implements OnInit {
     this.buscarForm = this.fb.group({
       'codigoe': '',
       'nombrecomunn': '',
-      'nombrecientifico': ''
+      'nombrecientifico': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   onSubmit() {
@@ -237,10 +239,13 @@ export class ElementoComponent implements OnInit {
     this.fotoId_Lista = [];
     this.tam_Inicial_ListaFotos = 0;
     this.loading = true;
+    this.k = 0;
     //variables necesarias para recuperarse de errores 
     var codigoe = "¬";
     var nombrecomunn = "¬";
     var nombrecientifico = "¬";
+    var clase = "¬";
+    var comunidad = "¬";
     this.elementos = new Array();
     this.k = 0;
     if (this.buscarForm.get('codigoe').value)
@@ -249,7 +254,32 @@ export class ElementoComponent implements OnInit {
       nombrecomunn = this.buscarForm.get('nombrecomunn').value;
     if (this.buscarForm.get('nombrecientifico').value)
       nombrecientifico = this.buscarForm.get('nombrecientifico').value;
-    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombrecientifico)
+    if (this.buscarForm.get('clase').value)
+      clase = this.buscarForm.get('clase').value;
+    if (this.buscarForm.get('comunidad').value)
+      comunidad = this.buscarForm.get('comunidad').value;
+    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombrecientifico, clase, comunidad)
+      .subscribe(
+        data => {
+          this.dataElementos = data;
+          for (let elementoVal of this.dataElementos) {
+            this.k = this.k + 1;
+            this.elementos.push(crearElemento(this.k, elementoVal));
+          }
+          this.dataSource = new MatTableDataSource(this.elementos);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  buscar_Todos_Elementos() {
+    this.elementos = new Array();
+    this.fotoId_Lista = [];
+    this.tam_Inicial_ListaFotos = 0;
+    this.loading = true;
+    this.k = 0;
+    this.elementoServicio.All
       .subscribe(
         data => {
           this.dataElementos = data;
@@ -308,6 +338,15 @@ export class ElementoComponent implements OnInit {
   get clasificacion_comunidad() {
     var val = false;
     if (this.elementoForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
+  //clasificación de comunidades buscardor
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscarForm.get('clase').value == 'C')
       val = true;
     else
       val = false;

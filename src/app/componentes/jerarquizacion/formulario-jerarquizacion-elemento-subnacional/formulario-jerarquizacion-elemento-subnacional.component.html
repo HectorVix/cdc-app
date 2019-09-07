@@ -561,6 +561,11 @@
                             <!-- Fin row -->
                             <!-- Inicio row -->
                             <div class="row">
+                                <div class="md-form col-md-5 mt-10">
+                                    <input mdbInputDirective type="text" id="formNombres" class="form-control"
+                                        formControlName="nombres" data-error=" " data-success=" ">
+                                    <label for="formNombres">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE SUBNACIONAL</label>
+                                </div>
                                 <div class="col-md-3 mt-10">
                                     <mat-form-field>
                                         <mat-select placeholder="DEPARTAMENTO" panelClass="color-panel-green"
@@ -572,11 +577,6 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                </div>
-                                <div class="md-form col-md-5 mt-10">
-                                    <input mdbInputDirective type="text" id="formNombres" class="form-control"
-                                        formControlName="nombres" data-error=" " data-success=" ">
-                                    <label for="formNombres">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE SUBNACIONAL</label>
                                 </div>
                             </div>
                             <!-- Fin row -->
@@ -591,6 +591,8 @@
                             <div>
                                 <button class="btn color-green waves-light" mdbWavesEffect
                                     (click)="buscarJerarquizacionSubnacional()">Buscar</button>
+                                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarTodos()">Buscar
+                                    Todos</button>
                             </div>
                         </form>
                         <!-- Fin form -->

@@ -7,14 +7,14 @@ import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-mo
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
-import { departamento_Guatemala } from '../../../modelo/jerarquizacion/departamento-guatemala';
+import { departamento_Nombre } from '../../../modelo/jerarquizacion/departamento-nombre';
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { Valor } from '../../../modelo/select/overwiew-valor';
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { subnacional_Dato } from '../../../modelo/tabla/subnacional-dato';
-import { Valor } from '../../../modelo/select/overwiew-valor';
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-subnacional',
@@ -29,7 +29,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   criterio_leprots = this.criterio_Jeraquizacion.lgn_leprot;
   criterio_amenazs = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangos = this.criterio_Jeraquizacion.ls_rango;
-  criterio_Nacion = this.criterio_Jeraquizacion.ln_Nacion;
+  criterio_Nacion = [];
   criterio_Subnacion = this.criterio_Jeraquizacion.ls_Subnacion;
   jerarquizacion_SubnacionalForm: FormGroup;
   buscar_Form: FormGroup;
@@ -138,10 +138,10 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
           if (err.status === 404)
             this.changeSuccessMessage(`Error no se pudo registrar el CODIGOE del elemento no existe, por favor ingresa uno valido.`, 'primary');
           else {
-            var departamentoGuatemala = new departamento_Guatemala();
-            departamentoGuatemala.departamentoGuatemala(this.jerarquizacion_SubnacionalForm.get('subnacion').value);
+            var depto = new departamento_Nombre();
+            depto.departamentoNombre(this.jerarquizacion_SubnacionalForm.get('subnacion').value);
             this.changeSuccessMessage(`No se pudo regitrar, el elemento con el CODIGOE: \"${this.jerarquizacion_SubnacionalForm.get('codigoe').value}\"
-            asociado al departamento: \"${departamentoGuatemala.valor_DepartamentoGuatemala}\" esté ya está jerarquizado subnacionalmente ó comprueba que esté disponible el servicio.`, 'primary');
+            asociado al departamento: \"${depto.valor_Depto}\" esté ya está jerarquizado subnacionalmente ó comprueba que esté disponible el servicio.`, 'primary');
           }
         });
   }
@@ -213,6 +213,29 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     if (this.buscar_Form.get('loctips').value)
       e = this.buscar_Form.get('loctips').value;
     this.jerarquizacionServicio.getJerarquizacionesSubnacional(a, b, c, d, e)
+      .subscribe(
+        data => {
+          this.dataJerarquizacionSubnacional = data;
+          var k = 0;
+          for (let val of this.dataJerarquizacionSubnacional) {
+            k = k + 1;
+            this.lista_Subnacional.push(crearSubnacional(k,
+              val.subnacionalId,
+              val.codigoe,
+              val.subnacion,
+              val.nombres));
+          }
+          this.dataSource = new MatTableDataSource(this.lista_Subnacional);
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.changeSuccessMessage('No se encontro información.', 'warning');
+        });
+  }
+  buscarTodos() {
+    this.lista_Subnacional = new Array();
+    this.loading = true;
+    this.jerarquizacionServicio.all_Subnacional
       .subscribe(
         data => {
           this.dataJerarquizacionSubnacional = data;
@@ -321,41 +344,23 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   //Catalogo de nación
   obtener_nacion() {
-    this.jerarquizacionServicio.nacion.subscribe(
-      (resNacion: any[]) => {
-        resNacion.forEach(nacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = nacion.codigo;
-          modelo_Valor.viewValue = nacion.nombre;
-          this.criterio_Nacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener las naciones, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_nacion();
+    this.criterio_Nacion = this.jerarquizacionServicio.nacion_Valor;
   }
   //Catalogo de subnación (Depto)
   obtener_subnacion() {
-    this.jerarquizacionServicio.subnacion.subscribe(
-      (resSubnacion: any[]) => {
-        resSubnacion.forEach(subnacion => {
-          var modelo_Valor = new Valor();
-          modelo_Valor.value = "" + subnacion.codigo;
-          modelo_Valor.viewValue = subnacion.nombre;
-          this.criterio_Subnacion.push(modelo_Valor);
-        });
-      }, err => {
-        this.changeSuccessMessage('Error no se pudo obtener los departamentos, comprueba que esté disponible el servicio.', 'primary');
-      });
+    this.jerarquizacionServicio.obtener_subnacion();
+    this.criterio_Subnacion = this.jerarquizacionServicio.subnacion_Valor;
   }
 }
 function crearSubnacional(k: Number, subnacionalId: Number, codigoe, subnacion, nombres): subnacional_Dato {
-  var departamentoGuatemala = new departamento_Guatemala();
-  departamentoGuatemala.departamentoGuatemala(subnacion);
+  var depto = new departamento_Nombre();
+  depto.departamentoNombre(subnacion);
   return {
     numero: k,
     subnacionalId: subnacionalId,
     codigoe: codigoe,
-    subnacion: departamentoGuatemala.valor_DepartamentoGuatemala,
+    subnacion: depto.valor_Depto,
     nombres: nombres
   };
 }

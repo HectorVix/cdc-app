@@ -65,7 +65,8 @@
               <div class="md-form col-md-9 mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formNombrecomunn" class="form-control"
                   formControlName="nombrecomunn">
-                <mdb-error *ngIf="input_nombrecomunn.invalid && (input_nombrecomunn.dirty || input_nombrecomunn.touched)">
+                <mdb-error
+                  *ngIf="input_nombrecomunn.invalid && (input_nombrecomunn.dirty || input_nombrecomunn.touched)">
                   <font size=2 color="red">Error, máximo 60 caracteres.</font>
                 </mdb-error>
               </div>
@@ -170,10 +171,38 @@
                   formControlName="nombrecientifico" data-error=" " data-success=" ">
                 <label for="formNombrecientifico">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE CIENTÍFICO</label>
               </div>
+              <div class="col-md-3 mt-15">
+                <mat-form-field>
+                  <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                      {{sClase.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Fin row -->
+            <div class="row" *ngIf="clasificacion_comunidad_Buscador">
+              <div class="col-md-5">
+                <label for=""></label>
+              </div>
+              <div class="col-md-4 mt-15">
+                <mat-form-field>
+                  <mat-select placeholder="COMUNIDAD NATURAL" panelClass="color-panel-green"
+                    formControlName="comunidad">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                      {{sTipo.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
             <!-- Fin row -->
             <div>
               <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarElemento()">Buscar</button>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscar_Todos_Elementos()">Buscar Todos</button>
             </div>
           </form>
           <div class="text-center">

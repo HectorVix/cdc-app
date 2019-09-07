@@ -83,4 +83,6 @@ export class CaracterizacionService {
   deleteDistribucion2(distribucion2_Id: Number) {
     return this.http.post('/cecon/caracterizacion/delete/distribucion2/' + distribucion2_Id, httpOptions);
   }
+  get all_Planta() { return this.http.get<planta_Modelo>('/cecon/caracterizacion/planta/all'); }
+  get all_Vertebrado() { return this.http.get<vertebrado_Modelo>('/cecon/caracterizacion/vertebrado/all'); }
 }
