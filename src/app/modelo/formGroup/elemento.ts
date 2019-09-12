@@ -12,8 +12,8 @@ export class elemento_FormGroup {
             'clase': row.clase,
             'comunidad': row.comunidad,
             'nombrecomunn': new FormControl(row.nombrecomunn, Validators.maxLength(60)),
-            'nombrecientifico': new FormControl(row.nombrecientifico, Validators.maxLength(60)),
-            'comentario': new FormControl(row.nombrecientifico, Validators.maxLength(120)),
+            'nombren': new FormControl(row.nombren, Validators.maxLength(60)),
+            'comentario': new FormControl(row.comentario, Validators.maxLength(120)),
             'fecha': fechaServicio.getFecha(row.fecha)
         });
     }

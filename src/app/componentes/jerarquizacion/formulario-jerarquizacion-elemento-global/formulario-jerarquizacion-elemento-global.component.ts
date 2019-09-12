@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
 import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-global-modelo';
-import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
@@ -34,7 +33,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
   jerarquizacion_Global_Form: FormGroup;
   buscar_Form: FormGroup;
-  jerarquizacionId: Number;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -56,6 +54,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   editar = true;
   guardar = false;
   jerarquia_Aux: any;
+  elemento_Id: Number;
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe,
     private jerarquizacionServicio: JerarquizacionService,
@@ -115,12 +114,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   //registro nuevo formulario jerarquizacion global
   registrarJerarquizacionGlobal() {
     if (this.jerarquizacion_Global_Form.get('codigoe').value && this.jerarquizacion_Global_Form.valid) {
-      var jerarquizacionModelo = new Jerarquizacion();
-      jerarquizacionModelo.codigoe = this.jerarquizacion_Global_Form.get('codigoe').value;
-      var globalist: Array<jerarquizacion_Global_Modelo> = new Array();
-      globalist.push(this.setDatosJerarquizacionGlobal(this.jerarquizacion_Global_Form.value));
-      jerarquizacionModelo.globalList = globalist;
-      this.addJerarquizacionGlobal(jerarquizacionModelo);
+      this.addJerarquizacionGlobal(this.setDatosJerarquizacionGlobal(this.jerarquizacion_Global_Form.value));
     }
     else
       this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
@@ -132,9 +126,9 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global
-  addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): void {
+  addJerarquizacionGlobal(jer_global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
-    this.jerarquizacionServicio.addJerarquizacionGlobal(jerarquizacion)
+    this.jerarquizacionServicio.addJerarquizacionGlobal(jer_global)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -250,7 +244,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       if (id == jerarquizacionGlobalBusqueda.globalId) {
         base_jerarquizacioGlobalBusqueda = jerarquizacionGlobalBusqueda;
         this.jerarquia_Aux = base_jerarquizacioGlobalBusqueda;
-        this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
+        this.elemento_Id = this.jerarquia_Aux.elementoelementoid.elementoId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
     });
@@ -263,7 +257,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   updateJerarquizacionGlobal(global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
-    this.jerarquizacionServicio.updateGlobal(global, this.jerarquizacionId)
+    this.jerarquizacionServicio.updateGlobal(global, this.elemento_Id)
       .subscribe(
         resGlobal => {
           this.loading = false;

@@ -275,6 +275,8 @@ export class FormularioReComponent implements OnInit {
   nuevo() {
     this.editar = true;
     this.guardar = false;
+    this.elementoId_Aux = null;
+    this.elementoId = null;
     this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
     this.tabPagina1();
   }

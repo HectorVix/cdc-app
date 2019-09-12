@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
-import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
@@ -33,7 +32,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   criterio_Subnacion = this.criterio_Jeraquizacion.ls_Subnacion;
   jerarquizacion_SubnacionalForm: FormGroup;
   buscar_Form: FormGroup;
-  jerarquizacionId: Number;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -55,6 +53,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   editar = true;
   guardar = false;
   jerarquia_Aux: any;
+  elemento_Id: Number;
 
   constructor(private fb: FormBuilder,
     private jerarquizacionServicio: JerarquizacionService,
@@ -99,14 +98,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     if (this.jerarquizacion_SubnacionalForm.get('codigoe').value) {
       if (this.jerarquizacion_SubnacionalForm.valid) {
         if (this.jerarquizacion_SubnacionalForm.get('subnacion').value) {
-          var jerarquizacionBase = new Jerarquizacion();
-          var jerarquizacionSubnacional = new jerarquizacion_Subnacional_Modelo();
-          var subnacionalList: Array<jerarquizacion_Subnacional_Modelo> = new Array();
-          jerarquizacionBase.codigoe = this.jerarquizacion_SubnacionalForm.get('codigoe').value;
-          jerarquizacionSubnacional = this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value);
-          subnacionalList.push(jerarquizacionSubnacional);
-          jerarquizacionBase.subnacionalList = subnacionalList;
-          this.addJerarquizacionNacional(jerarquizacionBase)
+          this.addJerarquizacionNacional(this.setDatosJerarquizacionSubnacional(this.jerarquizacion_SubnacionalForm.value));
         }
         else
           this.changeSuccessMessage('Por favor debes seleccionar un departamento de Guatemala para poder registrar la jerarquizacón subnacional.', 'primary');
@@ -125,10 +117,10 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     return datos;
   }
   //agrega un nuevo registro jerarquizacion subnacional
-  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
+  addJerarquizacionNacional(jer_SubNacional: jerarquizacion_Subnacional_Modelo): void {
 
     this.loading = true;
-    this.jerarquizacionServicio.addJerarquizacionSubnacional(jerarquizacion)
+    this.jerarquizacionServicio.addJerarquizacionSubnacional(jer_SubNacional)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -262,7 +254,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       if (id == dataJerarquizacionSubnacional.subnacionalId) {
         base_jerarquizacionSubnacionallBusqueda = jerarquizacionSubnacionalBusqueda;
         this.jerarquia_Aux = base_jerarquizacionSubnacionallBusqueda;
-        this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
+        this.elemento_Id = this.jerarquia_Aux.elementoelementoid.elementoId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
     });
@@ -281,7 +273,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   updateJerarquizacionSubnacional(subnacional: jerarquizacion_Subnacional_Modelo): void {
     this.loading = true;
-    this.jerarquizacionServicio.updateSubnacional(subnacional, this.jerarquizacionId)
+    this.jerarquizacionServicio.updateSubnacional(subnacional, this.elemento_Id)
       .subscribe(
         resSubnacional => {
           this.loading = false;

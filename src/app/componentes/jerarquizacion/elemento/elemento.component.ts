@@ -38,7 +38,7 @@ export class ElementoComponent implements OnInit {
   matcher = new ControlErrorStateMatcher();
   //---------------------------------tabla
   k: number;
-  displayedColumns: string[] = ['numero', 'codigoe', 'nombrecomunn', 'nombrecientifico'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombrecomunn', 'nombren'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -144,7 +144,7 @@ export class ElementoComponent implements OnInit {
     this.buscarForm = this.fb.group({
       'codigoe': '',
       'nombrecomunn': '',
-      'nombrecientifico': '',
+      'nombren': '',
       'clase': '',
       'comunidad': ''
     });
@@ -243,7 +243,7 @@ export class ElementoComponent implements OnInit {
     //variables necesarias para recuperarse de errores 
     var codigoe = "¬";
     var nombrecomunn = "¬";
-    var nombrecientifico = "¬";
+    var nombren = "¬";
     var clase = "¬";
     var comunidad = "¬";
     this.elementos = new Array();
@@ -252,13 +252,13 @@ export class ElementoComponent implements OnInit {
       codigoe = this.buscarForm.get('codigoe').value;
     if (this.buscarForm.get('nombrecomunn').value)
       nombrecomunn = this.buscarForm.get('nombrecomunn').value;
-    if (this.buscarForm.get('nombrecientifico').value)
-      nombrecientifico = this.buscarForm.get('nombrecientifico').value;
+    if (this.buscarForm.get('nombren').value)
+      nombren = this.buscarForm.get('nombren').value;
     if (this.buscarForm.get('clase').value)
       clase = this.buscarForm.get('clase').value;
     if (this.buscarForm.get('comunidad').value)
       comunidad = this.buscarForm.get('comunidad').value;
-    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombrecientifico, clase, comunidad)
+    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombren, clase, comunidad)
       .subscribe(
         data => {
           this.dataElementos = data;
@@ -330,7 +330,7 @@ export class ElementoComponent implements OnInit {
   //lleva el control de los errores
   get input_codigoe() { return this.elementoForm.get('codigoe'); }
   get input_nombrecomunn() { return this.elementoForm.get('nombrecomunn'); }
-  get input_nombrecientifico() { return this.elementoForm.get('nombrecientifico'); }
+  get input_nombren() { return this.elementoForm.get('nombren'); }
   get input_comentario() { return this.elementoForm.get('comentario'); }
   get input_fecha() { return this.elementoForm.get('fecha'); }
 
@@ -359,6 +359,6 @@ function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
     elementoId: elemento.elementoId,
     codigoe: elemento.codigoe,
     nombrecomunn: elemento.nombrecomunn,
-    nombrecientifico: elemento.nombrecientifico
+    nombren: elemento.nombren
   };
 }

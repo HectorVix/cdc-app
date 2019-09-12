@@ -1,4 +1,3 @@
-import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 export class jerarquizacion_Global_Modelo {
     globalId: Number;
     codigoe: String;
@@ -38,6 +37,5 @@ export class jerarquizacion_Global_Modelo {
     edautor: String;
     edicion: Date;
     actualizar: Date;
-    
-    jERARQUIZACIONjerarquizacionid: Jerarquizacion;
+    eLEMENTOelementoid: Number;
 }

@@ -6,7 +6,7 @@ export class elemento_Modelo {
     clase: String;
     comunidad: String;
     nombrecomunn: String;
-    nombrecientifico: String;
+    nombren: String;
     comentario: String;
     fecha: Date;
     fotoList: any;

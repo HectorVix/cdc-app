@@ -1,4 +1,3 @@
-import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 export class jerarquizacion_Subnacional_Modelo {
     subnacionalId: Number;
     codigoe: String;
@@ -26,5 +25,5 @@ export class jerarquizacion_Subnacional_Modelo {
     autored: String;
     edicion: Date;
     actualizar: Date;
-    jERARQUIZACIONjerarquizacionid: Jerarquizacion;
+    eLEMENTOelementoid: Number;
 }

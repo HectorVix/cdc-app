@@ -3,5 +3,5 @@ export interface ElementoDato {
     elementoId: Number;
     codigoe: String;
     nombrecomunn: String;
-    nombrecientifico: String;
+    nombren: String;
 }

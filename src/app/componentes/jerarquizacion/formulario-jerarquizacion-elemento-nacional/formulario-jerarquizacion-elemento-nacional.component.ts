@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-//import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { criterio_Jerarquizacion } from '../../../modelo/select/overview-jerarquia';
-import { Jerarquizacion } from '../../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
-//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
@@ -37,7 +33,6 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
 
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
-  jerarquizacionId: Number;
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
@@ -59,6 +54,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   editar = true;
   guardar = false;
   jerarquia_Aux: any;
+  elemento_Id: Number;
 
   constructor(private fb: FormBuilder,
     private jerarquizacionServicio: JerarquizacionService,
@@ -99,14 +95,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   //guarda un registro de jerarquizacion nacional
   guardarRegistroJerarquiazacionNacional() {
     if (this.jerarquizacion_Nacional_Form.get('codigoe').value && this.jerarquizacion_Nacional_Form.valid) {
-      var jerarquizacionBase = new Jerarquizacion();
-      var jerarquizacionNacional = new jerarquizacion_Nacional_Modelo();
-      var nacionalList: Array<jerarquizacion_Nacional_Modelo> = new Array();
-      jerarquizacionBase.codigoe = this.jerarquizacion_Nacional_Form.get('codigoe').value;
-      jerarquizacionNacional = this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value);
-      nacionalList.push(jerarquizacionNacional);
-      jerarquizacionBase.nacionalList = nacionalList;
-      this.addJerarquizacionNacional(jerarquizacionBase)
+      this.addJerarquizacionNacional(this.setDatosJerarquizacionNacional(this.jerarquizacion_Nacional_Form.value));
     }
     else
       this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos estén correctos donde se te indica..', 'primary');
@@ -119,9 +108,9 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global
-  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): void {
+  addJerarquizacionNacional(jer_Nacional: jerarquizacion_Nacional_Modelo): void {
     this.loading = true;
-    this.jerarquizacionServicio.addJerarquizacionNacional(jerarquizacion)
+    this.jerarquizacionServicio.addJerarquizacionNacional(jer_Nacional)
       .subscribe(
         resElemento => {
           this.loading = false;
@@ -249,7 +238,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       if (id == dataJerarquizacionNacional.nacionalId) {
         base_jerarquizacionNacionallBusqueda = jerarquizacionNacionalBusqueda;
         this.jerarquia_Aux = base_jerarquizacionNacionallBusqueda;
-        this.jerarquizacionId = this.jerarquia_Aux.jerarquizacionjerarquizacionid.jerarquizacionId;//al obtener lo pasa todo a minisculas
+        this.elemento_Id = this.jerarquia_Aux.elementoelementoid.elementoId;//al obtener lo pasa todo a minisculas
         this.editar = false;
       }
     });
@@ -262,7 +251,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   updateJerarquizacionNacional(nacional: jerarquizacion_Nacional_Modelo): void {
     this.loading = true;
-    this.jerarquizacionServicio.updateNacional(nacional, this.jerarquizacionId)
+    this.jerarquizacionServicio.updateNacional(nacional, this.elemento_Id)
       .subscribe(
         resNacional => {
           this.loading = false;

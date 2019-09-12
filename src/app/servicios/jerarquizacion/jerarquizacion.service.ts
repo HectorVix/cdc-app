@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 import { respuesta_cdc_Modelo } from '../../modelo/respuestaServicio/respuesta-cdc';
 import { jerarquizacion_Global_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-global-modelo';
 import { jerarquizacion_Nacional_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
@@ -22,16 +21,16 @@ export class JerarquizacionService {
   constructor(private http: HttpClient) { }
 
 
-  addJerarquizacionGlobal(jerarquizacion: Jerarquizacion): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/global', jerarquizacion, httpOptions);
+  addJerarquizacionGlobal(jer_global: jerarquizacion_Global_Modelo) {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/global', jer_global, httpOptions);
   }
 
-  addJerarquizacionNacional(jerarquizacion: Jerarquizacion): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/nacional', jerarquizacion, httpOptions);
+  addJerarquizacionNacional(jer_nacional: jerarquizacion_Nacional_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/nacional', jer_nacional, httpOptions);
   }
 
-  addJerarquizacionSubnacional(jerarquizacion: Jerarquizacion): Observable<respuesta_cdc_Modelo> {
-    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/subnacional', jerarquizacion, httpOptions);
+  addJerarquizacionSubnacional(jer_subNacional: jerarquizacion_Subnacional_Modelo): Observable<respuesta_cdc_Modelo> {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/subnacional', jer_subNacional, httpOptions);
   }
   //Obtener jerarquizació global por codigoe, nombreg, descrielem
   getJerarquizacionesGlobal(a: String, b: String, c: String): Observable<jerarquizacion_Global_Modelo> {
@@ -52,23 +51,14 @@ export class JerarquizacionService {
   get all_Subnacional() { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/subnacional/all'); }
 
   //Obtener catalogos de los rangos globaln, nacional y subnacional
-  get rangog() {
-    return this.http.get('/cecon/jerarquizacion/rangog');
-  }
-  get rangon() {
-    return this.http.get('/cecon/jerarquizacion/rangon');
-  }
-  get rangos() {
-    return this.http.get('/cecon/jerarquizacion/rangos');
-  }
+  get rangog() { return this.http.get('/cecon/jerarquizacion/rangog'); }
+  get rangon() { return this.http.get('/cecon/jerarquizacion/rangon'); }
+  get rangos() { return this.http.get('/cecon/jerarquizacion/rangos'); }
 
   //Obtener catalogos de nación, subnación(depto.) y municipio
-  get nacion() {
-    return this.http.get('/cecon/jerarquizacion/nacion');
-  }
-  get subnacion() {
-    return this.http.get('/cecon/jerarquizacion/subnacion');
-  }
+  get nacion() { return this.http.get('/cecon/jerarquizacion/nacion'); }
+  get subnacion() { return this.http.get('/cecon/jerarquizacion/subnacion'); }
+
   getMunicipio(departamento: Number) {
     return this.http.get('/cecon/jerarquizacion/municipio/' + departamento);
   }

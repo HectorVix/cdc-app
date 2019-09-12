@@ -1,9 +1,7 @@
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { jerarquizacion_Global_Modelo } from '../../modelo/jerarquizacion/jerarquizacion-global-modelo';
 import { FechaService } from '../../servicios/fecha/fecha.service';
-import { Jerarquizacion } from '../../modelo/jerarquizacion/jerarquizacion-modelo';
 export class jerarquizacion_Global_FormGroup {
-    jerarquizacionEditar: Jerarquizacion;
     constructor() { }
     getJerarquizacion_Global_FormGrup(row: jerarquizacion_Global_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
@@ -49,7 +47,6 @@ export class jerarquizacion_Global_FormGroup {
             'edautor': new FormControl(row.edautor, Validators.maxLength(30)),
             'edicion': fechaServicio.getFecha(row.edicion),
             'actualizar': fechaServicio.getFecha(row.actualizar),
-            'jERARQUIZACIONjerarquizacionid': Jerarquizacion
         });
     }
 }
