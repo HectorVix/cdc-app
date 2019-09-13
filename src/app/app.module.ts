@@ -69,7 +69,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { SideNavComponent } from './componentes/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -110,7 +110,7 @@ import { LayoutModule } from '@angular/cdk/layout';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
     FormsModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
@@ -128,7 +128,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    CoreModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [

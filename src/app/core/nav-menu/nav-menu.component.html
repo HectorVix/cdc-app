@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand"><img src="iconos/logo.ico">CECON</a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse" id="navmenu" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="/home"><img src="iconos/home.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/fuente"><img src="iconos/fuente.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/jerarquizacion"><img src="iconos/jerarquia.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/caracterizacion"><img
+              src="iconos/caracterizacion.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/rastreoElemento"><img src="iconos/rastreo.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/localizacionElemento"><img
+              src="iconos/localizacion.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/sitios"><img src="iconos/sitios.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/areasManejadas"><img src="iconos/area.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/contactos"><img src="iconos/contacto.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/perfil"><img src="iconos/perfil.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="colapsar()" routerLink="/acerca"><img src="iconos/info.ico"></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" (click)="Logout()"><img src="iconos/lock.ico"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

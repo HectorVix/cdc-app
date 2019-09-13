@@ -1,6 +1,14 @@
 <div *ngIf="auth(); else loggedOut">
-    <app-side-nav> </app-side-nav>
+  <app-nav-menu></app-nav-menu>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #loggedOut>
-    <app-login-page> </app-login-page>
+  <app-login-page> </app-login-page>
 </ng-template>
+<app-footer></app-footer>
