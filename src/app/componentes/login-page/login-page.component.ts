@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
   successMessage: string;
   tipoAlert: string;
   loading: boolean;
-
+  isCollapsed = true;
   constructor(public fb: FormBuilder,
     private usuarioServicio: UsuarioService,
     private fechaServicio: FechaService,

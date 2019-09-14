@@ -1,11 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-md  sticky-top" style=" background-color: #4cb34c;">
   <div class="container-fluid">
     <a class="navbar-brand"><img src="iconos/logo.ico">CECON</a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="navmenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="navbar-collapse" id="navmenu" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -43,10 +42,10 @@
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" (click)="colapsar()" routerLink="/acerca"><img src="iconos/info.ico"></a>
         </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="Logout()"><img src="iconos/lock.ico"></a>
-        </li>
       </ul>
+      <form class="form-inline my-2 my-lg-0">
+          <a class="nav-link" (click)="Logout()"><img src="iconos/exit2.ico"></a>
+      </form>
     </div>
   </div>
 </nav>

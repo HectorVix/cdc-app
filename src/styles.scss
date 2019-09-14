@@ -1,106 +1,52 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .color-panel-green .mat-select-content{
-    background: rgba(0, 255, 0, 0.5);
-  }
- 
-  .mt5 {
-    margin-top: 5px  !important;
-  }
-  .mt10 {
-    margin-top: 10px  !important;
-  }
-  .mt15 {
-    margin-top: 15px  !important;
-  }
-  .mt-1{
-    margin-top: -1px  !important;
-  }
-  .mt-3{
-    margin-top: -3px  !important;
-  }
-  .mt-5{
-    margin-top: -5px  !important;
-  }
-  .mt-7{
-    margin-top: -7px  !important;
-  }
-  .mt-10{
-    margin-top: -10px  !important;
-  }
-  .mt-15{
-    margin-top: -15px  !important;
-  }
-  .mt-20{
-    margin-top: -20px  !important;
-  }
-.base-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}  
-.base-full-width {
-  width: 100%;
-}
-table {
-  width: 100%;
-}
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-  
-td, th {
-  width: 25%;
-}
-tr.base-element-row:hover{
   background: rgba(0, 255, 0, 0.5);
-} 
-tr.base-element-row:active{
-  background: #efefef;
 }
 .color-green
 {
   background-color: #4cb34c !important;
 }
-.color-negro
-{
-  background-color: black !important;
-}
-.color-gris
-{
-  background-color: rgb(49, 46, 43) !important;
-}
-.fondo {
-  background-color: #555;
-}
-.ml-alinear {
-  margin-left: 100px  !important;;  
-}
-.mt-alinear {
-  margin-top: -690px  !important;
-}
-.tab-black {
-  background-color: #000;
-}
-.tab-white {
-  background-color:white;
-}
-.base-tam-y {
-  max-height: 600px;
-}
-.scrolling-wrapper {
-  overflow-x: scroll;
-  overflow-y: scroll;
-  white-space: nowrap;
-}
-.seccion-tema {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
-}
-.app-container {
+
+body,
+html {
   height: 100%;
-  width: 100%;
-  position: absolute;
+}
+
+.bg {
+  background-image: url("images/nature1.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mt5 {
+  margin-top: 5px  !important;
+}
+.mt10 {
+  margin-top: 10px  !important;
+}
+.mt15 {
+  margin-top: 15px  !important;
+}
+.mt-1{
+  margin-top: -1px  !important;
+}
+.mt-3{
+  margin-top: -3px  !important;
+}
+.mt-5{
+  margin-top: -5px  !important;
+}
+.mt-7{
+  margin-top: -7px  !important;
+}
+.mt-10{
+  margin-top: -10px  !important;
+}
+.mt-15{
+  margin-top: -15px  !important;
+}
+.mt-20{
+  margin-top: -20px  !important;
 }

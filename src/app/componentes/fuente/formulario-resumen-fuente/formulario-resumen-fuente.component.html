@@ -1,10 +1,15 @@
 <!-- <div class="container black"> -->
-  <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-    <mat-tab label="Formulario Fuente">
-      
+<div class="card-content white">
+  <div class="card-body">
+    <mat-tab-group dynamicHeight [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab label="Formulario Fuente">
         <form [formGroup]="fuenteForm">
-          <!-- <div class="modal-content mat-elevation-z4"> -->
-            
+          <div class="modal-content mat-elevation-z4">
+            <div class="modal-header color-green">
+              <h5 class="modal-title">
+                <font size=4 color="white">FORMULARIO DE RESUMEN DE FUENTE</font>
+              </h5>
+            </div>
             <div class="row">
               <div class="col-md-2">
                 <label for="">DOCUMENTO:</label>
@@ -20,10 +25,15 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+            </div>
+            <!-- fin row -->
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">CÓDIGO FUENTE:</label>
+              </div>
               <div class="md-form col-md-4 mt10" *ngIf="editar">
                 <input mdbInputDirective mdbValidate type="text" id="formCodFuente" class="form-control"
                   formControlName="codfuente">
-                <label for="formCodFuente">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
                 <mdb-error *ngIf="input_codfuente.invalid && (input_codfuente.dirty || input_codfuente.touched)">
                   <font size=2 color="red">Error, máximo 10 caracteres.</font>
                 </mdb-error>
@@ -31,10 +41,8 @@
               <div class="md-form col-md-4 mt10" *ngIf="guardar">
                 <input mdbInputDirective type="text" id="form1" class="form-control" formControlName="codfuente"
                   disabled>
-                <label for="form1">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
               </div>
             </div>
-            <!-- fin row -->
             <div class="row">
               <div class="col-md-2">
                 <label for="">CITA:</label>
@@ -43,7 +51,7 @@
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective mdbValidate type="text" id="formCita" class="md-textarea form-control"
                   rows="4" formControlName="cita"></textarea>
-                <label for="formCita">Cita Bibliográfica</label>
+                <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;Cita Bibliográfica</label>
                 <mdb-error *ngIf="input_cita.invalid && (input_cita.dirty || input_cita.touched)">
                   <font size=2 color="red">Error, máximo 240 caracteres.</font>
                 </mdb-error>
@@ -103,8 +111,7 @@
               <div class="md-form col-md-9 mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formCOBGEO" class="form-control"
                   formControlName="cobgeo">
-                <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica de la Información del
-                  Documento.</label>
+                <label for="formCOBGEO">&nbsp;&nbsp;&nbsp;&nbsp;Cobertura Geográfica</label>
                 <mdb-error *ngIf="input_cobgeo.invalid && (input_cobgeo.dirty || input_cobgeo.touched)">
                   <font size=2 color="red">Error, máximo 50 caracteres.</font>
                 </mdb-error>
@@ -115,7 +122,6 @@
               <div class="col-md-2">
                 <label for="">S:</label>
               </div>
-
               <div class="md-form  col-md-2 mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formRangoG" class="form-control"
                   formControlName="coords">
@@ -160,8 +166,7 @@
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective mdbValidate type="text" id="formResumen" class="md-textarea form-control"
                   rows="4" formControlName="resumen"></textarea>
-                <label for="formResumen">Escriba un texto corto pero representativo del contenido general del
-                  documento.</label>
+                <label for="formResumen">Escriba un texto corto</label>
                 <mdb-error *ngIf="input_resumen.invalid && (input_resumen.dirty || input_resumen.touched)">
                   <font size=2 color="red">Error, máximo 240 caracteres.</font>
                 </mdb-error>
@@ -169,189 +174,63 @@
             </div>
             <!-- fin row -->
             <!-- Inicio row -->
+            <!-- Inicio col-md-2  Tema 1-->
             <div class="row">
               <div class="col-md-2">
                 <label for="">TEMA:</label>
               </div>
-              <!-- Inicio col-md-2  Tema 1-->
-              <div class="col-md-2 ">
+              <div class="col">
                 <label>
-                  <mat-checkbox formControlName="comunnat">COMMUNNAT</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="comunnat">COMMUNNAT</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="comunterr">COMUNTERR</mat-checkbox>
+                  <mat-checkbox class="tema-margin"  formControlName="comunterr">COMUNTERR</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="bosque">BOSQUE</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="bosque">BOSQUE</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="sabana">SABANA</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="sabana">SABANA</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="prado">PRADO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="prado">PRADO</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="chaparral">CHAPARRAL</mat-checkbox>
+                  <mat-checkbox class="tema-margin" class="tema-margin" formControlName="chaparral">CHAPARRAL</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="desierto">DESIERTO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="desierto">DESIERTO</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="alpino">ALPINO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="alpino">ALPINO</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="otroterr">OTROTERR</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="otroterr">OTROTERR</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="comunac">COMUNAC</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="comunac">COMUNAC</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="palustre">PALUSTRE</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="palustre">PALUSTRE</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="lacustre">LACUSTRE</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="lacustre">LACUSTRE</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="fluvial">FLUVIAL</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="fluvial">FLUVIAL</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="estuarino">ESTUARINO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="estuarino">ESTUARINO</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="maritimo">MARITIMO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="maritimo">MARITIMO</mat-checkbox>
                 </label>
                 <label>
-                  <mat-checkbox formControlName="subterr">SUBTERR</mat-checkbox>
-                </label>
-              </div>
-              <!-- Fin col-md-2 -->
-              <!-- Inicio col-md-2 Tema 2-->
-              <div class="col-md-2 ">
-                <label>
-                  <mat-checkbox formControlName="flora">FLORA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="floraac">FLORAAC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="floraterr">FLORATERR</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="plnovasc">PLNOVASC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="plvasc">PLVASC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="microorg">MICROORG</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="infositio">INFOSITIO</mat-checkbox>
+                  <mat-checkbox class="tema-margin" formControlName="subterr">SUBTERR</mat-checkbox>
                 </label>
               </div>
-              <!-- Fin col-md-2 -->
-              <!-- Inicio col-md-2 Tema 3-->
-              <div class="col-md-2 ">
-                <label>
-                  <mat-checkbox formControlName="fauna">FAUNA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="faunaac">FAUNAAC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="faunaterr">FAUNATERR</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="moluscos">MOLUSCOS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="insectos">INSECTOS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="crustaceos">CRUSTACEOS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="otroartrop">OTROARTROP</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="otroinvert">OTROINVERT</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="peces">PECES</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="anfibios">ANFIBIOS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="reptiles">REPTILES</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="aves">AVES</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="mamiferos">MAMIFEROS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="cienfisic">CIENFISIC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="fisiotopo">FISIOTOPO</mat-checkbox>
-                </label>
-              </div>
-              <!-- Fin col-md-2 -->
-              <!-- Inicio col-md-2 Tema 4-->
-              <div class="col-md-2 ">
-                <label>
-                  <mat-checkbox formControlName="hidrol">HIDROL</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="geologia">GEOLOGIA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="suelos">SUELOS</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="clima">CLIMA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="biologia">BIOLOGIA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="ecologia">ECOLOGIA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="funecol">FUNECOL</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="diversnat">DIVERSNAT</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="inventario">INVENTARIO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="tecinvest">TECINVEST</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="am">AM</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="planmanejo">PLANMANEJO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="tecmanejo">TECMANEJO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="estimpamb">ESTIMPAMP</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="organprott">ORGANPROTT</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox formControlName="herrprot">HERRPROT</mat-checkbox>
-                </label>
-              </div>
-              <!-- Fin col-md-2 -->
             </div>
+            <!-- Fin col-md-2 -->
             <!-- Fin row -->
             <!-- Inicio row -->
             <div class="row">
@@ -406,7 +285,7 @@
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective mdbValidate type="text" id="formComentario" class="md-textarea form-control"
                   formControlName="comentario" rows="1"></textarea>
-                <label for="formComentario"> Describe de acuerdo al Valor, el tipo de información contenida.</label>
+                <label for="formComentario">Tipo de información contenida</label>
                 <mdb-error *ngIf="input_comentario.invalid && (input_comentario.dirty || input_comentario.touched)">
                   <font size=2 color="red">Error, máximo 120 caracteres.</font>
                 </mdb-error>
@@ -421,8 +300,7 @@
                 <i class="fa fa-pencil prefix"></i>
                 <textarea mdbInputDirective mdbValidate type="text" id="formNotadigest" class="md-textarea form-control"
                   formControlName="notadigest" rows="1"></textarea>
-                <label for="formNotadigest">Anotar en este campo hasta qué punto se ha extraído la fuente toda la
-                  información .</label>
+                <label for="formNotadigest">Hasta qué punto se ha extraído información.</label>
                 <mdb-error *ngIf="input_notadigest.invalid && (input_notadigest.dirty || input_notadigest.touched)">
                   <font size=2 color="red">Error, máximo 120 caracteres.</font>
                 </mdb-error>
@@ -433,16 +311,11 @@
               <div class="col-md-2">
               </div>
               <div class="md-form  col-md-3 mt-5">
-                <input mdbInputDirective mdbValidate type="text" id="formActualizar" class="form-control"
-                  formControlName="actualizar" ngbDatepicker #dActualizar="ngbDatepicker">
-                <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                <mdb-error *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
-                  <font size=2 color="red">Error, el formato debe ser
-                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                </mdb-error>
-              </div>
-              <div class="md-form mt-5" (click)="dActualizar.toggle()">
-                <i class="fa fa-calendar prefix"></i>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="ACTUALIZAR FECHA" formControlName="actualizar">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
               </div>
             </div>
             <!-- fin row -->
@@ -468,14 +341,14 @@
               <div class="md-form col-md-9  mt-5">
                 <input mdbInputDirective mdbValidate type="text" id="formbcd" class="form-control"
                   formControlName="bcd">
-                <label for="formbcd">&nbsp;&nbsp;&nbsp;Nombre de la persona que preparo el resúmen de fuente</label>
+                <label for="formbcd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nombre encargado</label>
                 <mdb-error *ngIf="input_bcd.invalid && (input_bcd.dirty || input_bcd.touched)">
                   <font size=2 color="red">Error, máximo 50 caracteres.</font>
                 </mdb-error>
 
               </div>
             </div>
-          <!-- </div> -->
+          </div>
           <!-- fin modal-content -->
           <div class="text-center">
             <div *ngIf="loading">
@@ -490,70 +363,71 @@
               mdbWavesEffect>Editar</button>
           </div>
         </form>
-      
-    </mat-tab>
-    <mat-tab label="Buscar">
-      <!-- <div class="card-body form-row"> -->
+
+      </mat-tab>
+      <mat-tab label="Buscar">
+        <!-- <div class="card-body form-row"> -->
         <!-- <div class="modal-content mat-elevation-z4"> -->
-          <!-- <div class="modal-header color-green"></div> -->
-          <!-- Inicio form -->
-          <form [formGroup]="buscarForm">
-            <!-- Inicio row -->
-            <div class="row">
-              <div class="md-form col-md-5 mt10">
-                <input mdbInputDirective type="text" id="formCodigoFuente" class="form-control"
-                  formControlName="codigoFuente" data-error=" " data-success=" ">
-                <label for="formCodigoFuente">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
-              </div>
-              <div class=" col-md-4 mt10">
-                <mat-form-field>
-                  <mat-select placeholder="DOCUMENTO" panelClass="color-panel-green" formControlName="naturalezaDocumento">
-                    <mat-option>-- Ningún valor --</mat-option>
-                    <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente"
-                      [value]="naturalezaDocumento.value">
-                      {{naturalezaDocumento.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+        <!-- <div class="modal-header color-green"></div> -->
+        <!-- Inicio form -->
+        <form [formGroup]="buscarForm">
+          <!-- Inicio row -->
+          <div class="row">
+            <div class="md-form col-md-5 mt10">
+              <input mdbInputDirective type="text" id="formCodigoFuente" class="form-control"
+                formControlName="codigoFuente" data-error=" " data-success=" ">
+              <label for="formCodigoFuente">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DE LA FUENTE</label>
             </div>
-            <!-- Fin row -->
-            <!-- Inicio row -->
-            <div class="row">
-              <div class="md-form col-md-5 mt-10">
-                <input mdbInputDirective type="text" id="formCita" class="form-control" formControlName="cita"
-                  data-error=" " data-success=" ">
-                <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;CITA</label>
-              </div>
-              <div class="md-form col-md-5 mt-10">
-                <input mdbInputDirective type="text" id="formAchivado" class="form-control" formControlName="archivado"
-                  data-error=" " data-success=" ">
-                <label for="formAchivado">&nbsp;&nbsp;&nbsp;&nbsp;ARCHIVADO</label>
-              </div>
-            </div>
-            <!-- Fin row -->
-            <!-- Inicio row -->
-            <div class="row">
-              <div class="md-form col-md-5 mt-10">
-                <input mdbInputDirective type="text" id="formClave" class="form-control" formControlName="clave"
-                  data-error=" " data-success=" ">
-                <label for="formClave">&nbsp;&nbsp;&nbsp;&nbsp;CLAVE</label>
-              </div>
-            </div>
-            <!-- Fin row -->
-            <div>
-              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarFuente()">Buscar</button>
-              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarTodos()">Buscar Todos</button>
-            </div>
-          </form>
-          <!-- Fin form -->
-          <div class="text-center">
-            <div *ngIf="loading">
-              <img src="assets/imagenes/load.gif">
+            <div class=" col-md-4 mt10">
+              <mat-form-field>
+                <mat-select placeholder="DOCUMENTO" panelClass="color-panel-green"
+                  formControlName="naturalezaDocumento">
+                  <mat-option>-- Ningún valor --</mat-option>
+                  <mat-option *ngFor="let naturalezaDocumento of criterio_codfuente"
+                    [value]="naturalezaDocumento.value">
+                    {{naturalezaDocumento.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
-          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
-          </ngb-alert>
+          <!-- Fin row -->
+          <!-- Inicio row -->
+          <div class="row">
+            <div class="md-form col-md-5 mt-10">
+              <input mdbInputDirective type="text" id="formCita" class="form-control" formControlName="cita"
+                data-error=" " data-success=" ">
+              <label for="formCita">&nbsp;&nbsp;&nbsp;&nbsp;CITA</label>
+            </div>
+            <div class="md-form col-md-5 mt-10">
+              <input mdbInputDirective type="text" id="formAchivado" class="form-control" formControlName="archivado"
+                data-error=" " data-success=" ">
+              <label for="formAchivado">&nbsp;&nbsp;&nbsp;&nbsp;ARCHIVADO</label>
+            </div>
+          </div>
+          <!-- Fin row -->
+          <!-- Inicio row -->
+          <div class="row">
+            <div class="md-form col-md-5 mt-10">
+              <input mdbInputDirective type="text" id="formClave" class="form-control" formControlName="clave"
+                data-error=" " data-success=" ">
+              <label for="formClave">&nbsp;&nbsp;&nbsp;&nbsp;CLAVE</label>
+            </div>
+          </div>
+          <!-- Fin row -->
+          <div>
+            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarFuente()">Buscar</button>
+            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarTodos()">Buscar Todos</button>
+          </div>
+        </form>
+        <!-- Fin form -->
+        <div class="text-center">
+          <div *ngIf="loading">
+            <img src="assets/imagenes/load.gif">
+          </div>
+        </div>
+        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+        </ngb-alert>
         <!-- </div> -->
         <!-- Tabla busqueda-->
         <mat-form-field>
@@ -592,8 +466,10 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
         <!-- Fin tabla busqueda -->
-      <!-- </div> -->
-      <!-- fin card-body -->
-    </mat-tab>
-  </mat-tab-group>
-<!-- </div> -->
+        <!-- </div> -->
+        <!-- fin card-body -->
+      </mat-tab>
+    </mat-tab-group>
+    <!-- </div> -->
+  </div>
+</div>

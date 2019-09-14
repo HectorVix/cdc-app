@@ -1,65 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:  #4cb34c">
-    <a class="navbar-brand disabled" href="#">
-        <img src="iconos/logo.ico">
-        <font size=4 color="white">CDC&nbsp;&nbsp;|&nbsp;&nbsp;CENTRO DE DATOS PARA CONSERVACIÓN CECON USAC</font>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <a href="https://www.facebook.com/">
-            <img src="iconos/facebook.ico">
-        </a>
-        <a href="https://www.twitter.com/">
-            <img src="iconos/twitter.ico">
-        </a>
+<nav class="navbar navbar-expand-md sticky-top" style=" background-color: #4cb34c;">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="iconos/logo.ico">CECON</a>
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navmenu" [ngbCollapse]="isCollapsed">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a href="https://www.facebook.com/">
+                    <img src="iconos/facebook.ico">
+                </a>
+                <a href="https://www.twitter.com/">
+                    <img src="iconos/twitter.ico">
+                </a>
+            </form>
+        </div>
+
     </div>
 </nav>
-<div class="row">
-    <div class="col-md-6 mx-auto my-5">
-        <div class="card color-green ">
-            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
-            </ngb-alert>
-            <div class="modal-content">
-                <div class="modal-header color-green">
-                    <h5 class="modal-tittle">
-                        <font size=4 color="white">Login</font>
-                    </h5>
+<div class="col-md-6 mx-auto my-5">
+    <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+    </ngb-alert>
+    <div class="modal-content">
+        <div class="modal-header color-green">
+            <h5 class="modal-tittle">
+                <font size=4 color="white">Login</font>
+            </h5>
+        </div>
+        <div class="card-body mx-4">
+            <!--Header-->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="md-form form-sm">
+                    <i class="fa fa-envelope prefix"></i>
+                    <input mdbInputDirective type="text" id="LFemail" formControlName="LFemail" class="form-control">
+                    <label for="LFemail">Tu correo</label>
                 </div>
-                <div class="card-body mx-4">
-                    <!--Header-->
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                        <div class="md-form form-sm">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input mdbInputDirective type="text" id="LFemail" formControlName="LFemail"
-                                class="form-control">
-                            <label for="LFemail">Tu correo</label>
-                        </div>
-                        <div class="md-form form-sm">
-                            <i class="fa fa-lock prefix "></i>
-                            <input mdbInputDirective type="password" id="LFcontrasena" formControlName="LFcontrasena"
-                                class="form-control">
-                            <label for="LFcontrasena">Tu Contraseña</label>
-                        </div>
-                        <div class="text-center">
-                            <div *ngIf="loading">
-                                <img src="assets/imagenes/load.gif">
-                            </div>
-                            <input type="submit" class="btn color-green waves-light" [disabled]="!loginForm.valid"
-                                mdbWavesEffect value="Iniciar sesión">
-                        </div>
-                    </form>
-                    <!--Footer-->
-                    <div class="modal-footer mx-5 pt-3 mb-1">
-                        <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
-                            <a (click)="formRegistro.show(); successMessage = null" class="blue-text ml-1">
-                                Regístrate</a>
-                        </p>
+                <div class="md-form form-sm">
+                    <i class="fa fa-lock prefix "></i>
+                    <input mdbInputDirective type="password" id="LFcontrasena" formControlName="LFcontrasena"
+                        class="form-control">
+                    <label for="LFcontrasena">Tu Contraseña</label>
+                </div>
+                <div class="text-center">
+                    <div *ngIf="loading">
+                        <img src="assets/imagenes/load.gif">
                     </div>
+                    <input type="submit" class="btn color-green waves-light" [disabled]="!loginForm.valid"
+                        mdbWavesEffect value="Iniciar sesión">
                 </div>
+            </form>
+            <!--Footer-->
+            <div class="modal-footer mx-5 pt-3 mb-1">
+                <p class="font-small grey-text d-flex justify-content-end">¿Aún no tienes cuenta?
+                    <a (click)="formRegistro.show(); successMessage = null" class="blue-text ml-1">
+                        Regístrate</a>
+                </p>
             </div>
         </div>
     </div>
@@ -67,7 +64,7 @@
 <!--Modal: Registro form-->
 <div mdbModal #formRegistro="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
+    <div class="modal-dialog cascading-modal modal-notify modal-warning" role="document">
         <!--Content-->
         <div class="modal-content">
             <!--Header-->
@@ -85,46 +82,33 @@
                     {{ successMessage }}</ngb-alert>
 
                 <form [formGroup]="registroForm">
-                    <!--Nombre-->
-                    <div class="row">
-                        <div class=" md-form form-sm  col-md-6">
-                            <i class="fa fa-user-circle prefix"></i>
-                            <input mdbInputDirective type="text" id="nombre" formControlName="nombre"
-                                class="form-control">
-                            <label for="nombre">&nbsp;&nbsp;&nbsp;Tu nombre</label>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="md-form">
+                                <i class="fa fa-user-circle prefix"></i>
+                                <input type="text" id="materialRegisterFormFirstName" class="form-control"
+                                    formControlName="nombre" mdbInputDirective>
+                                <label for="materialRegisterFormFirstName">Nombre</label>
+                            </div>
                         </div>
-                        <div class="md-form form-sm col-md-6">
-                            <input mdbInputDirective type="text" id="apellido" formControlName="apellido"
-                                class="form-control">
-                            <label for="apellido">&nbsp;&nbsp;&nbsp;Tu apellido</label>
-                        </div>
-                    </div>
-                    <!--Fecha de nacimiento-->
-                    <div class="md-form form-sm input-group-append mt-0">
-                        <i class="fa fa-calendar prefix "></i>
-                        <input mdbInputDirective type="text" id="fechaNacimiento" formControlName="fechaNacimiento"
-                            class="form-control" ngbDatepicker #d="ngbDatepicker">
-                        <label for="fechaNacimiento">Tu fecha de nacimiento</label>
-                        <div class="input-group-append ">
-                            <button class="btn color-green mb-2 waves-light" (click)="d.toggle()" mdbWavesEffect>Date
-                            </button>
+                        <div class="col">
+                            <div class="md-form">
+                                <input type="email" id="materialRegisterFormLastName" class="form-control"
+                                    formControlName="apellido" mdbInputDirective>
+                                <label for="materialRegisterFormLastName">Apellido</label>
+                            </div>
                         </div>
                     </div>
                     <div class="md-form form-sm">
                         <i class="fa fa-envelope prefix"></i>
                         <input mdbInputDirective type="email" id="email" formControlName="email" class="form-control">
-                        <label for="email">Tu correo</label>
-                    </div>
-                    <div class="md-form form-sm">
-                        <i class="fa fa-exclamation-triangle prefix "></i>
-                        <input mdbInputDirective type="email" id="emailConfirmar" ng-model="emailConfirmar">
-                        <label for="emailConfirmar">Confirmar tu correo</label>
+                        <label for="email">Correo</label>
                     </div>
                     <div class="md-form form-sm">
                         <i class="fa fa-lock prefix "></i>
                         <input mdbInputDirective type="password" id="contrasena" formControlName="contrasena"
                             class="form-control">
-                        <label for="contrasena">Tu contraseña</label>
+                        <label for="contrasena">Contraseña</label>
                     </div>
                     <div class="text-center mt-1-half">
                         <div *ngIf="loading">
