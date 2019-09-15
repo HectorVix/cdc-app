@@ -173,95 +173,7 @@
               </div>
             </div>
             <!-- fin row -->
-            <!-- Inicio row -->
-            <!-- Inicio col-md-2  Tema 1-->
-            <div class="row">
-              <div class="col-md-2">
-                <label for="">TEMA:</label>
-              </div>
-              <div class="col">
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="comunnat">COMMUNNAT</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin"  formControlName="comunterr">COMUNTERR</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="bosque">BOSQUE</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="sabana">SABANA</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="prado">PRADO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" class="tema-margin" formControlName="chaparral">CHAPARRAL</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="desierto">DESIERTO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="alpino">ALPINO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="otroterr">OTROTERR</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="comunac">COMUNAC</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="palustre">PALUSTRE</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="lacustre">LACUSTRE</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="fluvial">FLUVIAL</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="estuarino">ESTUARINO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="maritimo">MARITIMO</mat-checkbox>
-                </label>
-                <label>
-                  <mat-checkbox class="tema-margin" formControlName="subterr">SUBTERR</mat-checkbox>
-                </label>
-              </div>
-            </div>
-            <!-- Fin col-md-2 -->
-            <!-- Fin row -->
-            <!-- Inicio row -->
-            <div class="row">
-              <div class="col-md-2">
-                <label for="">PUBLICACION.CDC:</label>
-              </div>
-              <div class=" col-md-2">
-                <mat-form-field>
-                  <mat-select placeholder="" panelClass="color-panel-green" formControlName="publicacioncdc">
-                    <mat-option>-- Ninguna --</mat-option>
-                    <mat-option *ngFor="let sPublicacion of criterio_publicacion_cdc" [value]="sPublicacion.value">
-                      {{sPublicacion.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-1">
-                <label for="">VALOR:</label>
-              </div>
-              <div class=" col-md-4">
-                <mat-form-field>
-                  <mat-select placeholder="" panelClass="color-panel-green" formControlName="valor">
-                    <mat-option>-- Ninguna --</mat-option>
-                    <mat-option *ngFor="let sValor of criterio_valor" [value]="sValor.value">
-                      {{sValor.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-            <!-- fin row -->
+            
             <div class="row">
               <div class="col-md-2">
                 <label for="">CLAVE:</label>
@@ -354,7 +266,8 @@
             <div *ngIf="loading">
               <img src="assets/imagenes/load.gif">
             </div>
-            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+              {{ successMessage }}
             </ngb-alert>
             <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
             <button class="btn  color-green waves-light" [disabled]="guardar" mdbWavesEffect

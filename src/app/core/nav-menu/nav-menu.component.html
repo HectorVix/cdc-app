@@ -1,51 +1,62 @@
-<nav class="navbar navbar-expand-md  sticky-top" style=" background-color: #4cb34c;">
-  <div class="container-fluid">
-    <a class="navbar-brand"><img src="iconos/logo.ico">CECON</a>
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-      [attr.aria-expanded]="!isCollapsed" aria-controls="navmenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse" id="navmenu" [ngbCollapse]="isCollapsed">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" routerLink="/home"><img src="iconos/home.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/fuente"><img src="iconos/fuente.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/jerarquizacion"><img src="iconos/jerarquia.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/caracterizacion"><img
-              src="iconos/caracterizacion.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/rastreoElemento"><img src="iconos/rastreo.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/localizacionElemento"><img
-              src="iconos/localizacion.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/sitios"><img src="iconos/sitios.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/areasManejadas"><img src="iconos/area.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/contactos"><img src="iconos/contacto.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/perfil"><img src="iconos/perfil.ico"></a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" (click)="colapsar()" routerLink="/acerca"><img src="iconos/info.ico"></a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-          <a class="nav-link" (click)="Logout()"><img src="iconos/exit2.ico"></a>
-      </form>
-    </div>
-  </div>
-</nav>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green" [containerInside]="false">
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/home"><img src="iconos/logo.ico">CECON</a></mdb-navbar-brand>
+  <!-- Collapsible content -->
+  <!-- Links -->
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Elemento<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/jerarquizacion"><img
+              src="iconos/jerarquia.ico">Jerarquización</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/rastreoElemento"><img
+              src="iconos/rastreo.ico">Rastreo</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/localizacionElemento"><img
+              src="iconos/localizacion.ico">Localización</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/caracterizacion"><img
+              src="iconos/caracterizacion.ico">Caracterización</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/fuente">Fuente</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/sitios">Sitios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/areasManejadas">Áreas Manejadas</a>
+      </li>
+    </ul>
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/contactos">
+          <mdb-icon fas icon="address-book"></mdb-icon> Contactos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/acerca">
+          <mdb-icon fas icon="question-circle"></mdb-icon> Ayuda
+        </a>
+      </li>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Perfil<span class="caret"></span>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/perfil">Mi cuenta</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="Logout()">Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>
+<!--/.Navbar-->

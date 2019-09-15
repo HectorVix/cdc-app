@@ -1,25 +1,21 @@
-<nav class="navbar navbar-expand-md sticky-top" style=" background-color: #4cb34c;">
-    <div class="container-fluid">
-        <a class="navbar-brand"><img src="iconos/logo.ico">CECON</a>
-        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed" aria-controls="navmenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse" id="navmenu" [ngbCollapse]="isCollapsed">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <a href="https://www.facebook.com/">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green" [containerInside]="false">
+    <mdb-navbar-brand><a class="navbar-brand"><img src="iconos/logo.ico">CECON</a></mdb-navbar-brand>
+    <links>        
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link waves-light" href="https://www.facebook.com/" mdbWavesEffect>
                     <img src="iconos/facebook.ico">
                 </a>
-                <a href="https://www.twitter.com/">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" href="https://www.twitter.com/" mdbWavesEffect>
                     <img src="iconos/twitter.ico">
                 </a>
-            </form>
-        </div>
-
-    </div>
-</nav>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>
+<!--/.Navbar-->
 <div class="col-md-6 mx-auto my-5">
     <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
     </ngb-alert>

@@ -8,3 +8,17 @@
 .tema-margin {
   margin: 0 10px;
 }
+.cb-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  flex-flow: row;
+}
+
+.mat-checkbox {
+  margin-left:20px;
+} 
+
+.cb-vertival {
+  flex-flow: column;
+}
