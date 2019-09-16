@@ -137,9 +137,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
   }
   guardarFuente() {
-    
-    console.log("Fecha:", this.fuenteForm.get('actualizar').value);
-
     if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid) {
       var fuenteBase = this.setFuente(this.fuenteForm.value);
       this.addFuente(fuenteBase);
@@ -148,8 +145,6 @@ export class FormularioResumenFuenteComponent implements OnInit {
       this.changeSuccessMessage('No se pudo regitrar, comprueba que estén bien los campos donde se te indica.', 'primary');
   }
   setFuente(fuente: fuente_Modelo): fuente_Modelo {
-    fuente.actualizar = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('actualizar').value);
-    fuente.control = this.fechaServicio.toFormatoDateTime(this.fuenteForm.get('control').value);
     return fuente;
   }
   //agrega una nueva fuente

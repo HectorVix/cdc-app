@@ -43,4 +43,13 @@ export class FechaService {
     }
     return dateElemento;
   }
+  get_Fecha(fecha) {
+    var dateElemento: Date = null;
+    if (fecha != null) {
+      let d = new Date();
+      d = new Date(fecha);
+      return d;
+    }
+    return dateElemento;
+  }
 }

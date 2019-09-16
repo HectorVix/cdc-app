@@ -156,12 +156,8 @@ export class ElementoComponent implements OnInit {
     this.elementos = new Array();
     this.dataSource = new MatTableDataSource(this.elementos);
     if (this.elementoForm.get('codigoe').value && this.elementoForm.valid) {
-      if (this.elementoForm.get('fecha').value) {
-        var elementoBase = this.setElemento(this.elementoForm.value);
-        this.addElemento(elementoBase);
-      }
-      else
-        this.changeSuccessMessage('La fecha es obligatoria', 'primary');
+      var elementoBase = this.setElemento(this.elementoForm.value);
+      this.addElemento(elementoBase);
     }
     else
       this.changeSuccessMessage('El CODIGOE del elemento es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
@@ -169,17 +165,13 @@ export class ElementoComponent implements OnInit {
   }
   editarElemento() {
     if (this.elementoForm.get('codigoe').value && this.elementoForm.valid) {
-      if (this.elementoForm.get('fecha').value) {
-        var elementoBase = this.setElemento(this.elementoForm.value);
-        this.updateElemento(elementoBase);
-      } else
-        this.changeSuccessMessage('La fecha es obligatoria.', 'primary');
+      var elementoBase = this.setElemento(this.elementoForm.value);
+      this.updateElemento(elementoBase);
     }
     else
       this.changeSuccessMessage('Valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setElemento(elemento): elemento_Modelo {
-    elemento.fecha = this.fechaServicio.toFormatoDateTime(this.elementoForm.get('fecha').value);
     return elemento;
   }
   updateElemento(elemento: elemento_Modelo): void {

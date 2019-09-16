@@ -277,9 +277,10 @@
           </div>
           <div class="md-form  col-md-3 mt-5">
             <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="ACTUALIZAR FECHA" formControlName="actualizar">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #picker></mat-datepicker>
+              <input matInput [matDatepicker]="picker_Actualizar" placeholder="ACTUALIZAR FECHA"
+                formControlName="actualizar">
+              <mat-datepicker-toggle matSuffix [for]="picker_Actualizar"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker_Actualizar></mat-datepicker>
             </mat-form-field>
           </div>
         </div>
@@ -288,16 +289,11 @@
           <div class="col-md-2">
           </div>
           <div class="md-form col-md-3 mt-5">
-            <input mdbInputDirective mdbValidate type="text" id="formControl" class="form-control"
-              formControlName="control" ngbDatepicker #dControl="ngbDatepicker">
-            <label for="formControl">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL</label>
-            <mdb-error *ngIf="input_control.invalid && (input_control.dirty || input_control.touched)">
-              <font size=2 color="red">Error, el formato debe ser
-                aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-            </mdb-error>
-          </div>
-          <div class="md-form mt-5" (click)="dControl.toggle()">
-            <i class="fa fa-calendar prefix"></i>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker_Control" placeholder="CONTROL FECHA" formControlName="control">
+              <mat-datepicker-toggle matSuffix [for]="picker_Control"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker_Control></mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
         <!-- fin row -->

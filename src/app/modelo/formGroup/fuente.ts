@@ -30,8 +30,8 @@ export class fuente_FormGroup {
             'clave': new FormControl(row.clave, Validators.maxLength(120)),
             'comentario': new FormControl(row.comentario, Validators.maxLength(120)),
             'notadigest': new FormControl(row.notadigest, Validators.maxLength(120)),
-            'actualizar': fechaServicio.getFecha(row.actualizar), //date
-            'control': fechaServicio.getFecha(row.control),    //date
+            'actualizar': fechaServicio.get_Fecha(row.actualizar), //date
+            'control': fechaServicio.get_Fecha(row.control),    //date
             'bcd': new FormControl(row.bcd, Validators.maxLength(50)),
             //tema columna 1
             'comunnat': row.comunnat,

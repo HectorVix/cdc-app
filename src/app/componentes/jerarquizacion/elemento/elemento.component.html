@@ -103,17 +103,13 @@
             <div class="row">
               <div class="col-md-2"></div>
               <div class="md-form col-md-3  mt-5">
-                <input mdbInputDirective mdbValidate type="text" id="formFecha" class="form-control"
-                  formControlName="fecha" ngbDatepicker #dFecha="ngbDatepicker">
-                <label for="formFecha">&nbsp;&nbsp;&nbsp;&nbsp;FECHA</label>
-                <mdb-error *ngIf="input_fecha.invalid && (input_fecha.dirty || input_fecha.touched)">
-                  <font size=2 color="red">Error, el formato debe ser
-                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                </mdb-error>
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="FECHA" formControlName="fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
               </div>
-              <div class="mt-5" (click)="dFecha.toggle()">
-                <i class="fa fa-calendar prefix"></i>
-              </div>
+              
             </div>
             <!-- fin row -->
           </div>
