@@ -11,14 +11,14 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Elemento<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/jerarquizacion"><img
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/jerarquizacion"><img
               src="iconos/jerarquia.ico">Jerarquización</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/rastreoElemento"><img
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/rastreoElemento"><img
               src="iconos/rastreo.ico">Rastreo</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/localizacionElemento"><img
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/localizacionElemento"><img
               src="iconos/localizacion.ico">Localización</a>
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/caracterizacion"><img
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/caracterizacion"><img
               src="iconos/caracterizacion.ico">Caracterización</a>
         </div>
       </li>
@@ -50,8 +50,8 @@
           <mdb-icon fas icon="user"></mdb-icon> Perfil<span class="caret"></span>
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/perfil">Mi cuenta</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="Logout()">Cerrar sesión</a>
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/perfil">Mi cuenta</a>
+          <a class="dropdown-item waves-light menu-hover" mdbWavesEffect (click)="Logout()">Cerrar sesión</a>
         </div>
       </li>
     </ul>

@@ -61,6 +61,23 @@ export class FormularioResumenFuenteComponent implements OnInit {
   //componente archivos disponibles
   @ViewChild(ArchivosDisponiblesComponent)
   private archivos_Disponibles: ArchivosDisponiblesComponent;
+  //Tema
+  comunidad = new FormControl();
+  flora = new FormControl();
+  fauna = new FormControl();
+  otros = new FormControl();
+  comunidad_List: string[]
+    = ['COMMUNNAT', 'COMUNTERR', 'BOSQUE', 'SABANA', 'PRADO', 'CHAPARRAL', 'DESIERTO', 'ALPINO',
+      'OTROTERR', 'COMUNAC', 'PALUSTRE', 'LACUSTRE', 'FLUVIAL', 'ESTUARINO', 'MARITIMO', 'SUBTERR'];
+  flora_List: string[]
+    = ['FLORA', 'FLORAAC', 'FLORATERR', 'PLNOVASC', 'PLVASC', 'MICROORG', 'INFOSITIO'];
+  fauna_List: string[]
+    = ['FAUNA', 'FAUNAAC', 'FAUNATERR', 'MOLUSCOS', 'INSECTOS', 'CRUSTACEOS', 'OTROARTROP',
+      'OTROINVERT', 'PECES', 'ANFIBIOS', 'REPTILES', 'AVES', 'MAMIFEROS', 'CIENFISIC', 'FISIOTOPO'];
+  otros_List: string[]
+    = ['HIDROL', 'GEOLOGIA', 'SUELOS', 'CLIMA', 'BIOLOGIA', 'ECOLOGIA', 'FUNECOL',
+      'DIVERSNAT', 'INVENTARIO', 'TECINVEST', 'AM', 'PLANMANEJO', 'TECMANEJO', 'ESTIMPAMP', 'ORGANPROTT', 'HERRPROT'];
+
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
     private fechaServicio: FechaService,
@@ -120,6 +137,9 @@ export class FormularioResumenFuenteComponent implements OnInit {
 
   }
   guardarFuente() {
+    
+    console.log("Fecha:", this.fuenteForm.get('actualizar').value);
+
     if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid) {
       var fuenteBase = this.setFuente(this.fuenteForm.value);
       this.addFuente(fuenteBase);

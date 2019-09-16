@@ -50,3 +50,19 @@ html {
 .mt-20{
   margin-top: -20px  !important;
 }
+
+tr.base-element-row:hover{
+  background: rgba(0, 255, 0, 0.5);
+} 
+tr.base-element-row:active{
+  background: #efefef;
+}
+.menu-hover:hover{
+  background: rgba(0, 255, 0, 0.5);
+}
+table {
+  width: 100%;
+}
+.tab-black {
+  background-color: #000;
+}
