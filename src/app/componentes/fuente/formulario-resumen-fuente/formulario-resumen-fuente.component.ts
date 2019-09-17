@@ -67,7 +67,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   fauna = new FormControl();
   otros = new FormControl();
   comunidad_List: string[]
-    = ['COMMUNNAT', 'COMUNTERR', 'BOSQUE', 'SABANA', 'PRADO', 'CHAPARRAL', 'DESIERTO', 'ALPINO',
+    = ['COMUNNAT', 'COMUNTERR', 'BOSQUE', 'SABANA', 'PRADO', 'CHAPARRAL', 'DESIERTO', 'ALPINO',
       'OTROTERR', 'COMUNAC', 'PALUSTRE', 'LACUSTRE', 'FLUVIAL', 'ESTUARINO', 'MARITIMO', 'SUBTERR'];
   flora_List: string[]
     = ['FLORA', 'FLORAAC', 'FLORATERR', 'PLNOVASC', 'PLVASC', 'MICROORG', 'INFOSITIO'];
@@ -76,7 +76,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
       'OTROINVERT', 'PECES', 'ANFIBIOS', 'REPTILES', 'AVES', 'MAMIFEROS', 'CIENFISIC', 'FISIOTOPO'];
   otros_List: string[]
     = ['HIDROL', 'GEOLOGIA', 'SUELOS', 'CLIMA', 'BIOLOGIA', 'ECOLOGIA', 'FUNECOL',
-      'DIVERSNAT', 'INVENTARIO', 'TECINVEST', 'AM', 'PLANMANEJO', 'TECMANEJO', 'ESTIMPAMP', 'ORGANPROTT', 'HERRPROT'];
+      'DIVERSNAT', 'INVENTARIO', 'TECINVEST', 'AM', 'PLANMANEJO', 'TECMANEJO', 'ESTIMPAMB', 'ORGANPROTT', 'HERRPROT'];
 
   constructor(private fb: FormBuilder,
     private fuenteServicio: FuenteService,
@@ -138,6 +138,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   guardarFuente() {
     if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid) {
+      this.set_Tema(false);
       var fuenteBase = this.setFuente(this.fuenteForm.value);
       this.addFuente(fuenteBase);
     }
@@ -265,6 +266,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.archivos_Disponibles.buscarArchivos(this.fuenteForm.get('fuenteId').value);
     this.tabArchivos(1);
     this.cargado = false;
+    this.get_Tema();
   }
   getFuente_id(id: Number): fuente_Modelo {
     var fuenteBusqueda = new fuente_Modelo();
@@ -297,10 +299,16 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.cargado = false;
     this.tabArchivos(0);
     this.archivos_Disponibles.nuevo();
+    this.comunidad = new FormControl();
+    this.flora = new FormControl();
+    this.fauna = new FormControl();
+    this.otros = new FormControl();
   }
   editar_Fuente() {
-    if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid)
+    if (this.fuenteForm.get('codfuente').value && this.fuenteForm.valid) {
+      this.set_Tema(true);
       this.updateFuente(this.setFuente(this.fuenteForm.value));
+    }
     else
       this.changeSuccessMessage('No se pudo editar, comprueba que los campos estén correctos donde se te indica.', 'primary');
   }
@@ -338,6 +346,62 @@ export class FormularioResumenFuenteComponent implements OnInit {
   get input_bcd() { return this.fuenteForm.get('bcd'); }
   get input_actualizar() { return this.fuenteForm.get('actualizar'); }
   get input_control() { return this.fuenteForm.get('control'); }
+
+  //asigna los valores (true o false) a los temas para registrarlos
+  set_Tema(editar: Boolean) {
+    if (editar)
+      this.set_Tema_Limpiar();
+    var data_Comunidad: [] = this.comunidad.value;
+    var data_Flora: [] = this.flora.value;
+    var data_Fauna: [] = this.fauna.value;
+    var data_Otros: [] = this.otros.value;
+    if (data_Comunidad) { data_Comunidad.forEach(tema => { this.set_Tema_Valores(tema); }); }
+    if (data_Flora) { data_Flora.forEach(tema => { this.set_Tema_Valores(tema); }); }
+    if (data_Fauna) { data_Fauna.forEach(tema => { this.set_Tema_Valores(tema); }); }
+    if (data_Otros) { data_Otros.forEach(tema => { this.set_Tema_Valores(tema); }); }
+  }
+  set_Tema_Valores(tema: string) {
+    tema = tema.toLowerCase();
+    this.fuenteForm.get(tema).setValue(true);
+  }
+  set_Tema_Limpiar() {
+    this.comunidad_List.forEach(tema => { this.fuenteForm.get(tema.toLocaleLowerCase()).setValue(false); });
+    this.flora_List.forEach(tema => { this.fuenteForm.get(tema.toLocaleLowerCase()).setValue(false); });
+    this.fauna_List.forEach(tema => { this.fuenteForm.get(tema.toLocaleLowerCase()).setValue(false); });
+    this.otros_List.forEach(tema => { this.fuenteForm.get(tema.toLocaleLowerCase()).setValue(false); });
+  }
+
+  //muestra los valores registrados de tema para editarlos
+  get_Tema() {
+    var data_Comunidad: String[] = [];
+    var data_Flora: String[] = [];
+    var data_Fauna: String[] = [];
+    var data_Otros: String[] = [];
+    this.comunidad_List.forEach(comunidad => {
+      var estado = this.fuenteForm.get(comunidad.toLocaleLowerCase()).value;
+      if (estado == true)
+        data_Comunidad.push(comunidad.toLocaleUpperCase());
+    });
+    this.flora_List.forEach(flora => {
+      var estado = this.fuenteForm.get(flora.toLocaleLowerCase()).value;
+      if (estado)
+        data_Flora.push(flora.toLocaleUpperCase());
+    });
+    this.fauna_List.forEach(fauna => {
+      var estado = this.fuenteForm.get(fauna.toLocaleLowerCase()).value;
+      if (estado)
+        data_Fauna.push(fauna.toLocaleUpperCase());
+    });
+    this.otros_List.forEach(otros => {
+      var estado = this.fuenteForm.get(otros.toLocaleLowerCase()).value;
+      if (estado)
+        data_Otros.push(otros.toLocaleUpperCase());
+    });
+    this.comunidad = new FormControl(data_Comunidad);
+    this.flora = new FormControl(data_Flora);
+    this.fauna = new FormControl(data_Fauna);
+    this.otros = new FormControl(data_Otros);
+  }
 }
 function crearFuente(k: Number, fuenteId: Number, naturalezaDocumento: String, codigoFuente, cita, clave): fuente_Dato {
   var documento = new documento_Naturaleza();
