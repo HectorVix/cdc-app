@@ -379,7 +379,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     var data_Otros: String[] = [];
     this.comunidad_List.forEach(comunidad => {
       var estado = this.fuenteForm.get(comunidad.toLocaleLowerCase()).value;
-      if (estado == true)
+      if (estado)
         data_Comunidad.push(comunidad.toLocaleUpperCase());
     });
     this.flora_List.forEach(flora => {

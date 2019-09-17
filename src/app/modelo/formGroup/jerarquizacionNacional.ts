@@ -26,7 +26,7 @@ export class jerarquizacion_Nacional_FormGroup {
             //pagina2
             'notroconsi': new FormControl(row.notroconsi, Validators.maxLength(120)),
             'rangon': row.rangon,
-            'fecharn': fechaServicio.getFecha(row.fecharn),
+            'fecharn': fechaServicio.get_Fecha(row.fecharn),
             'nranrzon': new FormControl(row.nranrzon, Validators.maxLength(240)),
             'nnecprotec': new FormControl(row.nnecprotec, Validators.maxLength(120)),
             'nnecinvent': new FormControl(row.nnecinvent, Validators.maxLength(120)),
@@ -34,8 +34,8 @@ export class jerarquizacion_Nacional_FormGroup {
             'nnecmaejo': new FormControl(row.nnecmaejo, Validators.maxLength(120)),
             'resrn': new FormControl(row.resrn, Validators.maxLength(10)),
             'edautor': new FormControl(row.edautor, Validators.maxLength(30)),
-            'edicion': fechaServicio.getFecha(row.edicion),
-            'actualizar': fechaServicio.getFecha(row.actualizar),
+            'edicion': fechaServicio.get_Fecha(row.edicion),
+            'actualizar': fechaServicio.get_Fecha(row.actualizar),
         });
     }
 }

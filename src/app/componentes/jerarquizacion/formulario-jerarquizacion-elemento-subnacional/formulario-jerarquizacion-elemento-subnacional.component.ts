@@ -111,9 +111,6 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   }
   //setear datos jerarquizacion subnacioal
   setDatosJerarquizacionSubnacional(datos: jerarquizacion_Subnacional_Modelo): jerarquizacion_Subnacional_Modelo {
-    datos.fecharevrs = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('fecharevrs').value);
-    datos.edicion = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('edicion').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_SubnacionalForm.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion subnacional

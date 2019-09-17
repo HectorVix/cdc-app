@@ -347,11 +347,11 @@
                                         </div>
                                     </div>
                                     <!-- fin row -->
-                                    <div class="row">
+                                    <div class="form-row">
                                         <div class="col-md-2">
                                             <label for="">RANGOS:</label>
                                         </div>
-                                        <div class="col-md-2 mt-15">
+                                        <div class="col mt-15">
                                             <mat-form-field>
                                                 <mat-select placeholder=" " panelClass="color-panel-green"
                                                     formControlName="rangos">
@@ -363,14 +363,14 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
-                                        <div class="md-form form-sm  input-group-append mt-10">
-                                            <input mdbInputDirective type="text" id="formFechaRevrs"
-                                                class="form-control" formControlName="fecharevrs" data-error=" "
-                                                data-success=" " ngbDatepicker #dFechaRevrs="ngbDatepicker">
-                                            <label for="formFechaRevrs">FECHA.REVRS</label>
-                                            <div (click)="dFechaRevrs.toggle()">
-                                                <i class="fa fa-calendar prefix"></i>
-                                            </div>
+                                        <div class="col mt-12">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="picker_Fecharevrs"
+                                                    placeholder="FECHAREVRS" formControlName="fecharevrs">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_Fecharevrs">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker touchUi #picker_Fecharevrs></mat-datepicker>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <!-- fin row -->
@@ -378,7 +378,7 @@
                                         <div class="col-md-2">
                                             <label for="">RAZON.RS:</label>
                                         </div>
-                                        <div class="md-form  col-md-9 mt-20">
+                                        <div class="md-form  col-md-9 mt-10">
                                             <i class="fa fa-pencil prefix"></i>
                                             <textarea mdbInputDirective mdbValidate type="text" id="formRazonRs"
                                                 class="md-textarea form-control" formControlName="razonrs"
@@ -471,19 +471,13 @@
                                         <div class="col-md-2">
                                         </div>
                                         <div class="md-form col-md-3 mt-5">
-                                            <input mdbInputDirective mdbValidate type="text" id="formEdicion"
-                                                class="form-control" formControlName="edicion" ngbDatepicker
-                                                #dEdicion="ngbDatepicker">
-                                            <label for="formEdicion">&nbsp;&nbsp;&nbsp;&nbsp;EDICION</label>
-                                            <mdb-error
-                                                *ngIf="input_edicion.invalid && (input_edicion.dirty || input_edicion.touched)">
-                                                <font size=2 color="red">Error, el formato debe ser
-                                                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como
-                                                    ejemplo.</font>
-                                            </mdb-error>
-                                        </div>
-                                        <div class="md-form mt-5" (click)="dEdicion.toggle()">
-                                            <i class="fa fa-calendar prefix"></i>
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="picker_Edicion"
+                                                    placeholder="EDICION FECHA" formControlName="edicion">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_Edicion">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker touchUi #picker_Edicion></mat-datepicker>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <!-- fin row -->
@@ -491,19 +485,13 @@
                                         <div class="col-md-2">
                                         </div>
                                         <div class="md-form col-md-3 mt-5">
-                                            <input mdbInputDirective type="text" id="formActualizar"
-                                                class="form-control" formControlName="actualizar" ngbDatepicker
-                                                #dActualizar="ngbDatepicker">
-                                            <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                                            <mdb-error
-                                                *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
-                                                <font size=2 color="red">Error, el formato debe ser
-                                                    aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como
-                                                    ejemplo.</font>
-                                            </mdb-error>
-                                        </div>
-                                        <div class="md-form mt-5" (click)="dActualizar.toggle()">
-                                            <i class="fa fa-calendar prefix"></i>
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="picker_Actualizar"
+                                                    placeholder="ACTUALIZAR FECHA" formControlName="actualizar">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_Actualizar">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker touchUi #picker_Actualizar></mat-datepicker>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                     <!-- Fin row -->
@@ -591,7 +579,8 @@
                             <div>
                                 <button class="btn color-green waves-light" mdbWavesEffect
                                     (click)="buscarJerarquizacionSubnacional()">Buscar</button>
-                                <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarTodos()">Buscar
+                                <button class="btn color-green waves-light" mdbWavesEffect
+                                    (click)="buscarTodos()">Buscar
                                     Todos</button>
                             </div>
                         </form>

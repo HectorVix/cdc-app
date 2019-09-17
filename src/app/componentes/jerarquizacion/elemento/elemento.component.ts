@@ -1,17 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-// import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { debounceTime } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-// import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ControlErrorStateMatcher } from '../../../modelo/error/error-state-matcher';
 import { Subject } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-// import { DISABLED } from '@angular/forms/src/model';
 import { GaleriaComponent } from '../../../componentes/galeria/galeria.component';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
@@ -38,7 +35,7 @@ export class ElementoComponent implements OnInit {
   matcher = new ControlErrorStateMatcher();
   //---------------------------------tabla
   k: number;
-  displayedColumns: string[] = ['numero', 'codigoe', 'nombrecomunn', 'nombren'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nombrecomunn',];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;

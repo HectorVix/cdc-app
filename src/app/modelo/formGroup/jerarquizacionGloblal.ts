@@ -36,7 +36,7 @@ export class jerarquizacion_Global_FormGroup {
             'gfragilcom': new FormControl(row.gfragilcom, Validators.maxLength(120)),
             'gotroconsi': new FormControl(row.gotroconsi, Validators.maxLength(120)),
             'rangog': row.rangog,
-            'fecharg': fechaServicio.getFecha(row.fecharg),
+            'fecharg': fechaServicio.get_Fecha(row.fecharg),
             'granrazon': new FormControl(row.granrazon, Validators.maxLength(240)),
             'gnecprotec': new FormControl(row.gnecprotec, Validators.maxLength(120)),
             'gnecinvent': new FormControl(row.gnecinvent, Validators.maxLength(120)),
@@ -45,8 +45,8 @@ export class jerarquizacion_Global_FormGroup {
             //mantenimiento del registro
             'resrg': new FormControl(row.resrg, Validators.maxLength(10)),
             'edautor': new FormControl(row.edautor, Validators.maxLength(30)),
-            'edicion': fechaServicio.getFecha(row.edicion),
-            'actualizar': fechaServicio.getFecha(row.actualizar),
+            'edicion': fechaServicio.get_Fecha(row.edicion),
+            'actualizar': fechaServicio.get_Fecha(row.actualizar),
         });
     }
 }

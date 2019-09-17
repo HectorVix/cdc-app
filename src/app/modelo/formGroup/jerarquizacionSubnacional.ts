@@ -25,15 +25,15 @@ export class jerarquizacion_Subnacional_FormGroup {
             'comamenazs': new FormControl(row.comamenazs, Validators.maxLength(120)),
             'otraconsids': new FormControl(row.otraconsids, Validators.maxLength(120)),
             'rangos': row.rangos,//(6)
-            'fecharevrs': fechaServicio.getFecha(row.fecharevrs),
+            'fecharevrs': fechaServicio.get_Fecha(row.fecharevrs),
             'razonrs': new FormControl(row.loctips, Validators.maxLength(240)),
             'necprotecs': new FormControl(row.loctips, Validators.maxLength(120)),
             'necinvents': new FormControl(row.loctips, Validators.maxLength(120)),
             'necmanejos': new FormControl(row.loctips, Validators.maxLength(120)),
             //mantenimiento del registro
             'autored': new FormControl(row.loctips, Validators.maxLength(30)),
-            'edicion': fechaServicio.getFecha(row.edicion),
-            'actualizar': fechaServicio.getFecha(row.actualizar)
+            'edicion': fechaServicio.get_Fecha(row.edicion),
+            'actualizar': fechaServicio.get_Fecha(row.actualizar)
         });
-    }    
+    }
 }

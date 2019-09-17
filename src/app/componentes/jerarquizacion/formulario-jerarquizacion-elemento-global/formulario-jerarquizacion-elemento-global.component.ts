@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -9,7 +8,6 @@ import { jerarquizacion_Global_Modelo } from '../../../modelo/jerarquizacion/jer
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
-//import { elemento_Modelo } from '../../../modelo/jerarquizacion/elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 //--------------tabla------------------------------------
 import { jerarquizacion_Global_FormGroup } from '../../../modelo/formGroup/jerarquizacionGloblal';
@@ -120,9 +118,6 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setDatosJerarquizacionGlobal(datos: jerarquizacion_Global_Modelo): jerarquizacion_Global_Modelo {
-    datos.fecharg = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Global_Form.get('fecharg').value);
-    datos.edicion = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Global_Form.get('edicion').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Global_Form.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global

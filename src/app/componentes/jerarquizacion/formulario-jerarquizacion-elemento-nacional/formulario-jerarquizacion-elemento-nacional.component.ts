@@ -102,9 +102,6 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   //setear datos jerarquizacion nacional
   setDatosJerarquizacionNacional(datos: jerarquizacion_Nacional_Modelo): jerarquizacion_Nacional_Modelo {
-    datos.fecharn = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Nacional_Form.get('fecharn').value);
-    datos.edicion = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Nacional_Form.get('edicion').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.jerarquizacion_Nacional_Form.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro jerarquizacion global

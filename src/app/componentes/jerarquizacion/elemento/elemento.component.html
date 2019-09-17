@@ -103,13 +103,13 @@
             <div class="row">
               <div class="col-md-2"></div>
               <div class="md-form col-md-3  mt-5">
-                  <mat-form-field>
-                      <input matInput [matDatepicker]="picker" placeholder="FECHA" formControlName="fecha">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker touchUi #picker></mat-datepicker>
-                    </mat-form-field>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="FECHA" formControlName="fecha">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
               </div>
-              
+
             </div>
             <!-- fin row -->
           </div>
@@ -215,16 +215,14 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGOE</th>
             <td mat-cell *matCellDef="let row"> {{row.codigoe}} </td>
           </ng-container>
-
-          <ng-container matColumnDef="nombrecomunn">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
-            <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
-          </ng-container>
           <ng-container matColumnDef="nombren">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
             <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
           </ng-container>
-
+          <ng-container matColumnDef="nombrecomunn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
+            <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
             (click)="mostrar_Elemento_Buscado(row);">
