@@ -190,11 +190,6 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   }
 
   setVertebrado(datos: vertebrado_Modelo): vertebrado_Modelo {
-    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('fechaaepeu').value);
-    datos.ediciong = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('ediciong').value);
-    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('actualizag').value);
-    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('edicionn').value);
-    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionVertebradosNacionalForm.get('actualizan').value);
     return datos;
   }
   //agrega un nuevo registro de caracterizacion de vertebrado nacional

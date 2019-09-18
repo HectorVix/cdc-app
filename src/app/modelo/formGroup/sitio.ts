@@ -30,7 +30,7 @@ export class sitio_FormGroup {
             //descripción del sitio/diseño
             'descrito': new FormControl(row.descrito, Validators.maxLength(120)),
             'mapasitio': row.mapasitio,//♦
-            'fechamapa': fechaServicio.getFecha(row.fechamapa),
+            'fechamapa': fechaServicio.get_Fecha(row.fechamapa),
             'dibujante': new FormControl(row.dibujante, Validators.maxLength(60)),
             'justlimite': new FormControl(row.justlimite, Validators.maxLength(120)),
             'areaprisec1': row.areaprisec1,//Number
@@ -76,7 +76,7 @@ export class sitio_FormGroup {
             'rbsopc5': new FormControl(row.rbsopc5, Validators.maxLength(120)),
             //mantenimiento del registro
             'respdatos': new FormControl(row.respdatos, Validators.maxLength(10)),
-            'actualizar': fechaServicio.getFecha(row.actualizar)
+            'actualizar': fechaServicio.get_Fecha(row.actualizar)
         });
     }
 }

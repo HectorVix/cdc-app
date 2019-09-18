@@ -50,15 +50,6 @@ export class planta_FormGroup {
             'comhabn': new FormControl(row.comhabn, Validators.maxLength(120)),
             //ecología
             'comecoln': new FormControl(row.comecoln, Validators.maxLength(120)),
-            /**
-             *  Las posibles soluciones para hacer mas eficiente estos campos son:
-             * 1: Crear una matriz de 6x16 y validar sobre ella
-             * 2: Juntar todo en json y validar sobre esto en el servicio
-             * 3: Validar campo por campo "es la solucion actual" usando el sistema clásico (es funcional y aprueba de fallos) 
-             *      se deja esta solución para tener una base sobre la cual trabajar e ir mejorando.
-             * 4: Arbol de decisión segun sea el mes o meses a validar  para este caso se debe validar la linea del tiempo y mostrar los 
-             *      campos a llenar segun se requiera (existen o existieron elementos en años ateriores útil para sacar predicciones).
-             * **/
             //1 línea
             'nenea1': new FormControl(row.nenea1, Validators.maxLength(2)),
             'nenea2': new FormControl(row.nenea2, Validators.maxLength(2)),
@@ -200,9 +191,9 @@ export class planta_FormGroup {
             'transparen': new FormControl(row.transparen, Validators.maxLength(10)),
             'refg': new FormControl(row.refg, Validators.maxLength(120)),
             'refn': new FormControl(row.refn, Validators.maxLength(120)),
-            'edicionn': fechaServicio.getFecha(row.edicionn), //date
+            'edicionn': fechaServicio.get_Fecha(row.edicionn), //date
             'autoredn': new FormControl(row.autoredn, Validators.maxLength(10)),
-            'actualizan': fechaServicio.getFecha(row.actualizan), //date
+            'actualizan': fechaServicio.get_Fecha(row.actualizan), //date
         });
     }
 }

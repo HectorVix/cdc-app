@@ -27,7 +27,7 @@ export class vertebrado_FormGroup {
             'cites': new FormControl({ value: row.cites, disabled: true }),//representativo
             'uicn': new FormControl({ value: row.uicn, disabled: true }),//representativo
             'aepeu': new FormControl({ value: row.aepeu, disabled: true }),//representativo
-            'fechaaepeu': fechaServicio.getFecha(row.fechaaepeu),//date representativo 
+            'fechaaepeu': new FormControl({ value: fechaServicio.get_Fecha(row.fechaaepeu), disabled: true }),//date representativo 
             'endemismo': new FormControl({ value: row.endemismo, disabled: true }),//representativo
             'comstatg': new FormControl(row.comstatg, Validators.maxLength(120)),
             'rangon': new FormControl({ value: row.rangon, disabled: true }),//representativo
@@ -131,10 +131,10 @@ export class vertebrado_FormGroup {
             'refg': new FormControl(row.refg, Validators.maxLength(120)),
             'refn': new FormControl(row.refn, Validators.maxLength(120)),
             //mantenimiento del registro
-            'ediciong': fechaServicio.getFecha(row.ediciong), //date
-            'actualizag': fechaServicio.getFecha(row.actualizag), //date
-            'edicionn': fechaServicio.getFecha(row.edicionn),  //date
-            'actualizan': fechaServicio.getFecha(row.actualizan)//date
+            'ediciong': fechaServicio.get_Fecha(row.ediciong), //date
+            'actualizag': fechaServicio.get_Fecha(row.actualizag), //date
+            'edicionn': fechaServicio.get_Fecha(row.edicionn),  //date
+            'actualizan': fechaServicio.get_Fecha(row.actualizan)//date
         });
     }
 }

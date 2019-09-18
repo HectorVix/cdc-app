@@ -153,8 +153,6 @@ export class FormularioAreasManejadasComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el código del área es obligatorio ó valida que los campos estén correctos donde se te indica.', 'primary');
   }
   setAreasManejadas(datos: area_Modelo): area_Modelo {
-    datos.fechaesta = this.fechaServicio.toFormatoDateTime(this.areaManejoForm.get('fechaesta').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.areaManejoForm.get('actualizar').value);
     return datos;
   }
   //agrega una nueva area

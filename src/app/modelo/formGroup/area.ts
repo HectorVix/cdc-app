@@ -54,7 +54,7 @@ export class area_FormGroup {
             'involtnc': row.involtnc, //boolean ♦
             'comentario': new FormControl(row.comentario, Validators.maxLength(120)),
             //status
-            'fechaesta': fechaServicio.getFecha(row.fechaesta),
+            'fechaesta': fechaServicio.get_Fecha(row.fechaesta),
             'protasign': row.protasign, //varchar(1) ♦
             /**
              * Página 2 
@@ -80,7 +80,7 @@ export class area_FormGroup {
             'amopc5': new FormControl(row.amopc5, Validators.maxLength(120)),
             //mantenimiento del registro
             'respdatos': new FormControl(row.respdatos, Validators.maxLength(20)),
-            'actualizar': fechaServicio.getFecha(row.actualizar)
+            'actualizar': fechaServicio.get_Fecha(row.actualizar)
         });
     }
 }

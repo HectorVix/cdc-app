@@ -194,8 +194,6 @@ export class RegistroSitioComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el código del sitio es obligatorio ó valida que los campos estén correctos donde se te indica.', 'warning');
   }
   setSitio(datos: sitio_Modelo): sitio_Modelo {
-    datos.fechamapa = this.fechaServicio.toFormatoDateTime(this.sitioForm.get('fechamapa').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.sitioForm.get('actualizar').value);
     return datos;
   }
   //agrega un nuevo registro de sitio 

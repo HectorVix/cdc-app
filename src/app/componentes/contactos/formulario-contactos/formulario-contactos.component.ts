@@ -137,7 +137,6 @@ export class FormularioContactosComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el número de identificación es obligatorio ó valida que los campos estén correctos donde se te indica.', 'warning');
   }
   setContacto(contacto: contacto_Modelo): contacto_Modelo {
-    contacto.actualizar = this.fechaServicio.toFormatoDateTime(this.contactosForm.get('actualizar').value);
     return contacto;
   }
   addContacto(contacto: contacto_Modelo): void {

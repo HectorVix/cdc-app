@@ -39,7 +39,7 @@ export class contacto_FormGroup {
             'resumen': new FormControl(row.resumen, Validators.maxLength(120)),
             //documentación y mantenimiento
             'coddirp': new FormControl(row.coddirp, Validators.maxLength(20)),
-            'actualizar': fechaServicio.getFecha(row.actualizar)//date
+            'actualizar': fechaServicio.get_Fecha(row.actualizar)//date
         });
     }
 }

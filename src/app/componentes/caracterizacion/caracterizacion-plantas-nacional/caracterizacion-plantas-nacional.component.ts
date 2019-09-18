@@ -191,8 +191,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   }
 
   setPlanta(datos: planta_Modelo): planta_Modelo {
-    datos.edicionn = this.fechaServicio.toFormatoDateTime(this.caracterizacionPlantasNacionalForm.get('edicionn').value);
-    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.caracterizacionPlantasNacionalForm.get('actualizan').value);
     return datos;
   }
   //agrega un nuevo registro de caracterizacion de planta
