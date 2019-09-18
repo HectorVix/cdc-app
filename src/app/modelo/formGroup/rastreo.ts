@@ -66,11 +66,11 @@ export class rastreo_Elemento_FormGroup {
             'rangog': new FormControl({ value: '', disabled: true }),
             'formularg': re.formularg,//♦
             'resprg': new FormControl({ value: '', disabled: true }),
-            'fecharevrg': new FormControl({ value: '', disabled: true }),
+            'fecharevrg': new FormControl({ value: fechaServicio.get_Fecha(re.fecharevrg), disabled: true }),
             'aepeu': new FormControl(re.aepeu, Validators.maxLength(10)),
             'cites': re.cites,//♦
             'iucn': re.iucn,//♦
-            'fechaaepeu': fechaServicio.getFecha(re.fechaaepeu),
+            'fechaaepeu': fechaServicio.get_Fecha(re.fechaaepeu),
             'planscons': re.planscons,//♦
             'resplan': new FormControl(re.resplan, Validators.maxLength(10)),
             'resumenman': re.resumenman,//♦
@@ -82,7 +82,7 @@ export class rastreo_Elemento_FormGroup {
             'rangon': new FormControl({ value: '', disabled: true }),//♦ (6)
             'formularn': re.formularn,//♦
             'rastreolen': new FormControl(re.rastreolen, Validators.maxLength(10)),
-            'fecharevrn': new FormControl({ value: '', disabled: true }),
+            'fecharevrn': new FormControl({ value: fechaServicio.get_Fecha(re.fecharevrn), disabled: true }),
             'lestimn': new FormControl({ value: '', disabled: true }),
             'leprotn': new FormControl({ value: '', disabled: true }),
             'abundn': new FormControl({ value: '', disabled: true }),
@@ -93,7 +93,7 @@ export class rastreo_Elemento_FormGroup {
             'rangos': new FormControl({ value: '', disabled: true }),//♦ (6)
             'formulars': re.formulars,//♦
             'rastreoles': new FormControl(re.rastreoles, Validators.maxLength(10)),
-            'fecharevrs': new FormControl({ value: '', disabled: true }),
+            'fecharevrs': new FormControl({ value: fechaServicio.get_Fecha(re.fecharevrs), disabled: true }),
             'lestims': new FormControl({ value: '', disabled: true }),
             'leprots': new FormControl({ value: '', disabled: true }),
             'abunds': new FormControl({ value: '', disabled: true }),
@@ -109,9 +109,9 @@ export class rastreo_Elemento_FormGroup {
             // manteniiento del registro
             'codfuenten': new FormControl(re.codfuenten, Validators.maxLength(99)),
             'codfuentes': new FormControl(re.codfuentes, Validators.maxLength(99)),
-            'actualizag': fechaServicio.getFecha(re.actualizag),
-            'actualizan': fechaServicio.getFecha(re.actualizan),
-            'actualizas': fechaServicio.getFecha(re.actualizas)
+            'actualizag': fechaServicio.get_Fecha(re.actualizag),
+            'actualizan': fechaServicio.get_Fecha(re.actualizan),
+            'actualizas': fechaServicio.get_Fecha(re.actualizas)
         });
     }
 

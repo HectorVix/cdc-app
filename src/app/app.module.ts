@@ -54,7 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatListModule, MatProgressBarModule,
   MatSelectModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatGridListModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule, MatToolbarModule, MatSidenavModule, MatIconModule
+  MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatMenuModule, MatToolbarModule, MatSidenavModule, MatIconModule, MAT_DATE_LOCALE
 } from '@angular/material';
 import 'hammerjs';
 import 'mousetrap';
@@ -153,6 +153,7 @@ import { CoreModule } from './core/core.module';
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
 
   ],
   entryComponents: [ConfirmacionComponent],

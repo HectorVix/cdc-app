@@ -103,13 +103,6 @@ export class FormularioReComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el codigoe es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setRastreoElemento(datos: rastreo_Elemento_Modelo): rastreo_Elemento_Modelo {
-    datos.fecharevrg = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrg').value);
-    datos.fechaaepeu = this.fechaServicio.toFormatoDateTime(this.reForm.get('fechaaepeu').value);
-    datos.fecharevrn = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrn').value);
-    datos.fecharevrs = this.fechaServicio.toFormatoDateTime(this.reForm.get('fecharevrs').value);
-    datos.actualizag = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizag').value);
-    datos.actualizan = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizan').value);
-    datos.actualizas = this.fechaServicio.toFormatoDateTime(this.reForm.get('actualizas').value);
     return datos;
   }
 
@@ -372,7 +365,7 @@ export class FormularioReComponent implements OnInit {
         this.reForm.get('nombreg').setValue(resStatusGlobal.nombreg);
         this.reForm.get('rangog').setValue(resStatusGlobal.rangog);
         this.reForm.get('resprg').setValue(resStatusGlobal.resrg);
-        this.reForm.get('fecharevrg').setValue(this.fechaServicio.getFecha(resStatusGlobal.fecharg));
+        this.reForm.get('fecharevrg').setValue(this.fechaServicio.get_Fecha(resStatusGlobal.fecharg));
       }, err => {
         this.reForm.get('nombreg').setValue('');
         this.reForm.get('rangog').setValue('');
@@ -385,7 +378,7 @@ export class FormularioReComponent implements OnInit {
     this.rastreoServicio.get_Status_Nacional(codigoe).subscribe(
       resStatusNacional => {
         this.reForm.get('rangon').setValue(resStatusNacional.rangon);
-        this.reForm.get('fecharevrn').setValue(this.fechaServicio.getFecha(resStatusNacional.fecharn));
+        this.reForm.get('fecharevrn').setValue(this.fechaServicio.get_Fecha(resStatusNacional.fecharn));
         this.reForm.get('lestimn').setValue(resStatusNacional.nlestim);
         this.reForm.get('leprotn').setValue(resStatusNacional.nleprot);
         this.reForm.get('abundn').setValue(resStatusNacional.nabund);
@@ -402,7 +395,7 @@ export class FormularioReComponent implements OnInit {
     this.rastreoServicio.get_Status_Subnacional(codigoe, subnacion).subscribe(
       resStatusSubnacional => {
         this.reForm.get('rangos').setValue(resStatusSubnacional.rangos);
-        this.reForm.get('fecharevrs').setValue(this.fechaServicio.getFecha(resStatusSubnacional.fecharevrs));
+        this.reForm.get('fecharevrs').setValue(this.fechaServicio.get_Fecha(resStatusSubnacional.fecharevrs));
         this.reForm.get('lestims').setValue(resStatusSubnacional.lestims);
         this.reForm.get('leprots').setValue(resStatusSubnacional.leprots);
         this.reForm.get('abunds').setValue(resStatusSubnacional.abunds);

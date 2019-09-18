@@ -368,17 +368,14 @@
                     <div class="col-md-1">
                     </div>
                     <div class="md-form col-md-2 mt10">
-                      <input mdbInputDirective mdbValidate type="text" id="formFechaeva" class="form-control"
-                        formControlName="fechaeva" ngbDatepicker #dFechaeva="ngbDatepicker">
-                      <label for="formFechaeva">&nbsp;&nbsp;&nbsp;&nbsp;FECHAEVA</label>
-                      <mdb-error *ngIf="input_fechaeva.invalid && (input_fechaeva.dirty || input_fechaeva.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Fechaeva" placeholder="FECHA EVA"
+                          formControlName="fechaeva">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Fechaeva"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Fechaeva></mat-datepicker>
+                      </mat-form-field>
                     </div>
-                    <div class="md-form mt10" (click)="dFechaeva.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
-                    </div>
+
                   </div>
                   <!-- fin row -->
                   <div class="row">
@@ -397,33 +394,25 @@
                     </div>
                     <div class="col-md-3"></div>
                     <div class="md-form col-md-2 mt-5">
-                      <input mdbInputDirective mdbValidate type="text" id="formUltobs" class="form-control"
-                        formControlName="ultobs" ngbDatepicker #dUltobs="ngbDatepicker">
-                      <label for="formUltobs">&nbsp;&nbsp;&nbsp;&nbsp;ULTOBS</label>
-                      <mdb-error *ngIf="input_ultobs.invalid && (input_ultobs.dirty || input_ultobs.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Ultobs" placeholder="FECHA ULTOBS "
+                          formControlName="ultobs">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Ultobs"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Ultobs></mat-datepicker>
+                      </mat-form-field>
                     </div>
-                    <div class="md-form mt-5" (click)="dUltobs.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
-                    </div>
+
                   </div>
                   <!-- fin row -->
                   <div class="row">
                     <div class="col-md-7"></div>
                     <div class="md-form col-md-2 mt-5">
-                      <input mdbInputDirective mdbValidate type="text" id="formFecharangole" class="form-control"
-                        formControlName="fecharangole" ngbDatepicker #dFecharangole="ngbDatepicker">
-                      <label for="formFecharangole">&nbsp;&nbsp;&nbsp;&nbsp;FECHARANGOLE</label>
-                      <mdb-error
-                        *ngIf="input_fecharangole.invalid && (input_fecharangole.dirty || input_fecharangole.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
-                    </div>
-                    <div class="md-form mt-5" (click)="dFecharangole.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Fecharangole" placeholder="FECHA RANGOLE"
+                          formControlName="fecharangole">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Fecharangole"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Fecharangole></mat-datepicker>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
@@ -913,17 +902,12 @@
                     </div>
 
                     <div class="md-form col-md-2  mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formTranscrito" class="form-control"
-                        formControlName="transcrito" ngbDatepicker #dTranscrito="ngbDatepicker">
-                      <label for="formTranscrito">&nbsp;&nbsp;&nbsp;&nbsp;TRANSCRITO</label>
-                      <mdb-error
-                        *ngIf="input_transcrito.invalid && (input_transcrito.dirty || input_transcrito.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
-                    </div>
-                    <div class="md-form mt-20" (click)="dTranscrito.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Transcrito" placeholder="FECHA TRANSCRITO"
+                          formControlName="transcrito">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Transcrito"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Transcrito></mat-datepicker>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
@@ -942,17 +926,12 @@
                       </mat-form-field>
                     </div>
                     <div class="md-form col-md-2 mt-15">
-                      <input mdbInputDirective mdbValidate type="text" id="formCartografo" class="form-control"
-                        formControlName="cartografo" ngbDatepicker #dCartografo="ngbDatepicker">
-                      <label for="formCartografo">&nbsp;&nbsp;&nbsp;&nbsp;CARTOGRAFO</label>
-                      <mdb-error
-                        *ngIf="input_cartografo.invalid && (input_cartografo.dirty || input_cartografo.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
-                    </div>
-                    <div class="md-form mt-15" (click)="dCartografo.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Cartografo" placeholder="CARTOGRAFO FECHA"
+                          formControlName="cartografo">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Cartografo"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Cartografo></mat-datepicker>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->
@@ -968,17 +947,12 @@
                       </mdb-error>
                     </div>
                     <div class="md-form col-md-2 mt-15">
-                      <input mdbInputDirective mdbValidate type="text" id="formActualizar" class="form-control"
-                        formControlName="actualizar" ngbDatepicker #dActualizar="ngbDatepicker">
-                      <label for="formActualizar">&nbsp;&nbsp;&nbsp;&nbsp;ACTUALIZAR</label>
-                      <mdb-error
-                        *ngIf="input_actualizar.invalid && (input_actualizar.dirty || input_actualizar.touched)">
-                        <font size=2 color="red">Error, el formato debe ser
-                          aaaa-mm-dd (2019-12-31). Presiona el icono del calendario como ejemplo.</font>
-                      </mdb-error>
-                    </div>
-                    <div class="md-form mt-15" (click)="dActualizar.toggle()">
-                      <i class="fa fa-calendar prefix"></i>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker_Actualizar" placeholder="ACTUALIZAR FECHA"
+                          formControlName="actualizar">
+                        <mat-datepicker-toggle matSuffix [for]="picker_Actualizar"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker_Actualizar></mat-datepicker>
+                      </mat-form-field>
                     </div>
                   </div>
                   <!-- fin row -->

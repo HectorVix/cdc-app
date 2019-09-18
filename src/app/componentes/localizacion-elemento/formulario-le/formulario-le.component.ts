@@ -139,12 +139,6 @@ export class FormularioLeComponent implements OnInit {
       this.changeSuccessMessage('No se pudo registrar el codigole es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
   }
   setLocalizacionElemento(datos: Localizacion_Modelo): Localizacion_Modelo {
-    datos.fechaeva = this.fechaServicio.toFormatoDateTime(this.leForm.get('fechaeva').value);
-    datos.ultobs = this.fechaServicio.toFormatoDateTime(this.leForm.get('ultobs').value);
-    datos.fecharangole = this.fechaServicio.toFormatoDateTime(this.leForm.get('fecharangole').value);
-    datos.transcrito = this.fechaServicio.toFormatoDateTime(this.leForm.get('transcrito').value);
-    datos.cartografo = this.fechaServicio.toFormatoDateTime(this.leForm.get('cartografo').value);
-    datos.actualizar = this.fechaServicio.toFormatoDateTime(this.leForm.get('actualizar').value);
     return datos;
   }
 

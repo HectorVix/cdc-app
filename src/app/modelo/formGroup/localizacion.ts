@@ -125,10 +125,10 @@ export class localizacion_FormGroup {
             'cuenca': new FormControl(row.cuenca, Validators.maxLength(10)),
             //status
             'priobs': new FormControl(row.priobs, Validators.maxLength(4)),//año
-            'fechaeva': fechaServicio.getFecha(row.fechaeva),
+            'fechaeva': fechaServicio.get_Fecha(row.fechaeva),
             'rangole': row.rangole,//♦
-            'ultobs': fechaServicio.getFecha(row.ultobs),
-            'fecharangole': fechaServicio.getFecha(row.fecharangole),
+            'ultobs': fechaServicio.get_Fecha(row.ultobs),
+            'fecharangole': fechaServicio.get_Fecha(row.fecharangole),
             'comrangole': new FormControl(row.comrangole, Validators.maxLength(60)),
             //'resprg': '',
             'datosle': new FormControl(row.datosle, Validators.maxLength(240)),
@@ -175,11 +175,11 @@ export class localizacion_FormGroup {
             'mejorfuente': new FormControl(row.mejorfuente, Validators.maxLength(120)),
             'codfuente': new FormControl(row.codfuente, Validators.maxLength(99)),
             'mdrev': val_mdrev,//♦
-            'transcrito': fechaServicio.getFecha(row.transcrito),
+            'transcrito': fechaServicio.get_Fecha(row.transcrito),
             'cc': val_cc,//♦
-            'cartografo': fechaServicio.getFecha(row.cartografo),
+            'cartografo': fechaServicio.get_Fecha(row.cartografo),
             'respdatos': new FormControl(row.respdatos, Validators.maxLength(10)),
-            'actualizar': fechaServicio.getFecha(row.actualizar)
+            'actualizar': fechaServicio.get_Fecha(row.actualizar)
 
         });
     }
