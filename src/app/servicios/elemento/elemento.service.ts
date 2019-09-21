@@ -18,10 +18,14 @@ export class ElementoService {
   validarElementoCodigoe(codigoe: String): Observable<respuesta_cdc_Modelo> {
     return this.http.get<respuesta_cdc_Modelo>('/cecon/elemento/validar/' + codigoe);
   }
-  getElementos(codigo: String, nombrecomun, nombrecientifico, clase, comunidad): Observable<elemento_Modelo> {
-    return this.http.get<elemento_Modelo>('/cecon/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico + '/' + clase + '/' + comunidad);
+  getElementos(codigo: String, nombrecomun: String, nombrecientifico: String, clase: String, comunidad: String,
+    rol: String): Observable<elemento_Modelo> {
+    return this.http.get<elemento_Modelo>('/cecon/elemento/buscar/' + codigo + '/' + nombrecomun + '/' + nombrecientifico + '/' + clase + '/' + comunidad +
+      '/' + rol);
   }
-  get All() { return this.http.get<elemento_Modelo>('/cecon/elemento/all'); }
+  get_All(rol: String) {
+    return this.http.get<elemento_Modelo>('/cecon/elemento/all/' + rol);
+  }
   addElemento(elemento: elemento_Modelo, jti: String): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/elemento/registro/' + jti, elemento, httpOptions);
   }

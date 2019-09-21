@@ -15,7 +15,6 @@ import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { ElementoDato } from '../../../modelo/tabla/elemento-dato';
 import { elemento_FormGroup } from '../../../modelo/formGroup/elemento';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
-
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -63,9 +62,6 @@ export class ElementoComponent implements OnInit {
   criterio_elemento = new criterio_elemento();
   criterio_clase = this.criterio_elemento.clase;
   criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
-
-
-
   constructor(private fb: FormBuilder,
     private elementoServicio: ElementoService,
     private galeriaServicio: GaleriaService,
@@ -74,6 +70,8 @@ export class ElementoComponent implements OnInit {
     this.crearForm_Elemento(new elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
+    this.filtrar_Area();
+
   }
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
@@ -157,7 +155,7 @@ export class ElementoComponent implements OnInit {
       this.addElemento(elementoBase);
     }
     else
-      this.changeSuccessMessage('El CODIGOE del elemento es obligatorio ó valida que los campos esten correctos donde se te indica..', 'primary');
+      this.changeSuccessMessage('El CODIGOE del elemento es obligatorio ó valida que los campos esten correctos donde se te indica.', 'primary');
 
   }
   editarElemento() {
@@ -229,7 +227,8 @@ export class ElementoComponent implements OnInit {
     this.tam_Inicial_ListaFotos = 0;
     this.loading = true;
     this.k = 0;
-    //variables necesarias para recuperarse de errores 
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     var codigoe = "¬";
     var nombrecomunn = "¬";
     var nombren = "¬";
@@ -237,6 +236,7 @@ export class ElementoComponent implements OnInit {
     var comunidad = "¬";
     this.elementos = new Array();
     this.k = 0;
+
     if (this.buscarForm.get('codigoe').value)
       codigoe = this.buscarForm.get('codigoe').value;
     if (this.buscarForm.get('nombrecomunn').value)
@@ -247,7 +247,8 @@ export class ElementoComponent implements OnInit {
       clase = this.buscarForm.get('clase').value;
     if (this.buscarForm.get('comunidad').value)
       comunidad = this.buscarForm.get('comunidad').value;
-    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombren, clase, comunidad)
+    this.elementoServicio.getElementos(codigoe, nombrecomunn, nombren, clase, comunidad,
+      decodedToken.sub)
       .subscribe(
         data => {
           this.dataElementos = data;
@@ -268,7 +269,9 @@ export class ElementoComponent implements OnInit {
     this.tam_Inicial_ListaFotos = 0;
     this.loading = true;
     this.k = 0;
-    this.elementoServicio.All
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.elementoServicio.get_All(decodedToken.sub)
       .subscribe(
         data => {
           this.dataElementos = data;
@@ -332,7 +335,7 @@ export class ElementoComponent implements OnInit {
       val = false;
     return val;
   }
-  //clasificación de comunidades buscardor
+  //clasificación de comunidades buscador
   get clasificacion_comunidad_Buscador() {
     var val = false;
     if (this.buscarForm.get('clase').value == 'C')
@@ -340,6 +343,21 @@ export class ElementoComponent implements OnInit {
     else
       val = false;
     return val;
+  }
+
+  filtrar_Area() {
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    switch (decodedToken.sub) {
+      case "Botanica":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
+        break;
+      case "Zoologia":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
+        break;
+      default:
+        break;
+    }
   }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {

@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class PerfilComponent implements OnInit {
   datosUsuario: usuario_Modelo;
+  area;
   model = {
     left: true,
     middle: false,
@@ -22,6 +23,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
     this.usuarioService.getUsuarioDatos(this.decodedToken.jti)
       .subscribe((data: usuario_Modelo) => this.datosUsuario = { ...data });
+    this.area = this.decodedToken.sub;
   }
 
 }

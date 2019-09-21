@@ -51,6 +51,9 @@
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/perfil">Mi cuenta</a>
+          <div *ngIf="rolAdmin">
+            <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/perfil">Crear cuenta</a>
+          </div>
           <a class="dropdown-item waves-light menu-hover" mdbWavesEffect (click)="Logout()">Cerrar sesión</a>
         </div>
       </li>
