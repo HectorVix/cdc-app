@@ -11,7 +11,7 @@ export class rastreo_Elemento_Modelo {
       orden: String;
       familia: String;
       genero: String;
-      nombreg: String;
+     nombreg: String;
       autor: String;
       fuentenom: Number;
       refnombreg: String;
@@ -77,6 +77,6 @@ export class rastreo_Elemento_Modelo {
       //relaciones
       fuenteList: any;
       localizacionList: any;
-      eLEMENTOelementoid: Number;
+      eLEMENTOelementoid: any;
       observacionesList: any;
 }

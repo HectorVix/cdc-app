@@ -4,4 +4,5 @@ export interface ElementoDato {
     codigoe: String;
     nombrecomunn: String;
     nombren: String;
+    clase:String;
 }

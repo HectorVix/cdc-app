@@ -15,6 +15,7 @@ import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { ElementoDato } from '../../../modelo/tabla/elemento-dato';
 import { elemento_FormGroup } from '../../../modelo/formGroup/elemento';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html',
@@ -34,7 +35,7 @@ export class ElementoComponent implements OnInit {
   matcher = new ControlErrorStateMatcher();
   //---------------------------------tabla
   k: number;
-  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nombrecomunn',];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nombrecomunn', 'clase'];
   dataSource: MatTableDataSource<ElementoDato>;
   elementos: Array<ElementoDato> = new Array();
   dataElementos: any;
@@ -102,6 +103,7 @@ export class ElementoComponent implements OnInit {
     this.getFoto_Datos(row.elementoId);
     this.editar = false;
     this.guardar = true;
+    window.scrollTo(0, 0);
   }
   getElemento_id(id: Number): elemento_Modelo {
     var elementoBusqueda = new elemento_Modelo();
@@ -252,15 +254,18 @@ export class ElementoComponent implements OnInit {
       .subscribe(
         data => {
           this.dataElementos = data;
-          for (let elementoVal of this.dataElementos) {
-            this.k = this.k + 1;
-            this.elementos.push(crearElemento(this.k, elementoVal));
+          if (this.dataElementos) {
+            for (let elementoVal of this.dataElementos) {
+              this.k = this.k + 1;
+              this.elementos.push(crearElemento(this.k, elementoVal));
+            }
           }
           this.dataSource = new MatTableDataSource(this.elementos);
           this.loading = false;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se encontro información.', 'warning');
+          this.changeSuccessMessage('No se encontro información.', 'primary');
+          this.dataSource = new MatTableDataSource(this.elementos);
         });
   }
   buscar_Todos_Elementos() {
@@ -275,15 +280,18 @@ export class ElementoComponent implements OnInit {
       .subscribe(
         data => {
           this.dataElementos = data;
-          for (let elementoVal of this.dataElementos) {
-            this.k = this.k + 1;
-            this.elementos.push(crearElemento(this.k, elementoVal));
+          if (this.dataElementos) {
+            for (let elementoVal of this.dataElementos) {
+              this.k = this.k + 1;
+              this.elementos.push(crearElemento(this.k, elementoVal));
+            }
           }
           this.dataSource = new MatTableDataSource(this.elementos);
           this.loading = false;
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se encontro información.', 'warning');
+          this.changeSuccessMessage('No se encontro información.', 'primary');
+          this.dataSource = new MatTableDataSource(this.elementos);
         });
   }
 
@@ -318,6 +326,7 @@ export class ElementoComponent implements OnInit {
     this.tam_Inicial_ListaFotos = 0;
     this.loading = false;
     this.fotoId_Lista = [];
+    window.scrollTo(0, 0);
   }
   //lleva el control de los errores
   get input_codigoe() { return this.elementoForm.get('codigoe'); }
@@ -361,11 +370,14 @@ export class ElementoComponent implements OnInit {
   }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {
+  var clase = new clase_Elemento();
+  clase.clase_Nombre(elemento.clase);
   return {
     numero: k,
     elementoId: elemento.elementoId,
     codigoe: elemento.codigoe,
     nombrecomunn: elemento.nombrecomunn,
-    nombren: elemento.nombren
+    nombren: elemento.nombren,
+    clase: clase.valor_Clase
   };
 }

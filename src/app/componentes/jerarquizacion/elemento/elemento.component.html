@@ -175,7 +175,7 @@
             </div>
             <div class="col-md-4 mt-15">
               <mat-form-field>
-                <mat-select placeholder="COMUNIDAD NATURAL" panelClass="color-panel-green" formControlName="comunidad">
+                <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
                   <mat-option>--- Ningún valor ---</mat-option>
                   <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
                     {{sTipo.viewValue}}
@@ -223,6 +223,10 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
             <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
           </ng-container>
+          <ng-container matColumnDef="clase">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+              <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
+            </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
             (click)="mostrar_Elemento_Buscado(row);">

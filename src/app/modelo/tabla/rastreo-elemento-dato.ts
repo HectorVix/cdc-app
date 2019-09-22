@@ -3,7 +3,7 @@ export interface ratreoElemento_Dato {
     rastreoId: Number;
     codigoe: String;
     departamento: String;
-    nombreg: String;
+    clase: String;
     nombren: String;
     nombrecomunn: String
 }

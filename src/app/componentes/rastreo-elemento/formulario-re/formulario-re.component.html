@@ -160,9 +160,6 @@
                       <input mdbInputDirective mdbValidate type="text" id="formNombreg" class="form-control"
                         formControlName="nombreg">
                       <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico.</label>
-                      <mdb-error *ngIf="input_nombreg.invalid && (input_nombreg.dirty || input_nombreg.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
                     </div>
                   </div>
                   <div class="row">
@@ -280,9 +277,6 @@
                         formControlName="nombren">
                       <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;Binomial científico del elemento utilizado en el
                         país.</label>
-                      <mdb-error *ngIf="input_nombren.invalid && (input_nombren.dirty || input_nombren.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
                     </div>
                   </div>
                   <!-- fin row -->
@@ -303,10 +297,7 @@
                     <div class="md-form col-md-9 mt-20">
                       <input mdbInputDirective mdbValidate type="text" id="formNomcomunn" class="form-control"
                         formControlName="nomcomunn">
-                      <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;El nombre común nacional.</label>
-                      <mdb-error *ngIf="input_nomcomunn.invalid && (input_nomcomunn.dirty || input_nomcomunn.touched)">
-                        <font size=2 color="red">Error, máximo 60 caracteres.</font>
-                      </mdb-error>
+                      <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;Nombre común nacional.</label>
                     </div>
                   </div>
                   <div class="row">
@@ -907,33 +898,52 @@
                     data-error=" " data-success=" ">
                   <label for="formCodigo">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
                 </div>
-                <div class="md-form col-md-5 mt10">
-                  <input mdbInputDirective type="text" id="formSubnacion" class="form-control"
-                    formControlName="subnacion" data-error=" " data-success=" ">
-                  <label for="formSubnacion">&nbsp;&nbsp;&nbsp;&nbsp;DEPARTAMENTO</label>
+                <div class="md-form col-md-5 mt-1">
+                  <mat-form-field>
+                    <mat-select placeholder="" panelClass="color-panel-green" formControlName="subnacion">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sSubnacion of criterio_Subnacion" [value]="sSubnacion.value">
+                        {{sSubnacion.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- Fin row -->
               <!-- Inicio row -->
               <div class="row">
-                <div class="md-form col-md-5 mt-10">
-                  <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg"
-                    data-error=" " data-success=" ">
-                  <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE GLOBAL</label>
-                </div>
                 <div class="md-form col-md-5 mt-10">
                   <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren"
                     data-error=" " data-success=" ">
                   <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
                 </div>
-              </div>
-              <!-- Fin row -->
-              <!-- Inicio row -->
-              <div class="row">
                 <div class="md-form col-md-5 mt-10">
                   <input mdbInputDirective type="text" id="formNombrecomunnn" class="form-control"
                     formControlName="nombrecomunnn" data-error=" " data-success=" ">
                   <label for="formNombrecomunnn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div class="row">
+                <div class="col-md-3 mt-20">
+                  <mat-form-field>
+                    <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                        {{sClase.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3 mt-20" *ngIf="clasificacion_comunidad_Buscador">
+                  <mat-form-field>
+                    <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                        {{sTipo.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- Fin row -->
@@ -948,9 +958,10 @@
               <div *ngIf="loading">
                 <img src="assets/imagenes/load.gif">
               </div>
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+              </ngb-alert>
             </div>
-            <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
-            </ngb-alert>
+
 
           </div>
           <!-- Fin modal-content -->
@@ -975,10 +986,6 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>DEPARTAMENTO</th>
                 <td mat-cell *matCellDef="let row"> {{row.departamento}} </td>
               </ng-container>
-              <ng-container matColumnDef="nombreg">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE CIENTÍFICO</th>
-                <td mat-cell *matCellDef="let row"> {{row.nombreg}} </td>
-              </ng-container>
               <ng-container matColumnDef="nombren">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
                 <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
@@ -987,7 +994,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMUN NACIONAL</th>
                 <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
               </ng-container>
-
+              <ng-container matColumnDef="clase">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+                <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
+              </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
                 (click)="mostrar_RastreoElemento_Busqueda(row); fR.select('tab-formulario') ;">

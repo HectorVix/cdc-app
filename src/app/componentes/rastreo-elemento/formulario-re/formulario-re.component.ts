@@ -11,6 +11,9 @@ import { Valor } from '../../../modelo/select/overwiew-valor';
 import { rastreo_Elemento_Modelo } from '../../../modelo/rastreo/rastreo-elemento-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { departamento_Nombre } from '../../../modelo/jerarquizacion/departamento-nombre';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { ratreoElemento_Dato } from '../../../modelo/tabla/rastreo-elemento-dato'
@@ -44,7 +47,7 @@ export class FormularioReComponent implements OnInit {
   selected = new FormControl(0);
   buscarForm: FormGroup;
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigoe', 'departamento', 'nombreg', 'nombren', 'nombrecomunn'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'departamento', 'nombren', 'nombrecomunn', 'clase'];
   dataSource: MatTableDataSource<ratreoElemento_Dato>;
   listaRatreoElementos: Array<ratreoElemento_Dato> = new Array();
   private dataRatreoElemento: any;
@@ -59,6 +62,10 @@ export class FormularioReComponent implements OnInit {
   guardar = false;
   elementoId_Aux: any;
   elementoId: Number;
+  //select 
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
 
   constructor(
     private fb: FormBuilder,
@@ -72,6 +79,7 @@ export class FormularioReComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
     this.obtener_nacion();
     this.obtener_subnacion();
+    this.filtrar_Area();
   }
 
   ngOnInit() {
@@ -153,9 +161,11 @@ export class FormularioReComponent implements OnInit {
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -181,9 +191,10 @@ export class FormularioReComponent implements OnInit {
     this.buscarForm = this.fb.group({
       'codigo': '',
       'subnacion': '',
-      'nombreg': '',
       'nombren': '',
-      'nombrecomunnn': ''
+      'nombrecomunnn': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   buscar_RatreoElemento() {
@@ -198,49 +209,65 @@ export class FormularioReComponent implements OnInit {
     var c = "¬";
     var d = "¬";
     var e = "¬";
+    var f = "¬";
+
     if (this.buscarForm.get('codigo').value)
       a = this.buscarForm.get('codigo').value;
     if (this.buscarForm.get('subnacion').value)
       b = this.buscarForm.get('subnacion').value;
-    if (this.buscarForm.get('nombreg').value)
-      c = this.buscarForm.get('nombreg').value;
     if (this.buscarForm.get('nombren').value)
-      d = this.buscarForm.get('nombren').value;
+      c = this.buscarForm.get('nombren').value;
     if (this.buscarForm.get('nombrecomunnn').value)
-      e = this.buscarForm.get('nombrecomunnn').value;
-    this.rastreoServicio.getRastreosElementos(a, b, c, d, e)
+      d = this.buscarForm.get('nombrecomunnn').value;
+    if (this.buscarForm.get('clase').value)
+      e = this.buscarForm.get('clase').value;
+    if (this.buscarForm.get('comunidad').value)
+      f = this.buscarForm.get('comunidad').value;
+
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.rastreoServicio.getRastreosElementos(a, b, c, d, e, f, decodedToken.sub)
       .subscribe(
         data => {
           this.dataRatreoElemento = data;
           this.loading = false;
           var k = 0;
-          for (let reVal of this.dataRatreoElemento) {
-            k = k + 1;
-            this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+          if (this.dataRatreoElemento) {
+            for (let reVal of this.dataRatreoElemento) {
+              k = k + 1;
+              this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+            }
           }
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se encontro información.', 'warning ');
+          this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+          this.changeSuccessMessage('No se encontro información.', 'primary ');
         });
   }
   buscarTodos() {
     this.listaRatreoElementos = new Array();
     this.loading = true;
-    this.rastreoServicio.all_Rastreo
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.rastreoServicio.get_All_Rastreo(decodedToken.sub)
       .subscribe(
         data => {
           this.dataRatreoElemento = data;
           this.loading = false;
           var k = 0;
-          for (let reVal of this.dataRatreoElemento) {
-            k = k + 1;
-            this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+          if (this.dataRatreoElemento) {
+            for (let reVal of this.dataRatreoElemento) {
+              k = k + 1;
+              this.listaRatreoElementos.push(crearRastreoElemento(k, reVal));
+            }
           }
           this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
         }, err => {
           this.loading = false;
-          this.changeSuccessMessage('No se encontro información.', 'warning ');
+          this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
+          this.changeSuccessMessage('No se encontro información.', 'primary ');
+
         });
   }
   getRastreoElemento_id(id: Number): rastreo_Elemento_Modelo {
@@ -263,6 +290,7 @@ export class FormularioReComponent implements OnInit {
     this.tabPagina1();
     this.guardar = true;
     this.validarCodigoe();
+    window.scrollTo(0, 0);
   }
 
   nuevo() {
@@ -272,6 +300,7 @@ export class FormularioReComponent implements OnInit {
     this.elementoId = null;
     this.crearFormRastreoElemento(new rastreo_Elemento_Modelo);
     this.tabPagina1();
+    window.scrollTo(0, 0);
   }
   updateRastreoElemento(re: rastreo_Elemento_Modelo): void {
     this.loading = true;
@@ -362,12 +391,14 @@ export class FormularioReComponent implements OnInit {
   get_Status_Global(codigoe: String) {
     this.rastreoServicio.get_Status_Global(codigoe).subscribe(
       resStatusGlobal => {
-        this.reForm.get('nombreg').setValue(resStatusGlobal.nombreg);
-        this.reForm.get('rangog').setValue(resStatusGlobal.rangog);
-        this.reForm.get('resprg').setValue(resStatusGlobal.resrg);
-        this.reForm.get('fecharevrg').setValue(this.fechaServicio.get_Fecha(resStatusGlobal.fecharg));
+        if (resStatusGlobal) {
+          // this.reForm.get('nombreg').setValue(resStatusGlobal.nombreg);
+          this.reForm.get('rangog').setValue(resStatusGlobal.rangog);
+          this.reForm.get('resprg').setValue(resStatusGlobal.resrg);
+          this.reForm.get('fecharevrg').setValue(this.fechaServicio.get_Fecha(resStatusGlobal.fecharg));
+        }
       }, err => {
-        this.reForm.get('nombreg').setValue('');
+        // this.reForm.get('nombreg').setValue('');
         this.reForm.get('rangog').setValue('');
         this.reForm.get('resprg').setValue('');
         this.reForm.get('fecharevrg').setValue('');
@@ -377,11 +408,13 @@ export class FormularioReComponent implements OnInit {
   get_Status_Nacional(codigoe: String) {
     this.rastreoServicio.get_Status_Nacional(codigoe).subscribe(
       resStatusNacional => {
-        this.reForm.get('rangon').setValue(resStatusNacional.rangon);
-        this.reForm.get('fecharevrn').setValue(this.fechaServicio.get_Fecha(resStatusNacional.fecharn));
-        this.reForm.get('lestimn').setValue(resStatusNacional.nlestim);
-        this.reForm.get('leprotn').setValue(resStatusNacional.nleprot);
-        this.reForm.get('abundn').setValue(resStatusNacional.nabund);
+        if (resStatusNacional) {
+          this.reForm.get('rangon').setValue(resStatusNacional.rangon);
+          this.reForm.get('fecharevrn').setValue(this.fechaServicio.get_Fecha(resStatusNacional.fecharn));
+          this.reForm.get('lestimn').setValue(resStatusNacional.nlestim);
+          this.reForm.get('leprotn').setValue(resStatusNacional.nleprot);
+          this.reForm.get('abundn').setValue(resStatusNacional.nabund);
+        }
       }, err => {
         this.reForm.get('rangon').setValue('');
         this.reForm.get('fecharevrn').setValue('');
@@ -394,11 +427,13 @@ export class FormularioReComponent implements OnInit {
   get_Status_Subnacional(codigoe: String, subnacion: String) {
     this.rastreoServicio.get_Status_Subnacional(codigoe, subnacion).subscribe(
       resStatusSubnacional => {
-        this.reForm.get('rangos').setValue(resStatusSubnacional.rangos);
-        this.reForm.get('fecharevrs').setValue(this.fechaServicio.get_Fecha(resStatusSubnacional.fecharevrs));
-        this.reForm.get('lestims').setValue(resStatusSubnacional.lestims);
-        this.reForm.get('leprots').setValue(resStatusSubnacional.leprots);
-        this.reForm.get('abunds').setValue(resStatusSubnacional.abunds);
+        if (resStatusSubnacional) {
+          this.reForm.get('rangos').setValue(resStatusSubnacional.rangos);
+          this.reForm.get('fecharevrs').setValue(this.fechaServicio.get_Fecha(resStatusSubnacional.fecharevrs));
+          this.reForm.get('lestims').setValue(resStatusSubnacional.lestims);
+          this.reForm.get('leprots').setValue(resStatusSubnacional.leprots);
+          this.reForm.get('abunds').setValue(resStatusSubnacional.abunds);
+        }
       }, err => {
         this.reForm.get('rangos').setValue('');
         this.reForm.get('fecharevrs').setValue('');
@@ -417,17 +452,45 @@ export class FormularioReComponent implements OnInit {
     this.jerarquizacionServicio.obtener_subnacion();
     this.criterio_Subnacion = this.jerarquizacionServicio.subnacion_Valor;
   }
+
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscarForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
+  filtrar_Area() {
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    switch (decodedToken.sub) {
+      case "Botanica":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
+        break;
+      case "Zoologia":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
+        break;
+      default:
+        break;
+    }
+  }
 }
+
 function crearRastreoElemento(k: Number, re: rastreo_Elemento_Modelo): ratreoElemento_Dato {
   var depto = new departamento_Nombre();
+  var elemento: any = re;//se maneja todo en minusculas
+  var clase = new clase_Elemento();
+
   depto.departamentoNombre(re.subnacion);
+  clase.clase_Nombre(elemento.elementoelementoid.clase);
   return {
     numero: k,
     rastreoId: re.rastreoId,
     codigoe: re.codigoe,
     departamento: depto.valor_Depto,
-    nombreg: re.nombreg,
-    nombren: re.nombren,
-    nombrecomunn: re.nomcomunn
+    nombren: elemento.elementoelementoid.nombren,
+    nombrecomunn: elemento.elementoelementoid.nombrecomunn,
+    clase: clase.valor_Clase,
   };
 }

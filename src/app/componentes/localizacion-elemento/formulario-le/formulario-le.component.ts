@@ -167,12 +167,15 @@ export class FormularioLeComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   tabPagina3() {
     this.selected.setValue(2);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -264,6 +267,7 @@ export class FormularioLeComponent implements OnInit {
     this.getProteccion(row.LocalizacionId);
     this.obtener_Municipios(this.leForm.get('subnacion').value);
     this.validarCodigole(2);
+    window.scrollTo(0, 0);
   }
 
   getLocalizacionElemento_id(id: Number): Localizacion_Modelo {
@@ -286,6 +290,7 @@ export class FormularioLeComponent implements OnInit {
     this.crearFormLocalizacion_Elemento(new Localizacion_Modelo);
     this.tabPagina1();
     this.data_proteccion_DataSource = new LocalDataSource();
+    window.scrollTo(0, 0);
   }
   updateLocalizacionElemento(le: Localizacion_Modelo): void {
     this.loading = true;

@@ -17,13 +17,14 @@ export class RastreoService {
 
   constructor(private http: HttpClient) { }
 
-  //Obtener Rastreo del Elemento por codigoe, subnacion, nombreg, nombrecomunnn
-  getRastreosElementos(a: String, b: String, c: String, d: String, e: String): Observable<rastreo_Elemento_Modelo> {
-    return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+  //Obtener Rastreo del Elemento por codigoe, subnacion, nombrenacional,nombrecomun,rol
+  getRastreosElementos(a: String, b: String, c: String, d: String, e: String, f: String, g: String, ) {
+    return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/buscar/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + f + '/' + g);
   }
 
-  get all_Rastreo() { return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/all'); 
-}
+  get_All_Rastreo(rol: String) {
+    return this.http.get<rastreo_Elemento_Modelo>('/cecon/rastreo/all/' + rol);
+  }
   //Obtener Status Global
   get_Status_Global(codigoe: String) {
     return this.http.get<statusGlobal_Modelo>('/cecon/rastreo/status/global/' + codigoe);

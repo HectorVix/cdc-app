@@ -5,6 +5,9 @@ export class rastreo_Elemento_FormGroup {
     constructor() { }
     getRastreo_Elemento_FormGrup(re: rastreo_Elemento_Modelo): FormGroup {
         var fechaServicio: FechaService = new FechaService();
+        var elemento: any = re;
+        var nombreG = "";
+        var nombreComunn = "";
         var fb: FormBuilder = new FormBuilder();
         var val_exsitu_Aux = re.exsitu;
         var val_exsitu = "";
@@ -12,7 +15,7 @@ export class rastreo_Elemento_FormGroup {
         var val_transparencian = "";
         var val_transparencias_Aux = re.transparencias;
         var val_transparencias = "";
-        //no deja asignar directamente el  valor por el 3 valor que es cuando se selecciona --Ninguna--
+        //no deja asignar directamente el  valor por el 3 valor que es cuando se selecciona --Ningún Valor--
         if (val_exsitu_Aux == true)
             val_exsitu = "" + true;
         if (val_exsitu_Aux == false)
@@ -28,6 +31,10 @@ export class rastreo_Elemento_FormGroup {
         if (val_transparencias_Aux == false)
             val_transparencias = "" + false;
 
+        if (elemento.elementoelementoid) {
+            nombreG = elemento.elementoelementoid.nombren;
+            nombreComunn = elemento.elementoelementoid.nombrecomunn;
+        }
         /**
          * Los ♦ representan los mat-select el resto salvo rastreoId se valida su tamaño  
          */
@@ -46,7 +53,7 @@ export class rastreo_Elemento_FormGroup {
             'orden': new FormControl(re.orden, Validators.maxLength(20)),
             'familia': new FormControl(re.familia, Validators.maxLength(20)),
             'genero': new FormControl(re.genero, Validators.maxLength(20)),
-            'nombreg': new FormControl({ value: '', disabled: true }),
+            'nombreg': new FormControl({ value: nombreG, disabled: false }),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
             'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(2)),
             'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(60)),
@@ -55,9 +62,9 @@ export class rastreo_Elemento_FormGroup {
             'nomcomung': new FormControl(re.nomcomung, Validators.maxLength(60)),
             'comtaxg': new FormControl(re.comtaxg, Validators.maxLength(120)),
             //taxonomia (nacional)
-            'nombren': new FormControl(re.nombren, Validators.maxLength(60)),
+            'nombren': new FormControl({ value: nombreG, disabled: false }),
             'numsinn': re.numsinn,//Number (2)
-            'nomcomunn': new FormControl(re.nomcomunn, Validators.maxLength(60)),
+            'nomcomunn': new FormControl({ value: nombreComunn, disabled: false }),
             'comtaxn': new FormControl(re.comtaxn, Validators.maxLength(120)),
             /**
              * Status (global)
