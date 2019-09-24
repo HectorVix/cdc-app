@@ -95,10 +95,10 @@ export class localizacion_FormGroup {
              * Identificadores
              * Página1
              */
-            'codigole': new FormControl(row.codigole, [Validators.maxLength(14), Validators.required]),
+            'codigole': new FormControl(row.codigole, [Validators.maxLength(25), Validators.required]),
             'ident': val_ident,//♦
             'nombres': new FormControl(row.nombres, Validators.maxLength(60)),
-            'nomcomuns': new FormControl(row.nomcomuns, Validators.maxLength(60)),
+            'nomcomuns': new FormControl(row.nomcomuns, Validators.maxLength(100)),
             'rangog': new FormControl(row.rangog, Validators.maxLength(6)),
             'rangon': new FormControl(row.rangon, Validators.maxLength(6)),
             'rangos': new FormControl(row.rangos, Validators.maxLength(6)),
@@ -114,8 +114,8 @@ export class localizacion_FormGroup {
             'nummarg': new FormControl(row.nummarg, Validators.maxLength(4)),
             'numpunto': new FormControl(row.numpunto, Validators.maxLength(10)),
             'diezdiez': new FormControl(row.diezdiez, Validators.maxLength(5)),
-            'latitud': new FormControl(row.latitud, Validators.maxLength(6)),
-            'longitud': new FormControl(row.longitud, Validators.maxLength(7)),
+            'latitud': new FormControl(row.latitud),
+            'longitud': new FormControl(row.longitud),
             'coords': new FormControl(row.coords, Validators.maxLength(6)),
             'coordn': new FormControl(row.coordn, Validators.maxLength(6)),
             'coorde': new FormControl(row.coorde, Validators.maxLength(7)),

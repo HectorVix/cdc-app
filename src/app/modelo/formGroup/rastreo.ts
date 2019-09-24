@@ -53,7 +53,7 @@ export class rastreo_Elemento_FormGroup {
             'orden': new FormControl(re.orden, Validators.maxLength(20)),
             'familia': new FormControl(re.familia, Validators.maxLength(20)),
             'genero': new FormControl(re.genero, Validators.maxLength(20)),
-            'nombreg': new FormControl({ value: nombreG, disabled: false }),
+            'nombreg': new FormControl({ value: nombreG, disabled: true }),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
             'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(2)),
             'refnombreg': new FormControl(re.refnombreg, Validators.maxLength(60)),
@@ -62,9 +62,9 @@ export class rastreo_Elemento_FormGroup {
             'nomcomung': new FormControl(re.nomcomung, Validators.maxLength(60)),
             'comtaxg': new FormControl(re.comtaxg, Validators.maxLength(120)),
             //taxonomia (nacional)
-            'nombren': new FormControl({ value: nombreG, disabled: false }),
+            'nombren': new FormControl({ value: nombreG, disabled: true }),
             'numsinn': re.numsinn,//Number (2)
-            'nomcomunn': new FormControl({ value: nombreComunn, disabled: false }),
+            'nomcomunn': new FormControl({ value: nombreComunn, disabled: true }),
             'comtaxn': new FormControl(re.comtaxn, Validators.maxLength(120)),
             /**
              * Status (global)

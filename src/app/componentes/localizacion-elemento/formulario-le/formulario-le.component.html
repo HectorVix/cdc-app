@@ -41,7 +41,7 @@
                     <div class="col-md-2 mt-0">
                       <mat-form-field>
                         <mat-select placeholder="IDENT" panelClass="color-panel-green" formControlName="ident">
-                          <mat-option>-- Ninguna --</mat-option>
+                          <mat-option>-- Ningún valor --</mat-option>
                           <mat-option *ngFor="let sIdent of criterio_si_no" [value]="sIdent.value">
                             {{sIdent.viewValue}}
                           </mat-option>
@@ -990,19 +990,63 @@
                     data-error=" " data-success=" ">
                   <label for="formCodigole">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO LOCALIZACIÓN DEL ELEMENTO</label>
                 </div>
-                <div class="md-form col-md-5 mt10">
-                  <input mdbInputDirective type="text" id="formNombres" class="form-control" formControlName="nombres"
-                    data-error=" " data-success=" ">
-                  <label for="formNombres">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE SUBNACIONAL</label>
+                <div class="col-md-3 mt3">
+                  <mat-form-field>
+                    <mat-select placeholder="Departamento" panelClass="color-panel-green" formControlName="depto"
+                      (ngModelChange)="onChangeBuscador()">
+                      <mat-option>-- Ningún valor --</mat-option>
+                      <mat-option *ngFor="let sSubnacion of criterio_Subnacion" [value]="sSubnacion.value">
+                        {{sSubnacion.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3 mt3">
+                  <mat-form-field>
+                    <mat-select placeholder="Municipio" panelClass="color-panel-green" formControlName="municipio">
+                      <mat-option>-- Ningún valor --</mat-option>
+                      <mat-option *ngFor="let sMunicipio of criterio_Municipio" [value]="sMunicipio.value">
+                        {{sMunicipio.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- Fin row -->
               <!-- Inicio row -->
               <div class="row">
                 <div class="md-form col-md-5 mt-10">
-                  <input mdbInputDirective type="text" id="formNomcomuns" class="form-control"
-                    formControlName="nomcomuns" data-error=" " data-success=" ">
-                  <label for="formNomcomuns">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN SUBNACIONAL</label>
+                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren"
+                    data-error=" " data-success=" ">
+                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
+                </div>
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNomcomunn" class="form-control"
+                    formControlName="nombrecomunn" data-error=" " data-success=" ">
+                  <label for="formNomcomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div class="row">
+                <div class="col-md-3 mt-15">
+                  <mat-form-field>
+                    <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                        {{sClase.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3 mt-15" *ngIf="clasificacion_comunidad_Buscador">
+                  <mat-form-field>
+                    <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                        {{sTipo.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- Fin row -->
@@ -1037,6 +1081,22 @@
               <ng-container matColumnDef="codigole">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGOE</th>
                 <td mat-cell *matCellDef="let row"> {{row.codigole}} </td>
+              </ng-container>
+              <ng-container matColumnDef="depto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>DEPTO</th>
+                <td mat-cell *matCellDef="let row"> {{row.depto}} </td>
+              </ng-container>
+              <ng-container matColumnDef="municipio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>MUNICIPIO</th>
+                <td mat-cell *matCellDef="let row"> {{row.municipio}} </td>
+              </ng-container>
+              <ng-container matColumnDef="nombren">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBREN</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
+              </ng-container>
+              <ng-container matColumnDef="clase">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+                <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"

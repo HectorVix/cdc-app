@@ -10,6 +10,10 @@ import { proteccion_Modelo } from '../../../modelo/localizacion/proteccion-model
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarquizacion.service';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { departamento_Nombre } from '../../../modelo/jerarquizacion/departamento-nombre';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
 //--------------tabla------------------------------------
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { localizacionElemento_Dato } from '../../../modelo/tabla/localizacion-elemento-dato'
@@ -66,7 +70,7 @@ export class FormularioLeComponent implements OnInit {
   };
   selected = new FormControl(0);
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigole'];
+  displayedColumns: string[] = ['numero', 'codigole', 'depto', 'municipio', 'nombren', 'clase'];
   dataSource: MatTableDataSource<localizacionElemento_Dato>;
   lista_LE: Array<localizacionElemento_Dato> = new Array();
   dataLE: any;
@@ -81,6 +85,10 @@ export class FormularioLeComponent implements OnInit {
   guardar = false;
   rastreo_Aux: any;
   rastreoId: Number;
+  //--------------------------select 
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
 
   constructor(private fb: FormBuilder,
     private localizacionServicio: LocalizacionService,
@@ -92,6 +100,7 @@ export class FormularioLeComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.lista_LE);
     this.obtener_Subnacion();
     this.obtener_Municipios(this.leForm.get('subnacion').value);
+    this.filtrar_Area();
   }
 
   ngOnInit() {
@@ -207,24 +216,39 @@ export class FormularioLeComponent implements OnInit {
     this.lista_LE = new Array();
     this.data_proteccion_DataSource = new LocalDataSource();
     this.loading = true;
-    //variables necesarias para recuperarse de errores
     var codigole = "¬";
-    var nombres = "¬";
-    var nomcomuns = "¬";
+    var depto = "¬";
+    var municipio = "¬";
+    var nombren = "¬";
+    var nombrecomunn = "¬";
+    var clase = "¬";
+    var comunidad = "¬";
     if (this.buscarForm.get('codigole').value)
       codigole = this.buscarForm.get('codigole').value;
-    if (this.buscarForm.get('nombres').value)
-      nombres = this.buscarForm.get('nombres').value;
-    if (this.buscarForm.get('nomcomuns').value)
-      nomcomuns = this.buscarForm.get('nomcomuns').value;
-    this.localizacionServicio.getLocalizacionesElementos(codigole)
+    if (this.buscarForm.get('depto').value)
+      depto = this.buscarForm.get('depto').value;
+    if (this.buscarForm.get('municipio').value)
+      municipio = this.buscarForm.get('municipio').value;
+    if (this.buscarForm.get('nombrecomunn').value)
+      nombrecomunn = this.buscarForm.get('nombrecomunn').value;
+    if (this.buscarForm.get('nombrecomunn').value)
+      nombrecomunn = this.buscarForm.get('nombrecomunn').value;
+    if (this.buscarForm.get('clase').value)
+      nombrecomunn = this.buscarForm.get('clase').value;
+    if (this.buscarForm.get('comunidad').value)
+      nombrecomunn = this.buscarForm.get('comunidad').value;
+
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.localizacionServicio.getLocalizacionesElementos(codigole, depto, municipio, nombren, nombrecomunn, clase, comunidad,
+      decodedToken.sub)
       .subscribe(
         data => {
           this.dataLE = data;
           var k = 0;
           for (let elementoVal of this.dataLE) {
             k = k + 1;
-            this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
+            this.lista_LE.push(crearLocalizacionElemento(k, elementoVal));
           }
           this.dataSource = new MatTableDataSource(this.lista_LE);
           this.loading = false;
@@ -237,14 +261,16 @@ export class FormularioLeComponent implements OnInit {
     this.lista_LE = new Array();
     this.data_proteccion_DataSource = new LocalDataSource();
     this.loading = true;
-    this.localizacionServicio.all_Localizacion
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.localizacionServicio.get_All_Localizacion(decodedToken.sub)
       .subscribe(
         data => {
           this.dataLE = data;
           var k = 0;
           for (let elementoVal of this.dataLE) {
             k = k + 1;
-            this.lista_LE.push(crearLocalizacionElemento(k, elementoVal.localizacionId, elementoVal.codigole));
+            this.lista_LE.push(crearLocalizacionElemento(k, elementoVal));
           }
           this.dataSource = new MatTableDataSource(this.lista_LE);
           this.loading = false;
@@ -256,8 +282,12 @@ export class FormularioLeComponent implements OnInit {
   crearForm_Buscar() {
     this.buscarForm = this.fb.group({
       'codigole': '',
-      'nombres': '',
-      'nomcomuns': ''
+      'depto': '',
+      'municipio': '',
+      'nombren': '',
+      'nombrecomunn': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   mostrar_LocalizacionElemento_Busqueda(row: localizacionElemento_Dato) {
@@ -464,12 +494,16 @@ export class FormularioLeComponent implements OnInit {
   }
   //Catalogo de Municipios
   obtener_Municipios(departamento: Number) {
-    this.jerarquizacionServicio.obtener_Municipios(departamento);
-    this.criterio_Municipio = this.jerarquizacionServicio.municipio_Valor;
-
+    if (departamento) {
+      this.jerarquizacionServicio.obtener_Municipios(departamento);
+      this.criterio_Municipio = this.jerarquizacionServicio.municipio_Valor;
+    }
   }
   onChange() {
     this.obtener_Municipios(this.leForm.get('subnacion').value);
+  }
+  onChangeBuscador() {
+    this.obtener_Municipios(this.buscarForm.get('depto').value);
   }
   validarCodigole(estado: Number) {
     this.localizacionServicio.get_ValidarCodigoLE(this.leForm.get('codigole').value)
@@ -526,11 +560,45 @@ export class FormularioLeComponent implements OnInit {
           this.leForm.get('nomcomuns').setValue('');
         });
   }
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscarForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
+
+  filtrar_Area() {
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    switch (decodedToken.sub) {
+      case "Botanica":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
+        break;
+      case "Zoologia":
+        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
+        break;
+      default:
+        break;
+    }
+  }
 }
-function crearLocalizacionElemento(k: Number, localizacionId: Number, codigole): localizacionElemento_Dato {
+function crearLocalizacionElemento(k: Number, le): localizacionElemento_Dato {
+  var data_le = le;
+  var depto = new departamento_Nombre();
+  var clase = new clase_Elemento();
+
+  clase.clase_Nombre(le.rastreorastreoid.elementoelementoid.clase);
+  depto.departamentoNombre(le.subnacion);
   return {
     numero: k,
-    LocalizacionId: localizacionId,
-    codigole: codigole
+    LocalizacionId: le.localizacionId,
+    codigole: le.codigole,
+    depto: depto.valor_Depto,
+    municipio: le.subdivision,
+    nombren: le.rastreorastreoid.elementoelementoid.nombren,
+    clase: clase.valor_Clase
   };
 }

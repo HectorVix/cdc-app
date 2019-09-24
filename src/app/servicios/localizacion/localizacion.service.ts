@@ -30,12 +30,14 @@ export class LocalizacionService {
   addProtocoloLE(protocoloLE: protocolo_LE_Modelo) {
     return this.http.post<identificadores_Modelo>('/cecon/protocolo/registro', protocoloLE, httpOptions);
   }
-  //Obtener Localización del Elemento por codigole, nombres, nomcomuns
-  getLocalizacionesElementos(a: String): Observable<Localizacion_Modelo> {
-    return this.http.get<Localizacion_Modelo>('/cecon/localizacion/buscar/' + a);
+  //Obtener Localización del Elemento 
+  getLocalizacionesElementos(codigole: String, depto: String, municipio: String, nombren: String,
+    nombrecomunn: String, clase: String, comunidad: String, rol: String) {
+    return this.http.get<Localizacion_Modelo>('/cecon/localizacion/buscar/' + codigole + '/' + depto +
+      '/' + municipio + '/' + nombren + '/' + nombrecomunn + '/' + clase + '/' + comunidad + '/' + rol);
   }
-  get all_Localizacion() { return this.http.get<Localizacion_Modelo>('/cecon/localizacion/all'); }
-  
+  get_All_Localizacion(rol: String) { return this.http.get<Localizacion_Modelo>('/cecon/localizacion/all/' + rol); }
+
   //Obtener Protocolo Localización del Elemento por codigoe, nombre, nomcomun
   getProtocoloLE(a: String, b: String, c: String): Observable<protocolo_LE_Modelo> {
     return this.http.get<protocolo_LE_Modelo>('/cecon/protocolo/buscar/' + a + '/' + b + '/' + c);
