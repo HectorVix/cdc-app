@@ -612,18 +612,44 @@
                   <label for="formCodigoe">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
                 </div>
                 <div class="md-form col-md-5 mt10">
-                  <input mdbInputDirective type="text" id="formNombreg" class="form-control" formControlName="nombreg"
+                  <input mdbInputDirective type="text" id="formNombren" class="form-control" formControlName="nombren"
                     data-error=" " data-success=" ">
-                  <label for="formNombreg">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE GLOBAL</label>
+                  <label for="formNombren">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
                 </div>
               </div>
               <!-- Fin row -->
               <!-- Inicio row -->
               <div class="row">
                 <div class="md-form col-md-5 mt-10">
-                  <input mdbInputDirective type="text" id="formDescrielem" class="form-control"
-                    formControlName="descrielem" data-error=" " data-success=" ">
-                  <label for="formDescrielem">&nbsp;&nbsp;&nbsp;&nbsp;DESCRIPCIÓN ELEMENTO</label>
+                  <input mdbInputDirective type="text" id="formNombrecomunn" class="form-control"
+                    formControlName="nombrecomunn" data-error=" " data-success=" ">
+                  <label for="formNombrecomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+                </div>
+                <div class="col-md-3 mt-15">
+                  <mat-form-field>
+                    <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                        {{sClase.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div class="row" *ngIf="clasificacion_comunidad_Buscador">
+                <div class="col-md-5">
+                  <label for=""></label>
+                </div>
+                <div class="col-md-4 mt-15">
+                  <mat-form-field>
+                    <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                        {{sTipo.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
               <!-- Fin row -->
@@ -663,13 +689,17 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>CÓDIGO ELEMENTO</th>
                 <td mat-cell *matCellDef="let row"> {{row.codigoe}} </td>
               </ng-container>
-              <ng-container matColumnDef="nombreg">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE GLOBAL</th>
-                <td mat-cell *matCellDef="let row"> {{row.nombreg}} </td>
+              <ng-container matColumnDef="nombren">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
               </ng-container>
-              <ng-container matColumnDef="descrielem">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>DESCRIPCIÓN</th>
-                <td mat-cell *matCellDef="let row"> {{row.descrielem}} </td>
+              <ng-container matColumnDef="nombrecomunn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN NACIONAL</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
+              </ng-container>
+              <ng-container matColumnDef="clase">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+                <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>

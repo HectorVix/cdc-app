@@ -17,6 +17,7 @@ import { GaleriaComponent } from '../../../componentes/galeria/galeria.component
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
 
 @Component({
   selector: 'app-caracterizacion-vertebrados-nacional',
@@ -24,6 +25,9 @@ import { ElementoService } from '../../../servicios/elemento/elemento.service';
   styleUrls: ['./caracterizacion-vertebrados-nacional.component.scss']
 })
 export class CaracterizacionVertebradosNacionalComponent implements OnInit {
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
   caracterizacionVertebradosNacionalForm: FormGroup;
   buscarForm: FormGroup;
   data_distribucion1_DataSource: LocalDataSource = new LocalDataSource();
@@ -257,7 +261,9 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
       'nombreg': '',
       'autor': '',
       'nombren': '',
-      'nombrecomunn': ''
+      'nombrecomunn': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   buscarVertebrado() {
@@ -708,6 +714,15 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   get input_edicionn() { return this.caracterizacionVertebradosNacionalForm.get('edicionn'); }
   get input_actualizan() { return this.caracterizacionVertebradosNacionalForm.get('actualizan'); }
 
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscarForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
 }
 function crearVertebrado(k: Number, vertebradoId: Number, codigoe, nombreg, nombren, nombrecomunn): vertebrado_Dato {
   return {

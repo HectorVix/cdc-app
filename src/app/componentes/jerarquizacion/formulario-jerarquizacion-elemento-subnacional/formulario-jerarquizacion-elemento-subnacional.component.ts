@@ -11,6 +11,7 @@ import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacio
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -31,6 +32,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   criterio_rangos = this.criterio_Jeraquizacion.ls_rango;
   criterio_Nacion = [];
   criterio_Subnacion = this.criterio_Jeraquizacion.ls_Subnacion;
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
   jerarquizacion_SubnacionalForm: FormGroup;
   buscar_Form: FormGroup;
   private _success = new Subject<string>();
@@ -181,7 +185,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       'nacion': 'GT',
       'subnacion': '',
       'nombres': '',
-      'loctips': ''
+      'loctips': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   buscarJerarquizacionSubnacional() {
@@ -346,6 +352,15 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   obtener_subnacion() {
     this.jerarquizacionServicio.obtener_subnacion();
     this.criterio_Subnacion = this.jerarquizacionServicio.subnacion_Valor;
+  }
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscar_Form.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
   }
 }
 function crearSubnacional(k: Number, subnacionalId: Number, codigoe, subnacion, nombres): subnacional_Dato {

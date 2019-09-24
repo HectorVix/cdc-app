@@ -100,7 +100,6 @@ export class FormularioLeComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.lista_LE);
     this.obtener_Subnacion();
     this.obtener_Municipios(this.leForm.get('subnacion').value);
-    this.filtrar_Area();
   }
 
   ngOnInit() {
@@ -568,21 +567,6 @@ export class FormularioLeComponent implements OnInit {
     else
       val = false;
     return val;
-  }
-
-  filtrar_Area() {
-    var jwthelper = new JwtHelperService();
-    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    switch (decodedToken.sub) {
-      case "Botanica":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
-        break;
-      case "Zoologia":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
-        break;
-      default:
-        break;
-    }
   }
 }
 function crearLocalizacionElemento(k: Number, le): localizacionElemento_Dato {

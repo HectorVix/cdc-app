@@ -506,12 +506,33 @@
               <!-- Fin row -->
               <!-- Inicio row -->
               <div class="row">
+                <div class="md-form col-md-5 mt-10">
+                  <input mdbInputDirective type="text" id="formNombrecomunn" class="form-control"
+                    formControlName="nombrecomunn" data-error=" " data-success=" ">
+                  <label for="formNombrecomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+                </div>
                 <div class="col-md-3 mt-15">
                   <mat-form-field>
-                    <mat-select placeholder="NACIÓN" panelClass="color-panel-green" formControlName="nacion">
-                      <!-- <mat-option>-- Ningún valor --</mat-option> -->
-                      <mat-option *ngFor="let sNacion of criterio_Nacion" [value]="sNacion.value">
-                        {{sNacion.viewValue}}
+                    <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                        {{sClase.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Fin row -->
+              <div class="row" *ngIf="clasificacion_comunidad_Buscador">
+                <div class="col-md-5">
+                  <label for=""></label>
+                </div>
+                <div class="col-md-4 mt-15">
+                  <mat-form-field>
+                    <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
+                      <mat-option>--- Ningún valor ---</mat-option>
+                      <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                        {{sTipo.viewValue}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

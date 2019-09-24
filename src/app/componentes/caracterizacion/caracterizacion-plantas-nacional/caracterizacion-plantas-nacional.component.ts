@@ -17,6 +17,7 @@ import { GaleriaComponent } from '../../../componentes/galeria/galeria.component
 import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -24,6 +25,9 @@ import { ElementoService } from '../../../servicios/elemento/elemento.service';
   styleUrls: ['./caracterizacion-plantas-nacional.component.scss']
 })
 export class CaracterizacionPlantasNacionalComponent implements OnInit {
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
   caracterizacionPlantasNacionalForm: FormGroup;
   buscarForm: FormGroup;
   private _success = new Subject<string>();
@@ -258,7 +262,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       'nacion': '',
       'nombren': '',
       'nombrecomunn': '',
-
+      'clase': '',
+      'comunidad': ''
     });
   }
   buscarPlanta() {
@@ -762,6 +767,15 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   get input_autoredn() { return this.caracterizacionPlantasNacionalForm.get('autoredn'); }
   get input_actualizan() { return this.caracterizacionPlantasNacionalForm.get('actualizan'); }
 
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscarForm.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
 }
 function crearPlanta(k: Number, plantaId: Number, codigoe, nacion, nombren, nombrecomunn): planta_Dato {
   return {

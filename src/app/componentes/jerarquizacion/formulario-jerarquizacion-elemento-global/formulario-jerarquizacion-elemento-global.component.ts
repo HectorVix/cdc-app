@@ -10,11 +10,14 @@ import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import { Valor } from '../../../modelo/select/overwiew-valor';
 //--------------tabla------------------------------------
 import { jerarquizacion_Global_FormGroup } from '../../../modelo/formGroup/jerarquizacionGloblal';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { global_Dato } from '../../../modelo/tabla/global-dato'
-import { Valor } from '../../../modelo/select/overwiew-valor';
+
 
 @Component({
   selector: 'app-formulario-jerarquizacion-elemento-global',
@@ -30,6 +33,9 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   criterio_gamenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_gfragil = this.criterio_Jeraquizacion.lg_fragil;
   criterio_rangog = this.criterio_Jeraquizacion.lg_rango;
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
   jerarquizacion_Global_Form: FormGroup;
   buscar_Form: FormGroup;
   private _success = new Subject<string>();
@@ -39,7 +45,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   loading: boolean;
   selected = new FormControl(0);
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigoe', 'nombreg', 'descrielem'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nombrecomunn', 'clase'];
   dataSource: MatTableDataSource<global_Dato>;
   lista_Global: Array<global_Dato> = new Array();
   dataJerarquizacionGlobal: any;
@@ -145,9 +151,11 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -172,8 +180,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   crearForm_Buscar() {
     this.buscar_Form = this.fb.group({
       'codigoe': '',
-      'nombreg': '',
-      'descrielem': ''
+      'nombren': '',
+      'nombrecomunn': '',
+      'clase': '',
+      'comunidad':''
     });
   }
   buscarJerarquizacionGlobal() {
@@ -186,10 +196,10 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     if (this.buscar_Form.get('codigoe').value)
       a = this.buscar_Form.get('codigoe').value;
-    if (this.buscar_Form.get('nombreg').value)
-      b = this.buscar_Form.get('nombreg').value;
-    if (this.buscar_Form.get('descrielem').value)
-      c = this.buscar_Form.get('descrielem').value;
+    if (this.buscar_Form.get('nombren').value)
+      b = this.buscar_Form.get('nombren').value;
+    if (this.buscar_Form.get('nombrecomunn').value)
+      c = this.buscar_Form.get('nombrecomunn').value;
     this.jerarquizacionServicio.getJerarquizacionesGlobal(a, b, c, decodedToken.sub)
       .subscribe(
         data => {
@@ -197,11 +207,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           var k = 0;
           for (let val of this.dataJerarquizacionGlobal) {
             k = k + 1;
-            this.lista_Global.push(crearGlobal(k,
-              val.globalId,
-              val.codigoe,
-              val.nombreg,
-              val.descrielem));
+            this.lista_Global.push(crearGlobal(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Global);
           this.loading = false;
@@ -222,11 +228,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
           var k = 0;
           for (let val of this.dataJerarquizacionGlobal) {
             k = k + 1;
-            this.lista_Global.push(crearGlobal(k,
-              val.globalId,
-              val.codigoe,
-              val.nombreg,
-              val.descrielem));
+            this.lista_Global.push(crearGlobal(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Global);
           this.loading = false;
@@ -254,6 +256,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.crear_Jerarquizacion_Global(this.getJerarquizacionGlobal_id(row.globalId));
     this.tabPagina1();
     this.guardar = true;
+    window.scrollTo(0, 0);
   }
   updateJerarquizacionGlobal(global: jerarquizacion_Global_Modelo): void {
     this.loading = true;
@@ -281,6 +284,7 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     this.crear_Jerarquizacion_Global(new jerarquizacion_Global_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
   }
   // lleva el control de los errores
   //página 1
@@ -329,13 +333,25 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
         this.changeSuccessMessage('Error no se pudo obtener los rangos globales, comprueba que esté disponible el servicio.', 'primary');
       });
   }
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscar_Form.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
+  }
 }
-function crearGlobal(k: Number, globalId: Number, codigoe, nombreg, descrielem): global_Dato {
+function crearGlobal(k: Number, datos_global): global_Dato {
+  var clase = new clase_Elemento();
+  clase.clase_Nombre(datos_global.elementoelementoid.clase);
   return {
     numero: k,
-    globalId: globalId,
-    codigoe: codigoe,
-    nombreg: nombreg,
-    descrielem: descrielem
+    globalId: datos_global.globalId,
+    codigoe: datos_global.codigoe,
+    nombren: datos_global.elementoelementoid.nombren,
+    nombrecomunn: datos_global.elementoelementoid.nombrecomunn,
+    clase: clase.valor_Clase
   };
 }

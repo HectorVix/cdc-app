@@ -2,7 +2,7 @@ export interface global_Dato {
     numero: Number;
     globalId: Number;
     codigoe: String;
-    nombreg: String;
-    descrielem: String;
-
+    nombren: String;
+    nombrecomunn: String;
+    clase: String;
 }

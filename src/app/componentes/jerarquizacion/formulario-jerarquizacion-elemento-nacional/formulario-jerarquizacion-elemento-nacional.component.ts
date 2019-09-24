@@ -10,6 +10,7 @@ import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/j
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { criterio_elemento } from '../../../modelo/select/overview-elemento';
 //--------------tabla------------------------------------
 import { jerarquizacion_Nacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionNacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -31,7 +32,9 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   criterio_namenaz = this.criterio_Jeraquizacion.lgn_amenaz;
   criterio_rangon = this.criterio_Jeraquizacion.ln_rango;
   criterio_Nacion = [];
-
+  criterio_elemento = new criterio_elemento();
+  criterio_clase = this.criterio_elemento.clase;
+  criterio_tipo_comunidad = this.criterio_elemento.tipo_comunidad;
   jerarquizacion_Nacional_Form: FormGroup;
   buscar_Form: FormGroup;
   private _success = new Subject<string>();
@@ -171,7 +174,9 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.buscar_Form = this.fb.group({
       'codigoe': '',
       'nombren': '',
-      'nacion': 'GT'
+      'nombrecomunn': '',
+      'clase': '',
+      'comunidad': ''
     });
   }
   buscarJerarquizacionNacional() {
@@ -186,8 +191,8 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
       a = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nombren').value)
       b = this.buscar_Form.get('nombren').value;
-    if (this.buscar_Form.get('nacion').value)
-      c = this.buscar_Form.get('nacion').value;
+    if (this.buscar_Form.get('nombrecomunn').value)
+      c = this.buscar_Form.get('nombrecomunn').value;
     this.jerarquizacionServicio.getJerarquizacionesNacional(a, b, c, decodedToken.sub)
       .subscribe(
         data => {
@@ -322,6 +327,15 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   obtener_nacion() {
     this.jerarquizacionServicio.obtener_nacion();
     this.criterio_Nacion = this.jerarquizacionServicio.nacion_Valor;
+  }
+  //clasificación de comunidades buscador
+  get clasificacion_comunidad_Buscador() {
+    var val = false;
+    if (this.buscar_Form.get('clase').value == 'C')
+      val = true;
+    else
+      val = false;
+    return val;
   }
 }
 function crearNacional(k: Number, nacionalId: Number, codigoe, nombren, nacion): nacional_Dato {

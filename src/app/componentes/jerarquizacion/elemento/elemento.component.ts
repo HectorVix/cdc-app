@@ -71,8 +71,6 @@ export class ElementoComponent implements OnInit {
     this.crearForm_Elemento(new elemento_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.elementos);
-    this.filtrar_Area();
-
   }
   ngOnInit() {
     setTimeout(() => this.staticAlertClosed = true, 20000);
@@ -352,21 +350,6 @@ export class ElementoComponent implements OnInit {
     else
       val = false;
     return val;
-  }
-
-  filtrar_Area() {
-    var jwthelper = new JwtHelperService();
-    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    switch (decodedToken.sub) {
-      case "Botanica":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
-        break;
-      case "Zoologia":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
-        break;
-      default:
-        break;
-    }
   }
 }
 function crearElemento(k: Number, elemento: elemento_Modelo): ElementoDato {

@@ -79,7 +79,6 @@ export class FormularioReComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
     this.obtener_nacion();
     this.obtener_subnacion();
-    this.filtrar_Area();
   }
 
   ngOnInit() {
@@ -460,20 +459,6 @@ export class FormularioReComponent implements OnInit {
     else
       val = false;
     return val;
-  }
-  filtrar_Area() {
-    var jwthelper = new JwtHelperService();
-    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
-    switch (decodedToken.sub) {
-      case "Botanica":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'A');
-        break;
-      case "Zoologia":
-        this.criterio_clase = this.criterio_clase.filter((val) => val.value !== 'P');
-        break;
-      default:
-        break;
-    }
   }
 }
 
