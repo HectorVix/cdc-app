@@ -33,22 +33,22 @@ export class JerarquizacionService {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/subnacional', jer_subNacional, httpOptions);
   }
   //Obtener jerarquizació global por codigoe, nombreg, descrielem
-  getJerarquizacionesGlobal(a: String, b: String, c: String): Observable<jerarquizacion_Global_Modelo> {
-    return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/buscar/global/' + a + '/' + b + '/' + c);
+  getJerarquizacionesGlobal(a: String, b: String, c: String, rol: String) {
+    return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/buscar/global/' + a + '/' + b + '/' + c + '/' + rol);
   }
   //Obtener jerarquización nacional por codigoe, nombren, nacion
-  getJerarquizacionesNacional(a: String, b: String, c: String): Observable<jerarquizacion_Nacional_Modelo> {
-    return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/nacional/' + a + '/' + b + '/' + c);
+  getJerarquizacionesNacional(a: String, b: String, c: String, rol: String) {
+    return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/nacional/' + a + '/' + b + '/' + c + '/' + rol);
   }
 
   //Obtener jerarquización subnacional por codigoe, nacion, subnacion, nombres, loctips
-  getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String): Observable<jerarquizacion_Subnacional_Modelo> {
-    return this.http.get<jerarquizacion_Subnacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e);
+  getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String, rol: String) {
+    return this.http.get<jerarquizacion_Subnacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + rol);
   }
 
-  get all_Global() { return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/global/all'); }
-  get all_Nacional() { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/nacional/all'); }
-  get all_Subnacional() { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/subnacional/all'); }
+  get_All_Global(rol: String) { return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/global/all/' + rol); }
+  get_All_Nacional(rol: String) { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/nacional/all/' + rol); }
+  get_All_Subnacional(rol: String) { return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/subnacional/all/' + rol); }
 
   //Obtener catalogos de los rangos globaln, nacional y subnacional
   get rangog() { return this.http.get('/cecon/jerarquizacion/rangog'); }

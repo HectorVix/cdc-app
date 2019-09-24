@@ -10,6 +10,7 @@ import { departamento_Nombre } from '../../../modelo/jerarquizacion/departamento
 import { jerarquizacion_Subnacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-subnacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
+import { JwtHelperService } from '@auth0/angular-jwt';
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -191,6 +192,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     var c = "¬";
     var d = "¬";
     var e = "¬";
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+
     if (this.buscar_Form.get('codigoe').value)
       a = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nacion').value)
@@ -201,7 +205,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       d = this.buscar_Form.get('nombres').value;
     if (this.buscar_Form.get('loctips').value)
       e = this.buscar_Form.get('loctips').value;
-    this.jerarquizacionServicio.getJerarquizacionesSubnacional(a, b, c, d, e)
+    this.jerarquizacionServicio.getJerarquizacionesSubnacional(a, b, c, d, e, decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionSubnacional = data;
@@ -224,7 +228,9 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   buscarTodos() {
     this.lista_Subnacional = new Array();
     this.loading = true;
-    this.jerarquizacionServicio.all_Subnacional
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.jerarquizacionServicio.get_All_Subnacional(decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionSubnacional = data;

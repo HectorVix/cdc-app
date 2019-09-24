@@ -9,6 +9,7 @@ import { JerarquizacionService } from '../../../servicios/jerarquizacion/jerarqu
 import { FechaService } from '../../../servicios/fecha/fecha.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 //--------------tabla------------------------------------
 import { jerarquizacion_Global_FormGroup } from '../../../modelo/formGroup/jerarquizacionGloblal';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -181,13 +182,15 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
     var a = "¬";
     var b = "¬";
     var c = "¬";
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     if (this.buscar_Form.get('codigoe').value)
       a = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nombreg').value)
       b = this.buscar_Form.get('nombreg').value;
     if (this.buscar_Form.get('descrielem').value)
       c = this.buscar_Form.get('descrielem').value;
-    this.jerarquizacionServicio.getJerarquizacionesGlobal(a, b, c)
+    this.jerarquizacionServicio.getJerarquizacionesGlobal(a, b, c, decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionGlobal = data;
@@ -210,7 +213,9 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
   buscarTodos() {
     this.lista_Global = new Array();
     this.loading = true;
-    this.jerarquizacionServicio.all_Global
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.jerarquizacionServicio.get_All_Global(decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionGlobal = data;

@@ -9,6 +9,7 @@ import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { jerarquizacion_Nacional_Modelo } from '../../../modelo/jerarquizacion/jerarquizacion-nacional-modelo';
 import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion/confirmacion.component';
 import { Valor } from '../../../modelo/select/overwiew-valor';
+import { JwtHelperService } from '@auth0/angular-jwt';
 //--------------tabla------------------------------------
 import { jerarquizacion_Nacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionNacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -179,13 +180,15 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     var a = "¬";
     var b = "¬";
     var c = "¬";
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
     if (this.buscar_Form.get('codigoe').value)
       a = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nombren').value)
       b = this.buscar_Form.get('nombren').value;
     if (this.buscar_Form.get('nacion').value)
       c = this.buscar_Form.get('nacion').value;
-    this.jerarquizacionServicio.getJerarquizacionesNacional(a, b, c)
+    this.jerarquizacionServicio.getJerarquizacionesNacional(a, b, c, decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionNacional = data;
@@ -208,7 +211,9 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   buscarTodos() {
     this.lista_Nacional = new Array();
     this.loading = true;
-    this.jerarquizacionServicio.all_Nacional
+    var jwthelper = new JwtHelperService();
+    var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+    this.jerarquizacionServicio.get_All_Nacional(decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionNacional = data;
