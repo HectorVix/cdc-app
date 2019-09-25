@@ -569,7 +569,7 @@
                                 </div>
                                 <div class="md-form col-md-5 mt-10">
                                     <input mdbInputDirective type="text" id="formNombreNacional" class="form-control"
-                                        formControlName="nombres" data-error=" " data-success=" ">
+                                        formControlName="nombren" data-error=" " data-success=" ">
                                     <label for="formNombreNacional">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
                                 </div>
                             </div>
@@ -578,17 +578,9 @@
                             <div class="row">
                                 <div class="md-form col-md-5 mt-10">
                                     <input mdbInputDirective type="text" id="formNombrecomunn" class="form-control"
-                                        formControlName="loctips" data-error=" " data-success=" ">
+                                        formControlName="nombrecomunn" data-error=" " data-success=" ">
                                     <label for="formNombrecomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
                                 </div>
-                                <div class="md-form col-md-5 mt-10">
-                                    <input mdbInputDirective type="text" id="formLoctips" class="form-control"
-                                        formControlName="loctips" data-error=" " data-success=" ">
-                                    <label for="formLoctips">&nbsp;&nbsp;&nbsp;&nbsp;LOCTIPS</label>
-                                </div>
-                            </div>
-                            <!-- Fin row -->
-                            <div class="row">
                                 <div class="col-md-3 mt-15">
                                     <mat-form-field>
                                         <mat-select placeholder="CLASE" panelClass="color-panel-green"
@@ -599,6 +591,12 @@
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- Fin row -->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for=""></label>
                                 </div>
                                 <div class="col-md-4 mt-15" *ngIf="clasificacion_comunidad_Buscador">
                                     <mat-form-field>
@@ -658,6 +656,19 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE SUBNACIONAL</th>
                                 <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
                             </ng-container>
+                            <ng-container matColumnDef="nombren">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
+                                <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="nombrecomunn">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
+                                <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="clase">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+                                <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
+                            </ng-container>
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
                                 (click)="mostrar_JerarquizacionSubnacional_Busqueda(row); JerarquizacionSubNacional.select('tab-formulario');">

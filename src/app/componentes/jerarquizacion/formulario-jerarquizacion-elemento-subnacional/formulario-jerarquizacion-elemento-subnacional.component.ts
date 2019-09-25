@@ -12,6 +12,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
 //--------------tabla------------------------------------
 import { jerarquizacion_Subnacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionSubnacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -44,7 +45,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   loading: boolean;
   selected = new FormControl(0);
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigoe', 'subnacion', 'nombres'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'subnacion', 'nombres', 'nombren', 'nombrecomunn', 'clase'];
   dataSource: MatTableDataSource<subnacional_Dato>;
   lista_Subnacional: Array<subnacional_Dato> = new Array();
   dataJerarquizacionSubnacional: any;
@@ -185,7 +186,8 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
       'nacion': 'GT',
       'subnacion': '',
       'nombres': '',
-      'loctips': '',
+      'nombren': '',
+      'nombrecomunn': '',
       'clase': '',
       'comunidad': ''
     });
@@ -193,36 +195,42 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
   buscarJerarquizacionSubnacional() {
     this.lista_Subnacional = new Array();
     this.loading = true;
-    var a = "¬";
-    var b = "¬";
-    var c = "¬";
-    var d = "¬";
-    var e = "¬";
+    var codigoe = "¬";
+    var depto = "¬";
+    var nombres = "¬";
+    var nombren = "¬";
+    var nombrecomunn = "¬";
+    var clase = "¬";
+    var comunidad = "¬";
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
 
     if (this.buscar_Form.get('codigoe').value)
-      a = this.buscar_Form.get('codigoe').value;
-    if (this.buscar_Form.get('nacion').value)
-      b = this.buscar_Form.get('nacion').value;
+      codigoe = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('subnacion').value)
-      c = this.buscar_Form.get('subnacion').value;
+      depto = this.buscar_Form.get('subnacion').value;
     if (this.buscar_Form.get('nombres').value)
-      d = this.buscar_Form.get('nombres').value;
-    if (this.buscar_Form.get('loctips').value)
-      e = this.buscar_Form.get('loctips').value;
-    this.jerarquizacionServicio.getJerarquizacionesSubnacional(a, b, c, d, e, decodedToken.sub)
+      nombres = this.buscar_Form.get('nombres').value;
+    if (this.buscar_Form.get('nombren').value)
+      nombren = this.buscar_Form.get('nombren').value;
+    if (this.buscar_Form.get('nombrecomunn').value)
+      nombrecomunn = this.buscar_Form.get('nombrecomunn').value;
+    if (this.buscar_Form.get('clase').value)
+      clase = this.buscar_Form.get('clase').value;
+    if (this.buscar_Form.get('comunidad').value)
+      comunidad = this.buscar_Form.get('comunidad').value;
+
+    this.jerarquizacionServicio.getJerarquizacionesSubnacional(codigoe,
+      depto, nombres,
+      nombren, nombrecomunn, clase, comunidad,
+      decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionSubnacional = data;
           var k = 0;
           for (let val of this.dataJerarquizacionSubnacional) {
             k = k + 1;
-            this.lista_Subnacional.push(crearSubnacional(k,
-              val.subnacionalId,
-              val.codigoe,
-              val.subnacion,
-              val.nombres));
+            this.lista_Subnacional.push(crearSubnacional(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Subnacional);
           this.loading = false;
@@ -243,11 +251,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
           var k = 0;
           for (let val of this.dataJerarquizacionSubnacional) {
             k = k + 1;
-            this.lista_Subnacional.push(crearSubnacional(k,
-              val.subnacionalId,
-              val.codigoe,
-              val.subnacion,
-              val.nombres));
+            this.lista_Subnacional.push(crearSubnacional(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Subnacional);
           this.loading = false;
@@ -273,12 +277,15 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     this.crear_Jerarquizacion_Subnacional(this.getJerarquizacionSubnacional_id(row.subnacionalId));
     this.tabPagina1();
     this.guardar = true;
+    window.scrollTo(0, 0);
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   updateJerarquizacionSubnacional(subnacional: jerarquizacion_Subnacional_Modelo): void {
     this.loading = true;
@@ -307,6 +314,7 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     this.crear_Jerarquizacion_Subnacional(new jerarquizacion_Subnacional_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
   }
 
   //lleva el control de los errores
@@ -363,14 +371,19 @@ export class FormularioJerarquizacionElementoSubnacionalComponent implements OnI
     return val;
   }
 }
-function crearSubnacional(k: Number, subnacionalId: Number, codigoe, subnacion, nombres): subnacional_Dato {
+function crearSubnacional(k: Number, datos_subnacional): subnacional_Dato {
   var depto = new departamento_Nombre();
-  depto.departamentoNombre(subnacion);
+  var clase = new clase_Elemento();
+  depto.departamentoNombre(datos_subnacional.subnacion);
+  clase.clase_Nombre(datos_subnacional.elementoelementoid.clase);
   return {
     numero: k,
-    subnacionalId: subnacionalId,
-    codigoe: codigoe,
+    subnacionalId: datos_subnacional.subnacionalId,
+    codigoe: datos_subnacional.codigoe,
     subnacion: depto.valor_Depto,
-    nombres: nombres
+    nombres: datos_subnacional.nombres,
+    nombren: datos_subnacional.elementoelementoid.nombren,
+    nombrecomunn: datos_subnacional.elementoelementoid.nombrecomunn,
+    clase: clase.valor_Clase
   };
 }

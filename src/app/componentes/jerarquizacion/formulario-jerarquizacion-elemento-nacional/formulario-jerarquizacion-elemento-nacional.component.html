@@ -576,9 +576,13 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
                 <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
               </ng-container>
-              <ng-container matColumnDef="nacion">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>NACIÓN</th>
-                <td mat-cell *matCellDef="let row"> {{row.nacion}} </td>
+              <ng-container matColumnDef="nombrecomunn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRECOMUNN</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
+              </ng-container>
+              <ng-container matColumnDef="clase">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
+                <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"

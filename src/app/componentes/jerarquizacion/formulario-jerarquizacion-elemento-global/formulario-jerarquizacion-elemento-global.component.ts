@@ -183,24 +183,34 @@ export class FormularioJerarquizacionElementoGlobalComponent implements OnInit {
       'nombren': '',
       'nombrecomunn': '',
       'clase': '',
-      'comunidad':''
+      'comunidad': ''
     });
   }
   buscarJerarquizacionGlobal() {
     this.lista_Global = new Array();
     this.loading = true;
-    var a = "¬";
-    var b = "¬";
-    var c = "¬";
+    var codigoe = "¬";
+    var nombren = "¬";
+    var nombrecomunn = "¬";
+    var clase = "¬";
+    var comunidad = "¬";
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+
     if (this.buscar_Form.get('codigoe').value)
-      a = this.buscar_Form.get('codigoe').value;
+      codigoe = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nombren').value)
-      b = this.buscar_Form.get('nombren').value;
+      nombren = this.buscar_Form.get('nombren').value;
     if (this.buscar_Form.get('nombrecomunn').value)
-      c = this.buscar_Form.get('nombrecomunn').value;
-    this.jerarquizacionServicio.getJerarquizacionesGlobal(a, b, c, decodedToken.sub)
+      nombrecomunn = this.buscar_Form.get('nombrecomunn').value;
+    if (this.buscar_Form.get('clase').value)
+      clase = this.buscar_Form.get('clase').value;
+    if (this.buscar_Form.get('comunidad').value)
+      comunidad = this.buscar_Form.get('comunidad').value;
+
+    this.jerarquizacionServicio.getJerarquizacionesGlobal(codigoe,
+      nombren, nombrecomunn, clase, comunidad,
+      decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionGlobal = data;

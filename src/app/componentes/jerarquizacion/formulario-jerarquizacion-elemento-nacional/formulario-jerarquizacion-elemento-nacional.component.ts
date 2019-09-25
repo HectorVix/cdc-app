@@ -11,6 +11,7 @@ import { ConfirmacionComponent } from '../../../componentes/dialogo/confirmacion
 import { Valor } from '../../../modelo/select/overwiew-valor';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import { clase_Elemento } from '../../../modelo/jerarquizacion/clase-elemento';
 //--------------tabla------------------------------------
 import { jerarquizacion_Nacional_FormGroup } from '../../../modelo/formGroup/jerarquizacionNacional';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
@@ -44,7 +45,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   loading: boolean;
   selected = new FormControl(0);
   //---------------------------------tabla
-  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nacion'];
+  displayedColumns: string[] = ['numero', 'codigoe', 'nombren', 'nombrecomunn', 'clase'];
   dataSource: MatTableDataSource<nacional_Dato>;
   lista_Nacional: Array<nacional_Dato> = new Array();
   dataJerarquizacionNacional: any;
@@ -146,9 +147,11 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -182,29 +185,35 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
   buscarJerarquizacionNacional() {
     this.lista_Nacional = new Array();
     this.loading = true;
-    var a = "¬";
-    var b = "¬";
-    var c = "¬";
+    var codigoe = "¬";
+    var nombren = "¬";
+    var nombrecomunn = "¬";
+    var clase = "¬";
+    var comunidad = "¬";
     var jwthelper = new JwtHelperService();
     var decodedToken = jwthelper.decodeToken(localStorage.getItem('userToken'));
+
     if (this.buscar_Form.get('codigoe').value)
-      a = this.buscar_Form.get('codigoe').value;
+      codigoe = this.buscar_Form.get('codigoe').value;
     if (this.buscar_Form.get('nombren').value)
-      b = this.buscar_Form.get('nombren').value;
+      nombren = this.buscar_Form.get('nombren').value;
     if (this.buscar_Form.get('nombrecomunn').value)
-      c = this.buscar_Form.get('nombrecomunn').value;
-    this.jerarquizacionServicio.getJerarquizacionesNacional(a, b, c, decodedToken.sub)
+      nombrecomunn = this.buscar_Form.get('nombrecomunn').value;
+    if (this.buscar_Form.get('clase').value)
+      clase = this.buscar_Form.get('clase').value;
+    if (this.buscar_Form.get('comunidad').value)
+      comunidad = this.buscar_Form.get('comunidad').value;
+
+    this.jerarquizacionServicio.getJerarquizacionesNacional(codigoe,
+      nombren, nombrecomunn, clase, comunidad,
+      decodedToken.sub)
       .subscribe(
         data => {
           this.dataJerarquizacionNacional = data;
           var k = 0;
           for (let val of this.dataJerarquizacionNacional) {
             k = k + 1;
-            this.lista_Nacional.push(crearNacional(k,
-              val.nacionalId,
-              val.codigoe,
-              val.nombren,
-              val.nacion));
+            this.lista_Nacional.push(crearNacional(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Nacional);
           this.loading = false;
@@ -225,11 +234,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
           var k = 0;
           for (let val of this.dataJerarquizacionNacional) {
             k = k + 1;
-            this.lista_Nacional.push(crearNacional(k,
-              val.nacionalId,
-              val.codigoe,
-              val.nombren,
-              val.nacion));
+            this.lista_Nacional.push(crearNacional(k, val));
           }
           this.dataSource = new MatTableDataSource(this.lista_Nacional);
           this.loading = false;
@@ -255,6 +260,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.createFormJerarquizacionNacional(this.getJerarquizacionNacional_id(row.nacionalId));
     this.tabPagina1();
     this.guardar = true;
+    window.scrollTo(0, 0);
   }
   updateJerarquizacionNacional(nacional: jerarquizacion_Nacional_Modelo): void {
     this.loading = true;
@@ -283,6 +289,7 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     this.createFormJerarquizacionNacional(new jerarquizacion_Nacional_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
   }
 
   //lleva el control de los errores
@@ -338,12 +345,15 @@ export class FormularioJerarquizacionElementoNacionalComponent implements OnInit
     return val;
   }
 }
-function crearNacional(k: Number, nacionalId: Number, codigoe, nombren, nacion): nacional_Dato {
+function crearNacional(k: Number, datos_nacional): nacional_Dato {
+  var clase = new clase_Elemento();
+  clase.clase_Nombre(datos_nacional.elementoelementoid.clase);
   return {
     numero: k,
-    nacionalId: nacionalId,
-    codigoe: codigoe,
-    nombren: nombren,
-    nacion: nacion
+    nacionalId: datos_nacional.nacionalId,
+    codigoe: datos_nacional.codigoe,
+    nombren: datos_nacional.elementoelementoid.nombren,
+    nombrecomunn: datos_nacional.elementoelementoid.nombrecomunn,
+    clase: clase.valor_Clase
   };
 }

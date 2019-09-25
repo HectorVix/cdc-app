@@ -32,18 +32,31 @@ export class JerarquizacionService {
   addJerarquizacionSubnacional(jer_subNacional: jerarquizacion_Subnacional_Modelo): Observable<respuesta_cdc_Modelo> {
     return this.http.post<respuesta_cdc_Modelo>('/cecon/jerarquizacion/registro/subnacional', jer_subNacional, httpOptions);
   }
-  //Obtener jerarquizació global por codigoe, nombreg, descrielem
-  getJerarquizacionesGlobal(a: String, b: String, c: String, rol: String) {
-    return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/buscar/global/' + a + '/' + b + '/' + c + '/' + rol);
-  }
-  //Obtener jerarquización nacional por codigoe, nombren, nacion
-  getJerarquizacionesNacional(a: String, b: String, c: String, rol: String) {
-    return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/nacional/' + a + '/' + b + '/' + c + '/' + rol);
+
+  getJerarquizacionesGlobal(codigoe: String,
+    nombren: String, nombrecomunn: String, clase: String, comunidad: String,
+    rol: String) {
+    return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/buscar/global/' + codigoe + '/'
+      + nombren + '/' + nombrecomunn + '/' + clase + '/' + comunidad + '/'
+      + rol);
   }
 
-  //Obtener jerarquización subnacional por codigoe, nacion, subnacion, nombres, loctips
-  getJerarquizacionesSubnacional(a: String, b: String, c: String, d: String, e: String, rol: String) {
-    return this.http.get<jerarquizacion_Subnacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + a + '/' + b + '/' + c + '/' + d + '/' + e + '/' + rol);
+  getJerarquizacionesNacional(codigoe: String,
+    nombren: String, nombrecomunn: String, clase: String, comunidad: String,
+    rol: String) {
+    return this.http.get<jerarquizacion_Nacional_Modelo>('/cecon/jerarquizacion/buscar/nacional/' + codigoe + '/'
+      + nombren + '/' + nombrecomunn + '/' + '/' + clase + '/' + comunidad + '/' +
+      rol);
+  }
+
+  getJerarquizacionesSubnacional(codigoe: String,
+    depto: String, nombres: String,
+    nombren: String, nombrecomunn: String, clase: String, comunidad: String,
+    rol: String) {
+    return this.http.get<jerarquizacion_Subnacional_Modelo>('/cecon/jerarquizacion/buscar/subnacional/' + codigoe + '/'
+      + depto + '/' + nombres + '/'
+      + nombren + '/' + nombrecomunn + '/' + clase + '/' + comunidad + '/'
+      + rol);
   }
 
   get_All_Global(rol: String) { return this.http.get<jerarquizacion_Global_Modelo>('/cecon/jerarquizacion/global/all/' + rol); }

@@ -133,107 +133,107 @@
     </mat-tab>
     <mat-tab label="Buscar">
       <div class="card-body">
-      <div class="modal-content mat-elevation-z4">
-        <div class="modal-header color-green"></div>
-        <form [formGroup]="buscarForm ">
-          <!-- Inicio row -->
-          <div class="row">
-            <div class="md-form col-md-5 mt10">
-              <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe"
-                data-error=" " data-success=" ">
-              <label for="formCodigoe">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
+        <div class="modal-content mat-elevation-z4">
+          <div class="modal-header color-green"></div>
+          <form [formGroup]="buscarForm ">
+            <!-- Inicio row -->
+            <div class="row">
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formCodigoe" class="form-control" formControlName="codigoe"
+                  data-error=" " data-success=" ">
+                <label for="formCodigoe">&nbsp;&nbsp;&nbsp;&nbsp;CÓDIGO DEL ELEMENTO</label>
+              </div>
+              <div class="md-form col-md-5 mt10">
+                <input mdbInputDirective type="text" id="formNombreNacional" class="form-control"
+                  formControlName="nombren" data-error=" " data-success=" ">
+                <label for="formNombreNacional">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
+              </div>
             </div>
-            <div class="md-form col-md-5 mt10">
-              <input mdbInputDirective type="text" id="formNombrecomunn" class="form-control"
-                formControlName="nombrecomunn" data-error=" " data-success=" ">
-              <label for="formNombrecomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN</label>
+            <!-- Fin row -->
+            <!-- Inicio row -->
+            <div class="row">
+              <div class="md-form col-md-5 mt-15">
+                <input mdbInputDirective type="text" id="formNombrecomunn" class="form-control"
+                  formControlName="nombrecomunn" data-error=" " data-success=" ">
+                <label for="formNombrecomunn">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE COMÚN NACIONAL</label>
+              </div>
+              <div class="col-md-3 mt-15">
+                <mat-form-field>
+                  <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
+                      {{sClase.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Fin row -->
+            <div class="row" *ngIf="clasificacion_comunidad_Buscador">
+              <div class="col-md-5">
+                <label for=""></label>
+              </div>
+              <div class="col-md-4 mt-15">
+                <mat-form-field>
+                  <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
+                    <mat-option>--- Ningún valor ---</mat-option>
+                    <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
+                      {{sTipo.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Fin row -->
+            <div>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarElemento()">Buscar</button>
+              <button class="btn color-green waves-light" mdbWavesEffect (click)="buscar_Todos_Elementos()">Buscar
+                Todos</button>
+            </div>
+          </form>
+          <div class="text-center">
+            <div *ngIf="loading">
+              <img src="assets/imagenes/load.gif">
             </div>
           </div>
-          <!-- Fin row -->
-          <!-- Inicio row -->
-          <div class="row">
-            <div class="md-form col-md-5 mt-10">
-              <input mdbInputDirective type="text" id="formNombreNacional" class="form-control"
-                formControlName="nombren" data-error=" " data-success=" ">
-              <label for="formNombreNacional">&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE NACIONAL</label>
-            </div>
-            <div class="col-md-3 mt-15">
-              <mat-form-field>
-                <mat-select placeholder="CLASE" panelClass="color-panel-green" formControlName="clase">
-                  <mat-option>--- Ningún valor ---</mat-option>
-                  <mat-option *ngFor="let sClase of criterio_clase" [value]="sClase.value">
-                    {{sClase.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <!-- Fin row -->
-          <div class="row" *ngIf="clasificacion_comunidad_Buscador">
-            <div class="col-md-5">
-              <label for=""></label>
-            </div>
-            <div class="col-md-4 mt-15">
-              <mat-form-field>
-                <mat-select placeholder="COMUNIDAD" panelClass="color-panel-green" formControlName="comunidad">
-                  <mat-option>--- Ningún valor ---</mat-option>
-                  <mat-option *ngFor="let sTipo of criterio_tipo_comunidad" [value]="sTipo.value">
-                    {{sTipo.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <!-- Fin row -->
-          <div>
-            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscarElemento()">Buscar</button>
-            <button class="btn color-green waves-light" mdbWavesEffect (click)="buscar_Todos_Elementos()">Buscar
-              Todos</button>
-          </div>
-        </form>
-        <div class="text-center">
-          <div *ngIf="loading">
-            <img src="assets/imagenes/load.gif">
-          </div>
+          <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+          </ngb-alert>
         </div>
-        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
-        </ngb-alert>
-      </div>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
-      </mat-form-field>
-      <div class="mat-elevation-z8" *ngIf="dataSource">
-        <table mat-table [dataSource]="dataSource" matSort>
-          <!-- No. Column -->
-          <div class="col-md-1">
-            <ng-container matColumnDef="numero">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-              <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+        </mat-form-field>
+        <div class="mat-elevation-z8" *ngIf="dataSource">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <!-- No. Column -->
+            <div class="col-md-1">
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+                <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+              </ng-container>
+            </div>
+            <ng-container matColumnDef="codigoe">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGOE</th>
+              <td mat-cell *matCellDef="let row"> {{row.codigoe}} </td>
             </ng-container>
-          </div>
-          <ng-container matColumnDef="codigoe">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>CODIGOE</th>
-            <td mat-cell *matCellDef="let row"> {{row.codigoe}} </td>
-          </ng-container>
-          <ng-container matColumnDef="nombren">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
-            <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
-          </ng-container>
-          <ng-container matColumnDef="nombrecomunn">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
-            <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
-          </ng-container>
-          <ng-container matColumnDef="clase">
+            <ng-container matColumnDef="nombren">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE NACIONAL</th>
+              <td mat-cell *matCellDef="let row"> {{row.nombren}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nombrecomunn">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE COMÚN</th>
+              <td mat-cell *matCellDef="let row"> {{row.nombrecomunn}} </td>
+            </ng-container>
+            <ng-container matColumnDef="clase">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>CLASE</th>
               <td mat-cell *matCellDef="let row"> {{row.clase}} </td>
             </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
-            (click)="mostrar_Elemento_Buscado(row);">
-          </tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="color-green"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="base-element-row"
+              (click)="mostrar_Elemento_Buscado(row);">
+            </tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

@@ -3,5 +3,6 @@ export interface nacional_Dato {
     nacionalId: Number;
     codigoe: String;
     nombren: String;
-    nacion: String;
+    nombrecomunn: String;
+    clase: String;
 }
