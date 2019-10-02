@@ -6,6 +6,12 @@ import { FooterComponent } from './footer/footer.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatButtonModule, MatDialogModule,
+  MatSelectModule, MatFormFieldModule
+} from '@angular/material';
+
 @NgModule({
   declarations: [
     FooterComponent,
@@ -14,9 +20,13 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule,
+    NgbModule.forRoot(),
     BrowserModule,
     MDBBootstrapModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule, MatDialogModule,
+    MatSelectModule, MatFormFieldModule,
 
   ],
   exports: [

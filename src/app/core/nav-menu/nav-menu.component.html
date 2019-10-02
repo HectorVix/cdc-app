@@ -52,7 +52,8 @@
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/perfil">Mi cuenta</a>
           <div *ngIf="rolAdmin">
-            <a class="dropdown-item waves-light menu-hover" mdbWavesEffect routerLink="/perfil">Crear cuenta</a>
+            <a class="dropdown-item waves-light menu-hover" mdbWavesEffect (click)="formRegistro.show()">Crear
+              cuenta</a>
           </div>
           <a class="dropdown-item waves-light menu-hover" mdbWavesEffect (click)="Logout()">Cerrar sesión</a>
         </div>
@@ -63,3 +64,87 @@
   <!-- Collapsible content -->
 </mdb-navbar>
 <!--/.Navbar-->
+<!--Modal: Registro form-->
+<div mdbModal #formRegistro="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-notify modal-warning" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header color-green darken-3 white-text">
+        <h4 class="title">
+          <i class="fa fa-pencil"></i> Registro</h4>
+        <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close"
+          (click)="formRegistro.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mb-0">
+        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+          {{ successMessage }}</ngb-alert>
+        <form [formGroup]="registroForm">
+          <div class="form-row">
+            <div class="col">
+              <div class="md-form">
+                <i class="fa fa-user-circle prefix"></i>
+                <input type="text" id="materialRegisterFormFirstName" class="form-control" formControlName="nombre"
+                  mdbInputDirective>
+                <label for="materialRegisterFormFirstName">Nombre</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="md-form">
+                <input type="email" id="materialRegisterFormLastName" class="form-control" formControlName="apellido"
+                  mdbInputDirective>
+                <label for="materialRegisterFormLastName">Apellido</label>
+              </div>
+            </div>
+          </div>
+          <div class="md-form form-sm">
+            <i class="fa fa-envelope prefix"></i>
+            <input mdbInputDirective type="email" id="email" formControlName="email" class="form-control">
+            <label for="email">Correo</label>
+          </div>
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix "></i>
+            <input mdbInputDirective type="password" id="contrasena" formControlName="contrasena" class="form-control"
+            data-error="Mínimo 8 caracteres">
+            <label for="contrasena">Contraseña</label>
+          </div>
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix "></i>
+            <input mdbInputDirective type="password" id="repetir_Contrasena" formControlName="repetir_contrasena"
+              class="form-control" data-error=" " data-success="success">
+            <label for="repetir_Contrasena">Repetir contraseña</label>
+          </div>
+          <div *ngIf="registroForm.get('repetir_contrasena').errors &&
+                      registroForm.get('repetir_contrasena').dirty &&
+                      registroForm.get('repetir_contrasena').errors.validarContrasena">
+            <font size=4 color="red">Las contraseñas no coinciden!</font>
+          </div>
+          <div class="text-center mt-1-half">
+            <div class="md-form form-sm">
+              <select formControlName="rol">
+                <option value="" disabled>ELIJE UN ROL</option>
+                <option *ngFor="let usRol of criterio_Rol" [ngValue]="usRol.value">
+                  {{usRol.viewValue}}
+                </option>
+              </select>
+            </div>
+            <div *ngIf="loading">
+              <img src="assets/imagenes/load.gif">
+            </div>
+            <button class="btn color-green mb-2 waves-light" mdbWavesEffect (click)="rebuildFormRegistro()">Nuevo
+            </button>
+            <button class="btn color-green mb-2 waves-light" mdbWavesEffect [disabled]="!registroForm.valid"
+              (click)="guardarRegistro()">Registrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Registro form-->

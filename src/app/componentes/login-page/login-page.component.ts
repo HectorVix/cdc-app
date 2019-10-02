@@ -115,7 +115,7 @@ export class LoginPageComponent implements OnInit {
     this.registroForm = this.fb2.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
+      fechaNacimiento: ['',Validators.required],
       email: ['', [Validators.email, Validators.required]],
       contrasena: ['', Validators.required],
 
