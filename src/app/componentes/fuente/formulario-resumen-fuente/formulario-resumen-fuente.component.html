@@ -11,7 +11,7 @@
           <div class="col-md-2">
             <label for="">DOCUMENTO:</label>
           </div>
-          <div class=" col-md-4 mt10">
+          <div class="col-md-4 mt10">
             <mat-form-field>
               <mat-select placeholder=" " panelClass="color-panel-green" formControlName="naturalezadocumento">
                 <mat-option>-- Ningún valor --</mat-option>
@@ -70,6 +70,8 @@
           <mat-tab-group dynamicHeight [selectedIndex]="selectedArchivos.value"
             (selectedIndexChange)="selectedArchivos.setValue($event)">
             <mat-tab label="Nuevos Archivos">
+              <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">{{ successMessage }}
+              </ngb-alert>
               <div class="form-group">
                 <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
                 <div>
@@ -118,33 +120,33 @@
             <label for="">S:</label>
           </div>
           <div class="md-form  col-md-2 mt-5">
-            <input mdbInputDirective mdbValidate type="text" id="formRangoG" class="form-control"
+            <input mdbInputDirective mdbValidate type="text" id="formCoords" class="form-control"
               formControlName="coords">
-            <label for="formRangoG"></label>
+            <label for="formCoords"></label>
             <mdb-error *ngIf="input_coords.invalid && (input_coords.dirty || input_coords.touched)">
               <font size=2 color="red">Error, máximo 6 caracteres.</font>
             </mdb-error>
           </div>
           <div class="md-form col-md-2 mt-5">
-            <input mdbInputDirective mdbValidate type="text" id="formRangoN" class="form-control"
+            <input mdbInputDirective mdbValidate type="text" id="formCoordn" class="form-control"
               formControlName="coordn">
-            <label for="formRangoN">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
+            <label for="formCoordn">&nbsp;&nbsp;&nbsp;&nbsp;N</label>
             <mdb-error *ngIf="input_coordn.invalid && (input_coordn.dirty || input_coordn.touched)">
               <font size=2 color="red">Error, máximo 6 caracteres.</font>
             </mdb-error>
           </div>
           <div class="md-form col-md-2 mt-5">
-            <input mdbInputDirective mdbValidate type="text" id="formRangos" class="form-control"
+            <input mdbInputDirective mdbValidate type="text" id="formCoorde" class="form-control"
               formControlName="coorde">
-            <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
+            <label for="formCoorde">&nbsp;&nbsp;&nbsp;&nbsp;E</label>
             <mdb-error *ngIf="input_coorde.invalid && (input_coorde.dirty || input_coorde.touched)">
               <font size=2 color="red">Error, máximo 7 caracteres.</font>
             </mdb-error>
           </div>
           <div class="md-form col-md-2 mt-5">
-            <input mdbInputDirective mdbValidate type="text" id="formRangos" class="form-control"
+            <input mdbInputDirective mdbValidate type="text" id="formCoordo" class="form-control"
               formControlName="coordo">
-            <label for="formRangos">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
+            <label for="formCoordo">&nbsp;&nbsp;&nbsp;&nbsp;O</label>
             <mdb-error *ngIf="input_coordo.invalid && (input_coordo.dirty || input_coordo.touched)">
               <font size=2 color="red">Error, máximo 7 caracteres.</font>
             </mdb-error>

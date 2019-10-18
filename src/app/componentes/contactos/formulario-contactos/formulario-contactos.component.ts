@@ -43,7 +43,7 @@ export class FormularioContactosComponent implements OnInit {
   //------------------------------------------
   editar = true;
   guardar = false;
-  data_contacto_DataSource: LocalDataSource = new LocalDataSource();
+  //data_contacto_DataSource: LocalDataSource = new LocalDataSource();
   settings_contacto = {
     add: {
       addButtonContent: '<i class="fa  fa-plus prefix"></i> Nuevo',
@@ -104,9 +104,11 @@ export class FormularioContactosComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -226,6 +228,7 @@ export class FormularioContactosComponent implements OnInit {
   mostrar_Contacto_Busqueda(row: contacto_Dato) {
     this.crearForm_Contacto(this.getContacto_id(row.contactoId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
   }
   updateContacto(contacto: contacto_Modelo): void {
@@ -256,6 +259,9 @@ export class FormularioContactosComponent implements OnInit {
     this.crearForm_Contacto(new contacto_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
+    this.lista_Contacto = new Array();
+    this.dataSource = new MatTableDataSource(this.lista_Contacto);
   }
   onCreateConfirm(event): void {
     if (this.editar) { // se esta guardando un nuevo registro

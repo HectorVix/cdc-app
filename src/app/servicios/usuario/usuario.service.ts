@@ -43,4 +43,8 @@ export class UsuarioService {
       });
   }
   get rol_Valor() { return this.criterio_Rol; }
+
+  actualizarPefil(us: usuario_Modelo) {
+    return this.http.post<respuesta_cdc_Modelo>('/cecon/usuario/update/perfil', us, httpOptions);
+  }
 }

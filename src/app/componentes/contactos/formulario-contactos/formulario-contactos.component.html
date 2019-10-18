@@ -32,9 +32,9 @@
                       </div>
                       <div class="md-form col-md-5 mt10" *ngIf="guardar">
                         <i class="fa fa-id-card prefix"></i>
-                        <input mdbInputDirective type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective type="text" id="formNumident2" class="form-control"
                           formControlName="numident" data-error=" " data-success=" " disabled>
-                        <label for="formNumident"></label>
+                        <label for="formNumident2"></label>
                       </div>
                     </div>
                     <!-- fin row -->
@@ -59,7 +59,7 @@
                         <label for="">TITULO:</label>
                       </div>
                       <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formTitulo" class="form-control"
                           formControlName="titulo">
                         <mdb-error *ngIf="input_titulo.invalid && (input_titulo.dirty || input_titulo.touched)">
                           <font size=2 color="red">Error, máximo 60 caracteres.</font>
@@ -87,7 +87,7 @@
                         <label for="">APELLIDO.1:</label>
                       </div>
                       <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formApellido1" class="form-control"
                           formControlName="apellido1">
                         <mdb-error
                           *ngIf="input_apellido1.invalid && (input_apellido1.dirty || input_apellido1.touched)">
@@ -101,7 +101,7 @@
                         <label for="">APELLIDO.2:</label>
                       </div>
                       <div class="md-form col-md-9 mt-20">
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formApellido2" class="form-control"
                           formControlName="apellido2">
                         <mdb-error
                           *ngIf="input_apellido2.invalid && (input_apellido2.dirty || input_apellido2.touched)">
@@ -115,7 +115,7 @@
                         <label for="">SUFIJO:</label>
                       </div>
                       <div class="md-form col-md-4 mt-20">
-                        <input mdbInputDirective mdbValidate type="text" id="formNumident" class="form-control"
+                        <input mdbInputDirective mdbValidate type="text" id="formSufijo" class="form-control"
                           formControlName="sufijo">
                         <mdb-error *ngIf="input_sufijo.invalid && (input_sufijo.dirty || input_sufijo.touched)">
                           <font size=2 color="red">Error, máximo 20 caracteres.</font>
@@ -330,9 +330,9 @@
                   <!-- fin modal-content -->
                   <div class="text-center ">
                     <p>
+                      <button class="btn color-green waves-light" (click)="nuevo()" mdbWavesEffect>Nuevo</button>
                       <button class="btn color-green waves-light" (click)="tabPagina2()"
                         mdbWavesEffect>Siguiente</button>
-                      <button class="btn color-green waves-light" type="reset" mdbWavesEffect>Cancelar</button>
                     </p>
                   </div>
                 </mat-tab>

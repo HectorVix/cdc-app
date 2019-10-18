@@ -217,18 +217,23 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
 
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   tabPagina3() {
     this.selected.setValue(2);
+    window.scrollTo(0, 0);
   }
   tabPagina4() {
     this.selected.setValue(3);
+    window.scrollTo(0, 0);
   }
   tabPagina5() {
     this.selected.setValue(4);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -352,6 +357,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
   mostrar_Vertebrado_Busqueda(row: vertebrado_Dato) {
     this.crearForm_caracterizacionVertebradosNacional(this.getVertebrado_id(row.vertebradoId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
     this.getDistribucion1_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
     this.getDistribucion2_Vertebrado(this.caracterizacionVertebradosNacionalForm.get('vertebradoId').value);
@@ -390,6 +396,7 @@ export class CaracterizacionVertebradosNacionalComponent implements OnInit {
     this.crearForm_caracterizacionVertebradosNacional(new vertebrado_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.lista_Vertebrado = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Vertebrado);
     this.fotoId_Lista = [];

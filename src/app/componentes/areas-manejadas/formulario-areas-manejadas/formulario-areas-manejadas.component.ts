@@ -181,9 +181,11 @@ export class FormularioAreasManejadasComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -297,6 +299,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
   mostrar_Area_Busqueda(row: area_Dato) {
     this.crear_areaManejoForm(this.getArea_id(row.areaId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
     this.getListaElementos(this.areaManejoForm.get('areaId').value);
     this.getFoto_Datos(row.areaId);
@@ -336,6 +339,7 @@ export class FormularioAreasManejadasComponent implements OnInit {
     this.crear_areaManejoForm(new area_Modelo());
     this.crear_areaManejoForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.data_listaElemento_DataSource = new LocalDataSource();
     this.lista_Area = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Area);

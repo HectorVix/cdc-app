@@ -119,10 +119,12 @@ export class FormularioResumenFuenteComponent implements OnInit {
   onFilesAdded() {
     var archivos: { [key: string]: File } = this.archivo.nativeElement.files;
     for (let key in archivos) {
-      if (!isNaN(parseInt(key))) {
+      if (!isNaN(parseInt(key)) && archivos[key].size <= 26214400) { //<= 25M
         this.archivos.add(archivos[key]);
         this.tabArchivos(0);
       }
+      else if (archivos[key].size > 26214400)
+        this.changeSuccessMessage(`No se puede agregar el arhivo:${archivos[key].name} porque es mayor a 25M del espacio permitido.`, 'primary')
     }
   }
   cargarArchivos(fuenteId: Number) {
@@ -259,6 +261,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   mostrar_Fuente_Busqueda(row: fuente_Dato) {
     this.crearForm_ResumenesFuente(this.getFuente_id(row.fuenteId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
     this.archivo.nativeElement.value = "";
     this.progreso = null;
@@ -282,6 +285,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabArchivos(pag: Number) {
     this.selectedArchivos.setValue(pag);
@@ -292,6 +296,7 @@ export class FormularioResumenFuenteComponent implements OnInit {
     this.crearForm_ResumenesFuente(new fuente_Modelo);
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.resetForm();
     this.archivos = new Set();
     this.archivo.nativeElement.value = "";

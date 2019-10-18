@@ -245,9 +245,9 @@ export class GaleriaComponent implements OnInit {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
-      this.activoGaleria = false;
-      this.ligar_Id_Imagen_DatoFoto();
-      this.ligar_Id_Archivo_Nombre_DatoFoto();
+      //this.activoGaleria = false;
+      //this.ligar_Id_Imagen_DatoFoto();
+      //this.ligar_Id_Archivo_Nombre_DatoFoto();
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       this.archivo.nativeElement.value = "";
       this.archivos.forEach(archivo => {
@@ -255,11 +255,11 @@ export class GaleriaComponent implements OnInit {
           this.archivos.delete(archivo);
         }
       });
-      this.ordenar_DatosFotos(event.image.id);
+      // this.ordenar_DatosFotos(event.image.id);
     }
     if (event.button.type === ButtonType.CLOSE) {
-      this.activoGaleria = true;
-      this.mostrar_Datos_PosActual(0);
+      //this.activoGaleria = true;
+      //this.mostrar_Datos_PosActual(0);
     }
 
   }
@@ -502,7 +502,7 @@ export class GaleriaComponent implements OnInit {
   mostrar_Imagen_Posicion() {
     if (validarEntero(this.posicionarse) && this.posicionarse > 0 && this.posicionarse <= this.datosFotografias.length && this.datosFotografias.length >= 1 && this.datosFotografias.length >= 1)
       this.mostrar_Datos_PosActual(this.posicionarse - 1);
-    else { this.changeSuccessMessage('Error: Ingresa un número valido. Por ejemplo 1 , 2 , 3 ... 4 ... 15 ... 70 ... , tambien debe estar dentro del rango del número de tu lista de fotos. ', 'primary'); }
+    else { this.changeSuccessMessage('Error: Ingresa un número valido. ', 'primary'); }
   }
   //mensajes
   public changeSuccessMessage(mensaje: string, tipo: string) {
@@ -586,7 +586,7 @@ export class GaleriaComponent implements OnInit {
             descripcion: baseFotoModelo.descripcion,
             comentario: baseFotoModelo.comentario,
             autor: baseFotoModelo.autor,
-            //fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
+            fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
             editado: true,
             nombre: baseFotoModelo.nombre
           };

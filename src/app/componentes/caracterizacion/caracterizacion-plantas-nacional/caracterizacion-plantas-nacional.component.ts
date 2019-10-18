@@ -222,17 +222,21 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
 
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
 
   }
   tabPagina3() {
     this.selected.setValue(2);
+    window.scrollTo(0, 0);
 
   }
   tabPagina4() {
     this.selected.setValue(3);
+    window.scrollTo(0, 0);
 
   }
   openDialogo(): void {
@@ -346,6 +350,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   mostrar_Planta_Busqueda(row: planta_Dato) {
     this.crearForm_CaracterizacionPlantasNacional(this.getPlanta_id(row.plantaId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
     this.getDistribucion1_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
     this.getDistribucion2_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
@@ -384,6 +389,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo());
     this.crearForm_Buscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.lista_Planta = new Array();
     this.dataSource = new MatTableDataSource(this.lista_Planta);
     this.data_distribucion1_DataSource = new LocalDataSource();

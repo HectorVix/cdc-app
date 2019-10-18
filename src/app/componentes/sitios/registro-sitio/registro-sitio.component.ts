@@ -222,12 +222,15 @@ export class RegistroSitioComponent implements OnInit {
   }
   tabPagina1() {
     this.selected.setValue(0);
+    window.scrollTo(0, 0);
   }
   tabPagina2() {
     this.selected.setValue(1);
+    window.scrollTo(0, 0);
   }
   tabPagina3() {
     this.selected.setValue(2);
+    window.scrollTo(0, 0);
   }
   openDialogo(): void {
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
@@ -317,6 +320,7 @@ export class RegistroSitioComponent implements OnInit {
   mostrar_Sito_Busqueda(row: sitio_Dato) {
     this.crearFormSitio(this.getSitio_id(row.sitioId));
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.guardar = true;
     this.getMacsitio(this.sitioForm.get('sitioId').value);
     this.getSubdivision(this.sitioForm.get('sitioId').value);
@@ -362,6 +366,7 @@ export class RegistroSitioComponent implements OnInit {
     this.crearFormSitio(new sitio_Modelo());
     this.crearFormBuscar();
     this.tabPagina1();
+    window.scrollTo(0, 0);
     this.data_macsitio_DataSource = new LocalDataSource();
     this.data_subdivision_DataSource = new LocalDataSource();
     this.fotoId_Lista = [];

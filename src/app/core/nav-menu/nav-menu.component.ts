@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject } from 'rxjs';
-import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { UsuarioService } from '../../servicios/usuario/usuario.service';
 import { usuario_Modelo, Rol } from '../../modelo/usuario/usuario-modelo';
@@ -22,12 +22,12 @@ export class NavMenuComponent implements OnInit {
   tipoAlert: string;
   registroForm: FormGroup;
   loading: boolean;
-  criterio_Rol = []; 
-  
+  criterio_Rol = [];
+
   constructor(private router: Router,
     public fb: FormBuilder,
     private usuarioServicio: UsuarioService, ) {
-    this.crearRegistroForm();
+
     this.obtener_Roles();
   }
 
@@ -43,7 +43,7 @@ export class NavMenuComponent implements OnInit {
       this.rolAdmin = true;
     else
       this.rolAdmin = false;
-
+    this.crearRegistroForm();
   }
   colapsar() {
     this.isCollapsed = true;

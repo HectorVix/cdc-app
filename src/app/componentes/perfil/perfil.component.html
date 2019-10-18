@@ -12,6 +12,11 @@
                   <font size=4 color="white">{{datosUsuario.nombre}} {{datosUsuario.apellido}}</font>
                 </h5>
               </div>
+              <div class="text-center">
+                <div *ngIf="loadingPerfil">
+                  <img src="assets/imagenes/load.gif">
+                </div>
+              </div>
               <div class="row" *ngIf="datosUsuario">
                 <div class="col s12 m7">
                   <div class="card">
@@ -27,7 +32,7 @@
                       <!-- fin  row -->
                       <div class="row">
                         <div class="col-md-2">
-                          <label for="">Nombre completo</label>
+                          <label for="">Nombre completo:</label>
                         </div>
                         <div class="col-md-7">
                           <span>{{datosUsuario.nombre}} {{datosUsuario.apellido}}</span>
@@ -44,8 +49,10 @@
                       </div>
                       <!-- fin row -->
                       <br>
-                      <button class="btn color-green waves-light" type="button" mdbWavesEffect>
+                      <button class="btn color-green waves-light" type="button" (click)="cambiarContrasena.show()"
+                        mdbWavesEffect>
                         <i class="fa fa-pencil prefix"></i>
+                        Contraseña
                       </button>
                     </div>
                   </div>
@@ -67,5 +74,71 @@
       <!-- </div> -->
     </div>
     <!-- </div> -->
+  </div>
+</div>
+
+
+<div mdbModal #cambiarContrasena="mdbModal" class="modal fade right modal-scrolling" id="frameModalTop" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  [config]="{backdrop: false, ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-side modal-bottom-left modal-notify" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header color-green">
+        <p class="heading"><i class="fa fa-pencil"></i> Cambiar Contraseña
+        </p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cambiarContrasena.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <ngb-alert *ngIf="successMessage" [type]="tipoAlert" (close)="successMessage = null">
+          {{ successMessage }}</ngb-alert>
+        <form [formGroup]="cambiarContrasenaForm">
+          <div class="row">
+            <div class="col-9">
+              <div class="md-form form-sm">
+                <i class="fa fa-lock prefix "></i>
+                <input mdbInputDirective type="password" id="Ccontrasena" class="form-control"
+                  formControlName="contrasena" data-error="Mínimo 8 caracteres">
+                <label for="Ccontrasena">Contraseña nueva</label>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="md-form form-sm">
+                <i class="fa fa-lock prefix "></i>
+                <input mdbInputDirective type="password" id="Crepetir_Contrasena" formControlName="repetir_contrasena"
+                  class="form-control" data-error=" " data-success="success">
+                <label for="Crepetir_Contrasena">Repetir contraseña</label>
+              </div>
+              <div *ngIf="cambiarContrasenaForm.get('repetir_contrasena').errors &&
+              cambiarContrasenaForm.get('repetir_contrasena').dirty &&
+              cambiarContrasenaForm.get('repetir_contrasena').errors.validarContrasena">
+                <font size=4 color="red">Las contraseñas no coinciden!</font>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Fin row -->
+      </div>
+      <div class="text-center">
+        <div *ngIf="loading">
+          <img src="assets/imagenes/load.gif">
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <button class="btn color-green waves-light" type="button" (click)="nuevo()" mdbWavesEffect>
+          Nuevo
+        </button>
+        <button class="btn color-green waves-light" type="button" (click)="cambiar_Contrasena()" mdbWavesEffect
+          [disabled]="!cambiarContrasenaForm.valid">
+          Cambiar
+        </button>
+      </div>
+    </div>
+    <!--/.Content-->
   </div>
 </div>
