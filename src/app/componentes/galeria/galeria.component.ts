@@ -114,7 +114,7 @@ export class GaleriaComponent implements OnInit {
 
   plainGalleryGrid: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.GRID,
-    layout: new GridLayout({ width: '80px', height: '80px' }, { length: 7, wrap: true })
+    layout: new GridLayout({ width: '100px', height: '100px' }, { length: 10, wrap: true })
   };
 
   dotsConfig: DotsConfig = {
@@ -245,20 +245,22 @@ export class GaleriaComponent implements OnInit {
       return;
     }
     if (event.button.type === ButtonType.DELETE) {
-      //this.activoGaleria = false;
+      this.activoGaleria = false;
       //this.ligar_Id_Imagen_DatoFoto();
       //this.ligar_Id_Archivo_Nombre_DatoFoto();
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       this.archivo.nativeElement.value = "";
+      //console.log("Imagen para borrar:", event.image.modal.title)
       this.archivos.forEach(archivo => {
-        if (this.getArchivoNombre_Id(event.image.id) == archivo.name) {
+        if (archivo.name == event.image.modal.title) {
+          //console.log("Borrar:", archivo.name)
           this.archivos.delete(archivo);
         }
       });
       // this.ordenar_DatosFotos(event.image.id);
     }
     if (event.button.type === ButtonType.CLOSE) {
-      //this.activoGaleria = true;
+      this.activoGaleria = true;
       //this.mostrar_Datos_PosActual(0);
     }
 
@@ -356,7 +358,7 @@ export class GaleriaComponent implements OnInit {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: '',
+        description: file.name,
         title: file.name
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
@@ -367,6 +369,7 @@ export class GaleriaComponent implements OnInit {
   public agregarImagenBusqueda(fotoModelo) {
     const imageBlob = this.dataURItoBlob(fotoModelo.imagen);
     const imageFile = new File([imageBlob], fotoModelo.nombre, { type: 'image/jpeg' });
+    //console.log("Imagen Nombre:", imageFile.name)
     this.archivos.add(imageFile);
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(imageFile);
@@ -374,8 +377,8 @@ export class GaleriaComponent implements OnInit {
       this.base64String = onLoadPhotoEvent.target.result;
       var imagen = new Image(0, {
         img: this.base64String,
-        description: fotoModelo.descripcion,
-        title: fotoModelo.name
+        description: fotoModelo.nombre,
+        title: fotoModelo.nombre
       });
       const nuevaImagen: Image = new Image(this.imagenes.length - 1 + 1, imagen.modal, imagen.plain);
       this.imagenes = [...this.imagenes, nuevaImagen]
@@ -497,7 +500,7 @@ export class GaleriaComponent implements OnInit {
   }
 
   public getTam_final_ListaFotos() {
-    return this.datosFotografias.length;
+    return this.archivos.size;
   }
   mostrar_Imagen_Posicion() {
     if (validarEntero(this.posicionarse) && this.posicionarse > 0 && this.posicionarse <= this.datosFotografias.length && this.datosFotografias.length >= 1 && this.datosFotografias.length >= 1)

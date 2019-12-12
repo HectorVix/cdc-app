@@ -26,7 +26,7 @@ export class GaleriaService {
     archivos.forEach(archivo => {
       var formData: FormData = new FormData();
       var baseFotoModelo = new foto_Modelo();
-      baseFotoModelo = datosFotos[posicion];
+      // baseFotoModelo = datosFotos[posicion];
       if (baseFotoModelo.fecha) {
         fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
       }
@@ -63,6 +63,7 @@ export class GaleriaService {
     tam_Inicial_ListaFotos,
     tam_Final_ListaFotos: number,
     tipos: Number) {
+    //console.log("Tamaño final lista fotos:", tam_Final_ListaFotos)
     var tipo = -1;
     if (tam_Final_ListaFotos == tam_Inicial_ListaFotos) {
       tipo = 1;
@@ -81,13 +82,14 @@ export class GaleriaService {
     }
     switch (tipo) {
       case 1: { //listas final igual a la inicial
+        //console.log("La lista final igual a la inicial")
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
         archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = datosFotos[posicion];
+          // baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
@@ -118,13 +120,14 @@ export class GaleriaService {
       }
         break;
       case 2: { // la lista final es mayor a la inicial
+        //console.log("La lista final es mayor a la inicial")
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
         archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = datosFotos[posicion];
+          //baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
@@ -162,13 +165,15 @@ export class GaleriaService {
       }
         break;
       case 3: {
+        //lista menor a la inicial
+        //console.log("La lista es menor a la inicial")
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
         archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = datosFotos[posicion];
+          //baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
@@ -207,19 +212,21 @@ export class GaleriaService {
       }
 
       case 4: {
+        //console.log("Se borra la lista")
         for (let i = 0; i < fotoId_Lista.length; i++) {
           var fotoId = fotoId_Lista[i];
           this.http.delete('/cecon/elemento/delete/' + fotoId, httpOptions).subscribe();
         }
       } break;
       case 5: {
+        //console.log("Se carga una nueva lista")
         var posicion = 0;
         const estado = {};
         var fechaCreacion = null;
         archivos.forEach(archivo => {
           var formData: FormData = new FormData();
           var baseFotoModelo = new foto_Modelo();
-          baseFotoModelo = datosFotos[posicion];
+          //baseFotoModelo = datosFotos[posicion];
           if (baseFotoModelo.fecha) {
             fechaCreacion = this.fechaServicio.toFormato2(baseFotoModelo.fecha);
           }
