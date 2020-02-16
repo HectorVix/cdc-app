@@ -36,6 +36,7 @@ export class FormularioReComponent implements OnInit {
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
   criterio_listacdc = this.criterio_re.listacdc;
   criterio_Tropico = this.criterio_re.tropico;
+  criterio_Reino = this.criterio_re.reino;
   criterio_Nacion = [];
   criterio_Subnacion = [];
 
