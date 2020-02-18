@@ -588,46 +588,7 @@
                                             <font size=4 color="white">Fenología:</font>
                                         </h5>
                                     </div>
-                                    <!-- Todos los campos de Fenología desde Enero hasta Diciembre  4 estaciones x 2 -->
-                                    <div class="container">
-                                        <div class="row col-md-12 text-center">
-                                            <fenologia *ngFor="let fenologiaModelo_Valor of modelo_Fenologia">
-                                                <enero *ngIf="fenologiaModelo_Valor.posicion==0">
-                                                    <div class="md-form col-md-3">
-                                                        <input mdbInputDirective mdbValidate type="text"
-                                                            id="fenologiaModelo_Valor.posicion">
-                                                        <label
-                                                            for="fenologiaModelo_Valor.posicion">&nbsp;&nbsp;&nbsp;&nbsp;ENERO:</label>
-                                                    </div>
-                                                </enero>
-                                                <febrero *ngIf="fenologiaModelo_Valor.posicion==8">
-                                                    <div class="md-form col-md-3">
-                                                        <input mdbInputDirective mdbValidate type="text"
-                                                            id="fenologiaModelo_Valor.posicion">
-                                                        <label
-                                                            for="fenologiaModelo_Valor.posicion">&nbsp;&nbsp;&nbsp;&nbsp;FEBRERO:</label>
-                                                    </div>
-                                                </febrero>
-                                                <marzo *ngIf="fenologiaModelo_Valor.posicion==16">
-                                                    <div class="md-form col-md-7">
-                                                        <input mdbInputDirective mdbValidate type="text" class="form-control" formControlName="nfeba1"
-                                                            id="hola" >
-                                                        <label
-                                                            for="hola">&nbsp;&nbsp;&nbsp;&nbsp;MARZO:</label>
-                                                    </div>
-                                                </marzo>
-                                                <cola *ngIf="fenologiaModelo_Valor.posicion!=0 
-                                                    && fenologiaModelo_Valor.posicion!=8
-                                                    && fenologiaModelo_Valor.posicion!=16">
-                                                    <div class="md-form col-md-3">
-                                                        <input mdbInputDirective mdbValidate type="text">
-                                                    </div>
-                                                </cola>
-                                            </fenologia>
-                                        </div>
-                                        <!-- Fin row -->
-                                    </div>
-                                    <!-- Fin container -->
+                                 <app-fenologia></app-fenologia>
                                 </div>
                                 <!--fin modal-content-->
                                 <div class="modal-content mat-elevation-z4">

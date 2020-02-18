@@ -1,0 +1,36 @@
+<!-- Todos los campos de Fenología desde Enero hasta Diciembre  4 estaciones x 2 -->
+<div class="container text-center">
+  <div class="row col-md-12">
+    <fenologia *ngFor="let fenologiaModelo_Valor of modelo_Fenologia">
+      <enero *ngIf="fenologiaModelo_Valor.posicion==0">
+        <div class="md-form col-md-12">
+          <input mdbInputDirective  type="text" id="fenologiaEnero" class="form-control" [(ngModel)]="modelo_Fenologia[0].valores"
+            (ngModelChange)="onChanges()">
+          <label for="fenologiaEnero">&nbsp;&nbsp;&nbsp;&nbsp;ENERO:</label>
+        </div>
+      </enero>
+      <febrero *ngIf="fenologiaModelo_Valor.posicion==8">
+        <div class="md-form col-md-12">
+          <input mdbInputDirective  type="text" id="fenologiaFebrero" class="form-control" [(ngModel)]="modelo_Fenologia[8].valores">
+          <label for="fenologiaFebrero">&nbsp;&nbsp;&nbsp;&nbsp;FEBRERO:</label>
+        </div>
+      </febrero>
+      <marzo *ngIf="fenologiaModelo_Valor.posicion==16">
+        <div class="md-form col-md-12">
+          <input mdbInputDirective  type="text" id="fenologiaMarzo" class="form-control">
+          <label for="fenologiaMarzo">&nbsp;&nbsp;&nbsp;&nbsp;MARZO:</label>
+        </div>
+      </marzo>
+      <cola *ngIf="fenologiaModelo_Valor.posicion!=0 
+                && fenologiaModelo_Valor.posicion!=8
+                && fenologiaModelo_Valor.posicion!=16">
+        <div class="md-form col-md-12">
+          <input mdbInputDirective  type="text"  class="form-control" [(ngModel)]="modelo_Fenologia[fenologiaModelo_Valor.posicion].valores">
+
+        </div>
+      </cola>
+    </fenologia>
+  </div>
+  <!-- Fin row -->
+</div>
+<!-- Fin container -->

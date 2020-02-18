@@ -70,6 +70,7 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
 import { SideNavComponent } from './componentes/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CoreModule } from './core/core.module';
+import { FenologiaComponent } from './componentes/fenologia/fenologia.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { CoreModule } from './core/core.module';
     ArchivosDisponiblesComponent,
     AcercaComponent,
     MapaComponent,
-    SideNavComponent
+    SideNavComponent,
+    FenologiaComponent
   ],
   imports: [
     BrowserModule,

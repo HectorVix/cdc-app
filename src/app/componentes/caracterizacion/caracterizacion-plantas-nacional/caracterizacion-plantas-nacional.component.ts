@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { caracterizacion_Modelo } from '../../../modelo/resumen/caracterizacion-modelo';
 import { planta_Modelo } from '../../../modelo/resumen/planta-modelo';
 import { distribucion_Modelo } from '../../../modelo/resumen/distribucion-modelo';
-import { fenologia_Modelo } from '../../../modelo/resumen/fenologia-modelo';
 import { distribucion2_Modelo } from '../../../modelo/resumen/distribucion2-modelo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -124,8 +123,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   tam_Inicial_ListaFotos = 0;
   fotoId_Lista = [];
   //------fenología
-  modelo_Fenologia: fenologia_Modelo[] = new Array(96);
-  cont_tablero = 0;
+  
 
   constructor(private fb: FormBuilder,
     private caracterizacionServicio: CaracterizacionService,
@@ -136,7 +134,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.crearForm_CaracterizacionPlantasNacional(new planta_Modelo);
     this.crearForm_Buscar();
     this.dataSource = new MatTableDataSource(this.lista_Planta);
-    this.ordenar_Fenologia()
   }
 
   ngOnInit() {
@@ -785,22 +782,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     else
       val = false;
     return val;
-  }
-  onChanges() {
-    console.log("Hola de nuevo listo")
-    this.openDialogo()
-  }
-  ordenar_Fenologia() {
-    console.log("...")
-    var cont = 0;
-    for (let i = 0; i < this.modelo_Fenologia.length; i++) {
-      console.log("valores asignados..", i)
-      var modeloAux = new fenologia_Modelo();
-      modeloAux.posicion = i
-      modeloAux.id = "fenologia" + i
-      this.modelo_Fenologia[i] = modeloAux
-    }
-
   }
 }
 function crearPlanta(k: Number, plantaId: Number, codigoe, nacion, nombren, nombrecomunn): planta_Dato {
