@@ -8,18 +8,14 @@ import { fenologia_Modelo } from '../../modelo/resumen/fenologia-modelo';
 })
 export class FenologiaComponent implements OnInit {
   modelo_Fenologia: fenologia_Modelo[] = new Array(96);
-  enero: string = ''
-idFenologia: fenologia_Modelo[]= new Array(96)
-
   constructor() {
     this.ordenar_Fenologia()
   }
 
   ngOnInit() {
   }
-  onChanges() {
-    console.log("Cambios:", this.enero)
-
+  onChanges(posicion:number) {
+    console.log("Cambios en:",posicion)
   }
   ordenar_Fenologia() {
     console.log("...")
@@ -31,15 +27,6 @@ idFenologia: fenologia_Modelo[]= new Array(96)
       modeloAux.id = "fenologia" + i
       this.modelo_Fenologia[i] = modeloAux
     }
-
-  }
-
-  get_id_Fenologia(i):String {
-  
-    if(i==1)
-    return "ok1"
-    else
-    return "ok2"
 
   }
 }
