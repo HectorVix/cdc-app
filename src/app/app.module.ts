@@ -71,6 +71,7 @@ import { SideNavComponent } from './componentes/side-nav/side-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CoreModule } from './core/core.module';
 import { FenologiaComponent } from './componentes/fenologia/fenologia.component';
+import { ActividadEstacionComponent } from './componentes/fenologia/estacion/actividad-estacion/actividad-estacion.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { FenologiaComponent } from './componentes/fenologia/fenologia.component'
     AcercaComponent,
     MapaComponent,
     SideNavComponent,
-    FenologiaComponent
+    FenologiaComponent,
+    ActividadEstacionComponent
   ],
   imports: [
     BrowserModule,
@@ -158,7 +160,7 @@ import { FenologiaComponent } from './componentes/fenologia/fenologia.component'
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
 
   ],
-  entryComponents: [ConfirmacionComponent],
+  entryComponents: [ConfirmacionComponent,ActividadEstacionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

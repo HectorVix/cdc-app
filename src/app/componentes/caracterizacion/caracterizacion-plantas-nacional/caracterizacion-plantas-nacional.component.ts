@@ -18,6 +18,7 @@ import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
+import {FenologiaComponent} from '../../fenologia/fenologia.component'
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -123,7 +124,8 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   tam_Inicial_ListaFotos = 0;
   fotoId_Lista = [];
   //------fenología
-  
+  @ViewChild(FenologiaComponent)
+  private fenologia: FenologiaComponent;
 
   constructor(private fb: FormBuilder,
     private caracterizacionServicio: CaracterizacionService,

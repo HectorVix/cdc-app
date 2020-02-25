@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Estación</h1>
+<div mat-dialog-content>
+  <p>Marca la actividad</p>
+  <div class="row">
+    <div class="col-md-5">
+      <mat-checkbox [(ngModel)]="A">Apertura de la Yema</mat-checkbox>
+      <mat-checkbox>Aparecimiento de Pétalos</mat-checkbox>
+      <mat-checkbox>Aparecimeinto de Sépalos</mat-checkbox>
+      <mat-checkbox>Brote Frorales</mat-checkbox>
+      <mat-checkbox>Brote Foliares</mat-checkbox>
+      <mat-checkbox>Brote Frutales</mat-checkbox>
+      <mat-checkbox>Brotes Laterales</mat-checkbox>
+      <mat-checkbox>Caducifolias</mat-checkbox>
+      <mat-checkbox>Crecimiento del Fruto</mat-checkbox>
+      <mat-checkbox>Caída de Pétalos</mat-checkbox>
+    </div>
+    <div class="col-md-5">
+      <mat-checkbox>Coloración Semillas</mat-checkbox>
+      <mat-checkbox>Fruto(s)</mat-checkbox>
+      <mat-checkbox>Flor Abierta</mat-checkbox>
+      <mat-checkbox>Floración</mat-checkbox>
+      <mat-checkbox>Fructificación</mat-checkbox>
+      <mat-checkbox>Germinación</mat-checkbox>
+      <mat-checkbox>Maduración del Fruto</mat-checkbox>
+      <mat-checkbox>Retoños</mat-checkbox>
+      <mat-checkbox>Senecencia</mat-checkbox>
+      <mat-checkbox>Yemas Floriales</mat-checkbox>
+    </div>
+  </div>
+  <!-- Fin row -->
+</div>
+<div mat-dialog-actions>
+  <div class="text-center">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+  </div>
+</div>
