@@ -20,18 +20,13 @@ export class FenologiaComponent implements OnInit {
   ngOnInit() {
   }
   onChanges(posicion: number) {
-    console.log("Cambios en:", posicion)
-
   }
   cambios_ActividadesEstacion(posicion: number) {
-    console.log("Actividad en:", posicion)
     this.openDialogo_Actividades_Estacion(posicion)
   }
   ordenar_Fenologia() {
-    console.log("...")
     var cont = 0;
     for (let i = 0; i < this.modelo_Fenologia.length; i++) {
-      console.log("valores asignados..", i)
       var modeloAux = new fenologia_Modelo();
       modeloAux.posicion = i
       modeloAux.id = "fenologia" + i
@@ -39,21 +34,42 @@ export class FenologiaComponent implements OnInit {
     }
 
   }
-  openDialogo_Actividades_Estacion(posicion:number): void {
+  openDialogo_Actividades_Estacion(posicion: number): void {
+
     const dialogRef = this.dialogo.open(ActividadEstacionComponent, {
       width: '550px'
     });
-    // dialogRef.componentInstance.actividadCambiosEstacion()
-    var temp_A = dialogRef.componentInstance.actividad_A;
-    console.log("Temporal A antes:", temp_A)
+    var valoresCampo = this.modelo_Fenologia[posicion].valores
+    var contador_Campo = 0;
+    if (valoresCampo) {
+      for (let x = 0; x < valoresCampo.length; x++) {
+        if (valoresCampo[x] != ',') {
+          dialogRef.componentInstance.valor_Campo[contador_Campo].valor = parseInt(valoresCampo[x])
+          contador_Campo = contador_Campo + 1
+        }
+      }
+    }
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("cambio actividad  fenología...")
-        temp_A = dialogRef.componentInstance.actividad_A;
-        console.log("Temporal A despues:", temp_A,"Posicion:",posicion)
-
-        //  this.datos_ActividadFenologia()
+        var cadena = '' + this.asignar_Estado(dialogRef.componentInstance.valor_Campo[0].valor)
+        for (let i = 0; i < 20; i++) {
+          if (i >= 1)
+            cadena = cadena + ',' + this.asignar_Estado(dialogRef.componentInstance.valor_Campo[i].valor)
+        }
+        this.actualizar_Campo_Estacion(cadena, posicion)
       }
     });
+  }
+
+  //Para mejor control de los campos 
+  asignar_Estado(cadena: number) {
+    if (cadena == 1)
+      return 1
+    else
+      return 0
+  }
+  actualizar_Campo_Estacion(cadena: string, i: number) {
+    this.modelo_Fenologia[i].valores = cadena
   }
 }
