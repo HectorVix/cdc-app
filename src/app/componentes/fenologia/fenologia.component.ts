@@ -72,4 +72,16 @@ export class FenologiaComponent implements OnInit {
   actualizar_Campo_Estacion(cadena: string, i: number) {
     this.modelo_Fenologia[i].valores = cadena
   }
+  nuevo() {
+    this.modelo_Fenologia = new Array(96)
+    this.ordenar_Fenologia()
+  }
+  mostrar_Datos_Fenologia(val: string) {
+    var datosFenologia: any = JSON.parse(val)
+    for (let i = 0; i < 96; i++) {
+      var modeloFenologia = new fenologia_Modelo()
+      modeloFenologia = datosFenologia[i]
+      this.modelo_Fenologia[i].valores = modeloFenologia.valores
+    }
+  }
 }

@@ -18,7 +18,7 @@ import { foto_Modelo } from '../../../modelo/fotoDatos/foto-datos';
 import { GaleriaService } from '../../../servicios/galeria/galeria.service';
 import { ElementoService } from '../../../servicios/elemento/elemento.service';
 import { criterio_elemento } from '../../../modelo/select/overview-elemento';
-import {FenologiaComponent} from '../../fenologia/fenologia.component'
+import { FenologiaComponent } from '../../fenologia/fenologia.component'
 
 @Component({
   selector: 'app-caracterizacion-plantas-nacional',
@@ -187,6 +187,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
           });
           plantaBase.distribucionList = distribucion;
           plantaBase.distribucion2List = distribucion2;
+          plantaBase.fenologia = JSON.stringify(this.fenologia.modelo_Fenologia)
           planta.push(plantaBase);
           cplanta.plantaList = planta;
           this.addCaracterizacionPlanta(cplanta);
@@ -351,15 +352,17 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     return base_plantaBusqueda;
   }
   mostrar_Planta_Busqueda(row: planta_Dato) {
-    this.crearForm_CaracterizacionPlantasNacional(this.getPlanta_id(row.plantaId));
+    var temporal_Base_PlantaBusqueda = this.getPlanta_id(row.plantaId)
+    this.crearForm_CaracterizacionPlantasNacional(temporal_Base_PlantaBusqueda);
     this.tabPagina1();
     window.scrollTo(0, 0);
     this.guardar = true;
     this.getDistribucion1_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
     this.getDistribucion2_Planta(this.caracterizacionPlantasNacionalForm.get('plantaId').value);
-    this.getFoto_Datos(row.plantaId);
+    this.getFoto_Datos(row.plantaId, temporal_Base_PlantaBusqueda.fenologia);
   }
   updatePlanta(planta: planta_Modelo): void {
+    planta.fenologia = JSON.stringify(this.fenologia.modelo_Fenologia)
     this.loading = true;
     this.caracterizacionServicio.updatePlanta(planta, this.caracterizacionId)
       .subscribe(
@@ -400,6 +403,7 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
     this.fotoId_Lista = [];
     this.galeria.nuevo();
     this.tam_Inicial_ListaFotos = 0;
+    this.fenologia.nuevo()
   }
   // --------------Distribucion1------------------
   resDistribucion1: any;
@@ -551,12 +555,13 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  getFoto_Datos(plantaId: Number) {
+  getFoto_Datos(plantaId: Number, fenología: string) {
     const date = new Date().valueOf();
     this.galeriaServicio.getDatosFotos(plantaId, 4).subscribe(
       resFoto => {
         this.data_resFoto = resFoto;
         this.tam_Inicial_ListaFotos = this.data_resFoto.length;//tamaño inicial de la lista de fotos guardadas
+        this.fenologia.mostrar_Datos_Fenologia(fenología)
         for (let fotoVal of this.data_resFoto) {
           var fotoModelo = new foto_Modelo();
           fotoModelo = fotoVal;
@@ -624,140 +629,11 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   get input_comhabn() { return this.caracterizacionPlantasNacionalForm.get('comhabn'); }
   //ecologia
   get input_comecoln() { return this.caracterizacionPlantasNacionalForm.get('comecoln'); }
-  /*** páginga 3
-       fenelogía
-       1 línea   lo mejor aqui seria una matriz 6 x 16 ***/
-  get input_nenea1() { return this.caracterizacionPlantasNacionalForm.get('nenea1'); }
-  get input_nenea2() { return this.caracterizacionPlantasNacionalForm.get('nenea2'); }
-  get input_nenea3() { return this.caracterizacionPlantasNacionalForm.get('nenea3'); }
-  get input_nenea4() { return this.caracterizacionPlantasNacionalForm.get('nenea4'); }
-
-  get input_nmara1() { return this.caracterizacionPlantasNacionalForm.get('nmara1'); }
-  get input_nmara2() { return this.caracterizacionPlantasNacionalForm.get('nmara2'); }
-  get input_nmara3() { return this.caracterizacionPlantasNacionalForm.get('nmara3'); }
-  get input_nmara4() { return this.caracterizacionPlantasNacionalForm.get('nmara4'); }
-
-  get input_nmaya1() { return this.caracterizacionPlantasNacionalForm.get('nmaya1'); }
-  get input_nmaya2() { return this.caracterizacionPlantasNacionalForm.get('nmaya2'); }
-  get input_nmaya3() { return this.caracterizacionPlantasNacionalForm.get('nmaya3'); }
-  get input_nmaya4() { return this.caracterizacionPlantasNacionalForm.get('nmaya4'); }
-
-  get input_njula1() { return this.caracterizacionPlantasNacionalForm.get('njula1'); }
-  get input_njula2() { return this.caracterizacionPlantasNacionalForm.get('njula2'); }
-  get input_njula3() { return this.caracterizacionPlantasNacionalForm.get('njula3'); }
-  get input_njula4() { return this.caracterizacionPlantasNacionalForm.get('njula4'); }
-
-  get input_nseta1() { return this.caracterizacionPlantasNacionalForm.get('nseta1'); }
-  get input_nseta2() { return this.caracterizacionPlantasNacionalForm.get('nseta2'); }
-  get input_nseta3() { return this.caracterizacionPlantasNacionalForm.get('nseta3'); }
-  get input_nseta4() { return this.caracterizacionPlantasNacionalForm.get('nseta4'); }
-
-  get input_nnova1() { return this.caracterizacionPlantasNacionalForm.get('nnova1'); }
-  get input_nnova2() { return this.caracterizacionPlantasNacionalForm.get('nnova2'); }
-  get input_nnova3() { return this.caracterizacionPlantasNacionalForm.get('nnova3'); }
-  get input_nnova4() { return this.caracterizacionPlantasNacionalForm.get('nnova4'); }
-
-  //2 línea
-  get input_neneb1() { return this.caracterizacionPlantasNacionalForm.get('neneb1'); }
-  get input_neneb2() { return this.caracterizacionPlantasNacionalForm.get('neneb2'); }
-  get input_neneb3() { return this.caracterizacionPlantasNacionalForm.get('neneb3'); }
-  get input_neneb4() { return this.caracterizacionPlantasNacionalForm.get('neneb4'); }
-
-  get input_nmarb1() { return this.caracterizacionPlantasNacionalForm.get('nmarb1'); }
-  get input_nmarb2() { return this.caracterizacionPlantasNacionalForm.get('nmarb2'); }
-  get input_nmarb3() { return this.caracterizacionPlantasNacionalForm.get('nmarb3'); }
-  get input_nmarb4() { return this.caracterizacionPlantasNacionalForm.get('nmarb4'); }
-
-  get input_nmayb1() { return this.caracterizacionPlantasNacionalForm.get('nmayb1'); }
-  get input_nmayb2() { return this.caracterizacionPlantasNacionalForm.get('nmayb2'); }
-  get input_nmayb3() { return this.caracterizacionPlantasNacionalForm.get('nmayb3'); }
-  get input_nmayb4() { return this.caracterizacionPlantasNacionalForm.get('nmayb4'); }
-
-  get input_njulb1() { return this.caracterizacionPlantasNacionalForm.get('njulb1'); }
-  get input_njulb2() { return this.caracterizacionPlantasNacionalForm.get('njulb2'); }
-  get input_njulb3() { return this.caracterizacionPlantasNacionalForm.get('njulb3'); }
-  get input_njulb4() { return this.caracterizacionPlantasNacionalForm.get('njulb4'); }
-
-  get input_nsetb1() { return this.caracterizacionPlantasNacionalForm.get('nsetb1'); }
-  get input_nsetb2() { return this.caracterizacionPlantasNacionalForm.get('nsetb2'); }
-  get input_nsetb3() { return this.caracterizacionPlantasNacionalForm.get('nsetb3'); }
-  get input_nsetb4() { return this.caracterizacionPlantasNacionalForm.get('nsetb4'); }
-
-  get input_nnovb1() { return this.caracterizacionPlantasNacionalForm.get('nnovb1'); }
-  get input_nnovb2() { return this.caracterizacionPlantasNacionalForm.get('nnovb2'); }
-  get input_nnovb3() { return this.caracterizacionPlantasNacionalForm.get('nnovb3'); }
-  get input_nnovb4() { return this.caracterizacionPlantasNacionalForm.get('nnovb4'); }
-
-  //3 línea
-  get input_nfeba1() { return this.caracterizacionPlantasNacionalForm.get('nfeba1'); }
-  get input_nfeba2() { return this.caracterizacionPlantasNacionalForm.get('nfeba2'); }
-  get input_nfeba3() { return this.caracterizacionPlantasNacionalForm.get('nfeba3'); }
-  get input_nfeba4() { return this.caracterizacionPlantasNacionalForm.get('nfeba4'); }
-
-  get input_nabra1() { return this.caracterizacionPlantasNacionalForm.get('nabra1'); }
-  get input_nabra2() { return this.caracterizacionPlantasNacionalForm.get('nabra2'); }
-  get input_nabra3() { return this.caracterizacionPlantasNacionalForm.get('nabra3'); }
-  get input_nabra4() { return this.caracterizacionPlantasNacionalForm.get('nabra4'); }
-
-  get input_njuna1() { return this.caracterizacionPlantasNacionalForm.get('njuna1'); }
-  get input_njuna2() { return this.caracterizacionPlantasNacionalForm.get('njuna2'); }
-  get input_njuna3() { return this.caracterizacionPlantasNacionalForm.get('njuna3'); }
-  get input_njuna4() { return this.caracterizacionPlantasNacionalForm.get('njuna4'); }
-
-  get input_nagoa1() { return this.caracterizacionPlantasNacionalForm.get('nagoa1'); }
-  get input_nagoa2() { return this.caracterizacionPlantasNacionalForm.get('nagoa2'); }
-  get input_nagoa3() { return this.caracterizacionPlantasNacionalForm.get('nagoa3'); }
-  get input_nagoa4() { return this.caracterizacionPlantasNacionalForm.get('nagoa4'); }
-
-  get input_nocta1() { return this.caracterizacionPlantasNacionalForm.get('nocta1'); }
-  get input_nocta2() { return this.caracterizacionPlantasNacionalForm.get('nocta2'); }
-  get input_nocta3() { return this.caracterizacionPlantasNacionalForm.get('nocta3'); }
-  get input_nocta4() { return this.caracterizacionPlantasNacionalForm.get('nocta4'); }
-
-  get input_ndica1() { return this.caracterizacionPlantasNacionalForm.get('ndica1'); }
-  get input_ndica2() { return this.caracterizacionPlantasNacionalForm.get('ndica2'); }
-  get input_ndica3() { return this.caracterizacionPlantasNacionalForm.get('ndica3'); }
-  get input_ndica4() { return this.caracterizacionPlantasNacionalForm.get('ndica4'); }
-
-  //4 línea
-  get input_nfebb1() { return this.caracterizacionPlantasNacionalForm.get('nfebb1'); }
-  get input_nfebb2() { return this.caracterizacionPlantasNacionalForm.get('nfebb2'); }
-  get input_nfebb3() { return this.caracterizacionPlantasNacionalForm.get('nfebb3'); }
-  get input_nfebb4() { return this.caracterizacionPlantasNacionalForm.get('nfebb4'); }
-
-  get input_nabrb1() { return this.caracterizacionPlantasNacionalForm.get('nabrb1'); }
-  get input_nabrb2() { return this.caracterizacionPlantasNacionalForm.get('nabrb2'); }
-  get input_nabrb3() { return this.caracterizacionPlantasNacionalForm.get('nabrb3'); }
-  get input_nabrb4() { return this.caracterizacionPlantasNacionalForm.get('nabrb4'); }
-
-  get input_njunb1() { return this.caracterizacionPlantasNacionalForm.get('njunb1'); }
-  get input_njunb2() { return this.caracterizacionPlantasNacionalForm.get('njunb2'); }
-  get input_njunb3() { return this.caracterizacionPlantasNacionalForm.get('njunb3'); }
-  get input_njunb4() { return this.caracterizacionPlantasNacionalForm.get('njunb4'); }
-
-  get input_nagob1() { return this.caracterizacionPlantasNacionalForm.get('nagob1'); }
-  get input_nagob2() { return this.caracterizacionPlantasNacionalForm.get('nagob2'); }
-  get input_nagob3() { return this.caracterizacionPlantasNacionalForm.get('nagob3'); }
-  get input_nagob4() { return this.caracterizacionPlantasNacionalForm.get('nagob4'); }
-
-  get input_noctb1() { return this.caracterizacionPlantasNacionalForm.get('noctb1'); }
-  get input_noctb2() { return this.caracterizacionPlantasNacionalForm.get('noctb2'); }
-  get input_noctb3() { return this.caracterizacionPlantasNacionalForm.get('noctb3'); }
-  get input_noctb4() { return this.caracterizacionPlantasNacionalForm.get('noctb4'); }
-
-  get input_ndicb1() { return this.caracterizacionPlantasNacionalForm.get('ndicb1'); }
-  get input_ndicb2() { return this.caracterizacionPlantasNacionalForm.get('ndicb2'); }
-  get input_ndicb3() { return this.caracterizacionPlantasNacionalForm.get('ndicb3'); }
-  get input_ndicb4() { return this.caracterizacionPlantasNacionalForm.get('ndicb4'); }
-
   get input_comfenoln() { return this.caracterizacionPlantasNacionalForm.get('comfenoln'); }
-
   //Reproducción
   get input_comrepn() { return this.caracterizacionPlantasNacionalForm.get('comrepn'); }
-
   //Manejo
   get input_commanejon() { return this.caracterizacionPlantasNacionalForm.get('commanejon'); }
-
   /*** Campos opcionales 
    *   Página 4 ***/
   get input_rcpnopc1() { return this.caracterizacionPlantasNacionalForm.get('rcpnopc1'); }
@@ -765,7 +641,6 @@ export class CaracterizacionPlantasNacionalComponent implements OnInit {
   get input_rcpnopc3() { return this.caracterizacionPlantasNacionalForm.get('rcpnopc3'); }
   get input_rcpnopc4() { return this.caracterizacionPlantasNacionalForm.get('rcpnopc4'); }
   get input_rcpnopc5() { return this.caracterizacionPlantasNacionalForm.get('rcpnopc5'); }
-
   //Mantenimiento del registro
   get input_codfuente() { return this.caracterizacionPlantasNacionalForm.get('codfuente'); }
   get input_cita() { return this.caracterizacionPlantasNacionalForm.get('cita'); }
