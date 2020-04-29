@@ -100,6 +100,123 @@
                       <font size=4 color="white">Taxonomia(Global)</font>
                     </h5>
                   </div>
+                  <!-- REINO -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">REINO:</label>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="reino_id"
+                          (ngModelChange)="onChange_Reino()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sReino of criterio_Reino" [value]="sReino.value">
+                            {{sReino.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="PHYLUM" panelClass="color-panel-green" formControlName="phylum_id"
+                          (ngModelChange)="onChange_Phylum()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sPhylum of criterio_Phylum" [value]="sPhylum.value">
+                            {{sPhylum.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- fin row -->
+                  <!-- CLASE -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">CLASE:</label>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="clase_id"
+                          (ngModelChange)="onChange_Clase()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor=" let sClase of criterio_Clase" [value]="sClase.value">
+                          {{sClase.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="ORDEN" panelClass="color-panel-green" formControlName="orden_id"
+                          (ngModelChange)="onChange_Orden()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sOrden of criterio_Orden" [value]="sOrden.value">
+                            {{sOrden.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- Fin row -->
+                  <!-- FAMILIA -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">FAMILIA</label>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="familia_id"
+                          (ngModelChange)="onChange_Familia()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sFamilia of criterio_Familia" [value]="sFamilia.value">
+                            {{sFamilia.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="GENERO" panelClass="color-panel-green" formControlName="genero_id"
+                          (ngModelChange)="onChange_Genero()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sGenero of criterio_Genero" [value]="sGenero.value">
+                            {{sGenero.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- Fin row -->
+                  <!-- ESPECIE -->
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">ESPECIE:</label>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="especie_id"
+                          (ngModelChange)="onChange_Especie()">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sEspecie of criterio_Especie" [value]="sEspecie.value">
+                            {{sEspecie.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 mt10">
+                      <mat-form-field>
+                        <mat-select placeholder="INFRASPECIFICEPITHET" panelClass="color-panel-green"
+                          formControlName="infraspecificepithet_id">
+                          <mat-option>-- Ningún Valor --</mat-option>
+                          <mat-option *ngFor="let sInfraspecificepithet of criterio_Infraspecificepithet" [value]="sInfraspecificepithet.value">
+                            {{sInfraspecificepithet.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- Fin row -->
+                  <!-- CLASETAX -->
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">CLASETAX:</label>
@@ -113,45 +230,6 @@
                     </div>
                   </div>
                   <!-- fin row -->
-                  <div class="row">
-                    <div class="col-md-2">
-                      <label for="">ORDEN</label>
-                    </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formOrden" class="form-control"
-                        formControlName="orden">
-                      <mdb-error *ngIf="input_orden.invalid && (input_orden.dirty || input_orden.touched)">
-                        <font size=2 color="red">Error, máximo 20 caracteres.</font>
-                      </mdb-error>
-                    </div>
-                  </div>
-                  <!-- fin row -->
-                  <div class="row">
-                    <div class="col-md-2">
-                      <label for="">FAMILIA:</label>
-                    </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formFamilia" class="form-control"
-                        formControlName="familia">
-                      <mdb-error *ngIf="input_familia.invalid && (input_familia.dirty || input_familia.touched)">
-                        <font size=2 color="red">Error, máximo 20 caracteres.</font>
-                      </mdb-error>
-                    </div>
-
-                  </div>
-                  <!-- fin row -->
-                  <div class="row">
-                    <div class="col-md-2">
-                      <label for="">GENERO</label>
-                    </div>
-                    <div class="md-form col-md-9 mt-20">
-                      <input mdbInputDirective mdbValidate type="text" id="formGenero" class="form-control"
-                        formControlName="genero">
-                      <mdb-error *ngIf="input_genero.invalid && (input_genero.dirty || input_genero.touched)">
-                        <font size=2 color="red">Error, máximo 20 caracteres.</font>
-                      </mdb-error>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-md-2">
                       <label for="">NOMBREG:</label>

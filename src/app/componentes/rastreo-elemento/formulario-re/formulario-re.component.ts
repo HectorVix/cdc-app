@@ -36,9 +36,17 @@ export class FormularioReComponent implements OnInit {
   criterio_si_no = this.criterio_re.si_no;// exsitu, transparen  
   criterio_listacdc = this.criterio_re.listacdc;
   criterio_Tropico = this.criterio_re.tropico;
-  criterio_Reino = this.criterio_re.reino;
   criterio_Nacion = [];
   criterio_Subnacion = [];
+  //taxones
+  criterio_Reino = []
+  criterio_Phylum = []
+  criterio_Clase = []
+  criterio_Orden = []
+  criterio_Familia = []
+  criterio_Genero = []
+  criterio_Especie = []
+  criterio_Infraspecificepithet = []
 
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -80,6 +88,7 @@ export class FormularioReComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.listaRatreoElementos);
     this.obtener_nacion();
     this.obtener_subnacion();
+    this.obtener_Reino()
   }
 
   ngOnInit() {
@@ -460,6 +469,54 @@ export class FormularioReComponent implements OnInit {
     else
       val = false;
     return val;
+  }
+
+  // Catalogo de los taxones
+  obtener_Reino() {
+    this.rastreoServicio.obtener_Reino()
+    this.criterio_Reino = this.rastreoServicio.reino_Valor
+  }
+  onChange_Reino() {
+    if (this.reForm.get('reino_id').value) {
+      this.rastreoServicio.obtener_Phylum(this.reForm.get('reino_id').value)
+      this.criterio_Phylum = this.rastreoServicio.phylum_Valor
+    }
+  }
+  onChange_Phylum() {
+    if (this.reForm.get('phylum_id').value) {
+      this.rastreoServicio.obtener_Clase(this.reForm.get('phylum_id').value)
+      this.criterio_Clase = this.rastreoServicio.clase_Valor
+    }
+  }
+  onChange_Clase() {
+    if (this.reForm.get('clase_id').value) {
+      this.rastreoServicio.obtener_Orden(this.reForm.get('clase_id').value)
+      this.criterio_Orden = this.rastreoServicio.orden_Valor
+    }
+  }
+  onChange_Orden() {
+    if (this.reForm.get('orden_id').value) {
+      this.rastreoServicio.obtener_Familia(this.reForm.get('orden_id').value)
+      this.criterio_Familia = this.rastreoServicio.familia_Valor
+    }
+  }
+  onChange_Familia() {
+    if (this.reForm.get('familia_id').value) {
+      this.rastreoServicio.obtener_Genero(this.reForm.get('familia_id').value)
+      this.criterio_Genero = this.rastreoServicio.genero_Valor
+    }
+  }
+  onChange_Genero() {
+    if (this.reForm.get('genero_id').value) {
+      this.rastreoServicio.obtener_Especie(this.reForm.get('genero_id').value)
+      this.criterio_Especie = this.rastreoServicio.especie_Valor
+    }
+  }
+  onChange_Especie() {
+    if (this.reForm.get('especie_id').value) {
+      this.rastreoServicio.obtener_Infraspecificepithet(this.reForm.get('especie_id').value)
+      this.criterio_Infraspecificepithet = this.rastreoServicio.infraspecificepithet_Valor
+    }
   }
 }
 

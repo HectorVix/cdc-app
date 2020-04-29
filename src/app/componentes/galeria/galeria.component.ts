@@ -246,22 +246,16 @@ export class GaleriaComponent implements OnInit {
     }
     if (event.button.type === ButtonType.DELETE) {
       this.activoGaleria = false;
-      //this.ligar_Id_Imagen_DatoFoto();
-      //this.ligar_Id_Archivo_Nombre_DatoFoto();
       this.imagenes = this.imagenes.filter((val: Image) => event.image && val.id !== event.image.id);
       this.archivo.nativeElement.value = "";
-      //console.log("Imagen para borrar:", event.image.modal.title)
       this.archivos.forEach(archivo => {
         if (archivo.name == event.image.modal.title) {
-          //console.log("Borrar:", archivo.name)
           this.archivos.delete(archivo);
         }
       });
-      // this.ordenar_DatosFotos(event.image.id);
     }
     if (event.button.type === ButtonType.CLOSE) {
       this.activoGaleria = true;
-      //this.mostrar_Datos_PosActual(0);
     }
 
   }
@@ -517,51 +511,6 @@ export class GaleriaComponent implements OnInit {
     this.fotoBase_Form = new fotoBase_FormGroup().getFotoBase_FormGrup(row);
   }
 
-  ligar_Id_Imagen_DatoFoto() {
-    var cont = 0;
-    this.imagenes.forEach(val => {
-      try {
-        var baseFotoModelo = new foto_Modelo();
-        baseFotoModelo = this.datosFotografias[cont];
-        this.datosFotografias[cont] = {
-          id: val.id,
-          descripcion: baseFotoModelo.descripcion,
-          comentario: baseFotoModelo.comentario,
-          autor: baseFotoModelo.autor,
-          fecha: baseFotoModelo.fecha,
-          editado: true
-        };
-      }
-      catch (error) {
-        this.posicionarse = 1;
-      }
-      cont = cont + 1;
-    });
-  }
-
-  ligar_Id_Archivo_Nombre_DatoFoto() {
-    var cont = 0;
-    this.archivos.forEach(val => {
-      try {
-        var baseFotoModelo = new foto_Modelo();
-        baseFotoModelo = this.datosFotografias[cont];
-        this.datosFotografias[cont] = {
-          id: baseFotoModelo.id,
-          descripcion: baseFotoModelo.descripcion,
-          comentario: baseFotoModelo.comentario,
-          autor: baseFotoModelo.autor,
-          fecha: baseFotoModelo.fecha,
-          nombre: val.name,
-          editado: true
-        };
-      }
-      catch (error) {
-        this.posicionarse = 1;
-      }
-      cont = cont + 1;
-    });
-
-  }
   getArchivoNombre_Id(id: Number): String {
     var val = "";
     for (let i = 0; i < this.datosFotografias.length; i++) {
@@ -576,33 +525,6 @@ export class GaleriaComponent implements OnInit {
     }
     return val;
   }
-  ordenar_DatosFotos(id: Number) {
-    var ordenNuevo = 0;
-    var datosFotos = [];
-    for (let i = 0; i < this.datosFotografias.length; i++) {
-      var baseFotoModelo = new foto_Modelo();
-      try {
-        baseFotoModelo = this.datosFotografias[i];
-        if (baseFotoModelo.id != id) {//todos menos el que se elimino
-          datosFotos[ordenNuevo] = {
-            id: baseFotoModelo.id,
-            descripcion: baseFotoModelo.descripcion,
-            comentario: baseFotoModelo.comentario,
-            autor: baseFotoModelo.autor,
-            fecha: this.fechaServicio.getFecha(baseFotoModelo.fecha),
-            editado: true,
-            nombre: baseFotoModelo.nombre
-          };
-        }
-      } catch (error) {
-        this.posicionarse = 1;
-      }
-      ordenNuevo = ordenNuevo + 1;
-
-    }
-    this.datosFotografias = datosFotos;
-  }
-
   //lleva el control de los errores
   get input_descripcion() { return this.fotoBase_Form.get("descripcion"); }
   get input_comentario() { return this.fotoBase_Form.get("comentario"); }

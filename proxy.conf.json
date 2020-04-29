@@ -1,6 +1,6 @@
 {
     "/cecon": {
-        "target": "http://localhost:8080/cdc/rs",
+        "target": "http://localhost:8080/cdc2276268265276287207/rs",
         "secure": false,
         "changeOrigin": true
     }

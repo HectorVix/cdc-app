@@ -50,15 +50,7 @@ export class criterio_re {
     { value: 'CP', viewValue: 'Capricornio' },
 
   ];
-  reino: Valor[] = [
-    { value: 'A', viewValue: 'Animalia' },
-    { value: 'B', viewValue: 'Bacteria' },
-    { value: 'Ch', viewValue: 'Chromista' },
-    { value: 'F', viewValue: 'Fungi' },
-    { value: 'I', viewValue: 'incertae sedis' },
-    { value: 'PL', viewValue: 'Plantae' },
-    { value: 'PR', viewValue: 'Protozoa' },
-  ];
+ 
   phylum: Valor[] = [
     { value: 'C', viewValue: 'Cáncer' },
     { value: 'CP', viewValue: 'Capricornio' },

@@ -7,10 +7,15 @@ export class rastreo_Elemento_Modelo {
       nacion: String;
       subnacion: String;
       //taxonomia (global)
-      clasetax: String;
-      orden: String;
-      familia: String;
-      genero: String;
+      reino_id:String
+      phylum_id:String
+      clase_id:String
+      clasetax: String
+      orden_id: String
+      familia_id: String
+      genero_id: String
+      especie_id:String
+      infraspecificepithet_id:String
       nombreg: String;
       autor: String;
       fuentenom: Number;
