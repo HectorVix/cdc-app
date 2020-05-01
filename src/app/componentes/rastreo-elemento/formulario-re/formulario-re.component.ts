@@ -477,6 +477,7 @@ export class FormularioReComponent implements OnInit {
     this.criterio_Reino = this.rastreoServicio.reino_Valor
   }
   onChange_Reino() {
+    this.limpiar_onChange_Taxones(0)
     if (this.reForm.get('reino_id').value) {
       this.rastreoServicio.obtener_Phylum(this.reForm.get('reino_id').value)
       this.criterio_Phylum = this.rastreoServicio.phylum_Valor
@@ -484,39 +485,108 @@ export class FormularioReComponent implements OnInit {
   }
   onChange_Phylum() {
     if (this.reForm.get('phylum_id').value) {
+      this.limpiar_onChange_Taxones(1)
       this.rastreoServicio.obtener_Clase(this.reForm.get('phylum_id').value)
       this.criterio_Clase = this.rastreoServicio.clase_Valor
     }
+    else
+      this.limpiar_onChange_Taxones(1)
   }
   onChange_Clase() {
     if (this.reForm.get('clase_id').value) {
+      this.limpiar_onChange_Taxones(2)
       this.rastreoServicio.obtener_Orden(this.reForm.get('clase_id').value)
       this.criterio_Orden = this.rastreoServicio.orden_Valor
     }
+    else
+      this.limpiar_onChange_Taxones(2)
   }
   onChange_Orden() {
     if (this.reForm.get('orden_id').value) {
+      this.limpiar_onChange_Taxones(3)
       this.rastreoServicio.obtener_Familia(this.reForm.get('orden_id').value)
       this.criterio_Familia = this.rastreoServicio.familia_Valor
     }
+    else
+      this.limpiar_onChange_Taxones(3)
   }
   onChange_Familia() {
     if (this.reForm.get('familia_id').value) {
+      this.limpiar_onChange_Taxones(4)
       this.rastreoServicio.obtener_Genero(this.reForm.get('familia_id').value)
       this.criterio_Genero = this.rastreoServicio.genero_Valor
     }
+    else
+      this.limpiar_onChange_Taxones(4)
   }
   onChange_Genero() {
     if (this.reForm.get('genero_id').value) {
+      this.limpiar_onChange_Taxones(5)
       this.rastreoServicio.obtener_Especie(this.reForm.get('genero_id').value)
       this.criterio_Especie = this.rastreoServicio.especie_Valor
     }
+    else
+      this.limpiar_onChange_Taxones(5)
   }
   onChange_Especie() {
     if (this.reForm.get('especie_id').value) {
+      this.limpiar_onChange_Taxones(6)
       this.rastreoServicio.obtener_Infraspecificepithet(this.reForm.get('especie_id').value)
       this.criterio_Infraspecificepithet = this.rastreoServicio.infraspecificepithet_Valor
     }
+    else {
+      this.limpiar_onChange_Taxones(6)
+    }
+  }
+  limpiar_onChange_Taxones(taxon) {
+    switch (taxon) {
+      case 0://reino
+        this.criterio_Phylum = []; this.reForm.get('phylum_id').setValue('');
+        this.criterio_Clase = []; this.reForm.get('clase_id').setValue('');
+        this.criterio_Orden = []; this.reForm.get('orden_id').setValue('');
+        this.criterio_Familia = []; this.reForm.get('familia_id').setValue('');
+        this.criterio_Genero = []; this.reForm.get('genero_id').setValue('');
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('');
+        break;
+      case 1://phylum
+        this.criterio_Clase = []; this.reForm.get('clase_id').setValue('');
+        this.criterio_Orden = []; this.reForm.get('orden_id').setValue('');
+        this.criterio_Familia = []; this.reForm.get('familia_id').setValue('');
+        this.criterio_Genero = []; this.reForm.get('genero_id').setValue('');
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('');
+        break;
+      case 2://clase
+        this.criterio_Familia = []; this.reForm.get('familia_id').setValue('');
+        this.criterio_Genero = []; this.reForm.get('genero_id').setValue('');
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('');
+        break;
+      case 3://orden
+        this.criterio_Familia = []; this.reForm.get('familia_id').setValue('');
+        this.criterio_Genero = []; this.reForm.get('genero_id').setValue('');
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('');
+        break;
+      case 4://familia
+        this.criterio_Genero = []; this.reForm.get('genero_id').setValue('');
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('');
+        break;
+      case 5://genero
+        this.criterio_Especie = []; this.reForm.get('especie_id').setValue('');
+        this.criterio_Infraspecificepithet = []; this.reForm.get('infraspecificepithet_id').setValue('')
+        break;
+      case 6://especie
+        this.criterio_Infraspecificepithet = []
+        this.reForm.get('infraspecificepithet_id').setValue('')
+        break;
+    }
+
+  }
+  limpiar_Partes_Taxones() {
+
   }
 }
 
