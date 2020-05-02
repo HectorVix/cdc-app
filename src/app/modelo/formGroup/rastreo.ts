@@ -49,15 +49,15 @@ export class rastreo_Elemento_FormGroup {
             'nacion': 'GT',
             'subnacion': '1',
             //taxonomia (global)
-            'reino_id': new FormControl(re.reino_id),//♦
-            'phylum_id': new FormControl(re.phylum_id),//♦
-            'clase_id': new FormControl(re.clase_id),//♦
+            'reinoId': new FormControl(re.reinoId),//♦
+            'phylumId': new FormControl(re.phylumId),//♦
+            'claseId': new FormControl(re.claseId),//♦
             'clasetax': new FormControl(re.clasetax, Validators.maxLength(20)),
-            'orden_id': new FormControl(re.orden_id),//♦
-            'familia_id': new FormControl(re.familia_id),//♦
-            'genero_id': new FormControl(re.genero_id),//♦
-            'especie_id': new FormControl(re.especie_id),//♦
-            'infraspecificepithet_id': new FormControl(re.infraspecificepithet_id),
+            'ordenId': new FormControl(re.ordenId),//♦
+            'familiaId': new FormControl(re.familiaId),//♦
+            'generoId': new FormControl(re.generoId),//♦
+            'especieId': new FormControl(re.especieId),//♦
+            'infraspecificepithetId': new FormControl(re.infraspecificepithetId),
             'nombreg': new FormControl({ value: nombreG, disabled: true }),
             'autor': new FormControl(re.autor, Validators.maxLength(60)),
             'fuentenom': new FormControl(re.fuentenom, Validators.maxLength(2)),

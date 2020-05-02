@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="reino_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="reinoId"
                           (ngModelChange)="onChange_Reino()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sReino of criterio_Reino" [value]="sReino.value">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="phylum_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="phylumId"
                           (ngModelChange)="onChange_Phylum()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sPhylum of criterio_Phylum" [value]="sPhylum.value">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="clase_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="claseId"
                           (ngModelChange)="onChange_Clase()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor=" let sClase of criterio_Clase" [value]="sClase.value">
@@ -153,7 +153,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="orden_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="ordenId"
                           (ngModelChange)="onChange_Orden()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sOrden of criterio_Orden" [value]="sOrden.value">
@@ -171,7 +171,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="familia_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="familiaId"
                           (ngModelChange)="onChange_Familia()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sFamilia of criterio_Familia" [value]="sFamilia.value">
@@ -185,7 +185,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="genero_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="generoId"
                           (ngModelChange)="onChange_Genero()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sGenero of criterio_Genero" [value]="sGenero.value">
@@ -203,7 +203,7 @@
                     </div>
                     <div class="col-md-3 mt10">
                       <mat-form-field>
-                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="especie_id"
+                        <mat-select placeholder="" panelClass="color-panel-green" formControlName="especieId"
                           (ngModelChange)="onChange_Especie()">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sEspecie of criterio_Especie" [value]="sEspecie.value">
@@ -218,7 +218,7 @@
                     <div class="col-md-3 mt10">
                       <mat-form-field>
                         <mat-select placeholder="" panelClass="color-panel-green"
-                          formControlName="infraspecificepithet_id">
+                          formControlName="infraspecificepithetId">
                           <mat-option>-- Ningún Valor --</mat-option>
                           <mat-option *ngFor="let sInfraspecificepithet of criterio_Infraspecificepithet" [value]="sInfraspecificepithet.value">
                             {{sInfraspecificepithet.viewValue}}
